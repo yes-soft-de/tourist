@@ -19,9 +19,7 @@ class CreateProfileBloc {
     var profileCreated = await this._profileService.createProfile(profile);
 
     if (profileCreated == null) {
-
       _profileChecker.add(false);
-
     }
 
     _profileChecker.add(true);

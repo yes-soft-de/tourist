@@ -72,11 +72,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Container(
                   alignment: Alignment.center,
-                  child: Text(_error == null
-                      ? ''
-                      : (_error
-                          ? 'Successfully registered ' + _userEmail
-                          : 'Registration failed')),
+                  child: Text(
+                    _error == null ? '' : (_error ? 'Successfully registered ' + _userEmail: 'Registration failed')),
                 )
               ],
             ),

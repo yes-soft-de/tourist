@@ -1,0 +1,26 @@
+{
+  "asset": "asset:tourists/lib/ui/screens/account_type_selector/login_type_selector.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
+      {
+        "name": "LoginTypeSelectorScreen",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/ui/screens/account_type_selector/login_type_selector.dart#LoginTypeSelectorScreen",
+              "qualifier": null
+            },
+            "isProvider": false
+          },
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": []
+        }
+      }
+    ]
+  }
+}

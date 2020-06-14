@@ -1,0 +1,43 @@
+{
+  "asset": "asset:tourists/lib/di/components/app.component.dart",
+  "summary": {
+    "injector": [
+      {
+        "name": "AppComponent",
+        "providers": [
+          {
+            "name": "app",
+            "kind": "getter",
+            "injectedType": {
+              "lookupKey": {
+                "root": "asset:tourists/lib/main.dart#MyApp",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            "singleton": false,
+            "asynchronous": false,
+            "dependencies": []
+          },
+          {
+            "name": "getHttpClient",
+            "kind": "method",
+            "injectedType": {
+              "lookupKey": {
+                "root": "asset:tourists/lib/network/http_client/http_client.dart#HttpClient",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            "singleton": false,
+            "asynchronous": false,
+            "dependencies": []
+          }
+        ],
+        "modules": []
+      }
+    ],
+    "module": [],
+    "injectable": []
+  }
+}

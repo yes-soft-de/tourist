@@ -1,10 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/bloc/login/login.bloc.dart';
 import 'package:tourists/bloc/register/register.bloc.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/routes.dart';
-import 'package:tourists/services/login/login.service.dart';
 
 @provide
 class RegisterScreen extends StatefulWidget {
@@ -31,60 +29,129 @@ class _RegisterScreenState extends State<RegisterScreen> {
       initialData: null,
       builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
         if (snapshot.data != null && snapshot.data.length > 0) {
-          // Login Success
+          // Register Success
           Navigator.pushReplacementNamed(context, Routes.createProfile);
           return null;
         }
         return Scaffold(
-          body: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            body: ListView(
+          children: <Widget>[
+            Flex(
+              direction: Axis.vertical,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                TextFormField(
-                  controller: _emailController,
-                  decoration: const InputDecoration(labelText: 'Email'),
-                  validator: (String value) {
-                    if (value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
+                // LOGO
+                Container(
+                  height: 156,
+                  width: 156,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Container(
+                        height: 156,
+                        width: 156,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(78),
+                            color: Colors.green),
+                      ),
+                      Text(
+                        'LOGO',
+                        style: TextStyle(color: Colors.white, fontSize: 24),
+                      )
+                    ],
+                  ),
                 ),
-                TextFormField(
-                  controller: _passwordController,
-                  decoration: const InputDecoration(labelText: 'Password'),
-                  validator: (String value) {
-                    if (value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
+                // Divider
+                Container(
+                  height: 56,
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  alignment: Alignment.center,
-                  child: RaisedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState.validate()) {
-                        _register();
-                      }
-                    },
-                    child: const Text('Submit'),
+                  width: 256,
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        TextFormField(
+                          controller: _emailController,
+                          decoration: const InputDecoration(labelText: 'Email'),
+                          validator: (String value) {
+                            if (value.isEmpty) {
+                              return 'Please enter some text';
+                            }
+                            return null;
+                          },
+                        ),
+                        TextFormField(
+                          controller: _passwordController,
+                          decoration:
+                              const InputDecoration(labelText: 'Password'),
+                          validator: (String value) {
+                            if (value.isEmpty) {
+                              return 'Please enter some text';
+                            }
+                            return null;
+                          },
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            _register();
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 16.0),
+                            alignment: Alignment.center,
+                            child: Container(
+                              width: 160,
+                              height: 40,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(90)),
+                                color: Color(0xFF00FFA8),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.all(8),
+                                child: Text(
+                                  S.of(context).register_submit,
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          child: Text(_error == null
+                              ? ''
+                              : (_error
+                                  ? 'Successfully registered ' + _userEmail
+                                  : 'Registration failed')),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Container(
-                  alignment: Alignment.center,
-                  child: Text(_error == null
-                      ? ''
-                      : (_error
-                          ? 'Successfully registered ' + _userEmail
-                          : 'Registration failed')),
+                  height: 56,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacementNamed(context, Routes.login);
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(S.of(context).move_to_login),
+                    ),
+                  ),
                 )
               ],
-            ),
-          ),
-        );
+            )
+          ],
+        ));
       },
     );
   }
@@ -98,7 +165,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void _register() {
-    widget._registerBloc.register(_emailController.value.toString(),
-        _passwordController.value.toString());
+    widget._registerBloc.register(_emailController.text,
+        _passwordController.text);
   }
 }

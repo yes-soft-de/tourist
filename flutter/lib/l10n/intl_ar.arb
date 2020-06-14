@@ -3,5 +3,11 @@
   "title": "سياح",
   "welcome": "أهلاً بكم في برنامج",
   "card_01": "تود التمتع بالخدمات التي نقدمها لقضاء وقت ممتع في المملكة",
-  "go_to_tourist_login": "التالي"
+  "go_to_tourist_login": "التالي",
+  "login": "Login",
+  "move_to_register": "Register a new Account",
+  "move_to_login": "I have an account!",
+  "register_submit": "Register",
+  "form_label_name": "Name",
+  "next": "Next"
 }

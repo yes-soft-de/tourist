@@ -4,7 +4,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/routes.dart';
 import 'package:tourists/ui/screens/account_type_selector/login_type_selector.dart';
+import 'package:tourists/ui/screens/create_profile/create_profile.dart';
 import 'package:tourists/ui/screens/login/login.dart';
+import 'package:tourists/ui/screens/register/register.dart';
 
 import 'di/components/app.component.dart';
 import 'generated/l10n.dart';
@@ -30,8 +32,10 @@ class MyApp extends StatelessWidget {
 
   // This Screens is here because it needs to be injected!
   final LoginScreen _loginScreen;
+  final RegisterScreen _registerScreen;
+  final CreateProfileScreen _createProfileScreen;
 
-  MyApp(this._loginScreen);
+  MyApp(this._loginScreen, this._registerScreen, this._createProfileScreen);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +50,9 @@ class MyApp extends StatelessWidget {
       title: 'Tourists',
       routes: {
         Routes.loginTypeSelector: (context) => LoginTypeSelectorScreen(),
-        Routes.login: (context) => _loginScreen
+        Routes.login: (context) => _loginScreen,
+        Routes.register: (context) => _registerScreen,
+        Routes.createProfile: (context) => _createProfileScreen
       },
       initialRoute: Routes.loginTypeSelector,
       home: LoginTypeSelectorScreen()

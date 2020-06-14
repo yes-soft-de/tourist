@@ -1,6 +1,8 @@
+import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tourists/services/register/register.service.dart';
 
+@provide
 class RegisterBloc {
   RegisterService _registerService;
 

@@ -22,7 +22,13 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "card_01" : MessageLookupByLibrary.simpleMessage("تود التمتع بالخدمات التي نقدمها لقضاء وقت ممتع في المملكة"),
+    "form_label_name" : MessageLookupByLibrary.simpleMessage("Name"),
     "go_to_tourist_login" : MessageLookupByLibrary.simpleMessage("التالي"),
+    "login" : MessageLookupByLibrary.simpleMessage("Login"),
+    "move_to_login" : MessageLookupByLibrary.simpleMessage("I have an account!"),
+    "move_to_register" : MessageLookupByLibrary.simpleMessage("Register a new Account"),
+    "next" : MessageLookupByLibrary.simpleMessage("Next"),
+    "register_submit" : MessageLookupByLibrary.simpleMessage("Register"),
     "title" : MessageLookupByLibrary.simpleMessage("سياح"),
     "welcome" : MessageLookupByLibrary.simpleMessage("أهلاً بكم في برنامج")
   };

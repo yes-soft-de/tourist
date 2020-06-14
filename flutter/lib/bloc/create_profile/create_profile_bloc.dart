@@ -1,4 +1,5 @@
 import 'package:rxdart/rxdart.dart';
+import 'package:tourists/requests/create_profile/create_profile_body.dart';
 import 'package:tourists/services/profile/profile.service.dart';
 
 class CreateProfileBloc {
@@ -6,15 +7,24 @@ class CreateProfileBloc {
 
   CreateProfileBloc(this._profileService);
 
-  final _profileChecker = PublishSubject<String>();
+  final _profileChecker = PublishSubject<bool>();
 
-  Stream<String> get loginStatus => _profileChecker.stream;
+  Stream<bool> get profileStatus => _profileChecker.stream;
 
-  login(dynamic profile) async {
-    // Allocate Profile
-    String createProfileResponse = await _profileService.createProfile(null);
+  createProfile(String name, String age, String gender, String language) async {
 
-    _profileChecker.add(createProfileResponse);
+    CreateProfileBody profile =
+        new CreateProfileBody(null, name, language, int.parse(age));
+
+    var profileCreated = await this._profileService.createProfile(profile);
+
+    if (profileCreated == null) {
+
+      _profileChecker.add(false);
+
+    }
+
+    _profileChecker.add(true);
   }
 
   dispose() {

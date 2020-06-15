@@ -21,11 +21,8 @@ root:
   ## MySQL admin password
   ## ref: https://github.com/bitnami/bitnami-docker-mysql#setting-the-root-password-on-first-run
   ##
-  password:
-    valueFrom:
-      secretKeyRef:
-        name: db-secret
-        value: db-password
+  # password: ''
+
 
   forcePassword: false
   injectSecretsAsVolume: false
@@ -34,11 +31,7 @@ root:
 ##
 db:
   user: admin
-  password:
-    valueFrom:
-      secretKeyRef:
-        name: db-secret
-        value: db-password
+  # password: ''
   name: onyx
   forcePassword: false
   injectSecretsAsVolume: false

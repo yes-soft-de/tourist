@@ -7,9 +7,12 @@ services:
       - tourists
     environment:
       MYSQL_ROOT_PASSWORD: Y3sS0fT
+      MYSQL_DATABASE: tourists
 
   php-fpm:
     image: php:fpm-alpine3.12
+    volumes:
+      - tourists:/var/www/html/
     networks:
       - tourists
 
@@ -21,6 +24,8 @@ services:
     depends_on:
       - tourists-mysql
       - php-fpm
+    volumes:
+     - tourists:/var/www/html/
     ports:
       - 80:80
     networks:
@@ -29,3 +34,5 @@ services:
 networks: 
   tourists:
 
+volumes:
+  tourists:

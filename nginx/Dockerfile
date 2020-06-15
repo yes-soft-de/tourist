@@ -1,5 +1,5 @@
 # Grab the final Product
-FROM gcr.io/project/server-container:latest AS symfony
+FROM gcr.io/tourists-280412/server-container:latest AS symfony
 
 RUN ls /var/www/html/
 

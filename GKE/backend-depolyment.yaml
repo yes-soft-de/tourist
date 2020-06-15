@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: tourists-nginx
-        image: gcr.io/project/tourists-server:latest
+        image: gcr.io/tourists-280412/tourists-server:latest
         ports:
         - name: nginx-port
           containerPort: 80

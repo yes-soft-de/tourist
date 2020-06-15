@@ -20,45 +20,9 @@ spec:
     spec:
       containers:
       - name: tourists
-        image: gcr.io/project/php
-        ports:
-        - containerPort: 7000
-          name: php-fpm-port
-        volumeMounts:
-          - mountPath: "/var/www/html"
-            name: backend
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: touristsClaim
-      
----
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: tourists-backend-master
-  labels:
-    app: tourists
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: tourists
-      tier: backend
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        app: tourists
-        tier: backend
-    spec:
-      containers:
-      - name: tourists
         image: php:fpm-alpine3.12
         ports:
-        - containerPort: 7001
+        - containerPort: 9000
           name: php-fpm-port
         volumeMounts:
           - mountPath: "/var/www/html"

@@ -12,7 +12,8 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           registry: gcr.io
-          path: ./nginx
+          path: ./dev_symfony
+          dockerfile: ./server.Dockerfile
           repository: tourists-280412
           tags: project_container:latest
       # Building and pushing nginx server

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: onyx-nginx
+  labels:
+    app: onyx
+spec:
+  selector:
+    matchLabels:
+      app: onyx
+      tier: balancer
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: onyx
+        tier: balancer
+    spec:
+      containers:
+      - name: tourists-nginx
+        image: gcr.io/project/tourists-server
+        ports:
+        - name: nginx-port
+          containerPort: 80
+      

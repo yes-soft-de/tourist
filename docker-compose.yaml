@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  tourists-mysql:
+    image: mysql:5.7
+    networks:
+      - tourists
+    environment:
+      MYSQL_ROOT_PASSWORD: Y3sS0fT
+
+  php-fpm:
+    image: php:fpm-alpine3.12
+    networks:
+      - tourists
+
+  server:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    image: gcr.io/project/tourists-server:latest
+    depends_on:
+      - tourists-mysql
+      - php-fpm
+    ports:
+      - 80:80
+    networks:
+      - tourists
+
+networks: 
+  tourists:
+

@@ -10,6 +10,11 @@ import '../../ui/screens/register/register.dart' as _i9;
 import '../../bloc/register/register.bloc.dart' as _i10;
 import '../../services/register/register.service.dart' as _i11;
 import '../../ui/screens/create_profile/create_profile.dart' as _i12;
+import '../../bloc/create_profile/create_profile_bloc.dart' as _i13;
+import '../../services/profile/profile.service.dart' as _i14;
+import '../../managers/profile/profile.manager.dart' as _i15;
+import '../../repositories/profile/profile.repository.dart' as _i16;
+import '../../ui/screens/home/home.dart' as _i17;
 
 class AppComponent$Injector implements _i1.AppComponent {
   AppComponent$Injector._();
@@ -22,8 +27,11 @@ class AppComponent$Injector implements _i1.AppComponent {
     return injector;
   }
 
-  _i4.MyApp _createMyApp() => _i4.MyApp(_createLoginScreen(),
-      _createRegisterScreen(), _createCreateProfileScreen());
+  _i4.MyApp _createMyApp() => _i4.MyApp(
+      _createLoginScreen(),
+      _createRegisterScreen(),
+      _createCreateProfileScreen(),
+      _createHomeScreen());
   _i5.LoginScreen _createLoginScreen() => _i5.LoginScreen(_createLoginBloc());
   _i6.LoginBloc _createLoginBloc() => _i6.LoginBloc(_createLoginService());
   _i7.LoginService _createLoginService() =>
@@ -37,9 +45,18 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i11.RegisterService _createRegisterService() =>
       _i11.RegisterService(_createSharedPreferencesHelper());
   _i12.CreateProfileScreen _createCreateProfileScreen() =>
-      _i12.CreateProfileScreen();
+      _i12.CreateProfileScreen(_createCreateProfileBloc());
+  _i13.CreateProfileBloc _createCreateProfileBloc() =>
+      _i13.CreateProfileBloc(_createProfileService());
+  _i14.ProfileService _createProfileService() => _i14.ProfileService(
+      _createProfileManager(), _createSharedPreferencesHelper());
+  _i15.ProfileManager _createProfileManager() =>
+      _i15.ProfileManager(_createProfileRepository());
+  _i16.ProfileRepository _createProfileRepository() =>
+      _i16.ProfileRepository(_createHttpClient());
   _i2.HttpClient _createHttpClient() =>
       _singletonHttpClient ??= _i2.HttpClient();
+  _i17.HomeScreen _createHomeScreen() => _i17.HomeScreen();
   @override
   _i4.MyApp get app => _createMyApp();
   @override

@@ -1,0 +1,243 @@
+image:
+  registry: docker.io
+  repository: bitnami/mysql
+  tag: 8.0.20-debian-10-r24
+  pullPolicy: IfNotPresent
+  debug: false
+clusterDomain: cluster.local
+volumePermissions:
+  enabled: false
+  image:
+    registry: docker.io
+    repository: bitnami/minideb
+    tag: buster
+    pullPolicy: Always
+  resources:
+    limits: {}
+    requests: {}
+## Admin (root) credentials
+##
+root:
+  ## MySQL admin password
+  ## ref: https://github.com/bitnami/bitnami-docker-mysql#setting-the-root-password-on-first-run
+  ##
+  password:
+    valueFrom:
+      secretKeyRef:
+        name: db-secret
+        value: db-password
+
+  forcePassword: false
+  injectSecretsAsVolume: false
+
+## Custom user/db credentials
+##
+db:
+  user: admin
+  password:
+    valueFrom:
+      secretKeyRef:
+        name: db-secret
+        value: db-password
+  name: onyx
+  forcePassword: false
+  injectSecretsAsVolume: false
+
+## Replication configuration
+##
+replication:
+  enabled: true
+  user: replicator
+  password:
+  forcePassword: false
+  injectSecretsAsVolume: false
+
+serviceAccount:
+  create: true
+
+## Master nodes parameters
+##
+master:
+  config: |-
+    [mysqld]
+    sql_mode=
+    default_authentication_plugin=mysql_native_password
+    skip-name-resolve
+    explicit_defaults_for_timestamp
+    basedir=/opt/bitnami/mysql
+    plugin_dir=/opt/bitnami/mysql/plugin
+    port=3306
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    datadir=/bitnami/mysql/data
+    tmpdir=/opt/bitnami/mysql/tmp
+    max_allowed_packet=16M
+    bind-address=0.0.0.0
+    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
+    log-error=/opt/bitnami/mysql/logs/mysqld.log
+    character-set-server=UTF8
+    collation-server=utf8_general_ci
+    [client]
+    port=3306
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    default-character-set=UTF8
+    plugin_dir=/opt/bitnami/mysql/plugin
+    [manager]
+    port=3306
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
+  updateStrategy:
+    type: RollingUpdate
+  podAnnotations: {}
+  affinity: {}
+  extraEnvVars:
+  extraEnvVarsCM:
+  extraEnvVarsSecret:
+  nodeSelector: {}
+  tolerations: []
+  securityContext:
+    enabled: true
+    fsGroup: 1001
+    runAsUser: 1001
+
+  containerSecurityContext: {}
+
+  resources:
+    limits: {}
+    requests: {}
+  livenessProbe:
+    enabled: true
+    ## Initializing the database could take some time
+    ##
+    initialDelaySeconds: 120
+    periodSeconds: 10
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 3
+  readinessProbe:
+    enabled: true
+    ## Initializing the database could take some time
+    ##
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 3
+  persistence:
+    enabled: true
+    mountPath: /bitnami/mysql
+    annotations: {}
+    accessModes:
+      - ReadWriteOnce
+    size: 8Gi
+
+## Slave nodes parameters
+##
+slave:
+  replicas: 1
+  config: |-
+    [mysqld]
+    sql_mode=
+    default_authentication_plugin=mysql_native_password
+    skip-name-resolve
+    explicit_defaults_for_timestamp
+    basedir=/opt/bitnami/mysql
+    port=3306
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    datadir=/bitnami/mysql/data
+    tmpdir=/opt/bitnami/mysql/tmp
+    max_allowed_packet=16M
+    bind-address=0.0.0.0
+    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
+    log-error=/opt/bitnami/mysql/logs/mysqld.log
+    character-set-server=UTF8
+    collation-server=utf8_general_ci
+    [client]
+    port=3306
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    default-character-set=UTF8
+    [manager]
+    port=3306
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
+  updateStrategy:
+    type: RollingUpdate
+
+  podAnnotations: {}
+
+  affinity: {}
+
+  extraEnvVars:
+
+  extraEnvVarsCM:
+
+  extraEnvVarsSecret:
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  securityContext:
+    enabled: true
+    fsGroup: 1001
+    runAsUser: 1001
+
+  containerSecurityContext: {}
+
+  resources:
+    limits: {}
+    requests: {}
+  livenessProbe:
+    enabled: true
+    ## Initializing the database could take some time
+    ##
+    initialDelaySeconds: 120
+    periodSeconds: 10
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 3
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 3
+
+  persistence:
+    enabled: true
+    mountPath: /bitnami/mysql
+    annotations: {}
+    accessModes:
+      - ReadWriteOnce
+    size: 8Gi
+
+service:
+  type: ClusterIP
+  port: 3306
+  nodePort:
+    master:
+    slave:
+  annotations: {}
+metrics:
+  enabled: false
+  image:
+    registry: docker.io
+    repository: bitnami/mysqld-exporter
+    tag: 0.12.1-debian-10-r115
+    pullPolicy: IfNotPresent
+  resources:
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    limits: {}
+    requests: {}
+
+  ## MySQL Prometheus exporter service parameters
+  ##
+  service:
+    type: ClusterIP
+    port: 9104
+    annotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "{{ .Values.metrics.service.port }}"
+
+  serviceMonitor:
+    enabled: false

@@ -9,5 +9,6 @@
   "move_to_login": "I have an account!",
   "register_submit": "Register",
   "form_label_name": "Name",
-  "next": "Next"
+  "next": "Next",
+  "comments": "Comments"
 }

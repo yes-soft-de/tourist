@@ -2,13 +2,16 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: tourists-claim
+  annotations:
+    kubernetes.io/createdby: gce-pd-dynamic-provisioner
+    pv.kubernetes.io/bound-by-controller: "yes"
+    pv.kubernetes.io/provisioned-by: kubernetes.io/gce-pd
 spec:
   accessModes:
     - ReadWriteOnce
-  volumeMode: Filesystem
   resources:
     requests:
-      storage: 128Mi
+      storage: 10Gi
   selector:
     matchLabels:
       release: "stable"

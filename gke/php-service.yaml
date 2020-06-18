@@ -1,32 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: tourists-backend
+  name: tourists-php
   labels:
     app: tourists
 spec:
   ports:
-  - port: 7000
+  - port: 9000
     protocol: TCP
   selector:
     app: tourists
-    tier: backend
+    tier: php
   clusterIP: None
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: tourists-backend-master
-  labels:
-    app: tourists
-spec:
-  ports:
-  - port: 7000
-    protocol: TCP
-  selector:
-    app: tourists
-    tier: backend
-  clusterIP: None
-  

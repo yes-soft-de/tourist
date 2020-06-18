@@ -1,15 +1,14 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: touristsClaim
+  name: tourist-claim
 spec:
   accessModes:
-    - ReadWrite
+    - ReadWriteMany
   volumeMode: Filesystem
   resources:
     requests:
-      storage: 8Gi
-  storageClassName: slow
+      storage: 128Mi
   selector:
     matchLabels:
       release: "stable"

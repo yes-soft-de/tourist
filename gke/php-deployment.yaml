@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tourists-backend
+  name: tourists-php
   labels:
     app: tourists
 spec:
@@ -9,26 +9,27 @@ spec:
   selector:
     matchLabels:
       app: tourists
-      tier: backend
+      tier: php
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
         app: tourists
-        tier: backend
+        tier: php
     spec:
       containers:
       - name: tourists
-        image: php:fpm-alpine3.12
+        image: gcr.io/tourists-280412/tourists-php
+        imagePullPolicy: Never
         ports:
         - containerPort: 9000
           name: php-fpm-port
-        volumeMounts:
-          - mountPath: "/var/www/html"
-            name: backend
+        # volumeMounts:
+          # - mountPath: "/var/www/html"
+          #   name: tourists-claim
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: touristsClaim
+            claimName: tourist-claim
       

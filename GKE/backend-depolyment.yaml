@@ -20,13 +20,14 @@ spec:
       containers:
       - name: tourists-nginx
         image: gcr.io/tourists-280412/tourists-server:latest
+        imagePullPolicy: Never
         ports:
         - name: nginx-port
           containerPort: 80
-        volumeMounts:
-          - mountPath: "/var/www/html"
-            name: backend
+        # volumeMounts:
+          # - mountPath: "/var/www/html"
+          #   name: backend
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: touristsClaim
+            claimName: tourist-claim

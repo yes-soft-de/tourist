@@ -9,9 +9,7 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
       MYSQL_DATABASE: tourists
 
-  php-fpm:
-    build: 
-      context: ./tourists-php
+  tourists-php:
     image: gcr.io/tourists-280412/tourists-php:latest
     volumes:
       - tourists:/var/www/html/
@@ -19,17 +17,14 @@ services:
       - tourists
 
   server:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
     image: gcr.io/tourists-280412/tourists-server:latest
     depends_on:
       - db-mysql
-      - php-fpm
+      - tourists-php
     volumes:
      - tourists:/var/www/html/
     ports:
-      - 80:80
+      - 81:80
     networks:
       - tourists
 

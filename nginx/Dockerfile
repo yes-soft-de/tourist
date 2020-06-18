@@ -5,7 +5,16 @@ RUN ls /var/www/html/
 
 # Copy it and serve it
 FROM nginx:latest
-RUN mkdir -p /var/www/html
+WORKDIR /var/tourists
+RUN mkdir -p /var/tourists
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=symfony /var/www/html /var/www/html
-RUN cat /var/www/html/public/index.php
+COPY --from=symfony /var/www/html /var/tourists
+
+RUN rm -rf /var/tourists/var
+
+COPY ./start-point.sh /usr/local/bin/start-point
+RUN chmod 755 /usr/local/bin/start-point
+
+RUN ls /usr/local/bin/
+
+# CMD ["start-point"]

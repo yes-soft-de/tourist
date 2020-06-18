@@ -6,28 +6,30 @@ import 'package:tourists/services/profile/profile.service.dart';
 @provide
 class CreateProfileBloc {
   ProfileService _profileService;
+  final _profileCreationSubject = PublishSubject<bool>();
 
   CreateProfileBloc(this._profileService);
+  Stream<bool> get profileStatus => _profileCreationSubject.stream;
 
-  final _profileChecker = PublishSubject<bool>();
-
-  Stream<bool> get profileStatus => _profileChecker.stream;
-
-  createProfile(String name, String age, String gender, String language) async {
+  createProfile(String name, String gender, String language) async {
 
     CreateProfileBody profile =
-        new CreateProfileBody(null, name, language, int.parse(age));
+        new CreateProfileBody(
+          name: name,
+          gender: gender,
+          lang: language
+        );
 
     var profileCreated = await this._profileService.createProfile(profile);
 
     if (profileCreated == null) {
-      _profileChecker.add(false);
+      _profileCreationSubject.add(false);
     }
 
-    _profileChecker.add(true);
+    _profileCreationSubject.add(true);
   }
 
   dispose() {
-    _profileChecker.close();
+    _profileCreationSubject.close();
   }
 }

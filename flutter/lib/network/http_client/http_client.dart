@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart';
 import 'package:inject/inject.dart';
@@ -14,14 +15,17 @@ class HttpClient {
     });
 
     if (response.statusCode == 200) {
+      log(response.body);
       return response.body;
     } else {
       // TODO: Implement This, Log Error
-      return '';
+      log(response.statusCode.toString());
+      return null;
     }
   }
 
   Future<String> post(String url, Map<String, dynamic> payLoad) async {
+    log('Requesting Post to: ' + url);
     var response = await _client.post(url,
         headers: {
           // Add Auth Header Here!
@@ -29,10 +33,30 @@ class HttpClient {
         body: json.encode(payLoad));
 
     if (response.statusCode == 200) {
+      log(response.body);
       return response.body;
     } else {
       // TODO: Implement This, Log Error
-      return '';
+      log(response.statusCode.toString());
+      return null;
+    }
+  }
+
+  Future<String> put(String url, Map<String, dynamic> payLoad) async {
+    log('Requesting Post to: ' + url);
+    var response = await _client.put(url,
+        headers: {
+          // Add Auth Header Here!
+        },
+        body: json.encode(payLoad));
+
+    if (response.statusCode == 200) {
+      log(response.body);
+      return response.body;
+    } else {
+      // TODO: Implement This, Log Error
+      log(response.statusCode.toString());
+      return null;
     }
   }
 }

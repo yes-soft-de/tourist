@@ -1,16 +1,19 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/bloc/create_profile/create_profile_bloc.dart';
 import 'package:tourists/generated/l10n.dart';
-
-import '../../../routes.dart';
+import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
+import 'package:tourists/routes.dart';
 
 @provide
 class CreateProfileScreen extends StatefulWidget {
   CreateProfileBloc _profileBloc;
+  SharedPreferencesHelper _preferencesHelper;
 
-  CreateProfileScreen(this._profileBloc);
+  CreateProfileScreen(this._profileBloc, this._preferencesHelper);
 
   @override
   State<StatefulWidget> createState() => _CreateProfileScreenState();
@@ -20,97 +23,120 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   final GlobalKey _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _languageController = TextEditingController();
-  final TextEditingController _ageController = TextEditingController();
   final TextEditingController _genderController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: widget._profileBloc.profileStatus,
-      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-        if (snapshot.hasData && snapshot.data != null) {
-          if (snapshot.data == true) {
-            Navigator.pushReplacementNamed(context, Routes.intentionProfile);
-            return null;
-          }
-        }
+    widget._profileBloc.profileStatus.listen((event) {
+      if (widget != null) {
+        Navigator.pushReplacementNamed(context, Routes.intentionProfile);
+      }
+    });
 
-        return Scaffold(
-          body: ListView(
-            children: <Widget>[
-              Container(
-                width: 156,
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: <Widget>[
-                      TextFormField(
-                        controller: _nameController,
-                        decoration: const InputDecoration(labelText: 'Name'),
-                        validator: (String value) {
-                          if (value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },
-                      ),
-                      TextFormField(
-                        controller: _ageController,
-                        decoration: const InputDecoration(labelText: 'Age'),
-                        validator: (String value) {
-                          if (value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },
-                      ),
-                      TextFormField(
-                        controller: _languageController,
-                        decoration:
-                            const InputDecoration(labelText: 'Language'),
-                        validator: (String value) {
-                          if (value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },
-                      ),
-                      TextFormField(
-                        controller: _genderController,
-                        decoration: const InputDecoration(labelText: 'Gender'),
-                        validator: (String value) {
-                          if (value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          _createProfile();
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Container(
-                            height: 40,
-                            width: 160,
-                            child: Text(S.of(context).next),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+    widget._preferencesHelper.getUserUID().then((value) {
+      log('UserID: ' + value);
+    });
+
+    return Scaffold(
+      body: ListView(
+        children: <Widget>[
+          // LOGO
+          Container(
+            height: 156,
+            width: 156,
+            child: Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                Container(
+                  height: 156,
+                  width: 156,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(78),
+                      color: Colors.green),
                 ),
-              )
-            ],
+                Text(
+                  'LOGO',
+                  style: TextStyle(color: Colors.white, fontSize: 24),
+                )
+              ],
+            ),
           ),
-        );
-      },
+          // Divider
+          Container(
+            height: 56,
+          ),
+          Container(
+            width: 156,
+            child: Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    TextFormField(
+                      controller: _nameController,
+                      decoration: const InputDecoration(labelText: 'Name'),
+                      validator: (String value) {
+                        if (value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _languageController,
+                      decoration:
+                      const InputDecoration(labelText: 'Language'),
+                      validator: (String value) {
+                        if (value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _genderController,
+                      decoration:
+                      const InputDecoration(labelText: 'Gender'),
+                      validator: (String value) {
+                        if (value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                    ),
+                    Container(
+                      height: 16,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _createProfile();
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Container(
+                          height: 40,
+                          width: 160,
+                          alignment: Alignment.center,
+                          child: Text(S
+                              .of(context)
+                              .next),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 
   _createProfile() {
-    widget._profileBloc.createProfile(_nameController.text, _ageController.text,
-        _genderController.text, _languageController.text);
+    widget._profileBloc.createProfile(
+        _nameController.text, _genderController.text, _languageController.text);
   }
 }

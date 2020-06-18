@@ -7,7 +7,6 @@ import 'package:tourists/routes.dart';
 @provide
 class RegisterScreen extends StatefulWidget {
   final RegisterBloc _registerBloc;
-
   RegisterScreen(this._registerBloc);
 
   @override
@@ -15,6 +14,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  bool success = false;
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -24,17 +25,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: widget._registerBloc.registerStatus,
-      initialData: null,
-      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-        if (snapshot.data != null && snapshot.data.length > 0) {
-          // Register Success
-          Navigator.pushReplacementNamed(context, Routes.createProfile);
-          return null;
-        }
-        return Scaffold(
-            body: ListView(
+
+    widget._registerBloc.registerStatus.listen((event) {
+      if (event != null && event.length > 0) {
+        Navigator.of(context).pushReplacementNamed(Routes.createProfile);
+      }
+    });
+
+    return Scaffold(
+        body: ListView(
           children: <Widget>[
             Flex(
               direction: Axis.vertical,
@@ -86,7 +85,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         TextFormField(
                           controller: _passwordController,
                           decoration:
-                              const InputDecoration(labelText: 'Password'),
+                          const InputDecoration(labelText: 'Password'),
                           validator: (String value) {
                             if (value.isEmpty) {
                               return 'Please enter some text';
@@ -107,7 +106,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(90)),
+                                BorderRadius.all(Radius.circular(90)),
                                 color: Color(0xFF00FFA8),
                               ),
                               child: Padding(
@@ -126,8 +125,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: Text(_error == null
                               ? ''
                               : (_error
-                                  ? 'Successfully registered ' + _userEmail
-                                  : 'Registration failed')),
+                              ? 'Successfully registered ' + _userEmail
+                              : 'Registration failed')),
                         )
                       ],
                     ),
@@ -152,8 +151,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             )
           ],
         ));
-      },
-    );
   }
 
   @override

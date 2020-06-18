@@ -15,13 +15,21 @@ class ProfileRepository {
 
   Future<CreateProfileResponse> createProfile(CreateProfileBody profile) async {
     var stringResponse = await _httpClient.post(Urls.createProfileAPI, profile.toMap());
-    CreateProfileResponse parsedResponse = new CreateProfileResponse().fromJson(json.decode(stringResponse));
-    return parsedResponse;
+    if (stringResponse != null) {
+      CreateProfileResponse parsedResponse = new CreateProfileResponse().fromJson(jsonDecode(stringResponse));
+      return parsedResponse;
+    }
+
+    return null;
   }
 
   Future<CreateProfileResponse> getProfile(String uid) async {
     var stringResponse = await _httpClient.get(Urls.getProfileAPI + '/' + uid);
-    CreateProfileResponse parsedResponse = new CreateProfileResponse().fromJson(json.decode(stringResponse));
-    return parsedResponse;
+    if (stringResponse != null) {
+      CreateProfileResponse parsedResponse = new CreateProfileResponse().fromJson(json.decode(stringResponse));
+      return parsedResponse;
+    }
+
+    return null;
   }
 }

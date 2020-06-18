@@ -16,6 +16,10 @@ import '../../managers/profile/profile.manager.dart' as _i15;
 import '../../repositories/profile/profile.repository.dart' as _i16;
 import '../../ui/screens/home/home.dart' as _i17;
 import '../../ui/screens/intention_profile/intention_profile.dart' as _i18;
+import '../../bloc/create_intentions/create_intention_bloc.dart' as _i19;
+import '../../services/intentions/intentions_service.dart' as _i20;
+import '../../managers/intentions/intentions_manager.dart' as _i21;
+import '../../repositories/intentions/intentions_repository.dart' as _i22;
 
 class AppComponent$Injector implements _i1.AppComponent {
   AppComponent$Injector._();
@@ -47,7 +51,8 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i11.RegisterService _createRegisterService() =>
       _i11.RegisterService(_createSharedPreferencesHelper());
   _i12.CreateProfileScreen _createCreateProfileScreen() =>
-      _i12.CreateProfileScreen(_createCreateProfileBloc());
+      _i12.CreateProfileScreen(
+          _createCreateProfileBloc(), _createSharedPreferencesHelper());
   _i13.CreateProfileBloc _createCreateProfileBloc() =>
       _i13.CreateProfileBloc(_createProfileService());
   _i14.ProfileService _createProfileService() => _i14.ProfileService(
@@ -60,7 +65,15 @@ class AppComponent$Injector implements _i1.AppComponent {
       _singletonHttpClient ??= _i2.HttpClient();
   _i17.HomeScreen _createHomeScreen() => _i17.HomeScreen();
   _i18.IntentionProfileScreen _createIntentionProfileScreen() =>
-      _i18.IntentionProfileScreen();
+      _i18.IntentionProfileScreen(_createCreateIntentionBloc());
+  _i19.CreateIntentionBloc _createCreateIntentionBloc() =>
+      _i19.CreateIntentionBloc(_createIntentionService());
+  _i20.IntentionService _createIntentionService() =>
+      _i20.IntentionService(_createIntentionsManager());
+  _i21.IntentionsManager _createIntentionsManager() =>
+      _i21.IntentionsManager(_createIntentionsRepository());
+  _i22.IntentionsRepository _createIntentionsRepository() =>
+      _i22.IntentionsRepository(_createHttpClient());
   @override
   _i4.MyApp get app => _createMyApp();
   @override

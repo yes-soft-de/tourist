@@ -9,6 +9,11 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  gcePersistentDisk:
+    fsType: ext4
+    pdName: gke-cluster-1-pvc-cd3fd5e9-695a-11ea-a3da-42010a800003
+  storageClassName: standard
+  volumeMode: Filesystem
   resources:
     requests:
       storage: 10Gi

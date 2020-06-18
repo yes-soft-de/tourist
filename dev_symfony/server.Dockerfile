@@ -1,5 +1,5 @@
 # Get the config
-FROM gcr.io/tourists-280412/config as tourists_config
+FROM gcr.io/tourists-280412/tourists-config as tourists_config
 
 # Get Composer
 FROM composer:latest AS composer

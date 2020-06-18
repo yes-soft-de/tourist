@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
+import 'package:tourists/routes.dart';
+import 'package:tourists/ui/screens/location_details/location_details.dart';
 import 'package:tourists/ui/widgets/bottom_navigation_bar/buttom_navigation_bar.dart';
 import 'package:tourists/ui/widgets/carousel/carousel.dart';
 import 'package:tourists/ui/widgets/carousel_card/carousel_card.dart';
@@ -17,15 +19,29 @@ class _HomeScreenState extends State<HomeScreen> {
     List<Widget> locationCards = [];
     List<CarouselCard> carouselCards = [];
 
+    // TODO Replace this with network source
     for (int i = 0; i < 10; i++) {
-      locationCards.add(Padding(
-        padding: EdgeInsets.all(8),
-        child: LocationListItem.createLocationListItem(
-            'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-            'title ' + i.toString(),
-            'Best in the world!',
-            3,
-            3),
+      locationCards.add(GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => LocationDetailsScreen(),
+                settings: RouteSettings(
+                  // Replace this with location Id
+                  arguments: i,
+                ),
+              ));
+        },
+        child: Padding(
+          padding: EdgeInsets.all(8),
+          child: LocationListItem.createLocationListItem(
+              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
+              'title ' + i.toString(),
+              'Best in the world!',
+              3,
+              3),
+        ),
       ));
       carouselCards.add(CarouselCard(
           'title ' + i.toString(),

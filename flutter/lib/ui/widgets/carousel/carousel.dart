@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tourists/ui/widgets/carousel_card/carousel_card.dart';
 
 class CarouselWidget extends StatefulWidget {
-  final List<CarouselCard> pages;
+  final List<Widget> pages;
 
   CarouselWidget(this.pages);
 

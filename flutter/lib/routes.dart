@@ -8,4 +8,5 @@ class Routes {
   static const String loginTypeSelector = '/login_type_selector';
   static const String createProfile = '/createProfile';
   static const String intentionProfile = '/intentionProfile';
+  static const String locationDetails = '/locationDetails';
 }

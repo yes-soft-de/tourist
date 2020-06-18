@@ -15,6 +15,7 @@ import '../../services/profile/profile.service.dart' as _i14;
 import '../../managers/profile/profile.manager.dart' as _i15;
 import '../../repositories/profile/profile.repository.dart' as _i16;
 import '../../ui/screens/home/home.dart' as _i17;
+import '../../ui/screens/intention_profile/intention_profile.dart' as _i18;
 
 class AppComponent$Injector implements _i1.AppComponent {
   AppComponent$Injector._();
@@ -31,7 +32,8 @@ class AppComponent$Injector implements _i1.AppComponent {
       _createLoginScreen(),
       _createRegisterScreen(),
       _createCreateProfileScreen(),
-      _createHomeScreen());
+      _createHomeScreen(),
+      _createIntentionProfileScreen());
   _i5.LoginScreen _createLoginScreen() => _i5.LoginScreen(_createLoginBloc());
   _i6.LoginBloc _createLoginBloc() => _i6.LoginBloc(_createLoginService());
   _i7.LoginService _createLoginService() =>
@@ -57,6 +59,8 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i2.HttpClient _createHttpClient() =>
       _singletonHttpClient ??= _i2.HttpClient();
   _i17.HomeScreen _createHomeScreen() => _i17.HomeScreen();
+  _i18.IntentionProfileScreen _createIntentionProfileScreen() =>
+      _i18.IntentionProfileScreen();
   @override
   _i4.MyApp get app => _createMyApp();
   @override

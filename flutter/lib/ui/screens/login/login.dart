@@ -104,26 +104,23 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Container(
                             alignment: Alignment.center,
                             child: Container(
-                              height: 40,
+                              alignment: Alignment.center,
                               child: Container(
+                                height: 40,
+                                width: 160,
                                 alignment: Alignment.center,
-                                child: Container(
-                                  height: 40,
-                                  width: 160,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(90)),
-                                    color: Color(0xFF00FFA8),
-                                  ),
-                                  child: Text(
-                                    S.of(context).login,
-                                    style: TextStyle(
-                                        fontSize: 20, color: Colors.white),
-                                  ),
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(90)),
+                                  color: Color(0xFF00FFA8),
+                                ),
+                                child: Text(
+                                  S.of(context).login,
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white),
                                 ),
                               ),
-                            ),
+                            )
                           ),
                           onTap: () => _login(),
                         ),

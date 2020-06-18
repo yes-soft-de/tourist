@@ -6,6 +6,7 @@ import 'package:tourists/routes.dart';
 import 'package:tourists/ui/screens/account_type_selector/login_type_selector.dart';
 import 'package:tourists/ui/screens/create_profile/create_profile.dart';
 import 'package:tourists/ui/screens/home/home.dart';
+import 'package:tourists/ui/screens/intention_profile/intention_profile.dart';
 import 'package:tourists/ui/screens/login/login.dart';
 import 'package:tourists/ui/screens/register/register.dart';
 
@@ -35,9 +36,10 @@ class MyApp extends StatelessWidget {
   final LoginScreen _loginScreen;
   final RegisterScreen _registerScreen;
   final CreateProfileScreen _createProfileScreen;
+  final IntentionProfileScreen _intentionProfileScreen;
   final HomeScreen _homeScreen;
 
-  MyApp(this._loginScreen, this._registerScreen, this._createProfileScreen, this._homeScreen);
+  MyApp(this._loginScreen, this._registerScreen, this._createProfileScreen, this._homeScreen, this._intentionProfileScreen);
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +57,10 @@ class MyApp extends StatelessWidget {
         Routes.login: (context) => _loginScreen,
         Routes.register: (context) => _registerScreen,
         Routes.createProfile: (context) => _createProfileScreen,
-        Routes.home: (context) => _homeScreen
+        Routes.intentionProfile: (context) => _intentionProfileScreen,
+        Routes.home: (context) => _homeScreen,
       },
-      initialRoute: Routes.home,
+      initialRoute: Routes.intentionProfile,
       home: LoginTypeSelectorScreen()
     );
   }

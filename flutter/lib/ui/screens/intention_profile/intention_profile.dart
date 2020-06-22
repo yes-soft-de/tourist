@@ -15,7 +15,7 @@ class IntentionProfileScreen extends StatefulWidget {
     'Malls': false
   };
 
-  CreateIntentionBloc _createIntentionBloc;
+  final CreateIntentionBloc _createIntentionBloc;
 
   IntentionProfileScreen(this._createIntentionBloc);
 
@@ -30,12 +30,12 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
   final TextEditingController _stayingTime = TextEditingController();
   final TextEditingController _nationality = TextEditingController();
   final TextEditingController _arrivalCity = TextEditingController();
-  String _guideLanguage;
+
 
   @override
   Widget build(BuildContext context) {
-    widget._createIntentionBloc.intentionsCreateStream.listen((event) {
-      if (event) Navigator.of(context).pushReplacementNamed(Routes.home);
+    widget._createIntentionBloc.intentionsCreateStream.listen((intentionsCreated) {
+      if (intentionsCreated) Navigator.of(context).pushReplacementNamed(Routes.home);
     });
 
     return Scaffold(
@@ -75,25 +75,6 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
                 direction: Axis.vertical,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  DropdownButtonFormField(
-                    items: <DropdownMenuItem<String>>[
-                      DropdownMenuItem(
-                        value: null,
-                        child: Text('Select a Language'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'en',
-                        child: Text('English'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'ar',
-                        child: Text('العربية'),
-                      ),
-                    ],
-                    onChanged: (String value) {
-                      this._guideLanguage = value;
-                    },
-                  ),
                   Container(
                     height: 16,
                   ),
@@ -241,12 +222,6 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
   }
 
   _createIntentionProfile() {
-    if (_guideLanguage == null) {
-      log('Null Language');
-      return;
-    }
-
-    log('Language is ' + _guideLanguage);
 
     List<String> interests = [];
     widget._interests.forEach((key, value) {

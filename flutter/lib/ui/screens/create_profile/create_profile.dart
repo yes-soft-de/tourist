@@ -22,8 +22,9 @@ class CreateProfileScreen extends StatefulWidget {
 class _CreateProfileScreenState extends State<CreateProfileScreen> {
   final GlobalKey _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _languageController = TextEditingController();
   final TextEditingController _genderController = TextEditingController();
+
+  String _guideLanguage;
 
   @override
   Widget build(BuildContext context) {
@@ -84,15 +85,23 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                         return null;
                       },
                     ),
-                    TextFormField(
-                      controller: _languageController,
-                      decoration:
-                      const InputDecoration(labelText: 'Language'),
-                      validator: (String value) {
-                        if (value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
+                    DropdownButtonFormField(
+                      items: <DropdownMenuItem<String>>[
+                        DropdownMenuItem(
+                          value: null,
+                          child: Text('Select a Language'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'en',
+                          child: Text('English'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'ar',
+                          child: Text('العربية'),
+                        ),
+                      ],
+                      onChanged: (String value) {
+                        this._guideLanguage = value;
                       },
                     ),
                     TextFormField(
@@ -136,7 +145,14 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   }
 
   _createProfile() {
+    if (_guideLanguage == null) {
+      log('Null Language');
+      return;
+    }
+
+    log('Language is ' + _guideLanguage);
+
     widget._profileBloc.createProfile(
-        _nameController.text, _genderController.text, _languageController.text);
+        _nameController.text, _genderController.text, _guideLanguage);
   }
 }

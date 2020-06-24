@@ -34,7 +34,7 @@ void main() {
 @provide
 class MyApp extends StatelessWidget {
 
-  UserComponent _userComponent;
+  final UserComponent _userComponent;
 
   MyApp(this._userComponent);
 
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: S.delegate.supportedLocales,
       title: 'Tourists',
       routes: _userComponent.getRoutes(),
-      initialRoute: UserRoutes.intentionProfile,
+      initialRoute: UserRoutes.home,
       home: LoginTypeSelectorScreen()
     );
   }

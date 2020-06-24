@@ -10,5 +10,9 @@
   "register_submit": "Register",
   "form_label_name": "Name",
   "next": "Next",
-  "comments": "Comments"
+  "comments": "Comments",
+  "available": "Available",
+  "not_available": "Not Available",
+  "events": "Events",
+  "festivals": "Festivals"
 }

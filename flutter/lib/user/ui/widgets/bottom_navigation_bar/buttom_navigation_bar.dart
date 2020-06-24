@@ -42,12 +42,16 @@ class CustomBottomNavigationBar extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Container(width: 16,),
+                      Container(
+                        width: 16,
+                      ),
                       Text(
                         'Request Guid!',
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
-                      Container(width: 16,),
+                      Container(
+                        width: 16,
+                      ),
                     ],
                   ),
                 ),

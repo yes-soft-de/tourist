@@ -1,21 +1,38 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LocationListItem {
-  static Widget createLocationListItem(String imageLink, String title,
-      String description, int comments, int rate) {
+class LocationListItem extends StatelessWidget {
+  final String imageLink;
+  final String title;
+  final String description;
+  final int commentsNumber;
+  final int rate;
+
+  LocationListItem(
+      {Key key,
+      this.rate,
+      this.title,
+      this.description,
+      this.commentsNumber,
+      this.imageLink});
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       height: 128,
       child: Flex(
           direction: Axis.horizontal,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Flexible(
               flex: 1,
-              child: FittedBox(
-                child: Image.network(imageLink),
-                fit: BoxFit.fill,
+              child: Container(
+                height: 128,
+                width: 72,
+                child: Image.network(
+                  imageLink,
+                  fit: BoxFit.fitHeight,
+                ),
               ),
             ),
             Flexible(
@@ -46,18 +63,21 @@ class LocationListItem {
                         children: <Widget>[
                           Row(
                             children: <Widget>[
-                              Icon(
-                                Icons.comment,
-                                size: 16,
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                                child: Icon(
+                                  Icons.comment,
+                                  size: 16,
+                                ),
                               ),
                               Text(
-                                comments.toString() + ' Comments',
+                                commentsNumber.toString() + ' Comments',
                                 style: TextStyle(fontSize: 12),
                               )
                             ],
                           ),
                           Row(
-                            children: LocationListItem.getStarsBar(rate),
+                            children: getStarsBar(rate),
                           )
                         ],
                       ),
@@ -68,7 +88,7 @@ class LocationListItem {
     );
   }
 
-  static List<Widget> getStarsBar(int rate) {
+  List<Widget> getStarsBar(int rate) {
     List<Widget> starsBar = new List();
     for (int i = 0; i < 5; i++) {
       i <= rate

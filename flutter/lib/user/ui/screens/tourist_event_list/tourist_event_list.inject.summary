@@ -1,8 +1,0 @@
-{
-  "asset": "asset:tourists/lib/user/ui/screens/tourist_event_list/tourist_event_list.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": []
-  }
-}

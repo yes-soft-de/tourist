@@ -1,75 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/routes.dart';
-import 'package:tourists/user/ui/screens/location_details/location_details.dart';
+import 'package:tourists/user/ui/screens/home/subscreens/main/main_home.dart';
+import 'package:tourists/user/ui/screens/home/subscreens/tourist_guide_list/tourist_guide_list.dart';
 import 'package:tourists/user/ui/widgets/bottom_navigation_bar/buttom_navigation_bar.dart';
-import 'package:tourists/user/ui/widgets/carousel/carousel.dart';
-import 'package:tourists/user/ui/widgets/carousel_card/carousel_card.dart';
-import 'package:tourists/user/ui/widgets/location_list_item/location_list_item.dart';
 
 @provide
 class HomeScreen extends StatefulWidget {
+  final MainHomeSubScreen _homeSubScreen;
+  final TouristGuideListSubScreen _guideListScreen;
+  final TouristGuideListSubScreen _guideListSubScreen;
+
+  HomeScreen(
+      this._homeSubScreen, this._guideListScreen, this._guideListSubScreen);
+
   @override
   State<StatefulWidget> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int position;
+
   @override
   Widget build(BuildContext context) {
-    List<Widget> locationCards = [];
-    List<CarouselCard> carouselCards = [];
-
-    // TODO Replace this with network source
-    for (int i = 0; i < 10; i++) {
-      locationCards.add(GestureDetector(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => LocationDetailsScreen(),
-                settings: RouteSettings(
-                  // Replace this with location Id
-                  arguments: i,
-                ),
-              ));
-        },
-        child: Padding(
-          padding: EdgeInsets.all(8),
-          child: LocationListItem.createLocationListItem(
-              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-              'title ' + i.toString(),
-              'Best in the world!',
-              3,
-              3),
-        ),
-      ));
-      carouselCards.add(CarouselCard(
-          'title ' + i.toString(),
-          'Best location in the World!',
-          'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-          3,
-          3));
-    }
-
-    List<Widget> pageLayout = [];
-
-    // Add Carousel
-    pageLayout.add(CarouselWidget(carouselCards));
-
-    // Add location Cards
-    pageLayout.addAll(locationCards);
-
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          ListView(
-            children: pageLayout,
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 56,
+            child: PageView(
+              children: <Widget>[
+                widget._homeSubScreen,
+                widget._guideListScreen,
+                widget._guideListSubScreen
+              ],
+              onPageChanged: (pos) {
+                // Update the Home Page
+                position = pos;
+                setState(() {});
+              },
+            ),
           ),
           Positioned(
             bottom: 0,
             left: 0,
             right: 0,
-            child: CustomBottomNavigationBar(0),
+            child: CustomBottomNavigationBar(position),
           )
         ],
       ),

@@ -19,11 +19,14 @@ import '../../user/services/profile/profile.service.dart' as _i16;
 import '../../user/managers/profile/profile.manager.dart' as _i17;
 import '../../user/repositories/profile/profile.repository.dart' as _i18;
 import '../../user/ui/screens/home/home.dart' as _i19;
-import '../../user/ui/screens/intention_profile/intention_profile.dart' as _i20;
-import '../../user/bloc/create_intentions/create_intention_bloc.dart' as _i21;
-import '../../user/services/intentions/intentions_service.dart' as _i22;
-import '../../user/managers/intentions/intentions_manager.dart' as _i23;
-import '../../user/repositories/intentions/intentions_repository.dart' as _i24;
+import '../../user/ui/screens/home/subscreens/main/main_home.dart' as _i20;
+import '../../user/ui/screens/home/subscreens/tourist_guide_list/tourist_guide_list.dart'
+    as _i21;
+import '../../user/ui/screens/intention_profile/intention_profile.dart' as _i22;
+import '../../user/bloc/create_intentions/create_intention_bloc.dart' as _i23;
+import '../../user/services/intentions/intentions_service.dart' as _i24;
+import '../../user/managers/intentions/intentions_manager.dart' as _i25;
+import '../../user/repositories/intentions/intentions_repository.dart' as _i26;
 
 class AppComponent$Injector implements _i1.AppComponent {
   AppComponent$Injector._();
@@ -71,17 +74,23 @@ class AppComponent$Injector implements _i1.AppComponent {
       _i18.ProfileRepository(_createHttpClient());
   _i2.HttpClient _createHttpClient() =>
       _singletonHttpClient ??= _i2.HttpClient();
-  _i19.HomeScreen _createHomeScreen() => _i19.HomeScreen();
-  _i20.IntentionProfileScreen _createIntentionProfileScreen() =>
-      _i20.IntentionProfileScreen(_createCreateIntentionBloc());
-  _i21.CreateIntentionBloc _createCreateIntentionBloc() =>
-      _i21.CreateIntentionBloc(_createIntentionService());
-  _i22.IntentionService _createIntentionService() =>
-      _i22.IntentionService(_createIntentionsManager());
-  _i23.IntentionsManager _createIntentionsManager() =>
-      _i23.IntentionsManager(_createIntentionsRepository());
-  _i24.IntentionsRepository _createIntentionsRepository() =>
-      _i24.IntentionsRepository(_createHttpClient());
+  _i19.HomeScreen _createHomeScreen() => _i19.HomeScreen(
+      _createMainHomeSubScreen(),
+      _createTouristGuideListSubScreen(),
+      _createTouristGuideListSubScreen());
+  _i20.MainHomeSubScreen _createMainHomeSubScreen() => _i20.MainHomeSubScreen();
+  _i21.TouristGuideListSubScreen _createTouristGuideListSubScreen() =>
+      _i21.TouristGuideListSubScreen();
+  _i22.IntentionProfileScreen _createIntentionProfileScreen() =>
+      _i22.IntentionProfileScreen(_createCreateIntentionBloc());
+  _i23.CreateIntentionBloc _createCreateIntentionBloc() =>
+      _i23.CreateIntentionBloc(_createIntentionService());
+  _i24.IntentionService _createIntentionService() =>
+      _i24.IntentionService(_createIntentionsManager());
+  _i25.IntentionsManager _createIntentionsManager() =>
+      _i25.IntentionsManager(_createIntentionsRepository());
+  _i26.IntentionsRepository _createIntentionsRepository() =>
+      _i26.IntentionsRepository(_createHttpClient());
   @override
   _i4.MyApp get app => _createMyApp();
 }

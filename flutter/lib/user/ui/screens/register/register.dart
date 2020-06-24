@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/bloc/register/register.bloc.dart';
 import 'package:tourists/generated/l10n.dart';
+import 'package:tourists/user/bloc/register/register.bloc.dart';
 import 'package:tourists/routes.dart';
 
 @provide

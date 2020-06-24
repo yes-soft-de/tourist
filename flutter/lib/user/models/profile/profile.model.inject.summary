@@ -1,5 +1,5 @@
 {
-  "asset": "asset:tourists/lib/models/profile/profile.model.dart",
+  "asset": "asset:tourists/lib/user/models/profile/profile.model.dart",
   "summary": {
     "injector": [],
     "module": [],

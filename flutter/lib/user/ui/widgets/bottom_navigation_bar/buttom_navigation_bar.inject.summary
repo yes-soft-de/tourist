@@ -1,5 +1,5 @@
 {
-  "asset": "asset:tourists/lib/ui/widgets/bottom_navigation_bar/buttom_navigation_bar.dart",
+  "asset": "asset:tourists/lib/user/ui/widgets/bottom_navigation_bar/buttom_navigation_bar.dart",
   "summary": {
     "injector": [],
     "module": [],

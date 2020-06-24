@@ -21,35 +21,35 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/ui/screens/login/login.dart#LoginScreen",
+                "root": "asset:tourists/lib/user/ui/screens/login/login.dart#LoginScreen",
                 "qualifier": null
               },
               "isProvider": false
             },
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/ui/screens/register/register.dart#RegisterScreen",
+                "root": "asset:tourists/lib/user/ui/screens/register/register.dart#RegisterScreen",
                 "qualifier": null
               },
               "isProvider": false
             },
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/ui/screens/create_profile/create_profile.dart#CreateProfileScreen",
+                "root": "asset:tourists/lib/user/ui/screens/create_profile/create_profile.dart#CreateProfileScreen",
                 "qualifier": null
               },
               "isProvider": false
             },
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/ui/screens/home/home.dart#HomeScreen",
+                "root": "asset:tourists/lib/user/ui/screens/home/home.dart#HomeScreen",
                 "qualifier": null
               },
               "isProvider": false
             },
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/ui/screens/intention_profile/intention_profile.dart#IntentionProfileScreen",
+                "root": "asset:tourists/lib/user/ui/screens/intention_profile/intention_profile.dart#IntentionProfileScreen",
                 "qualifier": null
               },
               "isProvider": false

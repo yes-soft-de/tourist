@@ -1,5 +1,5 @@
 {
-  "asset": "asset:tourists/lib/models/intention_profile/intention_profile.dart",
+  "asset": "asset:tourists/lib/user/models/intention_profile/intention_profile.dart",
   "summary": {
     "injector": [],
     "module": [],

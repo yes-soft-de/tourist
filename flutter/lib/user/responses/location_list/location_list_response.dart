@@ -1,4 +1,4 @@
-import 'package:tourists/models/location_list_item/location_list_item.dart';
+import 'package:tourists/user/models/location_list_item/location_list_item.dart';
 
 class LocationListResponse {
   int statusCode;

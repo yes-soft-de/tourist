@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
-import 'package:tourists/responses/login/login.response.dart';
+import 'package:tourists/user/persistence/sharedpref/shared_preferences_helper.dart';
+import 'package:tourists/user/responses/login/login.response.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 

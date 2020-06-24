@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tourists/ui/widgets/carousel/carousel.dart';
+import 'package:tourists/user/ui/widgets/carousel/carousel.dart';
 
 class LocationDetailsScreen extends StatefulWidget {
 

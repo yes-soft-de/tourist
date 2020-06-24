@@ -3,12 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/routes.dart';
-import 'package:tourists/ui/screens/account_type_selector/login_type_selector.dart';
-import 'package:tourists/ui/screens/create_profile/create_profile.dart';
-import 'package:tourists/ui/screens/home/home.dart';
-import 'package:tourists/ui/screens/intention_profile/intention_profile.dart';
-import 'package:tourists/ui/screens/login/login.dart';
-import 'package:tourists/ui/screens/register/register.dart';
+import 'package:tourists/user/ui/screens/account_type_selector/login_type_selector.dart';
+import 'package:tourists/user/ui/screens/create_profile/create_profile.dart';
+import 'package:tourists/user/ui/screens/home/home.dart';
+import 'package:tourists/user/ui/screens/intention_profile/intention_profile.dart';
+import 'package:tourists/user/ui/screens/login/login.dart';
+import 'package:tourists/user/ui/screens/register/register.dart';
 
 import 'di/components/app.component.dart';
 import 'generated/l10n.dart';
@@ -53,6 +53,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: S.delegate.supportedLocales,
       title: 'Tourists',
       routes: {
+        // Move this to a SubComponent Level, for now though just release
         Routes.loginTypeSelector: (context) => LoginTypeSelectorScreen(),
         Routes.login: (context) => _loginScreen,
         Routes.register: (context) => _registerScreen,

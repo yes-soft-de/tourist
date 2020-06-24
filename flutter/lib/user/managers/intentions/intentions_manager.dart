@@ -1,7 +1,7 @@
 import 'package:inject/inject.dart';
-import 'package:tourists/repositories/intentions/intentions_repository.dart';
-import 'package:tourists/requests/create_profile/create_profile_body.dart';
-import 'package:tourists/responses/create_profile/create_profile_response.dart';
+import 'package:tourists/user/repositories/intentions/intentions_repository.dart';
+import 'package:tourists/user/requests/create_profile/create_profile_body.dart';
+import 'package:tourists/user/responses/create_profile/create_profile_response.dart';
 
 @provide
 class IntentionsManager {

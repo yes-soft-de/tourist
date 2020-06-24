@@ -1,6 +1,6 @@
 import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:tourists/services/login/login.service.dart';
+import 'package:tourists/user/services/login/login.service.dart';
 
 @provide
 class LoginBloc {

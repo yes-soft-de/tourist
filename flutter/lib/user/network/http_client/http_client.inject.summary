@@ -1,5 +1,5 @@
 {
-  "asset": "asset:tourists/lib/network/http_client/http_client.dart",
+  "asset": "asset:tourists/lib/user/network/http_client/http_client.dart",
   "summary": {
     "injector": [],
     "module": [],
@@ -11,7 +11,7 @@
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/network/http_client/http_client.dart#HttpClient",
+              "root": "asset:tourists/lib/user/network/http_client/http_client.dart#HttpClient",
               "qualifier": null
             },
             "isProvider": false

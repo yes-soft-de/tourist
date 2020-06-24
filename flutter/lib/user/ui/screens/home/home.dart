@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/routes.dart';
-import 'package:tourists/ui/screens/location_details/location_details.dart';
-import 'package:tourists/ui/widgets/bottom_navigation_bar/buttom_navigation_bar.dart';
-import 'package:tourists/ui/widgets/carousel/carousel.dart';
-import 'package:tourists/ui/widgets/carousel_card/carousel_card.dart';
-import 'package:tourists/ui/widgets/location_list_item/location_list_item.dart';
+import 'package:tourists/user/ui/screens/location_details/location_details.dart';
+import 'package:tourists/user/ui/widgets/bottom_navigation_bar/buttom_navigation_bar.dart';
+import 'package:tourists/user/ui/widgets/carousel/carousel.dart';
+import 'package:tourists/user/ui/widgets/carousel_card/carousel_card.dart';
+import 'package:tourists/user/ui/widgets/location_list_item/location_list_item.dart';
 
 @provide
 class HomeScreen extends StatefulWidget {

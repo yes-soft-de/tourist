@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:tourists/ui/screens/tourist_orders/tourist_order.dart';
+import 'package:tourists/user/ui/screens/tourist_orders/tourist_order.dart';
 
 class TouristChatScreen extends StatefulWidget{
 

@@ -1,5 +1,5 @@
 {
-  "asset": "asset:tourists/lib/managers/profile/profile.manager.dart",
+  "asset": "asset:tourists/lib/user/managers/profile/profile.manager.dart",
   "summary": {
     "injector": [],
     "module": [],
@@ -11,7 +11,7 @@
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/managers/profile/profile.manager.dart#ProfileManager",
+              "root": "asset:tourists/lib/user/managers/profile/profile.manager.dart#ProfileManager",
               "qualifier": null
             },
             "isProvider": false
@@ -21,7 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/repositories/profile/profile.repository.dart#ProfileRepository",
+                "root": "asset:tourists/lib/user/repositories/profile/profile.repository.dart#ProfileRepository",
                 "qualifier": null
               },
               "isProvider": false

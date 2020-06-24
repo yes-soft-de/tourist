@@ -1,5 +1,5 @@
 {
-  "asset": "asset:tourists/lib/requests/create_profile/create_profile_body.dart",
+  "asset": "asset:tourists/lib/user/requests/create_profile/create_profile_body.dart",
   "summary": {
     "injector": [],
     "module": [],

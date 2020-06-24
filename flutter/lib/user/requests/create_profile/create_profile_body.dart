@@ -1,4 +1,4 @@
-import 'package:tourists/models/profile/profile.model.dart';
+import 'package:tourists/user/models/profile/profile.model.dart';
 
 class CreateProfileBody {
   String uid;

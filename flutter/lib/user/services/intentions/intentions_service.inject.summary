@@ -1,5 +1,5 @@
 {
-  "asset": "asset:tourists/lib/services/intentions/intentions_service.dart",
+  "asset": "asset:tourists/lib/user/services/intentions/intentions_service.dart",
   "summary": {
     "injector": [],
     "module": [],
@@ -11,7 +11,7 @@
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/services/intentions/intentions_service.dart#IntentionService",
+              "root": "asset:tourists/lib/user/services/intentions/intentions_service.dart#IntentionService",
               "qualifier": null
             },
             "isProvider": false
@@ -21,7 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/managers/intentions/intentions_manager.dart#IntentionsManager",
+                "root": "asset:tourists/lib/user/managers/intentions/intentions_manager.dart#IntentionsManager",
                 "qualifier": null
               },
               "isProvider": false

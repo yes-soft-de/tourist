@@ -1,5 +1,5 @@
 {
-  "asset": "asset:tourists/lib/ui/widgets/location_list_item/location_list_item.dart",
+  "asset": "asset:tourists/lib/user/ui/widgets/location_list_item/location_list_item.dart",
   "summary": {
     "injector": [],
     "module": [],

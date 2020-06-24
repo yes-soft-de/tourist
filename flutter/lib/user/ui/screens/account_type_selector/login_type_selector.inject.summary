@@ -1,5 +1,5 @@
 {
-  "asset": "asset:tourists/lib/ui/screens/account_type_selector/login_type_selector.dart",
+  "asset": "asset:tourists/lib/user/ui/screens/account_type_selector/login_type_selector.dart",
   "summary": {
     "injector": [],
     "module": [],
@@ -11,7 +11,7 @@
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/ui/screens/account_type_selector/login_type_selector.dart#LoginTypeSelectorScreen",
+              "root": "asset:tourists/lib/user/ui/screens/account_type_selector/login_type_selector.dart#LoginTypeSelectorScreen",
               "qualifier": null
             },
             "isProvider": false

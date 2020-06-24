@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:inject/inject.dart';
-import 'package:tourists/consts/urls.dart';
-import 'package:tourists/network/http_client/http_client.dart';
-import 'package:tourists/requests/create_profile/create_profile_body.dart';
-import 'package:tourists/responses/create_profile/create_profile_response.dart';
+import 'package:tourists/user/consts/urls.dart';
+import 'package:tourists/user/network/http_client/http_client.dart';
+import 'package:tourists/user/requests/create_profile/create_profile_body.dart';
+import 'package:tourists/user/responses/create_profile/create_profile_response.dart';
 
 @provide
 class IntentionsRepository {

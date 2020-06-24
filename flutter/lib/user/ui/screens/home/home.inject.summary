@@ -1,5 +1,5 @@
 {
-  "asset": "asset:tourists/lib/ui/screens/home/home.dart",
+  "asset": "asset:tourists/lib/user/ui/screens/home/home.dart",
   "summary": {
     "injector": [],
     "module": [],
@@ -11,7 +11,7 @@
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/ui/screens/home/home.dart#HomeScreen",
+              "root": "asset:tourists/lib/user/ui/screens/home/home.dart#HomeScreen",
               "qualifier": null
             },
             "isProvider": false

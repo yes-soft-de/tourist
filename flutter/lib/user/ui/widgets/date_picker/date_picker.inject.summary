@@ -1,5 +1,5 @@
 {
-  "asset": "asset:tourists/lib/ui/widgets/date_picker/date_picker.dart",
+  "asset": "asset:tourists/lib/user/ui/widgets/date_picker/date_picker.dart",
   "summary": {
     "injector": [],
     "module": [],

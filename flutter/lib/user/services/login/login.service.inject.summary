@@ -1,5 +1,5 @@
 {
-  "asset": "asset:tourists/lib/services/login/login.service.dart",
+  "asset": "asset:tourists/lib/user/services/login/login.service.dart",
   "summary": {
     "injector": [],
     "module": [],
@@ -11,7 +11,7 @@
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/services/login/login.service.dart#LoginService",
+              "root": "asset:tourists/lib/user/services/login/login.service.dart#LoginService",
               "qualifier": null
             },
             "isProvider": false
@@ -21,7 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper",
+                "root": "asset:tourists/lib/user/persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper",
                 "qualifier": null
               },
               "isProvider": false

@@ -1,5 +1,5 @@
 {
-  "asset": "asset:tourists/lib/bloc/register/register.bloc.dart",
+  "asset": "asset:tourists/lib/user/bloc/register/register.bloc.dart",
   "summary": {
     "injector": [],
     "module": [],
@@ -11,7 +11,7 @@
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/bloc/register/register.bloc.dart#RegisterBloc",
+              "root": "asset:tourists/lib/user/bloc/register/register.bloc.dart#RegisterBloc",
               "qualifier": null
             },
             "isProvider": false
@@ -21,7 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/services/register/register.service.dart#RegisterService",
+                "root": "asset:tourists/lib/user/services/register/register.service.dart#RegisterService",
                 "qualifier": null
               },
               "isProvider": false

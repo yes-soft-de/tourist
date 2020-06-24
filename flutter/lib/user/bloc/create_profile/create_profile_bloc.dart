@@ -1,7 +1,7 @@
 import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:tourists/requests/create_profile/create_profile_body.dart';
-import 'package:tourists/services/profile/profile.service.dart';
+import 'package:tourists/user/requests/create_profile/create_profile_body.dart';
+import 'package:tourists/user/services/profile/profile.service.dart';
 
 @provide
 class CreateProfileBloc {

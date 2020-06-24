@@ -3,9 +3,9 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/bloc/create_profile/create_profile_bloc.dart';
+import 'package:tourists/user/bloc/create_profile/create_profile_bloc.dart';
 import 'package:tourists/generated/l10n.dart';
-import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
+import 'package:tourists/user/persistence/sharedpref/shared_preferences_helper.dart';
 import 'package:tourists/routes.dart';
 
 @provide

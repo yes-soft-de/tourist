@@ -1,5 +1,5 @@
 {
-  "asset": "asset:tourists/lib/bloc/create_profile/create_profile_bloc.dart",
+  "asset": "asset:tourists/lib/user/bloc/create_profile/create_profile_bloc.dart",
   "summary": {
     "injector": [],
     "module": [],
@@ -11,7 +11,7 @@
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/bloc/create_profile/create_profile_bloc.dart#CreateProfileBloc",
+              "root": "asset:tourists/lib/user/bloc/create_profile/create_profile_bloc.dart#CreateProfileBloc",
               "qualifier": null
             },
             "isProvider": false
@@ -21,7 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/services/profile/profile.service.dart#ProfileService",
+                "root": "asset:tourists/lib/user/services/profile/profile.service.dart#ProfileService",
                 "qualifier": null
               },
               "isProvider": false

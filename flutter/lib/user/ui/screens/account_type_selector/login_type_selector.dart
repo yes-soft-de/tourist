@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/routes.dart';
-import 'package:tourists/ui/screens/login/login.dart';
 
 @provide
 class LoginTypeSelectorScreen extends StatelessWidget {

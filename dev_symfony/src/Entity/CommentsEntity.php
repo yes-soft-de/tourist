@@ -22,18 +22,18 @@ class CommentsEntity
     private $comment;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\regionsEntity")
+     * @ORM\ManyToOne(targetEntity="App\Entity\RegionsEntity")
      * @ORM\JoinColumn(nullable=false)
      */
     private $region;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -67,24 +67,24 @@ class CommentsEntity
         return $this;
     }
 
-    public function getRegion(): ?regionsEntity
+    public function getRegion(): ?RegionsEntity
     {
         return $this->region;
     }
 
-    public function setRegion(?regionsEntity $region): self
+    public function setRegion(?RegionsEntity $region): self
     {
         $this->region = $region;
 
         return $this;
     }
 
-    public function getUser(): ?user
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?user $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 

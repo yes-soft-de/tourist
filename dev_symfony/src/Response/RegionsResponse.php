@@ -15,4 +15,9 @@ class RegionsResponse
 
     public $location;
 
+    public $commentNumber;
+
+    public $ratingAverage;
+
+    public $path = [];
 }

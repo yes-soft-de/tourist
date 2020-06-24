@@ -22,13 +22,13 @@ class RatingsEntity
     private $rate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\regionsEntity")
+     * @ORM\ManyToOne(targetEntity="App\Entity\RegionsEntity")
      * @ORM\JoinColumn(nullable=false)
      */
     private $region;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

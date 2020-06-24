@@ -17,7 +17,7 @@ class _TouristGuideListSubScreenState extends State<TouristGuideListSubScreen> {
     guideList.add(Text('سياح'));
 
     for (int i = 0; i < 20; i++) {
-      guideList.add(GuideListItem(
+      guideList.add(GuideListItemWidget(
         guideCity: 'Damascus',
         guideName: 'Mohammad',
         guideLanguage: 'العربية - English',

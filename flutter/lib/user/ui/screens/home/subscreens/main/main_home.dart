@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/user/ui/screens/location_details/location_details.dart';
@@ -28,7 +27,7 @@ class _MainHomeSubScreenState extends State<MainHomeSubScreen> {
                 builder: (context) => LocationDetailsScreen(),
                 settings: RouteSettings(
                   // Replace this with location Id
-                  arguments: i,
+                  arguments: i.toString(),
                 ),
               ));
         },
@@ -45,11 +44,12 @@ class _MainHomeSubScreenState extends State<MainHomeSubScreen> {
         ),
       ));
       carouselCards.add(CarouselCard(
-          'title ' + i.toString(),
-          'Best location in the World!',
-          'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-          3,
-          3));
+        title: 'title ' + i.toString(),
+        description: 'Best location in the World!',
+        image: 'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
+        commentsNumber: 3,
+        stars: 3,
+      ));
     }
 
     List<Widget> pageLayout = [];

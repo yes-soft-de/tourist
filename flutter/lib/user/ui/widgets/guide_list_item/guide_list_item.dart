@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tourists/generated/l10n.dart';
 
-class GuideListItem extends StatelessWidget {
+class GuideListItemWidget extends StatelessWidget {
   final String guideName;
   final String guideLanguage;
   final String guideImage;
@@ -10,7 +9,7 @@ class GuideListItem extends StatelessWidget {
   final double rate;
   final String guideCity;
 
-  GuideListItem(
+  GuideListItemWidget(
       {Key key,
       @required this.guideName,
       @required this.guideImage,
@@ -22,57 +21,76 @@ class GuideListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Padding(
-        padding: EdgeInsets.all(8),
-        child: Flex(
-          direction: Axis.horizontal,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            // TODO: Show Profile when clicking on image
-            // Image
-            Container(
-              height: 56,
-              width: 56,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(90))),
-              child: Image.network(
-                guideImage,
-                fit: BoxFit.contain,
-              ),
-            ),
-            // Info
-            Flex(
-              direction: Axis.vertical,
-              children: <Widget>[
-                Text(
-                  guideName,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+      child: Container(
+        height: 128,
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              // TODO: Show Profile when clicking on image
+              // Image
+              Container(
+                height: 96,
+                width: 96,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(90))),
+                child: Image.network(
+                  guideImage,
+                  fit: BoxFit.fitHeight,
                 ),
-                Text(guideLanguage + ' / ' + guideCity),
-                Flex(
-                  direction: Axis.horizontal,
-                  children: <Widget>[
-                    Text(
-                      availability
-                          ? S.of(context).available
-                          : S.of(context).not_available,
-                      style: TextStyle(
-                          color:
-                              availability ? Colors.greenAccent : Colors.red),
-                    ),
-                    getStarsLine()
-                  ],
-                )
-              ],
-            ),
-            // TODO: Move to Request Guide When this Clicked
-            // Request Button
-            Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(90)),
-                  border: Border.all(color: Colors.black)),
-            )
-          ],
+              ),
+              Container(
+                width: 8,
+              ),
+              // Info
+              Flex(
+                direction: Axis.vertical,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    guideName,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                  ),
+                  Text(guideLanguage + ' / ' + guideCity),
+                  Flex(
+                    direction: Axis.horizontal,
+                    children: <Widget>[
+                      Text(
+                        availability
+                            ? S.of(context).available
+                            : S.of(context).not_available,
+                        style: TextStyle(
+                            color:
+                                availability ? Colors.greenAccent : Colors.red),
+                      ),
+                      Container(
+                        width: 8,
+                      ),
+                      getStarsLine()
+                    ],
+                  )
+                ],
+              ),
+              // Divider
+              Container(
+                width: 8,
+              ),
+              // TODO: Move to Request Guide When this Clicked
+              // Request Button
+              Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(90)),
+                    border: Border.all(color: Colors.black)),
+                child: Icon(Icons.add),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -82,7 +100,10 @@ class GuideListItem extends StatelessWidget {
     List<Widget> starsLine = [];
 
     for (int i = 0; i < rate; i++) {
-      starsLine.add(Icon(Icons.star));
+      starsLine.add(Icon(
+        Icons.star,
+        size: 16,
+      ));
     }
 
     return Flex(

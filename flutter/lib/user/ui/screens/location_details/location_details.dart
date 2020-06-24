@@ -1,14 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tourists/user/ui/widgets/carousel/carousel.dart';
+import 'package:tourists/user/ui/widgets/carousel_card/carousel_card.dart';
+import 'package:tourists/user/ui/widgets/guide_list_item/guide_list_item.dart';
 
 class LocationDetailsScreen extends StatefulWidget {
-
-  String _locationId;
-
-  LocationDetailsScreen() {
-  }
-
   @override
   State<StatefulWidget> createState() => _LocationDetailsScreenState();
 }
@@ -19,94 +15,89 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
     // Get the Location Id
     final String locationId = ModalRoute.of(context).settings.arguments;
 
+    // Get Location Details From Network
+
+    List<Widget> pageLayout = [
+      CarouselWidget([
+        CarouselCard(
+          title: 'title ',
+          description: 'Best location in the World!',
+          image:
+              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
+          commentsNumber: 3,
+          stars: 3,
+        ),
+        CarouselCard(
+          title: 'title ',
+          description: 'Best location in the World!',
+          image:
+              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
+          commentsNumber: 3,
+          stars: 3,
+        ),
+        CarouselCard(
+          title: 'title ',
+          description: 'Best location in the World!',
+          image:
+              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
+          commentsNumber: 3,
+          stars: 3,
+        ),
+        CarouselCard(
+          title: 'title ',
+          description: 'Best location in the World!',
+          image:
+              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
+          commentsNumber: 3,
+          stars: 3,
+        ),
+        CarouselCard(
+          title: 'title ',
+          description: 'Best location in the World!',
+          image:
+              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
+          commentsNumber: 3,
+          stars: 3,
+        ),
+      ]),
+      Text('Description'),
+      Flex(
+        direction: Axis.horizontal,
+        children: <Widget>[
+          Container(
+            child: Text('Evaluate'),
+          ),
+          // TODO Add Stars Bar
+        ],
+      ),
+      Text('Guides who operates here')
+    ];
+
+    pageLayout.addAll(getGuidesList());
 
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          CarouselWidget([
-            Image.network('Some Image'),
-            Image.network('Some Image'),
-            Image.network('Some Image'),
-            Image.network('Some Image'),
-          ]),
-          Text('Description'),
-          Row(
-            children: <Widget>[
-              Container(
-                child: Text('Evaluate'),
-              ),
-              // TODO Add Stars Bar
-            ],
-          ),
-          Text('Guides who operates here'),
-          ListView(
-            children: getGuidesList(),
-          )
-        ],
+      body: ListView(
+        children: pageLayout,
       ),
     );
   }
 
-  List<Widget> getGuidesList() {
-    List<Widget> guidesList = [];
+  List<GuideListItemWidget> getGuidesList() {
+    List<GuideListItemWidget> guidesList = [];
 
     // TODO: Create Guides List
-    guidesList.add(createGuideCard(null, null, null, null));
-    guidesList.add(createGuideCard(null, null, null, null));
-    guidesList.add(createGuideCard(null, null, null, null));
-    guidesList.add(createGuideCard(null, null, null, null));
+    for (int i = 0; i < 20; i++) {
+      guidesList.add(GuideListItemWidget(
+        guideCity: 'Damascus',
+        guideName: 'Mohammad',
+        guideLanguage: 'العربية - English',
+        availability: i % 3 == 0,
+        rate: 3,
+        guideImage:
+            'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
+      ));
+    }
 
     return guidesList;
-  }
-
-  Widget createGuideCard(
-      String image, String guideName, String languages, int stars) {
-    return Flex(
-      direction: Axis.horizontal,
-      children: <Widget>[
-        Flexible(
-          flex: 1,
-          child: Container(
-              width: 96,
-              height: 96,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(90))),
-              child: Image.network(
-                image,
-                fit: BoxFit.contain,
-              )),
-        ),
-        Flexible(
-          flex: 3,
-          child: Column(
-            children: <Widget>[
-              Text(
-                guideName,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              Text(languages),
-              // TODO Add Star Line
-            ],
-          ),
-        ),
-        Flexible(
-          flex: 1,
-          child: GestureDetector(
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(90))),
-              color: Colors.greenAccent,
-              child: Text(
-                '+',
-                style: TextStyle(
-                    fontSize: 48,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
-              ),
-            ),
-          ),
-        )
-      ],
-    );
   }
 }

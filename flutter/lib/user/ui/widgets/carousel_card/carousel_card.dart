@@ -4,14 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:tourists/generated/l10n.dart';
 
 class CarouselCard extends StatelessWidget {
-  final String _title;
-  final String _description;
-  final String _image;
-  final int _stars;
-  final int _commentsNumber;
+  final String title;
+  final String description;
+  final String image;
+  final int stars;
+  final int commentsNumber;
 
-  CarouselCard(this._title, this._description, this._image, this._stars,
-      this._commentsNumber);
+  CarouselCard(
+      {Key key,
+      this.title,
+      this.description,
+      this.image,
+      this.stars,
+      this.commentsNumber});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,7 @@ class CarouselCard extends StatelessWidget {
           Container(
               width: double.infinity,
               child: Image.network(
-                _image,
+                image,
                 fit: BoxFit.fill,
               )),
           Container(
@@ -37,7 +42,7 @@ class CarouselCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  _title,
+                  title,
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -47,7 +52,7 @@ class CarouselCard extends StatelessWidget {
                   height: 8,
                 ),
                 Text(
-                  _description,
+                  description,
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
                 Container(
@@ -67,7 +72,7 @@ class CarouselCard extends StatelessWidget {
                       width: 8,
                     ),
                     Text(
-                      _commentsNumber.toString() + ' ' + S.of(context).comments,
+                      commentsNumber.toString() + ' ' + S.of(context).comments,
                       style: TextStyle(color: Colors.white),
                     )
                   ],
@@ -85,7 +90,7 @@ class CarouselCard extends StatelessWidget {
     List<Widget> starsRow = [];
     for (int i = 0; i < 5; i++) {
       starsRow.add(
-        i >= _stars
+        i >= stars
             ? Icon(
                 Icons.star,
                 color: Color(0x88ffffff),

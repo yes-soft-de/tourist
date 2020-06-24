@@ -28,7 +28,7 @@ class LocationListItem extends StatelessWidget {
               flex: 1,
               child: Container(
                 height: 128,
-                width: 72,
+                width: 128,
                 child: Image.network(
                   imageLink,
                   fit: BoxFit.fitHeight,

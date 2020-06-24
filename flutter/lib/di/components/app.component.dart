@@ -15,7 +15,4 @@ abstract class AppComponent {
     return await g.AppComponent$Injector.create(
     );
   }
-
-  @provide
-  HttpClient getHttpClient();
 }

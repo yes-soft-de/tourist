@@ -9,6 +9,8 @@ import 'package:tourists/user/ui/screens/home/home.dart';
 import 'package:tourists/user/ui/screens/intention_profile/intention_profile.dart';
 import 'package:tourists/user/ui/screens/login/login.dart';
 import 'package:tourists/user/ui/screens/register/register.dart';
+import 'package:tourists/user/user_component.dart';
+import 'package:tourists/user/user_routes.dart';
 
 import 'di/components/app.component.dart';
 import 'generated/l10n.dart';
@@ -32,14 +34,9 @@ void main() {
 @provide
 class MyApp extends StatelessWidget {
 
-  // This Screens is here because it needs to be injected!
-  final LoginScreen _loginScreen;
-  final RegisterScreen _registerScreen;
-  final CreateProfileScreen _createProfileScreen;
-  final IntentionProfileScreen _intentionProfileScreen;
-  final HomeScreen _homeScreen;
+  UserComponent _userComponent;
 
-  MyApp(this._loginScreen, this._registerScreen, this._createProfileScreen, this._homeScreen, this._intentionProfileScreen);
+  MyApp(this._userComponent);
 
   @override
   Widget build(BuildContext context) {
@@ -52,16 +49,8 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: S.delegate.supportedLocales,
       title: 'Tourists',
-      routes: {
-        // Move this to a SubComponent Level, for now though just release
-        Routes.loginTypeSelector: (context) => LoginTypeSelectorScreen(),
-        Routes.login: (context) => _loginScreen,
-        Routes.register: (context) => _registerScreen,
-        Routes.createProfile: (context) => _createProfileScreen,
-        Routes.intentionProfile: (context) => _intentionProfileScreen,
-        Routes.home: (context) => _homeScreen,
-      },
-      initialRoute: Routes.intentionProfile,
+      routes: _userComponent.getRoutes(),
+      initialRoute: UserRoutes.intentionProfile,
       home: LoginTypeSelectorScreen()
     );
   }

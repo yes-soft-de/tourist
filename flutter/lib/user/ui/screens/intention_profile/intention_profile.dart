@@ -3,9 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/user/bloc/create_intentions/create_intention_bloc.dart';
-import 'package:tourists/routes.dart';
-import 'package:tourists/user/services/intentions/intentions_service.dart';
-import 'package:tourists/user/ui/screens/location_details/location_details.dart';
+import 'package:tourists/user/user_routes.dart';
 
 @provide
 class IntentionProfileScreen extends StatefulWidget {
@@ -35,7 +33,7 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
   @override
   Widget build(BuildContext context) {
     widget._createIntentionBloc.intentionsCreateStream.listen((intentionsCreated) {
-      if (intentionsCreated) Navigator.of(context).pushReplacementNamed(Routes.home);
+      if (intentionsCreated) Navigator.of(context).pushReplacementNamed(UserRoutes.home);
     });
 
     return Scaffold(

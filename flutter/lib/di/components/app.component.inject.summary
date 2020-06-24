@@ -18,20 +18,6 @@
             "singleton": false,
             "asynchronous": false,
             "dependencies": []
-          },
-          {
-            "name": "getHttpClient",
-            "kind": "method",
-            "injectedType": {
-              "lookupKey": {
-                "root": "asset:tourists/lib/user/network/http_client/http_client.dart#HttpClient",
-                "qualifier": null
-              },
-              "isProvider": false
-            },
-            "singleton": false,
-            "asynchronous": false,
-            "dependencies": []
           }
         ],
         "modules": []

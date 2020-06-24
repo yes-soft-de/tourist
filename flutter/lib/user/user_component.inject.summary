@@ -1,0 +1,69 @@
+{
+  "asset": "asset:tourists/lib/user/user_component.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
+      {
+        "name": "UserComponent",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/user/user_component.dart#UserComponent",
+              "qualifier": null
+            },
+            "isProvider": false
+          },
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/user/ui/screens/login/login.dart#LoginScreen",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/user/ui/screens/account_type_selector/login_type_selector.dart#LoginTypeSelectorScreen",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/user/ui/screens/register/register.dart#RegisterScreen",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/user/ui/screens/create_profile/create_profile.dart#CreateProfileScreen",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/user/ui/screens/home/home.dart#HomeScreen",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/user/ui/screens/intention_profile/intention_profile.dart#IntentionProfileScreen",
+                "qualifier": null
+              },
+              "isProvider": false
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

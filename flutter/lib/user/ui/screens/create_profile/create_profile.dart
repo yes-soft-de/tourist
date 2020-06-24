@@ -7,6 +7,7 @@ import 'package:tourists/user/bloc/create_profile/create_profile_bloc.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/user/persistence/sharedpref/shared_preferences_helper.dart';
 import 'package:tourists/routes.dart';
+import 'package:tourists/user/user_routes.dart';
 
 @provide
 class CreateProfileScreen extends StatefulWidget {
@@ -30,7 +31,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   Widget build(BuildContext context) {
     widget._profileBloc.profileStatus.listen((event) {
       if (widget != null) {
-        Navigator.pushReplacementNamed(context, Routes.intentionProfile);
+        Navigator.pushReplacementNamed(context, UserRoutes.intentionProfile);
       }
     });
 

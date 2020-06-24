@@ -21,35 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/user/ui/screens/login/login.dart#LoginScreen",
-                "qualifier": null
-              },
-              "isProvider": false
-            },
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/user/ui/screens/register/register.dart#RegisterScreen",
-                "qualifier": null
-              },
-              "isProvider": false
-            },
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/user/ui/screens/create_profile/create_profile.dart#CreateProfileScreen",
-                "qualifier": null
-              },
-              "isProvider": false
-            },
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/user/ui/screens/home/home.dart#HomeScreen",
-                "qualifier": null
-              },
-              "isProvider": false
-            },
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/user/ui/screens/intention_profile/intention_profile.dart#IntentionProfileScreen",
+                "root": "asset:tourists/lib/user/user_component.dart#UserComponent",
                 "qualifier": null
               },
               "isProvider": false

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/routes.dart';
+import 'package:tourists/user/user_routes.dart';
 
 @provide
 class LoginTypeSelectorScreen extends StatelessWidget {
@@ -55,7 +56,7 @@ class LoginTypeSelectorScreen extends StatelessWidget {
 
             // First Card
             GestureDetector(
-              onTap: () => Navigator.pushReplacementNamed(context, Routes.login),
+              onTap: () => Navigator.pushReplacementNamed(context, UserRoutes.login),
               child: Stack(alignment: Alignment.center, children: <Widget>[
                 // Sizing Container
                 Container(

@@ -3,6 +3,7 @@ import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/user/bloc/register/register.bloc.dart';
 import 'package:tourists/routes.dart';
+import 'package:tourists/user/user_routes.dart';
 
 @provide
 class RegisterScreen extends StatefulWidget {
@@ -28,7 +29,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     widget._registerBloc.registerStatus.listen((event) {
       if (event != null && event.length > 0) {
-        Navigator.of(context).pushReplacementNamed(Routes.createProfile);
+        Navigator.of(context).pushReplacementNamed(UserRoutes.createProfile);
       }
     });
 
@@ -137,7 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushReplacementNamed(context, Routes.login);
+                    Navigator.pushReplacementNamed(context, UserRoutes.login);
                   },
                   child: Container(
                     alignment: Alignment.center,

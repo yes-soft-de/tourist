@@ -1,5 +1,5 @@
 {
-  "asset": "asset:tourists/lib/routes.dart",
+  "asset": "asset:tourists/lib/user/user_routes.dart",
   "summary": {
     "injector": [],
     "module": [],

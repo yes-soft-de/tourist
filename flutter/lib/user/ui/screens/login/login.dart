@@ -5,6 +5,8 @@ import 'package:tourists/user/bloc/login/login.bloc.dart';
 import 'package:tourists/routes.dart';
 import 'dart:developer' as developer;
 
+import 'package:tourists/user/user_routes.dart';
+
 @provide
 class LoginScreen extends StatefulWidget {
   final LoginBloc _loginBlock;
@@ -28,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     widget._loginBlock.loginStatus.listen((event) {
       if (event != null && event.length > 0) {
-        Navigator.of(context).pushReplacementNamed(Routes.createProfile);
+        Navigator.of(context).pushReplacementNamed(UserRoutes.createProfile);
       }
     });
 
@@ -140,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
             GestureDetector(
               onTap: () {
                 developer.log('Register Requested');
-                Navigator.pushReplacementNamed(context, Routes.register);
+                Navigator.pushReplacementNamed(context, UserRoutes.register);
               },
               child: Container(
                 alignment: Alignment.center,

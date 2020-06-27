@@ -19,32 +19,15 @@ class ImagesEntityRepository extends ServiceEntityRepository
         parent::__construct($registry, ImagesEntity::class);
     }
 
-    // /**
-    //  * @return ImagesEntity[] Returns an array of ImagesEntity objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getRegionImages($id)
     {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        return $this->createQueryBuilder('images')
+            ->select('images.path')
 
-    /*
-    public function findOneBySomeField($value): ?ImagesEntity
-    {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('images.region = :id')
+            ->setParameter('id', $id)
+
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
 }

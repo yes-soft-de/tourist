@@ -22,7 +22,7 @@ class ImagesEntity
     private $path;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\regionsEntity")
+     * @ORM\ManyToOne(targetEntity="App\Entity\RegionsEntity")
      * @ORM\JoinColumn(nullable=false)
      */
     private $region;

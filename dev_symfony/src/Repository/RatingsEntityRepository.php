@@ -19,32 +19,14 @@ class RatingsEntityRepository extends ServiceEntityRepository
         parent::__construct($registry, RatingsEntity::class);
     }
 
-    // /**
-    //  * @return RatingsEntity[] Returns an array of RatingsEntity objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function ratingRegionCalculate($id)
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        return $this->createQueryBuilder('rate')
+            ->select('avg(rate.rate)')
+            ->andWhere('rate.region = :id')
+            ->setParameter('id', $id)
 
-    /*
-    public function findOneBySomeField($value): ?RatingsEntity
-    {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getOneOrNullResult();
     }
-    */
 }

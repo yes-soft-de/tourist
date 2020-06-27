@@ -24,22 +24,29 @@ class RegionsEntityRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('regions')
 
-            ->select('regions.id', 'regions.name', 'regions.description', 'regions.location', 'count(comments) as commentNumber',
-                            'avg(rate.rate) as ratingAverage', 'images.path as path' )
+            ->select('regions.id', 'regions.name', 'regions.description', 'regions.location')
 
-            ->from('App:RatingsEntity','rate')
-            //->innerJoin('regions.id', 'regions', Join::ON, 'rate.region = regions.id')
-            ->from('App:CommentsEntity','comments')
-            ->from('App:ImagesEntity', 'images')
+           // ->from('App:ImagesEntity', 'images')
 
-            ->andWhere('images.region=regions.id')
-            ->andWhere('rate.region=regions.id')
-            ->andWhere('comments.region=regions.id')
+            //->andWhere('images.region=regions.id')
+
             ->groupBy('regions.id')
-            ->groupBy('rate.region')
             ->orderBy('regions.id', 'ASC')
 
             ->getQuery()
             ->getResult();
+    }
+
+    public function getRegion($id)
+    {
+        return $this->createQueryBuilder('regions')
+
+            ->select('regions.id', 'regions.name', 'regions.description', 'regions.location')
+
+            ->andWhere('regions.id=:id')
+            ->setParameter('id',$id)
+
+            ->getQuery()
+            ->getArrayResult();
     }
 }

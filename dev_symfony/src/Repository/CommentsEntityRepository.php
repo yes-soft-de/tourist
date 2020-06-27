@@ -19,32 +19,33 @@ class CommentsEntityRepository extends ServiceEntityRepository
         parent::__construct($registry, CommentsEntity::class);
     }
 
-    // /**
-    //  * @return CommentsEntity[] Returns an array of CommentsEntity objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getCommentsByID($id)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $r = $this->createQueryBuilder('comments')
+            ->select('comments.id', 'comments.comment', 'comments.date', 'user.name as userName')
+            //->from('App:User', 'user')
+            ->join('App:User', 'user')
+            //'IDENTITY(comments.region)'
+            //->join('App:RegionEntity', 'region')
+            ->andWhere('user.id = comments.user')
 
-    /*
-    public function findOneBySomeField($value): ?CommentsEntity
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('comments.region=:id')
+            ->setParameter('id',$id)
+
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getArrayResult();
+
+        return $r;
     }
-    */
+
+    public function commentsNumber($id)
+    {
+        return $this->createQueryBuilder('commentNumber')
+            ->select('count(commentNumber)')
+            ->andWhere('commentNumber.region = :id')
+            ->setParameter('id', $id)
+
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

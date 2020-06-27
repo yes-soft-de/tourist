@@ -17,12 +17,15 @@ class RatingManager
     private $autoMapping;
     private $entityManager;
     private $ratingsEntityRepository;
+    private $touristsManager;
 
-    public function __construct(AutoMapping $autoMapping, EntityManagerInterface $entityManager, RatingsEntityRepository $ratingsEntityRepository)
+    public function __construct(AutoMapping $autoMapping, EntityManagerInterface $entityManager, RatingsEntityRepository $ratingsEntityRepository,
+                                    TouristsManager $touristsManager)
     {
         $this->autoMapping = $autoMapping;
         $this->entityManager = $entityManager;
         $this->ratingsEntityRepository = $ratingsEntityRepository;
+        $this->touristsManager = $touristsManager;
     }
 
     public function ratingCreate(RatingCreateRequest $request)
@@ -34,7 +37,7 @@ class RatingManager
             $request->setRegion($region);
         }
 
-        $user = $this->entityManager->getRepository(User::class)->find($request->user);
+        $user = $this->touristsManager->getTouristByUserID($request->user);
         $request->setUser($user);
 
         $ratingCreate = $this->autoMapping->map(RatingCreateRequest::class, RatingsEntity::class, $request);
@@ -44,5 +47,10 @@ class RatingManager
         $this->entityManager->clear();
 
         return $ratingCreate;
+    }
+
+    public function getRegionRatingByID($id)
+    {
+        return $this->ratingsEntityRepository->ratingRegionCalculate($id);
     }
 }

@@ -47,3 +47,23 @@ methods={"POST"}
 /regions
 methods={"GET"}
 ```
+#### Get region details
+```
+/region/{id}
+methods={"GET"}
+```
+#### Create region image (another ones)
+```
+/regionimage
+methods={"POST"}
+```
+#### Create comment
+```
+/comment
+methods={"POST"}
+```
+#### Create rating
+```
+/rating
+methods={"POST"}
+```

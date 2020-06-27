@@ -17,13 +17,15 @@ class CommentsManager
     private $autoMapping;
     private $entityManager;
     private $commentsEntityRepository;
+    private $touristsManager;
 
     public function __construct(AutoMapping $autoMapping, EntityManagerInterface $entityManager,
-                                CommentsEntityRepository $commentsEntityRepository)
+                                CommentsEntityRepository $commentsEntityRepository, TouristsManager $touristsManager)
     {
         $this->autoMapping = $autoMapping;
         $this->entityManager = $entityManager;
         $this->commentsEntityRepository = $commentsEntityRepository;
+        $this->touristsManager = $touristsManager;
     }
 
     public function commentCreate(CommentCreateRequest $request)
@@ -31,7 +33,7 @@ class CommentsManager
         $region = $this->entityManager->getRepository(RegionsEntity::class)->find($request->region);
         $request->setRegion($region);
 
-        $user = $this->entityManager->getRepository(User::class)->find($request->user);
+        $user = $this->touristsManager->getTouristByUserID($request->user);
         $request->setUser($user);
 
         $commentCreate = $this->autoMapping->map(CommentCreateRequest::class, CommentsEntity::class, $request);
@@ -45,8 +47,14 @@ class CommentsManager
         return $commentCreate;
     }
 
-    public function getComments()
+    public function getCommentsByID($id)
     {
 
+        return $this->commentsEntityRepository->getCommentsByID($id);
+    }
+
+    public function commentsNumber($id)
+    {
+        return $this->commentsEntityRepository->commentsNumber($id);
     }
 }

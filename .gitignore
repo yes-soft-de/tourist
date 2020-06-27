@@ -1,3 +1,6 @@
+/nginx/pma
+with_pma.Dockerfile
+nginx-with-pma.conf
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php

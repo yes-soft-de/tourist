@@ -1,0 +1,18 @@
+{
+  "@@locale": "en",
+  "title": "Tourists",
+  "welcome": "Welcome to ",
+  "card_01": "I want to enjoy your services while I'm in Saudi Arabia",
+  "go_to_tourist_login": "Next",
+  "login": "Login",
+  "move_to_register": "Register a new Account",
+  "move_to_login": "I have an account!",
+  "register_submit": "Register",
+  "form_label_name": "Name",
+  "next": "Next",
+  "comments": "Comments",
+  "available": "Available",
+  "not_available": "Not Available",
+  "events": "Events",
+  "festivals": "Festivals"
+}

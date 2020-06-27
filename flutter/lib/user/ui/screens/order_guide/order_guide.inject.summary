@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/user/ui/screens/tourist_orders/tourist_order.dart",
+  "asset": "asset:tourists/lib/user/ui/screens/order_guide/order_guide.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "TouristOrdersScreen",
+        "name": "OrderGuideScreen",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/user/ui/screens/tourist_orders/tourist_order.dart#TouristOrdersScreen",
+              "root": "asset:tourists/lib/user/ui/screens/order_guide/order_guide.dart#OrderGuideScreen",
               "qualifier": null
             },
             "isProvider": false

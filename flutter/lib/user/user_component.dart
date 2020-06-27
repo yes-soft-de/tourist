@@ -5,7 +5,9 @@ import 'package:tourists/user/ui/screens/create_profile/create_profile.dart';
 import 'package:tourists/user/ui/screens/home/home.dart';
 import 'package:tourists/user/ui/screens/intention_profile/intention_profile.dart';
 import 'package:tourists/user/ui/screens/login/login.dart';
+import 'package:tourists/user/ui/screens/order_guide/order_guide.dart';
 import 'package:tourists/user/ui/screens/register/register.dart';
+import 'package:tourists/user/ui/screens/request_guide_success/request_guide_success.dart';
 import 'package:tourists/user/user_routes.dart';
 
 @provide
@@ -17,10 +19,20 @@ class UserComponent {
   final IntentionProfileScreen _intentionProfileScreen;
   final HomeScreen _homeScreen;
   final LoginTypeSelectorScreen _loginSelectorScreen;
+  final OrderGuideScreen _orderGuideScreen;
+  final RequestGuideSuccessScreen _requestGuideSuccessScreen;
 
   Map<String, WidgetBuilder> _userRoutes;
 
-  UserComponent(this._loginScreen, this._loginSelectorScreen, this._registerScreen, this._createProfileScreen, this._homeScreen, this._intentionProfileScreen) {
+  UserComponent(
+      this._loginScreen,
+      this._loginSelectorScreen,
+      this._requestGuideSuccessScreen,
+      this._registerScreen,
+      this._createProfileScreen,
+      this._homeScreen,
+      this._intentionProfileScreen,
+      this._orderGuideScreen) {
     _userRoutes = {
       UserRoutes.loginTypeSelector: (context) => _loginSelectorScreen,
       UserRoutes.login: (context) => _loginScreen,
@@ -28,6 +40,8 @@ class UserComponent {
       UserRoutes.createProfile: (context) => _createProfileScreen,
       UserRoutes.intentionProfile: (context) => _intentionProfileScreen,
       UserRoutes.home: (context) => _homeScreen,
+      UserRoutes.requestGuide: (context) => _orderGuideScreen,
+      UserRoutes.requestGuideSent: (context) => _requestGuideSuccessScreen
     };
   }
 

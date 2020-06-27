@@ -35,6 +35,13 @@
             },
             {
               "lookupKey": {
+                "root": "asset:tourists/lib/user/ui/screens/request_guide_success/request_guide_success.dart#RequestGuideSuccessScreen",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
                 "root": "asset:tourists/lib/user/ui/screens/register/register.dart#RegisterScreen",
                 "qualifier": null
               },
@@ -57,6 +64,13 @@
             {
               "lookupKey": {
                 "root": "asset:tourists/lib/user/ui/screens/intention_profile/intention_profile.dart#IntentionProfileScreen",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/user/ui/screens/order_guide/order_guide.dart#OrderGuideScreen",
                 "qualifier": null
               },
               "isProvider": false

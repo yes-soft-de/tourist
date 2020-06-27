@@ -6,13 +6,12 @@ import 'package:inject/inject.dart';
 import 'package:tourists/user/bloc/create_profile/create_profile_bloc.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/user/persistence/sharedpref/shared_preferences_helper.dart';
-import 'package:tourists/routes.dart';
 import 'package:tourists/user/user_routes.dart';
 
 @provide
 class CreateProfileScreen extends StatefulWidget {
-  CreateProfileBloc _profileBloc;
-  SharedPreferencesHelper _preferencesHelper;
+  final CreateProfileBloc _profileBloc;
+  final SharedPreferencesHelper _preferencesHelper;
 
   CreateProfileScreen(this._profileBloc, this._preferencesHelper);
 

@@ -9,4 +9,7 @@ class UserRoutes {
 
   static const String touristChat = '/touristChat';
   static const String touristOrders = '/touristOrders';
+
+  static const String requestGuide = '/requestGuide';
+  static const String requestGuideSent = '/requestGuideSent';
 }

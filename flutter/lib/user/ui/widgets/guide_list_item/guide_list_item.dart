@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:tourists/generated/l10n.dart';
+import 'package:tourists/user/user_routes.dart';
 
 class GuideListItemWidget extends StatelessWidget {
   final String guideName;
@@ -81,13 +84,19 @@ class GuideListItemWidget extends StatelessWidget {
               ),
               // TODO: Move to Request Guide When this Clicked
               // Request Button
-              Container(
-                width: 36,
-                height: 36,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(90)),
-                    border: Border.all(color: Colors.black)),
-                child: Icon(Icons.add),
+              GestureDetector(
+                onTap: () {
+                  log('Guide Requested');
+                  Navigator.pushReplacementNamed(context, UserRoutes.requestGuide);
+                },
+                child: Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(90)),
+                      border: Border.all(color: Colors.black)),
+                  child: Icon(Icons.add),
+                ),
               )
             ],
           ),

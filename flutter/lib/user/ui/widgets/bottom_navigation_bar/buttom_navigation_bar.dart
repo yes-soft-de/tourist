@@ -1,15 +1,21 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:inject/inject.dart';
+import 'package:tourists/user/ui/screens/home/home.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   final int activePosition;
+  final HomeScreenState _homeScreenState;
   final Color activeColor = Color(0xFF00FFA8);
   final Color inactiveColor = Colors.black;
 
-  CustomBottomNavigationBar(this.activePosition);
+  CustomBottomNavigationBar(this.activePosition, this._homeScreenState);
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children: <Widget>[
         // Request Button
@@ -73,7 +79,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 color: Colors.black,
                 spreadRadius: 5,
                 blurRadius: 7,
-                offset: Offset(0, 3))
+                offset: Offset(0, 20))
           ]),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -81,50 +87,89 @@ class CustomBottomNavigationBar extends StatelessWidget {
               direction: Axis.horizontal,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    Icon(
-                      Icons.home,
-                      color: activePosition == 0 ? activeColor : inactiveColor,
-                    ),
-                    Text(
-                      'home',
-                      style: TextStyle(
-                          color: activePosition == 0
-                              ? activeColor
-                              : inactiveColor),
-                    )
-                  ],
+                GestureDetector(
+                  onTap: (){
+                    log('Moving To Page ' + 0.toString());
+                    _homeScreenState.moveToPage(0);
+                  },
+                  child: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.home,
+                        color: activePosition == 0 ? activeColor : inactiveColor,
+                      ),
+                      Text(
+                        'home',
+                        style: TextStyle(
+                            color: activePosition == 0
+                                ? activeColor
+                                : inactiveColor),
+                      )
+                    ],
+                  ),
                 ),
-                Column(
-                  children: <Widget>[
-                    Icon(
-                      Icons.home,
-                      color: activePosition == 1 ? activeColor : inactiveColor,
-                    ),
-                    Text(
-                      'home',
-                      style: TextStyle(
-                          color: activePosition == 1
-                              ? activeColor
-                              : inactiveColor),
-                    )
-                  ],
+                GestureDetector(
+                  onTap: (){
+                    log('Moving To Page ' + 1.toString());
+                    _homeScreenState.moveToPage(1);
+                  },
+                  child: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.account_circle,
+                        color: activePosition == 1 ? activeColor : inactiveColor,
+                      ),
+                      Text(
+                        'Guides',
+                        style: TextStyle(
+                            color: activePosition == 1
+                                ? activeColor
+                                : inactiveColor),
+                      )
+                    ],
+                  ),
                 ),
-                Column(
-                  children: <Widget>[
-                    Icon(
-                      Icons.home,
-                      color: activePosition == 2 ? activeColor : inactiveColor,
-                    ),
-                    Text(
-                      'home',
-                      style: TextStyle(
-                          color: activePosition == 2
-                              ? activeColor
-                              : inactiveColor),
-                    )
-                  ],
+                GestureDetector(
+                  onTap: (){
+                    log('Moving To Page ' + 2.toString());
+                    _homeScreenState.moveToPage(2);
+                  },
+                  child: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.event,
+                        color: activePosition == 2 ? activeColor : inactiveColor,
+                      ),
+                      Text(
+                        'Events',
+                        style: TextStyle(
+                            color: activePosition == 2
+                                ? activeColor
+                                : inactiveColor),
+                      )
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: (){
+                    log('Moving To Page ' + 3.toString());
+                    _homeScreenState.moveToPage(3);
+                  },
+                  child: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.payment,
+                        color: activePosition == 3 ? activeColor : inactiveColor,
+                      ),
+                      Text(
+                        'Orders',
+                        style: TextStyle(
+                            color: activePosition == 3
+                                ? activeColor
+                                : inactiveColor),
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),

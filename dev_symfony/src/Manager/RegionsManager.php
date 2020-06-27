@@ -31,12 +31,16 @@ class RegionsManager
         $this->entityManager->flush();
         $this->entityManager->clear();
 
-        //TODO: Save image link in image table
         return $regionCreate;
     }
 
     public function getRegions()
     {
         return $this->regionsEntityRepository->getRegions();
+    }
+
+    public function getRegion($id)
+    {
+        return $this->regionsEntityRepository->getRegion($id);
     }
 }

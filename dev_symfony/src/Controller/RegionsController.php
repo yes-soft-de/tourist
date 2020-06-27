@@ -51,4 +51,16 @@ class RegionsController extends BaseController
 
         return $this->response($response, self::CREATE);
     }
+
+    /**
+     * @Route("/region/{id}", name="getregion", methods="GET")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getRegion(Request $request)
+    {
+        $response = $this->regionsService->getRegion($request->get('id'));
+
+        return $this->response($response,self::FETCH);
+    }
 }

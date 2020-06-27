@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\RegionsEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * @method RegionsEntity|null find($id, $lockMode = null, $lockVersion = null)
@@ -25,9 +26,27 @@ class RegionsEntityRepository extends ServiceEntityRepository
 
             ->select('regions.id', 'regions.name', 'regions.description', 'regions.location')
 
+           // ->from('App:ImagesEntity', 'images')
+
+            //->andWhere('images.region=regions.id')
+
+            ->groupBy('regions.id')
             ->orderBy('regions.id', 'ASC')
 
             ->getQuery()
             ->getResult();
+    }
+
+    public function getRegion($id)
+    {
+        return $this->createQueryBuilder('regions')
+
+            ->select('regions.id', 'regions.name', 'regions.description', 'regions.location')
+
+            ->andWhere('regions.id=:id')
+            ->setParameter('id',$id)
+
+            ->getQuery()
+            ->getArrayResult();
     }
 }

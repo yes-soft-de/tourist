@@ -75,4 +75,9 @@ class TouristsManager
             return $tourist;
         }
     }
+
+    public function getTouristByUserID($userID)
+    {
+        return $this->userRepository->getTourist($userID);
+    }
 }

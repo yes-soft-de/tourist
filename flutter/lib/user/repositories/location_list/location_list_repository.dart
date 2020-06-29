@@ -15,7 +15,7 @@ class LocationListRepository {
     String response = await _httpClient.get(Urls.locationList);
 
     if (response != null) {
-      return LocationListResponse().fromJson(jsonDecode(response));
+      return LocationListResponse.fromJson(jsonDecode(response));
     }
 
     return null;

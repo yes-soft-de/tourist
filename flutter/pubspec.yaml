@@ -65,6 +65,9 @@ dependencies:
   # Internationalization
   intl: ^0.16.1
 
+  # Toasts
+  fluttertoast: ^4.0.1
+
 dependency_overrides:
   source_gen: 0.9.5
   analyzer: ^0.39.4
@@ -90,10 +93,12 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  # assets:
+  assets:
   #  - resources/fonts
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+    - resources
+      - images
 
   # example:
   # fonts:

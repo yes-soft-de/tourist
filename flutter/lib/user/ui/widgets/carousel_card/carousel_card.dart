@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tourists/generated/l10n.dart';
 
@@ -33,7 +34,7 @@ class CarouselCard extends StatelessWidget {
           Container(
             height: 240,
             width: double.infinity,
-            color: Color(0x2d000000),
+            color: Color(0x80000000),
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(16, 0, 0, 48),
@@ -53,6 +54,8 @@ class CarouselCard extends StatelessWidget {
                 ),
                 Text(
                   description,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
                 Container(

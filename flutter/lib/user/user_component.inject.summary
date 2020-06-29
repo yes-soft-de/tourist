@@ -70,6 +70,13 @@
             },
             {
               "lookupKey": {
+                "root": "asset:tourists/lib/user/ui/screens/location_details/location_details.dart#LocationDetailsScreen",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
                 "root": "asset:tourists/lib/user/ui/screens/order_guide/order_guide.dart#OrderGuideScreen",
                 "qualifier": null
               },

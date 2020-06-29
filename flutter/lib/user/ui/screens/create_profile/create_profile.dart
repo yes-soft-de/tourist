@@ -23,7 +23,6 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   final GlobalKey _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _genderController = TextEditingController();
-
   String _guideLanguage;
 
   @override
@@ -55,10 +54,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       borderRadius: BorderRadius.circular(78),
                       color: Colors.green),
                 ),
-                Text(
-                  'LOGO',
-                  style: TextStyle(color: Colors.white, fontSize: 24),
-                )
+                Image.asset('logo.png', fit: BoxFit.contain,)
               ],
             ),
           ),

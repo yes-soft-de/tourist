@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/user/ui/screens/location_details/location_details.dart",
+  "asset": "asset:tourists/lib/user/repositories/location_details/location_details_repository.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "LocationDetailsScreen",
+        "name": "LocationDetailsRepository",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/user/ui/screens/location_details/location_details.dart#LocationDetailsScreen",
+              "root": "asset:tourists/lib/user/repositories/location_details/location_details_repository.dart#LocationDetailsRepository",
               "qualifier": null
             },
             "isProvider": false
@@ -21,7 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/user/bloc/location_details/location_details_bloc.dart#LocationDetailsBloc",
+                "root": "asset:tourists/lib/user/network/http_client/http_client.dart#HttpClient",
                 "qualifier": null
               },
               "isProvider": false

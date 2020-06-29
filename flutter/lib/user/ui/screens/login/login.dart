@@ -27,7 +27,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     widget._loginBlock.loginStatus.listen((event) {
       if (event != null && event.length > 0) {
         Navigator.of(context).pushReplacementNamed(UserRoutes.createProfile);
@@ -35,8 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     return Scaffold(
-      body:
-      ListView(children: <Widget>[
+      body: ListView(children: <Widget>[
         Flex(
           direction: Axis.vertical,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -88,8 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     TextFormField(
                       controller: _passwordController,
-                      decoration:
-                      const InputDecoration(labelText: 'Password'),
+                      decoration: const InputDecoration(labelText: 'Password'),
                       validator: (String value) {
                         if (value.isEmpty) {
                           return 'Please enter some text';
@@ -111,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(90)),
+                                    BorderRadius.all(Radius.circular(90)),
                                 color: Color(0xFF00FFA8),
                               ),
                               child: Text(
@@ -120,8 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     fontSize: 20, color: Colors.white),
                               ),
                             ),
-                          )
-                      ),
+                          )),
                       onTap: () => _login(),
                     ),
                     Container(
@@ -129,8 +125,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text(_error == null
                           ? ''
                           : (_error
-                          ? 'Successfully registered ' + _userEmail
-                          : 'Registration failed')),
+                              ? 'Successfully registered ' + _userEmail
+                              : 'Registration failed')),
                     )
                   ],
                 ),
@@ -167,7 +163,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _login() {
-    widget._loginBlock.login(_emailController.text,
-        _passwordController.text);
+    widget._loginBlock.login(_emailController.text, _passwordController.text);
   }
 }

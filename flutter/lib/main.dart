@@ -40,6 +40,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, WidgetBuilder> fullRoutesList = Map();
+
+    fullRoutesList.addAll(_userComponent.getRoutes());
+
     return MaterialApp(
       localizationsDelegates: [
         S.delegate,
@@ -47,10 +51,14 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      theme: ThemeData(
+        primaryColor: Colors.greenAccent,
+        accentColor: Colors.greenAccent
+      ),
       supportedLocales: S.delegate.supportedLocales,
       title: 'Tourists',
-      routes: _userComponent.getRoutes(),
-      initialRoute: UserRoutes.home,
+      routes: fullRoutesList,
+      initialRoute: UserRoutes.loginTypeSelector,
       home: LoginTypeSelectorScreen()
     );
   }

@@ -19,7 +19,7 @@ class HttpClient {
       return response.body;
     } else {
       // TODO: Implement This, Log Error
-      log(response.statusCode.toString());
+      log(response.statusCode.toString() + ' for link ' + url);
       return null;
     }
   }

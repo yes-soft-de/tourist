@@ -1,32 +1,31 @@
-class LocationListItem {
+class LocationDetailsModel {
   int id;
   String name;
   String description;
   List<String> location;
-  String commentNumber;
+  List<Null> comments;
   Null ratingAverage;
-  List<Path> path;
+  List<Paths> paths;
 
-  LocationListItem(
+  LocationDetailsModel(
       {this.id,
         this.name,
         this.description,
         this.location,
-        this.commentNumber,
+        this.comments,
         this.ratingAverage,
-        this.path});
+        this.paths});
 
-  LocationListItem.fromJson(Map<String, dynamic> json) {
+  LocationDetailsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
     location = json['location'].cast<String>();
-    commentNumber = json['commentNumber'];
     ratingAverage = json['ratingAverage'];
-    if (json['path'] != null) {
-      path = new List<Path>();
-      json['path'].forEach((v) {
-        path.add(new Path.fromJson(v));
+    if (json['paths'] != null) {
+      paths = new List<Paths>();
+      json['paths'].forEach((v) {
+        paths.add(new Paths.fromJson(v));
       });
     }
   }
@@ -37,21 +36,20 @@ class LocationListItem {
     data['name'] = this.name;
     data['description'] = this.description;
     data['location'] = this.location;
-    data['commentNumber'] = this.commentNumber;
     data['ratingAverage'] = this.ratingAverage;
-    if (this.path != null) {
-      data['path'] = this.path.map((v) => v.toJson()).toList();
+    if (this.paths != null) {
+      data['paths'] = this.paths.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Path {
+class Paths {
   String path;
 
-  Path({this.path});
+  Paths({this.path});
 
-  Path.fromJson(Map<String, dynamic> json) {
+  Paths.fromJson(Map<String, dynamic> json) {
     path = json['path'];
   }
 

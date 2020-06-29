@@ -220,7 +220,6 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
   }
 
   _createIntentionProfile() {
-
     List<String> interests = [];
     widget._interests.forEach((key, value) {
       if (value) {

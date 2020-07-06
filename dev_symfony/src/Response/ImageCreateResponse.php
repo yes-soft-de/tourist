@@ -4,7 +4,7 @@
 namespace App\Response;
 
 
-class RegionImageCreateResponse
+class ImageCreateResponse
 {
     public $path;
 

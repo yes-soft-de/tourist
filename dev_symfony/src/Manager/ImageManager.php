@@ -7,8 +7,9 @@ namespace App\Manager;
 use App\AutoMapping;
 use App\Entity\ImagesEntity;
 use App\Entity\RegionsEntity;
+use App\Entity\User;
 use App\Repository\ImagesEntityRepository;
-use App\Request\RegionImageCreateRequest;
+use App\Request\ImageCreateRequest;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ImageManager
@@ -24,7 +25,7 @@ class ImageManager
         $this->imagesEntityRepository = $imagesEntityRepository;
     }
 
-    public function regionImageCreate(RegionImageCreateRequest $request)
+    public function imageCreate(ImageCreateRequest $request)
     {
         if ($request->region)
         {
@@ -32,17 +33,28 @@ class ImageManager
             $request->setRegion($region);
         }
 
-        $regionImageCreate = $this->autoMapping->map(RegionImageCreateRequest::class, ImagesEntity::class, $request);
+        if ($request->guid)
+        {
+            $guid = $this->entityManager->getRepository(User::class)->find($request->guid);
+            $request->setGuid($guid);
+        }
 
-        $this->entityManager->persist($regionImageCreate);
+        $imageCreate = $this->autoMapping->map(ImageCreateRequest::class, ImagesEntity::class, $request);
+
+        $this->entityManager->persist($imageCreate);
         $this->entityManager->flush();
         $this->entityManager->clear();
 
-        return $regionImageCreate;
+        return $imageCreate;
     }
 
     public function getRegionImages($id)
     {
         return $this->imagesEntityRepository->getRegionImages($id);
+    }
+
+    public function getGuidImage($guidID)
+    {
+        return $this->imagesEntityRepository->getGuidImage($guidID);
     }
 }

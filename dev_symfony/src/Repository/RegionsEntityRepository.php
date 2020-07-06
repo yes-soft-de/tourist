@@ -47,6 +47,7 @@ class RegionsEntityRepository extends ServiceEntityRepository
             ->setParameter('id',$id)
 
             ->getQuery()
-            ->getArrayResult();
+            //->getArrayResult();
+            ->getOneOrNullResult();
     }
 }

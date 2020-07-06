@@ -67,3 +67,18 @@ methods={"POST"}
 /rating
 methods={"POST"}
 ```
+#### Register guid
+```
+/guid 
+methods={"POST"}
+```
+#### Update guid Profile 
+```
+/guid 
+methods={"PUT"}
+```
+#### Get all guided
+```
+/guides
+methods={"GET"}
+```

@@ -4,7 +4,7 @@
 namespace App\Request;
 
 
-class RegionImageCreateRequest
+class ImageCreateRequest
 {
     public $path;
 

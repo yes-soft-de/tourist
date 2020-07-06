@@ -18,7 +18,9 @@ class RegionResponse
 
     public $ratingAverage;
 
-    public $paths = [];
+    public $regionImage = [];
+
+    public $guides = [];
 
     /**
      * @param array $comments
@@ -29,11 +31,11 @@ class RegionResponse
     }
 
     /**
-     * @param array $paths
+     * @param array $regionImage
      */
-    public function setPaths(array $paths): void
+    public function setRegionImage(array $regionImage): void
     {
-        $this->paths = $paths;
+        $this->regionImage = $regionImage;
     }
 
     /**
@@ -42,6 +44,14 @@ class RegionResponse
     public function setRatingAverage($ratingAverage): void
     {
         $this->ratingAverage = $ratingAverage;
+    }
+
+    /**
+     * @param array $guides
+     */
+    public function setGuides(array $guides): void
+    {
+        $this->guides = $guides;
     }
 
 

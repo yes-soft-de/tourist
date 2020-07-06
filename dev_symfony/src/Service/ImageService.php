@@ -7,8 +7,8 @@ namespace App\Service;
 use App\AutoMapping;
 use App\Entity\ImagesEntity;
 use App\Manager\ImageManager;
-use App\Request\RegionImageCreateRequest;
-use App\Response\RegionImageCreateResponse;
+use App\Request\ImageCreateRequest;
+use App\Response\ImageCreateResponse;
 
 class ImageService
 {
@@ -21,11 +21,11 @@ class ImageService
         $this->imageManager = $imageManager;
     }
 
-    public function regionImageCreate(RegionImageCreateRequest $request)
+    public function regionImageCreate(ImageCreateRequest $request)
     {
-        $regionImageCreate = $this->imageManager->regionImageCreate($request);
+        $regionImageCreate = $this->imageManager->imageCreate($request);
 
-        $response = $this->autoMapping->map(ImagesEntity::class,RegionImageCreateResponse::class, $regionImageCreate);
+        $response = $this->autoMapping->map(ImagesEntity::class,ImageCreateResponse::class, $regionImageCreate);
 
         return $response;
     }

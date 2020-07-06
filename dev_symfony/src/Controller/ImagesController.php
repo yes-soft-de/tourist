@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\AutoMapping;
-use App\Request\RegionImageCreateRequest;
+use App\Request\ImageCreateRequest;
 use App\Service\ImageService;
 use stdClass;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -34,7 +34,7 @@ class ImagesController extends BaseController
     {
         $data = json_decode($request->getContent(), true);
 
-        $request = $this->autoMapping->map(stdClass::class,RegionImageCreateRequest::class,(object)$data);
+        $request = $this->autoMapping->map(stdClass::class,ImageCreateRequest::class,(object)$data);
 
         $response = $this->imageService->regionImageCreate($request);
 

@@ -29,4 +29,18 @@ class RatingsEntityRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function ratingGuidCalculate($id)
+    {
+        $r = $this->createQueryBuilder('rate')
+            ->select('avg(rate.rate)')
+            ->andWhere('rate.guid = :id')
+            ->setParameter('id', $id)
+
+            ->getQuery()
+            ->getOneOrNullResult();
+
+      // dd($r);
+        return $r;
+    }
 }

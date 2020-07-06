@@ -30,4 +30,16 @@ class ImagesEntityRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getGuidImage($guidID)
+    {
+        return $this->createQueryBuilder('images')
+            ->select('images.path')
+
+            ->andWhere('images.guid = :id')
+            ->setParameter('id', $guidID)
+
+            ->getQuery()
+            ->getResult();
+    }
 }

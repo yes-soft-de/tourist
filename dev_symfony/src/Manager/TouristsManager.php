@@ -57,7 +57,7 @@ class TouristsManager
 
     public function touristUpdate(TouristUpdateRequest $request)
     {
-        $tourist = $this->userRepository->getTourist($request->userID);
+        $tourist = $this->userRepository->getUser($request->userID);
 
         if ($tourist)
         {
@@ -78,6 +78,6 @@ class TouristsManager
 
     public function getTouristByUserID($userID)
     {
-        return $this->userRepository->getTourist($userID);
+        return $this->userRepository->getUser($userID);
     }
 }

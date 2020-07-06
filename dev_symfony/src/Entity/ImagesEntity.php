@@ -23,7 +23,6 @@ class ImagesEntity
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\RegionsEntity")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $region;
 

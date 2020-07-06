@@ -28,15 +28,18 @@ class CommentsEntity
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\RegionsEntity")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $region;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     */
+    private $guid;
 
     public function getId(): ?int
     {
@@ -87,6 +90,18 @@ class CommentsEntity
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getGuid(): ?User
+    {
+        return $this->guid;
+    }
+
+    public function setGuid(?User $guid): self
+    {
+        $this->guid = $guid;
 
         return $this;
     }

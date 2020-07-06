@@ -16,6 +16,8 @@ class CommentCreateRequest
 
     public $user;
 
+    public $guid;
+
     /**
      * @param mixed $region
      */
@@ -55,4 +57,14 @@ class CommentCreateRequest
 
         return $this;
     }
+
+    /**
+     * @param mixed $guid
+     */
+    public function setGuid($guid): void
+    {
+        $this->guid = $guid;
+    }
+
+
 }

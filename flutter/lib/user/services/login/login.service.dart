@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/user/persistence/sharedpref/shared_preferences_helper.dart';
 import 'package:tourists/user/responses/login/login.response.dart';
@@ -13,12 +16,19 @@ class LoginService {
 
   Future<String> login(String username, String password) async {
     // Login User to Firebase
-    var user = await _auth.signInWithEmailAndPassword(email: username, password: password);
+    try {
+      var user = await _auth.signInWithEmailAndPassword(
+          email: username, password: password);
 
-    if (user.user.uid != null) {
-      _cacheLoggedInUser(user.user);
-      return user.user.uid;
-    } else {
+      if (user.user.uid != null) {
+        _cacheLoggedInUser(user.user);
+        return user.user.uid;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: 'Can\'t Find user or Error Connecting to Server');
+      log(e.toString());
       return null;
     }
   }

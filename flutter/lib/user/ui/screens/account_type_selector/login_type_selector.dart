@@ -32,7 +32,7 @@ class LoginTypeSelectorScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(78),
                         color: Colors.green),
                   ),
-                  Image.asset('logo.png', fit: BoxFit.contain,),
+                  Image.asset('resources/images/logo.jpg', fit: BoxFit.contain,),
                 ],
               ),
             ),

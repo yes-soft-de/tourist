@@ -13,9 +13,9 @@ class IntentionsRepository {
   IntentionsRepository(this._client);
 
   Future<CreateProfileResponse> createIntentions(CreateProfileBody createProfileBody) async {
-    String response = await _client.put(Urls.createProfileAPI, createProfileBody.toMap());
+    String response = await _client.put(Urls.createProfileAPI, createProfileBody.toJson());
     if (response != null) {
-      return CreateProfileResponse().fromJson(jsonDecode(response));
+      return CreateProfileResponse.fromJson(jsonDecode(response));
     }
     return null;
   }

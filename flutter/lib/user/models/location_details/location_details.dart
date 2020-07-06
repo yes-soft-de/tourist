@@ -3,7 +3,7 @@ class LocationDetailsModel {
   String name;
   String description;
   List<String> location;
-  List<Null> comments;
+  List<String> comments;
   Null ratingAverage;
   List<Paths> paths;
 

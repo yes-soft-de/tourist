@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tourists-nginx
+  labels:
+    app: tourists
+spec:
+  selector:
+    matchLabels:
+      app: tourists
+      tier: balancer
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: tourists
+        tier: balancer
+    spec:
+      containers:
+      - name: tourists-nginx
+        image: gcr.io/tourists-280412/tourists-server:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: nginx-port
+          containerPort: 80
+        volumeMounts:
+          - name: tourists-vol
+            mountPath: /var/www/html/
+        
+      - name: tourists
+        image: gcr.io/tourists-280412/tourists-php
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - name: tourists-vol
+            mountPath: /var/www/html/
+
+      volumes:
+      - name: tourists-vol
+        persistentVolumeClaim:
+          claimName: tourists-claim

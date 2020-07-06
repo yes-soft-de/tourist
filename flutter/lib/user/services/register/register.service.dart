@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/user/persistence/sharedpref/shared_preferences_helper.dart';
 
@@ -13,16 +14,26 @@ class RegisterService {
   RegisterService(this._sharedPrefsHelper);
 
   Future<String> register(String username, String password) async {
-    log('Register a user with email: ' + username + ' and Password: ' + password);
-    final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
-    email: username,
-    password: password,
-    )).user;
-    if (user != null) {
-      this.cacheLoggedInUser(user);
-      return user.uid;
-    } else {
-      log('User Registration Failed');
+    log('Register a user with email: ' +
+        username +
+        ' and Password: ' +
+        password);
+    try {
+      final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
+        email: username,
+        password: password,
+      ))
+          .user;
+      if (user != null) {
+        this.cacheLoggedInUser(user);
+        return user.uid;
+      } else {
+        log('User Registration Failed');
+        return null;
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: 'Error Connecting to Server');
+      log(e.toString());
       return null;
     }
   }

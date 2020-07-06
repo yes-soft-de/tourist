@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LocationListItem extends StatelessWidget {
+class LocationListItemWidget extends StatelessWidget {
   final String imageLink;
   final String title;
   final String description;
   final int commentsNumber;
   final int rate;
 
-  LocationListItem(
+  LocationListItemWidget(
       {Key key,
       this.rate,
       this.title,
@@ -54,6 +54,8 @@ class LocationListItem extends StatelessWidget {
                           ),
                           Text(
                             description,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(fontSize: 16),
                           ),
                         ],

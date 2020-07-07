@@ -15,16 +15,15 @@ class CreateIntentionBloc {
   createIntention(String arrivalCity, String arrivalDate, String stayingTime,
       List<String> interests) async {
     bool response = await _intentionService.createIntentions(CreateProfileBody(
-      arrivalCity: arrivalCity,
-      arrivalDate: arrivalDate,
-      stayDays: stayingTime,
-      interests: interests
-    ));
+        arrivalCity: arrivalCity,
+        arrivalDate: arrivalDate,
+        stayDays: stayingTime,
+        interests: interests));
 
     _intentionsCreationSubject.add(response);
   }
 
-  dispose(){
+  dispose() {
     _intentionsCreationSubject.close();
   }
 }

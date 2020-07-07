@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:inject/inject.dart';
 import 'package:tourists/user/models/location_list_item/location_list_item.dart';
 import 'package:tourists/user/repositories/location_list/location_list_repository.dart';
@@ -13,6 +15,7 @@ class LocationListManager {
     LocationListResponse response = await _locationListRepository.getLocationList();
 
     if (response != null) {
+      log('Got Network Response of ' + response.locationList.length.toString());
       return response.locationList;
     }
 

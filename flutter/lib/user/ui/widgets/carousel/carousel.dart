@@ -40,10 +40,6 @@ class _CarouselWidgetState extends State<CarouselWidget> {
       height: 240,
       child: Stack(
         children: <Widget>[
-          // Sizing Background
-          Container(
-            height: 240,
-          ),
           PageView(
             children: widget.pages,
             scrollDirection: Axis.horizontal,
@@ -51,6 +47,10 @@ class _CarouselWidgetState extends State<CarouselWidget> {
               this.position = pos;
               setState(() {});
             },
+          ),
+          // Sizing Background
+          Container(
+            height: 240,
           ),
           Positioned(
             bottom: 16,

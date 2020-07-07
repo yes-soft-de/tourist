@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/user/bloc/login/login.bloc.dart';
@@ -25,18 +26,22 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _error;
   String _userEmail;
 
+  bool submitAvailable = true;
+
   @override
   Widget build(BuildContext context) {
-
     widget._loginBlock.loginStatus.listen((event) {
       if (event != null && event.length > 0) {
         Navigator.of(context).pushReplacementNamed(UserRoutes.createProfile);
       }
+      submitAvailable = true;
+      setState(() {});
     });
 
+
+
     return Scaffold(
-      body:
-      ListView(children: <Widget>[
+      body: ListView(children: <Widget>[
         Flex(
           direction: Axis.vertical,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -56,10 +61,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(78),
                         color: Color(0xFF00FFA8)),
                   ),
-                  Text(
-                    'LOGO',
-                    style: TextStyle(color: Colors.white, fontSize: 24),
-                  )
+                  Image.asset(
+                    'resources/images/logo.jpg',
+                    fit: BoxFit.contain,
+                  ),
                 ],
               ),
             ),
@@ -88,10 +93,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     TextFormField(
                       controller: _passwordController,
-                      decoration:
-                      const InputDecoration(labelText: 'Password'),
+                      decoration: const InputDecoration(labelText: 'Password'),
                       validator: (String value) {
-                        if (value.isEmpty) {
+                        if (value.isEmpty || value.length < 6) {
                           return 'Please enter some text';
                         }
                         return null;
@@ -111,8 +115,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(90)),
-                                color: Color(0xFF00FFA8),
+                                    BorderRadius.all(Radius.circular(90)),
+                                color: submitAvailable ? Colors.greenAccent : Colors.grey,
                               ),
                               child: Text(
                                 S.of(context).login,
@@ -120,8 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     fontSize: 20, color: Colors.white),
                               ),
                             ),
-                          )
-                      ),
+                          )),
                       onTap: () => _login(),
                     ),
                     Container(
@@ -129,8 +132,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text(_error == null
                           ? ''
                           : (_error
-                          ? 'Successfully registered ' + _userEmail
-                          : 'Registration failed')),
+                              ? 'Successfully registered ' + _userEmail
+                              : 'Registration failed')),
                     )
                   ],
                 ),
@@ -167,7 +170,13 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _login() {
-    widget._loginBlock.login(_emailController.text,
-        _passwordController.text);
+    if (submitAvailable) {
+      submitAvailable = false;
+      setState(() {});
+      widget._loginBlock.login(_emailController.text, _passwordController.text);
+
+    } else {
+      Fluttertoast.showToast(msg: 'Please Wait...');
+    }
   }
 }

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/user/bloc/create_profile/create_profile_bloc.dart';
 import 'package:tourists/generated/l10n.dart';
@@ -23,7 +24,6 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   final GlobalKey _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _genderController = TextEditingController();
-
   String _guideLanguage;
 
   @override
@@ -55,10 +55,10 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       borderRadius: BorderRadius.circular(78),
                       color: Colors.green),
                 ),
-                Text(
-                  'LOGO',
-                  style: TextStyle(color: Colors.white, fontSize: 24),
-                )
+                Image.asset(
+                  'resources/images/logo.jpg',
+                  fit: BoxFit.contain,
+                ),
               ],
             ),
           ),
@@ -106,8 +106,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                     ),
                     TextFormField(
                       controller: _genderController,
-                      decoration:
-                      const InputDecoration(labelText: 'Gender'),
+                      decoration: const InputDecoration(labelText: 'Gender'),
                       validator: (String value) {
                         if (value.isEmpty) {
                           return 'Please enter some text';
@@ -127,10 +126,10 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                         child: Container(
                           height: 40,
                           width: 160,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.greenAccent)),
                           alignment: Alignment.center,
-                          child: Text(S
-                              .of(context)
-                              .next),
+                          child: Text(S.of(context).next),
                         ),
                       ),
                     )
@@ -147,10 +146,18 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   _createProfile() {
     if (_guideLanguage == null) {
       log('Null Language');
+      Fluttertoast.showToast(
+          msg: 'Please Select a Language',
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 1);
       return;
     }
 
     log('Language is ' + _guideLanguage);
+    Fluttertoast.showToast(
+        msg: 'Saving Data',
+        toastLength: Toast.LENGTH_SHORT,
+        timeInSecForIosWeb: 1);
 
     widget._profileBloc.createProfile(
         _nameController.text, _genderController.text, _guideLanguage);

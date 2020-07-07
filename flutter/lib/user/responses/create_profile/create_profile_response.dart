@@ -1,32 +1,23 @@
+import 'package:tourists/user/requests/create_profile/create_profile_body.dart';
+
 class CreateProfileResponse {
-  String _name;
-  String _gender;
-  String _language;
+  String statusCode;
+  String msg;
+  CreateProfileBody profileData;
 
+  CreateProfileResponse({this.statusCode, this.msg, this.profileData});
 
-  fromJson(Map<String, dynamic> jsonPayload){
-    _gender = jsonPayload['sex'];
-    _name = jsonPayload['name'];
-    _language = jsonPayload['guideLanguage'];
+  CreateProfileResponse.fromJson(Map<String, dynamic> json) {
+    statusCode = json['status_code'];
+    msg = json['msg'];
+    if (json['data'] != null)
+      profileData = CreateProfileBody.fromJson(json['data']);
   }
 
-  CreateProfileResponse();
-
-  set language(String value) {
-    _language = value;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['status_code'] = this.statusCode;
+    data['msg'] = this.msg;
+    return data;
   }
-
-  set gender(String value) {
-    _gender = value;
-  }
-
-  set name(String value) {
-    _name = value;
-  }
-
-  String get language => _language;
-
-  String get gender => _gender;
-
-  String get name => _name;
 }

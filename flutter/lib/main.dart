@@ -1,3 +1,5 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -33,25 +35,33 @@ void main() {
 
 @provide
 class MyApp extends StatelessWidget {
-
   final UserComponent _userComponent;
+  static FirebaseAnalytics analytics = FirebaseAnalytics();
+  static FirebaseAnalyticsObserver observer =
+      FirebaseAnalyticsObserver(analytics: analytics);
 
   MyApp(this._userComponent);
 
   @override
   Widget build(BuildContext context) {
+    Map<String, WidgetBuilder> fullRoutesList = Map();
+
+    fullRoutesList.addAll(_userComponent.getRoutes());
+
     return MaterialApp(
-      localizationsDelegates: [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: S.delegate.supportedLocales,
-      title: 'Tourists',
-      routes: _userComponent.getRoutes(),
-      initialRoute: UserRoutes.home,
-      home: LoginTypeSelectorScreen()
-    );
+        navigatorObservers: <NavigatorObserver>[observer],
+        localizationsDelegates: [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        theme: ThemeData(
+            primaryColor: Colors.greenAccent, accentColor: Colors.greenAccent),
+        supportedLocales: S.delegate.supportedLocales,
+        title: 'Tourists',
+        routes: fullRoutesList,
+        initialRoute: UserRoutes.loginTypeSelector,
+        home: LoginTypeSelectorScreen());
   }
 }

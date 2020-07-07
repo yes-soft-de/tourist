@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/user/bloc/register/register.bloc.dart';
@@ -21,6 +22,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  bool submitAvailable = true;
+
   bool _error;
   String _userEmail;
 
@@ -31,6 +34,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (event != null && event.length > 0) {
         Navigator.of(context).pushReplacementNamed(UserRoutes.createProfile);
       }
+      submitAvailable = true;
+      setState(() {});
     });
 
     return Scaffold(
@@ -55,10 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             borderRadius: BorderRadius.circular(78),
                             color: Colors.green),
                       ),
-                      Text(
-                        'LOGO',
-                        style: TextStyle(color: Colors.white, fontSize: 24),
-                      )
+                      Image.asset('resources/images/logo.jpg', fit: BoxFit.contain,),
                     ],
                   ),
                 ),
@@ -88,7 +90,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           decoration:
                           const InputDecoration(labelText: 'Password'),
                           validator: (String value) {
-                            if (value.isEmpty) {
+                            if (value.isEmpty || value.length < 6) {
                               return 'Please enter some text';
                             }
                             return null;
@@ -108,7 +110,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               decoration: BoxDecoration(
                                 borderRadius:
                                 BorderRadius.all(Radius.circular(90)),
-                                color: Color(0xFF00FFA8),
+                                color: submitAvailable ? Colors.greenAccent : Colors.grey,
                               ),
                               child: Padding(
                                 padding: EdgeInsets.all(8),
@@ -163,7 +165,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void _register() {
-    widget._registerBloc.register(_emailController.text,
-        _passwordController.text);
+    if (submitAvailable) {
+      submitAvailable = false;
+      setState(() {});
+      widget._registerBloc.register(_emailController.text,
+          _passwordController.text);
+    }
+    else {
+      Fluttertoast.showToast(msg: 'Please Wait!');
+    }
   }
 }

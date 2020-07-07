@@ -23,14 +23,14 @@ class ProfileService {
     }
 
     // Assign UID to the request
-    profile.uid = uid;
+    profile.userID = uid;
 
     // Bye Bye, Sending Request
     CreateProfileResponse createProfileResponse = await this._profileManager.createProfile(profile);
 
     if (createProfileResponse != null) {
       // Cache Result
-      this._preferencesHelper.setCurrentUsername(createProfileResponse.name);
+      this._preferencesHelper.setCurrentUsername(createProfileResponse.profileData.name);
 
       return createProfileResponse;
     }

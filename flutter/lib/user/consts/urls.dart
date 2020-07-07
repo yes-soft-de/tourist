@@ -5,5 +5,6 @@ class Urls {
   static final createProfileAPI = _baseAPI + 'tourist';
   static final getProfileAPI = _baseAPI + 'tourist';
 
-  static final locationList = _baseAPI + 'locations';
+  static final locationList = _baseAPI + 'regions';
+  static final locationDetails = _baseAPI + 'region/';
 }

@@ -53,10 +53,7 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
                       borderRadius: BorderRadius.circular(78),
                       color: Color(0xFF00FFA8)),
                 ),
-                Text(
-                  'LOGO',
-                  style: TextStyle(color: Colors.white, fontSize: 24),
-                )
+                Image.asset('resources/images/logo.jpg', fit: BoxFit.contain,),
               ],
             ),
           ),
@@ -220,7 +217,6 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
   }
 
   _createIntentionProfile() {
-
     List<String> interests = [];
     widget._interests.forEach((key, value) {
       if (value) {

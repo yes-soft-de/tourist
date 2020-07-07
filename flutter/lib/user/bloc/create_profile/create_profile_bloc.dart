@@ -16,8 +16,8 @@ class CreateProfileBloc {
     CreateProfileBody profile =
         new CreateProfileBody(
           name: name,
-          gender: gender,
-          lang: language
+          sex: gender,
+          guideLanguage: language
         );
 
     var profileCreated = await this._profileService.createProfile(profile);

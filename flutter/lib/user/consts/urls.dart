@@ -7,4 +7,7 @@ class Urls {
 
   static final locationList = _baseAPI + 'regions';
   static final locationDetails = _baseAPI + 'region/';
+
+  static final guideList = _baseAPI + 'guides';
+  static final guidesByRegion = _baseAPI + 'guid';
 }

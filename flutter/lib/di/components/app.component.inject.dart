@@ -34,17 +34,21 @@ import '../../user/services/location_details/location_details_service.dart'
 import '../../user/managers/location_details/location_details.dart' as _i29;
 import '../../user/repositories/location_details/location_details_repository.dart'
     as _i30;
+import '../../user/managers/guides_manager/guides_manager.dart' as _i31;
+import '../../user/repositories/guides/guide_repository.dart' as _i32;
 import '../../user/ui/screens/home/subscreens/tourist_guide_list/tourist_guide_list.dart'
-    as _i31;
+    as _i33;
+import '../../user/bloc/guide_list/guide_list_bloc.dart' as _i34;
+import '../../user/services/guide_list/guide_list.dart' as _i35;
 import '../../user/ui/screens/home/subscreens/tourist_event_list/tourist_event_list.dart'
-    as _i32;
-import '../../user/ui/screens/tourist_orders/tourist_order.dart' as _i33;
-import '../../user/ui/screens/intention_profile/intention_profile.dart' as _i34;
-import '../../user/bloc/create_intentions/create_intention_bloc.dart' as _i35;
-import '../../user/services/intentions/intentions_service.dart' as _i36;
-import '../../user/managers/intentions/intentions_manager.dart' as _i37;
-import '../../user/repositories/intentions/intentions_repository.dart' as _i38;
-import '../../user/ui/screens/order_guide/order_guide.dart' as _i39;
+    as _i36;
+import '../../user/ui/screens/tourist_orders/tourist_order.dart' as _i37;
+import '../../user/ui/screens/intention_profile/intention_profile.dart' as _i38;
+import '../../user/bloc/create_intentions/create_intention_bloc.dart' as _i39;
+import '../../user/services/intentions/intentions_service.dart' as _i40;
+import '../../user/managers/intentions/intentions_manager.dart' as _i41;
+import '../../user/repositories/intentions/intentions_repository.dart' as _i42;
+import '../../user/ui/screens/order_guide/order_guide.dart' as _i43;
 
 class AppComponent$Injector implements _i1.AppComponent {
   AppComponent$Injector._();
@@ -101,7 +105,8 @@ class AppComponent$Injector implements _i1.AppComponent {
       _createMainHomeSubScreen(),
       _createTouristGuideListSubScreen(),
       _createTouristEventListSubScreen(),
-      _createTouristOrdersScreen());
+      _createTouristOrdersScreen(),
+      _createSharedPreferencesHelper());
   _i21.MainHomeSubScreen _createMainHomeSubScreen() => _i21.MainHomeSubScreen(
       _createMainHomeBloc(), _createLocationDetailsScreen());
   _i22.MainHomeBloc _createMainHomeBloc() =>
@@ -117,28 +122,37 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i27.LocationDetailsBloc _createLocationDetailsBloc() =>
       _i27.LocationDetailsBloc(_createLocationDetailsService());
   _i28.LocationDetailsService _createLocationDetailsService() =>
-      _i28.LocationDetailsService(_createLocationDetailsManager());
+      _i28.LocationDetailsService(
+          _createLocationDetailsManager(), _createGuidesManager());
   _i29.LocationDetailsManager _createLocationDetailsManager() =>
       _i29.LocationDetailsManager(_createLocationDetailsRepository());
   _i30.LocationDetailsRepository _createLocationDetailsRepository() =>
       _i30.LocationDetailsRepository(_createHttpClient());
-  _i31.TouristGuideListSubScreen _createTouristGuideListSubScreen() =>
-      _i31.TouristGuideListSubScreen();
-  _i32.TouristEventListSubScreen _createTouristEventListSubScreen() =>
-      _i32.TouristEventListSubScreen();
-  _i33.TouristOrdersScreen _createTouristOrdersScreen() =>
-      _i33.TouristOrdersScreen();
-  _i34.IntentionProfileScreen _createIntentionProfileScreen() =>
-      _i34.IntentionProfileScreen(_createCreateIntentionBloc());
-  _i35.CreateIntentionBloc _createCreateIntentionBloc() =>
-      _i35.CreateIntentionBloc(_createIntentionService());
-  _i36.IntentionService _createIntentionService() =>
-      _i36.IntentionService(_createIntentionsManager());
-  _i37.IntentionsManager _createIntentionsManager() =>
-      _i37.IntentionsManager(_createIntentionsRepository());
-  _i38.IntentionsRepository _createIntentionsRepository() =>
-      _i38.IntentionsRepository(_createHttpClient());
-  _i39.OrderGuideScreen _createOrderGuideScreen() => _i39.OrderGuideScreen();
+  _i31.GuidesManager _createGuidesManager() =>
+      _i31.GuidesManager(_createGuidesRepository());
+  _i32.GuidesRepository _createGuidesRepository() =>
+      _i32.GuidesRepository(_createHttpClient());
+  _i33.TouristGuideListSubScreen _createTouristGuideListSubScreen() =>
+      _i33.TouristGuideListSubScreen(_createGuideListBloc());
+  _i34.GuideListBloc _createGuideListBloc() =>
+      _i34.GuideListBloc(_createGuideListService());
+  _i35.GuideListService _createGuideListService() =>
+      _i35.GuideListService(_createGuidesManager());
+  _i36.TouristEventListSubScreen _createTouristEventListSubScreen() =>
+      _i36.TouristEventListSubScreen();
+  _i37.TouristOrdersScreen _createTouristOrdersScreen() =>
+      _i37.TouristOrdersScreen();
+  _i38.IntentionProfileScreen _createIntentionProfileScreen() =>
+      _i38.IntentionProfileScreen(_createCreateIntentionBloc());
+  _i39.CreateIntentionBloc _createCreateIntentionBloc() =>
+      _i39.CreateIntentionBloc(_createIntentionService());
+  _i40.IntentionService _createIntentionService() =>
+      _i40.IntentionService(_createIntentionsManager());
+  _i41.IntentionsManager _createIntentionsManager() =>
+      _i41.IntentionsManager(_createIntentionsRepository());
+  _i42.IntentionsRepository _createIntentionsRepository() =>
+      _i42.IntentionsRepository(_createHttpClient());
+  _i43.OrderGuideScreen _createOrderGuideScreen() => _i43.OrderGuideScreen();
   @override
   _i4.MyApp get app => _createMyApp();
 }

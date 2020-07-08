@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/user/services/location_details/location_details_service.dart",
+  "asset": "asset:tourists/lib/user/services/guide_list/guide_list.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "LocationDetailsService",
+        "name": "GuideListService",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/user/services/location_details/location_details_service.dart#LocationDetailsService",
+              "root": "asset:tourists/lib/user/services/guide_list/guide_list.dart#GuideListService",
               "qualifier": null
             },
             "isProvider": false
@@ -19,13 +19,6 @@
           "singleton": false,
           "asynchronous": false,
           "dependencies": [
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/user/managers/location_details/location_details.dart#LocationDetailsManager",
-                "qualifier": null
-              },
-              "isProvider": false
-            },
             {
               "lookupKey": {
                 "root": "asset:tourists/lib/user/managers/guides_manager/guides_manager.dart#GuidesManager",

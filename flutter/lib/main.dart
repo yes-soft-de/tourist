@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: S.delegate.supportedLocales,
         title: 'Tourists',
         routes: fullRoutesList,
-        initialRoute: UserRoutes.loginTypeSelector,
+        initialRoute: UserRoutes.home,
         home: LoginTypeSelectorScreen());
   }
 }

@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/user/bloc/location_details/location_details_bloc.dart';
+import 'package:tourists/user/models/guide_list_item/guide_list_item.dart';
 import 'package:tourists/user/models/location_details/location_details.dart';
 import 'package:tourists/user/ui/widgets/carousel/carousel.dart';
 import 'package:tourists/user/ui/widgets/guide_list_item/guide_list_item.dart';
@@ -16,96 +20,126 @@ class LocationDetailsScreen extends StatefulWidget {
 }
 
 class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
+  LocationDetailsModel _locationDetails;
+  List<GuideListItemModel> _guidesList;
+
+  bool loadingError;
+
   @override
   Widget build(BuildContext context) {
     // Get the Location Id
     final String locationId = ModalRoute.of(context).settings.arguments;
 
-    widget._locationBloc.getLocation(locationId);
+    widget._locationBloc.locationDetailsStream.listen((locationWithGuides) {
+      log('Got Data! -----------------------------------------------');
+      if (locationWithGuides != null) {
+        _locationDetails = locationWithGuides.locationDetails;
+        _guidesList = locationWithGuides.guides;
+        loadingError = false;
+        setState(() {});
+      }
+      loadingError = true;
+    });
 
-    return StreamBuilder(
-      stream: widget._locationBloc.locationDetailsStream,
-      builder:
-          (BuildContext context, AsyncSnapshot<LocationDetailsModel> snapshot) {
-        if (snapshot.data == null) {
-          return Scaffold(
-            body: Center(
-              child: Text('Loading for ' + locationId),
-            ),
-          );
-        }
+    if (loadingError == null) {
+      widget._locationBloc.getLocation(locationId);
+      return Scaffold(
+        body: Center(
+          child: Text('Loading'),
+        ),
+      );
+    }
 
-        List<Widget> carouselList = [];
-
-        snapshot.data.paths.forEach((path) {
-          carouselList.add(Image.network(path.path, fit: BoxFit.fitWidth,));
-        });
-
-        List<Widget> pageLayout = [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              snapshot.data.name,
-              style: TextStyle(
-                  color: Colors.black45,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24),
-            ),
+    if (loadingError == true) {
+      if (loadingError == null) {
+        return Scaffold(
+          body: Center(
+            child: Text('Error Loading Info!'),
           ),
-          CarouselWidget(carouselList),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(snapshot.data.description),
-          ),
-          Flex(
-            direction: Axis.horizontal,
-            children: <Widget>[
+        );
+      }
+    }
+
+    List<Widget> carouselList = [];
+
+    if (_locationDetails.paths != null) {
+      _locationDetails.paths.forEach((path) {
+        carouselList.add(Image.network(
+          path.path,
+          fit: BoxFit.fitWidth,
+        ));
+      });
+    } else {
+      Fluttertoast.showToast(msg: 'No Images?!!');
+    }
+
+    List<Widget> pageLayout = [
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          _locationDetails.name,
+          style: TextStyle(
+              color: Colors.black45, fontWeight: FontWeight.bold, fontSize: 24),
+        ),
+      ),
+      CarouselWidget(carouselList),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(_locationDetails.description),
+      ),
+      Flex(
+        direction: Axis.horizontal,
+        children: <Widget>[
 //              Container(
 //                child: Text('Evaluate'),
 //              ),
-              // TODO Add Stars Bar
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Guides',
-              style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.black45,
-                  fontWeight: FontWeight.bold),
-            ),
-          )
-        ];
+          // TODO Add Stars Bar
+        ],
+      ),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          'Guides',
+          style: TextStyle(
+              fontSize: 24, color: Colors.black45, fontWeight: FontWeight.bold),
+        ),
+      )
+    ];
 
-        pageLayout.addAll(getGuidesList());
+    pageLayout.addAll(getGuidesList());
 
-        return Scaffold(
-          body: ListView(
-            children: pageLayout,
-          ),
-        );
-      },
+    return Scaffold(
+      body: ListView(
+        children: pageLayout,
+      ),
     );
-
-    // TODO Get Location Details From Network
   }
 
   List<GuideListItemWidget> getGuidesList() {
     List<GuideListItemWidget> guidesList = [];
 
-    // TODO: Create Guides List
-    for (int i = 0; i < 6; i++) {
+    // Construct the List into CSV text
+    _guidesList.forEach((guide) {
+      String citiesInText = "";
+      guide.city.forEach((cityName) {
+        citiesInText = citiesInText + " " + cityName;
+      });
+
+      // Construct the List into CSV text
+      String languagesInText = "";
+      guide.language.forEach((language) {
+        citiesInText = citiesInText + language + " ";
+      });
+
       guidesList.add(GuideListItemWidget(
-        guideCity: 'Damascus',
-        guideName: 'Mohammad',
-        guideLanguage: 'العربية - English',
-        availability: i % 3 == 0,
+        guideCity: citiesInText,
+        guideName: guide.name,
+        guideLanguage: languagesInText,
+        availability: guide.status,
         rate: 3,
-        guideImage:
-            'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
+        guideImage: guide.image,
       ));
-    }
+    });
 
     return guidesList;
   }

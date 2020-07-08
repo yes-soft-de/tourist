@@ -1,5 +1,6 @@
 import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:tourists/user/models/guide_list_item/guide_list_item.dart';
 import 'package:tourists/user/models/location_details/location_details.dart';
 import 'package:tourists/user/services/location_details/location_details_service.dart';
 
@@ -10,11 +11,20 @@ class LocationDetailsBloc {
 
   LocationDetailsBloc(this._locationDetailsService);
 
-  Subject<LocationDetailsModel> locationDetailsSubject= new PublishSubject<LocationDetailsModel>();
-  Stream<LocationDetailsModel> get locationDetailsStream => locationDetailsSubject.stream;
+  Subject<LocationDetailsBlocModel> locationDetailsSubject= new PublishSubject<LocationDetailsBlocModel>();
+  Stream<LocationDetailsBlocModel> get locationDetailsStream => locationDetailsSubject.stream;
 
   getLocation(String locationId) async {
     LocationDetailsModel model = await _locationDetailsService.getLocationDetails(locationId);
-    locationDetailsSubject.add(model);
+    List<GuideListItemModel> guides = await _locationDetailsService.getGuidesByLocationId(locationId);
+
+    locationDetailsSubject.add(new LocationDetailsBlocModel(locationDetails: model, guides: guides));
   }
+}
+
+class LocationDetailsBlocModel {
+  LocationDetailsModel locationDetails;
+  List<GuideListItemModel> guides;
+
+  LocationDetailsBlocModel({this.locationDetails, this.guides});
 }

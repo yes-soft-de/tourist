@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 class LocationDetailsModel {
   int id;
   String name;
@@ -22,11 +24,14 @@ class LocationDetailsModel {
     description = json['description'];
     location = json['location'].cast<String>();
     ratingAverage = json['ratingAverage'];
-    if (json['paths'] != null) {
+    if (json['regionImage'] != null) {
       paths = new List<Paths>();
-      json['paths'].forEach((v) {
+      json['regionImage'].forEach((v) {
         paths.add(new Paths.fromJson(v));
+        log('Added an Image');
       });
+    } else {
+      log('No Images?!!');
     }
   }
 

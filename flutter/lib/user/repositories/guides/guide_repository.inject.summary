@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/user/ui/screens/home/subscreens/tourist_guide_list/tourist_guide_list.dart",
+  "asset": "asset:tourists/lib/user/repositories/guides/guide_repository.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "TouristGuideListSubScreen",
+        "name": "GuidesRepository",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/user/ui/screens/home/subscreens/tourist_guide_list/tourist_guide_list.dart#TouristGuideListSubScreen",
+              "root": "asset:tourists/lib/user/repositories/guides/guide_repository.dart#GuidesRepository",
               "qualifier": null
             },
             "isProvider": false
@@ -21,7 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/user/bloc/guide_list/guide_list_bloc.dart#GuideListBloc",
+                "root": "asset:tourists/lib/user/network/http_client/http_client.dart#HttpClient",
                 "qualifier": null
               },
               "isProvider": false

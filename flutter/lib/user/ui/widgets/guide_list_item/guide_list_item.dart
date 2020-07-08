@@ -8,7 +8,7 @@ class GuideListItemWidget extends StatelessWidget {
   final String guideName;
   final String guideLanguage;
   final String guideImage;
-  final bool availability;
+  final String availability;
   final double rate;
   final String guideCity;
 
@@ -58,17 +58,13 @@ class GuideListItemWidget extends StatelessWidget {
                     guideName,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
-                  Text(guideLanguage + ' / ' + guideCity),
+                  Text(guideLanguage + guideCity),
                   Flex(
                     direction: Axis.horizontal,
                     children: <Widget>[
                       Text(
-                        availability
-                            ? S.of(context).available
-                            : S.of(context).not_available,
-                        style: TextStyle(
-                            color:
-                                availability ? Colors.greenAccent : Colors.red),
+                        availability,
+                        style: TextStyle(),
                       ),
                       Container(
                         width: 8,
@@ -87,7 +83,8 @@ class GuideListItemWidget extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   log('Guide Requested');
-                  Navigator.pushReplacementNamed(context, UserRoutes.requestGuide);
+                  Navigator.pushReplacementNamed(
+                      context, UserRoutes.requestGuide);
                 },
                 child: Container(
                   width: 36,

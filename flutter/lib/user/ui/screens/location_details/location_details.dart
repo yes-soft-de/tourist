@@ -6,14 +6,18 @@ import 'package:inject/inject.dart';
 import 'package:tourists/user/bloc/location_details/location_details_bloc.dart';
 import 'package:tourists/user/models/guide_list_item/guide_list_item.dart';
 import 'package:tourists/user/models/location_details/location_details.dart';
+import 'package:tourists/user/nav_arguments/request_guide/request_guide_navigation.dart';
+import 'package:tourists/user/ui/screens/request_guide/request_guide_screen.dart';
 import 'package:tourists/user/ui/widgets/carousel/carousel.dart';
 import 'package:tourists/user/ui/widgets/guide_list_item/guide_list_item.dart';
+import 'package:tourists/user/user_routes.dart';
 
 @provide
 class LocationDetailsScreen extends StatefulWidget {
   final LocationDetailsBloc _locationBloc;
+  final RequestGuideScreen _requestGuideScreen;
 
-  LocationDetailsScreen(this._locationBloc);
+  LocationDetailsScreen(this._locationBloc, this._requestGuideScreen);
 
   @override
   State<StatefulWidget> createState() => _LocationDetailsScreenState();
@@ -31,7 +35,6 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
     final String locationId = ModalRoute.of(context).settings.arguments;
 
     widget._locationBloc.locationDetailsStream.listen((locationWithGuides) {
-      log('Got Data! -----------------------------------------------');
       if (locationWithGuides != null) {
         _locationDetails = locationWithGuides.locationDetails;
         _guidesList = locationWithGuides.guides;
@@ -116,7 +119,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
   }
 
   List<GuideListItemWidget> getGuidesList() {
-    List<GuideListItemWidget> guidesList = [];
+    List<Widget> guidesList = [];
 
     // Construct the List into CSV text
     _guidesList.forEach((guide) {
@@ -131,13 +134,28 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
         citiesInText = citiesInText + language + " ";
       });
 
-      guidesList.add(GuideListItemWidget(
-        guideCity: citiesInText,
-        guideName: guide.name,
-        guideLanguage: languagesInText,
-        availability: guide.status,
-        rate: 3,
-        guideImage: guide.image,
+      guidesList.add(GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => widget._requestGuideScreen,
+                settings: RouteSettings(
+                  // Replace this with location Id
+                  arguments: RequestGuideNavigationArguments(
+                      guideId: guide.user,
+                      cityId: _locationDetails.id.toString()),
+                ),
+              ));
+        },
+        child: GuideListItemWidget(
+          guideCity: citiesInText,
+          guideName: guide.name,
+          guideLanguage: languagesInText,
+          availability: guide.status,
+          rate: 3,
+          guideImage: guide.image,
+        ),
       ));
     });
 

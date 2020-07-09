@@ -36,19 +36,22 @@ import '../../user/repositories/location_details/location_details_repository.dar
     as _i30;
 import '../../user/managers/guides_manager/guides_manager.dart' as _i31;
 import '../../user/repositories/guides/guide_repository.dart' as _i32;
+import '../../user/ui/screens/request_guide/request_guide_screen.dart' as _i33;
+import '../../user/bloc/request_guide/request_guide.bloc.dart' as _i34;
+import '../../user/services/request_guide/request_guide.service.dart' as _i35;
+import '../../user/services/guide_list/guide_list.dart' as _i36;
 import '../../user/ui/screens/home/subscreens/tourist_guide_list/tourist_guide_list.dart'
-    as _i33;
-import '../../user/bloc/guide_list/guide_list_bloc.dart' as _i34;
-import '../../user/services/guide_list/guide_list.dart' as _i35;
+    as _i37;
+import '../../user/bloc/guide_list/guide_list_bloc.dart' as _i38;
 import '../../user/ui/screens/home/subscreens/tourist_event_list/tourist_event_list.dart'
-    as _i36;
-import '../../user/ui/screens/tourist_orders/tourist_order.dart' as _i37;
-import '../../user/ui/screens/intention_profile/intention_profile.dart' as _i38;
-import '../../user/bloc/create_intentions/create_intention_bloc.dart' as _i39;
-import '../../user/services/intentions/intentions_service.dart' as _i40;
-import '../../user/managers/intentions/intentions_manager.dart' as _i41;
-import '../../user/repositories/intentions/intentions_repository.dart' as _i42;
-import '../../user/ui/screens/order_guide/order_guide.dart' as _i43;
+    as _i39;
+import '../../user/ui/screens/tourist_orders/tourist_order.dart' as _i40;
+import '../../user/ui/screens/intention_profile/intention_profile.dart' as _i41;
+import '../../user/bloc/create_intentions/create_intention_bloc.dart' as _i42;
+import '../../user/services/intentions/intentions_service.dart' as _i43;
+import '../../user/managers/intentions/intentions_manager.dart' as _i44;
+import '../../user/repositories/intentions/intentions_repository.dart' as _i45;
+import '../../user/ui/screens/order_guide/order_guide.dart' as _i46;
 
 class AppComponent$Injector implements _i1.AppComponent {
   AppComponent$Injector._();
@@ -118,7 +121,8 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i25.LocationListRepository _createLocationListRepository() =>
       _i25.LocationListRepository(_createHttpClient());
   _i26.LocationDetailsScreen _createLocationDetailsScreen() =>
-      _i26.LocationDetailsScreen(_createLocationDetailsBloc());
+      _i26.LocationDetailsScreen(
+          _createLocationDetailsBloc(), _createRequestGuideScreen());
   _i27.LocationDetailsBloc _createLocationDetailsBloc() =>
       _i27.LocationDetailsBloc(_createLocationDetailsService());
   _i28.LocationDetailsService _createLocationDetailsService() =>
@@ -132,27 +136,35 @@ class AppComponent$Injector implements _i1.AppComponent {
       _i31.GuidesManager(_createGuidesRepository());
   _i32.GuidesRepository _createGuidesRepository() =>
       _i32.GuidesRepository(_createHttpClient());
-  _i33.TouristGuideListSubScreen _createTouristGuideListSubScreen() =>
-      _i33.TouristGuideListSubScreen(_createGuideListBloc());
-  _i34.GuideListBloc _createGuideListBloc() =>
-      _i34.GuideListBloc(_createGuideListService());
-  _i35.GuideListService _createGuideListService() =>
-      _i35.GuideListService(_createGuidesManager());
-  _i36.TouristEventListSubScreen _createTouristEventListSubScreen() =>
-      _i36.TouristEventListSubScreen();
-  _i37.TouristOrdersScreen _createTouristOrdersScreen() =>
-      _i37.TouristOrdersScreen();
-  _i38.IntentionProfileScreen _createIntentionProfileScreen() =>
-      _i38.IntentionProfileScreen(_createCreateIntentionBloc());
-  _i39.CreateIntentionBloc _createCreateIntentionBloc() =>
-      _i39.CreateIntentionBloc(_createIntentionService());
-  _i40.IntentionService _createIntentionService() =>
-      _i40.IntentionService(_createIntentionsManager());
-  _i41.IntentionsManager _createIntentionsManager() =>
-      _i41.IntentionsManager(_createIntentionsRepository());
-  _i42.IntentionsRepository _createIntentionsRepository() =>
-      _i42.IntentionsRepository(_createHttpClient());
-  _i43.OrderGuideScreen _createOrderGuideScreen() => _i43.OrderGuideScreen();
+  _i33.RequestGuideScreen _createRequestGuideScreen() =>
+      _i33.RequestGuideScreen(_createRequestGuideBloc());
+  _i34.RequestGuideBloc _createRequestGuideBloc() =>
+      _i34.RequestGuideBloc(_createRequestGuideService());
+  _i35.RequestGuideService _createRequestGuideService() =>
+      _i35.RequestGuideService(
+          _createSharedPreferencesHelper(), _createGuideListService());
+  _i36.GuideListService _createGuideListService() =>
+      _i36.GuideListService(_createGuidesManager());
+  _i37.TouristGuideListSubScreen _createTouristGuideListSubScreen() =>
+      _i37.TouristGuideListSubScreen(
+          _createGuideListBloc(), _createRequestGuideScreen());
+  _i38.GuideListBloc _createGuideListBloc() =>
+      _i38.GuideListBloc(_createGuideListService());
+  _i39.TouristEventListSubScreen _createTouristEventListSubScreen() =>
+      _i39.TouristEventListSubScreen();
+  _i40.TouristOrdersScreen _createTouristOrdersScreen() =>
+      _i40.TouristOrdersScreen();
+  _i41.IntentionProfileScreen _createIntentionProfileScreen() =>
+      _i41.IntentionProfileScreen(_createCreateIntentionBloc());
+  _i42.CreateIntentionBloc _createCreateIntentionBloc() =>
+      _i42.CreateIntentionBloc(_createIntentionService());
+  _i43.IntentionService _createIntentionService() =>
+      _i43.IntentionService(_createIntentionsManager());
+  _i44.IntentionsManager _createIntentionsManager() =>
+      _i44.IntentionsManager(_createIntentionsRepository());
+  _i45.IntentionsRepository _createIntentionsRepository() =>
+      _i45.IntentionsRepository(_createHttpClient());
+  _i46.OrderGuideScreen _createOrderGuideScreen() => _i46.OrderGuideScreen();
   @override
   _i4.MyApp get app => _createMyApp();
 }

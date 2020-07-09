@@ -24,9 +24,6 @@ void main() {
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-    DeviceOrientation.landscapeRight,
-    DeviceOrientation.landscapeLeft,
   ]).then((_) async {
     final container = await AppComponent.create();
     runApp(container.app);
@@ -49,7 +46,9 @@ class MyApp extends StatelessWidget {
     fullRoutesList.addAll(_userComponent.getRoutes());
 
     return MaterialApp(
-        navigatorObservers: <NavigatorObserver>[observer],
+        navigatorObservers: <NavigatorObserver>[
+          observer
+        ],
         localizationsDelegates: [
           S.delegate,
           GlobalMaterialLocalizations.delegate,

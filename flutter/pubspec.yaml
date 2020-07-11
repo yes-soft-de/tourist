@@ -40,6 +40,9 @@ dependencies:
   dio_flutter_transformer: ^3.0.2
   dio_http_cache: ^0.2.7
 
+  # Pair and Other Types
+  analyzer_plugin: ^0.2.5
+
   # String validation
   validators: ^2.0.0+1
 

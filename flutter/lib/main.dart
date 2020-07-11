@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:inject/inject.dart';
+import 'package:tourists/guide/guide_component.dart';
+import 'package:tourists/guide/guide_routes.dart';
 import 'package:tourists/routes.dart';
 import 'package:tourists/user/ui/screens/account_type_selector/login_type_selector.dart';
 import 'package:tourists/user/ui/screens/create_profile/create_profile.dart';
@@ -33,17 +35,20 @@ void main() {
 @provide
 class MyApp extends StatelessWidget {
   final UserComponent _userComponent;
+  final GuideComponent _guideComponent;
+
   static FirebaseAnalytics analytics = FirebaseAnalytics();
   static FirebaseAnalyticsObserver observer =
-      FirebaseAnalyticsObserver(analytics: analytics);
+  FirebaseAnalyticsObserver(analytics: analytics);
 
-  MyApp(this._userComponent);
+  MyApp(this._userComponent, this._guideComponent);
 
   @override
   Widget build(BuildContext context) {
     Map<String, WidgetBuilder> fullRoutesList = Map();
 
     fullRoutesList.addAll(_userComponent.getRoutes());
+    fullRoutesList.addAll(_guideComponent.getRoutes());
 
     return MaterialApp(
         navigatorObservers: <NavigatorObserver>[
@@ -60,7 +65,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: S.delegate.supportedLocales,
         title: 'Tourists',
         routes: fullRoutesList,
-        initialRoute: UserRoutes.home,
+        initialRoute: GuideRoutes.guideLogin,
         home: LoginTypeSelectorScreen());
   }
 }

@@ -1,0 +1,26 @@
+{
+  "asset": "asset:tourists/lib/guide/bloc/guide_login/guide_login.bloc.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
+      {
+        "name": "GuideLoginBloc",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/guide/bloc/guide_login/guide_login.bloc.dart#GuideLoginBloc",
+              "qualifier": null
+            },
+            "isProvider": false
+          },
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": []
+        }
+      }
+    ]
+  }
+}

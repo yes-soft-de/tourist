@@ -52,6 +52,9 @@ import '../../user/services/intentions/intentions_service.dart' as _i43;
 import '../../user/managers/intentions/intentions_manager.dart' as _i44;
 import '../../user/repositories/intentions/intentions_repository.dart' as _i45;
 import '../../user/ui/screens/order_guide/order_guide.dart' as _i46;
+import '../../guide/guide_component.dart' as _i47;
+import '../../guide/ui/screens/guide_login/guide_login.dart' as _i48;
+import '../../guide/bloc/guide_login/guide_login.bloc.dart' as _i49;
 
 class AppComponent$Injector implements _i1.AppComponent {
   AppComponent$Injector._();
@@ -64,7 +67,8 @@ class AppComponent$Injector implements _i1.AppComponent {
     return injector;
   }
 
-  _i4.MyApp _createMyApp() => _i4.MyApp(_createUserComponent());
+  _i4.MyApp _createMyApp() =>
+      _i4.MyApp(_createUserComponent(), _createGuideComponent());
   _i5.UserComponent _createUserComponent() => _i5.UserComponent(
       _createLoginScreen(),
       _createLoginTypeSelectorScreen(),
@@ -165,6 +169,11 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i45.IntentionsRepository _createIntentionsRepository() =>
       _i45.IntentionsRepository(_createHttpClient());
   _i46.OrderGuideScreen _createOrderGuideScreen() => _i46.OrderGuideScreen();
+  _i47.GuideComponent _createGuideComponent() =>
+      _i47.GuideComponent(_createGuideLoginScreen());
+  _i48.GuideLoginScreen _createGuideLoginScreen() =>
+      _i48.GuideLoginScreen(_createGuideLoginBloc());
+  _i49.GuideLoginBloc _createGuideLoginBloc() => _i49.GuideLoginBloc();
   @override
   _i4.MyApp get app => _createMyApp();
 }

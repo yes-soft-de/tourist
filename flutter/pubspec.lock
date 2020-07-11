@@ -15,6 +15,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.39.10"
+  analyzer_plugin:
+    dependency: "direct main"
+    description:
+      name: analyzer_plugin
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.5"
   ansicolor:
     dependency: transitive
     description:

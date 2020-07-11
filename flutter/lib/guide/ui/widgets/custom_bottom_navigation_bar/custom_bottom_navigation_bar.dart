@@ -16,59 +16,6 @@ class CustomGuideBottomNavigationBar extends StatelessWidget {
 
     return Column(
       children: <Widget>[
-        // Request Button
-        Container(
-          width: double.infinity,
-          alignment: Alignment.center,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                    boxShadow: [],
-                    color: Color(0xFF58595B),
-                    borderRadius: BorderRadius.all(Radius.circular(90))),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Flex(
-                    direction: Axis.horizontal,
-                    children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(90))),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Icon(
-                            Icons.add_circle,
-                            color: Color(0x2D00FFA8),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 16,
-                      ),
-                      Text(
-                        'Request Guid!',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                      Container(
-                        width: 16,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-
-        // Divider
-        Container(
-          height: 16,
-        ),
-
         // Nav bar
         Container(
           width: double.infinity,

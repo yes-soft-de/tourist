@@ -20,7 +20,7 @@ spec:
       containers:
       - name: tourists-nginx
         image: gcr.io/tourists-280412/tourists-server:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - name: nginx-port
           containerPort: 80
@@ -30,7 +30,7 @@ spec:
         
       - name: tourists
         image: gcr.io/tourists-280412/tourists-php
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         volumeMounts:
           - name: tourists-vol
             mountPath: /var/www/html/

@@ -8,6 +8,8 @@ class GuidesResponse
 {
     public $user;
 
+    public $userID;
+
     public $name;
 
     public $status;

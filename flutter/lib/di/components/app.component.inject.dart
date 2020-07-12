@@ -1,60 +1,58 @@
 import 'app.component.dart' as _i1;
-import '../../user/network/http_client/http_client.dart' as _i2;
+import '../../network/http_client/http_client.dart' as _i2;
 import 'dart:async' as _i3;
 import '../../main.dart' as _i4;
-import '../../user/user_component.dart' as _i5;
-import '../../user/ui/screens/login/login.dart' as _i6;
-import '../../user/bloc/login/login.bloc.dart' as _i7;
-import '../../user/services/login/login.service.dart' as _i8;
-import '../../user/persistence/sharedpref/shared_preferences_helper.dart'
-    as _i9;
-import '../../user/ui/screens/account_type_selector/login_type_selector.dart'
-    as _i10;
-import '../../user/ui/screens/request_guide_success/request_guide_success.dart'
-    as _i11;
-import '../../user/ui/screens/register/register.dart' as _i12;
-import '../../user/bloc/register/register.bloc.dart' as _i13;
-import '../../user/services/register/register.service.dart' as _i14;
-import '../../user/ui/screens/create_profile/create_profile.dart' as _i15;
-import '../../user/bloc/create_profile/create_profile_bloc.dart' as _i16;
-import '../../user/services/profile/profile.service.dart' as _i17;
-import '../../user/managers/profile/profile.manager.dart' as _i18;
-import '../../user/repositories/profile/profile.repository.dart' as _i19;
-import '../../user/ui/screens/home/home.dart' as _i20;
-import '../../user/ui/screens/home/subscreens/main/main_home.dart' as _i21;
-import '../../user/bloc/main_home/main_home_bloc.dart' as _i22;
-import '../../user/services/location_list/location_list_service.dart' as _i23;
-import '../../user/managers/location_list/location_list_manager.dart' as _i24;
-import '../../user/repositories/location_list/location_list_repository.dart'
-    as _i25;
-import '../../user/ui/screens/location_details/location_details.dart' as _i26;
-import '../../user/bloc/location_details/location_details_bloc.dart' as _i27;
-import '../../user/services/location_details/location_details_service.dart'
-    as _i28;
-import '../../user/managers/location_details/location_details.dart' as _i29;
-import '../../user/repositories/location_details/location_details_repository.dart'
+import '../../components/user/user_component.dart' as _i5;
+import '../../ui/user/login/login.dart' as _i6;
+import '../../bloc/login/login.bloc.dart' as _i7;
+import '../../services/login/login.service.dart' as _i8;
+import '../../persistence/sharedpref/shared_preferences_helper.dart' as _i9;
+import '../../ui/user/account_type_selector/login_type_selector.dart' as _i10;
+import '../../ui/user/request_guide_success/request_guide_success.dart' as _i11;
+import '../../ui/user/register/register.dart' as _i12;
+import '../../bloc/register/register.bloc.dart' as _i13;
+import '../../services/register/register.service.dart' as _i14;
+import '../../ui/user/create_profile/create_profile.dart' as _i15;
+import '../../bloc/create_profile/create_profile_bloc.dart' as _i16;
+import '../../services/profile/profile.service.dart' as _i17;
+import '../../managers/profile/profile.manager.dart' as _i18;
+import '../../repositories/profile/profile.repository.dart' as _i19;
+import '../../ui/user/home/home.dart' as _i20;
+import '../../ui/user/home/subscreens/main/main_home.dart' as _i21;
+import '../../bloc/main_home/main_home_bloc.dart' as _i22;
+import '../../services/location_list/location_list_service.dart' as _i23;
+import '../../managers/location_list/location_list_manager.dart' as _i24;
+import '../../repositories/location_list/location_list_repository.dart' as _i25;
+import '../../ui/user/location_details/location_details.dart' as _i26;
+import '../../bloc/location_details/location_details_bloc.dart' as _i27;
+import '../../services/location_details/location_details_service.dart' as _i28;
+import '../../managers/location_details/location_details.dart' as _i29;
+import '../../repositories/location_details/location_details_repository.dart'
     as _i30;
-import '../../user/managers/guides_manager/guides_manager.dart' as _i31;
-import '../../user/repositories/guides/guide_repository.dart' as _i32;
-import '../../user/ui/screens/request_guide/request_guide_screen.dart' as _i33;
-import '../../user/bloc/request_guide/request_guide.bloc.dart' as _i34;
-import '../../user/services/request_guide/request_guide.service.dart' as _i35;
-import '../../user/services/guide_list/guide_list.dart' as _i36;
-import '../../user/ui/screens/home/subscreens/tourist_guide_list/tourist_guide_list.dart'
+import '../../managers/guides_manager/guides_manager.dart' as _i31;
+import '../../repositories/guides/guide_repository.dart' as _i32;
+import '../../ui/user/request_guide/request_guide_screen.dart' as _i33;
+import '../../bloc/request_guide/request_guide.bloc.dart' as _i34;
+import '../../services/request_guide/request_guide.service.dart' as _i35;
+import '../../services/guide_list/guide_list.dart' as _i36;
+import '../../ui/user/home/subscreens/tourist_guide_list/tourist_guide_list.dart'
     as _i37;
-import '../../user/bloc/guide_list/guide_list_bloc.dart' as _i38;
-import '../../user/ui/screens/home/subscreens/tourist_event_list/tourist_event_list.dart'
+import '../../bloc/guide_list/guide_list_bloc.dart' as _i38;
+import '../../ui/user/home/subscreens/tourist_event_list/tourist_event_list.dart'
     as _i39;
-import '../../user/ui/screens/tourist_orders/tourist_order.dart' as _i40;
-import '../../user/ui/screens/intention_profile/intention_profile.dart' as _i41;
-import '../../user/bloc/create_intentions/create_intention_bloc.dart' as _i42;
-import '../../user/services/intentions/intentions_service.dart' as _i43;
-import '../../user/managers/intentions/intentions_manager.dart' as _i44;
-import '../../user/repositories/intentions/intentions_repository.dart' as _i45;
-import '../../user/ui/screens/order_guide/order_guide.dart' as _i46;
-import '../../guide/guide_component.dart' as _i47;
-import '../../guide/ui/screens/guide_login/guide_login.dart' as _i48;
-import '../../guide/bloc/guide_login/guide_login.bloc.dart' as _i49;
+import '../../ui/user/tourist_orders/tourist_order.dart' as _i40;
+import '../../ui/user/intention_profile/intention_profile.dart' as _i41;
+import '../../bloc/create_intentions/create_intention_bloc.dart' as _i42;
+import '../../services/intentions/intentions_service.dart' as _i43;
+import '../../managers/intentions/intentions_manager.dart' as _i44;
+import '../../repositories/intentions/intentions_repository.dart' as _i45;
+import '../../ui/user/order_guide/order_guide.dart' as _i46;
+import '../../components/guide/guide_component.dart' as _i47;
+import '../../ui/guide/guide_login/guide_login.dart' as _i48;
+import '../../bloc/guide_login/guide_login.bloc.dart' as _i49;
+import '../../ui/guide/guide_home/guide_home.dart' as _i50;
+import '../../ui/guide/guide_home/subscreens/main/guide_main_subscreen.dart'
+    as _i51;
 
 class AppComponent$Injector implements _i1.AppComponent {
   AppComponent$Injector._();
@@ -170,10 +168,14 @@ class AppComponent$Injector implements _i1.AppComponent {
       _i45.IntentionsRepository(_createHttpClient());
   _i46.OrderGuideScreen _createOrderGuideScreen() => _i46.OrderGuideScreen();
   _i47.GuideComponent _createGuideComponent() =>
-      _i47.GuideComponent(_createGuideLoginScreen());
+      _i47.GuideComponent(_createGuideLoginScreen(), _createGuideHomeScreen());
   _i48.GuideLoginScreen _createGuideLoginScreen() =>
       _i48.GuideLoginScreen(_createGuideLoginBloc());
   _i49.GuideLoginBloc _createGuideLoginBloc() => _i49.GuideLoginBloc();
+  _i50.GuideHomeScreen _createGuideHomeScreen() =>
+      _i50.GuideHomeScreen(_createGuideMainSubScreen());
+  _i51.GuideMainSubScreen _createGuideMainSubScreen() =>
+      _i51.GuideMainSubScreen();
   @override
   _i4.MyApp get app => _createMyApp();
 }

@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/main.dart",
+  "asset": "asset:tourists/lib/repositories/intentions/intentions_repository.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "MyApp",
+        "name": "IntentionsRepository",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/main.dart#MyApp",
+              "root": "asset:tourists/lib/repositories/intentions/intentions_repository.dart#IntentionsRepository",
               "qualifier": null
             },
             "isProvider": false
@@ -21,14 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/components/user/user_component.dart#UserComponent",
-                "qualifier": null
-              },
-              "isProvider": false
-            },
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/components/guide/guide_component.dart#GuideComponent",
+                "root": "asset:tourists/lib/network/http_client/http_client.dart#HttpClient",
                 "qualifier": null
               },
               "isProvider": false

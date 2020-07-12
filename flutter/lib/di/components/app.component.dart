@@ -1,7 +1,5 @@
 import 'package:inject/inject.dart';
 import 'package:tourists/main.dart';
-import 'package:tourists/user/network/http_client/http_client.dart';
-import 'package:tourists/user/user_component.dart';
 
 import 'app.component.inject.dart' as g;
 

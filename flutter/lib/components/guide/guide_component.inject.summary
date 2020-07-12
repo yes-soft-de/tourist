@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/main.dart",
+  "asset": "asset:tourists/lib/components/guide/guide_component.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "MyApp",
+        "name": "GuideComponent",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/main.dart#MyApp",
+              "root": "asset:tourists/lib/components/guide/guide_component.dart#GuideComponent",
               "qualifier": null
             },
             "isProvider": false
@@ -21,14 +21,14 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/components/user/user_component.dart#UserComponent",
+                "root": "asset:tourists/lib/ui/guide/guide_login/guide_login.dart#GuideLoginScreen",
                 "qualifier": null
               },
               "isProvider": false
             },
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/components/guide/guide_component.dart#GuideComponent",
+                "root": "asset:tourists/lib/ui/guide/guide_home/guide_home.dart#GuideHomeScreen",
                 "qualifier": null
               },
               "isProvider": false

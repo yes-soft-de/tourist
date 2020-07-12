@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/main.dart",
+  "asset": "asset:tourists/lib/services/request_guide/request_guide.service.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "MyApp",
+        "name": "RequestGuideService",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/main.dart#MyApp",
+              "root": "asset:tourists/lib/services/request_guide/request_guide.service.dart#RequestGuideService",
               "qualifier": null
             },
             "isProvider": false
@@ -21,14 +21,14 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/components/user/user_component.dart#UserComponent",
+                "root": "asset:tourists/lib/persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper",
                 "qualifier": null
               },
               "isProvider": false
             },
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/components/guide/guide_component.dart#GuideComponent",
+                "root": "asset:tourists/lib/services/guide_list/guide_list.dart#GuideListService",
                 "qualifier": null
               },
               "isProvider": false

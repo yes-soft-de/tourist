@@ -4,17 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/guide/guide_component.dart';
-import 'package:tourists/guide/guide_routes.dart';
-import 'package:tourists/routes.dart';
-import 'package:tourists/user/ui/screens/account_type_selector/login_type_selector.dart';
-import 'package:tourists/user/ui/screens/create_profile/create_profile.dart';
-import 'package:tourists/user/ui/screens/home/home.dart';
-import 'package:tourists/user/ui/screens/intention_profile/intention_profile.dart';
-import 'package:tourists/user/ui/screens/login/login.dart';
-import 'package:tourists/user/ui/screens/register/register.dart';
-import 'package:tourists/user/user_component.dart';
-import 'package:tourists/user/user_routes.dart';
+import 'package:tourists/components/guide/guide_component.dart';
+import 'package:tourists/components/guide/guide_routes.dart';
+import 'package:tourists/components/user/user_component.dart';
 
 import 'di/components/app.component.dart';
 import 'generated/l10n.dart';
@@ -65,7 +57,6 @@ class MyApp extends StatelessWidget {
         supportedLocales: S.delegate.supportedLocales,
         title: 'Tourists',
         routes: fullRoutesList,
-        initialRoute: GuideRoutes.guideLogin,
-        home: LoginTypeSelectorScreen());
+        initialRoute: GuideRoutes.guideLogin);
   }
 }

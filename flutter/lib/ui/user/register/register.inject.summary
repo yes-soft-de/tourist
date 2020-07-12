@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/main.dart",
+  "asset": "asset:tourists/lib/ui/user/register/register.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "MyApp",
+        "name": "RegisterScreen",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/main.dart#MyApp",
+              "root": "asset:tourists/lib/ui/user/register/register.dart#RegisterScreen",
               "qualifier": null
             },
             "isProvider": false
@@ -21,14 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/components/user/user_component.dart#UserComponent",
-                "qualifier": null
-              },
-              "isProvider": false
-            },
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/components/guide/guide_component.dart#GuideComponent",
+                "root": "asset:tourists/lib/bloc/register/register.bloc.dart#RegisterBloc",
                 "qualifier": null
               },
               "isProvider": false

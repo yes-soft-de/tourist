@@ -1,8 +1,0 @@
-{
-  "asset": "asset:tourists/lib/user/responses/create_profile/create_profile_response.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": []
-  }
-}

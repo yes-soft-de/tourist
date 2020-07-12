@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/main.dart",
+  "asset": "asset:tourists/lib/ui/user/home/subscreens/main/main_home.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "MyApp",
+        "name": "MainHomeSubScreen",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/main.dart#MyApp",
+              "root": "asset:tourists/lib/ui/user/home/subscreens/main/main_home.dart#MainHomeSubScreen",
               "qualifier": null
             },
             "isProvider": false
@@ -21,14 +21,14 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/components/user/user_component.dart#UserComponent",
+                "root": "asset:tourists/lib/bloc/main_home/main_home_bloc.dart#MainHomeBloc",
                 "qualifier": null
               },
               "isProvider": false
             },
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/components/guide/guide_component.dart#GuideComponent",
+                "root": "asset:tourists/lib/ui/user/location_details/location_details.dart#LocationDetailsScreen",
                 "qualifier": null
               },
               "isProvider": false

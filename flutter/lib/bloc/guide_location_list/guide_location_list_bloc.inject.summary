@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/main.dart",
+  "asset": "asset:tourists/lib/bloc/guide_location_list/guide_location_list_bloc.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "MyApp",
+        "name": "GuideLocationListBloc",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/main.dart#MyApp",
+              "root": "asset:tourists/lib/bloc/guide_location_list/guide_location_list_bloc.dart#GuideLocationListBloc",
               "qualifier": null
             },
             "isProvider": false
@@ -21,14 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/components/user/user_component.dart#UserComponent",
-                "qualifier": null
-              },
-              "isProvider": false
-            },
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/components/guide/guide_component.dart#GuideComponent",
+                "root": "asset:tourists/lib/services/location_list/location_list_service.dart#LocationListService",
                 "qualifier": null
               },
               "isProvider": false

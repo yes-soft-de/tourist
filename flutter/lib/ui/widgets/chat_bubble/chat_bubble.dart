@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 class ChatBubbleWidget extends StatefulWidget {
   final bool showImage;
-  final String userProfileImage;
   final String message;
   final DateTime sentDate;
+  final bool me;
 
   ChatBubbleWidget({
     Key key,
-    @required this.userProfileImage,
     @required this.message,
     @required this.sentDate,
+    @required this.me,
     this.showImage,
   });
 
@@ -25,7 +25,7 @@ class ChatBubbleWidgetState extends State<ChatBubbleWidget> {
   Widget build(BuildContext context) {
     List<Widget> rowLayout = [];
 
-    if (widget.showImage == true) {
+    if (widget.me) {
       rowLayout.add(GestureDetector(
         onTap: () {
           if (focused == null) {
@@ -36,13 +36,49 @@ class ChatBubbleWidgetState extends State<ChatBubbleWidget> {
           focused = !focused;
           setState(() {});
         },
-        child: Container(
-          decoration:
-              BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(90))),
-          child: Image.network(
-            widget.userProfileImage,
-            fit: BoxFit.contain,
-          ),
+        child: Flex(
+          direction: Axis.horizontal,
+          children: <Widget>[
+            Flexible(
+              flex: 3,
+              child: Container(
+                color: widget.me ? Colors.white70 : Colors.greenAccent,
+                child: Text(widget.message),
+              ),
+            ),
+            Flexible(
+              flex: 1,
+              child: Container(),
+            )
+          ],
+        ),
+      ));
+    } else {
+      rowLayout.add(GestureDetector(
+        onTap: () {
+          if (focused == null) {
+            focused = true;
+            setState(() {});
+            return;
+          }
+          focused = !focused;
+          setState(() {});
+        },
+        child: Flex(
+          direction: Axis.horizontal,
+          children: <Widget>[
+            Flexible(
+              flex: 1,
+              child: Container(),
+            ),
+            Flexible(
+              flex: 3,
+              child: Container(
+                color: widget.me ? Colors.white70 : Colors.greenAccent,
+                child: Text(widget.message),
+              ),
+            ),
+          ],
         ),
       ));
     }

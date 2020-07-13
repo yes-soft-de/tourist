@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class OrderItemWidget extends StatelessWidget {
+class OrderItemPendingWidget extends StatelessWidget {
   final String guideName;
   final String guideImage;
   final String guideLanguage;
@@ -12,18 +12,18 @@ class OrderItemWidget extends StatelessWidget {
   final String stayingDays;
   final String paymentValue;
 
-  OrderItemWidget(
+  OrderItemPendingWidget(
       {Key key,
-      @required this.guideName,
-      @required this.guideImage,
-      @required this.orderServices,
-      @required this.paymentValue,
-      @required this.stayingDays,
-      @required this.status,
-      @required this.guideLanguage,
-      @required this.guideLocation,
-      @required this.orderDate,
-      @required this.paymentDate});
+        @required this.guideName,
+        @required this.guideImage,
+        @required this.orderServices,
+        @required this.paymentValue,
+        @required this.stayingDays,
+        @required this.status,
+        @required this.guideLanguage,
+        @required this.guideLocation,
+        @required this.orderDate,
+        @required this.paymentDate});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class OrderItemWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration:
-            BoxDecoration(border: Border.all(color: Colors.black, width: .5)),
+        BoxDecoration(border: Border.all(color: Colors.black, width: .5)),
         child: Flex(
           direction: Axis.vertical,
           children: <Widget>[

@@ -62,6 +62,7 @@ dependencies:
   firebase_core: ^0.4.5
   firebase_auth: ^0.16.1
   firebase_analytics: ^5.0.15
+  cloud_firestore: ^0.13.7
 
   # Localization
   gen_lang: 0.1.3

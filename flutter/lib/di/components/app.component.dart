@@ -3,7 +3,6 @@ import 'package:tourists/main.dart';
 
 import 'app.component.inject.dart' as g;
 
-
 // Split this to multiple Components
 @Injector()
 abstract class AppComponent {

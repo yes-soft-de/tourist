@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/bloc/guide_login/guide_login.bloc.dart';
+import 'package:tourists/components/guide/guide_routes.dart';
+import 'package:tourists/ui/guide/guide_home/guide_home.dart';
 
 @provide
 class GuideLoginScreen extends StatefulWidget {
@@ -27,12 +29,15 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
   Widget build(BuildContext context) {
     widget._guideLoginBloc.stateStream.listen((event) {
       if (event.first == GuideLoginBloc.STATUS_CODE_RECEIVED) {
-        // Login the User
-        Fluttertoast.showToast(msg: 'Congrats! I did it :)');
+        Navigator.pushReplacementNamed(context, GuideRoutes.guideHome);
       }
 
       if (event.first == GuideLoginBloc.STATUS_CODE_FAILED) {
         Fluttertoast.showToast(msg: 'Error, Sorry =(');
+      }
+
+      if (event.first == GuideLoginBloc.STATUS_CODE_CONFIRM_ERROR) {
+        Fluttertoast.showToast(msg: 'SMS Code is incorrect, Please Try Again');
       }
 
       if (event.first == GuideLoginBloc.STATUS_CODE_SENT) {
@@ -42,7 +47,7 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
             barrierDismissible: false,
             builder: (context) {
               return AlertDialog(
-                title: Text("Give the code?"),
+                title: Text("Please Provide the Code from the SMS"),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[

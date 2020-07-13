@@ -6,6 +6,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/components/guide/guide_component.dart';
 import 'package:tourists/components/guide/guide_routes.dart';
+import 'package:tourists/components/shared/shared_component.dart';
+import 'package:tourists/components/shared/shared_routes.dart';
 import 'package:tourists/components/user/user_component.dart';
 
 import 'di/components/app.component.dart';
@@ -28,12 +30,13 @@ void main() {
 class MyApp extends StatelessWidget {
   final UserComponent _userComponent;
   final GuideComponent _guideComponent;
+  final SharedComponent _sharedComponent;
 
   static FirebaseAnalytics analytics = FirebaseAnalytics();
   static FirebaseAnalyticsObserver observer =
-  FirebaseAnalyticsObserver(analytics: analytics);
+      FirebaseAnalyticsObserver(analytics: analytics);
 
-  MyApp(this._userComponent, this._guideComponent);
+  MyApp(this._userComponent, this._guideComponent, this._sharedComponent);
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +44,7 @@ class MyApp extends StatelessWidget {
 
     fullRoutesList.addAll(_userComponent.getRoutes());
     fullRoutesList.addAll(_guideComponent.getRoutes());
+    fullRoutesList.addAll(_sharedComponent.getRoutes());
 
     return MaterialApp(
         navigatorObservers: <NavigatorObserver>[
@@ -57,6 +61,6 @@ class MyApp extends StatelessWidget {
         supportedLocales: S.delegate.supportedLocales,
         title: 'Tourists',
         routes: fullRoutesList,
-        initialRoute: GuideRoutes.guideLogin);
+        initialRoute: SharedRoutes.chatRoute);
   }
 }

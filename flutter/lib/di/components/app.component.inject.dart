@@ -53,6 +53,9 @@ import '../../bloc/guide_login/guide_login.bloc.dart' as _i49;
 import '../../ui/guide/guide_home/guide_home.dart' as _i50;
 import '../../ui/guide/guide_home/subscreens/main/guide_main_subscreen.dart'
     as _i51;
+import '../../components/shared/shared_component.dart' as _i52;
+import '../../ui/shared/chat_page/chat_page.dart' as _i53;
+import '../../bloc/chat_page/chat_page.bloc.dart' as _i54;
 
 class AppComponent$Injector implements _i1.AppComponent {
   AppComponent$Injector._();
@@ -65,8 +68,8 @@ class AppComponent$Injector implements _i1.AppComponent {
     return injector;
   }
 
-  _i4.MyApp _createMyApp() =>
-      _i4.MyApp(_createUserComponent(), _createGuideComponent());
+  _i4.MyApp _createMyApp() => _i4.MyApp(_createUserComponent(),
+      _createGuideComponent(), _createSharedComponent());
   _i5.UserComponent _createUserComponent() => _i5.UserComponent(
       _createLoginScreen(),
       _createLoginTypeSelectorScreen(),
@@ -176,6 +179,10 @@ class AppComponent$Injector implements _i1.AppComponent {
       _i50.GuideHomeScreen(_createGuideMainSubScreen());
   _i51.GuideMainSubScreen _createGuideMainSubScreen() =>
       _i51.GuideMainSubScreen();
+  _i52.SharedComponent _createSharedComponent() =>
+      _i52.SharedComponent(_createChatPage());
+  _i53.ChatPage _createChatPage() => _i53.ChatPage(_createChatPageBloc());
+  _i54.ChatPageBloc _createChatPageBloc() => _i54.ChatPageBloc();
   @override
   _i4.MyApp get app => _createMyApp();
 }

@@ -14,6 +14,7 @@ class GuideLoginBloc {
   static const int STATUS_CODE_SENT = 1;
   static const int STATUS_CODE_RECEIVED = 2;
   static const int STATUS_CODE_FAILED = 3;
+  static const int STATUS_CODE_CONFIRM_ERROR = 4;
 
   String _verificationId;
 
@@ -51,11 +52,10 @@ class GuideLoginBloc {
     FirebaseUser user = result.user;
 
     if (user != null) {
-      Fluttertoast.showToast(msg: 'Got it!!!!!');
       log('Code Verify complete');
       _stateSubject.add(Pair(STATUS_CODE_RECEIVED, user));
-      // TODO, Navigate to Guide Home
     } else {
+      _stateSubject.add(Pair(STATUS_CODE_CONFIRM_ERROR, null));
       print("Error");
     }
   }

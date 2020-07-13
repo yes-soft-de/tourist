@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/ui/widgets/order_item/order_item.dart';
+import 'package:tourists/ui/widgets/order_item_request/order_item_request.dart';
 
 @provide
 class GuideMainSubScreen extends StatefulWidget {
-
-
 
   @override
   State<StatefulWidget> createState() => _GuideMainSubScreenState();
@@ -62,7 +60,7 @@ class _GuideMainSubScreenState extends State<GuideMainSubScreen> {
     pageLayout.add(widgetHeader);
 
     for (int i = 0; i < 3; i++) {
-      pageLayout.add(OrderItemWidget(
+      pageLayout.add(OrderItemRequestWidget(
         guideName: 'Mohammad',
         guideLanguage: 'English - العربية',
         guideLocation: 'Aleppo',

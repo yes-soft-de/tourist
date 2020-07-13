@@ -56,6 +56,9 @@ import '../../ui/guide/guide_home/subscreens/main/guide_main_subscreen.dart'
 import '../../components/shared/shared_component.dart' as _i52;
 import '../../ui/shared/chat_page/chat_page.dart' as _i53;
 import '../../bloc/chat_page/chat_page.bloc.dart' as _i54;
+import '../../services/chat/char_service.dart' as _i55;
+import '../../managers/chat/chat_manager.dart' as _i56;
+import '../../repositories/chat/chat_repository.dart' as _i57;
 
 class AppComponent$Injector implements _i1.AppComponent {
   AppComponent$Injector._();
@@ -182,7 +185,13 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i52.SharedComponent _createSharedComponent() =>
       _i52.SharedComponent(_createChatPage());
   _i53.ChatPage _createChatPage() => _i53.ChatPage(_createChatPageBloc());
-  _i54.ChatPageBloc _createChatPageBloc() => _i54.ChatPageBloc();
+  _i54.ChatPageBloc _createChatPageBloc() =>
+      _i54.ChatPageBloc(_createChatService());
+  _i55.ChatService _createChatService() =>
+      _i55.ChatService(_createChatManager());
+  _i56.ChatManager _createChatManager() =>
+      _i56.ChatManager(_createChatRepository());
+  _i57.ChatRepository _createChatRepository() => _i57.ChatRepository();
   @override
   _i4.MyApp get app => _createMyApp();
 }

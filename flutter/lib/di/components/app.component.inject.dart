@@ -184,11 +184,12 @@ class AppComponent$Injector implements _i1.AppComponent {
       _i51.GuideMainSubScreen();
   _i52.SharedComponent _createSharedComponent() =>
       _i52.SharedComponent(_createChatPage());
-  _i53.ChatPage _createChatPage() => _i53.ChatPage(_createChatPageBloc());
+  _i53.ChatPage _createChatPage() =>
+      _i53.ChatPage(_createChatPageBloc(), _createSharedPreferencesHelper());
   _i54.ChatPageBloc _createChatPageBloc() =>
       _i54.ChatPageBloc(_createChatService());
   _i55.ChatService _createChatService() =>
-      _i55.ChatService(_createChatManager());
+      _i55.ChatService(_createChatManager(), _createSharedPreferencesHelper());
   _i56.ChatManager _createChatManager() =>
       _i56.ChatManager(_createChatRepository());
   _i57.ChatRepository _createChatRepository() => _i57.ChatRepository();

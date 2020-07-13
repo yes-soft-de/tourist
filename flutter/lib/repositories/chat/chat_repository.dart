@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:inject/inject.dart';
+import 'package:tourists/models/chat/chat_model.dart';
 
 @provide
 class ChatRepository {
@@ -11,5 +12,13 @@ class ChatRepository {
         .document(chatRoomID)
         .collection('messages')
         .snapshots();
+  }
+
+  void sendMessage(String chatRoomID, ChatModel chatMessage) {
+    _firestore
+        .collection('chat_rooms')
+        .document(chatRoomID)
+        .collection('messages')
+        .add(chatMessage.toJson());
   }
 }

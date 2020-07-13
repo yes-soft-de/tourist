@@ -14,12 +14,13 @@ class ChatPageBloc {
   static const STATUS_CODE_INIT = 1588;
   static const STATUS_CODE_EMPTY_LIST = 1589;
   static const STATUS_CODE_GOT_DATA = 1590;
+  static const STATUS_CODE_BUILDING_UI = 1591;
 
   ChatService _chatService;
   ChatPageBloc(this._chatService);
 
-  PublishSubject<Pair<int, dynamic>> _chatBlocSubject = new PublishSubject();
-  Stream<Pair<int, dynamic>> get chatBlocStream => _chatBlocSubject.stream;
+  PublishSubject<Pair<int, List<ChatModel>>> _chatBlocSubject = new PublishSubject();
+  Stream<Pair<int, List<ChatModel>>> get chatBlocStream => _chatBlocSubject.stream;
 
   // We Should get the UUID of the ChatRoom, as such we should request the data here
   getMessages(String chatRoomID) {
@@ -28,6 +29,10 @@ class ChatPageBloc {
       _chatBlocSubject.add(Pair(STATUS_CODE_GOT_DATA, event));
     });
     _chatService.requestMessages(chatRoomID);
+  }
+
+  sendMessage(String chatRoomID, String chat) {
+    _chatService.sendMessage(chatRoomID, chat);
   }
 
   dispose() {

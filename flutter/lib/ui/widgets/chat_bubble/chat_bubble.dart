@@ -8,9 +8,9 @@ class ChatBubbleWidget extends StatefulWidget {
 
   ChatBubbleWidget({
     Key key,
-    @required this.message,
-    @required this.sentDate,
-    @required this.me,
+    this.message,
+    this.sentDate,
+    this.me,
     this.showImage,
   });
 
@@ -23,88 +23,22 @@ class ChatBubbleWidgetState extends State<ChatBubbleWidget> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> rowLayout = [];
-
-    if (widget.me) {
-      rowLayout.add(GestureDetector(
-        onTap: () {
-          if (focused == null) {
-            focused = true;
-            setState(() {});
-            return;
-          }
-          focused = !focused;
-          setState(() {});
-        },
-        child: Flex(
-          direction: Axis.horizontal,
-          children: <Widget>[
-            Flexible(
-              flex: 3,
-              child: Container(
-                color: widget.me ? Colors.white70 : Colors.greenAccent,
-                child: Text(widget.message),
-              ),
-            ),
-            Flexible(
-              flex: 1,
-              child: Container(),
-            )
-          ],
+    return Container(
+      alignment: widget.me ? Alignment.centerLeft : Alignment.centerRight,
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Container(
+          width: 240,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            color: widget.me ? Colors.black12 : Colors.greenAccent,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(widget.message != null ? widget.message : "Empty Text?!!"),
+          ),
         ),
-      ));
-    } else {
-      rowLayout.add(GestureDetector(
-        onTap: () {
-          if (focused == null) {
-            focused = true;
-            setState(() {});
-            return;
-          }
-          focused = !focused;
-          setState(() {});
-        },
-        child: Flex(
-          direction: Axis.horizontal,
-          children: <Widget>[
-            Flexible(
-              flex: 1,
-              child: Container(),
-            ),
-            Flexible(
-              flex: 3,
-              child: Container(
-                color: widget.me ? Colors.white70 : Colors.greenAccent,
-                child: Text(widget.message),
-              ),
-            ),
-          ],
-        ),
-      ));
-    }
-
-    // Divider
-    rowLayout.add(Container(
-      width: 8,
-    ));
-
-    // Message
-    rowLayout.add(Container(
-      child: Text(widget.message),
-      decoration:
-          BoxDecoration(color: focused ? Colors.greenAccent : Colors.white10),
-    ));
-
-    Widget widgetLayout = Flex(
-      direction: Axis.vertical,
-      children: <Widget>[
-        Row(
-          children: rowLayout,
-        ),
-        focused == true ? Text(widget.sentDate.toIso8601String()) : null
-      ],
+      ),
     );
-
-    return widgetLayout;
   }
 }

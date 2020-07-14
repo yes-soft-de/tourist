@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
+import 'package:tourists/ui/widgets/order_item_pending/order_item_pending.dart';
 import 'package:tourists/ui/widgets/order_item_request/order_item_request.dart';
 
 @provide
@@ -65,6 +66,20 @@ class _TouristOrdersScreenState extends State<TouristOrdersScreen> {
         orderDate: DateTime.now(),
         guideImage:
             'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
+        status: 'payed',
+        paymentDate: DateTime(2020, 4, 24, 10, 14),
+        stayingDays: '2 Days',
+        paymentValue: '300 USD',
+        orderServices: 'Car',
+      ));
+
+      pageLayout.add(OrderItemPendingWidget(
+        guideName: 'Mohammad',
+        guideLanguage: 'English - العربية',
+        guideLocation: 'Aleppo',
+        orderDate: DateTime.now(),
+        guideImage:
+        'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
         status: 'payed',
         paymentDate: DateTime(2020, 4, 24, 10, 14),
         stayingDays: '2 Days',

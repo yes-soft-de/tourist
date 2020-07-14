@@ -67,7 +67,6 @@ class OrderItemDoneWidget extends StatelessWidget {
                           Container(height: 8,),
                           Text(guideLocation + ' / ' + guideLanguage),
                           Container(height: 8,),
-
                         ],
                       ),
                     ),

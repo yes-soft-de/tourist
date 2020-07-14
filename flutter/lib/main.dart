@@ -9,6 +9,7 @@ import 'package:tourists/components/guide/guide_routes.dart';
 import 'package:tourists/components/shared/shared_component.dart';
 import 'package:tourists/components/shared/shared_routes.dart';
 import 'package:tourists/components/user/user_component.dart';
+import 'package:tourists/components/user/user_routes.dart';
 
 import 'di/components/app.component.dart';
 import 'generated/l10n.dart';
@@ -61,6 +62,6 @@ class MyApp extends StatelessWidget {
         supportedLocales: S.delegate.supportedLocales,
         title: 'Tourists',
         routes: fullRoutesList,
-        initialRoute: SharedRoutes.chatRoute);
+        initialRoute: UserRoutes.home);
   }
 }

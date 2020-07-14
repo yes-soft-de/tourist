@@ -72,7 +72,7 @@ class OrderItemPendingWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Flexible(flex: 1, child: Text('Month Ago'))
+                  Flexible(flex: 1, child: Icon(Icons.chat))
                 ],
               ),
             ),

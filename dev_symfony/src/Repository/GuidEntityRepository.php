@@ -14,9 +14,12 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class GuidEntityRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $userRepository;
+
+    public function __construct(ManagerRegistry $registry, UserRepository $userRepository)
     {
         parent::__construct($registry, GuidEntity::class);
+        $this->userRepository = $userRepository;
     }
 
     public function getGuid($userID)
@@ -54,5 +57,18 @@ class GuidEntityRepository extends ServiceEntityRepository
 
             ->getQuery()
             ->getResult();
+    }
+
+    public function getGuidCityAndLanguage($guidUserID)
+    {
+        //get guid id
+        $id = $this->userRepository->getUser($guidUserID);
+        //dd($id);
+        return $this->createQueryBuilder('guid')
+            ->select('guid.city', 'guid.language')
+            ->andWhere('guid.user =:userID')
+            ->setParameter('userID', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }

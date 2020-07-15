@@ -82,3 +82,60 @@ methods={"PUT"}
 /guides
 methods={"GET"}
 ```
+### Orders System
+
+------------
+
+
+### Case one, Tourist select one of guides in region:
+#### Create order
+```
+/order
+methods={"POST"}
+```
+###### Order status = "waitingPayment"
+###### GuidUserID = must send in request
+####Update order
+```
+/order
+methods={"PUT"}
+```
+#### Get all tourist orders
+```
+order/{touristUserID}
+methods={"GET"}
+```
+### Case two Tourist asks for guides:
+#### Create order
+```
+/order
+methods={"POST"}
+```
+###### Order status = "pending"
+###### GuidUserID = Null (must NOT send in request)
+
+#### Get tourist orders matches Guid cites and languages
+```
+orderlookup/{guidUserID}
+methods={"GET"}
+```
+#### Accept tourist order by guid
+```
+/acceptorder
+methods={"POST"}
+```
+#### Get accepted order
+```
+acceptorder/{touristUserID}
+methods={"GET"}
+```
+#### When tourist select guid from his accepted orders then update order to put guidUserID and status to "paid" if must pay at first
+```
+/order
+methods={"PUT"}
+```
+#### Also update accepted order statue to be "selected" for not include it in "get accepted order" API
+```
+/acceptorder
+methods={"PUT"}
+```

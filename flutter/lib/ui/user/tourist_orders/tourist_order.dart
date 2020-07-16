@@ -63,13 +63,9 @@ class _TouristOrdersScreenState extends State<TouristOrdersScreen> {
         guideName: 'Mohammad',
         guideLanguage: 'English - العربية',
         guideLocation: 'Aleppo',
-        orderDate: DateTime.now(),
         guideImage:
             'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-        status: 'payed',
-        paymentDate: DateTime(2020, 4, 24, 10, 14),
         stayingDays: '2 Days',
-        paymentValue: '300 USD',
         orderServices: 'Car',
       ));
 

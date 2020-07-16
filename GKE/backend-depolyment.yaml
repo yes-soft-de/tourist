@@ -18,7 +18,8 @@ spec:
         tier: balancer
     spec:
       containers:
-      - name: tourists-nginx
+      # Server
+      - name: nginx
         image: gcr.io/tourists-280412/tourists-server:latest
         imagePullPolicy: Always
         ports:
@@ -28,7 +29,8 @@ spec:
           - name: tourists-vol
             mountPath: /var/www/html/
         
-      - name: tourists
+      # PHP
+      - name: php
         image: gcr.io/tourists-280412/tourists-php
         imagePullPolicy: Always
         volumeMounts:

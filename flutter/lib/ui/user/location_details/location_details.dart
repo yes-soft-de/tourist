@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
@@ -22,27 +21,27 @@ class LocationDetailsScreen extends StatefulWidget {
 }
 
 class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
+  int currentStatus = LocationDetailsBloc.STATUS_CODE_INIT;
+
   LocationDetailsModel _locationDetails;
   List<GuideListItemModel> _guidesList;
-
-  bool loadingError;
 
   @override
   Widget build(BuildContext context) {
     // Get the Location Id
     final String locationId = ModalRoute.of(context).settings.arguments;
 
-    widget._locationBloc.locationDetailsStream.listen((locationWithGuides) {
-      if (locationWithGuides != null) {
-        _locationDetails = locationWithGuides.locationDetails;
-        _guidesList = locationWithGuides.guides;
-        loadingError = false;
+    widget._locationBloc.locationDetailsStream.listen((event) {
+      currentStatus = event.first;
+      if (currentStatus == LocationDetailsBloc.STATUS_CODE_LOAD_FINISHED) {
+        _locationDetails = event.last.locationDetails;
+        _guidesList = event.last.guides;
         setState(() {});
       }
-      loadingError = true;
     });
 
-    if (loadingError == null) {
+    // Loading Screen
+    if (currentStatus == LocationDetailsBloc.STATUS_CODE_INIT) {
       widget._locationBloc.getLocation(locationId);
       return Scaffold(
         body: Center(
@@ -51,72 +50,69 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
       );
     }
 
-    if (loadingError == true) {
-      if (loadingError == null) {
-        return Scaffold(
-          body: Center(
-            child: Text('Error Loading Info!'),
-          ),
-        );
+    // Error Screen
+    if (currentStatus == LocationDetailsBloc.STATUS_CODE_LOAD_ERROR) {
+      return Scaffold(
+        body: Center(
+          child: Text('Error Loading Info!'),
+        ),
+      );
+    }
+
+    // Details Screen
+    if (currentStatus == LocationDetailsBloc.STATUS_CODE_LOAD_FINISHED) {
+      List<Widget> carouselList = [];
+
+      if (_locationDetails.paths != null) {
+        _locationDetails.paths.forEach((path) {
+          carouselList.add(Image.network(
+            path.path,
+            fit: BoxFit.fitWidth,
+          ));
+        });
+      } else {
+        Fluttertoast.showToast(msg: 'No Images?!!');
       }
-    }
 
-    List<Widget> carouselList = [];
-
-    if (_locationDetails.paths != null) {
-      _locationDetails.paths.forEach((path) {
-        carouselList.add(Image.network(
-          path.path,
-          fit: BoxFit.fitWidth,
-        ));
-      });
-    } else {
-      Fluttertoast.showToast(msg: 'No Images?!!');
-    }
-
-    List<Widget> pageLayout = [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          _locationDetails.name,
-          style: TextStyle(
-              color: Colors.black45, fontWeight: FontWeight.bold, fontSize: 24),
+      List<Widget> pageLayout = [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            _locationDetails.name,
+            style: TextStyle(
+                color: Colors.black45,
+                fontWeight: FontWeight.bold,
+                fontSize: 24),
+          ),
         ),
-      ),
-      CarouselWidget(carouselList),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(_locationDetails.description),
-      ),
-      Flex(
-        direction: Axis.horizontal,
-        children: <Widget>[
-//              Container(
-//                child: Text('Evaluate'),
-//              ),
-          // TODO Add Stars Bar
-        ],
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'Guides',
-          style: TextStyle(
-              fontSize: 24, color: Colors.black45, fontWeight: FontWeight.bold),
+        CarouselWidget(carouselList),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(_locationDetails.description),
         ),
-      )
-    ];
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'Guides',
+            style: TextStyle(
+                fontSize: 24,
+                color: Colors.black45,
+                fontWeight: FontWeight.bold),
+          ),
+        )
+      ];
 
-    pageLayout.addAll(getGuidesList());
+      pageLayout.addAll(getGuidesList());
 
-    return Scaffold(
-      body: ListView(
-        children: pageLayout,
-      ),
-    );
+      return Scaffold(
+        body: ListView(
+          children: pageLayout,
+        ),
+      );
+    }
   }
 
-  List<GuideListItemWidget> getGuidesList() {
+  List<Widget> getGuidesList() {
     List<Widget> guidesList = [];
 
     // Construct the List into CSV text

@@ -1,4 +1,4 @@
-package com.fast-prog.tourists
+package com.fastprog.tourists
 
 import io.flutter.embedding.android.FlutterActivity
 

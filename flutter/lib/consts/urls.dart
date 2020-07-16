@@ -10,4 +10,6 @@ class Urls {
 
   static final guideList = _baseAPI + 'guides';
   static final guidesByRegion = _baseAPI + 'guid';
+
+  static final orderGuide = _baseAPI + 'order';
 }

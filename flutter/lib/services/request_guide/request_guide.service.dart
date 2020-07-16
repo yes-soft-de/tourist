@@ -1,15 +1,18 @@
 import 'package:inject/inject.dart';
+import 'package:tourists/managers/request_guide/request_guide_manager.dart';
 import 'package:tourists/models/guide_list_item/guide_list_item.dart';
 import 'package:tourists/models/request_guide/request_guide.model.dart';
 import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
+import 'package:tourists/requests/request_guide/request_guide.dart';
 import 'package:tourists/services/guide_list/guide_list.dart';
 
 @provide
 class RequestGuideService {
-  SharedPreferencesHelper _preferencesHelper;
-  GuideListService _guidesService;
+  final SharedPreferencesHelper _preferencesHelper;
+  final GuideListService _guidesService;
+  final RequestGuideManager _requestGuideManager;
 
-  RequestGuideService(this._preferencesHelper, this._guidesService);
+  RequestGuideService(this._preferencesHelper, this._guidesService, this._requestGuideManager);
 
   Future<bool> requestGuide(RequestGuideModel requestGuide) async {
     String uid = await _preferencesHelper.getUserUID();
@@ -17,9 +20,22 @@ class RequestGuideService {
       return false;
     }
 
-    // TODO: Request the Guide From the Backend
+    dynamic requestResult = await _requestGuideManager.requestGuide(RequestGuideRequest(
+      touristUserID: uid,
+      guidUserID: requestGuide.uid,
+      city: requestGuide.location,
+      language: requestGuide.language,
+      arriveDate: requestGuide.arrivalDate,
+      leaveDate: requestGuide.arrivalDate.add(Duration(days: requestGuide.stayingDays)),
+      services: requestGuide.services,
+      status: "waitingPayment")
+    );
 
-    return true;
+    if (requestResult != null) {
+      return true;
+    }
+
+    return false;
   }
 
   Future<GuideListItemModel> getGuideInfoWithId(String guideId) async {

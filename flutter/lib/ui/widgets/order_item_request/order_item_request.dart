@@ -117,13 +117,6 @@ class OrderItemRequestWidget extends StatelessWidget {
                           onPressed: () {},
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(8),
-                        child: RaisedButton(
-                          child: Text('Accept'),
-                          onPressed: () {},
-                        ),
-                      )
                     ],
                   ),
                 ],

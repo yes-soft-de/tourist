@@ -5,9 +5,9 @@ class RequestGuideModel {
   String guideId;
   List<String> services;
   String location;
-  String arrivalDate;
+  DateTime arrivalDate;
   String language;
-  String stayingDays;
+  int stayingDays;
 
   RequestGuideModel(
       {@required this.location,

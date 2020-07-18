@@ -18,36 +18,40 @@ class TouristGuideListSubScreen extends StatefulWidget {
 }
 
 class _TouristGuideListSubScreenState extends State<TouristGuideListSubScreen> {
+  int currentStatus = GuideListBloc.STATUS_CODE_INIT;
   List<GuideListItemModel> _guidesList;
-  bool loadingError;
 
   @override
   Widget build(BuildContext context) {
-    widget._guideListBloc.guidesStream.listen((guidesList) {
-      _guidesList = guidesList;
-      loadingError = false;
-      setState(() {});
+    widget._guideListBloc.guidesStream.listen((guidesListEvent) {
+      currentStatus = guidesListEvent.first;
+      if (currentStatus == GuideListBloc.STATUS_CODE_LOAD_SUCCESS) {
+        _guidesList = guidesListEvent.last;
+        setState(() {});
+      }
     });
 
-    if (loadingError == null) {
+    if (currentStatus == GuideListBloc.STATUS_CODE_INIT) {
       widget._guideListBloc.getAllGuides();
       return Center(
         child: Text('Loading'),
       );
     }
 
-    if (loadingError == true || _guidesList == null || _guidesList.length < 1) {
+    if (currentStatus == GuideListBloc.STATUS_CODE_LOAD_ERROR) {
       widget._guideListBloc.getAllGuides();
       return Center(
         child: Text('Error Loading Data!'),
       );
     }
 
-    List<Widget> pageLayout = [];
+    if (currentStatus == GuideListBloc.STATUS_CODE_LOAD_SUCCESS) {
+      List<Widget> pageLayout = [];
 
-    pageLayout.add(Text('سياح'));
+      pageLayout.add(Text('سياح'));
 
-    return ListView(children: getGuidesList());
+      return ListView(children: getGuidesList());
+    }
   }
 
   List<GuideListItemWidget> getGuidesList() {

@@ -15,7 +15,6 @@ class LocationListManager {
     LocationListResponse response = await _locationListRepository.getLocationList();
 
     if (response != null) {
-      log('Got Network Response of ' + response.locationList.length.toString());
       return response.locationList;
     }
 

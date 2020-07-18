@@ -11,6 +11,7 @@ class GuideListService {
 
   Future<List<GuideListItemModel>> getAllGuides() async {
     GuidesResponse response = await _guidesManager.getGuidesList();
-    return response.data;
+    if (response != null) return response.data;
+    return null;
   }
 }

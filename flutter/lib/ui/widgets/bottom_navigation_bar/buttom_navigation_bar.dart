@@ -4,13 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:tourists/ui/user/home/home.dart';
 
 
-class CustomBottomNavigationBar extends StatelessWidget {
-  final int activePosition;
+class CustomBottomNavigationBar extends StatefulWidget {
   final HomeScreenState _homeScreenState;
   final Color activeColor = Color(0xFF00FFA8);
   final Color inactiveColor = Colors.black;
+  final int activePosition;
 
   CustomBottomNavigationBar(this.activePosition, this._homeScreenState);
+
+  @override
+  State<StatefulWidget> createState() => _CustomBottomNavigationBarState(activePosition);
+}
+
+class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
+  int activePosition;
+
+  _CustomBottomNavigationBarState(this.activePosition);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +47,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius:
-                                BorderRadius.all(Radius.circular(90))),
+                            BorderRadius.all(Radius.circular(90))),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Icon(
@@ -89,20 +98,20 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 GestureDetector(
                   onTap: (){
                     log('Moving To Page ' + 0.toString());
-                    _homeScreenState.moveToPage(0);
+                    widget._homeScreenState.moveToPage(0);
                   },
                   child: Column(
                     children: <Widget>[
                       Icon(
                         Icons.home,
-                        color: activePosition == 0 ? activeColor : inactiveColor,
+                        color: activePosition == 0 ? widget.activeColor : widget.inactiveColor,
                       ),
                       Text(
                         'home',
                         style: TextStyle(
                             color: activePosition == 0
-                                ? activeColor
-                                : inactiveColor),
+                                ? widget.activeColor
+                                : widget.inactiveColor),
                       )
                     ],
                   ),
@@ -110,20 +119,20 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 GestureDetector(
                   onTap: (){
                     log('Moving To Page ' + 1.toString());
-                    _homeScreenState.moveToPage(1);
+                    widget._homeScreenState.moveToPage(1);
                   },
                   child: Column(
                     children: <Widget>[
                       Icon(
                         Icons.account_circle,
-                        color: activePosition == 1 ? activeColor : inactiveColor,
+                        color: activePosition == 1 ? widget.activeColor : widget.inactiveColor,
                       ),
                       Text(
                         'Guides',
                         style: TextStyle(
                             color: activePosition == 1
-                                ? activeColor
-                                : inactiveColor),
+                                ? widget.activeColor
+                                : widget.inactiveColor),
                       )
                     ],
                   ),
@@ -131,20 +140,20 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 GestureDetector(
                   onTap: (){
                     log('Moving To Page ' + 2.toString());
-                    _homeScreenState.moveToPage(2);
+                    widget._homeScreenState.moveToPage(2);
                   },
                   child: Column(
                     children: <Widget>[
                       Icon(
                         Icons.event,
-                        color: activePosition == 2 ? activeColor : inactiveColor,
+                        color: activePosition == 2 ? widget.activeColor : widget.inactiveColor,
                       ),
                       Text(
                         'Events',
                         style: TextStyle(
                             color: activePosition == 2
-                                ? activeColor
-                                : inactiveColor),
+                                ? widget.activeColor
+                                : widget.inactiveColor),
                       )
                     ],
                   ),
@@ -152,20 +161,20 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 GestureDetector(
                   onTap: (){
                     log('Moving To Page ' + 3.toString());
-                    _homeScreenState.moveToPage(3);
+                    widget._homeScreenState.moveToPage(3);
                   },
                   child: Column(
                     children: <Widget>[
                       Icon(
                         Icons.payment,
-                        color: activePosition == 3 ? activeColor : inactiveColor,
+                        color: activePosition == 3 ? widget.activeColor : widget.inactiveColor,
                       ),
                       Text(
                         'Orders',
                         style: TextStyle(
                             color: activePosition == 3
-                                ? activeColor
-                                : inactiveColor),
+                                ? widget.activeColor
+                                : widget.inactiveColor),
                       )
                     ],
                   ),

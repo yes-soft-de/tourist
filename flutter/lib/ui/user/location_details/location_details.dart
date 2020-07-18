@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/bloc/location_details/location_details_bloc.dart';
+import 'package:tourists/components/user/user_routes.dart';
 import 'package:tourists/models/guide_list_item/guide_list_item.dart';
 import 'package:tourists/models/location_details/location_details.dart';
 import 'package:tourists/nav_arguments/request_guide/request_guide_navigation.dart';
@@ -130,17 +131,12 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
 
       guidesList.add(GestureDetector(
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => widget._requestGuideScreen,
-                settings: RouteSettings(
-                  // Replace this with location Id
-                  arguments: RequestGuideNavigationArguments(
-                      guideId: guide.user,
-                      cityId: _locationDetails.id.toString()),
-                ),
-              ));
+          Navigator.pushReplacementNamed(
+            context,
+            UserRoutes.requestGuide,
+            arguments: RequestGuideNavigationArguments(
+                guideId: guide.user, cityId: _locationDetails.id.toString()),
+          );
         },
         child: GuideListItemWidget(
           guideCity: citiesInText,

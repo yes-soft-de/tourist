@@ -17,7 +17,6 @@ class MainHomeSubScreen extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _MainHomeSubScreenState();
-
   MainHomeSubScreen(this._homeBloc, this._detailsScreen);
 }
 
@@ -35,8 +34,6 @@ class _MainHomeSubScreenState extends State<MainHomeSubScreen> {
             'Loading'
           ),);
         }
-
-        log(locationList.data.length.toString() + ' To the UI');
 
         List<Widget> locationCards = [];
         List<CarouselCard> carouselCards = [];

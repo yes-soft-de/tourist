@@ -9,6 +9,7 @@ import 'package:tourists/ui/user/location_details/location_details.dart';
 import 'package:tourists/ui/user/login/login.dart';
 import 'package:tourists/ui/user/order_guide/order_guide.dart';
 import 'package:tourists/ui/user/register/register.dart';
+import 'package:tourists/ui/user/request_guide/request_guide_screen.dart';
 import 'package:tourists/ui/user/request_guide_success/request_guide_success.dart';
 
 @provide
@@ -20,7 +21,7 @@ class UserComponent {
   final IntentionProfileScreen _intentionProfileScreen;
   final HomeScreen _homeScreen;
   final LoginTypeSelectorScreen _loginSelectorScreen;
-  final OrderGuideScreen _orderGuideScreen;
+  final RequestGuideScreen _orderGuideScreen;
   final RequestGuideSuccessScreen _requestGuideSuccessScreen;
   final LocationDetailsScreen _locationDetailsScreen;
 

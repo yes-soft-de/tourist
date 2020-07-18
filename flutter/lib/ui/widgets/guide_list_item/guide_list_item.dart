@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:tourists/components/user/user_routes.dart';
+import 'package:tourists/nav_arguments/request_guide/request_guide_navigation.dart';
 
 class GuideListItemWidget extends StatelessWidget {
   final String guideName;
@@ -77,14 +78,8 @@ class GuideListItemWidget extends StatelessWidget {
               Container(
                 width: 8,
               ),
-              // TODO: Move to Request Guide When this Clicked
               // Request Button
               GestureDetector(
-                onTap: () {
-                  log('Guide Requested');
-                  Navigator.pushReplacementNamed(
-                      context, UserRoutes.requestGuide);
-                },
                 child: Container(
                   width: 36,
                   height: 36,

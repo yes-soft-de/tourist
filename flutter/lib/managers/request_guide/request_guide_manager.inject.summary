@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/bloc/main_home/main_home_bloc.dart",
+  "asset": "asset:tourists/lib/managers/request_guide/request_guide_manager.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "MainHomeBloc",
+        "name": "RequestGuideManager",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/bloc/main_home/main_home_bloc.dart#MainHomeBloc",
+              "root": "asset:tourists/lib/managers/request_guide/request_guide_manager.dart#RequestGuideManager",
               "qualifier": null
             },
             "isProvider": false
@@ -21,14 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/services/location_list/location_list_service.dart#LocationListService",
-                "qualifier": null
-              },
-              "isProvider": false
-            },
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/utils/logger/logger.dart#Logger",
+                "root": "asset:tourists/lib/repositories/request_guide/request_guide_repository.dart#RequestGuideRepository",
                 "qualifier": null
               },
               "isProvider": false

@@ -7,12 +7,16 @@ import 'package:tourists/bloc/request_guide/request_guide.bloc.dart';
 import 'package:tourists/components/user/user_routes.dart';
 import 'package:tourists/models/guide_list_item/guide_list_item.dart';
 import 'package:tourists/nav_arguments/request_guide/request_guide_navigation.dart';
+import 'package:tourists/utils/logger/logger.dart';
 
 @provide
 class RequestGuideScreen extends StatefulWidget {
-  final RequestGuideBloc _requestGuideBloc;
+  final String tag = "RequestGuideScreen";
 
-  RequestGuideScreen(this._requestGuideBloc);
+  final RequestGuideBloc _requestGuideBloc;
+  final Logger _logger;
+
+  RequestGuideScreen(this._requestGuideBloc, this._logger);
 
   @override
   State<StatefulWidget> createState() => _RequestGuideScreenState();
@@ -21,7 +25,6 @@ class RequestGuideScreen extends StatefulWidget {
 class _RequestGuideScreenState extends State<RequestGuideScreen> {
   int currentStatus = RequestGuideBloc.STATUS_CODE_INIT;
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _arrivalDateField = TextEditingController();
   final TextEditingController _stayingTime = TextEditingController();
 
@@ -35,14 +38,16 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
 
   GuideListItemModel _guideInfo;
 
-  Map<String, bool> servicesMap = Map.fromIterable([
-    {KEY_CAR: false},
-    {KEY_HOTEL: false}
-  ]);
+  Map<String, bool> servicesMap = {KEY_CAR: false, KEY_HOTEL: false};
 
   @override
   Widget build(BuildContext context) {
     _requestGuideArguments = ModalRoute.of(context).settings.arguments;
+
+    widget._logger.info(widget.tag,
+        "Requesting Guide with ID of: " + _requestGuideArguments.guideId);
+    widget._logger.info(widget.tag,
+        "Requesting Guide for city ID of: " + _requestGuideArguments.cityId);
 
     if (_requestGuideArguments == null) {
       Fluttertoast.showToast(msg: 'Null Guide Id');
@@ -56,8 +61,10 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
     // listen for guide Info
     widget._requestGuideBloc.guideInfoStream.listen((event) {
       currentStatus = event.first;
-      if (currentStatus == RequestGuideBloc.STATUS_CODE_LOAD_SUCCESS)
+      if (currentStatus == RequestGuideBloc.STATUS_CODE_LOAD_SUCCESS) {
         _guideInfo = event.last;
+        widget._logger.info(widget.tag, "Guide Info: " + _guideInfo.toString());
+      }
       setState(() {});
     });
 
@@ -84,13 +91,19 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
     if (currentStatus == RequestGuideBloc.STATUS_CODE_LOAD_SUCCESS ||
         currentStatus == RequestGuideBloc.STATUS_CODE_REQUEST_SUCCESS ||
         currentStatus == RequestGuideBloc.STATUS_CODE_REQUEST_ERROR) {
-
       List<Widget> pageLayout = [];
 
       // region Guide Info Header
       Row guideInfoHeader = Row(
         children: <Widget>[
-          Image.network(_guideInfo.image),
+          Container(
+            height: 120,
+            width: 160,
+            child: Image.network(
+              _guideInfo.image,
+              fit: BoxFit.cover,
+            ),
+          ),
           Flex(
             direction: Axis.vertical,
             children: <Widget>[
@@ -130,7 +143,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
       // region City Selector
       List<DropdownMenuItem<String>> locationList = [];
       _guideInfo.city.forEach((guideLocation) {
-        languageList.add(
+        locationList.add(
           DropdownMenuItem(
             value: guideLocation,
             child: Text(guideLocation),
@@ -175,14 +188,8 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
                             context: context,
                             firstDate: DateTime.now(),
                             initialDate: DateTime.now(),
-                            lastDate: DateTime(DateTime
-                                .now()
-                                .year,
-                                DateTime
-                                    .now()
-                                    .month + 4, DateTime
-                                    .now()
-                                    .day),
+                            lastDate: DateTime(DateTime.now().year,
+                                DateTime.now().month + 4, DateTime.now().day),
                           ).then((value) {
                             _arrivalDate = value;
                             _arrivalDateField.text =
@@ -207,8 +214,8 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
                     child: TextFormField(
                       controller: _stayingTime,
                       keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                          labelText: 'Staying for'),
+                      decoration:
+                          const InputDecoration(labelText: 'Staying for'),
                       validator: (String value) {
                         if (value.isEmpty) {
                           return 'Please enter some text';
@@ -241,16 +248,18 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
           CheckboxListTile(
               title: Text('Car'),
               secondary: Icon(Icons.local_taxi),
-              value: false,
+              value: servicesMap[KEY_CAR],
               onChanged: (bool value) {
                 servicesMap[KEY_CAR] = value;
+                setState(() {});
               }),
           CheckboxListTile(
               title: Text('Hotel'),
               secondary: Icon(Icons.hotel),
-              value: false,
+              value: servicesMap[KEY_HOTEL],
               onChanged: (bool value) {
                 servicesMap[KEY_HOTEL] = value;
+                setState(() {});
               })
         ],
       );
@@ -260,7 +269,9 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
       // region Next
       pageLayout.add(Container(
         child: RaisedButton(
-          onPressed: _requestGuide(),
+          onPressed: () {
+            _requestGuide();
+          },
           child: Text('Request a Chat!'),
         ),
       ));
@@ -272,9 +283,14 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
         ),
       );
     }
+
+    return Center(
+      child: Text("Undefined State"),
+    );
   }
 
   _getStarsLine(double starCount) {
+    if (starCount == null) starCount = 5;
     List<Widget> stars = [];
     for (int i = 0; i < starCount; i++) {
       stars.add(Icon(Icons.star));

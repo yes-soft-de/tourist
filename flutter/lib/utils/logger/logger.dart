@@ -15,4 +15,11 @@ class Logger {
 
     // TODO: Maybe Send a Log to Google Analytics?
   }
+
+  error(String tag, String msg) {
+    String time = DateTime.now().toString();
+    print("$time: \t $tag \t $msg");
+
+    // TODO: Maybe Send a Log to Google Analytics?
+  }
 }

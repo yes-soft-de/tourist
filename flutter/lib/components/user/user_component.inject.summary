@@ -77,7 +77,7 @@
             },
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/ui/user/order_guide/order_guide.dart#OrderGuideScreen",
+                "root": "asset:tourists/lib/ui/user/request_guide/request_guide_screen.dart#RequestGuideScreen",
                 "qualifier": null
               },
               "isProvider": false

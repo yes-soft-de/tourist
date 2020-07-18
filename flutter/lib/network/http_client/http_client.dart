@@ -1,15 +1,20 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:inject/inject.dart';
+import 'package:tourists/utils/logger/logger.dart';
 
 @provide
 @singleton
 class HttpClient {
   final Client _client = Client();
+  final Logger _logger;
+
+  final String tag = "HttpClient";
+
+  HttpClient(this._logger);
 
   Future<String> get(String url) async {
     try {
@@ -17,17 +22,11 @@ class HttpClient {
         // Add Auth Header Here!
       });
 
-      if (response.statusCode == 200) {
-        log(response.body);
-        Fluttertoast.showToast(
-            msg: "OK!",
-            toastLength: Toast.LENGTH_SHORT,
-            timeInSecForIosWeb: 1,
-            fontSize: 16.0);
+      if (response.statusCode > 200 && response.statusCode < 300) {
+        _logger.info(tag, response.body);
         return response.body;
       } else {
-        // TODO: Implement This, Log Error
-        log(response.statusCode.toString() + ' for link ' + url);
+        _logger.error(tag, response.statusCode.toString() + ' for link ' + url);
         Fluttertoast.showToast(
             msg: "Error Code " +
                 response.statusCode.toString() +
@@ -40,7 +39,7 @@ class HttpClient {
         return null;
       }
     } catch (e) {
-      log(e.toString());
+      _logger.error(tag, e.toString());
       Fluttertoast.showToast(msg: e.toString());
       return null;
     }
@@ -48,23 +47,23 @@ class HttpClient {
 
   Future<String> post(String url, Map<String, dynamic> payLoad) async {
     try {
-      log('Requesting Post to: ' + url);
+      _logger.info(tag, 'Requesting Post to: ' + url);
       var response = await _client.post(url,
           headers: {
             // Add Auth Header Here!
           },
           body: json.encode(payLoad));
 
-      if (response.statusCode == 200) {
-        log(response.body);
+      if (response.statusCode > 200 && response.statusCode < 300) {
+        _logger.info(tag, response.body);
         return response.body;
       } else {
-        // TODO: Implement This, Log Error
-        log(response.statusCode.toString());
+        _logger.error(tag, response.statusCode.toString());
+        _logger.error(tag, response.body);
         return null;
       }
     } catch (e) {
-      log(e.toString());
+      _logger.error(tag, e.toString());
       Fluttertoast.showToast(msg: e.toString());
       return null;
     }
@@ -72,23 +71,22 @@ class HttpClient {
 
   Future<String> put(String url, Map<String, dynamic> payLoad) async {
     try {
-      log('Requesting Post to: ' + url);
+      _logger.info(tag, 'Requesting Post to: ' + url);
       var response = await _client.put(url,
           headers: {
             // Add Auth Header Here!
           },
           body: json.encode(payLoad));
 
-      if (response.statusCode == 200) {
-        log(response.body);
+      if (response.statusCode > 200 && response.statusCode < 300) {
+        _logger.info(tag, response.body);
         return response.body;
       } else {
-        // TODO: Implement This, Log Error
-        log(response.statusCode.toString());
+        _logger.error(tag, response.statusCode.toString());
         return null;
       }
     } catch (e) {
-      log(e.toString());
+      _logger.error(tag, e.toString());
       Fluttertoast.showToast(msg: e.toString());
       return null;
     }

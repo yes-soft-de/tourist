@@ -32,8 +32,8 @@ class RequestGuideRequest {
     jsonData["guidUserID"] = this.guidUserID;
     jsonData["city"] = this.city;
     jsonData["language"] = this.language;
-    jsonData["arriveDate"] = this.arriveDate;
-    jsonData["leaveDate"] = this.leaveDate;
+    jsonData["arriveDate"] = this.arriveDate.toIso8601String();
+    jsonData["leaveDate"] = this.leaveDate.toIso8601String();
     jsonData["services "] = this.services;
     jsonData["roomID"] = this.roomID;
     jsonData["status"] = this.status;

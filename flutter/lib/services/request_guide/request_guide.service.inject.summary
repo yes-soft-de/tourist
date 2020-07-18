@@ -32,6 +32,13 @@
                 "qualifier": null
               },
               "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/managers/request_guide/request_guide_manager.dart#RequestGuideManager",
+                "qualifier": null
+              },
+              "isProvider": false
             }
           ]
         }

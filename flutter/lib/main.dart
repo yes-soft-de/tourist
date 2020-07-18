@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
             primaryColor: Colors.greenAccent, accentColor: Colors.greenAccent),
         supportedLocales: S.delegate.supportedLocales,
-        title: 'Tourists',
+        title: 'Soyah',
         routes: fullRoutesList,
         initialRoute: UserRoutes.home);
   }

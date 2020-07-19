@@ -4,6 +4,8 @@
 namespace App\Request;
 
 
+use DateTime;
+
 class AcceptedOrderCreateRequest
 {
     public $date;
@@ -32,6 +34,17 @@ class AcceptedOrderCreateRequest
     public function setStatus($status): void
     {
         $this->status = $status;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDate():?\DateTimeInterface
+    {
+        try {
+            return new DateTime((string)$this->date);
+        } catch (\Exception $e) {
+        }
     }
 
 

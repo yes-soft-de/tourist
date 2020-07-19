@@ -11,6 +11,7 @@ use App\Repository\TouristOrderEntityRepository;
 use App\Request\TouristOrderCreateRequest;
 use App\Request\TouristOrderUpdateRequest;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Validator\Constraints\Date;
 
 class TouristOrderManager
 {
@@ -32,9 +33,10 @@ class TouristOrderManager
     {
         $creteOrder = $this->autoMapping->map(TouristOrderCreateRequest::class, TouristOrderEntity::class, $request);
 
-        $creteOrder->setDate($request->date);
-        $creteOrder->setArriveDate($request->arriveDate);
-        $creteOrder->setLeaveDate($request->leaveDate);
+        $creteOrder->setDate($request->getDate());
+        $creteOrder->setArriveDate($request->getArriveDate());
+        $creteOrder->setLeaveDate($request->getLeaveDate());
+
         $creteOrder->setStatus('waitingPayment');
 
         $this->entityManager->persist($creteOrder);

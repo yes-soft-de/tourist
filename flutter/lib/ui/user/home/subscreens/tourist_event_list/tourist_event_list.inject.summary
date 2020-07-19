@@ -1,0 +1,26 @@
+{
+  "asset": "asset:tourists/lib/ui/user/home/subscreens/tourist_event_list/tourist_event_list.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
+      {
+        "name": "TouristEventListSubScreen",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/ui/user/home/subscreens/tourist_event_list/tourist_event_list.dart#TouristEventListSubScreen",
+              "qualifier": null
+            },
+            "isProvider": false
+          },
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": []
+        }
+      }
+    ]
+  }
+}

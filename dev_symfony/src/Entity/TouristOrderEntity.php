@@ -67,7 +67,7 @@ class TouristOrderEntity
     private $roomID;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $status;
 

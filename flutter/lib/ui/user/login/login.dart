@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     widget._loginBlock.loginStatus.listen((event) {
       if (event != null && event.length > 0) {
-        Navigator.of(context).pushReplacementNamed(UserRoutes.createProfile);
+        Navigator.of(context).pushReplacementNamed(UserRoutes.home);
       }
       submitAvailable = true;
       setState(() {});

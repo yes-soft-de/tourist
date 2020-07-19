@@ -23,4 +23,9 @@ class SharedPreferencesHelper {
     SharedPreferences _sharedPreferences = await SharedPreferences.getInstance();
     return _sharedPreferences.getString('uid');
   }
+
+  Future<bool> clearData() async {
+    SharedPreferences _sharedPreferences = await SharedPreferences.getInstance();
+    return _sharedPreferences.clear();
+  }
 }

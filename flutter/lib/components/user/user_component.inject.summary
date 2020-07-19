@@ -56,6 +56,13 @@
             },
             {
               "lookupKey": {
+                "root": "asset:tourists/lib/ui/user/orders_page/orders_page.dart#OrdersScreen",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
                 "root": "asset:tourists/lib/ui/user/home/home.dart#HomeScreen",
                 "qualifier": null
               },

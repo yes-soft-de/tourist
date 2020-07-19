@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:inject/inject.dart';
 import 'package:tourists/managers/request_guide/request_guide_manager.dart';
 import 'package:tourists/models/guide_list_item/guide_list_item.dart';
@@ -20,16 +23,20 @@ class RequestGuideService {
       return false;
     }
 
-    dynamic requestResult = await _requestGuideManager.requestGuide(RequestGuideRequest(
-      touristUserID: uid,
-      guidUserID: requestGuide.uid,
-      city: requestGuide.location,
-      language: requestGuide.language,
-      arriveDate: requestGuide.arrivalDate,
-      leaveDate: requestGuide.arrivalDate.add(Duration(days: requestGuide.stayingDays)),
-      services: requestGuide.services,
-      status: "waitingPayment")
-    );
+    RequestGuideRequest requestObject = RequestGuideRequest(
+        touristUserID: uid,
+        guidUserID: requestGuide.uid,
+        city: requestGuide.location,
+        language: requestGuide.language,
+        arriveDate: requestGuide.arrivalDate,
+        cost: 500,
+        date: DateTime.now(),
+        leaveDate: requestGuide.arrivalDate.add(Duration(days: requestGuide.stayingDays)),
+        services: requestGuide.services);
+
+    log(jsonEncode(requestObject.toJson()));
+
+    dynamic requestResult = await _requestGuideManager.requestGuide(requestObject);
 
     if (requestResult != null) {
       return true;

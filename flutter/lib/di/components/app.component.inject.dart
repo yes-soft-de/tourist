@@ -18,49 +18,50 @@ import '../../bloc/create_profile/create_profile_bloc.dart' as _i17;
 import '../../services/profile/profile.service.dart' as _i18;
 import '../../managers/profile/profile.manager.dart' as _i19;
 import '../../repositories/profile/profile.repository.dart' as _i20;
-import '../../ui/user/home/home.dart' as _i21;
-import '../../ui/user/home/subscreens/main/main_home.dart' as _i22;
-import '../../bloc/main_home/main_home_bloc.dart' as _i23;
-import '../../services/location_list/location_list_service.dart' as _i24;
-import '../../managers/location_list/location_list_manager.dart' as _i25;
-import '../../repositories/location_list/location_list_repository.dart' as _i26;
-import '../../ui/user/location_details/location_details.dart' as _i27;
-import '../../bloc/location_details/location_details_bloc.dart' as _i28;
-import '../../services/location_details/location_details_service.dart' as _i29;
-import '../../managers/location_details/location_details.dart' as _i30;
+import '../../ui/user/orders_page/orders_page.dart' as _i21;
+import '../../ui/user/home/home.dart' as _i22;
+import '../../ui/user/home/subscreens/main/main_home.dart' as _i23;
+import '../../bloc/main_home/main_home_bloc.dart' as _i24;
+import '../../services/location_list/location_list_service.dart' as _i25;
+import '../../managers/location_list/location_list_manager.dart' as _i26;
+import '../../repositories/location_list/location_list_repository.dart' as _i27;
+import '../../ui/user/location_details/location_details.dart' as _i28;
+import '../../bloc/location_details/location_details_bloc.dart' as _i29;
+import '../../services/location_details/location_details_service.dart' as _i30;
+import '../../managers/location_details/location_details.dart' as _i31;
 import '../../repositories/location_details/location_details_repository.dart'
-    as _i31;
-import '../../managers/guides_manager/guides_manager.dart' as _i32;
-import '../../repositories/guides/guide_repository.dart' as _i33;
-import '../../ui/user/request_guide/request_guide_screen.dart' as _i34;
-import '../../bloc/request_guide/request_guide.bloc.dart' as _i35;
-import '../../services/request_guide/request_guide.service.dart' as _i36;
-import '../../services/guide_list/guide_list.dart' as _i37;
-import '../../managers/request_guide/request_guide_manager.dart' as _i38;
-import '../../repositories/request_guide/request_guide_repository.dart' as _i39;
+    as _i32;
+import '../../managers/guides_manager/guides_manager.dart' as _i33;
+import '../../repositories/guides/guide_repository.dart' as _i34;
+import '../../ui/user/request_guide/request_guide_screen.dart' as _i35;
+import '../../bloc/request_guide/request_guide.bloc.dart' as _i36;
+import '../../services/request_guide/request_guide.service.dart' as _i37;
+import '../../services/guide_list/guide_list.dart' as _i38;
+import '../../managers/request_guide/request_guide_manager.dart' as _i39;
+import '../../repositories/request_guide/request_guide_repository.dart' as _i40;
 import '../../ui/user/home/subscreens/tourist_guide_list/tourist_guide_list.dart'
-    as _i40;
-import '../../bloc/guide_list/guide_list_bloc.dart' as _i41;
+    as _i41;
+import '../../bloc/guide_list/guide_list_bloc.dart' as _i42;
 import '../../ui/user/home/subscreens/tourist_event_list/tourist_event_list.dart'
-    as _i42;
-import '../../ui/user/tourist_orders/tourist_order.dart' as _i43;
-import '../../ui/user/intention_profile/intention_profile.dart' as _i44;
-import '../../bloc/create_intentions/create_intention_bloc.dart' as _i45;
-import '../../services/intentions/intentions_service.dart' as _i46;
-import '../../managers/intentions/intentions_manager.dart' as _i47;
-import '../../repositories/intentions/intentions_repository.dart' as _i48;
-import '../../components/guide/guide_component.dart' as _i49;
-import '../../ui/guide/guide_login/guide_login.dart' as _i50;
-import '../../bloc/guide_login/guide_login.bloc.dart' as _i51;
-import '../../ui/guide/guide_home/guide_home.dart' as _i52;
+    as _i43;
+import '../../ui/user/tourist_orders/tourist_order.dart' as _i44;
+import '../../ui/user/intention_profile/intention_profile.dart' as _i45;
+import '../../bloc/create_intentions/create_intention_bloc.dart' as _i46;
+import '../../services/intentions/intentions_service.dart' as _i47;
+import '../../managers/intentions/intentions_manager.dart' as _i48;
+import '../../repositories/intentions/intentions_repository.dart' as _i49;
+import '../../components/guide/guide_component.dart' as _i50;
+import '../../ui/guide/guide_login/guide_login.dart' as _i51;
+import '../../bloc/guide_login/guide_login.bloc.dart' as _i52;
+import '../../ui/guide/guide_home/guide_home.dart' as _i53;
 import '../../ui/guide/guide_home/subscreens/main/guide_main_subscreen.dart'
-    as _i53;
-import '../../components/shared/shared_component.dart' as _i54;
-import '../../ui/shared/chat_page/chat_page.dart' as _i55;
-import '../../bloc/chat_page/chat_page.bloc.dart' as _i56;
-import '../../services/chat/char_service.dart' as _i57;
-import '../../managers/chat/chat_manager.dart' as _i58;
-import '../../repositories/chat/chat_repository.dart' as _i59;
+    as _i54;
+import '../../components/shared/shared_component.dart' as _i55;
+import '../../ui/shared/chat_page/chat_page.dart' as _i56;
+import '../../bloc/chat_page/chat_page.bloc.dart' as _i57;
+import '../../services/chat/char_service.dart' as _i58;
+import '../../managers/chat/chat_manager.dart' as _i59;
+import '../../repositories/chat/chat_repository.dart' as _i60;
 
 class AppComponent$Injector implements _i1.AppComponent {
   AppComponent$Injector._();
@@ -83,6 +84,7 @@ class AppComponent$Injector implements _i1.AppComponent {
       _createRequestGuideSuccessScreen(),
       _createRegisterScreen(),
       _createCreateProfileScreen(),
+      _createOrdersScreen(),
       _createHomeScreen(),
       _createIntentionProfileScreen(),
       _createLocationDetailsScreen(),
@@ -117,90 +119,91 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i3.HttpClient _createHttpClient() =>
       _singletonHttpClient ??= _i3.HttpClient(_createLogger());
   _i2.Logger _createLogger() => _singletonLogger ??= _i2.Logger();
-  _i21.HomeScreen _createHomeScreen() => _i21.HomeScreen(
+  _i21.OrdersScreen _createOrdersScreen() => _i21.OrdersScreen();
+  _i22.HomeScreen _createHomeScreen() => _i22.HomeScreen(
       _createMainHomeSubScreen(),
       _createTouristGuideListSubScreen(),
       _createTouristEventListSubScreen(),
       _createTouristOrdersScreen(),
       _createSharedPreferencesHelper());
-  _i22.MainHomeSubScreen _createMainHomeSubScreen() => _i22.MainHomeSubScreen(
+  _i23.MainHomeSubScreen _createMainHomeSubScreen() => _i23.MainHomeSubScreen(
       _createMainHomeBloc(), _createLocationDetailsScreen());
-  _i23.MainHomeBloc _createMainHomeBloc() =>
-      _i23.MainHomeBloc(_createLocationListService(), _createLogger());
-  _i24.LocationListService _createLocationListService() =>
-      _i24.LocationListService(_createLocationListManager());
-  _i25.LocationListManager _createLocationListManager() =>
-      _i25.LocationListManager(_createLocationListRepository());
-  _i26.LocationListRepository _createLocationListRepository() =>
-      _i26.LocationListRepository(_createHttpClient());
-  _i27.LocationDetailsScreen _createLocationDetailsScreen() =>
-      _i27.LocationDetailsScreen(
+  _i24.MainHomeBloc _createMainHomeBloc() =>
+      _i24.MainHomeBloc(_createLocationListService(), _createLogger());
+  _i25.LocationListService _createLocationListService() =>
+      _i25.LocationListService(_createLocationListManager());
+  _i26.LocationListManager _createLocationListManager() =>
+      _i26.LocationListManager(_createLocationListRepository());
+  _i27.LocationListRepository _createLocationListRepository() =>
+      _i27.LocationListRepository(_createHttpClient());
+  _i28.LocationDetailsScreen _createLocationDetailsScreen() =>
+      _i28.LocationDetailsScreen(
           _createLocationDetailsBloc(), _createRequestGuideScreen());
-  _i28.LocationDetailsBloc _createLocationDetailsBloc() =>
-      _i28.LocationDetailsBloc(_createLocationDetailsService());
-  _i29.LocationDetailsService _createLocationDetailsService() =>
-      _i29.LocationDetailsService(
+  _i29.LocationDetailsBloc _createLocationDetailsBloc() =>
+      _i29.LocationDetailsBloc(_createLocationDetailsService());
+  _i30.LocationDetailsService _createLocationDetailsService() =>
+      _i30.LocationDetailsService(
           _createLocationDetailsManager(), _createGuidesManager());
-  _i30.LocationDetailsManager _createLocationDetailsManager() =>
-      _i30.LocationDetailsManager(_createLocationDetailsRepository());
-  _i31.LocationDetailsRepository _createLocationDetailsRepository() =>
-      _i31.LocationDetailsRepository(_createHttpClient());
-  _i32.GuidesManager _createGuidesManager() =>
-      _i32.GuidesManager(_createGuidesRepository());
-  _i33.GuidesRepository _createGuidesRepository() =>
-      _i33.GuidesRepository(_createHttpClient());
-  _i34.RequestGuideScreen _createRequestGuideScreen() =>
-      _i34.RequestGuideScreen(_createRequestGuideBloc(), _createLogger());
-  _i35.RequestGuideBloc _createRequestGuideBloc() =>
-      _i35.RequestGuideBloc(_createRequestGuideService());
-  _i36.RequestGuideService _createRequestGuideService() =>
-      _i36.RequestGuideService(_createSharedPreferencesHelper(),
+  _i31.LocationDetailsManager _createLocationDetailsManager() =>
+      _i31.LocationDetailsManager(_createLocationDetailsRepository());
+  _i32.LocationDetailsRepository _createLocationDetailsRepository() =>
+      _i32.LocationDetailsRepository(_createHttpClient());
+  _i33.GuidesManager _createGuidesManager() =>
+      _i33.GuidesManager(_createGuidesRepository());
+  _i34.GuidesRepository _createGuidesRepository() =>
+      _i34.GuidesRepository(_createHttpClient());
+  _i35.RequestGuideScreen _createRequestGuideScreen() =>
+      _i35.RequestGuideScreen(_createRequestGuideBloc(), _createLogger());
+  _i36.RequestGuideBloc _createRequestGuideBloc() =>
+      _i36.RequestGuideBloc(_createRequestGuideService());
+  _i37.RequestGuideService _createRequestGuideService() =>
+      _i37.RequestGuideService(_createSharedPreferencesHelper(),
           _createGuideListService(), _createRequestGuideManager());
-  _i37.GuideListService _createGuideListService() =>
-      _i37.GuideListService(_createGuidesManager());
-  _i38.RequestGuideManager _createRequestGuideManager() =>
-      _i38.RequestGuideManager(_createRequestGuideRepository());
-  _i39.RequestGuideRepository _createRequestGuideRepository() =>
-      _i39.RequestGuideRepository(_createHttpClient());
-  _i40.TouristGuideListSubScreen _createTouristGuideListSubScreen() =>
-      _i40.TouristGuideListSubScreen(
+  _i38.GuideListService _createGuideListService() =>
+      _i38.GuideListService(_createGuidesManager());
+  _i39.RequestGuideManager _createRequestGuideManager() =>
+      _i39.RequestGuideManager(_createRequestGuideRepository());
+  _i40.RequestGuideRepository _createRequestGuideRepository() =>
+      _i40.RequestGuideRepository(_createHttpClient());
+  _i41.TouristGuideListSubScreen _createTouristGuideListSubScreen() =>
+      _i41.TouristGuideListSubScreen(
           _createGuideListBloc(), _createRequestGuideScreen());
-  _i41.GuideListBloc _createGuideListBloc() =>
-      _i41.GuideListBloc(_createGuideListService());
-  _i42.TouristEventListSubScreen _createTouristEventListSubScreen() =>
-      _i42.TouristEventListSubScreen();
-  _i43.TouristOrdersScreen _createTouristOrdersScreen() =>
-      _i43.TouristOrdersScreen();
-  _i44.IntentionProfileScreen _createIntentionProfileScreen() =>
-      _i44.IntentionProfileScreen(_createCreateIntentionBloc());
-  _i45.CreateIntentionBloc _createCreateIntentionBloc() =>
-      _i45.CreateIntentionBloc(_createIntentionService());
-  _i46.IntentionService _createIntentionService() =>
-      _i46.IntentionService(_createIntentionsManager());
-  _i47.IntentionsManager _createIntentionsManager() =>
-      _i47.IntentionsManager(_createIntentionsRepository());
-  _i48.IntentionsRepository _createIntentionsRepository() =>
-      _i48.IntentionsRepository(_createHttpClient());
-  _i49.GuideComponent _createGuideComponent() =>
-      _i49.GuideComponent(_createGuideLoginScreen(), _createGuideHomeScreen());
-  _i50.GuideLoginScreen _createGuideLoginScreen() =>
-      _i50.GuideLoginScreen(_createGuideLoginBloc());
-  _i51.GuideLoginBloc _createGuideLoginBloc() => _i51.GuideLoginBloc();
-  _i52.GuideHomeScreen _createGuideHomeScreen() =>
-      _i52.GuideHomeScreen(_createGuideMainSubScreen());
-  _i53.GuideMainSubScreen _createGuideMainSubScreen() =>
-      _i53.GuideMainSubScreen();
-  _i54.SharedComponent _createSharedComponent() =>
-      _i54.SharedComponent(_createChatPage());
-  _i55.ChatPage _createChatPage() =>
-      _i55.ChatPage(_createChatPageBloc(), _createSharedPreferencesHelper());
-  _i56.ChatPageBloc _createChatPageBloc() =>
-      _i56.ChatPageBloc(_createChatService());
-  _i57.ChatService _createChatService() =>
-      _i57.ChatService(_createChatManager(), _createSharedPreferencesHelper());
-  _i58.ChatManager _createChatManager() =>
-      _i58.ChatManager(_createChatRepository());
-  _i59.ChatRepository _createChatRepository() => _i59.ChatRepository();
+  _i42.GuideListBloc _createGuideListBloc() =>
+      _i42.GuideListBloc(_createGuideListService());
+  _i43.TouristEventListSubScreen _createTouristEventListSubScreen() =>
+      _i43.TouristEventListSubScreen();
+  _i44.TouristOrdersScreen _createTouristOrdersScreen() =>
+      _i44.TouristOrdersScreen();
+  _i45.IntentionProfileScreen _createIntentionProfileScreen() =>
+      _i45.IntentionProfileScreen(_createCreateIntentionBloc());
+  _i46.CreateIntentionBloc _createCreateIntentionBloc() =>
+      _i46.CreateIntentionBloc(_createIntentionService());
+  _i47.IntentionService _createIntentionService() =>
+      _i47.IntentionService(_createIntentionsManager());
+  _i48.IntentionsManager _createIntentionsManager() =>
+      _i48.IntentionsManager(_createIntentionsRepository());
+  _i49.IntentionsRepository _createIntentionsRepository() =>
+      _i49.IntentionsRepository(_createHttpClient());
+  _i50.GuideComponent _createGuideComponent() =>
+      _i50.GuideComponent(_createGuideLoginScreen(), _createGuideHomeScreen());
+  _i51.GuideLoginScreen _createGuideLoginScreen() =>
+      _i51.GuideLoginScreen(_createGuideLoginBloc());
+  _i52.GuideLoginBloc _createGuideLoginBloc() => _i52.GuideLoginBloc();
+  _i53.GuideHomeScreen _createGuideHomeScreen() =>
+      _i53.GuideHomeScreen(_createGuideMainSubScreen());
+  _i54.GuideMainSubScreen _createGuideMainSubScreen() =>
+      _i54.GuideMainSubScreen();
+  _i55.SharedComponent _createSharedComponent() =>
+      _i55.SharedComponent(_createChatPage());
+  _i56.ChatPage _createChatPage() =>
+      _i56.ChatPage(_createChatPageBloc(), _createSharedPreferencesHelper());
+  _i57.ChatPageBloc _createChatPageBloc() =>
+      _i57.ChatPageBloc(_createChatService());
+  _i58.ChatService _createChatService() =>
+      _i58.ChatService(_createChatManager(), _createSharedPreferencesHelper());
+  _i59.ChatManager _createChatManager() =>
+      _i59.ChatManager(_createChatRepository());
+  _i60.ChatRepository _createChatRepository() => _i60.ChatRepository();
   @override
   _i5.MyApp get app => _createMyApp();
 }

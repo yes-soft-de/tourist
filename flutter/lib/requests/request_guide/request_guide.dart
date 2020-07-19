@@ -1,5 +1,5 @@
 class RequestGuideRequest {
-  String date;
+  DateTime date;
   String touristUserID;
   String guidUserID;
   String city;
@@ -9,7 +9,7 @@ class RequestGuideRequest {
   List<String> services;
   String roomID;
   String status;
-  String cost;
+  int cost;
 
   RequestGuideRequest(
       {this.date,
@@ -26,18 +26,44 @@ class RequestGuideRequest {
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> jsonData = {};
+    if (this.date != null) {
+      jsonData["date"] = this.date.toIso8601String();
+    }
+    if (this.touristUserID != null) {
+      jsonData["touristUserID"] = this.touristUserID;
+    }
+    if (this.guidUserID != null) {
+      jsonData["guidUserID"] = this.guidUserID;
+    }
+    if (this.city != null) {
+      jsonData["city"] = this.city;
+    }
+    if (this.language != null) {
+      jsonData["language"] = this.language;
+    }
+    if (this.arriveDate != null) {
+      jsonData["arriveDate"] = this.arriveDate.toIso8601String();
+    }
 
-    jsonData["date"] = this.date;
-    jsonData["touristUserID"] = this.touristUserID;
-    jsonData["guidUserID"] = this.guidUserID;
-    jsonData["city"] = this.city;
-    jsonData["language"] = this.language;
-    jsonData["arriveDate"] = this.arriveDate.toIso8601String();
-    jsonData["leaveDate"] = this.leaveDate.toIso8601String();
-    jsonData["services "] = this.services;
-    jsonData["roomID"] = this.roomID;
-    jsonData["status"] = this.status;
-    jsonData["cost"] = this.cost;
+    if (this.leaveDate != null) {
+      jsonData["leaveDate"] = this.leaveDate.toIso8601String();
+    }
+
+    if (this.services != null) {
+      jsonData["services "] = this.services;
+    }
+
+    if (this.roomID != null) {
+      jsonData["roomID"] = this.roomID;
+    }
+
+    if (this.status != null) {
+      jsonData["status"] = this.status;
+    }
+
+    if (this.cost != null) {
+      jsonData["cost"] = this.cost;
+    }
 
     return jsonData;
   }

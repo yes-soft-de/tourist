@@ -12,4 +12,5 @@ class UserRoutes {
 
   static const String requestGuide = '/requestGuide';
   static const String requestGuideSent = '/requestGuideSent';
+  static const String orderPage = '/userOrders';
 }

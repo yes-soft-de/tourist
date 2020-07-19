@@ -1,19 +1,21 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:tourists/components/user/user_routes.dart';
+import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
 import 'package:tourists/ui/user/home/home.dart';
-
 
 class CustomBottomNavigationBar extends StatefulWidget {
   final HomeScreenState _homeScreenState;
   final Color activeColor = Color(0xFF00FFA8);
   final Color inactiveColor = Colors.black;
-  final int activePosition;
+  final int pagePosition;
 
-  CustomBottomNavigationBar(this.activePosition, this._homeScreenState);
+  CustomBottomNavigationBar(this.pagePosition, this._homeScreenState);
 
   @override
-  State<StatefulWidget> createState() => _CustomBottomNavigationBarState(activePosition);
+  State<StatefulWidget> createState() =>
+      _CustomBottomNavigationBarState(pagePosition);
 }
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
@@ -23,9 +25,10 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> widgetLayout = [];
 
-    return Column(
-      children: <Widget>[
+    if (activePosition != 3) {
+      widgetLayout.add(
         // Request Button
         Container(
           width: double.infinity,
@@ -47,7 +50,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius:
-                            BorderRadius.all(Radius.circular(90))),
+                                BorderRadius.all(Radius.circular(90))),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Icon(
@@ -73,117 +76,188 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             ],
           ),
         ),
-
-        // Divider
-        Container(
-          height: 16,
-        ),
-
-        // Nav bar
-        Container(
-          width: double.infinity,
-          decoration: BoxDecoration(color: Colors.white, boxShadow: [
-            BoxShadow(
-                color: Colors.black,
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: Offset(0, 20))
-          ]),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Flex(
-              direction: Axis.horizontal,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: (){
-                    log('Moving To Page ' + 0.toString());
-                    widget._homeScreenState.moveToPage(0);
-                  },
-                  child: Column(
-                    children: <Widget>[
-                      Icon(
-                        Icons.home,
-                        color: activePosition == 0 ? widget.activeColor : widget.inactiveColor,
-                      ),
-                      Text(
-                        'home',
-                        style: TextStyle(
-                            color: activePosition == 0
-                                ? widget.activeColor
-                                : widget.inactiveColor),
-                      )
-                    ],
-                  ),
+      );
+    } else {
+      widgetLayout.add(Flex(
+        direction: Axis.vertical,
+        children: <Widget>[
+          GestureDetector(
+            onTap: () {
+              Navigator.pushReplacementNamed(context, UserRoutes.orderPage);
+            },
+            child: Container(
+              color: Colors.white,
+              child: Padding(
+                padding: EdgeInsets.all(8),
+                child: Flex(
+                  direction: Axis.horizontal,
+                  children: <Widget>[
+                    Icon(Icons.credit_card),
+                    Container(
+                      width: 16,
+                    ),
+                    Text("Orders"),
+                  ],
                 ),
-                GestureDetector(
-                  onTap: (){
-                    log('Moving To Page ' + 1.toString());
-                    widget._homeScreenState.moveToPage(1);
-                  },
-                  child: Column(
-                    children: <Widget>[
-                      Icon(
-                        Icons.account_circle,
-                        color: activePosition == 1 ? widget.activeColor : widget.inactiveColor,
-                      ),
-                      Text(
-                        'Guides',
-                        style: TextStyle(
-                            color: activePosition == 1
-                                ? widget.activeColor
-                                : widget.inactiveColor),
-                      )
-                    ],
-                  ),
-                ),
-                GestureDetector(
-                  onTap: (){
-                    log('Moving To Page ' + 2.toString());
-                    widget._homeScreenState.moveToPage(2);
-                  },
-                  child: Column(
-                    children: <Widget>[
-                      Icon(
-                        Icons.event,
-                        color: activePosition == 2 ? widget.activeColor : widget.inactiveColor,
-                      ),
-                      Text(
-                        'Events',
-                        style: TextStyle(
-                            color: activePosition == 2
-                                ? widget.activeColor
-                                : widget.inactiveColor),
-                      )
-                    ],
-                  ),
-                ),
-                GestureDetector(
-                  onTap: (){
-                    log('Moving To Page ' + 3.toString());
-                    widget._homeScreenState.moveToPage(3);
-                  },
-                  child: Column(
-                    children: <Widget>[
-                      Icon(
-                        Icons.payment,
-                        color: activePosition == 3 ? widget.activeColor : widget.inactiveColor,
-                      ),
-                      Text(
-                        'Orders',
-                        style: TextStyle(
-                            color: activePosition == 3
-                                ? widget.activeColor
-                                : widget.inactiveColor),
-                      )
-                    ],
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
-        )
-      ],
+          GestureDetector(
+            onTap: () {
+              SharedPreferencesHelper preferencesHelper =
+                  new SharedPreferencesHelper();
+              preferencesHelper.clearData().then((value) {
+                Navigator.pushReplacementNamed(
+                    context, UserRoutes.loginTypeSelector);
+              });
+            },
+            child: Container(
+              color: Colors.white,
+              child: Padding(
+                padding: EdgeInsets.all(8),
+                child: Flex(
+                  direction: Axis.horizontal,
+                  children: <Widget>[
+                    Icon(Icons.exit_to_app),
+                    Container(
+                      width: 16,
+                    ),
+                    Text("Logout"),
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
+      ));
+    }
+
+    widgetLayout.addAll([
+      // Divider
+      Container(
+        height: 16,
+      ),
+
+      // Nav bar
+      Container(
+        width: double.infinity,
+        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+          BoxShadow(
+              color: Colors.black,
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 20))
+        ]),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Flex(
+            direction: Axis.horizontal,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              GestureDetector(
+                onTap: () {
+                  log('Moving To Page ' + 0.toString());
+                  activePosition = 0;
+                  widget._homeScreenState.moveToPage(0);
+                },
+                child: Column(
+                  children: <Widget>[
+                    Icon(
+                      Icons.home,
+                      color: activePosition == 0
+                          ? widget.activeColor
+                          : widget.inactiveColor,
+                    ),
+                    Text(
+                      'home',
+                      style: TextStyle(
+                          color: activePosition == 0
+                              ? widget.activeColor
+                              : widget.inactiveColor),
+                    )
+                  ],
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  log('Moving To Page ' + 1.toString());
+                  activePosition = 1;
+                  widget._homeScreenState.moveToPage(1);
+                },
+                child: Column(
+                  children: <Widget>[
+                    Icon(
+                      Icons.account_circle,
+                      color: activePosition == 1
+                          ? widget.activeColor
+                          : widget.inactiveColor,
+                    ),
+                    Text(
+                      'Guides',
+                      style: TextStyle(
+                          color: activePosition == 1
+                              ? widget.activeColor
+                              : widget.inactiveColor),
+                    )
+                  ],
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  log('Moving To Page ' + 2.toString());
+                  activePosition = 2;
+                  widget._homeScreenState.moveToPage(2);
+                },
+                child: Column(
+                  children: <Widget>[
+                    Icon(
+                      Icons.event,
+                      color: activePosition == 2
+                          ? widget.activeColor
+                          : widget.inactiveColor,
+                    ),
+                    Text(
+                      'Events',
+                      style: TextStyle(
+                          color: activePosition == 2
+                              ? widget.activeColor
+                              : widget.inactiveColor),
+                    )
+                  ],
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  log('Moving To Page ' + 3.toString());
+                  activePosition = 3;
+                  setState(() {});
+                },
+                child: Column(
+                  children: <Widget>[
+                    Icon(
+                      Icons.more_horiz,
+                      color: activePosition == 3
+                          ? widget.activeColor
+                          : widget.inactiveColor,
+                    ),
+                    Text(
+                      'More',
+                      style: TextStyle(
+                          color: activePosition == 3
+                              ? widget.activeColor
+                              : widget.inactiveColor),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      )
+    ]);
+
+    return Column(
+      children: widgetLayout,
     );
   }
 }

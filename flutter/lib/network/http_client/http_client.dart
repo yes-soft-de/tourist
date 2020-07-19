@@ -22,7 +22,7 @@ class HttpClient {
         // Add Auth Header Here!
       });
 
-      if (response.statusCode > 200 && response.statusCode < 300) {
+      if (response.statusCode >= 200 && response.statusCode < 300) {
         _logger.info(tag, response.body);
         return response.body;
       } else {
@@ -54,7 +54,7 @@ class HttpClient {
           },
           body: json.encode(payLoad));
 
-      if (response.statusCode > 200 && response.statusCode < 300) {
+      if (response.statusCode >= 200 && response.statusCode < 300) {
         _logger.info(tag, response.body);
         return response.body;
       } else {
@@ -78,7 +78,7 @@ class HttpClient {
           },
           body: json.encode(payLoad));
 
-      if (response.statusCode > 200 && response.statusCode < 300) {
+      if (response.statusCode >= 200 && response.statusCode < 300) {
         _logger.info(tag, response.body);
         return response.body;
       } else {

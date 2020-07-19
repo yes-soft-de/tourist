@@ -54,7 +54,7 @@ class _TouristGuideListSubScreenState extends State<TouristGuideListSubScreen> {
     }
   }
 
-  List<GuideListItemWidget> getGuidesList() {
+  List<Widget> getGuidesList() {
     List<Widget> guidesList = [];
 
     // Construct the List into CSV text

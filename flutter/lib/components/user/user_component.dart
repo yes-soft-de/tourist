@@ -8,6 +8,7 @@ import 'package:tourists/ui/user/intention_profile/intention_profile.dart';
 import 'package:tourists/ui/user/location_details/location_details.dart';
 import 'package:tourists/ui/user/login/login.dart';
 import 'package:tourists/ui/user/order_guide/order_guide.dart';
+import 'package:tourists/ui/user/orders_page/orders_page.dart';
 import 'package:tourists/ui/user/register/register.dart';
 import 'package:tourists/ui/user/request_guide/request_guide_screen.dart';
 import 'package:tourists/ui/user/request_guide_success/request_guide_success.dart';
@@ -24,6 +25,7 @@ class UserComponent {
   final RequestGuideScreen _orderGuideScreen;
   final RequestGuideSuccessScreen _requestGuideSuccessScreen;
   final LocationDetailsScreen _locationDetailsScreen;
+  final OrdersScreen _ordersScreen;
 
   Map<String, WidgetBuilder> _userRoutes;
 
@@ -33,6 +35,7 @@ class UserComponent {
       this._requestGuideSuccessScreen,
       this._registerScreen,
       this._createProfileScreen,
+      this._ordersScreen,
       this._homeScreen,
       this._intentionProfileScreen,
       this._locationDetailsScreen,
@@ -44,6 +47,7 @@ class UserComponent {
       UserRoutes.createProfile: (context) => _createProfileScreen,
       UserRoutes.intentionProfile: (context) => _intentionProfileScreen,
       UserRoutes.home: (context) => _homeScreen,
+      UserRoutes.orderPage: (context) => _ordersScreen,
       UserRoutes.locationDetails: (context) => _locationDetailsScreen,
       UserRoutes.requestGuide: (context) => _orderGuideScreen,
       UserRoutes.requestGuideSent: (context) => _requestGuideSuccessScreen

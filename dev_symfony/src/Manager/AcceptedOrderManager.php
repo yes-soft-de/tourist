@@ -30,7 +30,7 @@ class AcceptedOrderManager
     {
         $create = $this->autoMapping->map(AcceptedOrderCreateRequest::class, AcceptedOrderEntity::class, $request);
 
-        //$create->setDate(new \DateTime('now'));
+        $create->setDate($request->date);
         $create->setStatus('pending');
 
         $this->entityManager->persist($create);

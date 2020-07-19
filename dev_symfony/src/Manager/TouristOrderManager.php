@@ -32,9 +32,9 @@ class TouristOrderManager
     {
         $creteOrder = $this->autoMapping->map(TouristOrderCreateRequest::class, TouristOrderEntity::class, $request);
 
-        //$creteOrder->setDate(new \DateTime('now'));
-        //$creteOrder->setLeaveDate(new \DateTime('now'));
-        //$creteOrder->setArriveDate(new \DateTime('now'));
+        $creteOrder->setDate($request->date);
+        $creteOrder->setArriveDate($request->arriveDate);
+        $creteOrder->setLeaveDate($request->leaveDate);
         $creteOrder->setStatus('waitingPayment');
 
         $this->entityManager->persist($creteOrder);

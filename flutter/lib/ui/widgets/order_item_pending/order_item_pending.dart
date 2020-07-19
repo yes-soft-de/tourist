@@ -14,16 +14,16 @@ class OrderItemPendingWidget extends StatelessWidget {
 
   OrderItemPendingWidget(
       {Key key,
-        @required this.guideName,
-        @required this.guideImage,
-        @required this.orderServices,
-        @required this.paymentValue,
-        @required this.stayingDays,
-        @required this.status,
-        @required this.guideLanguage,
-        @required this.guideLocation,
-        @required this.orderDate,
-        @required this.paymentDate});
+      @required this.guideName,
+      @required this.guideImage,
+      @required this.orderServices,
+      @required this.paymentValue,
+      @required this.stayingDays,
+      @required this.status,
+      @required this.guideLanguage,
+      @required this.guideLocation,
+      @required this.orderDate,
+      @required this.paymentDate});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class OrderItemPendingWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration:
-        BoxDecoration(border: Border.all(color: Colors.black, width: .5)),
+            BoxDecoration(border: Border.all(color: Colors.black, width: .5)),
         child: Flex(
           direction: Axis.vertical,
           children: <Widget>[
@@ -64,10 +64,13 @@ class OrderItemPendingWidget extends StatelessWidget {
                             guideName,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          Container(height: 8,),
+                          Container(
+                            height: 8,
+                          ),
                           Text(guideLocation + ' / ' + guideLanguage),
-                          Container(height: 8,),
-
+                          Container(
+                            height: 8,
+                          ),
                         ],
                       ),
                     ),
@@ -85,16 +88,24 @@ class OrderItemPendingWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    Container(width: 72,),
+                    Container(
+                      width: 72,
+                    ),
                     Text('Services: ' + orderServices),
-                    Container(height: 8,),
+                    Container(
+                      height: 8,
+                    ),
                     Text('Stayed for: ' + stayingDays),
-                    Container(height: 8,),
+                    Container(
+                      height: 8,
+                    ),
                   ],
                 ),
               ),
             ),
-            Container(height: 16,),
+            Container(
+              height: 16,
+            ),
             Container(
               width: double.infinity,
               child: Flex(
@@ -102,14 +113,16 @@ class OrderItemPendingWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  Text('Payed ' +
-                      paymentValue +
-                      ' at ' +
-                      paymentDate.toLocal().toString(), style: TextStyle(color: Colors.red),),
+                  RaisedButton(
+                    child: Text('Confirm Payment'),
+                    onPressed: () {},
+                  )
                 ],
               ),
             ),
-            Container(height: 16,),
+            Container(
+              height: 16,
+            ),
           ],
         ),
       ),

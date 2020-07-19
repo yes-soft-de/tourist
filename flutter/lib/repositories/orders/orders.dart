@@ -12,7 +12,7 @@ class OrdersRepository {
   OrdersRepository(this._httpClient);
 
   Future<OrderResponse> getOrders(String uid) async {
-    String response = await _httpClient.get(Urls.orderGuide);
+    String response = await _httpClient.get(Urls.orderGuide + "/" + uid);
     if (response != null) {
       return OrderResponse.fromJson(jsonDecode(response));
     }

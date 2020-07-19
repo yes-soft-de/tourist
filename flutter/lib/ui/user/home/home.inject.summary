@@ -42,13 +42,6 @@
             },
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/ui/user/tourist_orders/tourist_order.dart#TouristOrdersScreen",
-                "qualifier": null
-              },
-              "isProvider": false
-            },
-            {
-              "lookupKey": {
                 "root": "asset:tourists/lib/persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper",
                 "qualifier": null
               },

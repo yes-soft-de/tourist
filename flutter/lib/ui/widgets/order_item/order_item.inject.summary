@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/bloc/orders_list/orders_list_screen_bloc.dart",
+  "asset": "asset:tourists/lib/ui/widgets/order_item/order_item.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "OrdersListScreenBloc",
+        "name": "OrderItemWidget",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/bloc/orders_list/orders_list_screen_bloc.dart#OrdersListScreenBloc",
+              "root": "asset:tourists/lib/ui/widgets/order_item/order_item.dart#OrderItemWidget",
               "qualifier": null
             },
             "isProvider": false
@@ -21,7 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/services/orders/orders_service.dart#OrdersService",
+                "root": "asset:tourists/lib/models/order/order_model.dart#OrderModel",
                 "qualifier": null
               },
               "isProvider": false

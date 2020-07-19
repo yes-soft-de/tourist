@@ -1,13 +1,17 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/ui/widgets/order_item_done/order_item_done.dart';
-import 'package:tourists/ui/widgets/order_item_ongoing/order_item_ongoing.dart';
-import 'package:tourists/ui/widgets/order_item_pending/order_item_pending.dart';
-import 'package:tourists/ui/widgets/order_item_request/order_item_request.dart';
+import 'package:tourists/bloc/orders_list/orders_list_screen_bloc.dart';
+import 'package:tourists/models/order/order_model.dart';
+import 'package:tourists/ui/widgets/order_item/order_item.dart';
 
 @provide
 class OrdersScreen extends StatefulWidget {
+  final OrdersListScreenBloc _bloc;
+
+  OrdersScreen(this._bloc);
+
   @override
   State<StatefulWidget> createState() => _OrdersScreenState();
 }
@@ -15,283 +19,216 @@ class OrdersScreen extends StatefulWidget {
 class _OrdersScreenState extends State<OrdersScreen> {
   PageController _pageController = PageController();
   int activePosition = 0;
+  List<OrderModel> ordersList;
+  int currentStatus = OrdersListScreenBloc.STATUS_CODE_INIT;
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> pageLayout = [];
+    if (currentStatus == OrdersListScreenBloc.STATUS_CODE_INIT) {
+      widget._bloc.getOrdersList();
+    }
 
-    pageLayout.add(Container(
-      height: 36,
-    ));
+    widget._bloc.ordersStream.listen((event) {
+      currentStatus = event.first;
+      if (currentStatus == OrdersListScreenBloc.STATUS_CODE_LOAD_SUCCESS) {
+        ordersList = event.last;
+      }
+      setState(() {});
+    });
 
-    // Header
-    Flex widgetHeader = Flex(
-      direction: Axis.horizontal,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: <Widget>[
-        Flexible(
-            flex: 1,
-            child: GestureDetector(
-              onTap: () {
-                activePosition = 1;
-                _pageController.jumpToPage(1);
-                setState(() {});
-              },
-              child: Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Sent / Pending',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: activePosition == 3
-                            ? Colors.greenAccent
-                            : Colors.black),
-                  )),
-            )),
-        Flexible(
-            flex: 1,
-            child: GestureDetector(
-              onTap: () {
-                activePosition = 1;
-                _pageController.jumpToPage(1);
-                setState(() {});
-              },
-              child: Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Pending Payment',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: activePosition == 2
-                            ? Colors.greenAccent
-                            : Colors.black),
-                  )),
-            )),
-        Flexible(
-            flex: 1,
-            child: GestureDetector(
-              onTap: () {
-                activePosition = 1;
-                _pageController.jumpToPage(1);
-                setState(() {});
-              },
-              child: Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Payed / On going',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: activePosition == 1
-                            ? Colors.greenAccent
-                            : Colors.black),
-                  )),
-            )),
-        Flexible(
-            flex: 1,
-            child: GestureDetector(
-              onTap: () {
-                activePosition = 0;
-                _pageController.jumpToPage(0);
-                setState(() {});
-              },
-              child: Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Finished Orders',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: activePosition == 0
-                            ? Colors.greenAccent
-                            : Colors.black),
-                  )),
-            )),
-      ],
-    );
-    pageLayout.add(widgetHeader);
+    if (currentStatus == OrdersListScreenBloc.STATUS_CODE_LOAD_ERROR) {
+      return Scaffold(
+          body: Center(
+        child: Text("Load Error!"),
+      ));
+    }
 
-    // Page 01: Sent Orders.
-    // Here we have all the payments that is sent from the user.
-    ListView sentOrders = getSentOrdersList();
-    ListView pendingPaymentOrders = getPendingPaymentList();
-    ListView onGoing = getOnGoingOrdersList();
-    ListView done = getFinishedOrdersList();
+    if (currentStatus == OrdersListScreenBloc.STATUS_CODE_INIT) {
+      return Scaffold(
+          body: Center(
+        child: Text("Loading"),
+      ));
+    }
 
-    PageView orderPages = PageView(
-      controller: _pageController,
-      onPageChanged: (position) {
-        activePosition = position;
-        setState(() {});
-      },
-      children: <Widget>[
-        sentOrders,
-        pendingPaymentOrders,
-        onGoing,
-        done
-      ],
-    );
+    if (currentStatus == OrdersListScreenBloc.STATUS_CODE_LOAD_SUCCESS) {
+      List<Widget> pageLayout = [];
+      pageLayout.add(Container(
+        height: 36,
+      ));
+      // region Header
+      Flex widgetHeader = Flex(
+        direction: Axis.horizontal,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Flexible(
+              flex: 1,
+              child: GestureDetector(
+                onTap: () {
+                  activePosition = 0;
+                  _pageController.jumpToPage(0);
+                  setState(() {});
+                },
+                child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Sent / Pending',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: activePosition == 0
+                              ? Colors.greenAccent
+                              : Colors.black),
+                    )),
+              )),
+          Flexible(
+              flex: 1,
+              child: GestureDetector(
+                onTap: () {
+                  activePosition = 1;
+                  _pageController.jumpToPage(1);
+                  setState(() {});
+                },
+                child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Pending Payment',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: activePosition == 1
+                              ? Colors.greenAccent
+                              : Colors.black),
+                    )),
+              )),
+          Flexible(
+              flex: 1,
+              child: GestureDetector(
+                onTap: () {
+                  activePosition = 2;
+                  _pageController.jumpToPage(2);
+                  setState(() {});
+                },
+                child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Payed / On going',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: activePosition == 2
+                              ? Colors.greenAccent
+                              : Colors.black),
+                    )),
+              )),
+          Flexible(
+              flex: 1,
+              child: GestureDetector(
+                onTap: () {
+                  activePosition = 3;
+                  _pageController.jumpToPage(3);
+                  setState(() {});
+                },
+                child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Finished Orders',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: activePosition == 3
+                              ? Colors.greenAccent
+                              : Colors.black),
+                    )),
+              )),
+        ],
+      );
+      pageLayout.add(widgetHeader);
+      // endregion
 
-    pageLayout.add(Expanded(
-      child: orderPages,
-    ));
+      // Here we have all the payments that is sent from the user.
+      ListView sentOrders = getSentOrdersList();
+      ListView pendingPaymentOrders = getPendingPaymentList();
+      ListView onGoing = getOnGoingOrdersList();
+      ListView done = getFinishedOrdersList();
+
+      PageView orderPages = PageView(
+        controller: _pageController,
+        onPageChanged: (position) {
+          activePosition = position;
+          setState(() {});
+        },
+        children: <Widget>[sentOrders, pendingPaymentOrders, onGoing, done],
+      );
+
+      pageLayout.add(Expanded(
+        child: orderPages,
+      ));
+
+      return Scaffold(
+          body: WillPopScope(
+        onWillPop: () {
+          Navigator.pop(context);
+          return;
+        },
+        child: Flex(
+          direction: Axis.vertical,
+          children: pageLayout,
+        ),
+      ));
+    }
 
     return Scaffold(
-        body: WillPopScope(
-      onWillPop: () {
-        Navigator.pop(context);
-        return;
-      },
-      child: Flex(
-        direction: Axis.vertical,
-        children: pageLayout,
+      body: Center(
+        child: Text("Undefined State?!! " + currentStatus.toString()),
       ),
-    ));
+    );
   }
 
   Widget getSentOrdersList() {
+    List<Widget> ordersWidgetList = [];
+    ordersList.forEach((element) {
+      if (element.status == 'waitingPayment')
+        ordersWidgetList.add(OrderItemWidget(element));
+    });
     return ListView(
-      children: <Widget>[
-        OrderItemRequestWidget(
-          guideName: 'Mohammad',
-          guideLanguage: 'English - العربية',
-          guideLocation: 'Aleppo',
-          guideImage:
-              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-          stayingDays: '2 Days',
-          orderServices: 'Car',
-        ),
-        OrderItemRequestWidget(
-          guideName: 'Mohammad',
-          guideLanguage: 'English - العربية',
-          guideLocation: 'Aleppo',
-          guideImage:
-              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-          stayingDays: '2 Days',
-          orderServices: 'Car',
-        ),
-        OrderItemRequestWidget(
-          guideName: 'Mohammad',
-          guideLanguage: 'English - العربية',
-          guideLocation: 'Aleppo',
-          guideImage:
-              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-          stayingDays: '2 Days',
-          orderServices: 'Car',
-        )
-      ],
+      children: ordersWidgetList.length > 0
+          ? ordersWidgetList
+          : <Widget>[Center(child: Text("Empty List"))],
     );
   }
 
   ListView getPendingPaymentList() {
+    List<Widget> ordersWidgetList = [];
+    ordersList.forEach((element) {
+      if (element.status == 'pendingConformation')
+        ordersWidgetList.add(OrderItemWidget(element));
+    });
     return ListView(
-      children: <Widget>[
-        OrderItemPendingWidget(
-          guideName: 'Mohammad',
-          guideLanguage: 'English - العربية',
-          guideLocation: 'Aleppo',
-          orderDate: DateTime.now(),
-          guideImage:
-              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-          status: 'payed',
-          paymentDate: DateTime(2020, 4, 24, 10, 14),
-          stayingDays: '2 Days',
-          paymentValue: '300 USD',
-          orderServices: 'Car',
-        ),
-        OrderItemPendingWidget(
-          guideName: 'Mohammad',
-          guideLanguage: 'English - العربية',
-          guideLocation: 'Aleppo',
-          orderDate: DateTime.now(),
-          guideImage:
-              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-          status: 'payed',
-          paymentDate: DateTime(2020, 4, 24, 10, 14),
-          stayingDays: '2 Days',
-          paymentValue: '300 USD',
-          orderServices: 'Car',
-        ),
-        OrderItemPendingWidget(
-          guideName: 'Mohammad',
-          guideLanguage: 'English - العربية',
-          guideLocation: 'Aleppo',
-          orderDate: DateTime.now(),
-          guideImage:
-              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-          status: 'payed',
-          paymentDate: DateTime(2020, 4, 24, 10, 14),
-          stayingDays: '2 Days',
-          paymentValue: '300 USD',
-          orderServices: 'Car',
-        )
-      ],
+      children: ordersWidgetList.length > 0
+          ? ordersWidgetList
+          : <Widget>[Center(child: Text("Empty List"))],
     );
   }
 
   ListView getOnGoingOrdersList() {
+    List<Widget> ordersWidgetList = [];
+    ordersList.forEach((element) {
+      if (element.status == 'onGoing')
+        ordersWidgetList.add(OrderItemWidget(element));
+    });
     return ListView(
-      children: <Widget>[
-        OrderItemOngoingWidget(
-          guideName: 'Mohammad',
-          guideLanguage: 'English - العربية',
-          guideLocation: 'Aleppo',
-          guideImage:
-              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-          stayingDays: '2 Days',
-          orderServices: 'Car',
-        ),
-        OrderItemOngoingWidget(
-          guideName: 'Mohammad',
-          guideLanguage: 'English - العربية',
-          guideLocation: 'Aleppo',
-          guideImage:
-              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-          stayingDays: '2 Days',
-          orderServices: 'Car',
-        ),
-        OrderItemOngoingWidget(
-          guideName: 'Mohammad',
-          guideLanguage: 'English - العربية',
-          guideLocation: 'Aleppo',
-          guideImage:
-              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-          stayingDays: '2 Days',
-          orderServices: 'Car',
-        )
-      ],
+      children: ordersWidgetList.length > 0
+          ? ordersWidgetList
+          : <Widget>[Center(child: Text("Empty List"))],
     );
   }
 
   ListView getFinishedOrdersList() {
+    List<Widget> ordersWidgetList = [];
+    ordersList.forEach((element) {
+      if (element.status == 'finished')
+        ordersWidgetList.add(OrderItemWidget(element));
+    });
     return ListView(
-      children: <Widget>[
-        OrderItemDoneWidget(
-          guideName: 'Mohammad',
-          guideLanguage: 'English - العربية',
-          guideLocation: 'Aleppo',
-          guideImage:
-              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-          stayingDays: '2 Days',
-          orderServices: 'Car',
-        ),
-        OrderItemDoneWidget(
-          guideName: 'Mohammad',
-          guideLanguage: 'English - العربية',
-          guideLocation: 'Aleppo',
-          guideImage:
-              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-          stayingDays: '2 Days',
-          orderServices: 'Car',
-        ),
-        OrderItemDoneWidget(
-          guideName: 'Mohammad',
-          guideLanguage: 'English - العربية',
-          guideLocation: 'Aleppo',
-          guideImage:
-              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-          stayingDays: '2 Days',
-          orderServices: 'Car',
-        )
-      ],
+      children: ordersWidgetList.length > 0
+          ? ordersWidgetList
+          : <Widget>[Center(child: Text("Empty List"))],
     );
   }
 }

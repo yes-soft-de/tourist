@@ -7,7 +7,6 @@ import 'package:tourists/ui/widgets/custom_bottom_navigation_bar/custom_bottom_n
 class GuideHomeScreen extends StatefulWidget {
 
   final GuideMainSubScreen _guideMainSubScreen;
-
   GuideHomeScreen(this._guideMainSubScreen);
 
   @override

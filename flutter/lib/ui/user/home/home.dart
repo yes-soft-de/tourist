@@ -6,7 +6,6 @@ import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
 import 'package:tourists/ui/user/home/subscreens/main/main_home.dart';
 import 'package:tourists/ui/user/home/subscreens/tourist_event_list/tourist_event_list.dart';
 import 'package:tourists/ui/user/home/subscreens/tourist_guide_list/tourist_guide_list.dart';
-import 'package:tourists/ui/user/tourist_orders/tourist_order.dart';
 import 'package:tourists/ui/widgets/bottom_navigation_bar/buttom_navigation_bar.dart';
 
 @provide
@@ -14,11 +13,10 @@ class HomeScreen extends StatefulWidget {
   final MainHomeSubScreen _homeSubScreen;
   final TouristGuideListSubScreen _guideListScreen;
   final TouristEventListSubScreen _eventsSubScreen;
-  final TouristOrdersScreen _touristOrdersScreen;
   final SharedPreferencesHelper _preferencesHelper;
 
   HomeScreen(this._homeSubScreen, this._guideListScreen, this._eventsSubScreen,
-      this._touristOrdersScreen, this._preferencesHelper);
+      this._preferencesHelper);
 
   @override
   State<StatefulWidget> createState() => HomeScreenState();
@@ -49,8 +47,7 @@ class HomeScreenState extends State<HomeScreen> {
               children: <Widget>[
                 widget._homeSubScreen,
                 widget._guideListScreen,
-                widget._eventsSubScreen,
-                widget._touristOrdersScreen
+                widget._eventsSubScreen
               ],
               onPageChanged: (pos) {
                 // Update the Home Page

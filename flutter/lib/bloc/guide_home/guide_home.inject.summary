@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/ui/user/account_type_selector/login_type_selector.dart",
+  "asset": "asset:tourists/lib/bloc/guide_home/guide_home.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "LoginTypeSelectorScreen",
+        "name": "GuideHomeBloc",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/ui/user/account_type_selector/login_type_selector.dart#LoginTypeSelectorScreen",
+              "root": "asset:tourists/lib/bloc/guide_home/guide_home.dart#GuideHomeBloc",
               "qualifier": null
             },
             "isProvider": false
@@ -21,7 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper",
+                "root": "asset:tourists/lib/services/orders/orders_service.dart#OrdersService",
                 "qualifier": null
               },
               "isProvider": false

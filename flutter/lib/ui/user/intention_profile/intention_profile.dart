@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/bloc/create_intentions/create_intention_bloc.dart';
 import 'package:tourists/components/user/user_routes.dart';
+import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
 
 @provide
 class IntentionProfileScreen extends StatefulWidget {
@@ -14,8 +15,9 @@ class IntentionProfileScreen extends StatefulWidget {
   };
 
   final CreateIntentionBloc _createIntentionBloc;
+  final SharedPreferencesHelper _preferencesHelper;
 
-  IntentionProfileScreen(this._createIntentionBloc);
+  IntentionProfileScreen(this._createIntentionBloc, this._preferencesHelper);
 
   @override
   State<StatefulWidget> createState() => _IntentionProfileScreenState();
@@ -29,11 +31,17 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
   final TextEditingController _nationality = TextEditingController();
   final TextEditingController _arrivalCity = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
-    widget._createIntentionBloc.intentionsCreateStream.listen((intentionsCreated) {
-      if (intentionsCreated) Navigator.of(context).pushReplacementNamed(UserRoutes.home);
+    widget._createIntentionBloc.intentionsCreateStream
+        .listen((intentionsCreated) {
+      if (intentionsCreated){
+        widget._preferencesHelper
+            .setLoggedInState(LoggedInState.TOURISTS)
+            .then((value) {
+          Navigator.of(context).pushReplacementNamed(UserRoutes.home);
+        });
+      }
     });
 
     return Scaffold(
@@ -53,7 +61,10 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
                       borderRadius: BorderRadius.circular(78),
                       color: Color(0xFF00FFA8)),
                 ),
-                Image.asset('resources/images/logo.jpg', fit: BoxFit.contain,),
+                Image.asset(
+                  'resources/images/logo.jpg',
+                  fit: BoxFit.contain,
+                ),
               ],
             ),
           ),
@@ -113,21 +124,14 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
                                         firstDate: DateTime.now(),
                                         initialDate: DateTime.now(),
                                         lastDate: DateTime(
-                                            DateTime
-                                                .now()
-                                                .year,
-                                            DateTime
-                                                .now()
-                                                .month + 4,
-                                            DateTime
-                                                .now()
-                                                .day),
+                                            DateTime.now().year,
+                                            DateTime.now().month + 4,
+                                            DateTime.now().day),
                                       ).then((value) {
                                         _arrivalDate = value;
-                                        _arrivalDateField.text =
-                                            _arrivalDate
-                                                .toIso8601String()
-                                                .substring(0, 10);
+                                        _arrivalDateField.text = _arrivalDate
+                                            .toIso8601String()
+                                            .substring(0, 10);
                                         log('Arrival date set to ' +
                                             _arrivalDate
                                                 .toIso8601String()
@@ -165,8 +169,8 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
                               Flexible(
                                 flex: 1,
                                 child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      0, 0, 0, 8.0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
                                   child: Text('Days'),
                                 ),
                               )
@@ -193,7 +197,7 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
                           decoration: BoxDecoration(
                               color: Colors.greenAccent,
                               borderRadius:
-                              BorderRadius.all(Radius.circular(90))),
+                                  BorderRadius.all(Radius.circular(90))),
                           child: Padding(
                             padding: EdgeInsets.all(8),
                             child: Text('      Save      '),
@@ -229,9 +233,8 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
       return;
     }
 
-    widget._createIntentionBloc.createIntention(
-        _arrivalCity.text, _arrivalDate.toIso8601String(), _stayingTime.text,
-        interests);
+    widget._createIntentionBloc.createIntention(_arrivalCity.text,
+        _arrivalDate.toIso8601String(), _stayingTime.text, interests);
   }
 
   List<Widget> _createInterestList() {

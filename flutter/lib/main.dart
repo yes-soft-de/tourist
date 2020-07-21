@@ -62,6 +62,6 @@ class MyApp extends StatelessWidget {
         supportedLocales: S.delegate.supportedLocales,
         title: 'Soyah',
         routes: fullRoutesList,
-        initialRoute: UserRoutes.home);
+        initialRoute: UserRoutes.loginTypeSelector);
   }
 }

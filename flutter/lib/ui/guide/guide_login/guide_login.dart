@@ -3,13 +3,15 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/bloc/guide_login/guide_login.bloc.dart';
 import 'package:tourists/components/guide/guide_routes.dart';
+import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
 import 'package:tourists/ui/guide/guide_home/guide_home.dart';
 
 @provide
 class GuideLoginScreen extends StatefulWidget {
   final GuideLoginBloc _guideLoginBloc;
+  final SharedPreferencesHelper _preferencesHelper;
 
-  GuideLoginScreen(this._guideLoginBloc);
+  GuideLoginScreen(this._guideLoginBloc, this._preferencesHelper);
 
   @override
   State<StatefulWidget> createState() => _GuideLoginScreenState();
@@ -29,7 +31,9 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
   Widget build(BuildContext context) {
     widget._guideLoginBloc.stateStream.listen((event) {
       if (event.first == GuideLoginBloc.STATUS_CODE_RECEIVED) {
-        Navigator.pushReplacementNamed(context, GuideRoutes.guideHome);
+        widget._preferencesHelper.setLoggedInState(LoggedInState.GUIDE).then((value) {
+          Navigator.pushReplacementNamed(context, GuideRoutes.guideHome);
+        });
       }
 
       if (event.first == GuideLoginBloc.STATUS_CODE_FAILED) {

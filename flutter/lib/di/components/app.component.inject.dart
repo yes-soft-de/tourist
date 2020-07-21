@@ -59,12 +59,13 @@ import '../../bloc/guide_login/guide_login.bloc.dart' as _i55;
 import '../../ui/guide/guide_home/guide_home.dart' as _i56;
 import '../../ui/guide/guide_home/subscreens/main/guide_main_subscreen.dart'
     as _i57;
-import '../../components/shared/shared_component.dart' as _i58;
-import '../../ui/shared/chat_page/chat_page.dart' as _i59;
-import '../../bloc/chat_page/chat_page.bloc.dart' as _i60;
-import '../../services/chat/char_service.dart' as _i61;
-import '../../managers/chat/chat_manager.dart' as _i62;
-import '../../repositories/chat/chat_repository.dart' as _i63;
+import '../../bloc/guide_home/guide_home.dart' as _i58;
+import '../../components/shared/shared_component.dart' as _i59;
+import '../../ui/shared/chat_page/chat_page.dart' as _i60;
+import '../../bloc/chat_page/chat_page.bloc.dart' as _i61;
+import '../../services/chat/char_service.dart' as _i62;
+import '../../managers/chat/chat_manager.dart' as _i63;
+import '../../repositories/chat/chat_repository.dart' as _i64;
 
 class AppComponent$Injector implements _i1.AppComponent {
   AppComponent$Injector._();
@@ -92,14 +93,15 @@ class AppComponent$Injector implements _i1.AppComponent {
       _createIntentionProfileScreen(),
       _createLocationDetailsScreen(),
       _createRequestGuideScreen());
-  _i7.LoginScreen _createLoginScreen() => _i7.LoginScreen(_createLoginBloc());
+  _i7.LoginScreen _createLoginScreen() =>
+      _i7.LoginScreen(_createLoginBloc(), _createSharedPreferencesHelper());
   _i8.LoginBloc _createLoginBloc() => _i8.LoginBloc(_createLoginService());
   _i9.LoginService _createLoginService() =>
       _i9.LoginService(_createSharedPreferencesHelper());
   _i10.SharedPreferencesHelper _createSharedPreferencesHelper() =>
       _i10.SharedPreferencesHelper();
   _i11.LoginTypeSelectorScreen _createLoginTypeSelectorScreen() =>
-      _i11.LoginTypeSelectorScreen();
+      _i11.LoginTypeSelectorScreen(_createSharedPreferencesHelper());
   _i12.RequestGuideSuccessScreen _createRequestGuideSuccessScreen() =>
       _i12.RequestGuideSuccessScreen();
   _i13.RegisterScreen _createRegisterScreen() =>
@@ -186,7 +188,8 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i47.TouristEventListSubScreen _createTouristEventListSubScreen() =>
       _i47.TouristEventListSubScreen();
   _i48.IntentionProfileScreen _createIntentionProfileScreen() =>
-      _i48.IntentionProfileScreen(_createCreateIntentionBloc());
+      _i48.IntentionProfileScreen(
+          _createCreateIntentionBloc(), _createSharedPreferencesHelper());
   _i49.CreateIntentionBloc _createCreateIntentionBloc() =>
       _i49.CreateIntentionBloc(_createIntentionService());
   _i50.IntentionService _createIntentionService() =>
@@ -197,24 +200,26 @@ class AppComponent$Injector implements _i1.AppComponent {
       _i52.IntentionsRepository(_createHttpClient());
   _i53.GuideComponent _createGuideComponent() =>
       _i53.GuideComponent(_createGuideLoginScreen(), _createGuideHomeScreen());
-  _i54.GuideLoginScreen _createGuideLoginScreen() =>
-      _i54.GuideLoginScreen(_createGuideLoginBloc());
+  _i54.GuideLoginScreen _createGuideLoginScreen() => _i54.GuideLoginScreen(
+      _createGuideLoginBloc(), _createSharedPreferencesHelper());
   _i55.GuideLoginBloc _createGuideLoginBloc() => _i55.GuideLoginBloc();
   _i56.GuideHomeScreen _createGuideHomeScreen() =>
       _i56.GuideHomeScreen(_createGuideMainSubScreen());
   _i57.GuideMainSubScreen _createGuideMainSubScreen() =>
-      _i57.GuideMainSubScreen();
-  _i58.SharedComponent _createSharedComponent() =>
-      _i58.SharedComponent(_createChatPage());
-  _i59.ChatPage _createChatPage() =>
-      _i59.ChatPage(_createChatPageBloc(), _createSharedPreferencesHelper());
-  _i60.ChatPageBloc _createChatPageBloc() =>
-      _i60.ChatPageBloc(_createChatService());
-  _i61.ChatService _createChatService() =>
-      _i61.ChatService(_createChatManager(), _createSharedPreferencesHelper());
-  _i62.ChatManager _createChatManager() =>
-      _i62.ChatManager(_createChatRepository());
-  _i63.ChatRepository _createChatRepository() => _i63.ChatRepository();
+      _i57.GuideMainSubScreen(_createGuideHomeBloc());
+  _i58.GuideHomeBloc _createGuideHomeBloc() =>
+      _i58.GuideHomeBloc(_createOrdersService());
+  _i59.SharedComponent _createSharedComponent() =>
+      _i59.SharedComponent(_createChatPage());
+  _i60.ChatPage _createChatPage() =>
+      _i60.ChatPage(_createChatPageBloc(), _createSharedPreferencesHelper());
+  _i61.ChatPageBloc _createChatPageBloc() =>
+      _i61.ChatPageBloc(_createChatService());
+  _i62.ChatService _createChatService() =>
+      _i62.ChatService(_createChatManager(), _createSharedPreferencesHelper());
+  _i63.ChatManager _createChatManager() =>
+      _i63.ChatManager(_createChatRepository());
+  _i64.ChatRepository _createChatRepository() => _i64.ChatRepository();
   @override
   _i5.MyApp get app => _createMyApp();
 }

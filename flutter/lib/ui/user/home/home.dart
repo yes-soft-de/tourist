@@ -29,11 +29,6 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    widget._preferencesHelper.getUserUID().then((value) {
-      if (value == null)
-        Navigator.pushReplacementNamed(context, UserRoutes.loginTypeSelector);
-    });
-
     return Scaffold(
       body: Stack(
         children: <Widget>[

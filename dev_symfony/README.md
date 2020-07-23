@@ -52,9 +52,9 @@ methods={"GET"}
 /region/{id}
 methods={"GET"}
 ```
-#### Create region image (another ones)
+#### Create image (region or event)
 ```
-/regionimage
+/image
 methods={"POST"}
 ```
 #### Create comment
@@ -138,4 +138,25 @@ methods={"PUT"}
 ```
 /acceptorder
 methods={"PUT"}
+```
+
+### Events System
+
+------------
+#### Create Event
+```
+/event
+methods={"POST"}
+```
+
+#### Get all Events
+```
+/event
+methods={"GET"}
+```
+
+#### Get event by id
+```
+/event/{eventID}
+methods={"GET"}
 ```

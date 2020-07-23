@@ -2,47 +2,77 @@
 
 ## Build Process
 
-1. Build and Push config to gcr, it uses alpine as a container to help with download/upload size
-2. Push the server files, i.e. Symfony project into master/dev.
+1. Build Config Image
+2. Build Project Images
+3. Deploy it using the files in GKE folder
 
 
 
-## Under the hood
+## How
 
-what happens is the following:
+to build config files:
 
-1. building the server:
+```bash
+docker build ./dev_symfony -f ./dev_symfony/config.Dockerfile -t gcr.io/tourists-280412/config:latest
+docker push gcr.io/tourists-280412/config:latest
+```
 
-   This happens by grabbing the config from the GCR that we pushed -- this is safe, we needs creditionals to pull and it's located privately.
+Then build server container
 
-   Then we copy the latest files from the 'dev' or 'master' branch.
+```bash
+docker build ./dev_symfony -f ./dev_symfony/server.Dockerfile -t gcr.io/tourists-280412/server-container:latest
+docker push gcr.io/tourists-280412/server-container:latest
 
-   we combine then and perform `composer install` to get all the dependencies.
-
-   The resulting image is fairly large, and contains composer, something we don't need in a prod environment, which is important for the next step.
-
-   we copy all the dependencies to an nginx image, it will be the final product of our work, with the serving server.
+docker build ./nginx -t gcr.io/tourists-280412/tourists-server:latest
+docker push gcr.io/tourists-280412/tourists-server:latest
+```
 
 
-2. Final Product:
 
-   a. I used nginx as a server just because I like it :smile:,
+**NOTE** the image `dockerfile` needs to be modified to get the correct config image file. and GKE K8s config files
 
-   b. I used php-fpm on port 9000 on the cluster network
 
-   c. MySQL is served via a helm chart, with persistence and all.
 
-3. Serving content:
+we then deploy using:
 
-   just run the following images:
+```bash
+# ******************* MySQL *******************
+# Using Helm V3
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install tourists bitnami/mysql
+# For AKS use https://bitnami.com/stack/mysql/helm
 
-   	- nginx
-   	- php-fpm
-   	- mysql 'from helm'
+# *******************  PVC  *******************
+# Use the provider version of the pressitance volume claim
+kubectl create -f ./GKE/tourists-claim.yaml
 
-   with this service:
 
-   - tourists-nginx (to expose nginx to the public)
-   - tourists-php (to php things...)
+# ******************* Server *******************
+# Deploy Backend
+kubectl create -f ./GKE/backend-service.yaml # I'm using the service as a balancer here
+kubectl create -f ./GKE/backend-deployment
 
-4. 
+```
+
+
+
+## Migrations
+
+first we need a pod name, we can do that using
+
+```bash
+kubectl get pods
+```
+
+once we get the name, we can use the following:
+
+```bash
+kubectl exec -it <pod_name> --container nginx -- start-point # To prepair PVC
+kubectl exec -it <pod_name> --container php -- sh
+# Inside the contaienr
+cd tourists
+php bin/console doctrine:migration:migrate
+exit
+```
+
+Done!

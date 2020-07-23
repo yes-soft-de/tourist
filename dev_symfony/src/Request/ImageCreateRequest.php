@@ -10,6 +10,18 @@ class ImageCreateRequest
 
     public $region;
 
+    public $event;
+
+    /**
+     * @param mixed $event
+     */
+    public function setEvent($event): void
+    {
+        $this->event = $event;
+    }
+
+
+
     /**
      * @param mixed $region
      */

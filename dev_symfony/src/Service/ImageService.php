@@ -21,11 +21,11 @@ class ImageService
         $this->imageManager = $imageManager;
     }
 
-    public function regionImageCreate(ImageCreateRequest $request)
+    public function imageCreate(ImageCreateRequest $request)
     {
-        $regionImageCreate = $this->imageManager->imageCreate($request);
+        $imageCreate = $this->imageManager->imageCreate($request);
 
-        $response = $this->autoMapping->map(ImagesEntity::class,ImageCreateResponse::class, $regionImageCreate);
+        $response = $this->autoMapping->map(ImagesEntity::class,ImageCreateResponse::class, $imageCreate);
 
         return $response;
     }

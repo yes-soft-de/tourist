@@ -26,17 +26,17 @@ class ImagesController extends BaseController
     }
 
     /**
-     * @Route("/regionimage", name="saveRegionImages", methods={"POST"})
+     * @Route("/image", name="saveRegionImages", methods={"POST"})
      * @param Request $request
      * @return JsonResponse
      */
-    public function saveRegionImages(Request $request)
+    public function saveImages(Request $request)
     {
         $data = json_decode($request->getContent(), true);
 
         $request = $this->autoMapping->map(stdClass::class,ImageCreateRequest::class,(object)$data);
 
-        $response = $this->imageService->regionImageCreate($request);
+        $response = $this->imageService->imageCreate($request);
 
         return $this->response($response, self::CREATE);
     }

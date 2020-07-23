@@ -26,10 +26,6 @@ class RegionsEntityRepository extends ServiceEntityRepository
 
             ->select('regions.id', 'regions.name', 'regions.description', 'regions.location')
 
-           // ->from('App:ImagesEntity', 'images')
-
-            //->andWhere('images.region=regions.id')
-
             ->groupBy('regions.id')
             ->orderBy('regions.id', 'ASC')
 

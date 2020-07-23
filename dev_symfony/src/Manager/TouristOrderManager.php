@@ -31,6 +31,7 @@ class TouristOrderManager
 
     public function createOrder(TouristOrderCreateRequest $request)
     {
+
         $creteOrder = $this->autoMapping->map(TouristOrderCreateRequest::class, TouristOrderEntity::class, $request);
 
         $creteOrder->setDate($request->getDate());

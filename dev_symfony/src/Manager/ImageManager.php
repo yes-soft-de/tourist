@@ -5,6 +5,7 @@ namespace App\Manager;
 
 
 use App\AutoMapping;
+use App\Entity\EventEntity;
 use App\Entity\ImagesEntity;
 use App\Entity\RegionsEntity;
 use App\Entity\User;
@@ -33,10 +34,10 @@ class ImageManager
             $request->setRegion($region);
         }
 
-        if ($request->guid)
+        if ($request->event)
         {
-            $guid = $this->entityManager->getRepository(User::class)->find($request->guid);
-            $request->setGuid($guid);
+            $event = $this->entityManager->getRepository(EventEntity::class)->find($request->event);
+            $request->setEvent($event);
         }
 
         $imageCreate = $this->autoMapping->map(ImageCreateRequest::class, ImagesEntity::class, $request);
@@ -53,8 +54,8 @@ class ImageManager
         return $this->imagesEntityRepository->getRegionImages($id);
     }
 
-    public function getGuidImage($guidID)
+    public function getEventImage($id)
     {
-        return $this->imagesEntityRepository->getGuidImage($guidID);
+        return $this->imagesEntityRepository->getEventImages($id);
     }
 }

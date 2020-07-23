@@ -26,6 +26,11 @@ class ImagesEntity
      */
     private $region;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\EventEntity")
+     */
+    private $event;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +56,18 @@ class ImagesEntity
     public function setRegion(?regionsEntity $region): self
     {
         $this->region = $region;
+
+        return $this;
+    }
+
+    public function getEvent(): ?EventEntity
+    {
+        return $this->event;
+    }
+
+    public function setEvent(?EventEntity $event): self
+    {
+        $this->event = $event;
 
         return $this;
     }

@@ -31,13 +31,13 @@ class ImagesEntityRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function getGuidImage($guidID)
+    public function getEventImages($id)
     {
         return $this->createQueryBuilder('images')
             ->select('images.path')
 
-            ->andWhere('images.guid = :id')
-            ->setParameter('id', $guidID)
+            ->andWhere('images.event = :id')
+            ->setParameter('id', $id)
 
             ->getQuery()
             ->getResult();

@@ -8,32 +8,37 @@ import 'package:tourists/services/location_details/location_details_service.dart
 @provide
 class LocationDetailsBloc {
   static const int STATUS_CODE_INIT = 200;
-  static const int STATUS_CODE_LOAD_FINISHED = 201;
+  static const int STATUS_CODE_LOAD_SUCCESS = 201;
   static const int STATUS_CODE_LOAD_ERROR = 202;
+
+  static const int KEY_STATUS = 321;
+  static const int KEY_LOCATION_INFO = 311;
+  static const int KEY_COMMENTS = 331;
+  static const int KEY_GUIDES = 341;
 
   final LocationDetailsService _locationDetailsService;
 
   LocationDetailsBloc(this._locationDetailsService);
 
-  Subject<Pair<int, LocationDetailsBlocModel>> locationDetailsSubject= new PublishSubject<Pair<int, LocationDetailsBlocModel>>();
-  Stream<Pair<int, LocationDetailsBlocModel>> get locationDetailsStream => locationDetailsSubject.stream;
+  Subject<Map<int, dynamic>> locationDetailsSubject= new PublishSubject<Map<int, dynamic>>();
+  Stream<Map<int, dynamic>> get locationDetailsStream => locationDetailsSubject.stream;
 
   getLocation(String locationId) async {
     LocationDetailsModel model = await _locationDetailsService.getLocationDetails(locationId);
     List<GuideListItemModel> guides = await _locationDetailsService.getGuidesByLocationId(locationId);
 
     if (model == null || guides == null) {
-      locationDetailsSubject.add(new Pair(STATUS_CODE_LOAD_ERROR, LocationDetailsBlocModel(locationDetails: model, guides: guides)));
+      locationDetailsSubject.add({
+        KEY_STATUS: STATUS_CODE_LOAD_ERROR
+      });
       return;
     }
 
-    locationDetailsSubject.add(new Pair(STATUS_CODE_LOAD_FINISHED, LocationDetailsBlocModel(locationDetails: model, guides: guides)));
+    locationDetailsSubject.add({
+      KEY_STATUS: STATUS_CODE_LOAD_SUCCESS,
+      KEY_LOCATION_INFO: model,
+      KEY_GUIDES: guides
+    });
   }
 }
 
-class LocationDetailsBlocModel {
-  LocationDetailsModel locationDetails;
-  List<GuideListItemModel> guides;
-
-  LocationDetailsBlocModel({this.locationDetails, this.guides});
-}

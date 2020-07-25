@@ -24,6 +24,8 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
 
   LocationDetailsModel _locationDetails;
   List<GuideListItemModel> _guidesList;
+  bool commentListCollapsed = false;
+  bool guidesListExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +33,10 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
     final String locationId = ModalRoute.of(context).settings.arguments;
 
     widget._locationBloc.locationDetailsStream.listen((event) {
-      currentStatus = event.first;
-      if (currentStatus == LocationDetailsBloc.STATUS_CODE_LOAD_FINISHED) {
-        _locationDetails = event.last.locationDetails;
-        _guidesList = event.last.guides;
+      currentStatus = event[LocationDetailsBloc.KEY_STATUS];
+      if (currentStatus == LocationDetailsBloc.STATUS_CODE_LOAD_SUCCESS) {
+        _locationDetails = event[LocationDetailsBloc.KEY_LOCATION_INFO];
+        _guidesList = event[LocationDetailsBloc.KEY_GUIDES];
         setState(() {});
       }
     });
@@ -59,67 +61,73 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
     }
 
     // Details Screen
-    if (currentStatus == LocationDetailsBloc.STATUS_CODE_LOAD_FINISHED) {
-      List<Widget> carouselList = [];
-
-      if (_locationDetails.paths != null) {
-        _locationDetails.paths.forEach((path) {
-          carouselList.add(Image.network(
-            path.path,
-            fit: BoxFit.fitWidth,
-          ));
-        });
-      } else {
-        Fluttertoast.showToast(msg: 'No Images?!!');
-      }
-
-      List<Widget> pageLayout = [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            _locationDetails.name,
-            style: TextStyle(
-                color: Colors.black45,
-                fontWeight: FontWeight.bold,
-                fontSize: 24),
-          ),
-        ),
-        CarouselWidget(carouselList),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(_locationDetails.description),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            'Guides',
-            style: TextStyle(
-                fontSize: 24,
-                color: Colors.black45,
-                fontWeight: FontWeight.bold),
-          ),
-        )
-      ];
-
-      pageLayout.addAll(getGuidesList());
-
-      return Scaffold(
-        body: ListView(
-          children: pageLayout,
-        ),
-      );
+    if (currentStatus == LocationDetailsBloc.STATUS_CODE_LOAD_SUCCESS) {
+      return getLocationScreen();
     }
 
     return Scaffold(
-      body: Center(child: Text("Undefined State"),),
+      body: Center(
+        child: Text("Undefined State"),
+      ),
+    );
+  }
+
+  Scaffold getLocationScreen() {
+    List<Widget> carouselList = [];
+
+    if (_locationDetails.paths != null) {
+      _locationDetails.paths.forEach((path) {
+        carouselList.add(Image.network(
+          path.path,
+          fit: BoxFit.fitWidth,
+        ));
+      });
+    } else {
+      Fluttertoast.showToast(msg: 'No Images?!!');
+    }
+
+    List<Widget> pageLayout = [
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          _locationDetails.name,
+          style: TextStyle(
+              color: Colors.black45, fontWeight: FontWeight.bold, fontSize: 24),
+        ),
+      ),
+      CarouselWidget(carouselList),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(_locationDetails.description),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          'Guides',
+          style: TextStyle(
+              fontSize: 24, color: Colors.black45, fontWeight: FontWeight.bold),
+        ),
+      )
+    ];
+
+    pageLayout.addAll(getGuidesList());
+
+    pageLayout.addAll(getCommentList());
+
+    return Scaffold(
+      body: ListView(
+        children: pageLayout,
+      ),
     );
   }
 
   List<Widget> getGuidesList() {
     List<Widget> guidesList = [];
 
+    List<GuideListItemModel> visibleGuides = guidesListExpanded ? _guidesList : _guidesList.sublist(0, 3);
+
     // Construct the List into CSV text
-    _guidesList.forEach((guide) {
+    visibleGuides.forEach((guide) {
       String citiesInText = "";
       guide.city.forEach((cityName) {
         citiesInText = citiesInText + " " + cityName;
@@ -151,6 +159,35 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
       ));
     });
 
+    if (guidesListExpanded == false) {
+      guidesList.add(Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          GestureDetector(
+            onTap: () {
+              guidesListExpanded = true;
+              setState(() {});
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(),
+                  borderRadius: BorderRadius.all(Radius.circular(90))),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("SHOW MORE"),
+              ),
+            ),
+          )
+        ],
+      ));
+    }
+
     return guidesList;
+  }
+
+  List<Widget> getCommentList() {
+    List<Widget> commentsList = [];
+
+    return commentsList;
   }
 }

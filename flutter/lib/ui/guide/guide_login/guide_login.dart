@@ -31,9 +31,7 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
   Widget build(BuildContext context) {
     widget._guideLoginBloc.stateStream.listen((event) {
       if (event.first == GuideLoginBloc.STATUS_CODE_RECEIVED) {
-        widget._preferencesHelper.setLoggedInState(LoggedInState.GUIDE).then((value) {
-          Navigator.pushReplacementNamed(context, GuideRoutes.guideHome);
-        });
+        Navigator.pushReplacementNamed(context, GuideRoutes.guideRegister);
       }
 
       if (event.first == GuideLoginBloc.STATUS_CODE_FAILED) {

@@ -7,7 +7,6 @@ import 'package:tourists/ui/user/home/home.dart';
 import 'package:tourists/ui/user/intention_profile/intention_profile.dart';
 import 'package:tourists/ui/user/location_details/location_details.dart';
 import 'package:tourists/ui/user/login/login.dart';
-import 'package:tourists/ui/user/order_guide/order_guide.dart';
 import 'package:tourists/ui/user/orders_page/orders_page.dart';
 import 'package:tourists/ui/user/register/register.dart';
 import 'package:tourists/ui/user/request_guide/request_guide_screen.dart';

@@ -5,9 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/components/guide/guide_component.dart';
-import 'package:tourists/components/guide/guide_routes.dart';
 import 'package:tourists/components/shared/shared_component.dart';
-import 'package:tourists/components/shared/shared_routes.dart';
 import 'package:tourists/components/user/user_component.dart';
 import 'package:tourists/components/user/user_routes.dart';
 

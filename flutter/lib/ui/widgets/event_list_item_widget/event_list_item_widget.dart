@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class EventListItemWidget extends StatelessWidget {
-  String image;
-  String name;
-  String time;
-  String location;
-  String status;
-  int commentNumber;
+  final String image;
+  final String name;
+  final String time;
+  final String location;
+  final String status;
+  final int commentNumber;
 
   EventListItemWidget(
       {Key key,

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/bloc/main_home/main_home_bloc.dart';

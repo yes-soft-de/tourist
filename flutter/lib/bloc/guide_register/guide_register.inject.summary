@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/ui/user/location_details/location_details.dart",
+  "asset": "asset:tourists/lib/bloc/guide_register/guide_register.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "LocationDetailsScreen",
+        "name": "GuideRegisterBloc",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/ui/user/location_details/location_details.dart#LocationDetailsScreen",
+              "root": "asset:tourists/lib/bloc/guide_register/guide_register.dart#GuideRegisterBloc",
               "qualifier": null
             },
             "isProvider": false
@@ -21,7 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/bloc/location_details/location_details_bloc.dart#LocationDetailsBloc",
+                "root": "asset:tourists/lib/services/guide_register/guide_register.dart#GuideRegisterService",
                 "qualifier": null
               },
               "isProvider": false

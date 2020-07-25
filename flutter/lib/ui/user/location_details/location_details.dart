@@ -6,16 +6,14 @@ import 'package:tourists/components/user/user_routes.dart';
 import 'package:tourists/models/guide_list_item/guide_list_item.dart';
 import 'package:tourists/models/location_details/location_details.dart';
 import 'package:tourists/nav_arguments/request_guide/request_guide_navigation.dart';
-import 'package:tourists/ui/user/request_guide/request_guide_screen.dart';
 import 'package:tourists/ui/widgets/carousel/carousel.dart';
 import 'package:tourists/ui/widgets/guide_list_item/guide_list_item.dart';
 
 @provide
 class LocationDetailsScreen extends StatefulWidget {
   final LocationDetailsBloc _locationBloc;
-  final RequestGuideScreen _requestGuideScreen;
 
-  LocationDetailsScreen(this._locationBloc, this._requestGuideScreen);
+  LocationDetailsScreen(this._locationBloc);
 
   @override
   State<StatefulWidget> createState() => _LocationDetailsScreenState();
@@ -111,6 +109,10 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
         ),
       );
     }
+
+    return Scaffold(
+      body: Center(child: Text("Undefined State"),),
+    );
   }
 
   List<Widget> getGuidesList() {

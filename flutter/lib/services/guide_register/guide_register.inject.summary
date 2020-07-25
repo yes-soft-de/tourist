@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/components/guide/guide_component.dart",
+  "asset": "asset:tourists/lib/services/guide_register/guide_register.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "GuideComponent",
+        "name": "GuideRegisterService",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/components/guide/guide_component.dart#GuideComponent",
+              "root": "asset:tourists/lib/services/guide_register/guide_register.dart#GuideRegisterService",
               "qualifier": null
             },
             "isProvider": false
@@ -21,21 +21,21 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/ui/guide/guide_login/guide_login.dart#GuideLoginScreen",
+                "root": "asset:tourists/lib/managers/guide_register/guide_register.dart#GuideRegisterManager",
                 "qualifier": null
               },
               "isProvider": false
             },
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/ui/guide/guide_home/guide_home.dart#GuideHomeScreen",
+                "root": "asset:tourists/lib/persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper",
                 "qualifier": null
               },
               "isProvider": false
             },
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/ui/guide/guide_info/guide_info.dart#GuideInfoScreen",
+                "root": "asset:tourists/lib/services/guide_list/guide_list.dart#GuideListService",
                 "qualifier": null
               },
               "isProvider": false

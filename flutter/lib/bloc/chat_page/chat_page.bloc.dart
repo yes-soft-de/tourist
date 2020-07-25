@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:analyzer_plugin/utilities/pair.dart';
 import 'package:inject/inject.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tourists/models/chat/chat_model.dart';
 import 'package:tourists/services/chat/char_service.dart';

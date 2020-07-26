@@ -48,29 +48,33 @@ import '../../managers/request_guide/request_guide_manager.dart' as _i45;
 import '../../repositories/request_guide/request_guide_repository.dart' as _i46;
 import '../../ui/user/home/subscreens/tourist_event_list/tourist_event_list.dart'
     as _i47;
-import '../../ui/user/intention_profile/intention_profile.dart' as _i48;
-import '../../bloc/create_intentions/create_intention_bloc.dart' as _i49;
-import '../../services/intentions/intentions_service.dart' as _i50;
-import '../../managers/intentions/intentions_manager.dart' as _i51;
-import '../../repositories/intentions/intentions_repository.dart' as _i52;
-import '../../components/guide/guide_component.dart' as _i53;
-import '../../ui/guide/guide_login/guide_login.dart' as _i54;
-import '../../bloc/guide_login/guide_login.bloc.dart' as _i55;
-import '../../ui/guide/guide_home/guide_home.dart' as _i56;
+import '../../bloc/event_list/event_list_bloc.dart' as _i48;
+import '../../services/event/event_service.dart' as _i49;
+import '../../managers/event/event_manager.dart' as _i50;
+import '../../repositories/event/event_repository.dart' as _i51;
+import '../../ui/user/intention_profile/intention_profile.dart' as _i52;
+import '../../bloc/create_intentions/create_intention_bloc.dart' as _i53;
+import '../../services/intentions/intentions_service.dart' as _i54;
+import '../../managers/intentions/intentions_manager.dart' as _i55;
+import '../../repositories/intentions/intentions_repository.dart' as _i56;
+import '../../components/guide/guide_component.dart' as _i57;
+import '../../ui/guide/guide_login/guide_login.dart' as _i58;
+import '../../bloc/guide_login/guide_login.bloc.dart' as _i59;
+import '../../ui/guide/guide_home/guide_home.dart' as _i60;
 import '../../ui/guide/guide_home/subscreens/main/guide_main_subscreen.dart'
-    as _i57;
-import '../../bloc/guide_home/guide_home.dart' as _i58;
-import '../../ui/guide/guide_info/guide_info.dart' as _i59;
-import '../../bloc/guide_register/guide_register.dart' as _i60;
-import '../../services/guide_register/guide_register.dart' as _i61;
-import '../../managers/guide_register/guide_register.dart' as _i62;
-import '../../repositories/guide_register/guide_register.dart' as _i63;
-import '../../components/shared/shared_component.dart' as _i64;
-import '../../ui/shared/chat_page/chat_page.dart' as _i65;
-import '../../bloc/chat_page/chat_page.bloc.dart' as _i66;
-import '../../services/chat/char_service.dart' as _i67;
-import '../../managers/chat/chat_manager.dart' as _i68;
-import '../../repositories/chat/chat_repository.dart' as _i69;
+    as _i61;
+import '../../bloc/guide_home/guide_home.dart' as _i62;
+import '../../ui/guide/guide_info/guide_info.dart' as _i63;
+import '../../bloc/guide_register/guide_register.dart' as _i64;
+import '../../services/guide_register/guide_register.dart' as _i65;
+import '../../managers/guide_register/guide_register.dart' as _i66;
+import '../../repositories/guide_register/guide_register.dart' as _i67;
+import '../../components/shared/shared_component.dart' as _i68;
+import '../../ui/shared/chat_page/chat_page.dart' as _i69;
+import '../../bloc/chat_page/chat_page.bloc.dart' as _i70;
+import '../../services/chat/char_service.dart' as _i71;
+import '../../managers/chat/chat_manager.dart' as _i72;
+import '../../repositories/chat/chat_repository.dart' as _i73;
 
 class AppComponent$Injector implements _i1.AppComponent {
   AppComponent$Injector._();
@@ -180,8 +184,8 @@ class AppComponent$Injector implements _i1.AppComponent {
       _i41.GuideListBloc(_createGuideListService());
   _i42.RequestGuideScreen _createRequestGuideScreen() =>
       _i42.RequestGuideScreen(_createRequestGuideBloc(), _createLogger());
-  _i43.RequestGuideBloc _createRequestGuideBloc() =>
-      _i43.RequestGuideBloc(_createRequestGuideService());
+  _i43.RequestGuideBloc _createRequestGuideBloc() => _i43.RequestGuideBloc(
+      _createRequestGuideService(), _createLocationDetailsService());
   _i44.RequestGuideService _createRequestGuideService() =>
       _i44.RequestGuideService(_createSharedPreferencesHelper(),
           _createGuideListService(), _createRequestGuideManager());
@@ -190,53 +194,61 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i46.RequestGuideRepository _createRequestGuideRepository() =>
       _i46.RequestGuideRepository(_createHttpClient());
   _i47.TouristEventListSubScreen _createTouristEventListSubScreen() =>
-      _i47.TouristEventListSubScreen();
-  _i48.IntentionProfileScreen _createIntentionProfileScreen() =>
-      _i48.IntentionProfileScreen(
+      _i47.TouristEventListSubScreen(_createEventListBloc());
+  _i48.EventListBloc _createEventListBloc() =>
+      _i48.EventListBloc(_createEventService());
+  _i49.EventService _createEventService() =>
+      _i49.EventService(_createEventManager());
+  _i50.EventManager _createEventManager() =>
+      _i50.EventManager(_createEventRepository());
+  _i51.EventRepository _createEventRepository() =>
+      _i51.EventRepository(_createHttpClient());
+  _i52.IntentionProfileScreen _createIntentionProfileScreen() =>
+      _i52.IntentionProfileScreen(
           _createCreateIntentionBloc(), _createSharedPreferencesHelper());
-  _i49.CreateIntentionBloc _createCreateIntentionBloc() =>
-      _i49.CreateIntentionBloc(_createIntentionService());
-  _i50.IntentionService _createIntentionService() =>
-      _i50.IntentionService(_createIntentionsManager());
-  _i51.IntentionsManager _createIntentionsManager() =>
-      _i51.IntentionsManager(_createIntentionsRepository());
-  _i52.IntentionsRepository _createIntentionsRepository() =>
-      _i52.IntentionsRepository(_createHttpClient());
-  _i53.GuideComponent _createGuideComponent() => _i53.GuideComponent(
+  _i53.CreateIntentionBloc _createCreateIntentionBloc() =>
+      _i53.CreateIntentionBloc(_createIntentionService());
+  _i54.IntentionService _createIntentionService() =>
+      _i54.IntentionService(_createIntentionsManager());
+  _i55.IntentionsManager _createIntentionsManager() =>
+      _i55.IntentionsManager(_createIntentionsRepository());
+  _i56.IntentionsRepository _createIntentionsRepository() =>
+      _i56.IntentionsRepository(_createHttpClient());
+  _i57.GuideComponent _createGuideComponent() => _i57.GuideComponent(
       _createGuideLoginScreen(),
       _createGuideHomeScreen(),
       _createGuideInfoScreen());
-  _i54.GuideLoginScreen _createGuideLoginScreen() => _i54.GuideLoginScreen(
-      _createGuideLoginBloc(), _createSharedPreferencesHelper());
-  _i55.GuideLoginBloc _createGuideLoginBloc() => _i55.GuideLoginBloc();
-  _i56.GuideHomeScreen _createGuideHomeScreen() =>
-      _i56.GuideHomeScreen(_createGuideMainSubScreen());
-  _i57.GuideMainSubScreen _createGuideMainSubScreen() =>
-      _i57.GuideMainSubScreen(_createGuideHomeBloc());
-  _i58.GuideHomeBloc _createGuideHomeBloc() =>
-      _i58.GuideHomeBloc(_createOrdersService());
-  _i59.GuideInfoScreen _createGuideInfoScreen() => _i59.GuideInfoScreen(
+  _i58.GuideLoginScreen _createGuideLoginScreen() =>
+      _i58.GuideLoginScreen(_createGuideLoginBloc());
+  _i59.GuideLoginBloc _createGuideLoginBloc() => _i59.GuideLoginBloc();
+  _i60.GuideHomeScreen _createGuideHomeScreen() =>
+      _i60.GuideHomeScreen(_createGuideMainSubScreen());
+  _i61.GuideMainSubScreen _createGuideMainSubScreen() =>
+      _i61.GuideMainSubScreen(_createGuideHomeBloc());
+  _i62.GuideHomeBloc _createGuideHomeBloc() =>
+      _i62.GuideHomeBloc(_createOrdersService());
+  _i63.GuideInfoScreen _createGuideInfoScreen() => _i63.GuideInfoScreen(
       _createGuideRegisterBloc(), _createSharedPreferencesHelper());
-  _i60.GuideRegisterBloc _createGuideRegisterBloc() =>
-      _i60.GuideRegisterBloc(_createGuideRegisterService());
-  _i61.GuideRegisterService _createGuideRegisterService() =>
-      _i61.GuideRegisterService(_createGuideRegisterManager(),
+  _i64.GuideRegisterBloc _createGuideRegisterBloc() =>
+      _i64.GuideRegisterBloc(_createGuideRegisterService());
+  _i65.GuideRegisterService _createGuideRegisterService() =>
+      _i65.GuideRegisterService(_createGuideRegisterManager(),
           _createSharedPreferencesHelper(), _createGuideListService());
-  _i62.GuideRegisterManager _createGuideRegisterManager() =>
-      _i62.GuideRegisterManager(_createGuideRegisterRepository());
-  _i63.GuideRegisterRepository _createGuideRegisterRepository() =>
-      _i63.GuideRegisterRepository(_createHttpClient());
-  _i64.SharedComponent _createSharedComponent() =>
-      _i64.SharedComponent(_createChatPage());
-  _i65.ChatPage _createChatPage() =>
-      _i65.ChatPage(_createChatPageBloc(), _createSharedPreferencesHelper());
-  _i66.ChatPageBloc _createChatPageBloc() =>
-      _i66.ChatPageBloc(_createChatService());
-  _i67.ChatService _createChatService() =>
-      _i67.ChatService(_createChatManager(), _createSharedPreferencesHelper());
-  _i68.ChatManager _createChatManager() =>
-      _i68.ChatManager(_createChatRepository());
-  _i69.ChatRepository _createChatRepository() => _i69.ChatRepository();
+  _i66.GuideRegisterManager _createGuideRegisterManager() =>
+      _i66.GuideRegisterManager(_createGuideRegisterRepository());
+  _i67.GuideRegisterRepository _createGuideRegisterRepository() =>
+      _i67.GuideRegisterRepository(_createHttpClient());
+  _i68.SharedComponent _createSharedComponent() =>
+      _i68.SharedComponent(_createChatPage());
+  _i69.ChatPage _createChatPage() =>
+      _i69.ChatPage(_createChatPageBloc(), _createSharedPreferencesHelper());
+  _i70.ChatPageBloc _createChatPageBloc() =>
+      _i70.ChatPageBloc(_createChatService());
+  _i71.ChatService _createChatService() =>
+      _i71.ChatService(_createChatManager(), _createSharedPreferencesHelper());
+  _i72.ChatManager _createChatManager() =>
+      _i72.ChatManager(_createChatRepository());
+  _i73.ChatRepository _createChatRepository() => _i73.ChatRepository();
   @override
   _i5.MyApp get app => _createMyApp();
 }

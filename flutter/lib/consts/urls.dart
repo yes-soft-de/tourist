@@ -14,4 +14,5 @@ class Urls {
 
   static final orderGuide = _baseAPI + 'order';
   static final comment = _baseAPI + 'comment';
+  static final event = _baseAPI + 'event';
 }

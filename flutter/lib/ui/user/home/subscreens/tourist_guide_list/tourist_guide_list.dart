@@ -52,6 +52,10 @@ class _TouristGuideListSubScreenState extends State<TouristGuideListSubScreen> {
 
       return ListView(children: getGuidesList());
     }
+
+    return Center(
+      child: Text("Unidentified State!"),
+    );
   }
 
   List<Widget> getGuidesList() {

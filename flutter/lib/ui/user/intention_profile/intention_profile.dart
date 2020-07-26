@@ -28,7 +28,6 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
   DateTime _arrivalDate;
   final TextEditingController _arrivalDateField = TextEditingController();
   final TextEditingController _stayingTime = TextEditingController();
-  final TextEditingController _nationality = TextEditingController();
   final TextEditingController _arrivalCity = TextEditingController();
 
   @override

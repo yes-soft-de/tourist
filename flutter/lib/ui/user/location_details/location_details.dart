@@ -8,6 +8,7 @@ import 'package:tourists/models/location_details/location_details.dart';
 import 'package:tourists/nav_arguments/request_guide/request_guide_navigation.dart';
 import 'package:tourists/ui/widgets/carousel/carousel.dart';
 import 'package:tourists/ui/widgets/guide_list_item/guide_list_item.dart';
+import 'package:tourists/ui/widgets/request_guide_button/request_guide_button.dart';
 
 @provide
 class LocationDetailsScreen extends StatefulWidget {
@@ -87,13 +88,13 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
     }
 
     List<Widget> pageLayout = [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
+      AppBar(
+        title: Text(
           _locationDetails.name,
           style: TextStyle(
               color: Colors.black45, fontWeight: FontWeight.bold, fontSize: 24),
         ),
+        backgroundColor: Colors.white,
       ),
       CarouselWidget(carouselList),
       Padding(
@@ -115,8 +116,26 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
     pageLayout.addAll(getCommentList());
 
     return Scaffold(
-      body: ListView(
-        children: pageLayout,
+      body: Stack(
+        children: <Widget>[
+          Positioned(
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: ListView(
+              children: pageLayout,
+            ),
+          ),
+          Positioned(
+            bottom: 16,
+            left: 0,
+            right: 0,
+            child: RequestGuideButton(
+              cityId: this._locationDetails.id.toString(),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -124,7 +143,13 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
   List<Widget> getGuidesList() {
     List<Widget> guidesList = [];
 
-    List<GuideListItemModel> visibleGuides = guidesListExpanded ? _guidesList : _guidesList.sublist(0, 3);
+    List<GuideListItemModel> visibleGuides;
+
+    // No Expansion Needed
+    if (_guidesList.length > 0) guidesListExpanded = true;
+
+    visibleGuides =
+        guidesListExpanded ? _guidesList : _guidesList.sublist(0, 3);
 
     // Construct the List into CSV text
     visibleGuides.forEach((guide) {

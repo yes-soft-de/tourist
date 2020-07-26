@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/components/user/user_routes.dart';
 import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
 import 'package:tourists/ui/user/home/subscreens/main/main_home.dart';
 import 'package:tourists/ui/user/home/subscreens/tourist_event_list/tourist_event_list.dart';
@@ -29,41 +28,68 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 56,
-            child: PageView(
-              controller: _pageController,
-              children: <Widget>[
-                widget._homeSubScreen,
-                widget._guideListScreen,
-                widget._eventsSubScreen
-              ],
-              onPageChanged: (pos) {
-                // Update the Home Page
-                position = pos;
-                setState(() {});
-              },
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Scaffold(
+        body: Stack(
+          children: <Widget>[
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 56,
+              child: PageView(
+                controller: _pageController,
+                children: <Widget>[
+                  widget._homeSubScreen,
+                  widget._guideListScreen,
+                  widget._eventsSubScreen
+                ],
+                onPageChanged: (pos) {
+                  // Update the Home Page
+                  position = pos;
+                  setState(() {});
+                },
+              ),
             ),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: CustomBottomNavigationBar(
-                position != null ? position : 0, this),
-          )
-        ],
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: CustomBottomNavigationBar(
+                pagePosition: position != null ? position : 0,
+                homeScreenState: this
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
 
   moveToPage(int position) {
     _pageController.jumpToPage(position);
+  }
+
+  Future<bool> _onBackPressed() {
+    return showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+            title: new Text('Are you sure?'),
+            content: new Text('Do you want to exit an App'),
+            actions: <Widget>[
+              new GestureDetector(
+                onTap: () => Navigator.of(context).pop(false),
+                child: Text("NO"),
+              ),
+              SizedBox(height: 16),
+              new GestureDetector(
+                onTap: () => Navigator.of(context).pop(true),
+                child: Text("YES"),
+              ),
+            ],
+          ),
+        ) ??
+        false;
   }
 }

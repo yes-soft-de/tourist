@@ -74,8 +74,6 @@ class _GuideInfoScreenState extends State<GuideInfoScreen> {
     );
   }
 
-  List<Widget> getLanguages() {}
-
   registerGuide() {
     widget._guideRegisterBloc
         .registerGuide(_nameController.text, _motherLanguage);

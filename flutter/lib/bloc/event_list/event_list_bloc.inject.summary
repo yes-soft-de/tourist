@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/ui/user/home/subscreens/tourist_event_list/tourist_event_list.dart",
+  "asset": "asset:tourists/lib/bloc/event_list/event_list_bloc.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "TouristEventListSubScreen",
+        "name": "EventListBloc",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/ui/user/home/subscreens/tourist_event_list/tourist_event_list.dart#TouristEventListSubScreen",
+              "root": "asset:tourists/lib/bloc/event_list/event_list_bloc.dart#EventListBloc",
               "qualifier": null
             },
             "isProvider": false
@@ -21,7 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/bloc/event_list/event_list_bloc.dart#EventListBloc",
+                "root": "asset:tourists/lib/services/event/event_service.dart#EventService",
                 "qualifier": null
               },
               "isProvider": false

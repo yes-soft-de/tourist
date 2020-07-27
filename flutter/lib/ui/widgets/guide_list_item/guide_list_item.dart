@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:tourists/components/user/user_routes.dart';
-import 'package:tourists/nav_arguments/request_guide/request_guide_navigation.dart';
+import 'package:tourists/generated/l10n.dart';
 
 class GuideListItemWidget extends StatelessWidget {
   final String guideName;
@@ -40,10 +37,10 @@ class GuideListItemWidget extends StatelessWidget {
                 width: 96,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(90))),
-                child: Image.network(
+                child: guideImage != null ? Image.network(
                   guideImage,
                   fit: BoxFit.fitHeight,
-                ),
+                ) : Icon(Icons.perm_identity),
               ),
               Container(
                 width: 8,
@@ -63,7 +60,7 @@ class GuideListItemWidget extends StatelessWidget {
                     direction: Axis.horizontal,
                     children: <Widget>[
                       Text(
-                        availability,
+                        availability != null ? availability : S.of(context).available,
                         style: TextStyle(),
                       ),
                       Container(

@@ -18,7 +18,15 @@
           },
           "singleton": false,
           "asynchronous": false,
-          "dependencies": []
+          "dependencies": [
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/bloc/guide_home/guide_home.dart#GuideHomeBloc",
+                "qualifier": null
+              },
+              "isProvider": false
+            }
+          ]
         }
       }
     ]

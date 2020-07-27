@@ -1,13 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tourists/generated/l10n.dart';
 
 class EventListItemWidget extends StatelessWidget {
-  String image;
-  String name;
-  String time;
-  String location;
-  String status;
-  int commentNumber;
+  final String image;
+  final String name;
+  final DateTime time;
+  final String location;
+  final String status;
+  final int commentNumber;
 
   EventListItemWidget(
       {Key key,
@@ -49,10 +49,10 @@ class EventListItemWidget extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                   Text(
-                    time,
+                    time.toString().substring(0, 16),
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Text(location),
+                  Text(location != null ? location : ''),
                   Flex(
                     direction: Axis.horizontal,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,8 +74,7 @@ class EventListItemWidget extends StatelessWidget {
                             Container(
                               width: 8,
                             ),
-                            Text(commentNumber.toString() + ' Comment(s)'),
-
+                            Text(commentNumber.toString() + ' ' + S.of(context).comments),
                           ],
                         ),
                       )

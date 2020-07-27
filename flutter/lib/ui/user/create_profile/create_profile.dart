@@ -22,7 +22,7 @@ class CreateProfileScreen extends StatefulWidget {
 class _CreateProfileScreenState extends State<CreateProfileScreen> {
   final GlobalKey _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _genderController = TextEditingController();
+  String _gender;
   String _guideLanguage;
 
   @override
@@ -79,7 +79,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       decoration: const InputDecoration(labelText: 'Name'),
                       validator: (String value) {
                         if (value.isEmpty) {
-                          return 'Please enter some text';
+                          return S.of(context).error_null_text;
                         }
                         return null;
                       },
@@ -88,29 +88,35 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       items: <DropdownMenuItem<String>>[
                         DropdownMenuItem(
                           value: null,
-                          child: Text('Select a Language'),
+                          child: Text(S.of(context).select_language),
                         ),
                         DropdownMenuItem(
                           value: 'en',
-                          child: Text('English'),
+                          child: Text(S.of(context).language_english),
                         ),
                         DropdownMenuItem(
                           value: 'ar',
-                          child: Text('العربية'),
+                          child: Text(S.of(context).language_arabic),
                         ),
                       ],
                       onChanged: (String value) {
                         this._guideLanguage = value;
                       },
                     ),
-                    TextFormField(
-                      controller: _genderController,
-                      decoration: const InputDecoration(labelText: 'Gender'),
-                      validator: (String value) {
-                        if (value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
+                    DropdownButtonFormField(
+                      hint: Text(S.of(context).select_gender),
+                      items: <DropdownMenuItem<String>>[
+                        DropdownMenuItem(
+                          value: 'male',
+                          child: Text(S.of(context).male),
+                        ),
+                        DropdownMenuItem(
+                          value: 'female',
+                          child: Text(S.of(context).female),
+                        ),
+                      ],
+                      onChanged: (String value) {
+                        this._gender = value;
                       },
                     ),
                     Container(
@@ -146,7 +152,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     if (_guideLanguage == null) {
       log('Null Language');
       Fluttertoast.showToast(
-          msg: 'Please Select a Language',
+          msg: S.of(context).toast_select_language,
           toastLength: Toast.LENGTH_SHORT,
           timeInSecForIosWeb: 1);
       return;
@@ -154,11 +160,11 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
 
     log('Language is ' + _guideLanguage);
     Fluttertoast.showToast(
-        msg: 'Saving Data',
+        msg: S.of(context).saving_cata,
         toastLength: Toast.LENGTH_SHORT,
         timeInSecForIosWeb: 1);
 
-    widget._profileBloc.createProfile(
-        _nameController.text, _genderController.text, _guideLanguage);
+    widget._profileBloc
+        .createProfile(_nameController.text, _gender, _guideLanguage);
   }
 }

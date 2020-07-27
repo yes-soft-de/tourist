@@ -25,6 +25,20 @@
                 "qualifier": null
               },
               "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/managers/comment/comment_service.dart#CommentManager",
+                "qualifier": null
+              },
+              "isProvider": false
             }
           ]
         }

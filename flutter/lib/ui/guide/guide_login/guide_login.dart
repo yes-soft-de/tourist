@@ -3,7 +3,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/bloc/guide_login/guide_login.bloc.dart';
 import 'package:tourists/components/guide/guide_routes.dart';
-import 'package:tourists/ui/guide/guide_home/guide_home.dart';
 
 @provide
 class GuideLoginScreen extends StatefulWidget {
@@ -29,7 +28,7 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
   Widget build(BuildContext context) {
     widget._guideLoginBloc.stateStream.listen((event) {
       if (event.first == GuideLoginBloc.STATUS_CODE_RECEIVED) {
-        Navigator.pushReplacementNamed(context, GuideRoutes.guideHome);
+        Navigator.pushReplacementNamed(context, GuideRoutes.guideRegister);
       }
 
       if (event.first == GuideLoginBloc.STATUS_CODE_FAILED) {
@@ -72,8 +71,6 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
             });
       }
     });
-
-    String myPhoneNumber = '+963953691509';
 
     return Scaffold(
         body: SingleChildScrollView(

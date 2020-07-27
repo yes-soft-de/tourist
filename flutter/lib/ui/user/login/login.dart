@@ -6,11 +6,14 @@ import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/bloc/login/login.bloc.dart';
 import 'dart:developer' as developer;
 
+import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
+
 @provide
 class LoginScreen extends StatefulWidget {
   final LoginBloc _loginBlock;
+  final SharedPreferencesHelper _preferencesHelper;
 
-  LoginScreen(this._loginBlock);
+  LoginScreen(this._loginBlock, this._preferencesHelper);
 
   @override
   State<StatefulWidget> createState() => _LoginScreenState();
@@ -30,13 +33,15 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     widget._loginBlock.loginStatus.listen((event) {
       if (event != null && event.length > 0) {
-        Navigator.of(context).pushReplacementNamed(UserRoutes.home);
+        widget._preferencesHelper
+            .setLoggedInState(LoggedInState.TOURISTS)
+            .then((value) {
+          Navigator.of(context).pushReplacementNamed(UserRoutes.home);
+        });
       }
       submitAvailable = true;
       setState(() {});
     });
-
-
 
     return Scaffold(
       body: ListView(children: <Widget>[
@@ -78,10 +83,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: <Widget>[
                     TextFormField(
                       controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
                       decoration: const InputDecoration(labelText: 'Email'),
                       validator: (String value) {
                         if (value.isEmpty) {
-                          return 'Please enter some text';
+                          return S.of(context).error_null_text;
                         }
                         return null;
                       },
@@ -91,10 +97,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     TextFormField(
                       controller: _passwordController,
+                      obscureText: true,
                       decoration: const InputDecoration(labelText: 'Password'),
                       validator: (String value) {
                         if (value.isEmpty || value.length < 6) {
-                          return 'Please enter some text';
+                          return S.of(context).error_null_text;
                         }
                         return null;
                       },
@@ -114,7 +121,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(90)),
-                                color: submitAvailable ? Colors.greenAccent : Colors.grey,
+                                color: submitAvailable
+                                    ? Colors.greenAccent
+                                    : Colors.grey,
                               ),
                               child: Text(
                                 S.of(context).login,
@@ -130,8 +139,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text(_error == null
                           ? ''
                           : (_error
-                              ? 'Successfully registered ' + _userEmail
-                              : 'Registration failed')),
+                              ? S.of(context).successfully_registered + _userEmail
+                              : S.of(context).registration_failed)),
                     )
                   ],
                 ),
@@ -172,7 +181,6 @@ class _LoginScreenState extends State<LoginScreen> {
       submitAvailable = false;
       setState(() {});
       widget._loginBlock.login(_emailController.text, _passwordController.text);
-
     } else {
       Fluttertoast.showToast(msg: 'Please Wait...');
     }

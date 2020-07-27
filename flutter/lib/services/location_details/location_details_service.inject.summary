@@ -32,6 +32,20 @@
                 "qualifier": null
               },
               "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/managers/rate/rate_manager.dart#RatingManager",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper",
+                "qualifier": null
+              },
+              "isProvider": false
             }
           ]
         }

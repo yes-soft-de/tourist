@@ -4,7 +4,7 @@ class LocationListItem {
   String description;
   List<String> location;
   String commentNumber;
-  Null ratingAverage;
+  int ratingAverage;
   List<Path> path;
 
   LocationListItem(

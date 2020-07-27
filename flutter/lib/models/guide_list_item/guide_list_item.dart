@@ -1,5 +1,6 @@
 class GuideListItemModel {
   String user;
+  String userID;
   String name;
   String status;
   List<String> city;
@@ -19,6 +20,7 @@ class GuideListItemModel {
   GuideListItemModel.fromJson(Map<String, dynamic> json) {
     user = json['user'];
     name = json['name'];
+    userID = json['userID'];
     status = json['status'];
     city = json['city'].cast<String>();
     language = json['language'].cast<String>();
@@ -31,6 +33,7 @@ class GuideListItemModel {
     data['user'] = this.user;
     data['name'] = this.name;
     data['status'] = this.status;
+    data['userID'] = userID;
     data['city'] = this.city;
     data['language'] = this.language;
     data['rating'] = this.rating;

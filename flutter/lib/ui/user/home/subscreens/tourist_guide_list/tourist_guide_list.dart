@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/bloc/guide_list/guide_list_bloc.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/models/guide_list_item/guide_list_item.dart';
 import 'package:tourists/nav_arguments/request_guide/request_guide_navigation.dart';
 import 'package:tourists/ui/user/request_guide/request_guide_screen.dart';
@@ -34,24 +35,31 @@ class _TouristGuideListSubScreenState extends State<TouristGuideListSubScreen> {
     if (currentStatus == GuideListBloc.STATUS_CODE_INIT) {
       widget._guideListBloc.getAllGuides();
       return Center(
-        child: Text('Loading'),
+        child: Text(S.of(context).loading),
       );
     }
 
     if (currentStatus == GuideListBloc.STATUS_CODE_LOAD_ERROR) {
       widget._guideListBloc.getAllGuides();
       return Center(
-        child: Text('Error Loading Data!'),
+        child: Text(S.of(context).error_fetching_data),
       );
     }
 
     if (currentStatus == GuideListBloc.STATUS_CODE_LOAD_SUCCESS) {
       List<Widget> pageLayout = [];
 
-      pageLayout.add(Text('سياح'));
+      pageLayout.add(AppBar(
+        title: Text('سياح'),
+        backgroundColor: Colors.white,
+      ));
 
       return ListView(children: getGuidesList());
     }
+
+    return Center(
+      child: Text("Unidentified State!"),
+    );
   }
 
   List<Widget> getGuidesList() {

@@ -1,39 +1,76 @@
-import 'package:analyzer_plugin/utilities/pair.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:tourists/managers/comment/comment_service.dart';
 import 'package:tourists/models/guide_list_item/guide_list_item.dart';
 import 'package:tourists/models/location_details/location_details.dart';
+import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
+import 'package:tourists/requests/create_comments/create_comments.dart';
+import 'package:tourists/responses/create_comment/create_comment_response.dart';
 import 'package:tourists/services/location_details/location_details_service.dart';
 
 @provide
 class LocationDetailsBloc {
   static const int STATUS_CODE_INIT = 200;
-  static const int STATUS_CODE_LOAD_FINISHED = 201;
+  static const int STATUS_CODE_LOAD_SUCCESS = 201;
   static const int STATUS_CODE_LOAD_ERROR = 202;
 
+  static const int KEY_STATUS = 321;
+  static const int KEY_LOCATION_INFO = 311;
+  static const int KEY_COMMENTS = 331;
+  static const int KEY_GUIDES = 341;
+
   final LocationDetailsService _locationDetailsService;
+  final SharedPreferencesHelper _preferencesHelper;
+  final CommentManager _commentManager;
 
-  LocationDetailsBloc(this._locationDetailsService);
+  LocationDetailsBloc(this._locationDetailsService, this._preferencesHelper,
+      this._commentManager);
 
-  Subject<Pair<int, LocationDetailsBlocModel>> locationDetailsSubject= new PublishSubject<Pair<int, LocationDetailsBlocModel>>();
-  Stream<Pair<int, LocationDetailsBlocModel>> get locationDetailsStream => locationDetailsSubject.stream;
+  Subject<Map<int, dynamic>> locationDetailsSubject =
+      new PublishSubject<Map<int, dynamic>>();
+
+  Stream<Map<int, dynamic>> get locationDetailsStream =>
+      locationDetailsSubject.stream;
 
   getLocation(String locationId) async {
-    LocationDetailsModel model = await _locationDetailsService.getLocationDetails(locationId);
-    List<GuideListItemModel> guides = await _locationDetailsService.getGuidesByLocationId(locationId);
+    LocationDetailsModel model =
+        await _locationDetailsService.getLocationDetails(locationId);
+    List<GuideListItemModel> guides =
+        await _locationDetailsService.getGuidesByLocationId(locationId);
 
     if (model == null || guides == null) {
-      locationDetailsSubject.add(new Pair(STATUS_CODE_LOAD_ERROR, LocationDetailsBlocModel(locationDetails: model, guides: guides)));
+      locationDetailsSubject.add({KEY_STATUS: STATUS_CODE_LOAD_ERROR});
       return;
     }
 
-    locationDetailsSubject.add(new Pair(STATUS_CODE_LOAD_FINISHED, LocationDetailsBlocModel(locationDetails: model, guides: guides)));
+    locationDetailsSubject.add({
+      KEY_STATUS: STATUS_CODE_LOAD_SUCCESS,
+      KEY_LOCATION_INFO: model,
+      KEY_GUIDES: guides
+    });
   }
-}
 
-class LocationDetailsBlocModel {
-  LocationDetailsModel locationDetails;
-  List<GuideListItemModel> guides;
+  Future<bool> postComment(String commentMsg, String regionId) async {
+    String uid = await this._preferencesHelper.getUserUID();
+    if (uid == null) {
+      return false;
+    }
 
-  LocationDetailsBlocModel({this.locationDetails, this.guides});
+    CreateCommentResponse response = await this._commentManager.createComment(
+        CreateCommentRequest(comment: commentMsg, user: uid, region: regionId));
+    if (response == null) return false;
+
+    return true;
+  }
+
+  createRate(int rate, String locationId) {
+    _locationDetailsService.createRate(rate, locationId).then((value) {
+      if (value != null) {
+        getLocation(locationId);
+      } else {
+        Fluttertoast.showToast(msg: 'Error Creating Rate');
+      }
+    });
+  }
 }

@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tourists/generated/l10n.dart';
 
 class LocationListItemWidget extends StatelessWidget {
   final String imageLink;
@@ -73,7 +73,7 @@ class LocationListItemWidget extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                commentsNumber.toString() + ' Comments',
+                                commentsNumber.toString() + ' ' + S.of(context).comments,
                                 style: TextStyle(fontSize: 12),
                               )
                             ],

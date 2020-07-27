@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:inject/inject.dart';
 import 'package:tourists/models/location_list_item/location_list_item.dart';
 import 'package:tourists/repositories/location_list/location_list_repository.dart';

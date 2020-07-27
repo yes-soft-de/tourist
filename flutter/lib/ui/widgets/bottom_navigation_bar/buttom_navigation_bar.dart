@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:tourists/components/user/user_routes.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
 import 'package:tourists/ui/user/home/home.dart';
 import 'package:tourists/ui/widgets/request_guide_button/request_guide_button.dart';
@@ -31,7 +32,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     List<Widget> widgetLayout = [];
 
     if (activePosition != 3) {
-      widgetLayout.add(RequestGuideButton());
+      widgetLayout.add(GestureDetector(
+          child: RequestGuideButton()));
     } else {
       widgetLayout.add(Flex(
         direction: Axis.vertical,
@@ -51,7 +53,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                     Container(
                       width: 16,
                     ),
-                    Text("Orders"),
+                    Text(S.of(context).orders),
                   ],
                 ),
               ),
@@ -62,8 +64,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               SharedPreferencesHelper preferencesHelper =
                   new SharedPreferencesHelper();
               preferencesHelper.clearData().then((value) {
-                Navigator.pushNamed(
-                    context, UserRoutes.loginTypeSelector);
+                Navigator.pushNamed(context, UserRoutes.loginTypeSelector);
               });
             },
             child: Container(
@@ -77,7 +78,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                     Container(
                       width: 16,
                     ),
-                    Text("Logout"),
+                    Text(S.of(context).logout),
                   ],
                 ),
               ),

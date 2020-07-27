@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/bloc/orders_list/orders_list_screen_bloc.dart';
-import 'package:tourists/components/user/user_routes.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/models/order/order_model.dart';
 import 'package:tourists/ui/widgets/order_item/order_item.dart';
 
@@ -43,7 +43,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
         },
         child: Scaffold(
             body: Center(
-          child: Text("Load Error!"),
+          child: Text(S.of(context).error_fetching_data),
         )),
       );
     }

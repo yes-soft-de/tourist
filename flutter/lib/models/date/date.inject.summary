@@ -1,5 +1,5 @@
 {
-  "asset": "asset:tourists/lib/ui/user/tourist_search/tourist_search.dart",
+  "asset": "asset:tourists/lib/models/date/date.dart",
   "summary": {
     "injector": [],
     "module": [],

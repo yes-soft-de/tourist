@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tourists/generated/l10n.dart';
 
 class GuideListItemWidget extends StatelessWidget {
   final String guideName;
@@ -59,7 +60,7 @@ class GuideListItemWidget extends StatelessWidget {
                     direction: Axis.horizontal,
                     children: <Widget>[
                       Text(
-                        availability != null ? availability : 'Available',
+                        availability != null ? availability : S.of(context).available,
                         style: TextStyle(),
                       ),
                       Container(

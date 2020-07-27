@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/components/user/user_routes.dart';
+import 'package:tourists/generated/l10n.dart';
 
 @provide
 class RequestGuideSuccessScreen extends StatelessWidget {
@@ -16,11 +17,11 @@ class RequestGuideSuccessScreen extends StatelessWidget {
                 child: Container(
                   width: 240,
                   child: Text(
-                      'Requesting the guide was completed, he/she will contact you as soon as possible'),
+                      S.of(context).request_guide_msg_success),
                 )),
           ),
           RaisedButton(
-            child: Text('Return to Home'),
+            child: Text(S.of(context).return_to_home),
             onPressed: () {
               Navigator.pushReplacementNamed(
                   context, UserRoutes.home);

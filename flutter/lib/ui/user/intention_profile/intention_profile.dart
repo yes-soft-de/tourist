@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/bloc/create_intentions/create_intention_bloc.dart';
 import 'package:tourists/components/user/user_routes.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
 
 @provide
@@ -88,7 +89,7 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
                     decoration: const InputDecoration(labelText: 'City'),
                     validator: (String value) {
                       if (value.isEmpty) {
-                        return 'Please enter some text';
+                        return S.of(context).error_null_text;
                       }
                       return null;
                     },
@@ -159,7 +160,7 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
                                       labelText: 'Staying for'),
                                   validator: (String value) {
                                     if (value.isEmpty) {
-                                      return 'Please enter some text';
+                                      return S.of(context).error_null_text;
                                     }
                                     return null;
                                   },
@@ -199,7 +200,7 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
                                   BorderRadius.all(Radius.circular(90))),
                           child: Padding(
                             padding: EdgeInsets.all(8),
-                            child: Text('      Save      '),
+                            child: Text(S.of(context).save),
                           ),
                         )
                       ],

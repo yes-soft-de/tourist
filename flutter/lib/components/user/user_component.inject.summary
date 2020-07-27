@@ -63,6 +63,20 @@
             },
             {
               "lookupKey": {
+                "root": "asset:tourists/lib/ui/user/event_details/event_details_screen.dart#EventDetailsScreen",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/ui/user/tourist_create_general_request/tourist_create_general_request.dart#TouristCreateGeneralRequestScreen",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
                 "root": "asset:tourists/lib/ui/user/home/home.dart#HomeScreen",
                 "qualifier": null
               },

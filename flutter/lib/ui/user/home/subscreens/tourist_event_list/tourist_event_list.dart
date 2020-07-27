@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/bloc/event_list/event_list_bloc.dart';
+import 'package:tourists/components/user/user_routes.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/models/event/event_model.dart';
 import 'package:tourists/ui/widgets/event_list_item_widget/event_list_item_widget.dart';
@@ -134,19 +135,25 @@ class _TouristEventListSubScreenState extends State<TouristEventListSubScreen> {
 
     if (eventsList.length > 0) {
       getActiveList().forEach((event) {
-        pageLayout.add(EventListItemWidget(
-          image:
-              'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-          location: event.location,
-          status: event.status,
-          commentNumber: 0,
-          time: getDate(event.date.timestamp).toString(),
-          name: event.name,
+        pageLayout.add(GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, UserRoutes.eventDetails,
+                arguments: event.id);
+          },
+          child: EventListItemWidget(
+            image:
+                'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
+            location: event.location,
+            status: event.status,
+            commentNumber: 0,
+            time: getDate(event.date.timestamp).toString(),
+            name: event.name,
+          ),
         ));
       });
     } else {
       pageLayout.add(Center(
-        child: Text("No Events for now!"),
+        child: Text(S.of(context).no_events_yet),
       ));
     }
 

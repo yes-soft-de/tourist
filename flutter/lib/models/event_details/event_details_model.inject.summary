@@ -1,5 +1,5 @@
 {
-  "asset": "asset:tourists/lib/ui/user/tourist_chat/tourist_chat.dart",
+  "asset": "asset:tourists/lib/models/event_details/event_details_model.dart",
   "summary": {
     "injector": [],
     "module": [],

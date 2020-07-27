@@ -83,10 +83,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: <Widget>[
                     TextFormField(
                       controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
                       decoration: const InputDecoration(labelText: 'Email'),
                       validator: (String value) {
                         if (value.isEmpty) {
-                          return 'Please enter some text';
+                          return S.of(context).error_null_text;
                         }
                         return null;
                       },
@@ -96,10 +97,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     TextFormField(
                       controller: _passwordController,
+                      obscureText: true,
                       decoration: const InputDecoration(labelText: 'Password'),
                       validator: (String value) {
                         if (value.isEmpty || value.length < 6) {
-                          return 'Please enter some text';
+                          return S.of(context).error_null_text;
                         }
                         return null;
                       },
@@ -137,8 +139,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text(_error == null
                           ? ''
                           : (_error
-                              ? 'Successfully registered ' + _userEmail
-                              : 'Registration failed')),
+                              ? S.of(context).successfully_registered + _userEmail
+                              : S.of(context).registration_failed)),
                     )
                   ],
                 ),

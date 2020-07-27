@@ -1,5 +1,6 @@
 import 'package:inject/inject.dart';
 import 'package:flutter/material.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/ui/guide/guide_home/guide_home.dart';
 import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
 import 'package:tourists/components/user/user_routes.dart';
@@ -43,7 +44,7 @@ class _CustomGuideBottomNavigatorState
                         Container(
                           width: 16,
                         ),
-                        Text("Orders"),
+                        Text(S.of(context).orders),
                       ],
                     ),
                   ),
@@ -69,7 +70,7 @@ class _CustomGuideBottomNavigatorState
                         Container(
                           width: 16,
                         ),
-                        Text("Logout"),
+                        Text(S.of(context).logout),
                       ],
                     ),
                   ),
@@ -96,7 +97,7 @@ class _CustomGuideBottomNavigatorState
                   color: activePosition == 0 ? activeColor : inactiveColor,
                 ),
                 Text(
-                  'home',
+                  S.of(context).home,
                   style: TextStyle(
                       color: activePosition == 0 ? activeColor : inactiveColor),
                 )
@@ -116,7 +117,7 @@ class _CustomGuideBottomNavigatorState
                   color: activePosition == 1 ? activeColor : inactiveColor,
                 ),
                 Text(
-                  'Guides',
+                  S.of(context).guides,
                   style: TextStyle(
                       color: activePosition == 1 ? activeColor : inactiveColor),
                 )
@@ -136,7 +137,7 @@ class _CustomGuideBottomNavigatorState
                   color: activePosition == 2 ? activeColor : inactiveColor,
                 ),
                 Text(
-                  'Events',
+                  S.of(context).events,
                   style: TextStyle(
                       color: activePosition == 2 ? activeColor : inactiveColor),
                 )
@@ -155,7 +156,7 @@ class _CustomGuideBottomNavigatorState
                   color: activePosition == 3 ? activeColor : inactiveColor,
                 ),
                 Text(
-                  'Orders',
+                  S.of(context).orders,
                   style: TextStyle(
                       color: activePosition == 3 ? activeColor : inactiveColor),
                 )

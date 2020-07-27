@@ -1,12 +1,19 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/bloc/location_details/location_details_bloc.dart';
 import 'package:tourists/components/user/user_routes.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/models/guide_list_item/guide_list_item.dart';
 import 'package:tourists/models/location_details/location_details.dart';
+import 'package:tourists/models/location_list_item/location_list_item.dart';
 import 'package:tourists/nav_arguments/request_guide/request_guide_navigation.dart';
+import 'package:tourists/responses/comment/comment_response.dart';
 import 'package:tourists/ui/widgets/carousel/carousel.dart';
+import 'package:tourists/ui/widgets/comment_item/comment_item.dart';
 import 'package:tourists/ui/widgets/guide_list_item/guide_list_item.dart';
 import 'package:tourists/ui/widgets/request_guide_button/request_guide_button.dart';
 
@@ -27,13 +34,20 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
   List<GuideListItemModel> _guidesList;
   bool commentListCollapsed = false;
   bool guidesListExpanded = false;
+  bool canSendComments = true;
+  ScrollController pageScrollController = ScrollController();
+  double scrollPosition = 0;
+  String locationId;
+
+  TextEditingController commentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     // Get the Location Id
-    final String locationId = ModalRoute.of(context).settings.arguments;
+    locationId = ModalRoute.of(context).settings.arguments;
 
     widget._locationBloc.locationDetailsStream.listen((event) {
+      canSendComments = true;
       currentStatus = event[LocationDetailsBloc.KEY_STATUS];
       if (currentStatus == LocationDetailsBloc.STATUS_CODE_LOAD_SUCCESS) {
         _locationDetails = event[LocationDetailsBloc.KEY_LOCATION_INFO];
@@ -47,7 +61,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
       widget._locationBloc.getLocation(locationId);
       return Scaffold(
         body: Center(
-          child: Text('Loading'),
+          child: Text(S.of(context).loading),
         ),
       );
     }
@@ -56,7 +70,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
     if (currentStatus == LocationDetailsBloc.STATUS_CODE_LOAD_ERROR) {
       return Scaffold(
         body: Center(
-          child: Text('Error Loading Info!'),
+          child: Text(S.of(context).error_fetching_data),
         ),
       );
     }
@@ -84,7 +98,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
         ));
       });
     } else {
-      Fluttertoast.showToast(msg: 'No Images?!!');
+      Fluttertoast.showToast(msg: S.of(context).error_no_images);
     }
 
     List<Widget> pageLayout = [
@@ -104,7 +118,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          'Guides',
+          S.of(context).guides,
           style: TextStyle(
               fontSize: 24, color: Colors.black45, fontWeight: FontWeight.bold),
         ),
@@ -113,7 +127,44 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
 
     pageLayout.addAll(getGuidesList());
 
-    pageLayout.addAll(getCommentList());
+    Flex createCommentRow = Flex(
+      direction: Axis.horizontal,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Flexible(
+          flex: 3,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              controller: commentController,
+              decoration: InputDecoration(hintText: 'Comment Here'),
+            ),
+          ),
+        ),
+        Flexible(
+          flex: 1,
+          child: GestureDetector(
+            onTap: () {
+              createComment();
+            },
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.send,
+                  color: Colors.white,
+                ),
+              ),
+              decoration: BoxDecoration(
+                  color: canSendComments ? Colors.greenAccent : Colors.grey),
+            ),
+          ),
+        )
+      ],
+    );
+    pageLayout.add(createCommentRow);
+
+    pageLayout.add(getCommentList());
 
     return Scaffold(
       body: Stack(
@@ -123,18 +174,32 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
             bottom: 0,
             left: 0,
             right: 0,
-            child: ListView(
-              children: pageLayout,
+            child: NotificationListener(
+              onNotification: (t) {
+                if (t is ScrollEndNotification) {
+                  scrollPosition =
+                      pageScrollController.position.pixels - scrollPosition;
+                  scrollPosition = scrollPosition > 0 ? 1 : -1;
+                  setState(() {});
+                }
+                return true;
+              },
+              child: ListView(
+                controller: pageScrollController,
+                children: pageLayout,
+              ),
             ),
           ),
-          Positioned(
-            bottom: 16,
-            left: 0,
-            right: 0,
-            child: RequestGuideButton(
-              cityId: this._locationDetails.id.toString(),
-            ),
-          )
+          scrollPosition < 0
+              ? Positioned(
+                  bottom: 16,
+                  left: 0,
+                  right: 0,
+                  child: RequestGuideButton(
+                    cityId: this._locationDetails.id.toString(),
+                  ),
+                )
+              : Container()
         ],
       ),
     );
@@ -199,7 +264,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(90))),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("SHOW MORE"),
+                child: Text(S.of(context).show_more),
               ),
             ),
           )
@@ -210,9 +275,47 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
     return guidesList;
   }
 
-  List<Widget> getCommentList() {
-    List<Widget> commentsList = [];
+  Widget getCommentList() {
+    if (_locationDetails.comments == null) return null;
 
-    return commentsList;
+    List<Widget> comments = [];
+    List<CommentModel> allComments = _locationDetails.comments;
+
+    if (_locationDetails.comments.length > 2 && commentListCollapsed) {
+      allComments = allComments.sublist(0, 2);
+    }
+
+    allComments.forEach((element) {
+      comments.add(CommentItemWidget(
+        comment: element.comment,
+        userName: element.userName,
+        commentDate: getTimeFromTimeStamp(element.date.timestamp),
+      ));
+    });
+
+    return Flex(
+      direction: Axis.vertical,
+      children: comments,
+    );
+  }
+
+  void createComment() {
+    if (!canSendComments) {
+      return;
+    }
+    canSendComments = false;
+    setState(() {});
+    if (commentController.text == null) return;
+    if (commentController.text.length > 0) {
+      widget._locationBloc
+          .postComment(commentController.text, locationId)
+          .then((createSuccess) {
+        widget._locationBloc.getLocation(locationId);
+      });
+    }
+  }
+
+  DateTime getTimeFromTimeStamp(int timeStamp) {
+    return new DateTime.fromMicrosecondsSinceEpoch(timeStamp);
   }
 }

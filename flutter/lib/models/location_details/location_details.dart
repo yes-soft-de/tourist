@@ -1,12 +1,14 @@
 import 'dart:developer';
 
+import 'package:tourists/responses/comment/comment_response.dart';
+
 class LocationDetailsModel {
   int id;
   String name;
   String description;
   List<String> location;
-  List<String> comments;
-  Null ratingAverage;
+  List<CommentModel> comments;
+  int ratingAverage;
   List<Paths> paths;
 
   LocationDetailsModel(
@@ -24,6 +26,12 @@ class LocationDetailsModel {
     description = json['description'];
     location = json['location'].cast<String>();
     ratingAverage = json['ratingAverage'];
+    if (json['comments'] != null) {
+      comments = new List<CommentModel>();
+      json['comments'].forEach((v) {
+        comments.add(new CommentModel.fromJson(v));
+      });
+    }
     if (json['regionImage'] != null) {
       paths = new List<Paths>();
       json['regionImage'].forEach((v) {
@@ -42,6 +50,9 @@ class LocationDetailsModel {
     data['description'] = this.description;
     data['location'] = this.location;
     data['ratingAverage'] = this.ratingAverage;
+    if (this.comments != null) {
+      data['comments'] = this.comments.map((v) => v.toJson()).toList();
+    }
     if (this.paths != null) {
       data['paths'] = this.paths.map((v) => v.toJson()).toList();
     }

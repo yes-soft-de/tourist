@@ -13,6 +13,10 @@ class EventService {
   Future<List<EventModel>> getAllEvents() async {
     EventListResponse response = await _manager.getAllEvents();
 
+    if (response == null) {
+      return [];
+    }
+
     List<EventModel> eventList = [];
     response.data.forEach((element) {
       eventList.add(EventModel(
@@ -32,14 +36,16 @@ class EventService {
   Future<EventModel> getEvent(String id) async {
     EventResponse response = await _manager.getEvent(id);
 
-    return EventModel(
-        id: response.data.id,
-        name: response.data.name,
-        type: response.data.type,
-        subType: response.data.subType,
-        description: response.data.description,
-        images: response.data.images,
-        status: response.data.status
-    );
+    if (response != null)
+      return EventModel(
+          id: response.data.id,
+          name: response.data.name,
+          type: response.data.type,
+          subType: response.data.subType,
+          description: response.data.description,
+          images: response.data.images,
+          date: response.data.date,
+          status: response.data.status);
+    return null;
   }
 }

@@ -1,4 +1,4 @@
-import 'package:tourists/responses/event_list/event_list.dart';
+import 'package:tourists/models/date/date.dart';
 
 class EventModel {
   int id;

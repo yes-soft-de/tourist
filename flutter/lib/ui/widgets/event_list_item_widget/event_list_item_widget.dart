@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tourists/generated/l10n.dart';
 
 class EventListItemWidget extends StatelessWidget {
   final String image;
@@ -74,7 +74,7 @@ class EventListItemWidget extends StatelessWidget {
                             Container(
                               width: 8,
                             ),
-                            Text(commentNumber.toString() + ' Comment(s)'),
+                            Text(commentNumber.toString() + ' ' + S.of(context).comments),
                           ],
                         ),
                       )

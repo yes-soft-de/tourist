@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/bloc/main_home/main_home_bloc.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/models/location_list_item/location_list_item.dart';
 import 'package:tourists/ui/user/location_details/location_details.dart';
 import 'package:tourists/ui/widgets/carousel/carousel.dart';
@@ -9,28 +10,28 @@ import 'package:tourists/ui/widgets/location_list_item/location_list_item.dart';
 
 @provide
 class MainHomeSubScreen extends StatefulWidget {
-
   final MainHomeBloc _homeBloc;
   final LocationDetailsScreen _detailsScreen;
 
   @override
   State<StatefulWidget> createState() => _MainHomeSubScreenState();
+
   MainHomeSubScreen(this._homeBloc, this._detailsScreen);
 }
 
 class _MainHomeSubScreenState extends State<MainHomeSubScreen> {
   @override
   Widget build(BuildContext context) {
-
     widget._homeBloc.requestLocationList();
 
     return StreamBuilder(
       stream: widget._homeBloc.locationListStream,
-      builder: (BuildContext context, AsyncSnapshot<List<LocationListItem>> locationList) {
+      builder: (BuildContext context,
+          AsyncSnapshot<List<LocationListItem>> locationList) {
         if (locationList == null || locationList.data == null) {
-          return Center(child: Text(
-            'Loading'
-          ),);
+          return Center(
+            child: Text(S.of(context).loading),
+          );
         }
 
         List<Widget> locationCards = [];

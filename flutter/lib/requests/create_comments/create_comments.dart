@@ -1,7 +1,7 @@
 class CreateCommentRequest {
   String comment;
-  Null region;
-  Null user;
+  String region;
+  String user;
 
   CreateCommentRequest({this.comment, this.region, this.user});
 

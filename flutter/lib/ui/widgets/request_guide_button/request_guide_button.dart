@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:tourists/components/user/user_routes.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/nav_arguments/request_guide/request_guide_navigation.dart';
 
 class RequestGuideButton extends StatelessWidget {
@@ -9,13 +12,16 @@ class RequestGuideButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String requestGuideMsg = cityId == null
+        ? S.of(context).request_guide
+        : S.of(context).request_tour;
     return GestureDetector(
       onTap: () {
+        log("Request Guide Position");
+        Navigator.pushNamed(context, UserRoutes.makeGeneralRequest);
         if (cityId != null) {
           Navigator.pushReplacementNamed(context, UserRoutes.requestGuide,
               arguments: RequestGuideNavigationArguments(cityId: cityId));
-        } else {
-          Navigator.pushReplacementNamed(context, UserRoutes.requestGuide);
         }
       },
       child: Container(
@@ -50,7 +56,7 @@ class RequestGuideButton extends StatelessWidget {
                       width: 16,
                     ),
                     Text(
-                      'Request Guid!',
+                      requestGuideMsg,
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                     Container(

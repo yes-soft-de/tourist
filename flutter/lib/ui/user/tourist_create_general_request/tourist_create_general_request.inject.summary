@@ -3,6 +3,32 @@
   "summary": {
     "injector": [],
     "module": [],
-    "injectable": []
+    "injectable": [
+      {
+        "name": "TouristCreateGeneralRequestScreen",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/ui/user/tourist_create_general_request/tourist_create_general_request.dart#TouristCreateGeneralRequestScreen",
+              "qualifier": null
+            },
+            "isProvider": false
+          },
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/ui/user/home/subscreens/tourist_guide_list/tourist_guide_list.dart#TouristGuideListSubScreen",
+                "qualifier": null
+              },
+              "isProvider": false
+            }
+          ]
+        }
+      }
+    ]
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
 import 'package:tourists/ui/user/home/subscreens/main/main_home.dart';
 import 'package:tourists/ui/user/home/subscreens/tourist_event_list/tourist_event_list.dart';
@@ -75,17 +76,17 @@ class HomeScreenState extends State<HomeScreen> {
     return showDialog(
           context: context,
           builder: (context) => new AlertDialog(
-            title: new Text('Are you sure?'),
-            content: new Text('Do you want to exit an App'),
+            title: new Text(S.of(context).are_you_sure),
+            content: new Text(S.of(context).exit_msg),
             actions: <Widget>[
               new GestureDetector(
                 onTap: () => Navigator.of(context).pop(false),
-                child: Text("NO"),
+                child: Text(S.of(context).no),
               ),
               SizedBox(height: 16),
               new GestureDetector(
                 onTap: () => Navigator.of(context).pop(true),
-                child: Text("YES"),
+                child: Text(S.of(context).yes),
               ),
             ],
           ),

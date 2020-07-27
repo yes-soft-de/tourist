@@ -29,7 +29,8 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
       currentState = event[EventDetailsBloc.KEY_STATUS];
       if (currentState == EventDetailsBloc.STATUS_CODE_LOAD_SUCCESS) {
         eventDetails = event[EventDetailsBloc.KEY_EVENT];
-        locationId = event[EventDetailsBloc.KEY_LOCATION].id;
+        if (event[EventDetailsBloc.KEY_LOCATION] != null)
+          locationId = event[EventDetailsBloc.KEY_LOCATION].id;
       }
       setState(() {});
     });
@@ -127,9 +128,7 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
     pageUI.add(Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text(getTimeFromTimeStamp(eventDetails.date.timestamp)
-            .toLocal()
-            .toString())
+        Text(getTimeFromTimeStamp(eventDetails.date.timestamp).toString())
       ],
     ));
 
@@ -168,9 +167,9 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
             bottom: 0,
             left: 0,
             right: 0,
-            child: RequestGuideButton(
-              cityId: this.locationId != null ? this.locationId : 1,
-            ),
+            child: this.locationId != null ? RequestGuideButton(
+              cityId: this.locationId != null ? this.locationId.toString() : '1',
+            ): Container(),
           )
         ],
       ),
@@ -178,6 +177,9 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
   }
 
   DateTime getTimeFromTimeStamp(int timestamp) {
-    return DateTime.fromMicrosecondsSinceEpoch(timestamp);
+    print(timestamp);
+    var date = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+    print(date.toString());
+    return date;
   }
 }

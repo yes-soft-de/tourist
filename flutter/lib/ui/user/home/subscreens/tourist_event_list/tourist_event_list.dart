@@ -146,7 +146,7 @@ class _TouristEventListSubScreenState extends State<TouristEventListSubScreen> {
             location: event.location,
             status: event.status,
             commentNumber: 0,
-            time: getDate(event.date.timestamp).toString(),
+            time: getDate(event.date.timestamp),
             name: event.name,
           ),
         ));
@@ -171,6 +171,6 @@ class _TouristEventListSubScreenState extends State<TouristEventListSubScreen> {
   }
 
   getDate(int timeStamp) {
-    return new DateTime.fromMicrosecondsSinceEpoch(timeStamp);
+    return new DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
   }
 }

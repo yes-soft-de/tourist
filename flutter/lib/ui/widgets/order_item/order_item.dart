@@ -195,6 +195,6 @@ class OrderItemWidget extends StatelessWidget {
   }
 
   DateTime getDateTime(int seconds) {
-    return new DateTime.fromMicrosecondsSinceEpoch(orderModel.date.timestamp);
+    return new DateTime.fromMillisecondsSinceEpoch(orderModel.date.timestamp * 1000);
   }
 }

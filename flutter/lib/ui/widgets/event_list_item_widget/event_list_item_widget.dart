@@ -4,7 +4,7 @@ import 'package:tourists/generated/l10n.dart';
 class EventListItemWidget extends StatelessWidget {
   final String image;
   final String name;
-  final String time;
+  final DateTime time;
   final String location;
   final String status;
   final int commentNumber;
@@ -49,7 +49,7 @@ class EventListItemWidget extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                   Text(
-                    time,
+                    time.toString().substring(0, 16),
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Text(location != null ? location : ''),

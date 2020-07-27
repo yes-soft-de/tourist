@@ -316,6 +316,6 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
   }
 
   DateTime getTimeFromTimeStamp(int timeStamp) {
-    return new DateTime.fromMicrosecondsSinceEpoch(timeStamp);
+    return new DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
   }
 }

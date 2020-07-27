@@ -29,6 +29,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    activePosition = widget.pagePosition;
+
     List<Widget> widgetLayout = [];
 
     if (activePosition != 3) {

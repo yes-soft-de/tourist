@@ -29,6 +29,12 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    Widget bottomNavBar = CustomBottomNavigationBar(
+        pagePosition: position != null ? position : 0,
+        homeScreenState: this
+    );
+
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
@@ -49,6 +55,10 @@ class HomeScreenState extends State<HomeScreen> {
                 onPageChanged: (pos) {
                   // Update the Home Page
                   position = pos;
+                  bottomNavBar = CustomBottomNavigationBar(
+                      pagePosition: position != null ? position : 0,
+                      homeScreenState: this
+                  );
                   setState(() {});
                 },
               ),
@@ -57,10 +67,7 @@ class HomeScreenState extends State<HomeScreen> {
               bottom: 0,
               left: 0,
               right: 0,
-              child: CustomBottomNavigationBar(
-                pagePosition: position != null ? position : 0,
-                homeScreenState: this
-              ),
+              child: bottomNavBar,
             )
           ],
         ),

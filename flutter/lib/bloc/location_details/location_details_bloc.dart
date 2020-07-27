@@ -1,3 +1,4 @@
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tourists/managers/comment/comment_service.dart';
@@ -61,5 +62,15 @@ class LocationDetailsBloc {
     if (response == null) return false;
 
     return true;
+  }
+
+  createRate(int rate, String locationId) {
+    _locationDetailsService.createRate(rate, locationId).then((value) {
+      if (value != null) {
+        getLocation(locationId);
+      } else {
+        Fluttertoast.showToast(msg: 'Error Creating Rate');
+      }
+    });
   }
 }

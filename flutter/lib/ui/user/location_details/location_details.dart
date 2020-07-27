@@ -39,6 +39,8 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
   double scrollPosition = 0;
   String locationId;
 
+  int currentRate;
+
   TextEditingController commentController = TextEditingController();
 
   @override
@@ -311,11 +313,42 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
           .postComment(commentController.text, locationId)
           .then((createSuccess) {
         widget._locationBloc.getLocation(locationId);
+        commentController.clear();
       });
     }
   }
 
   DateTime getTimeFromTimeStamp(int timeStamp) {
     return new DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
+  }
+
+  Widget getEvaluationBar() {
+    List<Widget> stars = [];
+
+    if (currentRate == null) {
+      for (int i = 0; i < 5; i++) {
+        stars.add(GestureDetector(
+          onTap: () {
+            widget._locationBloc.createRate(i, locationId);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.star_border),
+          ),
+        ));
+      }
+    } else {
+      for (int i = 0; i <= currentRate; i++) {
+        stars.add(Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Icon(Icons.star),
+        ));
+      }
+    }
+
+    return Flex(
+      direction: Axis.horizontal,
+      children: stars,
+    );
   }
 }

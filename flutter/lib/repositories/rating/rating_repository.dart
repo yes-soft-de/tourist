@@ -15,7 +15,6 @@ class RatingRepository {
     print(response);
 
     if (response == null) return false;
-
     return true;
   }
 }

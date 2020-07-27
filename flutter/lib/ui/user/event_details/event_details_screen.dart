@@ -39,7 +39,7 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
       widget._bloc.getEventDetails(eventId.toString());
       return Scaffold(
         body: Center(
-          child: Text(S.of(context).name),
+          child: Text(S.of(context).loading),
         ),
       );
     }
@@ -128,7 +128,7 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
     pageUI.add(Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text(getTimeFromTimeStamp(eventDetails.date.timestamp).toString())
+        Text(getTimeFromTimeStamp(eventDetails.date.timestamp).toString().substring(0, 16))
       ],
     ));
 

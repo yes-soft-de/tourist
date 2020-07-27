@@ -23,7 +23,8 @@ class CustomBottomNavigationBar extends StatefulWidget {
 }
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
-  int activePosition;
+  int activePosition = 0;
+  bool moreActive = false;
 
   _CustomBottomNavigationBarState(this.activePosition);
 
@@ -33,9 +34,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
     List<Widget> widgetLayout = [];
 
-    if (activePosition != 3) {
-      widgetLayout.add(GestureDetector(
-          child: RequestGuideButton()));
+    if (!moreActive) {
+      widgetLayout.add(GestureDetector(child: RequestGuideButton()));
     } else {
       widgetLayout.add(Flex(
         direction: Axis.vertical,
@@ -115,6 +115,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               GestureDetector(
                 onTap: () {
                   log('Moving To Page ' + 0.toString());
+                  moreActive = false;
                   activePosition = 0;
                   setState(() {});
                   widget.homeScreenState.moveToPage(0);
@@ -141,6 +142,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                 onTap: () {
                   log('Moving To Page ' + 1.toString());
                   activePosition = 1;
+                  moreActive = false;
                   setState(() {});
                   widget.homeScreenState.moveToPage(1);
                 },
@@ -166,6 +168,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                 onTap: () {
                   log('Moving To Page ' + 2.toString());
                   activePosition = 2;
+                  moreActive = false;
                   setState(() {});
                   widget.homeScreenState.moveToPage(2);
                 },
@@ -191,6 +194,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                 onTap: () {
                   log('Moving To Page ' + 3.toString());
                   activePosition = 3;
+                  moreActive = true;
                   setState(() {});
                 },
                 child: Column(

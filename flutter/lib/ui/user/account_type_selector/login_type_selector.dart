@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/components/guide/guide_routes.dart';
 import 'package:tourists/components/user/user_routes.dart';
@@ -208,12 +209,11 @@ class _LoginTypeSelectorScreenState extends State<LoginTypeSelectorScreen> {
         content: new Text(S.of(context).exit_msg),
         actions: <Widget>[
           new GestureDetector(
-            onTap: () => Navigator.of(context).pop(false),
             child: Text(S.of(context).no),
           ),
           SizedBox(height: 16),
           new GestureDetector(
-            onTap: () => Navigator.of(context).pop(true),
+            onTap: () => SystemNavigator.pop(),
             child: Text(S.of(context).yes),
           ),
         ],

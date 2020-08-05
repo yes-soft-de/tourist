@@ -1,0 +1,26 @@
+{
+  "asset": "asset:tourists/lib/ui/guide/guide_profile/guide_profile.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
+      {
+        "name": "GuideProfileScreen",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/ui/guide/guide_profile/guide_profile.dart#GuideProfileScreen",
+              "qualifier": null
+            },
+            "isProvider": false
+          },
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": []
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "asset": "asset:tourists/lib/services/location_details/location_details_service.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
+      {
+        "name": "LocationDetailsService",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/services/location_details/location_details_service.dart#LocationDetailsService",
+              "qualifier": null
+            },
+            "isProvider": false
+          },
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/managers/location_details/location_details.dart#LocationDetailsManager",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/managers/guides_manager/guides_manager.dart#GuidesManager",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/managers/rate/rate_manager.dart#RatingManager",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper",
+                "qualifier": null
+              },
+              "isProvider": false
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

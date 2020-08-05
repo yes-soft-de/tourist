@@ -1,0 +1,34 @@
+{
+  "asset": "asset:tourists/lib/ui/widgets/custom_bottom_navigation_bar/custom_bottom_navigation_bar.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
+      {
+        "name": "CustomGuideBottomNavigationBar",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/ui/widgets/custom_bottom_navigation_bar/custom_bottom_navigation_bar.dart#CustomGuideBottomNavigationBar",
+              "qualifier": null
+            },
+            "isProvider": false
+          },
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/ui/guide/guide_home/guide_home.dart#GuideHomeScreenState",
+                "qualifier": null
+              },
+              "isProvider": false
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

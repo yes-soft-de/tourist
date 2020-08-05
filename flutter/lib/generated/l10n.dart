@@ -1,0 +1,544 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'intl/messages_all.dart';
+
+// **************************************************************************
+// Generator: Flutter Intl IDE plugin
+// Made by Localizely
+// **************************************************************************
+
+// ignore_for_file: non_constant_identifier_names, lines_longer_than_80_chars
+
+class S {
+  S();
+  
+  static S current;
+  
+  static const AppLocalizationDelegate delegate =
+    AppLocalizationDelegate();
+
+  static Future<S> load(Locale locale) {
+    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name); 
+    return initializeMessages(localeName).then((_) {
+      Intl.defaultLocale = localeName;
+      S.current = S();
+      
+      return S.current;
+    });
+  } 
+
+  static S of(BuildContext context) {
+    return Localizations.of<S>(context, S);
+  }
+
+  /// `Tourists`
+  String get title {
+    return Intl.message(
+      'Tourists',
+      name: 'title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome to `
+  String get welcome {
+    return Intl.message(
+      'Welcome to ',
+      name: 'welcome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I want to enjoy your services while I'm in Saudi Arabia`
+  String get card_01 {
+    return Intl.message(
+      'I want to enjoy your services while I\'m in Saudi Arabia',
+      name: 'card_01',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get go_to_tourist_login {
+    return Intl.message(
+      'Next',
+      name: 'go_to_tourist_login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get login {
+    return Intl.message(
+      'Login',
+      name: 'login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register a new Account`
+  String get move_to_register {
+    return Intl.message(
+      'Register a new Account',
+      name: 'move_to_register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I have an account!`
+  String get move_to_login {
+    return Intl.message(
+      'I have an account!',
+      name: 'move_to_login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register`
+  String get register_submit {
+    return Intl.message(
+      'Register',
+      name: 'register_submit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get form_label_name {
+    return Intl.message(
+      'Name',
+      name: 'form_label_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message(
+      'Next',
+      name: 'next',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comments`
+  String get comments {
+    return Intl.message(
+      'Comments',
+      name: 'comments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available`
+  String get available {
+    return Intl.message(
+      'Available',
+      name: 'available',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not Available`
+  String get not_available {
+    return Intl.message(
+      'Not Available',
+      name: 'not_available',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Events`
+  String get events {
+    return Intl.message(
+      'Events',
+      name: 'events',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Festivals`
+  String get festivals {
+    return Intl.message(
+      'Festivals',
+      name: 'festivals',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading`
+  String get loading {
+    return Intl.message(
+      'Loading',
+      name: 'loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saving Data`
+  String get saving_cata {
+    return Intl.message(
+      'Saving Data',
+      name: 'saving_cata',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Select a Language`
+  String get toast_select_language {
+    return Intl.message(
+      'Please Select a Language',
+      name: 'toast_select_language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select a Gender`
+  String get select_gender {
+    return Intl.message(
+      'Select a Gender',
+      name: 'select_gender',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Male`
+  String get male {
+    return Intl.message(
+      'Male',
+      name: 'male',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Female`
+  String get female {
+    return Intl.message(
+      'Female',
+      name: 'female',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select a Language`
+  String get select_language {
+    return Intl.message(
+      'Select a Language',
+      name: 'select_language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get english {
+    return Intl.message(
+      'English',
+      name: 'english',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `العربية`
+  String get language_arabic {
+    return Intl.message(
+      'العربية',
+      name: 'language_arabic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get language_english {
+    return Intl.message(
+      'English',
+      name: 'language_english',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter some text`
+  String get error_null_text {
+    return Intl.message(
+      'Please enter some text',
+      name: 'error_null_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error Fetching Data!`
+  String get error_fetching_data {
+    return Intl.message(
+      'Error Fetching Data!',
+      name: 'error_fetching_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Events for now!`
+  String get no_events_yet {
+    return Intl.message(
+      'No Events for now!',
+      name: 'no_events_yet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message(
+      'No',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure?`
+  String get are_you_sure {
+    return Intl.message(
+      'Are you sure?',
+      name: 'are_you_sure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to exit an App`
+  String get exit_msg {
+    return Intl.message(
+      'Do you want to exit an App',
+      name: 'exit_msg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SHOW MORE`
+  String get show_more {
+    return Intl.message(
+      'SHOW MORE',
+      name: 'show_more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Guides`
+  String get guides {
+    return Intl.message(
+      'Guides',
+      name: 'guides',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Images?!!`
+  String get error_no_images {
+    return Intl.message(
+      'No Images?!!',
+      name: 'error_no_images',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Successfully registered`
+  String get successfully_registered {
+    return Intl.message(
+      'Successfully registered',
+      name: 'successfully_registered',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registration failed`
+  String get registration_failed {
+    return Intl.message(
+      'Registration failed',
+      name: 'registration_failed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Requesting the guide was completed, he/she will contact you as soon as possible`
+  String get request_guide_msg_success {
+    return Intl.message(
+      'Requesting the guide was completed, he/she will contact you as soon as possible',
+      name: 'request_guide_msg_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Return to Home`
+  String get return_to_home {
+    return Intl.message(
+      'Return to Home',
+      name: 'return_to_home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Orders`
+  String get orders {
+    return Intl.message(
+      'Orders',
+      name: 'orders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message(
+      'Logout',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get home {
+    return Intl.message(
+      'Home',
+      name: 'home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request for Guide`
+  String get request_for_guide {
+    return Intl.message(
+      'Request for Guide',
+      name: 'request_for_guide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request Guid!`
+  String get request_guid {
+    return Intl.message(
+      'Request Guid!',
+      name: 'request_guid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request Guide`
+  String get request_guide {
+    return Intl.message(
+      'Request Guide',
+      name: 'request_guide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request Tour`
+  String get request_tour {
+    return Intl.message(
+      'Request Tour',
+      name: 'request_tour',
+      desc: '',
+      args: [],
+    );
+  }
+}
+
+class AppLocalizationDelegate extends LocalizationsDelegate<S> {
+  const AppLocalizationDelegate();
+
+  List<Locale> get supportedLocales {
+    return const <Locale>[
+      Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ar'),
+    ];
+  }
+
+  @override
+  bool isSupported(Locale locale) => _isSupported(locale);
+  @override
+  Future<S> load(Locale locale) => S.load(locale);
+  @override
+  bool shouldReload(AppLocalizationDelegate old) => false;
+
+  bool _isSupported(Locale locale) {
+    if (locale != null) {
+      for (var supportedLocale in supportedLocales) {
+        if (supportedLocale.languageCode == locale.languageCode) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+}

@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  db-mysql:
+    image: mysql:5.7
+    networks:
+      - tourists
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_DATABASE: tourists
+
+  tourists-php:
+    image: gcr.io/tourists-280412/tourists-php:latest
+    volumes:
+      - tourists:/var/www/html/
+    networks:
+      - tourists
+
+  server:
+    image: gcr.io/tourists-280412/tourists-server:latest
+    depends_on:
+      - db-mysql
+      - tourists-php
+    volumes:
+     - tourists:/var/www/html/
+    ports:
+      - 81:80
+    networks:
+      - tourists
+
+networks: 
+  tourists:
+
+volumes:
+  tourists:

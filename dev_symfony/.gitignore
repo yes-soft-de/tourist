@@ -1,0 +1,29 @@
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/public/bundles/
+/public/Uploads
+/var/
+/vendor/
+.env
+.env.test
+.env.prod
+tests/
+###< symfony/framework-bundle ###
+.idea
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
+
+###> PHP Storm Index Files ###
+/.idea/
+###< PHP Storm Index Files ###
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
+
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###

@@ -156,7 +156,7 @@ class OrderItemWidget extends StatelessWidget {
           RaisedButton(
             child: Text("Chat"),
             onPressed: () {
-              Navigator.pushReplacementNamed(context, UserRoutes.touristChat,
+              Navigator.pushNamed(context, UserRoutes.touristChat,
                   arguments: orderModel.roomID);
             },
           ),

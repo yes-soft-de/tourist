@@ -152,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
             GestureDetector(
               onTap: () {
                 developer.log('Register Requested');
-                Navigator.pushReplacementNamed(context, UserRoutes.register);
+                Navigator.pushNamed(context, UserRoutes.register);
               },
               child: Container(
                 alignment: Alignment.center,

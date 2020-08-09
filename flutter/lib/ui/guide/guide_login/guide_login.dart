@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
@@ -28,7 +29,7 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
   Widget build(BuildContext context) {
     widget._guideLoginBloc.stateStream.listen((event) {
       if (event.first == GuideLoginBloc.STATUS_CODE_RECEIVED) {
-        Navigator.pushReplacementNamed(context, GuideRoutes.guideRegister);
+        Navigator.pushReplacementNamed(context, GuideRoutes.guideProfileCreate);
       }
 
       if (event.first == GuideLoginBloc.STATUS_CODE_FAILED) {
@@ -52,6 +53,10 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
                   children: <Widget>[
                     TextField(
                       controller: _codeController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        hintText: 'Confirmation Code'
+                      ),
                     ),
                   ],
                 ),
@@ -61,7 +66,6 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
                     textColor: Colors.white,
                     color: Colors.blue,
                     onPressed: () async {
-                      // TODO: Move this to confirm code
                       final code = _codeController.text.trim();
                       widget._guideLoginBloc.confirmCode(code);
                     },
@@ -92,6 +96,7 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
                 height: 16,
               ),
               TextFormField(
+                keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8)),

@@ -31,7 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     widget._registerBloc.registerStatus.listen((event) {
       if (event != null && event.length > 0) {
-        Navigator.of(context).pushReplacementNamed(UserRoutes.createProfile);
+        Navigator.of(context).pushNamed(UserRoutes.createProfile);
       }
       submitAvailable = true;
       setState(() {});
@@ -144,7 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushReplacementNamed(context, UserRoutes.login);
+                Navigator.pushNamed(context, UserRoutes.login);
               },
               child: Container(
                 alignment: Alignment.center,

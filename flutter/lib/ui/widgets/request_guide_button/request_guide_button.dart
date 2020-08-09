@@ -20,7 +20,7 @@ class RequestGuideButton extends StatelessWidget {
         log("Request Guide Position");
         Navigator.pushNamed(context, UserRoutes.makeGeneralRequest);
         if (cityId != null) {
-          Navigator.pushReplacementNamed(context, UserRoutes.requestGuide,
+          Navigator.pushNamed(context, UserRoutes.requestGuide,
               arguments: RequestGuideNavigationArguments(cityId: cityId));
         }
       },

@@ -29,7 +29,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   Widget build(BuildContext context) {
     widget._profileBloc.profileStatus.listen((event) {
       if (widget != null) {
-        Navigator.pushReplacementNamed(context, UserRoutes.intentionProfile);
+        Navigator.pushNamed(context, UserRoutes.intentionProfile);
       }
     });
 

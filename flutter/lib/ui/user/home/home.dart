@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
+import 'package:tourists/components/user/user_routes.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
 import 'package:tourists/ui/user/home/subscreens/main/main_home.dart';
@@ -24,11 +25,16 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   int position;
-
+  bool loggedIn = false;
   PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
+
+    widget._preferencesHelper.getUserUID().then((value) {
+      loggedIn = (value != null);
+      setState(() {});
+    });
 
     Widget bottomNavBar = CustomBottomNavigationBar(
         pagePosition: position != null ? position : 0,
@@ -38,6 +44,20 @@ class HomeScreenState extends State<HomeScreen> {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Text('سياح'),
+          actions: <Widget>[
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, UserRoutes.loginTypeSelector);
+              },
+              child: Icon(
+                loggedIn ? Icons.person : Icons.perm_identity
+              ),
+            )
+          ],
+        ),
         body: Stack(
           children: <Widget>[
             Positioned(

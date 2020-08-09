@@ -31,7 +31,7 @@ class _CustomGuideBottomNavigatorState
             children: <Widget>[
               GestureDetector(
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, UserRoutes.orderPage);
+                  Navigator.pushNamed(context, UserRoutes.orderPage);
                 },
                 child: Container(
                   color: Colors.white,

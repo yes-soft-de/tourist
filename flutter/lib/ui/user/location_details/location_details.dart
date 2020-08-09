@@ -233,7 +233,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
 
       guidesList.add(GestureDetector(
         onTap: () {
-          Navigator.pushReplacementNamed(
+          Navigator.pushNamed(
             context,
             UserRoutes.requestGuide,
             arguments: RequestGuideNavigationArguments(

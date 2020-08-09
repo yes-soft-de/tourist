@@ -39,6 +39,13 @@
                 "qualifier": null
               },
               "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/ui/guide/guide_profile/guide_profile.dart#GuideProfileScreen",
+                "qualifier": null
+              },
+              "isProvider": false
             }
           ]
         }

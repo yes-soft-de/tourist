@@ -77,12 +77,13 @@ import '../../bloc/guide_register/guide_register.dart' as _i71;
 import '../../services/guide_register/guide_register.dart' as _i72;
 import '../../managers/guide_register/guide_register.dart' as _i73;
 import '../../repositories/guide_register/guide_register.dart' as _i74;
-import '../../components/shared/shared_component.dart' as _i75;
-import '../../ui/shared/chat_page/chat_page.dart' as _i76;
-import '../../bloc/chat_page/chat_page.bloc.dart' as _i77;
-import '../../services/chat/char_service.dart' as _i78;
-import '../../managers/chat/chat_manager.dart' as _i79;
-import '../../repositories/chat/chat_repository.dart' as _i80;
+import '../../ui/guide/guide_profile/guide_profile.dart' as _i75;
+import '../../components/shared/shared_component.dart' as _i76;
+import '../../ui/shared/chat_page/chat_page.dart' as _i77;
+import '../../bloc/chat_page/chat_page.bloc.dart' as _i78;
+import '../../services/chat/char_service.dart' as _i79;
+import '../../managers/chat/chat_manager.dart' as _i80;
+import '../../repositories/chat/chat_repository.dart' as _i81;
 
 class AppComponent$Injector implements _i1.AppComponent {
   AppComponent$Injector._();
@@ -247,7 +248,8 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i64.GuideComponent _createGuideComponent() => _i64.GuideComponent(
       _createGuideLoginScreen(),
       _createGuideHomeScreen(),
-      _createGuideInfoScreen());
+      _createGuideInfoScreen(),
+      _createGuideProfileScreen());
   _i65.GuideLoginScreen _createGuideLoginScreen() =>
       _i65.GuideLoginScreen(_createGuideLoginBloc());
   _i66.GuideLoginBloc _createGuideLoginBloc() => _i66.GuideLoginBloc();
@@ -268,17 +270,19 @@ class AppComponent$Injector implements _i1.AppComponent {
       _i73.GuideRegisterManager(_createGuideRegisterRepository());
   _i74.GuideRegisterRepository _createGuideRegisterRepository() =>
       _i74.GuideRegisterRepository(_createHttpClient());
-  _i75.SharedComponent _createSharedComponent() =>
-      _i75.SharedComponent(_createChatPage());
-  _i76.ChatPage _createChatPage() =>
-      _i76.ChatPage(_createChatPageBloc(), _createSharedPreferencesHelper());
-  _i77.ChatPageBloc _createChatPageBloc() =>
-      _i77.ChatPageBloc(_createChatService());
-  _i78.ChatService _createChatService() =>
-      _i78.ChatService(_createChatManager(), _createSharedPreferencesHelper());
-  _i79.ChatManager _createChatManager() =>
-      _i79.ChatManager(_createChatRepository());
-  _i80.ChatRepository _createChatRepository() => _i80.ChatRepository();
+  _i75.GuideProfileScreen _createGuideProfileScreen() =>
+      _i75.GuideProfileScreen(_createLocationListService());
+  _i76.SharedComponent _createSharedComponent() =>
+      _i76.SharedComponent(_createChatPage());
+  _i77.ChatPage _createChatPage() =>
+      _i77.ChatPage(_createChatPageBloc(), _createSharedPreferencesHelper());
+  _i78.ChatPageBloc _createChatPageBloc() =>
+      _i78.ChatPageBloc(_createChatService());
+  _i79.ChatService _createChatService() =>
+      _i79.ChatService(_createChatManager(), _createSharedPreferencesHelper());
+  _i80.ChatManager _createChatManager() =>
+      _i80.ChatManager(_createChatRepository());
+  _i81.ChatRepository _createChatRepository() => _i81.ChatRepository();
   @override
   _i5.MyApp get app => _createMyApp();
 }

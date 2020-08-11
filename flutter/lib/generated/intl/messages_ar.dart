@@ -34,7 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "female" : MessageLookupByLibrary.simpleMessage("أنثى"),
     "festivals" : MessageLookupByLibrary.simpleMessage("الاحتفالات"),
     "form_label_name" : MessageLookupByLibrary.simpleMessage("الاسم"),
-    "go_to_tourist_login" : MessageLookupByLibrary.simpleMessage("Next"),
+    "go_to_tourist_login" : MessageLookupByLibrary.simpleMessage("التالي"),
     "guides" : MessageLookupByLibrary.simpleMessage("المرشدين"),
     "home" : MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "language_arabic" : MessageLookupByLibrary.simpleMessage("العربية"),

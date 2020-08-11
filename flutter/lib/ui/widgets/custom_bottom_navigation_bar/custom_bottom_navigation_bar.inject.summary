@@ -18,15 +18,7 @@
           },
           "singleton": false,
           "asynchronous": false,
-          "dependencies": [
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/ui/guide/guide_home/guide_home.dart#GuideHomeScreenState",
-                "qualifier": null
-              },
-              "isProvider": false
-            }
-          ]
+          "dependencies": []
         }
       }
     ]

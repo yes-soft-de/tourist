@@ -18,29 +18,7 @@
           },
           "singleton": false,
           "asynchronous": false,
-          "dependencies": [
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/components/user/user_component.dart#UserComponent",
-                "qualifier": null
-              },
-              "isProvider": false
-            },
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/components/guide/guide_component.dart#GuideComponent",
-                "qualifier": null
-              },
-              "isProvider": false
-            },
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/components/shared/shared_component.dart#SharedComponent",
-                "qualifier": null
-              },
-              "isProvider": false
-            }
-          ]
+          "dependencies": []
         }
       }
     ]

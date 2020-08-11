@@ -75,7 +75,5 @@ class _GuideInfoScreenState extends State<GuideInfoScreen> {
   }
 
   registerGuide() {
-    widget._guideRegisterBloc
-        .registerGuide(_nameController.text, _motherLanguage);
   }
 }

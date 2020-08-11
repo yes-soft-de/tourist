@@ -11,4 +11,8 @@ class OrdersManager {
   Future<OrderResponse> getOrders(String userId) {
     return _ordersRepository.getOrders(userId);
   }
+
+  Future<OrderResponse> getGeneralOrderList(String guideId) {
+    return _ordersRepository.getGeneralOrderList(guideId);
+  }
 }

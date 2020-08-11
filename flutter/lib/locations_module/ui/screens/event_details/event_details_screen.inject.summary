@@ -1,0 +1,26 @@
+{
+  "asset": "asset:tourists/lib/locations_module/ui/screens/event_details/event_details_screen.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
+      {
+        "name": "EventDetailsScreen",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/locations_module/ui/screens/event_details/event_details_screen.dart#EventDetailsScreen",
+              "qualifier": null
+            },
+            "isProvider": false
+          },
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": []
+        }
+      }
+    ]
+  }
+}

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/managers/orders/orders_manager.dart';
 import 'package:tourists/models/guide_list_item/guide_list_item.dart';
@@ -10,28 +11,41 @@ import 'package:tourists/services/guide_list/guide_list.dart';
 class OrdersService {
   OrdersManager _ordersManager;
   GuideListService _guideListService;
-  SharedPreferencesHelper _preferencesHelper;
+  final FirebaseAuth _authService = FirebaseAuth.instance;
 
-  OrdersService(this._ordersManager, this._preferencesHelper, this._guideListService);
+  OrdersService(this._ordersManager, this._guideListService);
 
   Future<List<OrderModel>> getOrders() async {
-    String uid = await _preferencesHelper.getUserUID();
-
-    if (uid == null) {
+    FirebaseUser user = await _authService.currentUser();
+    if (user == null) {
       return null;
     }
+
+    String uid = user.uid;
 
     OrderResponse orderResponse = await _ordersManager.getOrders(uid);
-    List<GuideListItemModel> guides = await _guideListService.getAllGuides();
+    List<GuideListItemModel> allGuides = await _guideListService.getAllGuides();
 
+    return formatOrders(allGuides, orderResponse);
+  }
+
+  Future<List<OrderModel>> getGeneralOrders() async {
+    FirebaseUser user = await _authService.currentUser();
+
+    OrderResponse response = await _ordersManager.getGeneralOrderList(user.uid);
+
+    if (response != null) {
+      return response.orderList;
+    }
+    return null;
+  }
+
+  List<OrderModel> formatOrders(
+      List<GuideListItemModel> allGuides, OrderResponse orderResponse) {
     Map<String, GuideListItemModel> guidesMap = {};
-    guides.forEach((guide) {
+    allGuides.forEach((guide) {
       guidesMap[guide.user] = guide;
     });
-
-    if (orderResponse == null) {
-      return null;
-    }
 
     orderResponse.orderList.forEach((order) {
       if (order.guidUserID != null) {
@@ -42,5 +56,4 @@ class OrdersService {
 
     return orderResponse.orderList;
   }
-
 }

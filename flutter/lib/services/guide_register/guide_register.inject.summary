@@ -21,13 +21,6 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/managers/guide_register/guide_register.dart#GuideRegisterManager",
-                "qualifier": null
-              },
-              "isProvider": false
-            },
-            {
-              "lookupKey": {
                 "root": "asset:tourists/lib/persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper",
                 "qualifier": null
               },

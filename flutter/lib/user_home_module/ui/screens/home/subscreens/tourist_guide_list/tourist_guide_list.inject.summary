@@ -1,0 +1,26 @@
+{
+  "asset": "asset:tourists/lib/user_home_module/ui/screens/home/subscreens/tourist_guide_list/tourist_guide_list.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
+      {
+        "name": "TouristGuideListSubScreen",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/user_home_module/ui/screens/home/subscreens/tourist_guide_list/tourist_guide_list.dart#TouristGuideListSubScreen",
+              "qualifier": null
+            },
+            "isProvider": false
+          },
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": []
+        }
+      }
+    ]
+  }
+}

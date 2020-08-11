@@ -18,4 +18,13 @@ class OrdersRepository {
     }
     return null;
   }
+
+  Future<OrderResponse> getGeneralOrderList(String guideId) async {
+    String response = await _httpClient.get(Urls.orderLookup + '/' + guideId);
+    if (response == null) {
+      return null;
+    } else {
+      return OrderResponse.fromJson(jsonDecode(response));
+    }
+  }
 }

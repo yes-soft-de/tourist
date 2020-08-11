@@ -13,7 +13,7 @@ class GuidesResponse {
     if (json['data'] != null) {
       data = new List<GuideListItemModel>();
       json['data'].forEach((v) {
-        data.add(new GuideListItemModel.fromJson(v));
+        if (v != null) data.add(new GuideListItemModel.fromJson(v));
       });
     }
   }

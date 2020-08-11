@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:tourists/components/user/user_routes.dart';
+import 'package:tourists/components/user/user_home_routes.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/nav_arguments/request_guide/request_guide_navigation.dart';
 

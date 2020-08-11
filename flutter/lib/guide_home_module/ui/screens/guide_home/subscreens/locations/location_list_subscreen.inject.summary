@@ -1,0 +1,26 @@
+{
+  "asset": "asset:tourists/lib/guide_home_module/ui/screens/guide_home/subscreens/locations/location_list_subscreen.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
+      {
+        "name": "LocationListSubScreen",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/guide_home_module/ui/screens/guide_home/subscreens/locations/location_list_subscreen.dart#LocationListSubScreen",
+              "qualifier": null
+            },
+            "isProvider": false
+          },
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": []
+        }
+      }
+    ]
+  }
+}

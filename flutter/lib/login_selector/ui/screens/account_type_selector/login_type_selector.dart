@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
-import 'package:tourists/guide_login_module/guide_login_routes.dart';
-import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
+import 'package:tourists/guide_authorization_module/guide_authorization_routes.dart';
+import 'package:tourists/user_authorization_module/user_auth_routes.dart';
 
 @provide
 class LoginTypeSelectorScreen extends StatefulWidget {
@@ -68,7 +68,7 @@ class _LoginTypeSelectorScreenState extends State<LoginTypeSelectorScreen> {
               // First Card
               GestureDetector(
                 onTap: () =>
-                    Navigator.pushReplacementNamed(context, UserLoginRoutes.login),
+                    Navigator.pushReplacementNamed(context, UserAuthorizationRoutes.login),
                 child: Stack(alignment: Alignment.center, children: <Widget>[
                   // Sizing Container
                   Container(
@@ -134,7 +134,7 @@ class _LoginTypeSelectorScreenState extends State<LoginTypeSelectorScreen> {
               GestureDetector(
                 onTap: () {
                   Navigator.pushReplacementNamed(
-                      context, GuideLoginRoutes.guideLogin);
+                      context, GuideAuthorizationRoutes.guideLogin);
                 },
                 child: Stack(alignment: Alignment.center, children: <Widget>[
                   // Sizing Container

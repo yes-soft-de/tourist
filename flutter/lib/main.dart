@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/components/guide/guide_module.dart';
-import 'package:tourists/components/shared/chat_component.dart';
-import 'package:tourists/components/user/user_component.dart';
-import 'package:tourists/components/user/user_home_routes.dart';
+import 'package:tourists/guide_authorization_module/guide_authorization_module.dart';
+import 'package:tourists/guide_home_module/guide_module.dart';
+import 'package:tourists/locations_module/location_module.dart';
+import 'package:tourists/user_authorization_module/user_auth.dart';
+import 'package:tourists/user_home_module/user_component.dart';
 
 import 'di/components/app.component.dart';
 import 'generated/l10n.dart';
@@ -27,23 +28,27 @@ void main() {
 
 @provide
 class MyApp extends StatelessWidget {
-  final UserComponent _userComponent;
-  final GuideComponent _guideComponent;
-  final SharedComponent _sharedComponent;
+  final UserAuthorizationModule _userAuthModule;
+  final GuideAuthorizationModule _guideAuthModule;
+  final UserHomeModule _userHomeModule;
+  final GuideHomeModule _guideHomeModule;
+  final LocationModule _locationModule;
 
   static FirebaseAnalytics analytics = FirebaseAnalytics();
   static FirebaseAnalyticsObserver observer =
       FirebaseAnalyticsObserver(analytics: analytics);
 
-  MyApp(this._userComponent, this._guideComponent, this._sharedComponent);
+  MyApp(this._userAuthModule, this._guideAuthModule, this._userHomeModule,
+      this._guideHomeModule, this._locationModule);
 
   @override
   Widget build(BuildContext context) {
     Map<String, WidgetBuilder> fullRoutesList = Map();
 
-    fullRoutesList.addAll(_userComponent.getRoutes());
-    fullRoutesList.addAll(_guideComponent.getRoutes());
-    fullRoutesList.addAll(_sharedComponent.getRoutes());
+    fullRoutesList.addAll(_userAuthModule.getRoutes());
+    fullRoutesList.addAll(_guideAuthModule.getRoutes());
+    fullRoutesList.addAll(_userHomeModule.getRoutes());
+    fullRoutesList.addAll(_guideHomeModule.getRoutes());
 
     return MaterialApp(
         navigatorObservers: <NavigatorObserver>[

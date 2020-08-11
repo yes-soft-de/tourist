@@ -18,7 +18,22 @@
           },
           "singleton": false,
           "asynchronous": false,
-          "dependencies": []
+          "dependencies": [
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/guide_list_module/bloc/guide_list/guide_list_bloc.dart#GuideListBloc",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/user_orders_module/ui/screens/request_guide/request_guide_screen.dart#RequestGuideScreen",
+                "qualifier": null
+              },
+              "isProvider": false
+            }
+          ]
         }
       }
     ]

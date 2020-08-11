@@ -21,6 +21,13 @@
           "dependencies": [
             {
               "lookupKey": {
+                "root": "asset:tourists/lib/user_orders_module/bloc/request_guide/request_guide.bloc.dart#RequestGuideBloc",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
                 "root": "asset:tourists/lib/utils/logger/logger.dart#Logger",
                 "qualifier": null
               },

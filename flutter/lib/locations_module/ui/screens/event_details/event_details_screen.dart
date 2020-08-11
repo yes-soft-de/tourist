@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
-import 'package:tourists/models/event/event_model.dart';
+import 'package:tourists/locations_module/bloc/event_details/event_details.dart';
+import 'package:tourists/locations_module/model/event/event_model.dart';
 import 'package:tourists/ui/widgets/carousel/carousel.dart';
 import 'package:tourists/ui/widgets/request_guide_button/request_guide_button.dart';
 
@@ -36,25 +37,29 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
 
     if (currentState == EventDetailsBloc.STATUS_CODE_INIT) {
       widget._bloc.getEventDetails(eventId.toString());
-      return Scaffold(
-        body: Center(
-          child: Text(S.of(context).loading),
-        ),
-      );
+      return _getLoadingScreen();
     }
 
     if (currentState == EventDetailsBloc.STATUS_CODE_LOAD_ERROR) {
-      return Scaffold(
-        body: Center(
-          child: Text(S.of(context).error_fetching_data),
-        ),
-      );
+      return _getErrorScreen();
     }
 
     if (currentState == EventDetailsBloc.STATUS_CODE_LOAD_SUCCESS) {
-      return getScaffoldUI();
+      return _getSuccessScreenScaffold();
     }
 
+    return _getUndefinedScreenScaffold();
+  }
+
+  Scaffold _getLoadingScreen() {
+    return Scaffold(
+      body: Center(
+        child: Text(S.of(context).loading),
+      ),
+    );
+  }
+
+  Scaffold _getUndefinedScreenScaffold() {
     return Scaffold(
       body: Center(
         child: Text("Unknown State: " + currentState.toString()),
@@ -62,7 +67,7 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
     );
   }
 
-  Scaffold getScaffoldUI() {
+  Scaffold _getSuccessScreenScaffold() {
     List<Widget> pageUI = [];
     List<Widget> carouselCards = [];
 
@@ -171,6 +176,14 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
             ): Container(),
           )
         ],
+      ),
+    );
+  }
+
+  Scaffold _getErrorScreen() {
+    return Scaffold(
+      body: Center(
+        child: Text(S.of(context).error_fetching_data),
       ),
     );
   }

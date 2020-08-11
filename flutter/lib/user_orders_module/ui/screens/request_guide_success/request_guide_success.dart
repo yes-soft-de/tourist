@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/components/user/user_home_routes.dart';
 import 'package:tourists/generated/l10n.dart';
+import 'package:tourists/user_home_module/user_home_routes.dart';
 
 @provide
 class RequestGuideSuccessScreen extends StatelessWidget {
@@ -24,7 +24,7 @@ class RequestGuideSuccessScreen extends StatelessWidget {
             child: Text(S.of(context).return_to_home),
             onPressed: () {
               Navigator.pushReplacementNamed(
-                  context, UserRoutes.home);
+                  context, UserHomeRoutes.home);
             },
           )
         ],

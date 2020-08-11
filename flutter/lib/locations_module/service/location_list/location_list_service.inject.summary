@@ -21,7 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/managers/location_list/location_list_manager.dart#LocationListManager",
+                "root": "asset:tourists/lib/locations_module/manager/location_list/location_list_manager.dart#LocationListManager",
                 "qualifier": null
               },
               "isProvider": false

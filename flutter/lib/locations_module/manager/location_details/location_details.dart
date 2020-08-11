@@ -1,6 +1,6 @@
 import 'package:inject/inject.dart';
-import 'package:tourists/repositories/location_details/location_details_repository.dart';
-import 'package:tourists/responses/location_details/location_response.dart';
+import 'package:tourists/locations_module/repository/location_details/location_details_repository.dart';
+import 'package:tourists/locations_module/response/location_details/location_response.dart';
 
 @provide
 class LocationDetailsManager {

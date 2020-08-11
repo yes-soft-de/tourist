@@ -18,7 +18,43 @@
           },
           "singleton": false,
           "asynchronous": false,
-          "dependencies": []
+          "dependencies": [
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/user_authorization_module/user_auth.dart#UserAuthorizationModule",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/guide_authorization_module/guide_authorization_module.dart#GuideAuthorizationModule",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/user_home_module/user_component.dart#UserHomeModule",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/guide_home_module/guide_module.dart#GuideHomeModule",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/locations_module/location_module.dart#LocationModule",
+                "qualifier": null
+              },
+              "isProvider": false
+            }
+          ]
         }
       }
     ]

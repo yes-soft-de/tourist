@@ -1,6 +1,5 @@
 import 'package:inject/inject.dart';
 import 'package:tourists/managers/event/event_manager.dart';
-import 'package:tourists/models/event/event_model.dart';
 import 'package:tourists/responses/event_details/event_details.dart';
 import 'package:tourists/responses/event_list/event_list.dart';
 

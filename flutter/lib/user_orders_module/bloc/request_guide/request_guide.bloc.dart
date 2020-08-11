@@ -1,8 +1,8 @@
 import 'package:analyzer_plugin/utilities/pair.dart';
 import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:tourists/locations_module/service/location_details/location_details_service.dart';
 import 'package:tourists/models/request_guide/request_guide.model.dart';
-import 'package:tourists/services/location_details/location_details_service.dart';
 import 'package:tourists/services/request_guide/request_guide.service.dart';
 
 @provide

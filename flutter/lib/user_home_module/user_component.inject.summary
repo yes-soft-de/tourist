@@ -5,13 +5,13 @@
     "module": [],
     "injectable": [
       {
-        "name": "UserModule",
+        "name": "UserHomeModule",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/user_home_module/user_component.dart#UserModule",
+              "root": "asset:tourists/lib/user_home_module/user_component.dart#UserHomeModule",
               "qualifier": null
             },
             "isProvider": false

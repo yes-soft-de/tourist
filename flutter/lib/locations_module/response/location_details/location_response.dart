@@ -1,4 +1,4 @@
-import 'package:tourists/models/location_details/location_details.dart';
+import 'package:tourists/locations_module/model/location_details/location_details.dart';
 
 class LocationDetailsResponse {
   String statusCode;

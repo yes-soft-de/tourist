@@ -1,21 +1,18 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/bloc/location_details/location_details_bloc.dart';
-import 'package:tourists/components/user/user_home_routes.dart';
 import 'package:tourists/generated/l10n.dart';
+import 'package:tourists/locations_module/bloc/location_details/location_details_bloc.dart';
+import 'package:tourists/locations_module/model/location_details/location_details.dart';
 import 'package:tourists/models/guide_list_item/guide_list_item.dart';
-import 'package:tourists/models/location_details/location_details.dart';
-import 'package:tourists/models/location_list_item/location_list_item.dart';
 import 'package:tourists/nav_arguments/request_guide/request_guide_navigation.dart';
 import 'package:tourists/responses/comment/comment_response.dart';
 import 'package:tourists/ui/widgets/carousel/carousel.dart';
 import 'package:tourists/ui/widgets/comment_item/comment_item.dart';
 import 'package:tourists/ui/widgets/guide_list_item/guide_list_item.dart';
 import 'package:tourists/ui/widgets/request_guide_button/request_guide_button.dart';
+import 'package:tourists/user_home_module/user_home_routes.dart';
 
 @provide
 class LocationDetailsScreen extends StatefulWidget {
@@ -233,9 +230,8 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
 
       guidesList.add(GestureDetector(
         onTap: () {
-          Navigator.pushNamed(
-            context,
-            UserRoutes.requestGuide,
+          Navigator.of(context).pushNamed(
+            UserHomeRoutes.requestGuide,
             arguments: RequestGuideNavigationArguments(
                 guideId: guide.user, cityId: _locationDetails.id.toString()),
           );

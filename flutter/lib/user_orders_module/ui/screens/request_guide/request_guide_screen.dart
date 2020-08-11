@@ -3,11 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/bloc/request_guide/request_guide.bloc.dart';
-import 'package:tourists/components/user/user_home_routes.dart';
+import 'package:tourists/locations_module/model/location_details/location_details.dart';
 import 'package:tourists/models/guide_list_item/guide_list_item.dart';
-import 'package:tourists/models/location_details/location_details.dart';
 import 'package:tourists/nav_arguments/request_guide/request_guide_navigation.dart';
+import 'package:tourists/user_home_module/user_home_routes.dart';
+import 'package:tourists/user_orders_module/bloc/request_guide/request_guide.bloc.dart';
 import 'package:tourists/utils/logger/logger.dart';
 
 @provide
@@ -50,18 +50,30 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
 
     // region Setting up
     if (_requestGuideArguments == null) {
-      return Scaffold(
-        body: Center(
-          child: Text("Null Arguments"),
+      return WillPopScope(
+        onWillPop: () {
+          Navigator.of(context).pop();
+          return;
+        },
+        child: Scaffold(
+          body: Center(
+            child: Text("Null Arguments"),
+          ),
         ),
       );
     }
 
     if (_requestGuideArguments.guideId == null &&
         _requestGuideArguments.cityId == null) {
-      return Scaffold(
-        body: Center(
-          child: Text("Null Arguments"),
+      return WillPopScope(
+        onWillPop: () {
+          Navigator.of(context).pop();
+          return;
+        },
+        child: Scaffold(
+          body: Center(
+            child: Text("Null Arguments"),
+          ),
         ),
       );
     }
@@ -92,18 +104,30 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
       } else {
         widget._requestGuideBloc.getGuideWithId(_requestGuideArguments.guideId);
       }
-      return Scaffold(
-        body: Center(
-          child: Text('Loading ;)'),
+      return WillPopScope(
+        onWillPop: () {
+          Navigator.of(context).pop();
+          return;
+        },
+        child: Scaffold(
+          body: Center(
+            child: Text('Loading ;)'),
+          ),
         ),
       );
     }
 
     if (currentStatus == RequestGuideBloc.STATUS_CODE_LOAD_ERROR) {
       Fluttertoast.showToast(msg: "Error Sending Request!");
-      return Scaffold(
-        body: Center(
-          child: Text('Error Loading data'),
+      return WillPopScope(
+        onWillPop: () {
+          Navigator.of(context).pop();
+          return;
+        },
+        child: Scaffold(
+          body: Center(
+            child: Text('Error Loading data'),
+          ),
         ),
       );
     }
@@ -111,10 +135,16 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
     if (currentStatus == RequestGuideBloc.STATUS_CODE_REQUEST_SUCCESS) {
       // Go to Home
       Fluttertoast.showToast(msg: "Request Sent!");
-      Navigator.pushReplacementNamed(context, UserRoutes.home);
-      return Scaffold(
-        body: Center(
-          child: Text('Success'),
+      Navigator.pushReplacementNamed(context, UserHomeRoutes.home);
+      return WillPopScope(
+        onWillPop: () {
+          Navigator.of(context).pop();
+          return;
+        },
+        child: Scaffold(
+          body: Center(
+            child: Text('Success'),
+          ),
         ),
       );
     }

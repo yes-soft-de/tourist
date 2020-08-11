@@ -1,13 +1,13 @@
 import 'package:inject/inject.dart';
+import 'package:tourists/locations_module/manager/location_details/location_details.dart';
+import 'package:tourists/locations_module/model/location_details/location_details.dart';
+import 'package:tourists/locations_module/response/location_details/location_response.dart';
 import 'package:tourists/managers/guides_manager/guides_manager.dart';
-import 'package:tourists/managers/location_details/location_details.dart';
 import 'package:tourists/managers/rate/rate_manager.dart';
 import 'package:tourists/models/guide_list_item/guide_list_item.dart';
-import 'package:tourists/models/location_details/location_details.dart';
 import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
 import 'package:tourists/requests/create_rating/create_rating.dart';
 import 'package:tourists/responses/guide_response/guides_response.dart';
-import 'package:tourists/responses/location_details/location_response.dart';
 
 @provide
 class LocationDetailsService {

@@ -5,13 +5,13 @@ import 'package:tourists/user_home_module/ui/screens/home/home.dart';
 import 'package:tourists/user_home_module/user_home_routes.dart';
 
 @provide
-class UserModule extends YesModule {
+class UserHomeModule extends YesModule {
   final HomeScreen _homeScreen;
   final RequestGuideScreen _orderGuideScreen;
 
   Map<String, WidgetBuilder> _userRoutes;
 
-  UserModule(
+  UserHomeModule(
       this._homeScreen,
       this._orderGuideScreen);
 

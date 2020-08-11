@@ -1,8 +1,0 @@
-{
-  "asset": "asset:tourists/lib/requests/create_rating/create_rating.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": []
-  }
-}

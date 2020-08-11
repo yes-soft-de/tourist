@@ -1,8 +1,0 @@
-{
-  "asset": "asset:tourists/lib/guide_authorization_module/guide_authorization_routes.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": []
-  }
-}

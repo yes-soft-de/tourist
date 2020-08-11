@@ -1,0 +1,8 @@
+{
+  "asset": "asset:tourists/lib/module_authorization/authprization_module.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": []
+  }
+}

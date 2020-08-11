@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/guide_authorization_module/guide_authorization_module.dart';
-import 'package:tourists/guide_home_module/guide_module.dart';
-import 'package:tourists/locations_module/location_module.dart';
-import 'package:tourists/user_authorization_module/user_auth.dart';
-import 'package:tourists/user_home_module/user_component.dart';
+import 'package:tourists/module_authorization/authprization_module.dart';
+import 'package:tourists/module_forms/forms_module.dart';
+import 'package:tourists/module_guide/guide_list_module.dart';
+import 'package:tourists/module_home/home_module.dart';
+import 'package:tourists/module_orders/model/order/order_model.dart';
 
 import 'di/components/app.component.dart';
 import 'generated/l10n.dart';
+import 'module_chat/chat_module.dart';
 
 typedef Provider<T> = T Function();
 
@@ -28,27 +29,30 @@ void main() {
 
 @provide
 class MyApp extends StatelessWidget {
-  final UserAuthorizationModule _userAuthModule;
-  final GuideAuthorizationModule _guideAuthModule;
-  final UserHomeModule _userHomeModule;
-  final GuideHomeModule _guideHomeModule;
-  final LocationModule _locationModule;
-
   static FirebaseAnalytics analytics = FirebaseAnalytics();
   static FirebaseAnalyticsObserver observer =
       FirebaseAnalyticsObserver(analytics: analytics);
 
-  MyApp(this._userAuthModule, this._guideAuthModule, this._userHomeModule,
-      this._guideHomeModule, this._locationModule);
+  final AuthorizationModule _authorizationModule;
+  final HomeModule _homeModule;
+  final ChatModule _chatModule;
+  final FormsModule _formsModule;
+  final GuideListModule _guideListModule;
+  final OrderModel _orderModel;
+
+  MyApp(this._authorizationModule, this._homeModule, this._chatModule,
+      this._guideListModule, this._orderModel, this._formsModule);
 
   @override
   Widget build(BuildContext context) {
     Map<String, WidgetBuilder> fullRoutesList = Map();
 
-    fullRoutesList.addAll(_userAuthModule.getRoutes());
-    fullRoutesList.addAll(_guideAuthModule.getRoutes());
-    fullRoutesList.addAll(_userHomeModule.getRoutes());
-    fullRoutesList.addAll(_guideHomeModule.getRoutes());
+    fullRoutesList.addAll(_authorizationModule.getRoutes());
+    fullRoutesList.addAll(_homeModule.getRoutes());
+    fullRoutesList.addAll(_chatModule.getRoutes());
+    fullRoutesList.addAll(_formsModule.getRoutes());
+    fullRoutesList.addAll(_guideListModule.getRoutes());
+    fullRoutesList.addAll(_orderModel.getRoutes());
 
     return MaterialApp(
         navigatorObservers: <NavigatorObserver>[

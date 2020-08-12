@@ -3,6 +3,32 @@
   "summary": {
     "injector": [],
     "module": [],
-    "injectable": []
+    "injectable": [
+      {
+        "name": "GuideListScreen",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_guide/ui/screen/guide_list/guide_list_screen.dart#GuideListScreen",
+              "qualifier": null
+            },
+            "isProvider": false
+          },
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_guide/bloc/guide_list/guide_list_bloc.dart#GuideListBloc",
+                "qualifier": null
+              },
+              "isProvider": false
+            }
+          ]
+        }
+      }
+    ]
   }
 }

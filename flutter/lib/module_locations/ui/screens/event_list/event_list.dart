@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_locations/bloc/event_list/event_list_bloc.dart';
 import 'package:tourists/module_locations/model/event/event_model.dart';
@@ -6,6 +7,7 @@ import 'package:tourists/module_locations/ui/widgets/event_list_item_widget/even
 
 import '../../../location_routes.dart';
 
+@provide
 class EventListScreen extends StatefulWidget {
   final EventListBloc bloc;
 

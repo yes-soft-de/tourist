@@ -46,6 +46,13 @@
                 "qualifier": null
               },
               "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_locations/ui/screens/location_carousel/location_carousel.dart#LocationCarouselScreen",
+                "qualifier": null
+              },
+              "isProvider": false
             }
           ]
         }

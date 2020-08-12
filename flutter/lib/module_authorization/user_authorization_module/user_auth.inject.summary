@@ -3,6 +3,24 @@
   "summary": {
     "injector": [],
     "module": [],
-    "injectable": []
+    "injectable": [
+      {
+        "name": "UserAuthorizationModule",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_authorization/user_authorization_module/user_auth.dart#UserAuthorizationModule",
+              "qualifier": null
+            },
+            "isProvider": false
+          },
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": []
+        }
+      }
+    ]
   }
 }

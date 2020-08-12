@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_forms/forms_routes.dart';
 import 'package:tourists/module_guide/bloc/guide_list/guide_list_bloc.dart';
@@ -6,6 +7,7 @@ import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart
 import 'package:tourists/module_guide/nav_arguments/request_guide/request_guide_navigation.dart';
 import 'package:tourists/module_guide/ui/widget/guide_list_item/guide_list_item.dart';
 
+@provide
 class GuideListScreen extends StatefulWidget {
   final GuideListBloc _guideListBloc;
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inject/inject.dart';
 import 'package:tourists/abstracts/module/yes_module.dart';
 
 import 'ui/screens/create_profile/create_profile.dart';
@@ -7,6 +8,7 @@ import 'ui/screens/login/login.dart';
 import 'ui/screens/register/register.dart';
 import 'user_auth_routes.dart';
 
+@provide
 class UserAuthorizationModule extends YesModule {
   LoginScreen _loginScreen;
   RegisterScreen _registerScreen;

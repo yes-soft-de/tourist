@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_locations/bloc/location_list/location_list_bloc.dart';
+import 'package:tourists/module_shared/ui/widgets/carousel/carousel.dart';
 import 'package:tourists/module_shared/ui/widgets/carousel_card/carousel_card.dart';
 
+@provide
 class LocationCarouselScreen extends StatefulWidget {
   final LocationListBloc bloc;
 
@@ -34,7 +37,7 @@ class _LocationCarouselScreenState extends State<LocationCarouselScreen> {
         return _getLoadingScreen();
       case LocationListBloc.STATUS_CODE_LOAD_SUCCESS:
         return _getSuccessScreen();
-      case LocationListBloc.STATUS_CODE_LOAD_ERROR:
+      default:
         return _getErrorScreen();
     }
   }
@@ -52,18 +55,13 @@ class _LocationCarouselScreenState extends State<LocationCarouselScreen> {
       ));
     });
 
-    return Flex(
-      direction: Axis.vertical,
-      children: locationList,
-    );
+    return CarouselWidget(locationWidgetList);
   }
 
   Widget _getErrorScreen() {
     return Flex(
       direction: Axis.horizontal,
-      children: <Widget>[
-        Text(S.of(context).error_fetching_data)
-      ],
+      children: <Widget>[Text(S.of(context).error_fetching_data)],
     );
   }
 

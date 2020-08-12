@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_locations/bloc/location_list/location_list_bloc.dart';
+import 'package:tourists/module_locations/location_module.dart';
+import 'package:tourists/module_locations/model/location_details/location_details.dart';
+import 'package:tourists/module_locations/model/location_list_item/location_list_item.dart';
 import 'package:tourists/module_locations/ui/widgets/location_list_item/location_list_item.dart';
 
 import '../../../location_routes.dart';
 
+@provide
 class LocationListScreen extends StatefulWidget {
   final LocationListBloc bloc;
 
@@ -15,16 +20,17 @@ class LocationListScreen extends StatefulWidget {
 }
 
 class _LocationListScreenState extends State<LocationListScreen> {
-  List locationList;
-  int currentStatus = -1;
+  List<LocationListItem> locationModelList;
+  int currentStatus = LocationListBloc.STATUS_CODE_INIT;
 
   @override
   Widget build(BuildContext context) {
     widget.bloc.stateStream.listen((event) {
+      print('Got Event');
       currentStatus = event[LocationListBloc.KEY_STATUS];
 
       if (currentStatus == LocationListBloc.STATUS_CODE_LOAD_SUCCESS) {
-        locationList = event[LocationListBloc.KEY_PAYLOAD];
+        locationModelList = event[LocationListBloc.KEY_PAYLOAD];
       }
 
       setState(() {});
@@ -46,30 +52,31 @@ class _LocationListScreenState extends State<LocationListScreen> {
   Widget _getSuccessScreen() {
     List<Widget> locationWidgetList = [];
 
-    locationList.forEach((location) {
-      locationWidgetList.add(GestureDetector(
-        onTap: () {
-          Navigator.of(context).pushNamed(
-            LocationRoutes.locationDetails,
-            arguments: location.id.toString(),
-          );
-        },
-        child: Padding(
-          padding: EdgeInsets.all(8),
-          child: LocationListItemWidget(
-            imageLink: location.path[0].path,
-            title: location.name,
-            description: location.description,
-            rate: 2,
-            commentsNumber: 2,
+    if (locationModelList != null)
+      locationModelList.forEach((location) {
+        locationWidgetList.add(GestureDetector(
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              LocationRoutes.locationDetails,
+              arguments: location.id.toString(),
+            );
+          },
+          child: Padding(
+            padding: EdgeInsets.all(8),
+            child: LocationListItemWidget(
+              imageLink: location.path[0].path,
+              title: location.name,
+              description: location.description,
+              rate: 2,
+              commentsNumber: 2,
+            ),
           ),
-        ),
-      ));
-    });
+        ));
+      });
 
     return Flex(
       direction: Axis.vertical,
-      children: locationList,
+      children: locationWidgetList,
     );
   }
 

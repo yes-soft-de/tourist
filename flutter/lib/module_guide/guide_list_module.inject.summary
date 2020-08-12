@@ -3,6 +3,24 @@
   "summary": {
     "injector": [],
     "module": [],
-    "injectable": []
+    "injectable": [
+      {
+        "name": "GuideListModule",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_guide/guide_list_module.dart#GuideListModule",
+              "qualifier": null
+            },
+            "isProvider": false
+          },
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": []
+        }
+      }
+    ]
   }
 }

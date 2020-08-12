@@ -8,7 +8,8 @@ import 'package:tourists/module_authorization/authprization_module.dart';
 import 'package:tourists/module_forms/forms_module.dart';
 import 'package:tourists/module_guide/guide_list_module.dart';
 import 'package:tourists/module_home/home_module.dart';
-import 'package:tourists/module_orders/model/order/order_model.dart';
+import 'package:tourists/module_home/home_routes.dart';
+import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 
 import 'di/components/app.component.dart';
 import 'generated/l10n.dart';
@@ -38,10 +39,10 @@ class MyApp extends StatelessWidget {
   final ChatModule _chatModule;
   final FormsModule _formsModule;
   final GuideListModule _guideListModule;
-  final OrderModel _orderModel;
+  final SharedPreferencesHelper _preferencesHelper;
 
   MyApp(this._authorizationModule, this._homeModule, this._chatModule,
-      this._guideListModule, this._orderModel, this._formsModule);
+      this._guideListModule, this._formsModule, this._preferencesHelper);
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,45 @@ class MyApp extends StatelessWidget {
     fullRoutesList.addAll(_chatModule.getRoutes());
     fullRoutesList.addAll(_formsModule.getRoutes());
     fullRoutesList.addAll(_guideListModule.getRoutes());
-    fullRoutesList.addAll(_orderModel.getRoutes());
+
+    this._preferencesHelper.getLoggedInState().then((loggedInStatus) {
+      if (loggedInStatus == LoggedInState.GUIDE) {
+        return MaterialApp(
+            navigatorObservers: <NavigatorObserver>[
+              observer
+            ],
+            localizationsDelegates: [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            theme: ThemeData(
+                primaryColor: Colors.greenAccent,
+                accentColor: Colors.greenAccent),
+            supportedLocales: S.delegate.supportedLocales,
+            title: 'Soyah',
+            routes: fullRoutesList,
+            initialRoute: HomeRoutes.guideHome);
+      }
+      return MaterialApp(
+          navigatorObservers: <NavigatorObserver>[
+            observer
+          ],
+          localizationsDelegates: [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          theme: ThemeData(
+              primaryColor: Colors.greenAccent,
+              accentColor: Colors.greenAccent),
+          supportedLocales: S.delegate.supportedLocales,
+          title: 'Soyah',
+          routes: fullRoutesList,
+          initialRoute: HomeRoutes.home);
+    });
 
     return MaterialApp(
         navigatorObservers: <NavigatorObserver>[
@@ -69,6 +108,6 @@ class MyApp extends StatelessWidget {
         supportedLocales: S.delegate.supportedLocales,
         title: 'Soyah',
         routes: fullRoutesList,
-        initialRoute: UserRoutes.home);
+        initialRoute: HomeRoutes.home);
   }
 }

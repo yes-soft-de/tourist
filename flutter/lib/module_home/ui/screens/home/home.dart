@@ -2,22 +2,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
-import 'package:tourists/module_authorization/guide_authorization_module/guide_authorization_routes.dart';
+import 'package:tourists/module_authorization/authorization_routes.dart';
+import 'package:tourists/module_guide/ui/screen/guide_list/guide_list_screen.dart';
 import 'package:tourists/module_home/ui/widget/bottom_navigation_bar/buttom_navigation_bar.dart';
+import 'package:tourists/module_locations/ui/screens/event_list/event_list.dart';
+import 'package:tourists/module_locations/ui/screens/location_list/location_list_screen.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
-import './subscreens/main/main_home.dart';
-import './subscreens/tourist_event_list/tourist_event_list.dart';
-import './subscreens/tourist_guide_list/tourist_guide_list.dart';
 
 @provide
 class HomeScreen extends StatefulWidget {
-  final MainHomeSubScreen _homeSubScreen;
-  final TouristGuideListSubScreen _guideListScreen;
-  final TouristEventListSubScreen _eventsSubScreen;
+  final GuideListScreen _guideListScreen;
+  final EventListScreen _eventListScreen;
+  final LocationListScreen _locationListScreen;
   final SharedPreferencesHelper _preferencesHelper;
 
-  HomeScreen(this._homeSubScreen, this._guideListScreen, this._eventsSubScreen,
-      this._preferencesHelper);
+  HomeScreen(this._locationListScreen, this._guideListScreen,
+      this._eventListScreen, this._preferencesHelper);
 
   @override
   State<StatefulWidget> createState() => HomeScreenState();
@@ -30,16 +30,13 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     widget._preferencesHelper.getUserUID().then((value) {
       loggedIn = (value != null);
       setState(() {});
     });
 
     Widget bottomNavBar = CustomBottomNavigationBar(
-        pagePosition: position != null ? position : 0,
-        homeScreenState: this
-    );
+        pagePosition: position != null ? position : 0);
 
     return WillPopScope(
       onWillPop: _onBackPressed,
@@ -50,11 +47,10 @@ class HomeScreenState extends State<HomeScreen> {
           actions: <Widget>[
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, AuthprozationRoutes.loginTypeSelector);
+                Navigator.pushNamed(
+                    context, AuthorizationRoutes.loginTypeSelector);
               },
-              child: Icon(
-                loggedIn ? Icons.person : Icons.perm_identity
-              ),
+              child: Icon(loggedIn ? Icons.person : Icons.perm_identity),
             )
           ],
         ),
@@ -68,16 +64,18 @@ class HomeScreenState extends State<HomeScreen> {
               child: PageView(
                 controller: _pageController,
                 children: <Widget>[
-                  widget._homeSubScreen,
+                  widget._locationListScreen,
                   widget._guideListScreen,
-                  widget._eventsSubScreen
+                  widget._eventListScreen
                 ],
                 onPageChanged: (pos) {
                   // Update the Home Page
                   position = pos;
                   bottomNavBar = CustomBottomNavigationBar(
-                      pagePosition: position != null ? position : 0,
-                      homeScreenState: this
+                    pagePosition: position != null ? position : 0,
+                    onLocationChanged: (int position) {
+                      setActivePage(position);
+                    },
                   );
                   setState(() {});
                 },
@@ -119,5 +117,11 @@ class HomeScreenState extends State<HomeScreen> {
           ),
         ) ??
         false;
+  }
+
+  setActivePage(int position) {
+    setState(() {
+      this.position = position;
+    });
   }
 }

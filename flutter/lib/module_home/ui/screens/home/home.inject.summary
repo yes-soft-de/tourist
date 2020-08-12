@@ -21,21 +21,21 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/module_home/ui/screens/home/subscreens/main/main_home.dart#MainHomeSubScreen",
+                "root": "asset:tourists/lib/module_locations/ui/screens/location_list/location_list_screen.dart#LocationListScreen",
                 "qualifier": null
               },
               "isProvider": false
             },
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/module_home/ui/screens/home/subscreens/tourist_guide_list/tourist_guide_list.dart#TouristGuideListSubScreen",
+                "root": "asset:tourists/lib/module_guide/ui/screen/guide_list/guide_list_screen.dart#GuideListScreen",
                 "qualifier": null
               },
               "isProvider": false
             },
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/module_home/ui/screens/home/subscreens/tourist_event_list/tourist_event_list.dart#TouristEventListSubScreen",
+                "root": "asset:tourists/lib/module_locations/ui/screens/event_list/event_list.dart#EventListScreen",
                 "qualifier": null
               },
               "isProvider": false

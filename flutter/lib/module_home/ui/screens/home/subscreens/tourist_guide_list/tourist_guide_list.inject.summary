@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/module_home/ui/screens/orders_page/orders_page.dart",
+  "asset": "asset:tourists/lib/module_home/ui/screens/home/subscreens/tourist_guide_list/tourist_guide_list.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "OrdersScreen",
+        "name": "TouristGuideListSubScreen",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/module_home/ui/screens/orders_page/orders_page.dart#OrdersScreen",
+              "root": "asset:tourists/lib/module_home/ui/screens/home/subscreens/tourist_guide_list/tourist_guide_list.dart#TouristGuideListSubScreen",
               "qualifier": null
             },
             "isProvider": false
@@ -21,7 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/module_forms/user_orders_module/bloc/orders_list/orders_list_screen_bloc.dart#OrdersListScreenBloc",
+                "root": "asset:tourists/lib/module_forms/user_orders_module/ui/screens/request_guide/request_guide_screen.dart#RequestGuideScreen",
                 "qualifier": null
               },
               "isProvider": false

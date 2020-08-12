@@ -1,21 +1,22 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:tourists/components/user/user_home_routes.dart';
 import 'package:tourists/generated/l10n.dart';
-import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
-import 'package:tourists/ui/user/home/home.dart';
-import 'package:tourists/ui/widgets/request_guide_button/request_guide_button.dart';
+import 'package:tourists/module_authorization/authorization_routes.dart';
+import 'package:tourists/module_forms/forms_routes.dart';
+import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
+import 'package:tourists/module_shared/ui/widgets/request_guide_button/request_guide_button.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
-  final HomeScreenState homeScreenState;
   final Color activeColor = Color(0xFF00FFA8);
   final Color inactiveColor = Colors.black;
   final int pagePosition;
   final String cityId;
 
   CustomBottomNavigationBar(
-      {this.pagePosition, @required this.homeScreenState, this.cityId});
+      {this.pagePosition,
+      this.cityId,
+      @required void onLocationChanged(int position)});
 
   @override
   State<StatefulWidget> createState() =>
@@ -42,7 +43,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, UserRoutes.orderPage);
+              Navigator.pushNamed(context, FormsRoutes.requestGuideForm);
             },
             child: Container(
               color: Colors.white,
@@ -66,7 +67,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               SharedPreferencesHelper preferencesHelper =
                   new SharedPreferencesHelper();
               preferencesHelper.clearData().then((value) {
-                Navigator.pushNamed(context, UserRoutes.loginTypeSelector);
+                Navigator.pushNamed(
+                    context, AuthorizationRoutes.loginTypeSelector);
               });
             },
             child: Container(
@@ -118,7 +120,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                   moreActive = false;
                   activePosition = 0;
                   setState(() {});
-                  widget.homeScreenState.moveToPage(0);
+                  // widget.homeScreenState.moveToPage(0);
                 },
                 child: Column(
                   children: <Widget>[
@@ -144,7 +146,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                   activePosition = 1;
                   moreActive = false;
                   setState(() {});
-                  widget.homeScreenState.moveToPage(1);
+                  // widget.homeScreenState.moveToPage(1);
                 },
                 child: Column(
                   children: <Widget>[
@@ -170,7 +172,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                   activePosition = 2;
                   moreActive = false;
                   setState(() {});
-                  widget.homeScreenState.moveToPage(2);
+                  // widget.homeScreenState.moveToPage(2);
                 },
                 child: Column(
                   children: <Widget>[

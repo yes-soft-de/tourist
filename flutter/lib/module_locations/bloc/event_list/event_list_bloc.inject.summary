@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/module_home/ui/screens/orders_page/orders_page.dart",
+  "asset": "asset:tourists/lib/module_locations/bloc/event_list/event_list_bloc.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "OrdersScreen",
+        "name": "EventListBloc",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/module_home/ui/screens/orders_page/orders_page.dart#OrdersScreen",
+              "root": "asset:tourists/lib/module_locations/bloc/event_list/event_list_bloc.dart#EventListBloc",
               "qualifier": null
             },
             "isProvider": false
@@ -21,7 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/module_forms/user_orders_module/bloc/orders_list/orders_list_screen_bloc.dart#OrdersListScreenBloc",
+                "root": "asset:tourists/lib/module_locations/service/event/event_service.dart#EventService",
                 "qualifier": null
               },
               "isProvider": false

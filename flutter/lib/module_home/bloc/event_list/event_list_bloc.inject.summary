@@ -18,15 +18,7 @@
           },
           "singleton": false,
           "asynchronous": false,
-          "dependencies": [
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/module_locations/service/event/event_service.dart#EventService",
-                "qualifier": null
-              },
-              "isProvider": false
-            }
-          ]
+          "dependencies": []
         }
       }
     ]

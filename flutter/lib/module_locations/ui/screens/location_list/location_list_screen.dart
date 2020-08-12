@@ -38,6 +38,8 @@ class _LocationListScreenState extends State<LocationListScreen> {
         return _getSuccessScreen();
       case LocationListBloc.STATUS_CODE_LOAD_ERROR:
         return _getErrorScreen();
+      default:
+        return _getErrorScreen();
     }
   }
 
@@ -74,9 +76,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
   Widget _getErrorScreen() {
     return Flex(
       direction: Axis.horizontal,
-      children: <Widget>[
-        Text(S.of(context).error_fetching_data)
-      ],
+      children: <Widget>[Text(S.of(context).error_fetching_data)],
     );
   }
 

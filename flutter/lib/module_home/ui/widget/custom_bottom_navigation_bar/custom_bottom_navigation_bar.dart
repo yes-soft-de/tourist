@@ -1,9 +1,9 @@
 import 'package:inject/inject.dart';
 import 'package:flutter/material.dart';
 import 'package:tourists/generated/l10n.dart';
-import 'package:tourists/ui/guide/guide_home/guide_home.dart';
-import 'package:tourists/persistence/sharedpref/shared_preferences_helper.dart';
-import 'package:tourists/components/user/user_home_routes.dart';
+import 'package:tourists/module_forms/forms_routes.dart';
+import 'package:tourists/module_home/ui/screens/guide_home/guide_home.dart';
+import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 
 @provide
 class CustomGuideBottomNavigationBar extends StatefulWidget {
@@ -27,57 +27,57 @@ class _CustomGuideBottomNavigatorState
 
     if (activePosition == 3) {
       widgetLayout.add(Flex(
-            direction: Axis.vertical,
-            children: <Widget>[
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, UserRoutes.orderPage);
-                },
-                child: Container(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: EdgeInsets.all(8),
-                    child: Flex(
-                      direction: Axis.horizontal,
-                      children: <Widget>[
-                        Icon(Icons.credit_card),
-                        Container(
-                          width: 16,
-                        ),
-                        Text(S.of(context).orders),
-                      ],
+        direction: Axis.vertical,
+        children: <Widget>[
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, FormsRoutes.requestGuideForm);
+            },
+            child: Container(
+              color: Colors.white,
+              child: Padding(
+                padding: EdgeInsets.all(8),
+                child: Flex(
+                  direction: Axis.horizontal,
+                  children: <Widget>[
+                    Icon(Icons.credit_card),
+                    Container(
+                      width: 16,
                     ),
-                  ),
+                    Text(S.of(context).orders),
+                  ],
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  SharedPreferencesHelper preferencesHelper =
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              SharedPreferencesHelper preferencesHelper =
                   new SharedPreferencesHelper();
-                  preferencesHelper.clearData().then((value) {
-                    Navigator.pushReplacementNamed(
-                        context, UserRoutes.loginTypeSelector);
-                  });
-                },
-                child: Container(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: EdgeInsets.all(8),
-                    child: Flex(
-                      direction: Axis.horizontal,
-                      children: <Widget>[
-                        Icon(Icons.exit_to_app),
-                        Container(
-                          width: 16,
-                        ),
-                        Text(S.of(context).logout),
-                      ],
+//              preferencesHelper.clearData().then((value) {
+//                Navigator.pushReplacementNamed(
+//                    context, UserRoutes.loginTypeSelector);
+//              });
+            },
+            child: Container(
+              color: Colors.white,
+              child: Padding(
+                padding: EdgeInsets.all(8),
+                child: Flex(
+                  direction: Axis.horizontal,
+                  children: <Widget>[
+                    Icon(Icons.exit_to_app),
+                    Container(
+                      width: 16,
                     ),
-                  ),
+                    Text(S.of(context).logout),
+                  ],
                 ),
-              )
-            ],
-          ));
+              ),
+            ),
+          )
+        ],
+      ));
     }
 
     widgetLayout.add(Flex(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/bloc/orders_list/orders_list_screen_bloc.dart';
 import 'package:tourists/generated/l10n.dart';
-import 'package:tourists/models/order/order_model.dart';
-import 'package:tourists/ui/widgets/order_item/order_item.dart';
+import 'package:tourists/module_forms/user_orders_module/bloc/orders_list/orders_list_screen_bloc.dart';
+import 'package:tourists/module_orders/model/order/order_model.dart';
+import 'package:tourists/module_orders/ui/widget/order_item/order_item.dart';
 
 @provide
 class OrdersScreen extends StatefulWidget {

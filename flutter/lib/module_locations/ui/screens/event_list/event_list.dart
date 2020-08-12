@@ -1,34 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:inject/inject.dart';
-import 'package:tourists/bloc/event_list/event_list_bloc.dart';
-import 'package:tourists/components/user/user_home_routes.dart';
 import 'package:tourists/generated/l10n.dart';
-import 'package:tourists/models/event/event_model.dart';
-import 'package:tourists/ui/widgets/event_list_item_widget/event_list_item_widget.dart';
+import 'package:tourists/module_locations/bloc/event_list/event_list_bloc.dart';
+import 'package:tourists/module_locations/model/event/event_model.dart';
+import 'package:tourists/module_locations/ui/widgets/event_list_item_widget/event_list_item_widget.dart';
 
-// Event and Festivals List has the same layout, we can use the top button as a filter
+import '../../../location_routes.dart';
 
-@provide
-class TouristEventListSubScreen extends StatefulWidget {
-  final EventListBloc _bloc;
-  static const String KEY_FESTIVAL = 'festival';
-  static const String KEY_EVENT = 'event';
+class EventListScreen extends StatefulWidget {
+  final EventListBloc bloc;
 
-  const TouristEventListSubScreen(this._bloc);
+  EventListScreen(this.bloc);
 
   @override
-  State<StatefulWidget> createState() => _TouristEventListSubScreenState();
+  State<StatefulWidget> createState() => _EventListScreenState();
 }
 
-class _TouristEventListSubScreenState extends State<TouristEventListSubScreen> {
-  int currentStatus = EventListBloc.STATUS_CODE_INIT;
-  String activeList = TouristEventListSubScreen.KEY_FESTIVAL;
-
+class _EventListScreenState extends State<EventListScreen> {
+  String activeList;
   List<EventModel> eventList;
+  int currentStatus;
 
   @override
   Widget build(BuildContext context) {
-    widget._bloc.eventStream.listen((event) {
+    widget.bloc.eventStream.listen((event) {
       currentStatus = event.first;
       if (currentStatus == EventListBloc.STATUS_CODE_LOAD_SUCCESS) {
         eventList = event.last;
@@ -36,23 +30,33 @@ class _TouristEventListSubScreenState extends State<TouristEventListSubScreen> {
       setState(() {});
     });
 
-    if (currentStatus == EventListBloc.STATUS_CODE_INIT) {
-      widget._bloc.getAllEvents();
-      return Center(child: Text("Loading"));
+    switch (currentStatus) {
+      case EventListBloc.STATUS_CODE_INIT:
+        getActiveList();
+        return _getLoadingUI();
+      case EventListBloc.STATUS_CODE_LOAD_SUCCESS:
+        return _getSuccessUI();
+      default:
+        return _getErrorUI();
     }
-
-    if (currentStatus == EventListBloc.STATUS_CODE_LOAD_ERROR) {
-      return Center(child: Text("Error fetching Data"));
-    }
-
-    if (currentStatus == EventListBloc.STATUS_CODE_LOAD_SUCCESS) {
-      return buildUI();
-    }
-
-    return Center(child: Text("Undefined Status"));
   }
 
-  buildUI() {
+  Widget _getLoadingUI() {
+    return Center(
+      child: Flex(
+        direction: Axis.vertical,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[CircularProgressIndicator(), Text('Loading...')],
+      ),
+    );
+  }
+
+  Widget _getErrorUI() {
+    return Center(child: Text("Error fetching Data"));
+  }
+
+  Widget _getSuccessUI() {
     List<Widget> pageLayout = [];
 
     // Title
@@ -77,7 +81,7 @@ class _TouristEventListSubScreenState extends State<TouristEventListSubScreen> {
           flex: 1,
           child: GestureDetector(
             onTap: () {
-              activeList = TouristEventListSubScreen.KEY_EVENT;
+              activeList = EventListBloc.KEY_EVENT;
               setState(() {});
             },
             child: Container(
@@ -87,7 +91,7 @@ class _TouristEventListSubScreenState extends State<TouristEventListSubScreen> {
               child: Text(
                 S.of(context).events,
                 style: TextStyle(
-                    color: activeList == TouristEventListSubScreen.KEY_EVENT
+                    color: activeList == EventListBloc.KEY_EVENT
                         ? Colors.greenAccent
                         : Colors.black,
                     fontWeight: FontWeight.bold),
@@ -104,7 +108,7 @@ class _TouristEventListSubScreenState extends State<TouristEventListSubScreen> {
           flex: 1,
           child: GestureDetector(
             onTap: () {
-              activeList = TouristEventListSubScreen.KEY_FESTIVAL;
+              activeList = EventListBloc.KEY_FESTIVAL;
               setState(() {});
             },
             child: Container(
@@ -114,7 +118,7 @@ class _TouristEventListSubScreenState extends State<TouristEventListSubScreen> {
               child: Text(
                 S.of(context).festivals,
                 style: TextStyle(
-                    color: activeList == TouristEventListSubScreen.KEY_FESTIVAL
+                    color: activeList == EventListBloc.KEY_FESTIVAL
                         ? Colors.greenAccent
                         : Colors.black,
                     fontWeight: FontWeight.bold),
@@ -137,7 +141,7 @@ class _TouristEventListSubScreenState extends State<TouristEventListSubScreen> {
       getActiveList().forEach((event) {
         pageLayout.add(GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, UserRoutes.eventDetails,
+            Navigator.pushNamed(context, LocationRoutes.eventDetails,
                 arguments: event.id);
           },
           child: EventListItemWidget(

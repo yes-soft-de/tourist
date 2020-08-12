@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tourists/models/order/order_model.dart';
+import 'package:tourists/module_orders/model/order/order_model.dart';
 
 class PendingOrdersScreen extends StatefulWidget {
   @override

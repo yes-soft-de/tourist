@@ -249,8 +249,8 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i60.EventDetailsBloc _createEventDetailsBloc() => _i60.EventDetailsBloc(
       _createEventService(), _createLocationListService());
   _i61.GuideListModule _createGuideListModule() => _i61.GuideListModule();
-  _i62.OrderModule _createOrderModule() =>
-      _i62.OrderModule(_createOrdersListScreen());
+  _i62.OrderModule _createOrderModule() => _i62.OrderModule(
+      _createOrdersListScreen(), _createLoginTypeSelectorScreen());
   _i63.FormsModule _createFormsModule() => _i63.FormsModule(
       _createRequestGuideScreen(),
       _createAuthGuard(),

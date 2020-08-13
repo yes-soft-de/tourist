@@ -14,7 +14,7 @@ class CommentListWidget extends StatefulWidget {
 }
 
 class _CommentListWidgetState extends State<CommentListWidget> {
-  bool commentListCollapsed = false;
+  bool commentListCollapsed = true;
 
   _CommentListWidgetState();
 
@@ -23,10 +23,12 @@ class _CommentListWidgetState extends State<CommentListWidget> {
     if (widget.comments == null) return Container();
 
     List<Widget> comments = [];
-    List<CommentModel> allComments = widget.comments;
+    List<CommentModel> allComments = [];
 
-    if (comments.length > 2 && commentListCollapsed) {
-      allComments = allComments.sublist(0, 2);
+    if (widget.comments.length > 2 && commentListCollapsed) {
+      allComments = widget.comments.sublist(0, 2);
+    } else {
+      allComments = widget.comments;
     }
 
     allComments.forEach((element) {
@@ -43,6 +45,7 @@ class _CommentListWidgetState extends State<CommentListWidget> {
       ),
       onPressed: () {
         commentListCollapsed = !commentListCollapsed;
+        setState(() {});
       },
     ));
 

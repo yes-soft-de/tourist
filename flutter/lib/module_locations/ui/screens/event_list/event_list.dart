@@ -63,12 +63,6 @@ class _EventListScreenState extends State<EventListScreen> {
   Widget _getSuccessUI() {
     List<Widget> pageLayout = [];
 
-    // Title
-    pageLayout.add(AppBar(
-      backgroundColor: Colors.white,
-      title: Text("سياح"),
-    ));
-
     pageLayout.add(Container(
       width: double.infinity,
       height: 2,

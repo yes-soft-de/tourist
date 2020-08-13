@@ -23,6 +23,10 @@ class LocationDetailsService {
     LocationDetailsResponse response =
         await _locationManager.getLocationDetails(locationId);
 
+    if (response == null) {
+      return null;
+    }
+
     return response.locationDetails;
   }
 

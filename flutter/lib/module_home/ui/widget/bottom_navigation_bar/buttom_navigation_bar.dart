@@ -25,17 +25,17 @@ class CustomBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> widgetLayout = [];
 
-    if (activePosition != 3) {
-      widgetLayout.add(GestureDetector(child: RequestGuideButton()));
-    } else {
+    if (activePosition == 3) {
       widgetLayout.add(moreColumn());
+    } else if (activePosition == 1) {
+      widgetLayout.add(GestureDetector(child: RequestGuideButton()));
     }
 
     widgetLayout.addAll([
       // Divider
       Container(
-        height: 16,
-      ),
+          height: 16,
+          color: activePosition == 3 ? Colors.white : Colors.transparent),
 
       // Nav bar
       Container(
@@ -65,8 +65,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         ),
         Text(
           iconName,
-          style: TextStyle(
-              color: active ? activeColor : inactiveColor),
+          style: TextStyle(color: active ? activeColor : inactiveColor),
         )
       ],
     );
@@ -113,7 +112,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
       children: <Widget>[
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, OrdersRoutes.ordersList);
+            onLocationChanged(1);
           },
           child: Container(
             color: Colors.white,

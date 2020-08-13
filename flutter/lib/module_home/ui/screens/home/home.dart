@@ -103,7 +103,7 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   _changePosition(position) {
-    _pageController.jumpToPage(position);
+    if (position < 3) _pageController.jumpToPage(position);
     setState(() {
       this.position = position;
     });

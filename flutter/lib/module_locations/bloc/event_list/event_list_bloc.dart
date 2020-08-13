@@ -12,6 +12,7 @@ class EventListBloc {
   static const STATUS_CODE_INIT = 480;
   static const STATUS_CODE_LOAD_SUCCESS = 490;
   static const STATUS_CODE_LOAD_ERROR = 500;
+  static const STATUS_CODE_LOADING = 510;
 
   final EventService _eventService;
 

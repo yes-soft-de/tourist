@@ -24,11 +24,12 @@ class _GuideListScreenState extends State<GuideListScreen> {
   @override
   Widget build(BuildContext context) {
     widget._guideListBloc.guidesStream.listen((guidesListEvent) {
-      currentStatus = guidesListEvent.first;
-      if (currentStatus == GuideListBloc.STATUS_CODE_LOAD_SUCCESS) {
-        _guidesList = guidesListEvent.last;
-        setState(() {});
-      }
+      setState(() {
+        currentStatus = guidesListEvent.first;
+        if (currentStatus == GuideListBloc.STATUS_CODE_LOAD_SUCCESS) {
+          _guidesList = guidesListEvent.last;
+        }
+      });
     });
 
     if (currentStatus == GuideListBloc.STATUS_CODE_INIT) {

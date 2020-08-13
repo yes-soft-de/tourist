@@ -20,21 +20,24 @@ class EventListScreen extends StatefulWidget {
 class _EventListScreenState extends State<EventListScreen> {
   String activeList;
   List<EventModel> eventList;
-  int currentStatus;
+  int currentStatus = EventListBloc.STATUS_CODE_INIT;
 
   @override
   Widget build(BuildContext context) {
     widget.bloc.eventStream.listen((event) {
-      currentStatus = event.first;
-      if (currentStatus == EventListBloc.STATUS_CODE_LOAD_SUCCESS) {
-        eventList = event.last;
-      }
-      setState(() {});
+      setState(() {
+        currentStatus = event.first;
+        if (currentStatus == EventListBloc.STATUS_CODE_LOAD_SUCCESS) {
+          eventList = event.last;
+        }
+      });
     });
 
     switch (currentStatus) {
       case EventListBloc.STATUS_CODE_INIT:
-        getActiveList();
+        widget.bloc.getAllEvents();
+        return _getLoadingUI();
+      case EventListBloc.STATUS_CODE_LOADING:
         return _getLoadingUI();
       case EventListBloc.STATUS_CODE_LOAD_SUCCESS:
         return _getSuccessUI();

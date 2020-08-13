@@ -49,9 +49,10 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
       canSendComments = true;
       currentStatus = event[LocationDetailsBloc.KEY_STATUS];
       if (currentStatus == LocationDetailsBloc.STATUS_CODE_LOAD_SUCCESS) {
-        _locationDetails = event[LocationDetailsBloc.KEY_LOCATION_INFO];
-        _guidesList = event[LocationDetailsBloc.KEY_GUIDES];
-        setState(() {});
+        setState(() {
+          _locationDetails = event[LocationDetailsBloc.KEY_LOCATION_INFO];
+          _guidesList = event[LocationDetailsBloc.KEY_GUIDES];
+        });
       }
     });
 
@@ -60,7 +61,16 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
       widget._locationBloc.getLocation(locationId);
       return Scaffold(
         body: Center(
-          child: Text(S.of(context).loading),
+          child: Flex(
+            direction: Axis.vertical,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              CircularProgressIndicator(),
+              Container(height: 16,),
+              Text(S.of(context).loading)
+            ],
+          ),
         ),
       );
     }
@@ -225,7 +235,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
       // Construct the List into CSV text
       String languagesInText = "";
       guide.language.forEach((language) {
-        citiesInText = citiesInText + language + " ";
+        languagesInText = languagesInText + language + " ";
       });
 
       guidesList.add(GestureDetector(

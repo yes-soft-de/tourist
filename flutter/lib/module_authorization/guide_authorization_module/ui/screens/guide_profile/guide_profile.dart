@@ -20,7 +20,9 @@ class GuideProfileScreen extends StatefulWidget {
 
 class _GuideProfileScreenState extends State<GuideProfileScreen> {
   int step = 0;
-  PageController _profilePagesController = PageController();
+  bool editMode = false;
+
+  PageController signUpController = PageController(initialPage: 0);
 
   String _userId;
   List<String> _languages = [];
@@ -48,7 +50,8 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
 
     widget._guideRegisterBloc.guideStream.listen((event) {
       currentState = event.first;
-      setState(() {});
+      if (currentState != GuideRegisterBloc.STATUS_CODE_UPDATE_SUCCESS)
+        setState(() {});
     });
 
     switch (currentState) {
@@ -56,6 +59,9 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
         _checkIfRegistered();
         return _getContactInfoPage();
       case GuideRegisterBloc.STATUS_CODE_USER_ALREADY_LOGGED_IN:
+        editMode = true;
+        return _signUpPages();
+      case GuideRegisterBloc.STATUS_CODE_EDIT_MODE:
         return _getServicesPage();
       case GuideRegisterBloc.STATUS_CODE_LOADING:
         return _getLoadingScreen();
@@ -88,6 +94,13 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
           title: Text('سياح'),
         ),
         body: Center(child: CircularProgressIndicator()));
+  }
+
+  PageView _signUpPages() {
+    return PageView(
+      controller: signUpController,
+      children: <Widget>[_getContactInfoPage(), _getServicesPage()],
+    );
   }
 
   Scaffold _getServicesPage() {
@@ -230,7 +243,11 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
             ),
             RaisedButton(
               onPressed: () {
-                _createGuideProfile();
+                if (editMode == false) {
+                  _createGuideProfile();
+                } else {
+                  signUpController.jumpToPage(1);
+                }
               },
               child: Text('Next'),
             )

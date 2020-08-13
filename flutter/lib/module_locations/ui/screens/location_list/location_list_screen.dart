@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_locations/bloc/location_list/location_list_bloc.dart';
-import 'package:tourists/module_locations/location_module.dart';
-import 'package:tourists/module_locations/model/location_details/location_details.dart';
 import 'package:tourists/module_locations/model/location_list_item/location_list_item.dart';
 import 'package:tourists/module_locations/ui/widgets/location_list_item/location_list_item.dart';
 
@@ -29,16 +27,18 @@ class _LocationListScreenState extends State<LocationListScreen> {
       print('Got Event');
       currentStatus = event[LocationListBloc.KEY_STATUS];
 
-      if (currentStatus == LocationListBloc.STATUS_CODE_LOAD_SUCCESS) {
-        locationModelList = event[LocationListBloc.KEY_PAYLOAD];
-      }
-
-      setState(() {});
+      setState(() {
+        if (currentStatus == LocationListBloc.STATUS_CODE_LOAD_SUCCESS) {
+          locationModelList = event[LocationListBloc.KEY_PAYLOAD];
+        }
+      });
     });
 
     switch (currentStatus) {
       case LocationListBloc.STATUS_CODE_INIT:
         widget.bloc.requestLocationList();
+        return _getLoadingScreen();
+      case LocationListBloc.STATUS_CODE_LOADING:
         return _getLoadingScreen();
       case LocationListBloc.STATUS_CODE_LOAD_SUCCESS:
         return _getSuccessScreen();
@@ -81,9 +81,21 @@ class _LocationListScreenState extends State<LocationListScreen> {
   }
 
   Widget _getErrorScreen() {
-    return Flex(
-      direction: Axis.horizontal,
-      children: <Widget>[Text(S.of(context).error_fetching_data)],
+    return Center(
+      child: Flex(
+        direction: Axis.vertical,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text(S.of(context).error_fetching_data),
+          RaisedButton(
+            child: Text(S.of(context).reload),
+            onPressed: () {
+              widget.bloc.requestLocationList();
+            },
+          )
+        ],
+      ),
     );
   }
 

@@ -89,7 +89,8 @@ class HomeScreenState extends State<HomeScreen> {
               left: 0,
               right: 0,
               child: CustomBottomNavigationBar(
-                pagePosition: position != null ? position : 0,
+                activePosition: position != null ? position : 0,
+                context: context,
                 onLocationChanged: (int position) {
                   _changePosition(position);
                 },
@@ -102,6 +103,7 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   _changePosition(position) {
+    _pageController.jumpToPage(position);
     setState(() {
       this.position = position;
     });

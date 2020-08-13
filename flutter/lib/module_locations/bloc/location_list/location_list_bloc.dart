@@ -4,6 +4,7 @@ import 'package:tourists/module_locations/service/location_list/location_list_se
 import 'package:tourists/utils/logger/logger.dart';
 
 @provide
+@singleton
 class LocationListBloc {
   static const TAG = 'LocationListBloc';
 

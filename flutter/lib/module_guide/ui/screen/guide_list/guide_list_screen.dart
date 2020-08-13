@@ -66,22 +66,21 @@ class _GuideListScreenState extends State<GuideListScreen> {
 
     // Construct the List into CSV text
     _guidesList.forEach((guide) {
-      String citiesInText = "";
+      String citiesInText = " ";
       guide.city.forEach((cityName) {
-        citiesInText = citiesInText + " " + cityName;
+        citiesInText = citiesInText + cityName + " ";
       });
+      print(citiesInText);
 
       // Construct the List into CSV text
-      String languagesInText = "";
+      String languagesInText = " ";
       guide.language.forEach((language) {
-        citiesInText = citiesInText + language + " ";
+        languagesInText = languagesInText + language + " ";
       });
 
       guidesList.add(GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamed(
-              //TOdO Change This
-              FormsRoutes.requestGuideForm,
+          Navigator.of(context).pushNamed(FormsRoutes.requestGuideForm,
               arguments: RequestGuideNavigationArguments(
                   guideId: guide.user, cityId: null));
         },

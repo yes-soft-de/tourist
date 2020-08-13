@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
@@ -35,6 +36,8 @@ class _LocationCarouselScreenState extends State<LocationCarouselScreen> {
       case LocationListBloc.STATUS_CODE_INIT:
         widget.bloc.requestLocationList();
         return _getLoadingScreen();
+      case LocationListBloc.STATUS_CODE_LOADING:
+        return _getLoadingScreen();
       case LocationListBloc.STATUS_CODE_LOAD_SUCCESS:
         return _getSuccessScreen();
       default:
@@ -60,8 +63,17 @@ class _LocationCarouselScreenState extends State<LocationCarouselScreen> {
 
   Widget _getErrorScreen() {
     return Flex(
-      direction: Axis.horizontal,
-      children: <Widget>[Text(S.of(context).error_fetching_data)],
+      direction: Axis.vertical,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Text(S.of(context).error_fetching_data),
+        RaisedButton(
+            child: Text(S.of(context).reload),
+            onPressed: () {
+              widget.bloc.requestLocationList();
+            }),
+      ],
     );
   }
 

@@ -31,13 +31,13 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
   Widget build(BuildContext context) {
     widget._firebaseAuth.currentUser().then((value) {
       if (value != null) {
-        Navigator.pushReplacementNamed(context, GuideAuthorizationRoutes.guideUpdateProfile);
+        Navigator.pushNamed(context, GuideAuthorizationRoutes.guideUpdateProfile);
       }
     });
 
     widget._guideLoginBloc.stateStream.listen((event) {
       if (event.first == GuideLoginBloc.STATUS_CODE_RECEIVED) {
-        Navigator.pushReplacementNamed(context, GuideAuthorizationRoutes.guideUpdateProfile);
+        Navigator.pushNamed(context, GuideAuthorizationRoutes.guideUpdateProfile);
       }
 
       if (event.first == GuideLoginBloc.STATUS_CODE_FAILED) {

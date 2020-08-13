@@ -94,7 +94,11 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
         locationMode ? _locationInfo = event.last : _guideInfo = event.last;
         widget._logger.info(widget.tag, "Guide Info: " + _guideInfo.toString());
       }
-      setState(() {});
+      if (currentStatus != RequestGuideBloc.STATUS_CODE_REQUEST_SUCCESS) {
+        setState(() {});
+      } else {
+        Navigator.pushNamed(context, HomeRoutes.home);
+      }
     });
 
     if (currentStatus == RequestGuideBloc.STATUS_CODE_INIT) {
@@ -348,13 +352,15 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
     pageLayout.add(Padding(
       padding: EdgeInsets.all(16),
       child: RaisedButton(
-        onPressed: requestInProgress ? null : () {
-          if (!locationMode) {
-            _requestGuide();
-          } else {
-            _requestLocation();
-          }
-        },
+        onPressed: requestInProgress
+            ? null
+            : () {
+                if (!locationMode) {
+                  _requestGuide();
+                } else {
+                  _requestLocation();
+                }
+              },
         color: Colors.greenAccent,
         child: Text('Request a Chat!'),
       ),

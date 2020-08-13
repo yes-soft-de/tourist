@@ -13,6 +13,7 @@ class GuideRegisterBloc {
   static const int STATUS_CODE_REGISTER_ERROR = 1150;
   static const int STATUS_CODE_UPDATE_ERROR = 1160;
   static const int STATUS_CODE_UPDATE_SUCCESS = 1170;
+  static const int STATUS_CODE_EDIT_MODE = 1190;
   static const int STATUS_CODE_LOADING = 1180;
 
   final GuideRegisterService _guideRegisterService;
@@ -29,8 +30,9 @@ class GuideRegisterBloc {
     _guideRegisterService.registerGuide(name, uid).then((value) {
       if (value == null || value == false) {
         _guideRegisterSubject.add(Pair(STATUS_CODE_REGISTER_ERROR, null));
+      } else {
+        _guideRegisterSubject.add(Pair(STATUS_CODE_REGISTER_SUCCESS, null));
       }
-      _guideRegisterSubject.add(Pair(STATUS_CODE_REGISTER_SUCCESS, null));
     });
   }
 
@@ -68,8 +70,13 @@ class GuideRegisterBloc {
   checkIfGuideRegistered() {
     _guideRegisterService.checkIfRegistered().then((value) {
       if (value) {
-        _guideRegisterSubject.add(Pair(STATUS_CODE_USER_ALREADY_LOGGED_IN, null));
+        _guideRegisterSubject
+            .add(Pair(STATUS_CODE_USER_ALREADY_LOGGED_IN, null));
       }
     });
+  }
+
+  moveToProfile() {
+    _guideRegisterSubject.add(Pair(STATUS_CODE_EDIT_MODE, null));
   }
 }

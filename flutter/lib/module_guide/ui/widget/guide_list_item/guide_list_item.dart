@@ -21,73 +21,85 @@ class GuideListItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Container(
-        height: 128,
-        width: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              // TODO: Show Profile when clicking on image
-              // Image
-              Container(
-                height: 96,
-                width: 96,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(90))),
-                child: guideImage != null ? Image.network(
-                  guideImage,
-                  fit: BoxFit.fitHeight,
-                ) : Icon(Icons.perm_identity),
-              ),
-              Container(
-                width: 8,
-              ),
-              // Info
-              Flex(
-                direction: Axis.vertical,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Flex(
+          direction: Axis.horizontal,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: Flex(
+                direction: Axis.horizontal,
                 children: <Widget>[
-                  Text(
-                    guideName,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                  // Image
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                        height: 56,
+                        width: 56,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.greenAccent,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(90))),
+                        child: Text(
+                          guideName[0],
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24),
+                        )),
                   ),
-                  Text(guideLanguage + guideCity),
-                  Flex(
-                    direction: Axis.horizontal,
-                    children: <Widget>[
-                      Text(
-                        availability != null ? availability : S.of(context).available,
-                        style: TextStyle(),
-                      ),
-                      Container(
-                        width: 8,
-                      ),
-                      getStarsLine()
-                    ],
-                  )
+                  // Info
+                  Expanded(
+                    child: Flex(
+                      direction: Axis.vertical,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          guideName,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                        Flex(
+                          direction: Axis.horizontal,
+                          children: <Widget>[
+                            Text(
+                              availability != null
+                                  ? availability
+                                  : S.of(context).available,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(),
+                            ),
+                            Container(
+                              width: 8,
+                            ),
+                            getStarsLine()
+                          ],
+                        ),
+                        Text(
+                          '$guideCity | $guideLanguage',
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-              // Divider
-              Container(
-                width: 8,
+            ),
+            // Request Button
+            GestureDetector(
+              child: Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(90)),
+                    border: Border.all(color: Colors.black)),
+                child: Icon(Icons.add),
               ),
-              // Request Button
-              GestureDetector(
-                child: Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(90)),
-                      border: Border.all(color: Colors.black)),
-                  child: Icon(Icons.add),
-                ),
-              )
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );

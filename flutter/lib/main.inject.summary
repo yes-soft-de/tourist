@@ -42,6 +42,13 @@
             },
             {
               "lookupKey": {
+                "root": "asset:tourists/lib/module_locations/location_module.dart#LocationModule",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
                 "root": "asset:tourists/lib/module_guide/guide_list_module.dart#GuideListModule",
                 "qualifier": null
               },

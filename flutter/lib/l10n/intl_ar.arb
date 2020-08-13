@@ -47,5 +47,7 @@
   "request_for_guide": "طلب مرشد",
   "request_guid": "طلب مرشد!",
   "request_guide": "طلب مرشد",
-  "request_tour": "طلب رحلة عام"
+  "request_tour": "طلب رحلة عام",
+  "more": "المزيد",
+  "reload": "مرة أخرى"
 }

@@ -63,26 +63,37 @@ import '../../module_chat/bloc/chat_page/chat_page.bloc.dart' as _i44;
 import '../../module_chat/service/chat/char_service.dart' as _i45;
 import '../../module_chat/manager/chat/chat_manager.dart' as _i46;
 import '../../module_chat/repository/chat/chat_repository.dart' as _i47;
-import '../../module_guide/guide_list_module.dart' as _i48;
-import '../../module_forms/forms_module.dart' as _i49;
-import '../../module_forms/user_orders_module/ui/screens/request_guide/request_guide_screen.dart'
+import '../../module_locations/location_module.dart' as _i48;
+import '../../module_locations/ui/screens/location_details/location_details.dart'
+    as _i49;
+import '../../module_locations/bloc/location_details/location_details_bloc.dart'
     as _i50;
-import '../../module_forms/user_orders_module/bloc/request_guide/request_guide.bloc.dart'
-    as _i51;
-import '../../module_forms/user_orders_module/service/request_guide/request_guide.service.dart'
-    as _i52;
-import '../../module_forms/user_orders_module/manager/request_manager/request_guide_manager.dart'
-    as _i53;
-import '../../module_forms/user_orders_module/repository/request_guide/request_guide_repository.dart'
-    as _i54;
 import '../../module_locations/service/location_details/location_details_service.dart'
-    as _i55;
+    as _i51;
 import '../../module_locations/manager/location_details/location_details.dart'
-    as _i56;
+    as _i52;
 import '../../module_locations/repository/location_details/location_details_repository.dart'
+    as _i53;
+import '../../module_comment/manager/rate/rate_manager.dart' as _i54;
+import '../../module_comment/repository/rating/rating_repository.dart' as _i55;
+import '../../module_comment/manager/comment/comment_service.dart' as _i56;
+import '../../module_comment/repository/comment/comment_repository.dart'
     as _i57;
-import '../../module_comment/manager/rate/rate_manager.dart' as _i58;
-import '../../module_comment/repository/rating/rating_repository.dart' as _i59;
+import '../../module_locations/ui/screens/event_details/event_details_screen.dart'
+    as _i58;
+import '../../module_locations/bloc/event_details/event_details.dart' as _i59;
+import '../../module_guide/guide_list_module.dart' as _i60;
+import '../../module_forms/forms_module.dart' as _i61;
+import '../../module_forms/user_orders_module/ui/screens/request_guide/request_guide_screen.dart'
+    as _i62;
+import '../../module_forms/user_orders_module/bloc/request_guide/request_guide.bloc.dart'
+    as _i63;
+import '../../module_forms/user_orders_module/service/request_guide/request_guide.service.dart'
+    as _i64;
+import '../../module_forms/user_orders_module/manager/request_manager/request_guide_manager.dart'
+    as _i65;
+import '../../module_forms/user_orders_module/repository/request_guide/request_guide_repository.dart'
+    as _i66;
 
 class AppComponent$Injector implements _i1.AppComponent {
   AppComponent$Injector._();
@@ -101,6 +112,7 @@ class AppComponent$Injector implements _i1.AppComponent {
       _createAuthorizationModule(),
       _createHomeModule(),
       _createChatModule(),
+      _createLocationModule(),
       _createGuideListModule(),
       _createFormsModule(),
       _createSharedPreferencesHelper());
@@ -195,34 +207,49 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i46.ChatManager _createChatManager() =>
       _i46.ChatManager(_createChatRepository());
   _i47.ChatRepository _createChatRepository() => _i47.ChatRepository();
-  _i48.GuideListModule _createGuideListModule() => _i48.GuideListModule();
-  _i49.FormsModule _createFormsModule() =>
-      _i49.FormsModule(_createRequestGuideScreen());
-  _i50.RequestGuideScreen _createRequestGuideScreen() =>
-      _i50.RequestGuideScreen(_createRequestGuideBloc(), _createLogger());
-  _i51.RequestGuideBloc _createRequestGuideBloc() => _i51.RequestGuideBloc(
-      _createRequestGuideService(), _createLocationDetailsService());
-  _i52.RequestGuideService _createRequestGuideService() =>
-      _i52.RequestGuideService(_createSharedPreferencesHelper(),
-          _createGuideListService(), _createRequestGuideManager());
-  _i53.RequestGuideManager _createRequestGuideManager() =>
-      _i53.RequestGuideManager(_createRequestGuideRepository());
-  _i54.RequestGuideRepository _createRequestGuideRepository() =>
-      _i54.RequestGuideRepository(_createHttpClient());
-  _i55.LocationDetailsService _createLocationDetailsService() =>
-      _i55.LocationDetailsService(
+  _i48.LocationModule _createLocationModule() => _i48.LocationModule(
+      _createLocationDetailsScreen(), _createEventDetailsScreen());
+  _i49.LocationDetailsScreen _createLocationDetailsScreen() =>
+      _i49.LocationDetailsScreen(_createLocationDetailsBloc());
+  _i50.LocationDetailsBloc _createLocationDetailsBloc() =>
+      _i50.LocationDetailsBloc(_createLocationDetailsService(),
+          _createSharedPreferencesHelper(), _createCommentManager());
+  _i51.LocationDetailsService _createLocationDetailsService() =>
+      _i51.LocationDetailsService(
           _createLocationDetailsManager(),
           _createGuidesManager(),
           _createRatingManager(),
           _createSharedPreferencesHelper());
-  _i56.LocationDetailsManager _createLocationDetailsManager() =>
-      _i56.LocationDetailsManager(_createLocationDetailsRepository());
-  _i57.LocationDetailsRepository _createLocationDetailsRepository() =>
-      _i57.LocationDetailsRepository(_createHttpClient());
-  _i58.RatingManager _createRatingManager() =>
-      _i58.RatingManager(_createRatingRepository());
-  _i59.RatingRepository _createRatingRepository() =>
-      _i59.RatingRepository(_createHttpClient());
+  _i52.LocationDetailsManager _createLocationDetailsManager() =>
+      _i52.LocationDetailsManager(_createLocationDetailsRepository());
+  _i53.LocationDetailsRepository _createLocationDetailsRepository() =>
+      _i53.LocationDetailsRepository(_createHttpClient());
+  _i54.RatingManager _createRatingManager() =>
+      _i54.RatingManager(_createRatingRepository());
+  _i55.RatingRepository _createRatingRepository() =>
+      _i55.RatingRepository(_createHttpClient());
+  _i56.CommentManager _createCommentManager() =>
+      _i56.CommentManager(_createCommentRepository());
+  _i57.CommentRepository _createCommentRepository() =>
+      _i57.CommentRepository(_createHttpClient());
+  _i58.EventDetailsScreen _createEventDetailsScreen() =>
+      _i58.EventDetailsScreen(_createEventDetailsBloc());
+  _i59.EventDetailsBloc _createEventDetailsBloc() => _i59.EventDetailsBloc(
+      _createEventService(), _createLocationListService());
+  _i60.GuideListModule _createGuideListModule() => _i60.GuideListModule();
+  _i61.FormsModule _createFormsModule() =>
+      _i61.FormsModule(_createRequestGuideScreen());
+  _i62.RequestGuideScreen _createRequestGuideScreen() =>
+      _i62.RequestGuideScreen(_createRequestGuideBloc(), _createLogger());
+  _i63.RequestGuideBloc _createRequestGuideBloc() => _i63.RequestGuideBloc(
+      _createRequestGuideService(), _createLocationDetailsService());
+  _i64.RequestGuideService _createRequestGuideService() =>
+      _i64.RequestGuideService(_createSharedPreferencesHelper(),
+          _createGuideListService(), _createRequestGuideManager());
+  _i65.RequestGuideManager _createRequestGuideManager() =>
+      _i65.RequestGuideManager(_createRequestGuideRepository());
+  _i66.RequestGuideRepository _createRequestGuideRepository() =>
+      _i66.RequestGuideRepository(_createHttpClient());
   @override
   _i5.MyApp get app => _createMyApp();
 }

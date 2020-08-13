@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/module_forms/user_orders_module/manager/request_manager/request_guide_manager.dart';
 import 'package:tourists/module_forms/user_orders_module/model/request_guide/request_guide.model.dart';
@@ -11,6 +12,7 @@ import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper
 
 @provide
 class RequestGuideService {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final SharedPreferencesHelper _preferencesHelper;
   final GuideListService _guidesService;
   final RequestGuideManager _requestGuideManager;
@@ -18,10 +20,12 @@ class RequestGuideService {
   RequestGuideService(this._preferencesHelper, this._guidesService, this._requestGuideManager);
 
   Future<bool> requestGuide(RequestGuideModel requestGuide) async {
-    String uid = await _preferencesHelper.getUserUID();
-    if (uid == null) {
+    FirebaseUser user = await _auth.currentUser();
+    if (user == null) {
       return false;
     }
+
+    String uid = user.uid;
 
     RequestGuideRequest requestObject = RequestGuideRequest(
         touristUserID: uid,

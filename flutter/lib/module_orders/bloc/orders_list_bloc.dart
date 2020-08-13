@@ -29,4 +29,8 @@ class OrdersListBloc {
       _orderSubject.add(Pair(STATUS_CODE_LOAD_SUCCESS, value));
     });
   }
+
+  dispose() {
+    _orderSubject.close();
+  }
 }

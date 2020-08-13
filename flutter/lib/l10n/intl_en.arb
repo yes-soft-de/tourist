@@ -49,5 +49,6 @@
   "request_guide": "Request Guide",
   "request_tour": "Request Tour",
   "more": "More",
-  "reload": "Reload"
+  "reload": "Reload",
+  "showLess": "Show Less"
 }

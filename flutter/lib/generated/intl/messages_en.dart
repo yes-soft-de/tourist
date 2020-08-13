@@ -65,6 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "saving_cata" : MessageLookupByLibrary.simpleMessage("Saving Data"),
     "select_gender" : MessageLookupByLibrary.simpleMessage("Select a Gender"),
     "select_language" : MessageLookupByLibrary.simpleMessage("Select a Language"),
+    "showLess" : MessageLookupByLibrary.simpleMessage("Show Less"),
     "show_more" : MessageLookupByLibrary.simpleMessage("SHOW MORE"),
     "successfully_registered" : MessageLookupByLibrary.simpleMessage("Successfully registered"),
     "title" : MessageLookupByLibrary.simpleMessage("Tourists"),

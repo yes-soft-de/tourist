@@ -25,12 +25,11 @@ class _EventListScreenState extends State<EventListScreen> {
   @override
   Widget build(BuildContext context) {
     widget.bloc.eventStream.listen((event) {
-      setState(() {
-        currentStatus = event.first;
-        if (currentStatus == EventListBloc.STATUS_CODE_LOAD_SUCCESS) {
-          eventList = event.last;
-        }
-      });
+      currentStatus = event.first;
+      if (currentStatus == EventListBloc.STATUS_CODE_LOAD_SUCCESS) {
+        eventList = event.last;
+      }
+      if (this.mounted) setState(() {});
     });
 
     switch (currentStatus) {

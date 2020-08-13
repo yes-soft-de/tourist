@@ -17,6 +17,7 @@ class HttpClient {
   HttpClient(this._logger);
 
   Future<String> get(String url) async {
+    _logger.info(tag, 'GET $url');
     try {
       var response = await _client.get(url, headers: {
         // Add Auth Header Here!

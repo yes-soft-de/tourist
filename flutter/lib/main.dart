@@ -10,6 +10,7 @@ import 'package:tourists/module_guide/guide_list_module.dart';
 import 'package:tourists/module_home/home_module.dart';
 import 'package:tourists/module_home/home_routes.dart';
 import 'package:tourists/module_locations/location_module.dart';
+import 'package:tourists/module_orders/order_module.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 
 import 'di/components/app.component.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
   final GuideListModule _guideListModule;
   final LocationModule _locationModule;
   final SharedPreferencesHelper _preferencesHelper;
+  final OrderModule _orderModule;
 
   MyApp(
       this._authorizationModule,
@@ -49,8 +51,9 @@ class MyApp extends StatelessWidget {
       this._chatModule,
       this._locationModule,
       this._guideListModule,
+      this._orderModule,
       this._formsModule,
-      this._preferencesHelper);
+      this._preferencesHelper,);
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +65,7 @@ class MyApp extends StatelessWidget {
     fullRoutesList.addAll(_formsModule.getRoutes());
     fullRoutesList.addAll(_locationModule.getRoutes());
     fullRoutesList.addAll(_guideListModule.getRoutes());
+    fullRoutesList.addAll(_orderModule.getRoutes());
 
     this._preferencesHelper.getLoggedInState().then((loggedInStatus) {
       if (loggedInStatus == LoggedInState.GUIDE) {

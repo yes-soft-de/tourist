@@ -5,14 +5,16 @@ import 'package:inject/inject.dart';
 import 'package:tourists/module_authorization/guide_authorization_module/bloc/guide_register/guide_register.dart';
 import 'package:tourists/module_home/home_routes.dart';
 import 'package:tourists/module_locations/service/location_list/location_list_service.dart';
+import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 
 @provide
 class GuideProfileScreen extends StatefulWidget {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final LocationListService locationListService;
   final GuideRegisterBloc _guideRegisterBloc;
+  final SharedPreferencesHelper _preferencesHelper;
 
-  GuideProfileScreen(this.locationListService, this._guideRegisterBloc);
+  GuideProfileScreen(this.locationListService, this._guideRegisterBloc, this._preferencesHelper);
 
   @override
   State<StatefulWidget> createState() => _GuideProfileScreenState();
@@ -68,6 +70,7 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
       case GuideRegisterBloc.STATUS_CODE_REGISTER_SUCCESS:
         return _getServicesPage();
       case GuideRegisterBloc.STATUS_CODE_UPDATE_SUCCESS:
+        widget._preferencesHelper.setLoggedInState(LoggedInState.GUIDE);
         Navigator.pushReplacementNamed(context, HomeRoutes.guideHome);
         return Scaffold();
       case GuideRegisterBloc.STATUS_CODE_REGISTER_ERROR:

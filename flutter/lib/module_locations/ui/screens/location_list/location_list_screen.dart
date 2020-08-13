@@ -24,14 +24,14 @@ class _LocationListScreenState extends State<LocationListScreen> {
   @override
   Widget build(BuildContext context) {
     widget.bloc.stateStream.listen((event) {
-      print('Got Event');
       currentStatus = event[LocationListBloc.KEY_STATUS];
+      if (currentStatus == LocationListBloc.STATUS_CODE_LOAD_SUCCESS) {
+        locationModelList = event[LocationListBloc.KEY_PAYLOAD];
+      }
 
-      setState(() {
-        if (currentStatus == LocationListBloc.STATUS_CODE_LOAD_SUCCESS) {
-          locationModelList = event[LocationListBloc.KEY_PAYLOAD];
-        }
-      });
+      if (this.mounted) {
+        setState(() {});
+      }
     });
 
     switch (currentStatus) {

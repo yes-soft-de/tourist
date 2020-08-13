@@ -5,6 +5,8 @@ import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_comment/response/comment/comment_response.dart';
 import 'package:tourists/module_comment/ui/widget/comment_item/comment_item.dart';
+import 'package:tourists/module_comment/ui/widget/comment_list/comment_list.dart';
+import 'package:tourists/module_comment/ui/widget/new_comment/new_comment_widget.dart';
 import 'package:tourists/module_forms/forms_routes.dart';
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
 import 'package:tourists/module_guide/nav_arguments/request_guide/request_guide_navigation.dart';
@@ -13,6 +15,7 @@ import 'package:tourists/module_locations/bloc/location_details/location_details
 import 'package:tourists/module_locations/model/location_details/location_details.dart';
 import 'package:tourists/module_shared/ui/widgets/carousel/carousel.dart';
 import 'package:tourists/module_shared/ui/widgets/request_guide_button/request_guide_button.dart';
+import 'package:tourists/utils/time/time_formatter.dart';
 
 @provide
 class LocationDetailsScreen extends StatefulWidget {
@@ -37,8 +40,6 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
   String locationId;
 
   int currentRate;
-
-  TextEditingController commentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +68,9 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               CircularProgressIndicator(),
-              Container(height: 16,),
+              Container(
+                height: 16,
+              ),
               Text(S.of(context).loading)
             ],
           ),
@@ -106,8 +109,6 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
           fit: BoxFit.fitWidth,
         ));
       });
-    } else {
-      Fluttertoast.showToast(msg: S.of(context).error_no_images);
     }
 
     List<Widget> pageLayout = [
@@ -136,44 +137,14 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
 
     pageLayout.addAll(getGuidesList());
 
-    Flex createCommentRow = Flex(
-      direction: Axis.horizontal,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Flexible(
-          flex: 3,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              controller: commentController,
-              decoration: InputDecoration(hintText: 'Comment Here'),
-            ),
-          ),
-        ),
-        Flexible(
-          flex: 1,
-          child: GestureDetector(
-            onTap: () {
-              createComment();
-            },
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.send,
-                  color: Colors.white,
-                ),
-              ),
-              decoration: BoxDecoration(
-                  color: canSendComments ? Colors.greenAccent : Colors.grey),
-            ),
-          ),
-        )
-      ],
-    );
-    pageLayout.add(createCommentRow);
+    pageLayout.add(NewCommentWidget(
+      active: canSendComments,
+      onCommentAdded: (String msg) {
+        createComment(msg);
+      },
+    ));
 
-    pageLayout.add(getCommentList());
+    pageLayout.add(CommentListWidget(_locationDetails.comments));
 
     return Scaffold(
       body: Stack(
@@ -283,49 +254,12 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
     return guidesList;
   }
 
-  Widget getCommentList() {
-    if (_locationDetails.comments == null) return null;
-
-    List<Widget> comments = [];
-    List<CommentModel> allComments = _locationDetails.comments;
-
-    if (_locationDetails.comments.length > 2 && commentListCollapsed) {
-      allComments = allComments.sublist(0, 2);
-    }
-
-    allComments.forEach((element) {
-      comments.add(CommentItemWidget(
-        comment: element.comment,
-        userName: element.userName,
-        commentDate: getTimeFromTimeStamp(element.date.timestamp),
-      ));
+  void createComment(String newComment) {
+    widget._locationBloc
+        .postComment(newComment, locationId)
+        .then((createSuccess) {
+      widget._locationBloc.getLocation(locationId);
     });
-
-    return Flex(
-      direction: Axis.vertical,
-      children: comments,
-    );
-  }
-
-  void createComment() {
-    if (!canSendComments) {
-      return;
-    }
-    canSendComments = false;
-    setState(() {});
-    if (commentController.text == null) return;
-    if (commentController.text.length > 0) {
-      widget._locationBloc
-          .postComment(commentController.text, locationId)
-          .then((createSuccess) {
-        widget._locationBloc.getLocation(locationId);
-        commentController.clear();
-      });
-    }
-  }
-
-  DateTime getTimeFromTimeStamp(int timeStamp) {
-    return new DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
   }
 
   Widget getEvaluationBar() {

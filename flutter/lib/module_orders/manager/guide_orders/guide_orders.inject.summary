@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/module_orders/ui/screen/orders_list/order_list_screen.dart",
+  "asset": "asset:tourists/lib/module_orders/manager/guide_orders/guide_orders.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "OrdersListScreen",
+        "name": "GuideOrdersManager",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/module_orders/ui/screen/orders_list/order_list_screen.dart#OrdersListScreen",
+              "root": "asset:tourists/lib/module_orders/manager/guide_orders/guide_orders.dart#GuideOrdersManager",
               "qualifier": null
             },
             "isProvider": false
@@ -21,7 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/module_orders/bloc/orders_list_bloc/orders_list_bloc.dart#OrdersListBloc",
+                "root": "asset:tourists/lib/module_orders/repository/guide_orders/guide_orders.dart#GuideOrdersRepository",
                 "qualifier": null
               },
               "isProvider": false

@@ -7,14 +7,17 @@ import 'package:tourists/module_home/home_routes.dart';
 import 'package:tourists/module_locations/service/location_list/location_list_service.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 
+FirebaseAuth _auth = FirebaseAuth.instance;
+
 @provide
 class GuideProfileScreen extends StatefulWidget {
-  final FirebaseAuth auth = FirebaseAuth.instance;
   final LocationListService locationListService;
   final GuideRegisterBloc _guideRegisterBloc;
   final SharedPreferencesHelper _preferencesHelper;
 
-  GuideProfileScreen(this.locationListService, this._guideRegisterBloc, this._preferencesHelper);
+  GuideProfileScreen(this.locationListService,
+      this._guideRegisterBloc,
+      this._preferencesHelper,);
 
   @override
   State<StatefulWidget> createState() => _GuideProfileScreenState();
@@ -45,7 +48,7 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
       _getLocations();
     }
 
-    widget.auth.currentUser().then((value) {
+    _auth.currentUser().then((value) {
       _phoneNumber = value.phoneNumber;
       _userId = value.uid;
     });

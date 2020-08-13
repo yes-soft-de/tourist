@@ -29,12 +29,12 @@ class _LocationCarouselScreenState extends State<LocationCarouselScreen> {
         locationList = event[LocationListBloc.KEY_PAYLOAD];
       }
 
-      setState(() {});
+      if (this.mounted) setState(() {});
     });
 
     switch (currentStatus) {
       case LocationListBloc.STATUS_CODE_INIT:
-        widget.bloc.requestLocationList();
+        if (this.locationList == null) widget.bloc.requestLocationList();
         return _getLoadingScreen();
       case LocationListBloc.STATUS_CODE_LOADING:
         return _getLoadingScreen();

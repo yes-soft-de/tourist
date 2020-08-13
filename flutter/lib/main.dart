@@ -68,25 +68,6 @@ class MyApp extends StatelessWidget {
     fullRoutesList.addAll(_orderModule.getRoutes());
 
     this._preferencesHelper.getLoggedInState().then((loggedInStatus) {
-      if (loggedInStatus == LoggedInState.GUIDE) {
-        return MaterialApp(
-            navigatorObservers: <NavigatorObserver>[
-              observer
-            ],
-            localizationsDelegates: [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            theme: ThemeData(
-                primaryColor: Colors.greenAccent,
-                accentColor: Colors.greenAccent),
-            supportedLocales: S.delegate.supportedLocales,
-            title: 'Soyah',
-            routes: fullRoutesList,
-            initialRoute: HomeRoutes.guideHome);
-      }
       return MaterialApp(
           navigatorObservers: <NavigatorObserver>[
             observer

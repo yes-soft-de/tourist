@@ -49,6 +49,13 @@
             },
             {
               "lookupKey": {
+                "root": "asset:tourists/lib/utils/auth_guard/auth_gard.dart#AuthGuard",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
                 "root": "asset:tourists/lib/module_locations/ui/screens/location_carousel/location_carousel.dart#LocationCarouselScreen",
                 "qualifier": null
               },

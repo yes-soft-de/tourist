@@ -28,7 +28,17 @@ class GuideLoginBloc {
         timeout: Duration(seconds: 30),
         verificationCompleted: (AuthCredential credentials) {
           log('Verification Complete');
-          _stateSubject.add(Pair(STATUS_CODE_RECEIVED, credentials));
+          _auth.signInWithCredential(credentials).then((result) {
+            FirebaseUser user = result.user;
+
+            if (user != null) {
+              log('Code Verify complete');
+              _stateSubject.add(Pair(STATUS_CODE_RECEIVED, user));
+            } else {
+              _stateSubject.add(Pair(STATUS_CODE_CONFIRM_ERROR, null));
+              print("Error");
+            }
+          });
         },
         verificationFailed: (err) {
           log('Verification Failed: ' + err.message);

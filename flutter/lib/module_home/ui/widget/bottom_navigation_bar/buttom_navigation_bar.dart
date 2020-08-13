@@ -9,6 +9,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
   final Color activeColor = Color(0xFF00FFA8);
   final Color inactiveColor = Colors.black;
   final int activePosition;
+  final bool isLoggedIn;
 
   final void Function(int) onLocationChanged;
   final BuildContext context;
@@ -16,6 +17,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
   CustomBottomNavigationBar(
       {@required this.activePosition,
       @required this.context,
+      @required this.isLoggedIn,
       @required this.onLocationChanged});
 
   @override
@@ -152,7 +154,16 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   Container(
                     width: 16,
                   ),
-                  Text(S.of(context).logout),
+                  GestureDetector(
+                      onTap: () {
+                        if (isLoggedIn)
+                          Navigator.of(context).pushNamed(AuthorizationRoutes.logout);
+                        else
+                          Navigator.of(context).pushNamed(AuthorizationRoutes.loginTypeSelector);
+                      },
+                      child: Text(isLoggedIn
+                          ? S.of(context).logout
+                          : S.of(context).login)),
                 ],
               ),
             ),

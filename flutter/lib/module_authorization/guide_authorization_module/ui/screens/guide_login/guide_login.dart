@@ -30,6 +30,7 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
   @override
   Widget build(BuildContext context) {
     widget._firebaseAuth.currentUser().then((value) {
+      print('User Logged in: ' + (value != null).toString());
       if (value != null) {
         Navigator.pushNamed(context, GuideAuthorizationRoutes.guideUpdateProfile);
       }

@@ -67,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "select_language" : MessageLookupByLibrary.simpleMessage("اختر لغة"),
     "showLess" : MessageLookupByLibrary.simpleMessage("Show Less"),
     "show_more" : MessageLookupByLibrary.simpleMessage("المزيد"),
+    "signing_out" : MessageLookupByLibrary.simpleMessage("Signing out"),
     "successfully_registered" : MessageLookupByLibrary.simpleMessage("تم تسجيل الدخول بنجاح"),
     "title" : MessageLookupByLibrary.simpleMessage("سياح"),
     "toast_select_language" : MessageLookupByLibrary.simpleMessage("الرجاء اختيار لغة"),

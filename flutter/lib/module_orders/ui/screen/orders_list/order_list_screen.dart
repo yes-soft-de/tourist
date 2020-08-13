@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/module_orders/bloc/orders_list_bloc.dart';
+import 'package:tourists/module_orders/bloc/orders_list_bloc/orders_list_bloc.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
 import 'package:tourists/module_orders/ui/widget/order_item/order_item.dart';
 

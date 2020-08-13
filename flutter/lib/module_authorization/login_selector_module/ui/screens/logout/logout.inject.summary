@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/module_orders/bloc/orders_list_bloc.dart",
+  "asset": "asset:tourists/lib/module_authorization/login_selector_module/ui/screens/logout/logout.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "OrdersListBloc",
+        "name": "LogoutScreen",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/module_orders/bloc/orders_list_bloc.dart#OrdersListBloc",
+              "root": "asset:tourists/lib/module_authorization/login_selector_module/ui/screens/logout/logout.dart#LogoutScreen",
               "qualifier": null
             },
             "isProvider": false
@@ -21,7 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/module_orders/service/orders/orders_service.dart#OrdersService",
+                "root": "asset:tourists/lib/module_persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper",
                 "qualifier": null
               },
               "isProvider": false

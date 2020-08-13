@@ -181,8 +181,17 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
                   bottom: 16,
                   left: 0,
                   right: 0,
-                  child: RequestGuideButton(
-                    cityId: this._locationDetails.id.toString(),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                        FormsRoutes.requestTourForm,
+                        arguments: RequestGuideNavigationArguments(
+                            cityId: this.locationId),
+                      );
+                    },
+                    child: RequestGuideButton(
+                      cityId: this._locationDetails.id.toString(),
+                    ),
                   ),
                 )
               : Container()

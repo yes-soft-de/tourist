@@ -35,6 +35,7 @@ class GuideRegisterService {
 
   Future<bool> checkIfRegistered() async {
     FirebaseUser user = await _authService.currentUser();
+
     String uid = user.uid;
 
     List<GuideListItemModel> guidesList =

@@ -9,6 +9,7 @@ import 'package:tourists/module_locations/ui/screens/event_list/event_list.dart'
 import 'package:tourists/module_locations/ui/screens/location_carousel/location_carousel.dart';
 import 'package:tourists/module_locations/ui/screens/location_list/location_list_screen.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
+import 'package:tourists/utils/auth_guard/auth_gard.dart';
 
 @provide
 class HomeScreen extends StatefulWidget {
@@ -16,6 +17,7 @@ class HomeScreen extends StatefulWidget {
   final EventListScreen _eventListScreen;
   final LocationListScreen _locationListScreen;
   final LocationCarouselScreen _locationCarouselScreen;
+  final AuthGuard _authGuard;
 
   final SharedPreferencesHelper _preferencesHelper;
 
@@ -24,6 +26,7 @@ class HomeScreen extends StatefulWidget {
       this._guideListScreen,
       this._eventListScreen,
       this._preferencesHelper,
+      this._authGuard,
       this._locationCarouselScreen);
 
   @override
@@ -32,16 +35,21 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   int position;
-  bool loggedIn = false;
+  bool loggedIn;
   PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
-    widget._preferencesHelper.getUserUID().then((value) {
-      loggedIn = (value != null);
-      setState(() {});
-    });
+    if (loggedIn == null)
+      widget._authGuard.isLoggedIn().then((value) {
+        loggedIn = value;
+        if (this.mounted) setState(() {});
+      });
 
+    return _getUI();
+  }
+
+  _getUI() {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
@@ -49,13 +57,7 @@ class HomeScreenState extends State<HomeScreen> {
           backgroundColor: Colors.white,
           title: Text('سياح'),
           actions: <Widget>[
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(
-                    context, AuthorizationRoutes.loginTypeSelector);
-              },
-              child: Icon(loggedIn ? Icons.person : Icons.perm_identity),
-            )
+            Icon(loggedIn ? Icons.person : Icons.perm_identity)
           ],
         ),
         body: Stack(
@@ -91,6 +93,7 @@ class HomeScreenState extends State<HomeScreen> {
               child: CustomBottomNavigationBar(
                 activePosition: position != null ? position : 0,
                 context: context,
+                isLoggedIn: loggedIn,
                 onLocationChanged: (int position) {
                   _changePosition(position);
                 },

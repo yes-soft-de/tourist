@@ -7,8 +7,9 @@ import 'package:tourists/module_orders/model/order/order_model.dart';
 @provide
 class OrderItemWidget extends StatelessWidget {
   final OrderModel orderModel;
+  final Function(OrderModel) onAcceptOrder;
 
-  OrderItemWidget(this.orderModel);
+  OrderItemWidget(this.orderModel, {this.onAcceptOrder});
 
   @override
   Widget build(BuildContext context) {
@@ -62,68 +63,68 @@ class OrderItemWidget extends StatelessWidget {
                   .substring(0, 10)))
         ],
       ));
-
-    else widgetLayout.add(Flex(
-      direction: Axis.horizontal,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      mainAxisSize: MainAxisSize.max,
-      children: <Widget>[
-        Flexible(
-          flex: 2,
-          child: Container(
-            height: 72,
-            width: 72,
-            decoration: BoxDecoration(),
-            child: Image.asset("resources/images/logo.jpg"),
-          ),
-        ),
-        Flexible(
-          flex: 4,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Flex(
-              direction: Axis.vertical,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  S.of(context).request_for_guide,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Container(
-                  height: 8,
-                ),
-                Flex(
-                  direction: Axis.horizontal,
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Text(orderModel.city),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Text("|"),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Text(orderModel.language),
-                    )
-                  ],
-                ),
-                Container(
-                  height: 8,
-                ),
-              ],
+    else
+      widgetLayout.add(Flex(
+        direction: Axis.horizontal,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Flexible(
+            flex: 2,
+            child: Container(
+              height: 72,
+              width: 72,
+              decoration: BoxDecoration(),
+              child: Image.asset("resources/images/logo.jpg"),
             ),
           ),
-        ),
-        // Order date
-        Flexible(
-            flex: 1,
-            child: Text(getDateTime(orderModel.date.timestamp)
-                .toIso8601String()
-                .substring(0, 10)))
-      ],
-    ));
+          Flexible(
+            flex: 4,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Flex(
+                direction: Axis.vertical,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    S.of(context).request_for_guide,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Container(
+                    height: 8,
+                  ),
+                  Flex(
+                    direction: Axis.horizontal,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Text(orderModel.city),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Text("|"),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Text(orderModel.language),
+                      )
+                    ],
+                  ),
+                  Container(
+                    height: 8,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // Order date
+          Flexible(
+              flex: 1,
+              child: Text(getDateTime(orderModel.date.timestamp)
+                  .toIso8601String()
+                  .substring(0, 10)))
+        ],
+      ));
 
     widgetLayout.add(Container(
       height: 8,
@@ -143,7 +144,10 @@ class OrderItemWidget extends StatelessWidget {
         orderModel.guidUserID != null) {
       // This should be, Start Payment Process
       widgetLayout.add(RaisedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context)
+              .pushNamed(ChatRoutes.chatRoute, arguments: orderModel.roomID);
+        },
         child: Text("Start Chat"),
       ));
     }
@@ -177,7 +181,9 @@ class OrderItemWidget extends StatelessWidget {
               .substring(0, 10)));
     }
 
-    widgetLayout.add(Container(height: 16,));
+    widgetLayout.add(Container(
+      height: 16,
+    ));
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -195,6 +201,7 @@ class OrderItemWidget extends StatelessWidget {
   }
 
   DateTime getDateTime(int seconds) {
-    return new DateTime.fromMillisecondsSinceEpoch(orderModel.date.timestamp * 1000);
+    return new DateTime.fromMillisecondsSinceEpoch(
+        orderModel.date.timestamp * 1000);
   }
 }

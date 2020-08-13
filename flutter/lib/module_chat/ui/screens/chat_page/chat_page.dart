@@ -25,10 +25,14 @@ class ChatPageState extends State<ChatPage> {
   TextEditingController _msgController = TextEditingController();
   List<ChatBubbleWidget> chatsMessagesWidgets = [];
 
+  String chatRoomId;
+
   @override
   Widget build(BuildContext context) {
+    chatRoomId = ModalRoute.of(context).settings.arguments;
+
     if (currentState == ChatPageBloc.STATUS_CODE_INIT)
-      widget._chatPageBloc.getMessages("123456789");
+      widget._chatPageBloc.getMessages(chatRoomId);
 
     widget._chatPageBloc.chatBlocStream.listen((event) {
       currentState = event.first;
@@ -115,7 +119,7 @@ class ChatPageState extends State<ChatPage> {
 
   sendMessage() {
     log("Sending: " + _msgController.text);
-    widget._chatPageBloc.sendMessage("123456789", _msgController.text);
+    widget._chatPageBloc.sendMessage(chatRoomId, _msgController.text);
     _msgController.clear();
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_authorization/authorization_routes.dart';
 import 'package:tourists/module_forms/forms_routes.dart';
+import 'package:tourists/module_orders/orders_routes.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 import 'package:tourists/module_shared/ui/widgets/request_guide_button/request_guide_button.dart';
 
@@ -112,7 +113,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
       children: <Widget>[
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, FormsRoutes.requestGuideForm);
+            Navigator.pushNamed(context, OrdersRoutes.ordersList);
           },
           child: Container(
             color: Colors.white,

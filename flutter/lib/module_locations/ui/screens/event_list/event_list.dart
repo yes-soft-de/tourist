@@ -18,7 +18,7 @@ class EventListScreen extends StatefulWidget {
 }
 
 class _EventListScreenState extends State<EventListScreen> {
-  String activeList;
+  String activeList = EventListBloc.KEY_FESTIVAL;
   List<EventModel> eventList;
   int currentStatus = EventListBloc.STATUS_CODE_INIT;
 

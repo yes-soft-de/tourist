@@ -15,13 +15,15 @@ import 'package:tourists/module_locations/bloc/location_details/location_details
 import 'package:tourists/module_locations/model/location_details/location_details.dart';
 import 'package:tourists/module_shared/ui/widgets/carousel/carousel.dart';
 import 'package:tourists/module_shared/ui/widgets/request_guide_button/request_guide_button.dart';
+import 'package:tourists/utils/auth_guard/auth_gard.dart';
 import 'package:tourists/utils/time/time_formatter.dart';
 
 @provide
 class LocationDetailsScreen extends StatefulWidget {
   final LocationDetailsBloc _locationBloc;
+  final AuthGuard _authGuard;
 
-  LocationDetailsScreen(this._locationBloc);
+  LocationDetailsScreen(this._locationBloc, this._authGuard);
 
   @override
   State<StatefulWidget> createState() => _LocationDetailsScreenState();
@@ -46,8 +48,12 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
     // Get the Location Id
     locationId = ModalRoute.of(context).settings.arguments;
 
+    widget._authGuard.isLoggedIn().then((value) {
+      canSendComments = value;
+      if (this.mounted) setState(() {});
+    });
+
     widget._locationBloc.locationDetailsStream.listen((event) {
-      canSendComments = true;
       currentStatus = event[LocationDetailsBloc.KEY_STATUS];
       if (currentStatus == LocationDetailsBloc.STATUS_CODE_LOAD_SUCCESS) {
         setState(() {

@@ -13,7 +13,8 @@ class OrderModule extends YesModule {
   LoginTypeSelectorScreen _loginTypeSelectorScreen;
   AuthGuard _authGuard;
 
-  OrderModule(this._ordersListScreen, this._loginTypeSelectorScreen);
+  OrderModule(
+      this._ordersListScreen, this._loginTypeSelectorScreen, this._authGuard);
 
   @override
   Map<String, WidgetBuilder> getRoutes() {

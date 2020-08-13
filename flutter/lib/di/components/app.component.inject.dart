@@ -222,7 +222,8 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i49.LocationModule _createLocationModule() => _i49.LocationModule(
       _createLocationDetailsScreen(), _createEventDetailsScreen());
   _i50.LocationDetailsScreen _createLocationDetailsScreen() =>
-      _i50.LocationDetailsScreen(_createLocationDetailsBloc());
+      _i50.LocationDetailsScreen(
+          _createLocationDetailsBloc(), _createAuthGuard());
   _i51.LocationDetailsBloc _createLocationDetailsBloc() =>
       _i51.LocationDetailsBloc(_createLocationDetailsService(),
           _createSharedPreferencesHelper(), _createCommentManager());
@@ -250,7 +251,9 @@ class AppComponent$Injector implements _i1.AppComponent {
       _createEventService(), _createLocationListService());
   _i61.GuideListModule _createGuideListModule() => _i61.GuideListModule();
   _i62.OrderModule _createOrderModule() => _i62.OrderModule(
-      _createOrdersListScreen(), _createLoginTypeSelectorScreen());
+      _createOrdersListScreen(),
+      _createLoginTypeSelectorScreen(),
+      _createAuthGuard());
   _i63.FormsModule _createFormsModule() => _i63.FormsModule(
       _createRequestGuideScreen(),
       _createAuthGuard(),

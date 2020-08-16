@@ -40,32 +40,42 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
 
     public function getOrderByGuidCityAndLanguage($city, $language)
     {
-        $order = $this->createQueryBuilder('orders')
-            ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.city', 'orders.language', 'orders.services',
-                'orders.arriveDate', 'orders.leaveDate', 'orders.cost', 'orders.status');
+        $res = [];
 
         foreach ($city as $c)
         {
             foreach ($language as $l)
             {
-                $order
-                    ->andWhere('orders.touristUserID like :city')
-                    ->setParameter('city', '%' . $c[0]  . '%')
-                    ->andWhere('orders.touristUserID like :language')
-                    ->setParameter('language', '%' . $l[0]  . '%')
+                $order = $this->createQueryBuilder('orders')
+                    ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.city', 'orders.language', 'orders.services',
+                        'orders.arriveDate', 'orders.leaveDate', 'orders.cost', 'orders.status')
+
+                    ->andWhere('orders.city = :city')
+                    ->setParameter('city', $c)
+                    ->andWhere('orders.language = :language')
+                    ->setParameter('language', $l)
                     ->andWhere('orders.status = :pending')
-                    ->setParameter('pending', 'pending');
+                    ->setParameter('pending', 'pending')
+
+                    ->getQuery()
+                    ->getResult();
+
+                if($order)
+                {
+                    $res[]=$order;
+                }
+
             }
         }
 
-        $res = $order
-            ->groupBy('orders.id')
-            ->orderBy('orders.id', 'ASC')
-
-            ->getQuery()
-            ->getResult();
-
-        return $res;
+        if ($res)
+        {
+            return $res[0];
+        }
+        else
+        {
+            return $res;
+        }
     }
 
     public function getOrdersByGuidUserID($guidUserID)

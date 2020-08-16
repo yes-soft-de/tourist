@@ -72,9 +72,9 @@ class TouristOrderManager
     {
         //get guid city and language
         $city_language = $this->guidEntityRepository->getGuidCityAndLanguage($guidUserID);
-
+            //dd($city_language['language']);
         //get tourist orders
-        return $this->orderEntityRepository->getOrderByGuidCityAndLanguage($city_language, $city_language);
+        return $this->orderEntityRepository->getOrderByGuidCityAndLanguage($city_language['city'], $city_language['language']);
     }
 
     public function getOrderByGuid($guidUserID)

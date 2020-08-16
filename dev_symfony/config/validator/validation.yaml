@@ -7,7 +7,6 @@ App\Request\AcceptedOrderCreateRequest:
   properties:
     date:
       - NotBlank: ~
-      - Date:
     touristUserID:
       - NotBlank: ~
     orderID:
@@ -21,7 +20,6 @@ App\Request\CommentCreateRequest:
   properties:
     date:
       - NotBlank: ~
-      - date:
     comment:
       - NotBlank: ~
     user:
@@ -31,7 +29,6 @@ App\Request\EventCreateRequest:
   properties:
     date:
       - NotBlank: ~
-      - date:
     name:
       - NotBlank: ~
     type:
@@ -71,7 +68,6 @@ App\Request\TouristOrderCreateRequest:
   properties:
     date:
       - NotBlank: ~
-      - date:
     touristUserID:
       - NotBlank: ~
     city:

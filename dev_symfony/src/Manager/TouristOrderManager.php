@@ -76,4 +76,9 @@ class TouristOrderManager
         //get tourist orders
         return $this->orderEntityRepository->getOrderByGuidCityAndLanguage($city_language, $city_language);
     }
+
+    public function getOrderByGuid($guidUserID)
+    {
+        return $this->orderEntityRepository->getOrdersByGuidUserID($guidUserID);
+    }
 }

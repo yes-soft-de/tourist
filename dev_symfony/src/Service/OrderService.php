@@ -104,4 +104,16 @@ class OrderService
 
         return $response;
     }
+
+    public function getOrderByGuid($guidUserID)
+    {
+        $ordersResponse = [];
+        $orders = $this->touristOrderManager->getOrderByGuid($guidUserID);
+        foreach ($orders as $order)
+        {
+            $ordersResponse[] = $this->autoMapping->map('array', TouristOrderCreateResponse::class, $order);
+        }
+
+        return $ordersResponse;
+    }
 }

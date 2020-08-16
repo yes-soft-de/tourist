@@ -5,7 +5,15 @@ namespace App\Controller;
 use App\AutoMapping;
 use App\Request\ImageCreateRequest;
 use App\Service\ImageService;
+use Aws\Credentials\CredentialProvider;
+use Aws\Exception\AwsException;
+use Aws\S3\S3Client;
+use League\Flysystem\AdapterInterface;
+use League\Flysystem\FilesystemInterface;
 use stdClass;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,14 +27,19 @@ class ImagesController extends BaseController
     private $autoMapping;
     private $imageService;
     private $validator;
+    /**
+     * @var FilesystemInterface
+     */
+    private $filesystem;
 
-    public function __construct(SerializerInterface $serializer, AutoMapping $autoMapping, ImageService $imageService, ValidatorInterface $validator)
+    public function __construct( FilesystemInterface $publicFileSystem, SerializerInterface $serializer, AutoMapping $autoMapping, ImageService $imageService, ValidatorInterface $validator)
     {
         parent::__construct($serializer);
         $this->serializer = $serializer;
         $this->autoMapping = $autoMapping;
         $this->imageService = $imageService;
         $this->validator = $validator;
+        $this->filesystem = $publicFileSystem;
     }
 
     /**
@@ -51,5 +64,46 @@ class ImagesController extends BaseController
         $response = $this->imageService->imageCreate($request);
 
         return $this->response($response, self::CREATE);
+    }
+
+    /**
+     * @Route("/s", name="s3", methods={"POST"})
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function test(Request $request)
+    {
+        $imageFile = $request->files->get('image');
+
+        $this->upload($imageFile);
+
+        return new JsonResponse(["done"]);
+    }
+
+    public function upload(UploadedFile $file)
+    {
+        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $safeFilename = $originalFilename; //todo add more strong file renaming
+        $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+
+
+        //$file = new UploadedFile($imageFile, "what");
+
+        //dd($fileName);
+        $stream = fopen($file->getPathname(), 'r');
+
+        $this->filesystem->writeStream(
+            $fileName, $stream,
+        [
+            'visibility' => AdapterInterface::VISIBILITY_PUBLIC
+        ]);
+
+
+        if (is_resource($stream))
+        {
+            fclose($stream);
+        }
+
+
     }
 }

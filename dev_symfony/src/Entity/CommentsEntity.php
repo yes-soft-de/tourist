@@ -41,6 +41,11 @@ class CommentsEntity
      */
     private $guid;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\EventEntity")
+     */
+    private $event;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +107,18 @@ class CommentsEntity
     public function setGuid(?User $guid): self
     {
         $this->guid = $guid;
+
+        return $this;
+    }
+
+    public function getEvent(): ?EventEntity
+    {
+        return $this->event;
+    }
+
+    public function setEvent(?EventEntity $event): self
+    {
+        $this->event = $event;
 
         return $this;
     }

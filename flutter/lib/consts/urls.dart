@@ -10,6 +10,9 @@ class Urls {
   static final guideList = _baseAPI + 'guides';
   static final guidesByRegion = _baseAPI + 'guid';
   static final orderGuide = _baseAPI + 'order';
+  static final orderLookup = _baseAPI + 'orderlookup';
+  static final acceptOrder = _baseAPI + 'acceptorder';
+  static final updateOrder = _baseAPI + 'orderUpdate';
   static final comment = _baseAPI + 'comment';
   static final event = _baseAPI + 'event';
   static final rate = _baseAPI + 'rating';

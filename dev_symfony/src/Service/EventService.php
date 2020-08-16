@@ -6,11 +6,13 @@ namespace App\Service;
 
 use App\AutoMapping;
 use App\Entity\EventEntity;
+use App\Manager\CommentsManager;
 use App\Manager\EventManager;
 use App\Manager\ImageManager;
 use App\Request\EventCreateRequest;
 use App\Response\EventCreateResponse;
 use App\Response\EventsResponse;
+use App\Response\GetCommentsByIdResponse;
 
 class EventService
 {
@@ -18,12 +20,14 @@ class EventService
     private $autoMapping;
     private $eventManager;
     private $imageManager;
+    private $commentsManager;
 
-    public function __construct(AutoMapping $autoMapping, EventManager $eventManager, ImageManager $imageManager)
+    public function __construct(AutoMapping $autoMapping, EventManager $eventManager, ImageManager $imageManager, CommentsManager $commentsManager)
     {
         $this->autoMapping = $autoMapping;
         $this->eventManager = $eventManager;
         $this->imageManager = $imageManager;
+        $this->commentsManager = $commentsManager;
     }
 
     public function eventCreate(EventCreateRequest $request)
@@ -47,6 +51,12 @@ class EventService
             $images = $eventImages;
             $event['images'] = $images;
             //
+
+            //count comment for each event
+            $commentsCount = $this->eventCommentsCount($event['id']);
+            $event['commentNumber'] = $commentsCount[1];
+            //
+
             $eventsResponse[] = $this->autoMapping->map('array', EventsResponse::class, $event);
         }
 
@@ -63,6 +73,23 @@ class EventService
         $images = $eventImages;
         $response->images = $images;
 
+        //get comments
+        $commentsResponse= [];
+        $comments = $this->commentsManager->getEventCommentsByID($id);
+
+        foreach ($comments as $comment)
+        {
+            $commentsResponse[] = $this->autoMapping->map('array', GetCommentsByIdResponse::class, $comment);
+        }
+
+        //add comments to response
+        $response->setComments($commentsResponse);
+
         return $response;
+    }
+
+    public function eventCommentsCount($id)
+    {
+        return $this->commentsManager->eventCommentsNumber($id);
     }
 }

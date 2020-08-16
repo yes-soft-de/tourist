@@ -1,8 +1,0 @@
-{
-  "asset": "asset:tourists/lib/models/event_details/event_details_model.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": []
-  }
-}

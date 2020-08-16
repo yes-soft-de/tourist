@@ -25,6 +25,7 @@ class EventManager
 
     public function eventCreate(EventCreateRequest $request)
     {
+
         $eventCreate = $this->autoMapping->map(EventCreateRequest::class, EventEntity::class, $request);
         $eventCreate->setDate($request->getDate());
 

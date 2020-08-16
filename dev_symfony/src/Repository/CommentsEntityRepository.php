@@ -48,4 +48,36 @@ class CommentsEntityRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function eventCommentsNumber($id)
+    {
+        $r = $this->createQueryBuilder('commentNumber')
+            ->select('count(commentNumber)')
+            ->andWhere('commentNumber.event = :id')
+            ->setParameter('id', $id)
+
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        //dd($r);
+        return $r;
+    }
+
+    public function getEventCommentsByID($id)
+    {
+        $r = $this->createQueryBuilder('comments')
+            ->select('comments.id', 'comments.comment', 'comments.date', 'user.name as userName')
+            //->from('App:User', 'user')
+            ->join('App:User', 'user')
+            ->andWhere('user.id = comments.user')
+
+            ->andWhere('comments.event=:id')
+            ->setParameter('id',$id)
+
+            ->getQuery()
+            ->getArrayResult();
+
+
+        return $r;
+    }
 }

@@ -47,5 +47,9 @@
   "request_for_guide": "Request for Guide",
   "request_guid": "Request Guid!",
   "request_guide": "Request Guide",
-  "request_tour": "Request Tour"
+  "request_tour": "Request Tour",
+  "more": "More",
+  "reload": "Reload",
+  "showLess": "Show Less",
+  "signing_out": "Signing out"
 }

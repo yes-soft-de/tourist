@@ -1,0 +1,41 @@
+{
+  "asset": "asset:tourists/lib/module_authorization/guide_authorization_module/guide_authorization_module.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
+      {
+        "name": "GuideAuthorizationModule",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_authorization/guide_authorization_module/guide_authorization_module.dart#GuideAuthorizationModule",
+              "qualifier": null
+            },
+            "isProvider": false
+          },
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_authorization/guide_authorization_module/ui/screens/guide_profile/guide_profile.dart#GuideProfileScreen",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_authorization/guide_authorization_module/ui/screens/guide_login/guide_login.dart#GuideLoginScreen",
+                "qualifier": null
+              },
+              "isProvider": false
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -105,6 +105,12 @@ methods={"PUT"}
 order/{touristUserID}
 methods={"GET"}
 ```
+#### Get all orders by GuidUserID
+```
+guidorder/{guidUserID}
+methods={"GET"}
+key='id'
+```
 ### Case two Tourist asks for guides:
 #### Create order
 ```

@@ -4,13 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/components/guide/guide_component.dart';
-import 'package:tourists/components/shared/shared_component.dart';
-import 'package:tourists/components/user/user_component.dart';
-import 'package:tourists/components/user/user_routes.dart';
+import 'package:tourists/module_authorization/authprization_module.dart';
+import 'package:tourists/module_forms/forms_module.dart';
+import 'package:tourists/module_guide/guide_list_module.dart';
+import 'package:tourists/module_home/home_module.dart';
+import 'package:tourists/module_home/home_routes.dart';
+import 'package:tourists/module_locations/location_module.dart';
+import 'package:tourists/module_orders/order_module.dart';
+import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 
 import 'di/components/app.component.dart';
 import 'generated/l10n.dart';
+import 'module_chat/chat_module.dart';
 
 typedef Provider<T> = T Function();
 
@@ -27,23 +32,60 @@ void main() {
 
 @provide
 class MyApp extends StatelessWidget {
-  final UserComponent _userComponent;
-  final GuideComponent _guideComponent;
-  final SharedComponent _sharedComponent;
-
   static FirebaseAnalytics analytics = FirebaseAnalytics();
   static FirebaseAnalyticsObserver observer =
       FirebaseAnalyticsObserver(analytics: analytics);
 
-  MyApp(this._userComponent, this._guideComponent, this._sharedComponent);
+  final AuthorizationModule _authorizationModule;
+  final HomeModule _homeModule;
+  final ChatModule _chatModule;
+  final FormsModule _formsModule;
+  final GuideListModule _guideListModule;
+  final LocationModule _locationModule;
+  final SharedPreferencesHelper _preferencesHelper;
+  final OrderModule _orderModule;
+
+  MyApp(
+      this._authorizationModule,
+      this._homeModule,
+      this._chatModule,
+      this._locationModule,
+      this._guideListModule,
+      this._orderModule,
+      this._formsModule,
+      this._preferencesHelper,);
 
   @override
   Widget build(BuildContext context) {
     Map<String, WidgetBuilder> fullRoutesList = Map();
 
-    fullRoutesList.addAll(_userComponent.getRoutes());
-    fullRoutesList.addAll(_guideComponent.getRoutes());
-    fullRoutesList.addAll(_sharedComponent.getRoutes());
+    fullRoutesList.addAll(_authorizationModule.getRoutes());
+    fullRoutesList.addAll(_homeModule.getRoutes());
+    fullRoutesList.addAll(_chatModule.getRoutes());
+    fullRoutesList.addAll(_formsModule.getRoutes());
+    fullRoutesList.addAll(_locationModule.getRoutes());
+    fullRoutesList.addAll(_guideListModule.getRoutes());
+    fullRoutesList.addAll(_orderModule.getRoutes());
+
+    this._preferencesHelper.getLoggedInState().then((loggedInStatus) {
+      return MaterialApp(
+          navigatorObservers: <NavigatorObserver>[
+            observer
+          ],
+          localizationsDelegates: [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          theme: ThemeData(
+              primaryColor: Colors.greenAccent,
+              accentColor: Colors.greenAccent),
+          supportedLocales: S.delegate.supportedLocales,
+          title: 'Soyah',
+          routes: fullRoutesList,
+          initialRoute: HomeRoutes.home);
+    });
 
     return MaterialApp(
         navigatorObservers: <NavigatorObserver>[
@@ -60,6 +102,6 @@ class MyApp extends StatelessWidget {
         supportedLocales: S.delegate.supportedLocales,
         title: 'Soyah',
         routes: fullRoutesList,
-        initialRoute: UserRoutes.loginTypeSelector);
+        initialRoute: HomeRoutes.home);
   }
 }

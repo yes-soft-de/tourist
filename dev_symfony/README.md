@@ -107,7 +107,7 @@ methods={"GET"}
 ```
 #### Get all orders by GuidUserID
 ```
-order/{guidUserID}
+guidorder/{guidUserID}
 methods={"GET"}
 key='id'
 ```

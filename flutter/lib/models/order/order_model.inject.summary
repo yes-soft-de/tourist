@@ -1,8 +1,0 @@
-{
-  "asset": "asset:tourists/lib/models/order/order_model.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": []
-  }
-}

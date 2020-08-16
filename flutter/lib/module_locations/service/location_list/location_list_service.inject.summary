@@ -1,0 +1,34 @@
+{
+  "asset": "asset:tourists/lib/module_locations/service/location_list/location_list_service.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
+      {
+        "name": "LocationListService",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_locations/service/location_list/location_list_service.dart#LocationListService",
+              "qualifier": null
+            },
+            "isProvider": false
+          },
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_locations/manager/location_list/location_list_manager.dart#LocationListManager",
+                "qualifier": null
+              },
+              "isProvider": false
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

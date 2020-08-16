@@ -101,6 +101,9 @@ dev_dependencies:
   # Generate Language Files
   lang_table: 0.2.0
 
+  # Icons Generator
+  flutter_launcher_icons: "^0.7.3"
+
 flutter:
   uses-material-design: true
 
@@ -126,3 +129,8 @@ flutter:
 
 flutter_intl:
   enabled: true
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "resources/images/logo.png"

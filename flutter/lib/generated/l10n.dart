@@ -182,6 +182,376 @@ class S {
       args: [],
     );
   }
+
+  /// `Loading`
+  String get loading {
+    return Intl.message(
+      'Loading',
+      name: 'loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saving Data`
+  String get saving_cata {
+    return Intl.message(
+      'Saving Data',
+      name: 'saving_cata',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Select a Language`
+  String get toast_select_language {
+    return Intl.message(
+      'Please Select a Language',
+      name: 'toast_select_language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select a Gender`
+  String get select_gender {
+    return Intl.message(
+      'Select a Gender',
+      name: 'select_gender',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Male`
+  String get male {
+    return Intl.message(
+      'Male',
+      name: 'male',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Female`
+  String get female {
+    return Intl.message(
+      'Female',
+      name: 'female',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select a Language`
+  String get select_language {
+    return Intl.message(
+      'Select a Language',
+      name: 'select_language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get english {
+    return Intl.message(
+      'English',
+      name: 'english',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `العربية`
+  String get language_arabic {
+    return Intl.message(
+      'العربية',
+      name: 'language_arabic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get language_english {
+    return Intl.message(
+      'English',
+      name: 'language_english',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter some text`
+  String get error_null_text {
+    return Intl.message(
+      'Please enter some text',
+      name: 'error_null_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error Fetching Data!`
+  String get error_fetching_data {
+    return Intl.message(
+      'Error Fetching Data!',
+      name: 'error_fetching_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Events for now!`
+  String get no_events_yet {
+    return Intl.message(
+      'No Events for now!',
+      name: 'no_events_yet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message(
+      'No',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure?`
+  String get are_you_sure {
+    return Intl.message(
+      'Are you sure?',
+      name: 'are_you_sure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to exit an App`
+  String get exit_msg {
+    return Intl.message(
+      'Do you want to exit an App',
+      name: 'exit_msg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SHOW MORE`
+  String get show_more {
+    return Intl.message(
+      'SHOW MORE',
+      name: 'show_more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Guides`
+  String get guides {
+    return Intl.message(
+      'Guides',
+      name: 'guides',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Images?!!`
+  String get error_no_images {
+    return Intl.message(
+      'No Images?!!',
+      name: 'error_no_images',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Successfully registered`
+  String get successfully_registered {
+    return Intl.message(
+      'Successfully registered',
+      name: 'successfully_registered',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registration failed`
+  String get registration_failed {
+    return Intl.message(
+      'Registration failed',
+      name: 'registration_failed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Requesting the guide was completed, he/she will contact you as soon as possible`
+  String get request_guide_msg_success {
+    return Intl.message(
+      'Requesting the guide was completed, he/she will contact you as soon as possible',
+      name: 'request_guide_msg_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Return to Home`
+  String get return_to_home {
+    return Intl.message(
+      'Return to Home',
+      name: 'return_to_home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Orders`
+  String get orders {
+    return Intl.message(
+      'Orders',
+      name: 'orders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message(
+      'Logout',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get home {
+    return Intl.message(
+      'Home',
+      name: 'home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request for Guide`
+  String get request_for_guide {
+    return Intl.message(
+      'Request for Guide',
+      name: 'request_for_guide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request Guid!`
+  String get request_guid {
+    return Intl.message(
+      'Request Guid!',
+      name: 'request_guid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request Guide`
+  String get request_guide {
+    return Intl.message(
+      'Request Guide',
+      name: 'request_guide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request Tour`
+  String get request_tour {
+    return Intl.message(
+      'Request Tour',
+      name: 'request_tour',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `More`
+  String get more {
+    return Intl.message(
+      'More',
+      name: 'more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reload`
+  String get reload {
+    return Intl.message(
+      'Reload',
+      name: 'reload',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show Less`
+  String get showLess {
+    return Intl.message(
+      'Show Less',
+      name: 'showLess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Signing out`
+  String get signing_out {
+    return Intl.message(
+      'Signing out',
+      name: 'signing_out',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

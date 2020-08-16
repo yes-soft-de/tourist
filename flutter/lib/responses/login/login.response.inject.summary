@@ -1,8 +1,0 @@
-{
-  "asset": "asset:tourists/lib/responses/login/login.response.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": []
-  }
-}

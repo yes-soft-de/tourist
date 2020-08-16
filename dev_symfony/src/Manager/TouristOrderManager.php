@@ -38,7 +38,7 @@ class TouristOrderManager
         $creteOrder->setArriveDate($request->getArriveDate());
         $creteOrder->setLeaveDate($request->getLeaveDate());
 
-        $creteOrder->setStatus('waitingPayment');
+        //$creteOrder->setStatus('waitingPayment');
 
         $this->entityManager->persist($creteOrder);
         $this->entityManager->flush();

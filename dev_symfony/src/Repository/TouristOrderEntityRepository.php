@@ -75,8 +75,6 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
             'orders.arriveDate', 'orders.leaveDate', 'orders.roomID', 'orders.cost', 'orders.status')
 
         ->andWhere('orders.guidUserID=:guidID')
-        ->andWhere('orders.status=:status')
-            ->setParameter('status', 'waitingPayment')
         ->setParameter('guidID', $guidUserID)
         ->groupBy('orders.id')
         ->orderBy('orders.id', 'ASC')

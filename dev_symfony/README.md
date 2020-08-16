@@ -105,7 +105,7 @@ methods={"PUT"}
 order/{touristUserID}
 methods={"GET"}
 ```
-#### Get all orders by GuidUserID where status='waitingPayment'
+#### Get all orders by GuidUserID
 ```
 order/{guidUserID}
 methods={"GET"}

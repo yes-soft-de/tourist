@@ -64,7 +64,6 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
                 {
                     $res[]=$order;
                 }
-
             }
         }
 

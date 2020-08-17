@@ -2,7 +2,6 @@ import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
 import 'package:tourists/module_orders/service/guide_orders/guide_orders.dart';
-import 'package:uuid/uuid.dart';
 
 @provide
 class GuideOrdersListBloc {
@@ -25,7 +24,7 @@ class GuideOrdersListBloc {
 
   getAvailableOrders() {
     _stateSubject.add({KEY_STATUS: STATUS_CODE_LOADING});
-    _ordersService.getAvailableOrders().then((ordersList) {
+    _ordersService.getAllPossibleOrders().then((ordersList) {
       if (ordersList != null) {
         _stateSubject.add(
             {KEY_STATUS: STATUS_CODE_LOAD_SUCCESS, KEY_PAYLOAD: ordersList});
@@ -38,14 +37,26 @@ class GuideOrdersListBloc {
   acceptOrder(OrderModel orderModel) {
     _stateSubject.add({KEY_STATUS: STATUS_CODE_LOADING});
     _ordersService.acceptOrder(orderModel).then((value) {
-      if (value = null) {
+      if (value == null) {
         _stateSubject.add({KEY_STATUS: STATUS_CODE_LOAD_ERROR});
       } else {
-        _stateSubject
-            .add({KEY_STATUS: STATUS_CODE_LOAD_SUCCESS, KEY_PAYLOAD: value});
+        this.getAvailableOrders();
       }
     });
   }
+
+  acceptAvailableOrder(OrderModel orderModel) {
+    _stateSubject.add({KEY_STATUS: STATUS_CODE_LOADING});
+    _ordersService.acceptAvailableOrder(orderModel).then((value) {
+      if (value == null) {
+        _stateSubject.add({KEY_STATUS: STATUS_CODE_LOAD_ERROR});
+      } else {
+        this.getAvailableOrders();
+      }
+    });
+  }
+
+  payOrder(OrderModel orderModel) {}
 
   dispose() {
     _stateSubject.close();

@@ -57,9 +57,8 @@ class GuideRegisterBloc {
                 'https://www.fundermax.at/fileadmin/redakteure/_processed_/1/9/csm_0059_A4_5bc386ea8a.jpg',
             service: services))
         .then((value) {
-      if (value == null) {
-        _guideRegisterSubject.add(Pair(STATUS_CODE_UPDATE_ERROR, null));
-      } else if (value == false) {
+      print(value);
+      if (value == null || value == false) {
         _guideRegisterSubject.add(Pair(STATUS_CODE_UPDATE_ERROR, null));
       } else {
         _guideRegisterSubject.add(Pair(STATUS_CODE_UPDATE_SUCCESS, null));
@@ -68,11 +67,10 @@ class GuideRegisterBloc {
   }
 
   checkIfGuideRegistered() {
+    _guideRegisterSubject.add(Pair(STATUS_CODE_LOADING, null));
     _guideRegisterService.checkIfRegistered().then((value) {
-      if (value) {
-        _guideRegisterSubject
-            .add(Pair(STATUS_CODE_USER_ALREADY_LOGGED_IN, null));
-      }
+      _guideRegisterSubject
+          .add(Pair(STATUS_CODE_USER_ALREADY_LOGGED_IN, value));
     });
   }
 

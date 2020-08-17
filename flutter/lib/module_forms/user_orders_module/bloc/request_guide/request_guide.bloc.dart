@@ -5,7 +5,6 @@ import 'package:tourists/module_forms/user_orders_module/model/request_guide/req
 import 'package:tourists/module_forms/user_orders_module/service/request_guide/request_guide.service.dart';
 import 'package:tourists/module_locations/service/location_details/location_details_service.dart';
 
-
 @provide
 class RequestGuideBloc {
   static const int STATUS_CODE_INIT = 512;
@@ -28,7 +27,7 @@ class RequestGuideBloc {
       DateTime arrivalDate, int stayingDays, String language, String location) {
     print('Requesting Guide');
     _requestGuideService
-        .requestGuide(new RequestGuideModel(
+        .requestGuide(RequestGuideModel(
             services: requiredServices,
             arrivalDate: arrivalDate,
             stayingDays: stayingDays,

@@ -1,5 +1,3 @@
-
-
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
 
 class GuidesResponse {

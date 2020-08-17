@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_forms/user_orders_module/bloc/request_guide/request_guide.bloc.dart';
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
 import 'package:tourists/module_guide/nav_arguments/request_guide/request_guide_navigation.dart';
@@ -81,6 +82,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
     if (_requestGuideArguments.guideId == null &&
         _requestGuideArguments.cityId != null) {
       locationMode = true;
+      _arrivalCity = _requestGuideArguments.cityId;
     }
 
     widget._logger.info(widget.tag, "Mode: " + this.locationMode.toString());
@@ -94,12 +96,16 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
         locationMode ? _locationInfo = event.last : _guideInfo = event.last;
         widget._logger.info(widget.tag, "Guide Info: " + _guideInfo.toString());
       }
-      if (currentStatus != RequestGuideBloc.STATUS_CODE_REQUEST_SUCCESS) {
-        setState(() {});
-      } else {
-        Navigator.pushNamed(context, HomeRoutes.home);
-      }
+      if (this.mounted) setState(() {});
     });
+
+    if (currentStatus == RequestGuideBloc.STATUS_CODE_REQUEST_SUCCESS) {
+      Future.delayed(Duration(seconds: 1), () {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil(HomeRoutes.home, (r) => false);
+      });
+      return Scaffold();
+    }
 
     if (currentStatus == RequestGuideBloc.STATUS_CODE_INIT) {
       if (locationMode) {
@@ -115,14 +121,14 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
         },
         child: Scaffold(
           body: Center(
-            child: Text('Loading ;)'),
+            child: Text(S.of(context).loading),
           ),
         ),
       );
     }
 
     if (currentStatus == RequestGuideBloc.STATUS_CODE_LOAD_ERROR) {
-      Fluttertoast.showToast(msg: "Error Sending Request!");
+      Fluttertoast.showToast(msg: S.of(context).error_fetching_data);
       return WillPopScope(
         onWillPop: () {
           Navigator.of(context).pop();
@@ -130,7 +136,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
         },
         child: Scaffold(
           body: Center(
-            child: Text('Error Loading data'),
+            child: Text(S.of(context).error_fetching_data),
           ),
         ),
       );
@@ -138,7 +144,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
 
     if (currentStatus == RequestGuideBloc.STATUS_CODE_REQUEST_SUCCESS) {
       // Go to Home
-      Fluttertoast.showToast(msg: "Request Sent!");
+      Fluttertoast.showToast(msg: S.of(context).requestSent);
       Navigator.pushReplacementNamed(context, HomeRoutes.home);
       return WillPopScope(
         onWillPop: () {
@@ -147,7 +153,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
         },
         child: Scaffold(
           body: Center(
-            child: Text('Success'),
+            child: Text(S.of(context).success),
           ),
         ),
       );
@@ -170,12 +176,12 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
     if (locationMode) {
       pageLayout.add(AppBar(
         backgroundColor: Colors.white,
-        title: Text("Make a General Request"),
+        title: Text(S.of(context).makeAGeneralRequest),
       ));
     } else {
       pageLayout.add(AppBar(
         backgroundColor: Colors.white,
-        title: Text("Request a Guide"),
+        title: Text(S.of(context).requestAGuide),
       ));
     }
     pageLayout.add(_getScreenHeader());
@@ -183,7 +189,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
     List<String> availableLanguage = [];
 
     if (locationMode) {
-      availableLanguage = ["Arabic", "English"];
+      availableLanguage = ["العربية", "English"];
     } else {
       availableLanguage = _guideInfo.language;
     }
@@ -200,7 +206,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
     });
     Widget languageSelector = DropdownButtonFormField(
       items: languageList,
-      hint: Text('Expected Communication Language'),
+      hint: Text(S.of(context).expectedCommunicationLanguage),
       onChanged: (String value) {
         this._guideLanguage = value;
       },
@@ -224,7 +230,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
       });
       Widget locationSelector = DropdownButtonFormField(
         items: locationList,
-        hint: Text('Target City'),
+        hint: Text(S.of(context).targetCity),
         onChanged: (String value) {
           this._arrivalCity = value;
         },
@@ -294,7 +300,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
                   child: TextFormField(
                     controller: _stayingTime,
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(labelText: 'Staying for'),
+                    decoration: const InputDecoration(labelText: "Staying For"),
                     validator: (String value) {
                       if (value.isEmpty) {
                         return 'Please enter some text';
@@ -307,7 +313,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
                   flex: 1,
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
-                    child: Text('Days'),
+                    child: Text(S.of(context).days),
                   ),
                 )
               ],
@@ -326,9 +332,9 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
     Flex servicesContainer = Flex(
       direction: Axis.vertical,
       children: <Widget>[
-        Text('Services'),
+        Text(S.of(context).services),
         CheckboxListTile(
-            title: Text('Car'),
+            title: Text(S.of(context).car),
             secondary: Icon(Icons.local_taxi),
             value: servicesMap[KEY_CAR],
             onChanged: (bool value) {
@@ -336,7 +342,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
               setState(() {});
             }),
         CheckboxListTile(
-            title: Text('Hotel'),
+            title: Text(S.of(context).hotel),
             secondary: Icon(Icons.hotel),
             value: servicesMap[KEY_HOTEL],
             onChanged: (bool value) {
@@ -362,7 +368,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
                 }
               },
         color: Colors.greenAccent,
-        child: Text('Request a Chat!'),
+        child: Text(S.of(context).requestAChat),
       ),
     ));
     // endregion
@@ -393,8 +399,13 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
     servicesMap.forEach((key, value) {
       if (value == true) servicesList.add(key);
     });
+
+    print(_requestGuideArguments != null
+        ? 'Active Guide: ' + _requestGuideArguments.guideId
+        : 'No Guide ID');
+
     widget._requestGuideBloc.requestGuide(
-        _requestGuideArguments.guideId,
+        _guideInfo.userID,
         servicesList,
         DateTime.parse(_arrivalDateField.text),
         int.parse(_stayingTime.text),
@@ -408,13 +419,14 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
     servicesMap.forEach((key, value) {
       if (value == true) servicesList.add(key);
     });
+
     widget._requestGuideBloc.requestGuide(
         _requestGuideArguments.guideId,
         servicesList,
         DateTime.parse(_arrivalDateField.text),
         int.parse(_stayingTime.text),
         _guideLanguage,
-        _arrivalCity);
+        _locationInfo.name);
   }
 
   Widget _getScreenHeader() {
@@ -468,8 +480,9 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 _getStarsLine(_guideInfo.rating),
-                Text(
-                    _guideInfo.status != null ? _guideInfo.status : 'Available')
+                Text(_guideInfo.status != null
+                    ? _guideInfo.status
+                    : S.of(context).available)
               ],
             ),
           )

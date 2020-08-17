@@ -51,5 +51,21 @@
   "more": "More",
   "reload": "Reload",
   "showLess": "Show Less",
-  "signing_out": "Signing out"
+  "signing_out": "Signing out",
+  "requestSent": "Request Sent!",
+  "success": "Success",
+  "requestAGuide": "Request a Guide",
+  "makeAGeneralRequest": "Make a General Request",
+  "expectedCommunicationLanguage": "Expected Communication Language",
+  "targetCity": "Target City",
+  "stayingFor": "Staying for",
+  "days": "Days",
+  "services": "Services",
+  "car": "Car",
+  "hotel": "Hotel",
+  "requestAChat": "Request a Chat!",
+  "stying_for": "Stying For",
+  "map": "Map",
+  "updateMyProfile": "Update My Profile",
+  "accept_order": "Accept Order"
 }

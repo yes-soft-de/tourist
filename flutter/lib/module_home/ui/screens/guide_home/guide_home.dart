@@ -1,25 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_home/ui/widget/custom_bottom_navigation_bar/custom_bottom_navigation_bar.dart';
+import 'package:tourists/module_locations/ui/screens/event_list/event_list.dart';
 import 'package:tourists/module_locations/ui/screens/location_list/location_list_screen.dart';
-import 'package:tourists/module_orders/ui/screen/orders_list/order_list_screen.dart';
+import 'package:tourists/module_orders/ui/screen/guide_orders/guide_orders.dart';
+import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 
 @provide
 class GuideHomeScreen extends StatefulWidget {
-  final OrdersListScreen _ordersListScreen;
+  final GuideOrdersScreen _ordersListScreen;
   final LocationListScreen _locationListScreen;
+  final EventListScreen _eventListScreen;
 
-  GuideHomeScreen(this._ordersListScreen, this._locationListScreen);
+  final SharedPreferencesHelper _preferencesHelper;
+
+  GuideHomeScreen(this._ordersListScreen, this._locationListScreen,
+      this._eventListScreen, this._preferencesHelper);
 
   @override
   State<StatefulWidget> createState() => GuideHomeScreenState(0);
 }
 
 class GuideHomeScreenState extends State<GuideHomeScreen> {
-  int position;
+  int currentPosition;
   PageController _pageController = PageController();
 
-  GuideHomeScreenState(this.position);
+  GuideHomeScreenState(this.currentPosition);
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +42,17 @@ class GuideHomeScreenState extends State<GuideHomeScreen> {
               controller: _pageController,
               children: <Widget>[
                 widget._ordersListScreen,
-                widget._locationListScreen,
-                widget._ordersListScreen,
+                Scaffold(
+                  appBar: AppBar(
+                    title: Text(S.of(context).map),
+                  ),
+                  body: widget._locationListScreen,
+                ),
+                widget._eventListScreen,
               ],
               onPageChanged: (pos) {
                 // Update the Home Page
-                position = pos;
+                currentPosition = pos;
                 setState(() {});
               },
             ),
@@ -49,7 +61,20 @@ class GuideHomeScreenState extends State<GuideHomeScreen> {
             bottom: 0,
             left: 0,
             right: 0,
-            child: CustomGuideBottomNavigationBar(this),
+            child: FutureBuilder(
+              future: widget._preferencesHelper.getLoggedInState(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<LoggedInState> snapshot) {
+                return CustomGuideBottomNavigationBar(
+                  onNavigationChanged: (int newPosition) {
+                    _pageController.jumpToPage(newPosition);
+                    if (this.mounted) setState(() {});
+                  },
+                  currentPosition: currentPosition,
+                  loggedIn: snapshot.data == LoggedInState.GUIDE,
+                );
+              },
+            ),
           )
         ],
       ),

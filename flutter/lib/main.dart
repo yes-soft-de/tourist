@@ -16,6 +16,7 @@ import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper
 import 'di/components/app.component.dart';
 import 'generated/l10n.dart';
 import 'module_chat/chat_module.dart';
+import 'module_splash/splash_module.dart';
 
 typedef Provider<T> = T Function();
 
@@ -44,16 +45,19 @@ class MyApp extends StatelessWidget {
   final LocationModule _locationModule;
   final SharedPreferencesHelper _preferencesHelper;
   final OrderModule _orderModule;
+  final SplashModule _splashModule;
 
   MyApp(
-      this._authorizationModule,
-      this._homeModule,
-      this._chatModule,
-      this._locationModule,
-      this._guideListModule,
-      this._orderModule,
-      this._formsModule,
-      this._preferencesHelper,);
+    this._authorizationModule,
+    this._homeModule,
+    this._splashModule,
+    this._chatModule,
+    this._locationModule,
+    this._guideListModule,
+    this._orderModule,
+    this._formsModule,
+    this._preferencesHelper,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +70,7 @@ class MyApp extends StatelessWidget {
     fullRoutesList.addAll(_locationModule.getRoutes());
     fullRoutesList.addAll(_guideListModule.getRoutes());
     fullRoutesList.addAll(_orderModule.getRoutes());
+    fullRoutesList.addAll(_splashModule.getRoutes());
 
     this._preferencesHelper.getLoggedInState().then((loggedInStatus) {
       return MaterialApp(

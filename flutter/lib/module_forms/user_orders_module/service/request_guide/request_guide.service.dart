@@ -17,7 +17,8 @@ class RequestGuideService {
   final GuideListService _guidesService;
   final RequestGuideManager _requestGuideManager;
 
-  RequestGuideService(this._preferencesHelper, this._guidesService, this._requestGuideManager);
+  RequestGuideService(
+      this._preferencesHelper, this._guidesService, this._requestGuideManager);
 
   Future<bool> requestGuide(RequestGuideModel requestGuide) async {
     FirebaseUser user = await _auth.currentUser();
@@ -27,20 +28,25 @@ class RequestGuideService {
 
     String uid = user.uid;
 
+    print('Requesting Guide with ID: ' + requestGuide.guideId);
+
     RequestGuideRequest requestObject = RequestGuideRequest(
         touristUserID: uid,
-        guidUserID: requestGuide.uid,
+        guidUserID: requestGuide.guideId,
         city: requestGuide.location,
         language: requestGuide.language,
         arriveDate: requestGuide.arrivalDate,
-        cost: 500,
+        cost: 7,
+        status: 'pending',
         date: DateTime.now(),
-        leaveDate: requestGuide.arrivalDate.add(Duration(days: requestGuide.stayingDays)),
+        leaveDate: requestGuide.arrivalDate
+            .add(Duration(days: requestGuide.stayingDays)),
         services: requestGuide.services);
 
     log(jsonEncode(requestObject.toJson()));
 
-    dynamic requestResult = await _requestGuideManager.requestGuide(requestObject);
+    dynamic requestResult =
+        await _requestGuideManager.requestGuide(requestObject);
 
     if (requestResult != null) {
       return true;

@@ -15,9 +15,11 @@ class GuideProfileScreen extends StatefulWidget {
   final GuideRegisterBloc _guideRegisterBloc;
   final SharedPreferencesHelper _preferencesHelper;
 
-  GuideProfileScreen(this.locationListService,
-      this._guideRegisterBloc,
-      this._preferencesHelper,);
+  GuideProfileScreen(
+    this.locationListService,
+    this._guideRegisterBloc,
+    this._preferencesHelper,
+  );
 
   @override
   State<StatefulWidget> createState() => _GuideProfileScreenState();
@@ -54,14 +56,19 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
     });
 
     widget._guideRegisterBloc.guideStream.listen((event) {
+      print('Event: ' + event.first.toString());
       currentState = event.first;
-      if (currentState != GuideRegisterBloc.STATUS_CODE_UPDATE_SUCCESS)
-        setState(() {});
+
+      if (event.first == GuideRegisterBloc.STATUS_CODE_USER_ALREADY_LOGGED_IN) {
+        editMode = event.last != null;
+      }
+
+      if (this.mounted) updateStatus();
     });
 
     switch (currentState) {
       case GuideRegisterBloc.STATUS_CODE_INIT:
-        _checkIfRegistered();
+        widget._guideRegisterBloc.checkIfGuideRegistered();
         return _getContactInfoPage();
       case GuideRegisterBloc.STATUS_CODE_USER_ALREADY_LOGGED_IN:
         editMode = true;
@@ -73,8 +80,11 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
       case GuideRegisterBloc.STATUS_CODE_REGISTER_SUCCESS:
         return _getServicesPage();
       case GuideRegisterBloc.STATUS_CODE_UPDATE_SUCCESS:
-        widget._preferencesHelper.setLoggedInState(LoggedInState.GUIDE);
-        Navigator.pushReplacementNamed(context, HomeRoutes.guideHome);
+        widget._preferencesHelper
+            .setLoggedInState(LoggedInState.GUIDE)
+            .then((value) {
+          Navigator.pushReplacementNamed(context, HomeRoutes.home);
+        });
         return Scaffold();
       case GuideRegisterBloc.STATUS_CODE_REGISTER_ERROR:
         Fluttertoast.showToast(msg: 'Error Saving Profile');
@@ -131,7 +141,7 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
         } else {
           _services.add('car');
         }
-        setState(() {});
+        updateStatus();
       },
     ));
     pageLayout.add(CheckboxListTile(
@@ -143,7 +153,7 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
         } else {
           _services.add('hotel');
         }
-        setState(() {});
+        updateStatus();
       },
     ));
 
@@ -154,7 +164,9 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
     pageLayout.add(_getCitiesInFlex());
 
     pageLayout.add(RaisedButton(
-      onPressed: () => _updateGuideProfile(),
+      onPressed: () {
+        _updateGuideProfile();
+      },
       child: Text('Submit Details'),
     ));
 
@@ -202,21 +214,21 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
                 children: <Widget>[
                   GestureDetector(
                     onTap: () {
-                      if (_languages.contains('en')) {
-                        _languages.remove('en');
+                      if (_languages.contains('English')) {
+                        _languages.remove('English');
                       } else {
-                        _languages.add('en');
+                        _languages.add('English');
                       }
-                      setState(() {});
+                      updateStatus();
                     },
                     child: Chip(
-                      backgroundColor: _languages.contains('en')
+                      backgroundColor: _languages.contains('English')
                           ? Colors.greenAccent
                           : Colors.black26,
                       label: Text(
                         'English',
                         style: TextStyle(
-                            color: _languages.contains('en')
+                            color: _languages.contains('English')
                                 ? Colors.white
                                 : Colors.black),
                       ),
@@ -224,21 +236,21 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      if (_languages.contains('ar')) {
-                        _languages.remove('ar');
+                      if (_languages.contains('العربية')) {
+                        _languages.remove('العربية');
                       } else {
-                        _languages.add('ar');
+                        _languages.add('العربية');
                       }
-                      setState(() {});
+                      updateStatus();
                     },
                     child: Chip(
-                      backgroundColor: _languages.contains('ar')
+                      backgroundColor: _languages.contains('العربية')
                           ? Colors.greenAccent
                           : Colors.black26,
                       label: Text(
                         'العربية',
                         style: TextStyle(
-                            color: _languages.contains('ar')
+                            color: _languages.contains('العربية')
                                 ? Colors.white
                                 : Colors.black),
                       ),
@@ -249,10 +261,11 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
             ),
             RaisedButton(
               onPressed: () {
-                if (editMode == false) {
-                  _createGuideProfile();
-                } else {
+                if (currentState ==
+                    GuideRegisterBloc.STATUS_CODE_USER_ALREADY_LOGGED_IN) {
                   signUpController.jumpToPage(1);
+                } else {
+                  _createGuideProfile();
                 }
               },
               child: Text('Next'),
@@ -276,7 +289,7 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
             } else {
               _cities.add(city);
             }
-            setState(() {});
+            updateStatus();
           },
           value: _cities.contains(city),
         ));
@@ -291,25 +304,22 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
     );
   }
 
-  _checkIfRegistered() {
-    widget._guideRegisterBloc.checkIfGuideRegistered();
-  }
-
   _getLocations() {
     _availableLocations = [];
     widget.locationListService.getLocationList().then((locationList) {
       locationList.forEach((city) {
         _availableLocations.add(city.name);
       });
-      setState(() {});
     });
   }
 
   _createGuideProfile() {
+    print('Requesting Create Profile');
     widget._guideRegisterBloc.registerGuide(_userNameController.text, _userId);
   }
 
   _updateGuideProfile() {
+    print('Requesting Update Profile');
     widget._guideRegisterBloc.updateGuide(
       uid: _userId,
       phone: _phoneNumber,
@@ -319,5 +329,10 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
       cities: _cities,
       languages: _languages,
     );
+  }
+
+  updateStatus() {
+    print("Updating From Event: " + currentState.toString());
+    if (this.mounted) setState(() {});
   }
 }

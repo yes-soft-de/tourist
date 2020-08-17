@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
-import 'package:tourists/module_comment/response/comment/comment_response.dart';
-import 'package:tourists/module_comment/ui/widget/comment_item/comment_item.dart';
 import 'package:tourists/module_comment/ui/widget/comment_list/comment_list.dart';
 import 'package:tourists/module_comment/ui/widget/new_comment/new_comment_widget.dart';
 import 'package:tourists/module_forms/forms_routes.dart';
@@ -16,7 +13,6 @@ import 'package:tourists/module_locations/model/location_details/location_detail
 import 'package:tourists/module_shared/ui/widgets/carousel/carousel.dart';
 import 'package:tourists/module_shared/ui/widgets/request_guide_button/request_guide_button.dart';
 import 'package:tourists/utils/auth_guard/auth_gard.dart';
-import 'package:tourists/utils/time/time_formatter.dart';
 
 @provide
 class LocationDetailsScreen extends StatefulWidget {
@@ -48,18 +44,20 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
     // Get the Location Id
     locationId = ModalRoute.of(context).settings.arguments;
 
-    widget._authGuard.isLoggedIn().then((value) {
-      canSendComments = value;
-      if (this.mounted) setState(() {});
-    });
+    if (canSendComments == null)
+      widget._authGuard.isLoggedIn().then((value) {
+        canSendComments = value;
+        if (this.mounted) setState(() {});
+      });
 
     widget._locationBloc.locationDetailsStream.listen((event) {
       currentStatus = event[LocationDetailsBloc.KEY_STATUS];
       if (currentStatus == LocationDetailsBloc.STATUS_CODE_LOAD_SUCCESS) {
-        setState(() {
-          _locationDetails = event[LocationDetailsBloc.KEY_LOCATION_INFO];
-          _guidesList = event[LocationDetailsBloc.KEY_GUIDES];
-        });
+        if (this.mounted)
+          setState(() {
+            _locationDetails = event[LocationDetailsBloc.KEY_LOCATION_INFO];
+            _guidesList = event[LocationDetailsBloc.KEY_GUIDES];
+          });
       }
     });
 
@@ -104,6 +102,8 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
       ),
     );
   }
+
+  double lastLocation = 0.0;
 
   Scaffold getLocationScreen() {
     List<Widget> carouselList = [];
@@ -163,9 +163,9 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
             child: NotificationListener(
               onNotification: (t) {
                 if (t is ScrollEndNotification) {
-                  scrollPosition =
-                      pageScrollController.position.pixels - scrollPosition;
-                  scrollPosition = scrollPosition > 0 ? 1 : -1;
+                  print(lastLocation > t.metrics.pixels ? 'up' : 'down');
+                  scrollPosition = lastLocation > t.metrics.pixels ? 1 : -1;
+                  lastLocation = t.metrics.pixels;
                   setState(() {});
                 }
                 return true;
@@ -176,7 +176,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
               ),
             ),
           ),
-          scrollPosition < 0
+          scrollPosition > 0 || lastLocation == 0
               ? Positioned(
                   bottom: 16,
                   left: 0,
@@ -184,7 +184,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.of(context).pushNamed(
-                        FormsRoutes.requestTourForm,
+                        FormsRoutes.requestGuideForm,
                         arguments: RequestGuideNavigationArguments(
                             cityId: this.locationId),
                       );

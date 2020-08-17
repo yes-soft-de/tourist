@@ -35,6 +35,13 @@
             },
             {
               "lookupKey": {
+                "root": "asset:tourists/lib/module_splash/splash_module.dart#SplashModule",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
                 "root": "asset:tourists/lib/module_chat/chat_module.dart#ChatModule",
                 "qualifier": null
               },

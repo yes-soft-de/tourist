@@ -8,7 +8,6 @@ import 'package:tourists/module_authorization/authprization_module.dart';
 import 'package:tourists/module_forms/forms_module.dart';
 import 'package:tourists/module_guide/guide_list_module.dart';
 import 'package:tourists/module_home/home_module.dart';
-import 'package:tourists/module_home/home_routes.dart';
 import 'package:tourists/module_locations/location_module.dart';
 import 'package:tourists/module_orders/order_module.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
@@ -16,6 +15,8 @@ import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper
 import 'di/components/app.component.dart';
 import 'generated/l10n.dart';
 import 'module_chat/chat_module.dart';
+import 'module_splash/splash_module.dart';
+import 'module_splash/ui/splash_routes.dart';
 
 typedef Provider<T> = T Function();
 
@@ -44,16 +45,19 @@ class MyApp extends StatelessWidget {
   final LocationModule _locationModule;
   final SharedPreferencesHelper _preferencesHelper;
   final OrderModule _orderModule;
+  final SplashModule _splashModule;
 
   MyApp(
-      this._authorizationModule,
-      this._homeModule,
-      this._chatModule,
-      this._locationModule,
-      this._guideListModule,
-      this._orderModule,
-      this._formsModule,
-      this._preferencesHelper,);
+    this._authorizationModule,
+    this._homeModule,
+    this._splashModule,
+    this._chatModule,
+    this._locationModule,
+    this._guideListModule,
+    this._orderModule,
+    this._formsModule,
+    this._preferencesHelper,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -66,26 +70,7 @@ class MyApp extends StatelessWidget {
     fullRoutesList.addAll(_locationModule.getRoutes());
     fullRoutesList.addAll(_guideListModule.getRoutes());
     fullRoutesList.addAll(_orderModule.getRoutes());
-
-    this._preferencesHelper.getLoggedInState().then((loggedInStatus) {
-      return MaterialApp(
-          navigatorObservers: <NavigatorObserver>[
-            observer
-          ],
-          localizationsDelegates: [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          theme: ThemeData(
-              primaryColor: Colors.greenAccent,
-              accentColor: Colors.greenAccent),
-          supportedLocales: S.delegate.supportedLocales,
-          title: 'Soyah',
-          routes: fullRoutesList,
-          initialRoute: HomeRoutes.home);
-    });
+    fullRoutesList.addAll(_splashModule.getRoutes());
 
     return MaterialApp(
         navigatorObservers: <NavigatorObserver>[
@@ -102,6 +87,6 @@ class MyApp extends StatelessWidget {
         supportedLocales: S.delegate.supportedLocales,
         title: 'Soyah',
         routes: fullRoutesList,
-        initialRoute: HomeRoutes.home);
+        initialRoute: SplashRoutes.splash);
   }
 }

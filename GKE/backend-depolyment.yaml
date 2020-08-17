@@ -5,6 +5,7 @@ metadata:
   labels:
     app: tourists
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: tourists

@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
-import 'package:tourists/module_authorization/authorization_routes.dart';
 import 'package:tourists/module_guide/ui/screen/guide_list/guide_list_screen.dart';
+import 'package:tourists/module_home/home_routes.dart';
 import 'package:tourists/module_home/ui/widget/bottom_navigation_bar/buttom_navigation_bar.dart';
 import 'package:tourists/module_locations/ui/screens/event_list/event_list.dart';
 import 'package:tourists/module_locations/ui/screens/location_carousel/location_carousel.dart';
@@ -43,10 +42,10 @@ class HomeScreenState extends State<HomeScreen> {
     if (loggedIn == null)
       widget._authGuard.isLoggedIn().then((value) {
         loggedIn = value;
-        if (this.mounted) setState(() {});
+        return _getUI();
       });
 
-    return _getUI();
+    return Container();
   }
 
   _getUI() {
@@ -57,7 +56,15 @@ class HomeScreenState extends State<HomeScreen> {
           backgroundColor: Colors.white,
           title: Text('سياح'),
           actions: <Widget>[
-            Icon(loggedIn ? Icons.person : Icons.perm_identity)
+            GestureDetector(
+                onTap: () {
+                  widget._preferencesHelper.getLoggedInState().then((value) {
+                    if (value != null) if (value == LoggedInState.GUIDE) {
+                      Navigator.of(context).pushNamed(HomeRoutes.guideHome);
+                    }
+                  });
+                },
+                child: Icon(loggedIn ? Icons.person : Icons.perm_identity))
           ],
         ),
         body: Stack(

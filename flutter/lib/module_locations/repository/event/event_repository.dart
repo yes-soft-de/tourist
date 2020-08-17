@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:inject/inject.dart';
 import 'package:tourists/consts/urls.dart';
 import 'package:tourists/module_locations/response/event_details/event_details.dart';
@@ -12,20 +10,20 @@ class EventRepository {
   EventRepository(this._httpClient);
 
   Future<EventListResponse> getAllEvents() async {
-    String response = await _httpClient.get(Urls.event);
+    Map response = await _httpClient.get(Urls.event);
 
     if (response != null) {
-      return EventListResponse.fromJson(jsonDecode(response));
+      return EventListResponse.fromJson(response);
     }
 
     return null;
   }
 
   Future<EventResponse> getEvent(String id) async {
-    String response  = await _httpClient.get(Urls.event + '/' + id);
+    Map response = await _httpClient.get(Urls.event + '/' + id);
 
     if (response != null) {
-      return EventResponse.fromJson(jsonDecode(response));
+      return EventResponse.fromJson(response);
     }
 
     return null;

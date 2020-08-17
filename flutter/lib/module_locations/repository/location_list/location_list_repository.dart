@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:inject/inject.dart';
 import 'package:tourists/consts/urls.dart';
 import 'package:tourists/module_locations/response/location_list/location_list_response.dart';
@@ -12,10 +10,10 @@ class LocationListRepository {
   LocationListRepository(this._httpClient);
 
   Future<LocationListResponse> getLocationList() async {
-    String response = await _httpClient.get(Urls.locationList);
+    Map response = await _httpClient.get(Urls.locationList);
 
     if (response != null) {
-      return LocationListResponse.fromJson(jsonDecode(response));
+      return LocationListResponse.fromJson(response);
     }
 
     return null;

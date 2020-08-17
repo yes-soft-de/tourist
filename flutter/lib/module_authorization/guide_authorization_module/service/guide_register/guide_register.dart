@@ -5,8 +5,8 @@ import 'package:inject/inject.dart';
 import 'package:tourists/module_authorization/guide_authorization_module/manager/guide_register/guide_register.dart';
 import 'package:tourists/module_authorization/guide_authorization_module/request/register_guide/register_guide.dart';
 import 'package:tourists/module_authorization/guide_authorization_module/request/update_guide/update_guide.dart';
+import 'package:tourists/module_authorization/guide_authorization_module/response/update_guide/update_guide_response.dart';
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
-import 'package:tourists/module_guide/response/guide_response/guides_response.dart';
 import 'package:tourists/module_guide/service/guide_list/guide_list.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 
@@ -33,7 +33,7 @@ class GuideRegisterService {
     return true;
   }
 
-  Future<bool> checkIfRegistered() async {
+  Future<GuideListItemModel> checkIfRegistered() async {
     FirebaseUser user = await _authService.currentUser();
 
     String uid = user.uid;
@@ -41,12 +41,12 @@ class GuideRegisterService {
     List<GuideListItemModel> guidesList =
         await _guideListService.getAllGuides();
 
-    bool guideLoggedId = false;
+    GuideListItemModel guideLoggedId;
 
     guidesList.forEach((element) {
       if (element.userID == uid) {
         log("User Already Exists with ID: " + uid);
-        guideLoggedId = true;
+        guideLoggedId = element;
       }
     });
 
@@ -54,12 +54,13 @@ class GuideRegisterService {
   }
 
   Future<bool> updateGuide(UpdateGuideRequest updateGuideRequest) async {
-    GuidesResponse response = await _guideRegisterManager.updateGuide(updateGuideRequest);
+    UpdateGuidResponse response =
+        await _guideRegisterManager.updateGuide(updateGuideRequest);
 
     if (response != null) {
-      return false;
-    } else {
       return true;
+    } else {
+      return false;
     }
   }
 }

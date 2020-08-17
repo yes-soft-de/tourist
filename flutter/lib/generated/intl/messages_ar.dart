@@ -21,7 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
-    "accept_order" : MessageLookupByLibrary.simpleMessage("Accept Order"),
+    "accept_order" : MessageLookupByLibrary.simpleMessage("قبول الطلب"),
     "are_you_sure" : MessageLookupByLibrary.simpleMessage("هل أنت منتأكد؟"),
     "available" : MessageLookupByLibrary.simpleMessage("متوفر"),
     "car" : MessageLookupByLibrary.simpleMessage("سيارة"),
@@ -86,7 +86,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "targetCity" : MessageLookupByLibrary.simpleMessage("المدينة المطلوبة"),
     "title" : MessageLookupByLibrary.simpleMessage("سياح"),
     "toast_select_language" : MessageLookupByLibrary.simpleMessage("الرجاء اختيار لغة"),
-    "updateMyProfile" : MessageLookupByLibrary.simpleMessage("Update My Profile"),
+    "updateMyProfile" : MessageLookupByLibrary.simpleMessage("تحديث ملفي الشخصي"),
     "welcome" : MessageLookupByLibrary.simpleMessage("اهلا بك في"),
     "yes" : MessageLookupByLibrary.simpleMessage("نعم")
   };

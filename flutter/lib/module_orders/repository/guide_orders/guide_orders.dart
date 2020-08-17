@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/consts/urls.dart';
@@ -19,38 +17,38 @@ class GuideOrdersRepository {
     FirebaseUser guideUser = await _auth.currentUser();
     String guideId = guideUser.uid;
 
-    String response = await _httpClient.get(Urls.orderLookup + '/$guideId');
+    Map response = await _httpClient.get(Urls.orderLookup + '/$guideId');
 
     if (response == null) {
       return null;
     }
 
-    return OrderResponse.fromJson(jsonDecode(response));
+    return OrderResponse.fromJson(response);
   }
 
   Future<UpdateOrderResponse> updateOrder(OrderModel model) async {
-    String response = await _httpClient.put(Urls.updateOrder, model.toJson());
+    Map response = await _httpClient.put(Urls.updateOrder, model.toJson());
 
     if (response == null) {
       return null;
     }
 
-    return UpdateOrderResponse.fromJson(jsonDecode(response));
+    return UpdateOrderResponse.fromJson(response);
   }
 
   Future<UpdateOrderResponse> updateAvailableOrder(OrderModel model) async {
-    String response = await _httpClient.post(Urls.acceptOrder, model.toJson());
+    Map response = await _httpClient.post(Urls.acceptOrder, model.toJson());
     if (response == null) return null;
-    return UpdateOrderResponse.fromJson(jsonDecode(response));
+    return UpdateOrderResponse.fromJson(response);
   }
 
   Future<OrderResponse> getGuideOrders(String guideUserId) async {
-    String response = await _httpClient.get(Urls.guideOrders + '/$guideUserId');
+    Map response = await _httpClient.get(Urls.guideOrders + '/$guideUserId');
 
     if (response == null) {
       return null;
     }
 
-    return OrderResponse.fromJson(jsonDecode(response));
+    return OrderResponse.fromJson(response);
   }
 }

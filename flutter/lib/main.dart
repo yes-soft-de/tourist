@@ -8,7 +8,6 @@ import 'package:tourists/module_authorization/authprization_module.dart';
 import 'package:tourists/module_forms/forms_module.dart';
 import 'package:tourists/module_guide/guide_list_module.dart';
 import 'package:tourists/module_home/home_module.dart';
-import 'package:tourists/module_home/home_routes.dart';
 import 'package:tourists/module_locations/location_module.dart';
 import 'package:tourists/module_orders/order_module.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
@@ -73,26 +72,6 @@ class MyApp extends StatelessWidget {
     fullRoutesList.addAll(_orderModule.getRoutes());
     fullRoutesList.addAll(_splashModule.getRoutes());
 
-    this._preferencesHelper.getLoggedInState().then((loggedInStatus) {
-      return MaterialApp(
-          navigatorObservers: <NavigatorObserver>[
-            observer
-          ],
-          localizationsDelegates: [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          theme: ThemeData(
-              primaryColor: Colors.greenAccent,
-              accentColor: Colors.greenAccent),
-          supportedLocales: S.delegate.supportedLocales,
-          title: 'Soyah',
-          routes: fullRoutesList,
-          initialRoute: SplashRoutes.splash);
-    });
-
     return MaterialApp(
         navigatorObservers: <NavigatorObserver>[
           observer
@@ -108,6 +87,6 @@ class MyApp extends StatelessWidget {
         supportedLocales: S.delegate.supportedLocales,
         title: 'Soyah',
         routes: fullRoutesList,
-        initialRoute: HomeRoutes.home);
+        initialRoute: SplashRoutes.splash);
   }
 }

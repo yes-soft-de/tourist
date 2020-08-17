@@ -21,23 +21,23 @@ class HttpClient {
         .add(DioCacheManager(CacheConfig(baseUrl: Urls.baseAPI)).interceptor);
   }
 
-  Future<String> get(String url) async {
+  Future<Map> get(String url) async {
     _logger.info(tag, 'GET $url');
     try {
-      var response = await _client.get(
+      Response response = await _client.get(
         url,
         options: buildCacheOptions(Duration(seconds: 15)),
       );
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
-        _logger.info(tag, response.data);
+        _logger.info(tag, response.data.toString());
         return response.data;
       } else {
         _logger.error(tag, response.statusCode.toString() + ' for link ' + url);
         Fluttertoast.showToast(
             msg: "Error Code " +
                 response.statusCode.toString() +
-                ' Please Retry',
+                " Please Retry",
             toastLength: Toast.LENGTH_SHORT,
             timeInSecForIosWeb: 1,
             backgroundColor: Colors.red,
@@ -52,7 +52,7 @@ class HttpClient {
     }
   }
 
-  Future<String> post(String url, Map<String, dynamic> payLoad) async {
+  Future<Map> post(String url, Map<String, dynamic> payLoad) async {
     try {
       _logger.info(tag, 'Requesting Post to: ' + url);
       _logger.info(tag, 'POST: ' + jsonEncode(payLoad));
@@ -73,14 +73,14 @@ class HttpClient {
     }
   }
 
-  Future<String> put(String url, Map<String, dynamic> payLoad) async {
+  Future<Map> put(String url, Map<String, dynamic> payLoad) async {
     try {
       _logger.info(tag, 'Requesting Put to: ' + url);
       _logger.info(tag, 'PUT: ' + jsonEncode(payLoad));
       var response = await _client.put(url, data: json.encode(payLoad));
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
-        _logger.info(tag, response.data);
+        _logger.info(tag, response.data.toString());
         return response.data;
       } else {
         _logger.error(tag, response.statusCode.toString());

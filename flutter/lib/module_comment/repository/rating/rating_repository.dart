@@ -10,7 +10,7 @@ class RatingRepository {
   RatingRepository(this._client);
 
   Future<bool> postRating(CreateRatingRequest request) async {
-    String response = await this._client.post(Urls.rate, request.toJson());
+    Map response = await this._client.post(Urls.rate, request.toJson());
 
     print(response);
 

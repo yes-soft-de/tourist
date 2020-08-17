@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:inject/inject.dart';
 import 'package:tourists/consts/urls.dart';
 import 'package:tourists/module_locations/response/location_details/location_response.dart';
@@ -12,11 +10,11 @@ class LocationDetailsRepository {
   LocationDetailsRepository(this._client);
 
   Future<LocationDetailsResponse> getLocationDetails(String locationId) async {
-    String response = await _client.get(Urls.locationDetails + locationId);
+    Map response = await _client.get(Urls.locationDetails + locationId);
 
     if (response != null) {
-      return new LocationDetailsResponse.fromJson(jsonDecode(response));
-    }
-    else return null;
+      return new LocationDetailsResponse.fromJson(response);
+    } else
+      return null;
   }
 }

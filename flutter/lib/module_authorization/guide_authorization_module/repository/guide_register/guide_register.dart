@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:inject/inject.dart';
@@ -17,14 +16,14 @@ class GuideRegisterRepository {
 
   Future<GuidesResponse> registerGuide(
       RegisterGuideRequest requestGuideRequest) async {
-    String response = await this
+    Map response = await this
         ._client
         .post(Urls.loginGuideAPI, requestGuideRequest.toJson());
 
     if (response == null) {
       return null;
     }
-    return GuidesResponse.fromJson(jsonDecode(response));
+    return GuidesResponse.fromJson(response);
   }
 
   loginGuide() {
@@ -33,12 +32,12 @@ class GuideRegisterRepository {
 
   Future<UpdateGuidResponse> updateGuide(
       UpdateGuideRequest updateGuideRequest) async {
-    String response =
+    Map response =
         await this._client.put(Urls.loginGuideAPI, updateGuideRequest.toJson());
 
     if (response != null) {
       try {
-        return UpdateGuidResponse.fromJson(jsonDecode(response));
+        return UpdateGuidResponse.fromJson(response);
       } catch (e) {
         log(e.toString());
         return null;

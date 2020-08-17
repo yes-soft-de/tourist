@@ -95,6 +95,8 @@ class _GuideOrdersScreenState extends State<GuideOrdersScreen> {
     List<Widget> orderCards = [];
     FirebaseUser _user = await widget.auth.currentUser();
 
+    print('Got ' + ordersList.length.toString() + ' Length');
+
     if (ordersList != null)
       ordersList.forEach((order) {
         orderCards.add(OrderItemWidget(order,

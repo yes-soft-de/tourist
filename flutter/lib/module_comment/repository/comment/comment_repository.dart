@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:inject/inject.dart';
 import 'package:tourists/consts/urls.dart';
 import 'package:tourists/module_comment/request/create_comments/create_comments.dart';
@@ -16,10 +14,10 @@ class CommentRepository {
 
   Future<CreateCommentResponse> createComment(
       CreateCommentRequest request) async {
-    String response = await _client.post(Urls.comment, request.toJson());
+    Map response = await _client.post(Urls.comment, request.toJson());
 
     if (response != null) {
-      return CreateCommentResponse.fromJson(jsonDecode(response));
+      return CreateCommentResponse.fromJson(response);
     }
     return null;
   }

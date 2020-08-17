@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:inject/inject.dart';
 import 'package:tourists/consts/urls.dart';
 import 'package:tourists/module_authorization/user_authorization_module/request/create_profile/create_profile_body.dart';
@@ -12,10 +10,12 @@ class IntentionsRepository {
 
   IntentionsRepository(this._client);
 
-  Future<CreateProfileResponse> createIntentions(CreateProfileBody createProfileBody) async {
-    String response = await _client.put(Urls.createProfileAPI, createProfileBody.toJson());
+  Future<CreateProfileResponse> createIntentions(
+      CreateProfileBody createProfileBody) async {
+    Map response =
+        await _client.put(Urls.createProfileAPI, createProfileBody.toJson());
     if (response != null) {
-      return CreateProfileResponse.fromJson(jsonDecode(response));
+      return CreateProfileResponse.fromJson(response);
     }
     return null;
   }

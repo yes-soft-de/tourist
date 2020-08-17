@@ -9,11 +9,17 @@ class OrderItemWidget extends StatelessWidget {
   final Function(OrderModel) onAcceptOrder;
   final Function(OrderModel) onAcceptAvailableOrder;
   final Function(OrderModel) onPayOrder;
+  final Function(OrderModel) onPayAvailableOrder;
+  bool canPay = false;
 
   BuildContext context;
 
   OrderItemWidget(this.orderModel,
-      {this.onAcceptOrder, this.onAcceptAvailableOrder, this.onPayOrder});
+      {this.onAcceptOrder,
+      this.onPayAvailableOrder,
+      this.onAcceptAvailableOrder,
+      this.onPayOrder,
+      this.canPay});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +30,7 @@ class OrderItemWidget extends StatelessWidget {
 
     // If there is guide assigned, Show Multiple Choices
     if (orderModel.guidUserID != null) {
-      if (orderModel.status == 'pending')
+      if (orderModel.status == 'pendingPayment')
         widgetLayout.add(_getPendingOrder(orderModel));
       else if (orderModel.status == 'onGoing') {
         // There is a chat here

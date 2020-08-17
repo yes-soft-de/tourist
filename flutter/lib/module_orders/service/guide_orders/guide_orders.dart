@@ -92,6 +92,18 @@ class GuideOrdersService {
     return response;
   }
 
+  Future<UpdateOrderResponse> payAvailableOrder(OrderModel orderModel) async {
+    orderModel.status = 'onGoing';
+
+    UpdateOrderResponse response = await _ordersManager.updateOrder(orderModel);
+
+    if (response == null) {
+      return null;
+    }
+
+    return response;
+  }
+
   Future<UpdateOrderResponse> startAvailableOrder(OrderModel orderModel) async {
     orderModel.status = 'onGoing';
 

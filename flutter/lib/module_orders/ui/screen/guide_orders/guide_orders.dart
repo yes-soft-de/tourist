@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
@@ -8,6 +9,7 @@ import 'package:tourists/module_orders/ui/widget/order_item/order_item.dart';
 @provide
 class GuideOrdersScreen extends StatefulWidget {
   final GuideOrdersListBloc bloc;
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   GuideOrdersScreen(this.bloc);
 
@@ -54,7 +56,14 @@ class _GuideOrdersScreenState extends State<GuideOrdersScreen> {
         title: Text(S.of(context).orders),
       ),
       body: PageView(
-        children: <Widget>[_getAvailableOrders()],
+        children: <Widget>[
+          FutureBuilder(
+            future: _getAvailableOrders(),
+            builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+              return snapshot.data;
+            },
+          )
+        ],
       ),
     );
   }
@@ -82,21 +91,22 @@ class _GuideOrdersScreenState extends State<GuideOrdersScreen> {
     );
   }
 
-  Widget _getAvailableOrders() {
+  Future<Widget> _getAvailableOrders() async {
     List<Widget> orderCards = [];
+    FirebaseUser _user = await widget.auth.currentUser();
 
     if (ordersList != null)
       ordersList.forEach((order) {
-        if (order.status != 'pendingPayment')
-          orderCards.add(OrderItemWidget(
-            order,
-            onAcceptOrder: (order) {
-              widget.bloc.acceptOrder(order);
-            },
-            onAcceptAvailableOrder: (order) {
-              widget.bloc.acceptAvailableOrder(order);
-            },
-          ));
+        orderCards.add(OrderItemWidget(order,
+            canPay: _user.uid == order.touristUserID, onAcceptOrder: (order) {
+          widget.bloc.acceptOrder(order);
+        }, onAcceptAvailableOrder: (order) {
+          widget.bloc.acceptAvailableOrder(order);
+        }, onPayOrder: (order) {
+          widget.bloc.payOrder(order);
+        }, onPayAvailableOrder: (orderModel) {
+          widget.bloc.payAvailableOrder(orderModel);
+        }));
       });
 
     return ListView(

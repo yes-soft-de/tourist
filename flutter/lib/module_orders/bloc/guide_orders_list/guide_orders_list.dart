@@ -56,7 +56,27 @@ class GuideOrdersListBloc {
     });
   }
 
-  payOrder(OrderModel orderModel) {}
+  payOrder(OrderModel orderModel) {
+    _stateSubject.add({KEY_STATUS: STATUS_CODE_LOADING});
+    _ordersService.payOrder(orderModel).then((value) {
+      if (value == null) {
+        _stateSubject.add({KEY_STATUS: STATUS_CODE_LOAD_ERROR});
+      } else {
+        this.getAvailableOrders();
+      }
+    });
+  }
+
+  payAvailableOrder(OrderModel orderModel) {
+    _stateSubject.add({KEY_STATUS: STATUS_CODE_LOADING});
+    _ordersService.payAvailableOrder(orderModel).then((value) {
+      if (value == null) {
+        _stateSubject.add({KEY_STATUS: STATUS_CODE_LOAD_ERROR});
+      } else {
+        this.getAvailableOrders();
+      }
+    });
+  }
 
   dispose() {
     _stateSubject.close();

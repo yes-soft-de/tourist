@@ -223,7 +223,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
     }
     List<Widget> ordersWidgetList = [];
     ordersList.forEach((element) {
-      if (element.status == 'pendingConformation')
+      if (element.status == 'pendingPayment')
         ordersWidgetList.add(OrderItemWidget(element));
     });
     return ListView(

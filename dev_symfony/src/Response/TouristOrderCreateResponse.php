@@ -6,6 +6,8 @@ namespace App\Response;
 
 class TouristOrderCreateResponse
 {
+    public $id;
+
     public $date;
 
     public $touristUserID;

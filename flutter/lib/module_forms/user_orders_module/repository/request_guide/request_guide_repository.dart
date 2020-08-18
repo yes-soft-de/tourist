@@ -8,7 +8,7 @@ class RequestGuideRepository {
   HttpClient _httpClient;
   RequestGuideRepository(this._httpClient);
 
-  Future<dynamic> requestGuide(RequestGuideRequest request) {
+  Future<Map> requestGuide(RequestGuideRequest request) {
     return _httpClient.post(Urls.orderGuide, request.toJson());
   }
 }

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/module_orders/bloc/orders_list_bloc/orders_list_bloc.dart';
@@ -20,14 +21,18 @@ class _OrderListScreenState extends State<OrdersListScreen> {
   List<OrderModel> ordersList;
   int currentStatus = OrdersListBloc.STATUS_CODE_INIT;
 
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  String currentUserId;
+
   @override
   Widget build(BuildContext context) {
-    widget._bloc.ordersStream.listen((event) {
-
+    widget._bloc.ordersStream.listen((event) async {
       currentStatus = event.first;
 
       if (currentStatus == OrdersListBloc.STATUS_CODE_LOAD_SUCCESS) {
         ordersList = event.last;
+        FirebaseUser user = await _auth.currentUser();
+        currentUserId = user.uid;
       }
 
       if (this.mounted) {
@@ -56,6 +61,10 @@ class _OrderListScreenState extends State<OrdersListScreen> {
     // region Header
     pageLayout.add(_getFilterBar());
     // endregion
+
+    ordersList.forEach((element) {
+      print(element.status);
+    });
 
     // Here we have all the payments that is sent from the user.
     ListView sentOrders = _getSentOrdersList();
@@ -202,7 +211,10 @@ class _OrderListScreenState extends State<OrdersListScreen> {
     List<Widget> ordersWidgetList = [];
     ordersList.forEach((element) {
       if (element.status == 'waitingPayment')
-        ordersWidgetList.add(OrderItemWidget(element));
+        ordersWidgetList.add(OrderItemWidget(
+          element,
+          canPay: currentUserId == element.touristUserID,
+        ));
     });
     return ListView(
       children: ordersWidgetList.length > 0
@@ -223,8 +235,17 @@ class _OrderListScreenState extends State<OrdersListScreen> {
     }
     List<Widget> ordersWidgetList = [];
     ordersList.forEach((element) {
-      if (element.status == 'pendingPayment')
-        ordersWidgetList.add(OrderItemWidget(element));
+      if (element.status == 'pending')
+        ordersWidgetList.add(OrderItemWidget(
+          element,
+          canPay: currentUserId == element.touristUserID,
+          onPayOrder: (order) {
+            widget._bloc.payOrder(order);
+          },
+          onAcceptOrder: (order) {
+            widget._bloc.payOrder(order);
+          },
+        ));
     });
     return ListView(
       children: ordersWidgetList.length > 0
@@ -246,7 +267,10 @@ class _OrderListScreenState extends State<OrdersListScreen> {
     List<Widget> ordersWidgetList = [];
     ordersList.forEach((element) {
       if (element.status == 'onGoing')
-        ordersWidgetList.add(OrderItemWidget(element));
+        ordersWidgetList.add(OrderItemWidget(
+          element,
+          canPay: currentUserId == element.touristUserID,
+        ));
     });
     return ListView(
       children: ordersWidgetList.length > 0
@@ -268,7 +292,10 @@ class _OrderListScreenState extends State<OrdersListScreen> {
     List<Widget> ordersWidgetList = [];
     ordersList.forEach((element) {
       if (element.status == 'finished')
-        ordersWidgetList.add(OrderItemWidget(element));
+        ordersWidgetList.add(OrderItemWidget(
+          element,
+          canPay: currentUserId == element.touristUserID,
+        ));
     });
     return ListView(
       children: ordersWidgetList.length > 0

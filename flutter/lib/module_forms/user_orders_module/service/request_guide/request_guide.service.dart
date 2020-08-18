@@ -43,9 +43,7 @@ class RequestGuideService {
             .add(Duration(days: requestGuide.stayingDays)),
         services: requestGuide.services);
 
-    log(jsonEncode(requestObject.toJson()));
-
-    dynamic requestResult =
+    Map requestResult =
         await _requestGuideManager.requestGuide(requestObject);
 
     if (requestResult != null) {

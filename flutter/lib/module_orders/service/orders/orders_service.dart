@@ -5,6 +5,8 @@ import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart
 import 'package:tourists/module_guide/service/guide_list/guide_list.dart';
 import 'package:tourists/module_orders/manager/orders/orders_manager.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
+import 'package:tourists/module_orders/response/update_order_response.dart';
+
 @provide
 class OrdersService {
   OrdersManager _ordersManager;
@@ -48,10 +50,23 @@ class OrdersService {
     orderResponse.orderList.forEach((order) {
       if (order.guidUserID != null) {
         // Get the info from the list
+        print('Matched Guide to Order');
         order.guideInfo = guidesMap[order.guidUserID];
       }
     });
 
     return orderResponse.orderList;
+  }
+
+  Future<UpdateOrderResponse> payOrder(OrderModel orderModel) async {
+    orderModel.status = 'onGoing';
+
+    UpdateOrderResponse response = await _ordersManager.updateOrder(orderModel);
+
+    if (response == null) {
+      return null;
+    }
+
+    return response;
   }
 }

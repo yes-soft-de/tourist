@@ -22,8 +22,8 @@ class OrderModule extends YesModule {
       OrdersRoutes.ordersList: (context) => FutureBuilder(
             future: _authGuard.isLoggedIn(),
             builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-              if (snapshot.data) {
-                return _ordersListScreen;
+              if (snapshot.hasData) {
+                if (snapshot.data) return _ordersListScreen;
               }
               return _loginTypeSelectorScreen;
             },

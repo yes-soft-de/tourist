@@ -173,8 +173,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (submitAvailable) {
       submitAvailable = false;
       setState(() {});
-      widget._registerBloc
-          .register(_emailController.text, _passwordController.text);
+      widget._registerBloc.register(
+          _emailController.text.trim(), _passwordController.text.trim());
     } else {
       Fluttertoast.showToast(msg: 'Please Wait!');
     }

@@ -30,7 +30,7 @@ class OrderItemWidget extends StatelessWidget {
 
     // If there is guide assigned, Show Multiple Choices
     if (orderModel.guidUserID != null) {
-      if (orderModel.status == 'pendingPayment')
+      if (orderModel.status == 'pending')
         widgetLayout.add(_getPendingOrder(orderModel));
       else if (orderModel.status == 'onGoing') {
         // There is a chat here
@@ -160,8 +160,10 @@ class OrderItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      orderModel.touristUserID
-                          .substring(orderModel.touristUserID.length - 4),
+                      orderModel.guideInfo == null
+                          ? orderModel.touristUserID
+                              .substring(orderModel.touristUserID.length)
+                          : orderModel.guideInfo.name,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Container(
@@ -182,17 +184,21 @@ class OrderItemWidget extends StatelessWidget {
                     .substring(5, 10)))
           ],
         ),
-        RaisedButton(
-          onPressed: () {
-            this.onAcceptOrder(orderModel);
-          },
-          child: Text(S.of(context).accept_order),
-        )
+        canPay != null && canPay
+            ? RaisedButton(
+                onPressed: () {
+                  this.onAcceptOrder(orderModel);
+                },
+                child: Text(S.of(context).accept_order),
+              )
+            : Container()
       ],
     );
   }
 
   Widget _getOnGoingOrder(OrderModel orderModel) {
+    print((orderModel.guideInfo != null).toString());
+
     return Flex(
       direction: Axis.vertical,
       children: [
@@ -222,8 +228,9 @@ class OrderItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      orderModel.touristUserID
-                          .substring(orderModel.touristUserID.length - 4),
+                      orderModel.guideInfo == null
+                          ? orderModel.touristUserID
+                          : orderModel.guideInfo.name,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Container(
@@ -282,8 +289,10 @@ class OrderItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  orderModel.touristUserID
-                      .substring(orderModel.touristUserID.length - 4),
+                  orderModel.guideInfo == null
+                      ? orderModel.touristUserID
+                          .substring(orderModel.touristUserID.length - 4)
+                      : orderModel.guideInfo.name,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Container(

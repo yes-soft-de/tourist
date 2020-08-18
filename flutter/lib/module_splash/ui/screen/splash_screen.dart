@@ -37,28 +37,29 @@ class SplashScreen extends StatelessWidget {
 
   Future<bool> setUpRemoteConfig(BuildContext context) async {
     try {
-    final RemoteConfig remoteConfig = await RemoteConfig.instance;
-    await remoteConfig.fetch(expiration: const Duration(seconds: 0));
-    await remoteConfig.activateFetched();
+      final RemoteConfig remoteConfig = await RemoteConfig.instance;
+      await remoteConfig.fetch(expiration: const Duration(seconds: 0));
+      await remoteConfig.activateFetched();
 
-    String base = remoteConfig.getString('server');
+      String base = remoteConfig.getString('server');
 
-    if (base == null) {
-      Fluttertoast.showToast(msg: 'Connection Error');
-      print('Didn\'t get the Config:(');
-      return false;
-    } else {
-      print('Config: Size: ' + remoteConfig.getAll().length.toString());
-      String serverName = remoteConfig.getString('server');
-      print('Got this as a Config: Server ' + serverName);
-      Urls.baseAPI = serverName;
-    }
+      if (base == null) {
+        Fluttertoast.showToast(msg: 'Connection Error');
+        print('Didn\'t get the Config:(');
+        return false;
+      } else {
+        print('Config: Size: ' + remoteConfig.getAll().length.toString());
+        String serverName = remoteConfig.getString('server');
+        print('Got this as a Config: Server ' + serverName);
+        Urls.baseAPI = serverName;
+      }
 
-    Urls.baseAPI = base != null
-        ? remoteConfig.getString('server')
-        : 'http://35.228.120.165/';
+      Urls.baseAPI = base != null
+          ? remoteConfig.getString('server')
+          : 'http://35.228.120.165/';
 
-    Navigator.of(context).pushReplacementNamed(HomeRoutes.home);
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(HomeRoutes.home, (r) => false);
     } catch (e) {
       await setUpRemoteConfig(context);
     }

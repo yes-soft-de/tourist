@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
   final SplashModule _splashModule;
 
   MyApp(
-    this._authorizationModule,
+    this._authorizationModule,  
     this._homeModule,
     this._splashModule,
     this._chatModule,

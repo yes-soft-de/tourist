@@ -56,14 +56,14 @@ class HttpClient {
     try {
       _logger.info(tag, 'Requesting Post to: ' + url);
       _logger.info(tag, 'POST: ' + jsonEncode(payLoad));
-      var response = await _client.post(url, data: json.encode(payLoad));
+      Response response = await _client.post(url, data: json.encode(payLoad));
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
-        _logger.info(tag, response.data);
+        _logger.info(tag, response.data.toString());
         return response.data;
       } else {
         _logger.error(tag, response.statusCode.toString());
-        _logger.error(tag, response.data);
+        _logger.error(tag, response.data.toString());
         return null;
       }
     } catch (e) {

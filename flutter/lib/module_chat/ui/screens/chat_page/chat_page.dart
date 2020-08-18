@@ -30,10 +30,12 @@ class ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    chatRoomId = ModalRoute.of(context).settings.arguments;
+    chatRoomId = ModalRoute.of(context).settings.arguments.toString();
 
-    if (currentState == ChatPageBloc.STATUS_CODE_INIT)
+    if (currentState == ChatPageBloc.STATUS_CODE_INIT) {
+      print('Chat Room: ' + chatRoomId);
       widget._chatPageBloc.getMessages(chatRoomId);
+    }
 
     widget._chatPageBloc.chatBlocStream.listen((event) {
       currentState = event.first;
@@ -55,8 +57,8 @@ class ChatPageState extends State<ChatPage> {
         // direction: Axis.vertical,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Row(
-            children: <Widget>[Text('Title')],
+          AppBar(
+            title: Text('Chat Room'),
           ),
           Expanded(
             child: chatsMessagesWidgets != null

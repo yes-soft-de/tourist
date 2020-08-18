@@ -62,6 +62,7 @@ dependencies:
   firebase_core: ^0.4.5
   firebase_auth: ^0.16.1
   firebase_analytics: ^5.0.15
+  firebase_remote_config: ^0.3.1+1
   cloud_firestore: ^0.13.7
 
   # Localization
@@ -69,6 +70,8 @@ dependencies:
 
   # Internationalization
   intl: ^0.16.1
+  intl_translation: ^0.17.9
+  intl_utils: ^1.6.3
 
   # Toasts
   fluttertoast: ^4.0.1

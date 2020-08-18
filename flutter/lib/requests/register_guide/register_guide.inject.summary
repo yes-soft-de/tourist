@@ -1,8 +1,0 @@
-{
-  "asset": "asset:tourists/lib/requests/register_guide/register_guide.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": []
-  }
-}

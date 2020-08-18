@@ -512,6 +512,236 @@ class S {
       args: [],
     );
   }
+
+  /// `More`
+  String get more {
+    return Intl.message(
+      'More',
+      name: 'more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reload`
+  String get reload {
+    return Intl.message(
+      'Reload',
+      name: 'reload',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show Less`
+  String get showLess {
+    return Intl.message(
+      'Show Less',
+      name: 'showLess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Signing out`
+  String get signing_out {
+    return Intl.message(
+      'Signing out',
+      name: 'signing_out',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request Sent!`
+  String get requestSent {
+    return Intl.message(
+      'Request Sent!',
+      name: 'requestSent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Success`
+  String get success {
+    return Intl.message(
+      'Success',
+      name: 'success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request a Guide`
+  String get requestAGuide {
+    return Intl.message(
+      'Request a Guide',
+      name: 'requestAGuide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Make a General Request`
+  String get makeAGeneralRequest {
+    return Intl.message(
+      'Make a General Request',
+      name: 'makeAGeneralRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expected Communication Language`
+  String get expectedCommunicationLanguage {
+    return Intl.message(
+      'Expected Communication Language',
+      name: 'expectedCommunicationLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Target City`
+  String get targetCity {
+    return Intl.message(
+      'Target City',
+      name: 'targetCity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Staying for`
+  String get stayingFor {
+    return Intl.message(
+      'Staying for',
+      name: 'stayingFor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Days`
+  String get days {
+    return Intl.message(
+      'Days',
+      name: 'days',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Services`
+  String get services {
+    return Intl.message(
+      'Services',
+      name: 'services',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Car`
+  String get car {
+    return Intl.message(
+      'Car',
+      name: 'car',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hotel`
+  String get hotel {
+    return Intl.message(
+      'Hotel',
+      name: 'hotel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request a Chat!`
+  String get requestAChat {
+    return Intl.message(
+      'Request a Chat!',
+      name: 'requestAChat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stying For`
+  String get stying_for {
+    return Intl.message(
+      'Stying For',
+      name: 'stying_for',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Map`
+  String get map {
+    return Intl.message(
+      'Map',
+      name: 'map',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update My Profile`
+  String get updateMyProfile {
+    return Intl.message(
+      'Update My Profile',
+      name: 'updateMyProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accept Order`
+  String get accept_order {
+    return Intl.message(
+      'Accept Order',
+      name: 'accept_order',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open Chat`
+  String get openChat {
+    return Intl.message(
+      'Open Chat',
+      name: 'openChat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I am a Guide Operating in Saudi Arabia`
+  String get iAmAGuideOperatingInSaudiArabia {
+    return Intl.message(
+      'I am a Guide Operating in Saudi Arabia',
+      name: 'iAmAGuideOperatingInSaudiArabia',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I am a Guide Operating in Saudi Arabia`
+  String get card_02 {
+    return Intl.message(
+      'I am a Guide Operating in Saudi Arabia',
+      name: 'card_02',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

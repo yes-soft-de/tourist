@@ -6,6 +6,7 @@ namespace App\Manager;
 
 use App\AutoMapping;
 use App\Entity\CommentsEntity;
+use App\Entity\EventEntity;
 use App\Entity\RegionsEntity;
 use App\Entity\User;
 use App\Repository\CommentsEntityRepository;
@@ -30,8 +31,17 @@ class CommentsManager
 
     public function commentCreate(CommentCreateRequest $request)
     {
-        $region = $this->entityManager->getRepository(RegionsEntity::class)->find($request->region);
-        $request->setRegion($region);
+        if ($request->region)
+        {
+            $region = $this->entityManager->getRepository(RegionsEntity::class)->find($request->region);
+            $request->setRegion($region);
+        }
+
+        if ($request->event)
+        {
+            $event = $this->entityManager->getRepository(EventEntity::class)->find($request->event);
+            $request->setEvent($event);
+        }
 
         $user = $this->touristsManager->getTouristByUserID($request->user);
         $request->setUser($user);
@@ -49,12 +59,21 @@ class CommentsManager
 
     public function getCommentsByID($id)
     {
-
         return $this->commentsEntityRepository->getCommentsByID($id);
     }
 
     public function commentsNumber($id)
     {
         return $this->commentsEntityRepository->commentsNumber($id);
+    }
+
+    public function eventCommentsNumber($id)
+    {
+        return $this->commentsEntityRepository->eventCommentsNumber($id);
+    }
+
+    public function getEventCommentsByID($id)
+    {
+        return $this->commentsEntityRepository->getEventCommentsByID($id);
     }
 }

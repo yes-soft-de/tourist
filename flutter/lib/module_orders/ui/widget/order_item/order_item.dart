@@ -245,6 +245,7 @@ class OrderItemWidget extends StatelessWidget {
           ],
         ),
         RaisedButton(
+          child: Text(S.of(context).openChat),
           onPressed: () {
             Navigator.of(context)
                 .pushNamed(ChatRoutes.chatRoute, arguments: orderModel.roomID);

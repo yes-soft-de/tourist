@@ -1,7 +1,3 @@
-import 'dart:convert';
-
-import 'dart:developer';
-
 class ChatModel {
   String sender;
   String sentDate;
@@ -13,7 +9,6 @@ class ChatModel {
     sender = jsonData['sender'];
     msg = jsonData['msg'];
     sentDate = jsonData['sentDate'].toString();
-    log("Decoding: " + jsonEncode(toJson()));
   }
 
   Map<String, dynamic> toJson() {

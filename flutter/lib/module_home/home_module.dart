@@ -20,7 +20,9 @@ class HomeModule extends YesModule {
     return {
       HomeRoutes.home: (context) => FutureBuilder(
             future: _authGuard.isGuide(),
+            initialData: false,
             builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+              print('Logged in: ' + snapshot.data.toString());
               if (snapshot.data == true) {
                 return _guideHomeScreen;
               } else {

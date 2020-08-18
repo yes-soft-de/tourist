@@ -1,10 +1,8 @@
-import 'dart:developer';
-
 import 'package:analyzer_plugin/utilities/pair.dart';
 import 'package:inject/inject.dart';
-
 import 'package:rxdart/rxdart.dart';
 import 'package:tourists/module_chat/model/chat/chat_model.dart';
+
 import '../../service/chat/char_service.dart';
 
 @provide
@@ -14,15 +12,21 @@ class ChatPageBloc {
   static const STATUS_CODE_GOT_DATA = 1590;
   static const STATUS_CODE_BUILDING_UI = 1591;
 
+  bool listening = false;
+
   ChatService _chatService;
+
   ChatPageBloc(this._chatService);
 
-  PublishSubject<Pair<int, List<ChatModel>>> _chatBlocSubject = new PublishSubject();
-  Stream<Pair<int, List<ChatModel>>> get chatBlocStream => _chatBlocSubject.stream;
+  PublishSubject<Pair<int, List<ChatModel>>> _chatBlocSubject =
+      new PublishSubject();
+
+  Stream<Pair<int, List<ChatModel>>> get chatBlocStream =>
+      _chatBlocSubject.stream;
 
   // We Should get the UUID of the ChatRoom, as such we should request the data here
   getMessages(String chatRoomID) {
-    log(_chatService.hashCode.toString());
+    if (!listening) listening = true;
     _chatService.chatMessagesStream.listen((event) {
       _chatBlocSubject.add(Pair(STATUS_CODE_GOT_DATA, event));
     });

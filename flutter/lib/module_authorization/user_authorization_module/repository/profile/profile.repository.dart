@@ -11,7 +11,7 @@ class ProfileRepository {
   ProfileRepository(this._httpClient);
 
   Future<CreateProfileResponse> createProfile(CreateProfileBody profile) async {
-    var mapResponse =
+    Map mapResponse =
         await _httpClient.post(Urls.createProfileAPI, profile.toJson());
     if (mapResponse != null) {
       CreateProfileResponse parsedResponse =
@@ -23,7 +23,7 @@ class ProfileRepository {
   }
 
   Future<CreateProfileResponse> getProfile(String uid) async {
-    var stringResponse = await _httpClient.get(Urls.getProfileAPI + '/' + uid);
+    Map stringResponse = await _httpClient.get(Urls.getProfileAPI + '/' + uid);
     if (stringResponse != null) {
       CreateProfileResponse parsedResponse =
           new CreateProfileResponse.fromJson(stringResponse);

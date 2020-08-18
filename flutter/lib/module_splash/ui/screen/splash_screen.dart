@@ -1,5 +1,7 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/consts/urls.dart';
 import 'package:tourists/module_home/home_routes.dart';
@@ -8,29 +10,33 @@ import 'package:tourists/module_home/home_routes.dart';
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    setUpRemoteConfig().then((value) {
-      if (value)
-        Future.delayed(Duration(seconds: 3), () {
-          Navigator.of(context).pushReplacementNamed(HomeRoutes.home);
-        });
+    Future.delayed(Duration(seconds: 1), () {
+      setUpRemoteConfig(context);
     });
 
     return Scaffold(
-        body: Column(
+        body: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
-          height: 120,
-          width: 120,
-          alignment: Alignment.center,
-          child: Image.asset('resources/images/logo.jpg'),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              height: 120,
+              width: 120,
+              alignment: Alignment.center,
+              child: Image.asset('resources/images/logo.jpg'),
+            )
+          ],
         )
       ],
     ));
   }
 
-  Future<bool> setUpRemoteConfig() async {
+  Future<bool> setUpRemoteConfig(BuildContext context) async {
+    try {
     final RemoteConfig remoteConfig = await RemoteConfig.instance;
     await remoteConfig.fetch(expiration: const Duration(seconds: 0));
     await remoteConfig.activateFetched();
@@ -38,6 +44,7 @@ class SplashScreen extends StatelessWidget {
     String base = remoteConfig.getString('server');
 
     if (base == null) {
+      Fluttertoast.showToast(msg: 'Connection Error');
       print('Didn\'t get the Config:(');
       return false;
     } else {
@@ -51,6 +58,9 @@ class SplashScreen extends StatelessWidget {
         ? remoteConfig.getString('server')
         : 'http://35.228.120.165/';
 
-    return true;
+    Navigator.of(context).pushReplacementNamed(HomeRoutes.home);
+    } catch (e) {
+      await setUpRemoteConfig(context);
+    }
   }
 }

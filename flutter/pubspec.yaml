@@ -70,6 +70,8 @@ dependencies:
 
   # Internationalization
   intl: ^0.16.1
+  intl_translation: ^0.17.9
+  intl_utils: ^1.6.3
 
   # Toasts
   fluttertoast: ^4.0.1

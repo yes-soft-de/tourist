@@ -108,8 +108,16 @@ class _OrderListScreenState extends State<OrdersListScreen> {
 
   _getLoadingUI() {
     return Scaffold(
-        body: Column(
-      children: [Text("Loading"), CircularProgressIndicator()],
+        body: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [Text("Loading"), CircularProgressIndicator()],
+        ),
+      ],
     ));
   }
 

@@ -44,7 +44,7 @@ class OrdersService {
       List<GuideListItemModel> allGuides, OrderResponse orderResponse) {
     Map<String, GuideListItemModel> guidesMap = {};
     allGuides.forEach((guide) {
-      guidesMap[guide.user] = guide;
+      guidesMap[guide.userID] = guide;
     });
 
     orderResponse.orderList.forEach((order) {
@@ -54,6 +54,8 @@ class OrdersService {
         order.guideInfo = guidesMap[order.guidUserID];
       }
     });
+
+    print(orderResponse.orderList[0].guideInfo.name);
 
     return orderResponse.orderList;
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_authorization/guide_authorization_module/guide_authorization_routes.dart';
@@ -80,7 +79,7 @@ class _LoginTypeSelectorScreenState extends State<LoginTypeSelectorScreen> {
                 Navigator.pushReplacementNamed(
                     context, GuideAuthorizationRoutes.guideLogin);
               },
-              child: NavigationCard(S.of(context).card_01),
+              child: NavigationCard(S.of(context).card_02),
             ),
             // endregion
           ]),

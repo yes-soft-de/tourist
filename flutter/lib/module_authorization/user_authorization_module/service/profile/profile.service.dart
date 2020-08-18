@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/module_authorization/user_authorization_module/manager/profile/profile.manager.dart';
 import 'package:tourists/module_authorization/user_authorization_module/request/create_profile/create_profile_body.dart';
@@ -15,7 +16,9 @@ class ProfileService {
 
   Future<CreateProfileResponse> createProfile(CreateProfileBody profile) async {
     // Get UID
-    String uid = await _preferencesHelper.getUserUID();
+    FirebaseAuth auth = FirebaseAuth.instance;
+    FirebaseUser user = await auth.currentUser();
+    String uid = user.uid;
 
     if (uid == null) {
       log('Error, Null UID!');

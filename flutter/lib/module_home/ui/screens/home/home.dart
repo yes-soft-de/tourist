@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_guide/ui/screen/guide_list/guide_list_screen.dart';
-import 'package:tourists/module_home/home_routes.dart';
 import 'package:tourists/module_home/ui/widget/bottom_navigation_bar/buttom_navigation_bar.dart';
 import 'package:tourists/module_locations/ui/screens/event_list/event_list.dart';
 import 'package:tourists/module_locations/ui/screens/location_carousel/location_carousel.dart';
@@ -39,13 +38,15 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (loggedIn == null)
-      widget._authGuard.isLoggedIn().then((value) {
-        loggedIn = value;
-        return _getUI();
-      });
+    print('In Main Page');
 
-    return Container();
+    if  (loggedIn == null)
+    widget._authGuard.isLoggedIn().then((value) {
+      loggedIn = value;
+      setState(() {});
+    });
+
+    return _getUI();
   }
 
   _getUI() {
@@ -55,17 +56,6 @@ class HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           title: Text('سياح'),
-          actions: <Widget>[
-            GestureDetector(
-                onTap: () {
-                  widget._preferencesHelper.getLoggedInState().then((value) {
-                    if (value != null) if (value == LoggedInState.GUIDE) {
-                      Navigator.of(context).pushNamed(HomeRoutes.guideHome);
-                    }
-                  });
-                },
-                child: Icon(loggedIn ? Icons.person : Icons.perm_identity))
-          ],
         ),
         body: Stack(
           children: <Widget>[
@@ -100,7 +90,7 @@ class HomeScreenState extends State<HomeScreen> {
               child: CustomBottomNavigationBar(
                 activePosition: position != null ? position : 0,
                 context: context,
-                isLoggedIn: loggedIn,
+                isLoggedIn: loggedIn == null ? false : loggedIn,
                 onLocationChanged: (int position) {
                   _changePosition(position);
                 },

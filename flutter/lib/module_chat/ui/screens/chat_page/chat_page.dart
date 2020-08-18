@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/module_chat/bloc/chat_page/chat_page.bloc.dart';
@@ -29,20 +30,22 @@ class ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    chatRoomId = ModalRoute.of(context).settings.arguments;
+    chatRoomId = ModalRoute.of(context).settings.arguments.toString();
 
-    if (currentState == ChatPageBloc.STATUS_CODE_INIT)
+    if (currentState == ChatPageBloc.STATUS_CODE_INIT) {
+      print('Chat Room: ' + chatRoomId);
       widget._chatPageBloc.getMessages(chatRoomId);
+    }
 
     widget._chatPageBloc.chatBlocStream.listen((event) {
       currentState = event.first;
+      print('Got Event');
       if (event.first == ChatPageBloc.STATUS_CODE_GOT_DATA) {
         _chatMessagesList = event.last;
         if (chatsMessagesWidgets.length == _chatMessagesList.length) {
-          log("Same Batch Twice");
         } else {
           buildMessagesList(_chatMessagesList).then((value) {
-            setState(() {});
+            if (this.mounted) setState(() {});
           });
         }
       }
@@ -54,13 +57,14 @@ class ChatPageState extends State<ChatPage> {
         // direction: Axis.vertical,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Row(
-            children: <Widget>[Text('Title')],
+          AppBar(
+            title: Text('Chat Room'),
           ),
           Expanded(
             child: chatsMessagesWidgets != null
                 ? ListView(
                     children: chatsMessagesWidgets,
+                    reverse: false,
                   )
                 : Center(
                     child: Text("Loading"),
@@ -104,13 +108,12 @@ class ChatPageState extends State<ChatPage> {
 
   Future<void> buildMessagesList(List<ChatModel> chatList) async {
     List<ChatBubbleWidget> newMessagesList = [];
-    String myId = await widget._preferencesHelper.getUserUID();
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
     chatList.forEach((element) {
-      log("Adding new Item");
       newMessagesList.add(ChatBubbleWidget(
         message: element.msg,
-        me: element.sender == myId ? true : false,
-        sentDate: DateTime.now(),
+        me: element.sender == user.uid ? true : false,
+        sentDate: DateTime.parse(element.sentDate),
       ));
     });
     chatsMessagesWidgets = newMessagesList;
@@ -119,7 +122,7 @@ class ChatPageState extends State<ChatPage> {
 
   sendMessage() {
     log("Sending: " + _msgController.text);
-    widget._chatPageBloc.sendMessage(chatRoomId, _msgController.text);
+    widget._chatPageBloc.sendMessage(chatRoomId, _msgController.text.trim());
     _msgController.clear();
   }
 }

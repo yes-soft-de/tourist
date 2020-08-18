@@ -8,7 +8,7 @@ class RequestGuideManager {
 
   RequestGuideManager(this._requestGuideRepository);
 
-  Future<dynamic> requestGuide(RequestGuideRequest request) {
+  Future<Map> requestGuide(RequestGuideRequest request) {
     return _requestGuideRepository.requestGuide(request);
   }
 }

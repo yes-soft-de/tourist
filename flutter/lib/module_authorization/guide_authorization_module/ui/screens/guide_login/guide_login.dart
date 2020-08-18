@@ -23,6 +23,8 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
 
   int stateCode = GuideLoginBloc.STATUS_CODE_INIT;
 
+  bool canRequest = true;
+
   loginUser(String phoneNumber, BuildContext context) {
     widget._guideLoginBloc.login(phoneNumber);
   }
@@ -32,24 +34,29 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
     widget._firebaseAuth.currentUser().then((value) {
       print('User Logged in: ' + (value != null).toString());
       if (value != null) {
-        Navigator.pushNamed(context, GuideAuthorizationRoutes.guideUpdateProfile);
+        Navigator.pushNamed(
+            context, GuideAuthorizationRoutes.guideUpdateProfile);
       }
     });
 
     widget._guideLoginBloc.stateStream.listen((event) {
       if (event.first == GuideLoginBloc.STATUS_CODE_RECEIVED) {
-        Navigator.pushNamed(context, GuideAuthorizationRoutes.guideUpdateProfile);
+        Navigator.pushNamed(
+            context, GuideAuthorizationRoutes.guideUpdateProfile);
       }
 
       if (event.first == GuideLoginBloc.STATUS_CODE_FAILED) {
+        canRequest = true;
         Fluttertoast.showToast(msg: 'Error, Sorry =(');
       }
 
       if (event.first == GuideLoginBloc.STATUS_CODE_CONFIRM_ERROR) {
+        canRequest = true;
         Fluttertoast.showToast(msg: 'SMS Code is incorrect, Please Try Again');
       }
 
       if (event.first == GuideLoginBloc.STATUS_CODE_SENT) {
+        canRequest = false;
         Fluttertoast.showToast(msg: 'Code Sent!');
         showDialog(
             context: context,
@@ -63,9 +70,8 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
                     TextField(
                       controller: _codeController,
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        hintText: 'Confirmation Code'
-                      ),
+                      decoration:
+                          InputDecoration(hintText: 'Confirmation Code'),
                     ),
                   ],
                 ),
@@ -128,10 +134,14 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
                   textColor: Colors.white,
                   padding: EdgeInsets.all(16),
                   onPressed: () {
+                    if (!canRequest) return;
                     final phone = _phoneController.text.trim();
+                    setState(() {
+                      canRequest = false;
+                    });
                     loginUser(phone, context);
                   },
-                  color: Colors.blue,
+                  color: canRequest ? Colors.blue : Colors.grey,
                 ),
               )
             ],

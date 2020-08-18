@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tourists/module_chat/manager/chat/chat_manager.dart';
@@ -15,13 +14,13 @@ class ChatService {
 
   // This is Real Time, That is Why I went this way
   PublishSubject<List<ChatModel>> _chatPublishSubject = new PublishSubject();
+
   Stream<List<ChatModel>> get chatMessagesStream => _chatPublishSubject.stream;
 
   requestMessages(String chatRoomID) async {
     _chatManager.getMessages(chatRoomID).listen((event) {
       List<ChatModel> chatMessagesList = [];
       event.documents.forEach((element) {
-        log(element.data.keys.toString());
         chatMessagesList.add(new ChatModel.fromJson(element.data));
       });
 
@@ -29,11 +28,11 @@ class ChatService {
     });
   }
 
-  sendMessage(String chatRoomID, String msg) {
-    _preferencesHelper.getUserUID().then((uid) {
-       ChatModel model = new ChatModel(msg: msg, sender: uid, sentDate: DateTime.now().toIso8601String());
-       _chatManager.sendMessage(chatRoomID, model);
-    });
+  sendMessage(String chatRoomID, String msg) async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    ChatModel model = new ChatModel(
+        msg: msg, sender: user.uid, sentDate: DateTime.now().toIso8601String());
+    _chatManager.sendMessage(chatRoomID, model);
   }
 
   dispose() {

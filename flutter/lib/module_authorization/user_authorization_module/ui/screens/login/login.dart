@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
@@ -5,8 +7,6 @@ import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_authorization/user_authorization_module/bloc/login/login.bloc.dart';
 import 'package:tourists/module_home/home_routes.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
-import 'dart:developer' as developer;
-
 
 import '../../../user_auth_routes.dart';
 
@@ -183,7 +183,8 @@ class _LoginScreenState extends State<LoginScreen> {
     if (submitAvailable) {
       submitAvailable = false;
       setState(() {});
-      widget._loginBlock.login(_emailController.text, _passwordController.text);
+      widget._loginBlock
+          .login(_emailController.text.trim(), _passwordController.text.trim());
     } else {
       Fluttertoast.showToast(msg: 'Please Wait...');
     }

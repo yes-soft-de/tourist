@@ -19,20 +19,23 @@ class RegisterService {
         ' and Password: ' +
         password);
     try {
-      final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
+      final AuthResult authResult = await _auth.createUserWithEmailAndPassword(
         email: username,
         password: password,
-      ))
-          .user;
-      if (user != null) {
-        this.cacheLoggedInUser(user);
-        return user.uid;
+      );
+
+      print('User Registeration: ' + (authResult.user != null).toString());
+      AuthResult user = await _auth.signInWithEmailAndPassword(email: username, password: password);
+
+      if (user.user != null) {
+        this.cacheLoggedInUser(user.user);
+        return user.user.uid;
       } else {
         log('User Registration Failed');
         return null;
       }
     } catch (e) {
-      Fluttertoast.showToast(msg: 'Error Connecting to Server');
+      Fluttertoast.showToast(msg: e.toString());
       log(e.toString());
       return null;
     }

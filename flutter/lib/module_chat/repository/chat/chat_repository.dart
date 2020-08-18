@@ -11,6 +11,7 @@ class ChatRepository {
         .collection('chat_rooms')
         .document(chatRoomID)
         .collection('messages')
+        .orderBy('sentDate', descending: false)
         .snapshots();
   }
 

@@ -712,6 +712,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Open Chat`
+  String get openChat {
+    return Intl.message(
+      'Open Chat',
+      name: 'openChat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I am a Guide Operating in Saudi Arabia`
+  String get iAmAGuideOperatingInSaudiArabia {
+    return Intl.message(
+      'I am a Guide Operating in Saudi Arabia',
+      name: 'iAmAGuideOperatingInSaudiArabia',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I am a Guide Operating in Saudi Arabia`
+  String get card_02 {
+    return Intl.message(
+      'I am a Guide Operating in Saudi Arabia',
+      name: 'card_02',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -10,13 +10,14 @@ import 'package:tourists/module_guide/guide_list_module.dart';
 import 'package:tourists/module_home/home_module.dart';
 import 'package:tourists/module_locations/location_module.dart';
 import 'package:tourists/module_orders/order_module.dart';
-import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
+import 'package:tourists/module_settings/settings_module.dart';
+import 'package:tourists/module_settings/settings_routes.dart';
+import 'package:tourists/utils/language/language.dart';
 
 import 'di/components/app.component.dart';
 import 'generated/l10n.dart';
 import 'module_chat/chat_module.dart';
 import 'module_splash/splash_module.dart';
-import 'module_splash/ui/splash_routes.dart';
 
 typedef Provider<T> = T Function();
 
@@ -43,12 +44,16 @@ class MyApp extends StatelessWidget {
   final FormsModule _formsModule;
   final GuideListModule _guideListModule;
   final LocationModule _locationModule;
-  final SharedPreferencesHelper _preferencesHelper;
   final OrderModule _orderModule;
   final SplashModule _splashModule;
+  final SettingsModule _settingsModule;
+
+  final LanguageHelper _languageHelper;
 
   MyApp(
-    this._authorizationModule,  
+    this._languageHelper,
+    this._authorizationModule,
+    this._settingsModule,
     this._homeModule,
     this._splashModule,
     this._chatModule,
@@ -56,12 +61,11 @@ class MyApp extends StatelessWidget {
     this._guideListModule,
     this._orderModule,
     this._formsModule,
-    this._preferencesHelper,
   );
 
   @override
   Widget build(BuildContext context) {
-    Map<String, WidgetBuilder> fullRoutesList = Map();
+    Map<String, WidgetBuilder> fullRoutesList = {};
 
     fullRoutesList.addAll(_authorizationModule.getRoutes());
     fullRoutesList.addAll(_homeModule.getRoutes());
@@ -70,23 +74,40 @@ class MyApp extends StatelessWidget {
     fullRoutesList.addAll(_locationModule.getRoutes());
     fullRoutesList.addAll(_guideListModule.getRoutes());
     fullRoutesList.addAll(_orderModule.getRoutes());
+    fullRoutesList.addAll(_settingsModule.getRoutes());
     fullRoutesList.addAll(_splashModule.getRoutes());
 
-    return MaterialApp(
-        navigatorObservers: <NavigatorObserver>[
-          observer
-        ],
-        localizationsDelegates: [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        theme: ThemeData(
-            primaryColor: Colors.greenAccent, accentColor: Colors.greenAccent),
-        supportedLocales: S.delegate.supportedLocales,
-        title: 'Soyah',
-        routes: fullRoutesList,
-        initialRoute: SplashRoutes.splash);
+    return StreamBuilder(
+      stream: _languageHelper.languageStream,
+      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+        String currentLang;
+        if (snapshot.hasData) {
+          if (snapshot.data != null) {
+            currentLang = snapshot.data;
+          } else {
+            currentLang = 'en';
+          }
+        } else {
+          currentLang = 'en';
+        }
+
+        return MaterialApp(
+            navigatorObservers: <NavigatorObserver>[observer],
+            locale: Locale(currentLang),
+            localizationsDelegates: [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            theme: ThemeData(
+                primaryColor: Colors.greenAccent,
+                accentColor: Colors.greenAccent),
+            supportedLocales: S.delegate.supportedLocales,
+            title: 'Soyah',
+            routes: fullRoutesList,
+            initialRoute: SettingsRoute.settingsRoutes);
+      },
+    );
   }
 }

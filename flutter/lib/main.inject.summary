@@ -21,7 +21,21 @@
           "dependencies": [
             {
               "lookupKey": {
+                "root": "asset:tourists/lib/utils/language/language.dart#LanguageHelper",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
                 "root": "asset:tourists/lib/module_authorization/authprization_module.dart#AuthorizationModule",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_settings/settings_module.dart#SettingsModule",
                 "qualifier": null
               },
               "isProvider": false
@@ -71,13 +85,6 @@
             {
               "lookupKey": {
                 "root": "asset:tourists/lib/module_forms/forms_module.dart#FormsModule",
-                "qualifier": null
-              },
-              "isProvider": false
-            },
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/module_persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper",
                 "qualifier": null
               },
               "isProvider": false

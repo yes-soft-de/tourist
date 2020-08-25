@@ -63,7 +63,7 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
             barrierDismissible: false,
             builder: (context) {
               return AlertDialog(
-                title: Text("Please Provide the Code from the SMS"),
+                title: Text('Please Provide the Code from the SMS'),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -77,7 +77,7 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
                 ),
                 actions: <Widget>[
                   FlatButton(
-                    child: Text("Confirm"),
+                    child: Text('Confirm'),
                     textColor: Colors.white,
                     color: Colors.blue,
                     onPressed: () async {
@@ -101,7 +101,7 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "Login",
+                'Login',
                 style: TextStyle(
                     color: Colors.lightBlue,
                     fontSize: 36,
@@ -121,7 +121,7 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
                         borderSide: BorderSide(color: Colors.grey[300])),
                     filled: true,
                     fillColor: Colors.grey[100],
-                    hintText: "Mobile Number"),
+                    hintText: 'Mobile Number'),
                 controller: _phoneController,
               ),
               SizedBox(
@@ -130,7 +130,7 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
               Container(
                 width: double.infinity,
                 child: FlatButton(
-                  child: Text("LOGIN"),
+                  child: Text('LOGIN'),
                   textColor: Colors.white,
                   padding: EdgeInsets.all(16),
                   onPressed: () {

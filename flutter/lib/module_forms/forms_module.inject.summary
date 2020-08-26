@@ -35,7 +35,7 @@
             },
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/module_authorization/login_selector_module/ui/screens/account_type_selector/login_type_selector.dart#LoginTypeSelectorScreen",
+                "root": "asset:tourists/lib/module_authorization/user_authorization_module/ui/screens/login/login.dart#LoginScreen",
                 "qualifier": null
               },
               "isProvider": false

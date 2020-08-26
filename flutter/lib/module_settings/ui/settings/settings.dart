@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/utils/auth_guard/auth_gard.dart';
 import 'package:tourists/utils/language/language.dart';
 
@@ -20,6 +21,7 @@ class __SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        title: Text(S.of(context).settings),
         elevation: 0,
       ),
       body: Padding(
@@ -36,7 +38,7 @@ class __SettingsScreenState extends State<SettingsScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Logged in:',
+                      S.of(context).loggedIn,
                       style: TextStyle(fontSize: 16),
                     ),
                     FutureBuilder(
@@ -49,13 +51,13 @@ class __SettingsScreenState extends State<SettingsScreen> {
                             builder: (BuildContext context,
                                 AsyncSnapshot<dynamic> snapshot) {
                               if (snapshot.data) {
-                                return Text('Guide');
+                                return Text(S.of(context).guide);
                               }
-                              return Text('Tourist');
+                              return Text(S.of(context).tourist);
                             },
                           );
                         }
-                        return Text('Not logged in');
+                        return Text(S.of(context).notLoggedIn);
                       },
                     )
                   ],
@@ -75,7 +77,7 @@ class __SettingsScreenState extends State<SettingsScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Language',
+                      S.of(context).language,
                       style: TextStyle(fontSize: 16),
                     ),
                     DropdownButton(

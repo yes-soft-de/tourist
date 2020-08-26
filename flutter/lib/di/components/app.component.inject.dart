@@ -306,7 +306,8 @@ class AppComponent$Injector implements _i1.AppComponent {
       _i62.LocationCarouselScreen(_createLocationListBloc());
   _i63.SplashModule _createSplashModule() =>
       _i63.SplashModule(_createSplashScreen());
-  _i64.SplashScreen _createSplashScreen() => _i64.SplashScreen();
+  _i64.SplashScreen _createSplashScreen() =>
+      _i64.SplashScreen(_createLanguageHelper());
   _i65.ChatModule _createChatModule() => _i65.ChatModule(
       _createChatPage(), _createAuthGuard(), _createLoginTypeSelectorScreen());
   _i66.ChatPage _createChatPage() => _i66.ChatPage(_createChatPageBloc());
@@ -363,9 +364,7 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i89.OrdersRepository _createOrdersRepository() =>
       _i89.OrdersRepository(_createHttpClient());
   _i90.FormsModule _createFormsModule() => _i90.FormsModule(
-      _createRequestGuideScreen(),
-      _createAuthGuard(),
-      _createLoginTypeSelectorScreen());
+      _createRequestGuideScreen(), _createAuthGuard(), _createLoginScreen());
   _i91.RequestGuideScreen _createRequestGuideScreen() =>
       _i91.RequestGuideScreen(_createRequestGuideBloc(), _createLogger());
   _i92.RequestGuideBloc _createRequestGuideBloc() => _i92.RequestGuideBloc(

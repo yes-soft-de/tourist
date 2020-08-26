@@ -46,6 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     return Scaffold(
+      appBar: AppBar(),
       body: ListView(children: <Widget>[
         Flex(
           direction: Axis.vertical,
@@ -86,7 +87,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextFormField(
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(labelText: 'Email'),
+                      decoration:
+                          InputDecoration(labelText: S.of(context).email),
                       validator: (String value) {
                         if (value.isEmpty) {
                           return S.of(context).error_null_text;
@@ -100,7 +102,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextFormField(
                       controller: _passwordController,
                       obscureText: true,
-                      decoration: const InputDecoration(labelText: 'Password'),
+                      decoration:
+                          InputDecoration(labelText: S.of(context).password),
                       validator: (String value) {
                         if (value.isEmpty || value.length < 6) {
                           return S.of(context).error_null_text;

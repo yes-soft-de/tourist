@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
+import 'package:tourists/module_chat/chat_routes.dart';
 import 'package:tourists/module_forms/user_orders_module/bloc/request_guide/request_guide.bloc.dart';
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
 import 'package:tourists/module_guide/nav_arguments/request_guide/request_guide_navigation.dart';
@@ -27,6 +28,8 @@ class RequestGuideScreen extends StatefulWidget {
 class _RequestGuideScreenState extends State<RequestGuideScreen> {
   int currentStatus = RequestGuideBloc.STATUS_CODE_INIT;
 
+  String _stayingForDecoration;
+
   final TextEditingController _arrivalDateField = TextEditingController();
   final TextEditingController _stayingTime = TextEditingController();
 
@@ -48,6 +51,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
   @override
   Widget build(BuildContext context) {
     _requestGuideArguments = ModalRoute.of(context).settings.arguments;
+    _stayingForDecoration = S.of(context).stayingFor;
 
     // region Setting up
     if (_requestGuideArguments == null) {
@@ -93,19 +97,24 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
       currentStatus = event.first;
       requestInProgress = false;
       if (currentStatus == RequestGuideBloc.STATUS_CODE_LOAD_SUCCESS) {
-        locationMode ? _locationInfo = event.last : _guideInfo = event.last;
+        if (locationMode) {
+          _locationInfo = event.last;
+        } else {
+          _guideInfo = event.last;
+        }
         widget._logger.info(widget.tag, 'Guide Info: ' + _guideInfo.toString());
+      }
+      if (currentStatus == RequestGuideBloc.STATUS_CODE_REQUEST_SUCCESS) {
+        Future.delayed(Duration(seconds: 1), () {
+          Navigator.of(context).pushReplacementNamed(ChatRoutes.chatRoute,
+              arguments: event.last);
+          widget._logger
+              .info(widget.tag, 'Guide Info: ' + _guideInfo.toString());
+        });
+        return Scaffold();
       }
       if (this.mounted) setState(() {});
     });
-
-    if (currentStatus == RequestGuideBloc.STATUS_CODE_REQUEST_SUCCESS) {
-      Future.delayed(Duration(seconds: 1), () {
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil(HomeRoutes.home, (r) => false);
-      });
-      return Scaffold();
-    }
 
     if (currentStatus == RequestGuideBloc.STATUS_CODE_INIT) {
       if (locationMode) {
@@ -258,7 +267,8 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
                 children: <Widget>[
                   TextFormField(
                     controller: _arrivalDateField,
-                    decoration: InputDecoration(labelText: 'Arrival Date'),
+                    decoration:
+                        InputDecoration(labelText: S.of(context).arrivalDate),
                   ),
                   Positioned(
                     top: 0,
@@ -300,10 +310,11 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
                   child: TextFormField(
                     controller: _stayingTime,
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(labelText: 'Staying For'),
+                    decoration:
+                        InputDecoration(labelText: '$_stayingForDecoration'),
                     validator: (String value) {
                       if (value.isEmpty) {
-                        return 'Please enter some text';
+                        return S.of(context).error_null_text;
                       }
                       return null;
                     },

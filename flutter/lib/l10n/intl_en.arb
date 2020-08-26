@@ -70,5 +70,22 @@
     "accept_order": "Accept Order",
     "openChat": "Open Chat",
     "iAmAGuideOperatingInSaudiArabia": "I am a Guide Operating in Saudi Arabia",
-    "card_02": "I am a Guide Operating in Saudi Arabia"
+    "card_02": "I am a Guide Operating in Saudi Arabia",
+  "loggedIn": "Logged in:",
+    "guide": "Guide",
+    "tourist": "Tourist",
+  "arrivalDate": "Arrival Date",
+  "notLoggedIn": "Not Logged In",
+    "language": "Language",
+    "settings": "Settings",
+    "email": "Email",
+    "password": "Password",
+    "mountains": "Mountains",
+    "dessert": "Dessert",
+    "malls": "Malls",
+    "iCameFor": "I came for:",
+    "sentPending": "Sent / Pending",
+    "pendingPayment": "Pending Payment",
+    "payedOnGoing": "Payed / On going",
+    "finishedOrders": "Finished Orders"
 }

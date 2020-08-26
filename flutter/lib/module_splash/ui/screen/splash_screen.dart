@@ -5,11 +5,18 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/consts/urls.dart';
 import 'package:tourists/module_home/home_routes.dart';
+import 'package:tourists/utils/language/language.dart';
 
 @provide
 class SplashScreen extends StatelessWidget {
+  final LanguageHelper _languageHelper;
+
+  SplashScreen(this._languageHelper);
+
   @override
   Widget build(BuildContext context) {
+    _languageHelper.getLanguage();
+
     Future.delayed(Duration(seconds: 1), () {
       setUpRemoteConfig(context);
     });

@@ -37,8 +37,9 @@ class RequestGuideBloc {
             location: location))
         .then((requestSuccess) {
       print('Requesting Guide Complete');
-      if (requestSuccess) {
-        _requestGuideForm.add(Pair(STATUS_CODE_REQUEST_SUCCESS, null));
+      if (requestSuccess != null) {
+        _requestGuideForm
+            .add(Pair(STATUS_CODE_REQUEST_SUCCESS, requestSuccess));
       } else {
         _requestGuideForm.add(Pair(STATUS_CODE_REQUEST_ERROR, null));
       }

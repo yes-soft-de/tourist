@@ -150,7 +150,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   Container(
                     width: 16,
                   ),
-                  Text('Settings'),
+                  Text(S.of(context).settings),
                 ],
               ),
             ),

@@ -11,12 +11,12 @@ import 'package:tourists/module_home/home_module.dart';
 import 'package:tourists/module_locations/location_module.dart';
 import 'package:tourists/module_orders/order_module.dart';
 import 'package:tourists/module_settings/settings_module.dart';
+import 'package:tourists/module_splash/ui/splash_routes.dart';
 import 'package:tourists/utils/language/language.dart';
 
 import 'di/components/app.component.dart';
 import 'generated/l10n.dart';
 import 'module_chat/chat_module.dart';
-import 'module_home/home_routes.dart';
 import 'module_splash/splash_module.dart';
 
 typedef Provider<T> = T Function();
@@ -109,7 +109,7 @@ class MyApp extends StatelessWidget {
             supportedLocales: S.delegate.supportedLocales,
             title: 'Soyah',
             routes: fullRoutesList,
-            initialRoute: HomeRoutes.home);
+            initialRoute: SplashRoutes.splash);
       },
     );
   }

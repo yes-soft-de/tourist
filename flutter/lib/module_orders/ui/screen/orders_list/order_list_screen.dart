@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_orders/bloc/orders_list_bloc/orders_list_bloc.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
 import 'package:tourists/module_orders/ui/widget/order_item/order_item.dart';
@@ -137,7 +138,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
               child: Container(
                   alignment: Alignment.center,
                   child: Text(
-                    'Sent / Pending',
+                    S.of(context).sentPending,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: activePosition == 0
@@ -156,7 +157,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
               child: Container(
                   alignment: Alignment.center,
                   child: Text(
-                    'Pending Payment',
+                    S.of(context).pendingPayment,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: activePosition == 1
@@ -175,7 +176,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
               child: Container(
                   alignment: Alignment.center,
                   child: Text(
-                    'Payed / On going',
+                    S.of(context).payedOnGoing,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: activePosition == 2
@@ -194,7 +195,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
               child: Container(
                   alignment: Alignment.center,
                   child: Text(
-                    'Finished Orders',
+                    S.of(context).finishedOrders,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: activePosition == 3

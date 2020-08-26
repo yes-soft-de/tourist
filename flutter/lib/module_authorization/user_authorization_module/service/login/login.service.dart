@@ -27,7 +27,9 @@ class LoginService {
       }
     } catch (e) {
       await Fluttertoast.showToast(
-          msg: 'Can\'t Find user or Error Connecting to Server');
+          msg: e.toString(),
+          toastLength: Toast.LENGTH_LONG,
+          timeInSecForIosWeb: 3000);
       log(e.toString());
       return null;
     }

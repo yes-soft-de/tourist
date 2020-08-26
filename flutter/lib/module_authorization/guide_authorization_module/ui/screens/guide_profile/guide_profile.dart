@@ -84,7 +84,8 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
         widget._preferencesHelper
             .setLoggedInState(LoggedInState.GUIDE)
             .then((value) {
-          Navigator.pushReplacementNamed(context, HomeRoutes.home);
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(HomeRoutes.home, (r) => false);
         });
         return Scaffold();
       case GuideRegisterBloc.STATUS_CODE_REGISTER_ERROR:

@@ -1,93 +1,93 @@
 {
-  'asset': 'asset:tourists/lib/main.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': [
+  "asset": "asset:tourists/lib/main.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
       {
-        'name': 'MyApp',
-        'constructor': {
-          'name': '',
-          'kind': 'constructor',
-          'injectedType': {
-            'lookupKey': {
-              'root': 'asset:tourists/lib/main.dart#MyApp',
-              'qualifier': null
+        "name": "MyApp",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/main.dart#MyApp",
+              "qualifier": null
             },
-            'isProvider': false
+            "isProvider": false
           },
-          'singleton': false,
-          'asynchronous': false,
-          'dependencies': [
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/utils/language/language.dart#LanguageHelper',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/utils/language/language.dart#LanguageHelper",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_authorization/authprization_module.dart#AuthorizationModule',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_authorization/authprization_module.dart#AuthorizationModule",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_settings/settings_module.dart#SettingsModule',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_settings/settings_module.dart#SettingsModule",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_home/home_module.dart#HomeModule',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_home/home_module.dart#HomeModule",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_splash/splash_module.dart#SplashModule',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_splash/splash_module.dart#SplashModule",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_chat/chat_module.dart#ChatModule',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_chat/chat_module.dart#ChatModule",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_locations/location_module.dart#LocationModule',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_locations/location_module.dart#LocationModule",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_guide/guide_list_module.dart#GuideListModule',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_guide/guide_list_module.dart#GuideListModule",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_orders/order_module.dart#OrderModule',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_orders/order_module.dart#OrderModule",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_forms/forms_module.dart#FormsModule',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_forms/forms_module.dart#FormsModule",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             }
           ]
         }

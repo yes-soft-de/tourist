@@ -1,30 +1,30 @@
 {
-  'asset': 'asset:tourists/lib/module_guide/manager/guides_manager/guides_manager.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': [
+  "asset": "asset:tourists/lib/module_guide/manager/guides_manager/guides_manager.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
       {
-        'name': 'GuidesManager',
-        'constructor': {
-          'name': '',
-          'kind': 'constructor',
-          'injectedType': {
-            'lookupKey': {
-              'root': 'asset:tourists/lib/module_guide/manager/guides_manager/guides_manager.dart#GuidesManager',
-              'qualifier': null
+        "name": "GuidesManager",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_guide/manager/guides_manager/guides_manager.dart#GuidesManager",
+              "qualifier": null
             },
-            'isProvider': false
+            "isProvider": false
           },
-          'singleton': false,
-          'asynchronous': false,
-          'dependencies': [
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_guide/repository/guides/guide_repository.dart#GuidesRepository',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_guide/repository/guides/guide_repository.dart#GuidesRepository",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             }
           ]
         }

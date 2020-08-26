@@ -1,8 +1,8 @@
 {
-  'asset': 'asset:tourists/lib/module_comment/ui/widget/comment_item/comment_item.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': []
+  "asset": "asset:tourists/lib/module_comment/ui/widget/comment_item/comment_item.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": []
   }
 }

@@ -1,37 +1,37 @@
 {
-  'asset': 'asset:tourists/lib/module_forms/user_orders_module/ui/screens/request_guide/request_guide_screen.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': [
+  "asset": "asset:tourists/lib/module_forms/user_orders_module/ui/screens/request_guide/request_guide_screen.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
       {
-        'name': 'RequestGuideScreen',
-        'constructor': {
-          'name': '',
-          'kind': 'constructor',
-          'injectedType': {
-            'lookupKey': {
-              'root': 'asset:tourists/lib/module_forms/user_orders_module/ui/screens/request_guide/request_guide_screen.dart#RequestGuideScreen',
-              'qualifier': null
+        "name": "RequestGuideScreen",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_forms/user_orders_module/ui/screens/request_guide/request_guide_screen.dart#RequestGuideScreen",
+              "qualifier": null
             },
-            'isProvider': false
+            "isProvider": false
           },
-          'singleton': false,
-          'asynchronous': false,
-          'dependencies': [
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_forms/user_orders_module/bloc/request_guide/request_guide.bloc.dart#RequestGuideBloc',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_forms/user_orders_module/bloc/request_guide/request_guide.bloc.dart#RequestGuideBloc",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/utils/logger/logger.dart#Logger',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/utils/logger/logger.dart#Logger",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             }
           ]
         }

@@ -1,32 +1,24 @@
 {
-  'asset': 'asset:tourists/lib/module_forms/user_orders_module/bloc/user_pending_order/user_pending_order.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': [
+  "asset": "asset:tourists/lib/module_forms/user_orders_module/bloc/user_pending_order/user_pending_order.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
       {
-        'name': 'UserPendingOrders',
-        'constructor': {
-          'name': '',
-          'kind': 'constructor',
-          'injectedType': {
-            'lookupKey': {
-              'root': 'asset:tourists/lib/module_forms/user_orders_module/bloc/user_pending_order/user_pending_order.dart#UserPendingOrders',
-              'qualifier': null
+        "name": "UserPendingOrders",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_forms/user_orders_module/bloc/user_pending_order/user_pending_order.dart#UserPendingOrders",
+              "qualifier": null
             },
-            'isProvider': false
+            "isProvider": false
           },
-          'singleton': false,
-          'asynchronous': false,
-          'dependencies': [
-            {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_orders/service/orders/orders_service.dart#OrdersService',
-                'qualifier': null
-              },
-              'isProvider': false
-            }
-          ]
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": []
         }
       }
     ]

@@ -1,37 +1,37 @@
 {
-  'asset': 'asset:tourists/lib/module_locations/bloc/event_details/event_details.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': [
+  "asset": "asset:tourists/lib/module_locations/bloc/event_details/event_details.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
       {
-        'name': 'EventDetailsBloc',
-        'constructor': {
-          'name': '',
-          'kind': 'constructor',
-          'injectedType': {
-            'lookupKey': {
-              'root': 'asset:tourists/lib/module_locations/bloc/event_details/event_details.dart#EventDetailsBloc',
-              'qualifier': null
+        "name": "EventDetailsBloc",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_locations/bloc/event_details/event_details.dart#EventDetailsBloc",
+              "qualifier": null
             },
-            'isProvider': false
+            "isProvider": false
           },
-          'singleton': false,
-          'asynchronous': false,
-          'dependencies': [
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_locations/service/event/event_service.dart#EventService',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_locations/service/event/event_service.dart#EventService",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_locations/service/location_list/location_list_service.dart#LocationListService',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_locations/service/location_list/location_list_service.dart#LocationListService",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             }
           ]
         }

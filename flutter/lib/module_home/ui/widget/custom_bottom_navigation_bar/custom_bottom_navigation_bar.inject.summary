@@ -1,8 +1,8 @@
 {
-  'asset': 'asset:tourists/lib/module_home/ui/widget/custom_bottom_navigation_bar/custom_bottom_navigation_bar.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': []
+  "asset": "asset:tourists/lib/module_home/ui/widget/custom_bottom_navigation_bar/custom_bottom_navigation_bar.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": []
   }
 }

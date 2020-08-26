@@ -1,24 +1,24 @@
 {
-  'asset': 'asset:tourists/lib/utils/logger/logger.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': [
+  "asset": "asset:tourists/lib/utils/logger/logger.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
       {
-        'name': 'Logger',
-        'constructor': {
-          'name': '',
-          'kind': 'constructor',
-          'injectedType': {
-            'lookupKey': {
-              'root': 'asset:tourists/lib/utils/logger/logger.dart#Logger',
-              'qualifier': null
+        "name": "Logger",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/utils/logger/logger.dart#Logger",
+              "qualifier": null
             },
-            'isProvider': false
+            "isProvider": false
           },
-          'singleton': true,
-          'asynchronous': false,
-          'dependencies': []
+          "singleton": true,
+          "asynchronous": false,
+          "dependencies": []
         }
       }
     ]

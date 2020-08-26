@@ -1,37 +1,37 @@
 {
-  'asset': 'asset:tourists/lib/module_locations/bloc/location_list/location_list_bloc.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': [
+  "asset": "asset:tourists/lib/module_locations/bloc/location_list/location_list_bloc.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
       {
-        'name': 'LocationListBloc',
-        'constructor': {
-          'name': '',
-          'kind': 'constructor',
-          'injectedType': {
-            'lookupKey': {
-              'root': 'asset:tourists/lib/module_locations/bloc/location_list/location_list_bloc.dart#LocationListBloc',
-              'qualifier': null
+        "name": "LocationListBloc",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_locations/bloc/location_list/location_list_bloc.dart#LocationListBloc",
+              "qualifier": null
             },
-            'isProvider': false
+            "isProvider": false
           },
-          'singleton': true,
-          'asynchronous': false,
-          'dependencies': [
+          "singleton": true,
+          "asynchronous": false,
+          "dependencies": [
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_locations/service/location_list/location_list_service.dart#LocationListService',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_locations/service/location_list/location_list_service.dart#LocationListService",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/utils/logger/logger.dart#Logger',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/utils/logger/logger.dart#Logger",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             }
           ]
         }

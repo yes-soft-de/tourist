@@ -1,44 +1,44 @@
 {
-  'asset': 'asset:tourists/lib/module_locations/bloc/location_details/location_details_bloc.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': [
+  "asset": "asset:tourists/lib/module_locations/bloc/location_details/location_details_bloc.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
       {
-        'name': 'LocationDetailsBloc',
-        'constructor': {
-          'name': '',
-          'kind': 'constructor',
-          'injectedType': {
-            'lookupKey': {
-              'root': 'asset:tourists/lib/module_locations/bloc/location_details/location_details_bloc.dart#LocationDetailsBloc',
-              'qualifier': null
+        "name": "LocationDetailsBloc",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_locations/bloc/location_details/location_details_bloc.dart#LocationDetailsBloc",
+              "qualifier": null
             },
-            'isProvider': false
+            "isProvider": false
           },
-          'singleton': false,
-          'asynchronous': false,
-          'dependencies': [
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_locations/service/location_details/location_details_service.dart#LocationDetailsService',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_locations/service/location_details/location_details_service.dart#LocationDetailsService",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_comment/manager/comment/comment_service.dart#CommentManager',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_comment/manager/comment/comment_service.dart#CommentManager",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             }
           ]
         }

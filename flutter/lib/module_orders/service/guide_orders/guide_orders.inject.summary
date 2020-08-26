@@ -1,37 +1,30 @@
 {
-  'asset': 'asset:tourists/lib/module_orders/service/guide_orders/guide_orders.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': [
+  "asset": "asset:tourists/lib/module_orders/service/guide_orders/guide_orders.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
       {
-        'name': 'GuideOrdersService',
-        'constructor': {
-          'name': '',
-          'kind': 'constructor',
-          'injectedType': {
-            'lookupKey': {
-              'root': 'asset:tourists/lib/module_orders/service/guide_orders/guide_orders.dart#GuideOrdersService',
-              'qualifier': null
+        "name": "GuideOrdersService",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_orders/service/guide_orders/guide_orders.dart#GuideOrdersService",
+              "qualifier": null
             },
-            'isProvider': false
+            "isProvider": false
           },
-          'singleton': false,
-          'asynchronous': false,
-          'dependencies': [
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_orders/manager/guide_orders/guide_orders.dart#GuideOrdersManager',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_orders/manager/guide_orders/guide_orders.dart#GuideOrdersManager",
+                "qualifier": null
               },
-              'isProvider': false
-            },
-            {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_forms/user_orders_module/service/request_guide/request_guide.service.dart#RequestGuideService',
-                'qualifier': null
-              },
-              'isProvider': false
+              "isProvider": false
             }
           ]
         }

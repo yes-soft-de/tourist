@@ -1,51 +1,51 @@
 {
-  'asset': 'asset:tourists/lib/module_home/ui/screens/guide_home/guide_home.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': [
+  "asset": "asset:tourists/lib/module_home/ui/screens/guide_home/guide_home.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
       {
-        'name': 'GuideHomeScreen',
-        'constructor': {
-          'name': '',
-          'kind': 'constructor',
-          'injectedType': {
-            'lookupKey': {
-              'root': 'asset:tourists/lib/module_home/ui/screens/guide_home/guide_home.dart#GuideHomeScreen',
-              'qualifier': null
+        "name": "GuideHomeScreen",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_home/ui/screens/guide_home/guide_home.dart#GuideHomeScreen",
+              "qualifier": null
             },
-            'isProvider': false
+            "isProvider": false
           },
-          'singleton': false,
-          'asynchronous': false,
-          'dependencies': [
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_orders/ui/screen/guide_orders/guide_orders.dart#GuideOrdersScreen',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_orders/ui/screen/guide_orders/guide_orders.dart#GuideOrdersScreen",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_locations/ui/screens/location_list/location_list_screen.dart#LocationListScreen',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_locations/ui/screens/location_list/location_list_screen.dart#LocationListScreen",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_locations/ui/screens/event_list/event_list.dart#EventListScreen',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_locations/ui/screens/event_list/event_list.dart#EventListScreen",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             }
           ]
         }

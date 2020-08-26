@@ -1,37 +1,37 @@
 {
-  'asset': 'asset:tourists/lib/module_forms/user_orders_module/bloc/request_guide/request_guide.bloc.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': [
+  "asset": "asset:tourists/lib/module_forms/user_orders_module/bloc/request_guide/request_guide.bloc.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
       {
-        'name': 'RequestGuideBloc',
-        'constructor': {
-          'name': '',
-          'kind': 'constructor',
-          'injectedType': {
-            'lookupKey': {
-              'root': 'asset:tourists/lib/module_forms/user_orders_module/bloc/request_guide/request_guide.bloc.dart#RequestGuideBloc',
-              'qualifier': null
+        "name": "RequestGuideBloc",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_forms/user_orders_module/bloc/request_guide/request_guide.bloc.dart#RequestGuideBloc",
+              "qualifier": null
             },
-            'isProvider': false
+            "isProvider": false
           },
-          'singleton': false,
-          'asynchronous': false,
-          'dependencies': [
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_forms/user_orders_module/service/request_guide/request_guide.service.dart#RequestGuideService',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_forms/user_orders_module/service/request_guide/request_guide.service.dart#RequestGuideService",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_locations/service/location_details/location_details_service.dart#LocationDetailsService',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_locations/service/location_details/location_details_service.dart#LocationDetailsService",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             }
           ]
         }

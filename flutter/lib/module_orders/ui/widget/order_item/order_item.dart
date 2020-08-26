@@ -35,7 +35,7 @@ class OrderItemWidget extends StatelessWidget {
         widgetLayout.add(_getFinishedOrder(orderModel, context));
       }
     } else {
-      widgetLayout.add(_getAvailableOrder(orderModel));
+      widgetLayout.add(_getAvailableOrder(orderModel, context));
     }
 
     return Padding(

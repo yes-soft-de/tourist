@@ -1,44 +1,37 @@
 {
-  'asset': 'asset:tourists/lib/module_forms/user_orders_module/service/request_guide/request_guide.service.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': [
+  "asset": "asset:tourists/lib/module_forms/user_orders_module/service/request_guide/request_guide.service.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
       {
-        'name': 'RequestGuideService',
-        'constructor': {
-          'name': '',
-          'kind': 'constructor',
-          'injectedType': {
-            'lookupKey': {
-              'root': 'asset:tourists/lib/module_forms/user_orders_module/service/request_guide/request_guide.service.dart#RequestGuideService',
-              'qualifier': null
+        "name": "RequestGuideService",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_forms/user_orders_module/service/request_guide/request_guide.service.dart#RequestGuideService",
+              "qualifier": null
             },
-            'isProvider': false
+            "isProvider": false
           },
-          'singleton': false,
-          'asynchronous': false,
-          'dependencies': [
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_guide/service/guide_list/guide_list.dart#GuideListService",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_guide/service/guide_list/guide_list.dart#GuideListService',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_forms/user_orders_module/manager/request_manager/request_guide_manager.dart#RequestGuideManager",
+                "qualifier": null
               },
-              'isProvider': false
-            },
-            {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_forms/user_orders_module/manager/request_manager/request_guide_manager.dart#RequestGuideManager',
-                'qualifier': null
-              },
-              'isProvider': false
+              "isProvider": false
             }
           ]
         }

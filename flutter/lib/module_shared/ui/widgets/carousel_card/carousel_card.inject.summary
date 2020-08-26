@@ -1,8 +1,8 @@
 {
-  'asset': 'asset:tourists/lib/module_shared/ui/widgets/carousel_card/carousel_card.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': []
+  "asset": "asset:tourists/lib/module_shared/ui/widgets/carousel_card/carousel_card.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": []
   }
 }

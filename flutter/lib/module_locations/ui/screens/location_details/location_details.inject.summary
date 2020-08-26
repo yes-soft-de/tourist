@@ -1,37 +1,37 @@
 {
-  'asset': 'asset:tourists/lib/module_locations/ui/screens/location_details/location_details.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': [
+  "asset": "asset:tourists/lib/module_locations/ui/screens/location_details/location_details.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
       {
-        'name': 'LocationDetailsScreen',
-        'constructor': {
-          'name': '',
-          'kind': 'constructor',
-          'injectedType': {
-            'lookupKey': {
-              'root': 'asset:tourists/lib/module_locations/ui/screens/location_details/location_details.dart#LocationDetailsScreen',
-              'qualifier': null
+        "name": "LocationDetailsScreen",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_locations/ui/screens/location_details/location_details.dart#LocationDetailsScreen",
+              "qualifier": null
             },
-            'isProvider': false
+            "isProvider": false
           },
-          'singleton': false,
-          'asynchronous': false,
-          'dependencies': [
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_locations/bloc/location_details/location_details_bloc.dart#LocationDetailsBloc',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_locations/bloc/location_details/location_details_bloc.dart#LocationDetailsBloc",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/utils/auth_guard/auth_gard.dart#AuthGuard',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/utils/auth_guard/auth_gard.dart#AuthGuard",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             }
           ]
         }

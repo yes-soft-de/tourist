@@ -1,30 +1,30 @@
 {
-  'asset': 'asset:tourists/lib/module_authorization/guide_authorization_module/ui/screens/guide_login/guide_login.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': [
+  "asset": "asset:tourists/lib/module_authorization/guide_authorization_module/ui/screens/guide_login/guide_login.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
       {
-        'name': 'GuideLoginScreen',
-        'constructor': {
-          'name': '',
-          'kind': 'constructor',
-          'injectedType': {
-            'lookupKey': {
-              'root': 'asset:tourists/lib/module_authorization/guide_authorization_module/ui/screens/guide_login/guide_login.dart#GuideLoginScreen',
-              'qualifier': null
+        "name": "GuideLoginScreen",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_authorization/guide_authorization_module/ui/screens/guide_login/guide_login.dart#GuideLoginScreen",
+              "qualifier": null
             },
-            'isProvider': false
+            "isProvider": false
           },
-          'singleton': false,
-          'asynchronous': false,
-          'dependencies': [
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_authorization/guide_authorization_module/bloc/guide_login/guide_login.bloc.dart#GuideLoginBloc',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_authorization/guide_authorization_module/bloc/guide_login/guide_login.bloc.dart#GuideLoginBloc",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             }
           ]
         }

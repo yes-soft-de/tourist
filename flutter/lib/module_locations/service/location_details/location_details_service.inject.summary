@@ -1,51 +1,51 @@
 {
-  'asset': 'asset:tourists/lib/module_locations/service/location_details/location_details_service.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': [
+  "asset": "asset:tourists/lib/module_locations/service/location_details/location_details_service.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
       {
-        'name': 'LocationDetailsService',
-        'constructor': {
-          'name': '',
-          'kind': 'constructor',
-          'injectedType': {
-            'lookupKey': {
-              'root': 'asset:tourists/lib/module_locations/service/location_details/location_details_service.dart#LocationDetailsService',
-              'qualifier': null
+        "name": "LocationDetailsService",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_locations/service/location_details/location_details_service.dart#LocationDetailsService",
+              "qualifier": null
             },
-            'isProvider': false
+            "isProvider": false
           },
-          'singleton': false,
-          'asynchronous': false,
-          'dependencies': [
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_locations/manager/location_details/location_details.dart#LocationDetailsManager',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_locations/manager/location_details/location_details.dart#LocationDetailsManager",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_guide/manager/guides_manager/guides_manager.dart#GuidesManager',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_guide/manager/guides_manager/guides_manager.dart#GuidesManager",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_comment/manager/rate/rate_manager.dart#RatingManager',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_comment/manager/rate/rate_manager.dart#RatingManager",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             }
           ]
         }

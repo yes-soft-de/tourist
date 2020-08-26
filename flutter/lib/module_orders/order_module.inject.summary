@@ -1,44 +1,44 @@
 {
-  'asset': 'asset:tourists/lib/module_orders/order_module.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': [
+  "asset": "asset:tourists/lib/module_orders/order_module.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
       {
-        'name': 'OrderModule',
-        'constructor': {
-          'name': '',
-          'kind': 'constructor',
-          'injectedType': {
-            'lookupKey': {
-              'root': 'asset:tourists/lib/module_orders/order_module.dart#OrderModule',
-              'qualifier': null
+        "name": "OrderModule",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_orders/order_module.dart#OrderModule",
+              "qualifier": null
             },
-            'isProvider': false
+            "isProvider": false
           },
-          'singleton': false,
-          'asynchronous': false,
-          'dependencies': [
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_orders/ui/screen/orders_list/order_list_screen.dart#OrdersListScreen',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_orders/ui/screen/orders_list/order_list_screen.dart#OrdersListScreen",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_authorization/login_selector_module/ui/screens/account_type_selector/login_type_selector.dart#LoginTypeSelectorScreen',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_authorization/login_selector_module/ui/screens/account_type_selector/login_type_selector.dart#LoginTypeSelectorScreen",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/utils/auth_guard/auth_gard.dart#AuthGuard',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/utils/auth_guard/auth_gard.dart#AuthGuard",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             }
           ]
         }

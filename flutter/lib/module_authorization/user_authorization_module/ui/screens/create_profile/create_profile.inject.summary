@@ -1,37 +1,37 @@
 {
-  'asset': 'asset:tourists/lib/module_authorization/user_authorization_module/ui/screens/create_profile/create_profile.dart',
-  'summary': {
-    'injector': [],
-    'module': [],
-    'injectable': [
+  "asset": "asset:tourists/lib/module_authorization/user_authorization_module/ui/screens/create_profile/create_profile.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": [
       {
-        'name': 'CreateProfileScreen',
-        'constructor': {
-          'name': '',
-          'kind': 'constructor',
-          'injectedType': {
-            'lookupKey': {
-              'root': 'asset:tourists/lib/module_authorization/user_authorization_module/ui/screens/create_profile/create_profile.dart#CreateProfileScreen',
-              'qualifier': null
+        "name": "CreateProfileScreen",
+        "constructor": {
+          "name": "",
+          "kind": "constructor",
+          "injectedType": {
+            "lookupKey": {
+              "root": "asset:tourists/lib/module_authorization/user_authorization_module/ui/screens/create_profile/create_profile.dart#CreateProfileScreen",
+              "qualifier": null
             },
-            'isProvider': false
+            "isProvider": false
           },
-          'singleton': false,
-          'asynchronous': false,
-          'dependencies': [
+          "singleton": false,
+          "asynchronous": false,
+          "dependencies": [
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_authorization/user_authorization_module/bloc/create_profile/create_profile_bloc.dart#CreateProfileBloc',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_authorization/user_authorization_module/bloc/create_profile/create_profile_bloc.dart#CreateProfileBloc",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             },
             {
-              'lookupKey': {
-                'root': 'asset:tourists/lib/module_persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper',
-                'qualifier': null
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper",
+                "qualifier": null
               },
-              'isProvider': false
+              "isProvider": false
             }
           ]
         }

@@ -11,7 +11,7 @@ class GuidesResponse {
     statusCode = json['status_code'];
     msg = json['msg'];
     if (json['data'] != null) {
-      data = new List<GuideListItemModel>();
+      data = <GuideListItemModel>[];
       json['data'].forEach((v) {
         if (v != null) data.add(new GuideListItemModel.fromJson(v));
       });

@@ -4,7 +4,7 @@ class ProfileModel {
   String _arrivalCity;
   DateTime _arrivalDate;
   String _stayingTime;
-  int _age;
+  final int _age;
 
   ProfileModel(this._name, this._age, this._lang, this._arrivalCity,
       this._arrivalDate, this._stayingTime);

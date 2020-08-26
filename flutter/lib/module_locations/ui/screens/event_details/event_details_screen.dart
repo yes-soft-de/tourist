@@ -29,8 +29,9 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
       currentState = event[EventDetailsBloc.KEY_STATUS];
       if (currentState == EventDetailsBloc.STATUS_CODE_LOAD_SUCCESS) {
         eventDetails = event[EventDetailsBloc.KEY_EVENT];
-        if (event[EventDetailsBloc.KEY_LOCATION] != null)
+        if (event[EventDetailsBloc.KEY_LOCATION] != null) {
           locationId = event[EventDetailsBloc.KEY_LOCATION].id;
+        }
       }
       setState(() {});
     });
@@ -76,7 +77,7 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
       eventImages = [
         'https://cdn.pixabay.com/photo/2017/07/21/23/57/concert-2527495__340.jpg'
       ];
-    } else if (eventDetails.images.length == 0) {
+    } else if (eventDetails.images.isEmpty) {
       eventImages = [
         'https://cdn.pixabay.com/photo/2017/07/21/23/57/concert-2527495__340.jpg'
       ];
@@ -132,7 +133,9 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
     pageUI.add(Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text(getTimeFromTimeStamp(eventDetails.date.timestamp).toString().substring(0, 16))
+        Text(getTimeFromTimeStamp(eventDetails.date.timestamp)
+            .toString()
+            .substring(0, 16))
       ],
     ));
 
@@ -145,7 +148,7 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
       children: <Widget>[
         Icon(Icons.location_on),
         Text(
-          eventDetails.location != null ? eventDetails.location : 'Soon',
+          eventDetails.location ?? 'Soon',
           style: TextStyle(fontSize: 24),
         )
       ],
@@ -171,9 +174,13 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
             bottom: 0,
             left: 0,
             right: 0,
-            child: this.locationId != null ? RequestGuideButton(
-              cityId: this.locationId != null ? this.locationId.toString() : '1',
-            ): Container(),
+            child: this.locationId != null
+                ? RequestGuideButton(
+                    cityId: this.locationId != null
+                        ? this.locationId.toString()
+                        : '1',
+                  )
+                : Container(),
           )
         ],
       ),

@@ -34,7 +34,7 @@ class HttpClient {
         return response.data;
       } else {
         _logger.error(tag, response.statusCode.toString() + ' for link ' + url);
-        Fluttertoast.showToast(
+        await Fluttertoast.showToast(
             msg: 'Error Code ' +
                 response.statusCode.toString() +
                 ' Please Retry',
@@ -47,7 +47,7 @@ class HttpClient {
       }
     } catch (e) {
       _logger.error(tag, e.toString());
-      Fluttertoast.showToast(msg: e.toString());
+      await Fluttertoast.showToast(msg: e.toString());
       return null;
     }
   }
@@ -68,7 +68,7 @@ class HttpClient {
       }
     } catch (e) {
       _logger.error(tag, e.toString());
-      Fluttertoast.showToast(msg: e.toString());
+      await Fluttertoast.showToast(msg: e.toString());
       return null;
     }
   }

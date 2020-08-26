@@ -34,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     widget._loginBlock.loginStatus.listen((event) {
-      if (event != null && event.length > 0) {
+      if (event != null && event.isNotEmpty) {
         widget._preferencesHelper
             .setLoggedInState(LoggedInState.TOURISTS)
             .then((value) {

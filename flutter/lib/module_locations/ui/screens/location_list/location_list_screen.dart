@@ -67,7 +67,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
               imageLink: location.path[0].path,
               title: location.name,
               description: location.description,
-              rate: location.ratingAverage != null ? location.ratingAverage : 5,
+              rate: location.ratingAverage ?? 5,
               commentsNumber: location.commentNumber != null
                   ? int.parse(location.commentNumber)
                   : 0,

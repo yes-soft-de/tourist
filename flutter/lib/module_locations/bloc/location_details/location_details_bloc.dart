@@ -33,7 +33,7 @@ class LocationDetailsBloc {
   Stream<Map<int, dynamic>> get locationDetailsStream =>
       locationDetailsSubject.stream;
 
-  getLocation(String locationId) async {
+  Future<void> getLocation(String locationId) async {
     LocationDetailsModel model =
         await _locationDetailsService.getLocationDetails(locationId);
     List<GuideListItemModel> guides =

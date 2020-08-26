@@ -20,7 +20,7 @@ class GuideHomeBloc {
 
   Stream<Pair<int, List<OrderModel>>> get ordersStream => _orderSubject.stream;
 
-  getOrdersList() {
+  void getOrdersList() {
     _orderSubject.add(Pair(STATUS_CODE_LOADING, null));
     _ordersService.getOrders().then((value) {
       if (value == null) {

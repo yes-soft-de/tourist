@@ -10,36 +10,33 @@ class OrderItemWidget extends StatelessWidget {
   final Function(OrderModel) onAcceptAvailableOrder;
   final Function(OrderModel) onPayOrder;
   final Function(OrderModel) onPayAvailableOrder;
-  bool canPay = false;
-
-  BuildContext context;
+  final bool canPay;
 
   OrderItemWidget(this.orderModel,
       {this.onAcceptOrder,
       this.onPayAvailableOrder,
       this.onAcceptAvailableOrder,
       this.onPayOrder,
-      this.canPay});
+      this.canPay = false});
 
   @override
   Widget build(BuildContext context) {
-    this.context = context;
-
     // This will be the children of the flex
     List<Widget> widgetLayout = [];
 
     // If there is guide assigned, Show Multiple Choices
     if (orderModel.guidUserID != null) {
-      if (orderModel.status == 'pending')
-        widgetLayout.add(_getPendingOrder(orderModel));
-      else if (orderModel.status == 'onGoing') {
+      if (orderModel.status == 'pending') {
+        widgetLayout.add(_getPendingOrder(orderModel, context));
+      } else if (orderModel.status == 'onGoing') {
         // There is a chat here
-        widgetLayout.add(_getOnGoingOrder(orderModel));
+        widgetLayout.add(_getOnGoingOrder(orderModel, context));
       } else if (orderModel.status == 'finished') {
-        widgetLayout.add(_getFinishedOrder(orderModel));
+        widgetLayout.add(_getFinishedOrder(orderModel, context));
       }
-    } else
+    } else {
       widgetLayout.add(_getAvailableOrder(orderModel));
+    }
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -56,7 +53,7 @@ class OrderItemWidget extends StatelessWidget {
     );
   }
 
-  Widget _getAvailableOrder(OrderModel orderModel) {
+  Widget _getAvailableOrder(OrderModel orderModel, BuildContext context) {
     return Flex(
       direction: Axis.vertical,
       children: <Widget>[
@@ -130,7 +127,7 @@ class OrderItemWidget extends StatelessWidget {
     );
   }
 
-  Widget _getPendingOrder(OrderModel orderModel) {
+  Widget _getPendingOrder(OrderModel orderModel, BuildContext context) {
     return Flex(
       direction: Axis.vertical,
       children: [
@@ -196,7 +193,7 @@ class OrderItemWidget extends StatelessWidget {
     );
   }
 
-  Widget _getOnGoingOrder(OrderModel orderModel) {
+  Widget _getOnGoingOrder(OrderModel orderModel, BuildContext context) {
     print((orderModel.guideInfo != null).toString());
 
     return Flex(
@@ -262,7 +259,7 @@ class OrderItemWidget extends StatelessWidget {
     );
   }
 
-  Widget _getFinishedOrder(OrderModel orderModel) {
+  Widget _getFinishedOrder(OrderModel orderModel, BuildContext context) {
     return Flex(
       direction: Axis.horizontal,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

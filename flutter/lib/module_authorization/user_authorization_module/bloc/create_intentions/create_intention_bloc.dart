@@ -12,8 +12,8 @@ class CreateIntentionBloc {
 
   Stream<bool> get intentionsCreateStream => _intentionsCreationSubject.stream;
 
-  createIntention(String arrivalCity, String arrivalDate, String stayingTime,
-      List<String> interests) async {
+  void createIntention(String arrivalCity, String arrivalDate,
+      String stayingTime, List<String> interests) async {
     bool response = await _intentionService.createIntentions(CreateProfileBody(
         arrivalCity: arrivalCity,
         arrivalDate: arrivalDate,
@@ -23,7 +23,7 @@ class CreateIntentionBloc {
     _intentionsCreationSubject.add(response);
   }
 
-  dispose() {
+  void dispose() {
     _intentionsCreationSubject.close();
   }
 }

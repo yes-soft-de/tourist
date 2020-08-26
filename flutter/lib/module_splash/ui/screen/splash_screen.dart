@@ -35,7 +35,7 @@ class SplashScreen extends StatelessWidget {
     ));
   }
 
-  Future<bool> setUpRemoteConfig(BuildContext context) async {
+  Future<void> setUpRemoteConfig(BuildContext context) async {
     try {
       final RemoteConfig remoteConfig = await RemoteConfig.instance;
       await remoteConfig.fetch(expiration: const Duration(seconds: 0));
@@ -44,7 +44,7 @@ class SplashScreen extends StatelessWidget {
       String base = remoteConfig.getString('server');
 
       if (base == null) {
-        Fluttertoast.showToast(msg: 'Connection Error');
+        await Fluttertoast.showToast(msg: 'Connection Error');
         print('Didn\'t get the Config:(');
         return false;
       } else {
@@ -58,7 +58,7 @@ class SplashScreen extends StatelessWidget {
           ? remoteConfig.getString('server')
           : 'http://35.228.120.165/';
 
-      Navigator.of(context)
+      await Navigator.of(context)
           .pushNamedAndRemoveUntil(HomeRoutes.home, (r) => false);
     } catch (e) {
       await setUpRemoteConfig(context);

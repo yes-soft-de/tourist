@@ -31,7 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     widget._registerBloc.registerStatus.listen((event) {
-      if (event != null && event.length > 0) {
+      if (event != null && event.isNotEmpty) {
         Navigator.of(context).pushNamed(UserAuthorizationRoutes.createProfile);
       }
       submitAvailable = true;

@@ -14,7 +14,8 @@ class LocationDetailsRepository {
 
     if (response != null) {
       return new LocationDetailsResponse.fromJson(response);
-    } else
+    } else {
       return null;
+    }
   }
 }

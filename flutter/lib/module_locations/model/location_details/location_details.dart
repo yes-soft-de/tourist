@@ -27,7 +27,7 @@ class LocationDetailsModel {
     location = json['location'].cast<String>();
     ratingAverage = json['ratingAverage'];
     if (json['comments'] != null) {
-      comments = new List<CommentModel>();
+      comments = <CommentModel>[];
       json['comments'].forEach((v) {
         comments.add(new CommentModel.fromJson(v));
       });

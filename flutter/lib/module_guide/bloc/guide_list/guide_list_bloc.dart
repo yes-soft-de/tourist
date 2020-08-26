@@ -18,12 +18,13 @@ class GuideListBloc {
   Stream<Pair<int, List<GuideListItemModel>>> get guidesStream =>
       _guidesListSubject.stream;
 
-  getAllGuides() {
+  void getAllGuides() {
     _guideListService.getAllGuides().then((value) {
-      if (value != null)
+      if (value != null) {
         _guidesListSubject.add(Pair(STATUS_CODE_LOAD_SUCCESS, value));
-      else
+      } else {
         _guidesListSubject.add(Pair(STATUS_CODE_LOAD_ERROR, null));
+      }
     });
   }
 }

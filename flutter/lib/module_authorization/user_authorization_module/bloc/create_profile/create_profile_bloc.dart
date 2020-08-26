@@ -11,7 +11,7 @@ class CreateProfileBloc {
   CreateProfileBloc(this._profileService);
   Stream<bool> get profileStatus => _profileCreationSubject.stream;
 
-  createProfile(String name, String gender, String language) async {
+  void createProfile(String name, String gender, String language) async {
     CreateProfileBody profile =
         new CreateProfileBody(name: name, sex: gender, guideLanguage: language);
 
@@ -24,7 +24,7 @@ class CreateProfileBloc {
     _profileCreationSubject.add(true);
   }
 
-  dispose() {
+  void dispose() {
     _profileCreationSubject.close();
   }
 }

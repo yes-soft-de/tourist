@@ -6,7 +6,7 @@ import 'package:tourists/module_orders/response/update_order_response.dart';
 
 @provide
 class OrdersManager {
-  OrdersRepository _ordersRepository;
+  final OrdersRepository _ordersRepository;
 
   OrdersManager(this._ordersRepository);
 

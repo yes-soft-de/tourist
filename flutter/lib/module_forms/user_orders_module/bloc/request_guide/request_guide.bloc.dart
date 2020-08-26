@@ -37,28 +37,31 @@ class RequestGuideBloc {
             location: location))
         .then((requestSuccess) {
       print('Requesting Guide Complete');
-      if (requestSuccess)
+      if (requestSuccess) {
         _requestGuideForm.add(Pair(STATUS_CODE_REQUEST_SUCCESS, null));
-      else
+      } else {
         _requestGuideForm.add(Pair(STATUS_CODE_REQUEST_ERROR, null));
+      }
     });
   }
 
-  getGuideWithId(String guid) {
+  void getGuideWithId(String guid) {
     _requestGuideService.getGuideInfoWithId(guid).then((guideInfo) {
-      if (guideInfo != null)
+      if (guideInfo != null) {
         _requestGuideForm.add(Pair(STATUS_CODE_LOAD_SUCCESS, guideInfo));
-      else
+      } else {
         _requestGuideForm.add(Pair(STATUS_CODE_LOAD_ERROR, null));
+      }
     });
   }
 
-  getLocationWithId(String locationId) {
+  void getLocationWithId(String locationId) {
     _locationDetailsService.getLocationDetails(locationId).then((value) {
-      if (value != null)
+      if (value != null) {
         _requestGuideForm.add(Pair(STATUS_CODE_LOAD_SUCCESS, value));
-      else
+      } else {
         _requestGuideForm.add(Pair(STATUS_CODE_LOAD_ERROR, null));
+      }
     });
   }
 }

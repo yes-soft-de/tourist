@@ -24,7 +24,7 @@ class LocationListItem {
     commentNumber = json['commentNumber'];
     ratingAverage = json['ratingAverage'];
     if (json['path'] != null) {
-      path = new List<Path>();
+      path = <Path>[];
       json['path'].forEach((v) {
         path.add(new Path.fromJson(v));
       });

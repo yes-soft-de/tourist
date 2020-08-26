@@ -13,7 +13,7 @@ class ChatManager {
     return _chatRepository.requestMessages(chatRoomID);
   }
 
-  sendMessage(String chatRoomID, ChatModel chatMessage) {
+  void sendMessage(String chatRoomID, ChatModel chatMessage) {
     _chatRepository.sendMessage(chatRoomID, chatMessage);
   }
 }

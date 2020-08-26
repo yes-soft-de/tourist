@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/module_forms/user_orders_module/response/order/order_response.dart';
-import 'package:tourists/module_forms/user_orders_module/service/request_guide/request_guide.service.dart';
 import 'package:tourists/module_orders/manager/guide_orders/guide_orders.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
 import 'package:tourists/module_orders/response/update_order_response.dart';
@@ -10,10 +9,9 @@ import 'package:uuid/uuid.dart';
 @provide
 class GuideOrdersService {
   final GuideOrdersManager _ordersManager;
-  final RequestGuideService _requestGuideService;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  GuideOrdersService(this._ordersManager, this._requestGuideService);
+  GuideOrdersService(this._ordersManager);
 
   Future<List<OrderModel>> getAvailableOrders() async {
     OrderResponse response = await _ordersManager.getAvailableOrders();

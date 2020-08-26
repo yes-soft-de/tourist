@@ -9,9 +9,9 @@ import 'ui/screen/orders_list/order_list_screen.dart';
 
 @provide
 class OrderModule extends YesModule {
-  OrdersListScreen _ordersListScreen;
-  LoginTypeSelectorScreen _loginTypeSelectorScreen;
-  AuthGuard _authGuard;
+  final OrdersListScreen _ordersListScreen;
+  final LoginTypeSelectorScreen _loginTypeSelectorScreen;
+  final AuthGuard _authGuard;
 
   OrderModule(
       this._ordersListScreen, this._loginTypeSelectorScreen, this._authGuard);
@@ -20,14 +20,14 @@ class OrderModule extends YesModule {
   Map<String, WidgetBuilder> getRoutes() {
     return {
       OrdersRoutes.ordersList: (context) => FutureBuilder(
-        future: _authGuard.isLoggedIn(),
-        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-          if (snapshot.hasData) {
-            if (snapshot.data) return _ordersListScreen;
-          }
-          return _loginTypeSelectorScreen;
-        },
-      )
+            future: _authGuard.isLoggedIn(),
+            builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+              if (snapshot.hasData) {
+                if (snapshot.data) return _ordersListScreen;
+              }
+              return _loginTypeSelectorScreen;
+            },
+          )
     };
   }
 }

@@ -380,8 +380,8 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
     );
   }
 
-  _getStarsLine(double starCount) {
-    if (starCount == null) starCount = 5;
+  Flex _getStarsLine(double starCount) {
+    starCount ??= 5;
     List<Widget> stars = [];
     for (int i = 0; i < starCount; i++) {
       stars.add(Icon(Icons.star));
@@ -393,7 +393,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
     );
   }
 
-  _requestGuide() {
+  void _requestGuide() {
     log('Request the guide');
     List<String> servicesList = [];
     servicesMap.forEach((key, value) {
@@ -413,7 +413,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
         _arrivalCity);
   }
 
-  _requestLocation() {
+  void _requestLocation() {
     log('Request a City');
     List<String> servicesList = [];
     servicesMap.forEach((key, value) {
@@ -480,9 +480,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 _getStarsLine(_guideInfo.rating),
-                Text(_guideInfo.status != null
-                    ? _guideInfo.status
-                    : S.of(context).available)
+                Text(_guideInfo.status ?? S.of(context).available)
               ],
             ),
           )

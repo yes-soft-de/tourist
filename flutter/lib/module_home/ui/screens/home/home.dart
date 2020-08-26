@@ -6,7 +6,6 @@ import 'package:tourists/module_home/ui/widget/bottom_navigation_bar/buttom_navi
 import 'package:tourists/module_locations/ui/screens/event_list/event_list.dart';
 import 'package:tourists/module_locations/ui/screens/location_carousel/location_carousel.dart';
 import 'package:tourists/module_locations/ui/screens/location_list/location_list_screen.dart';
-import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 import 'package:tourists/utils/auth_guard/auth_gard.dart';
 
 @provide
@@ -17,15 +16,8 @@ class HomeScreen extends StatefulWidget {
   final LocationCarouselScreen _locationCarouselScreen;
   final AuthGuard _authGuard;
 
-  final SharedPreferencesHelper _preferencesHelper;
-
-  HomeScreen(
-      this._locationListScreen,
-      this._guideListScreen,
-      this._eventListScreen,
-      this._preferencesHelper,
-      this._authGuard,
-      this._locationCarouselScreen);
+  HomeScreen(this._locationListScreen, this._guideListScreen,
+      this._eventListScreen, this._authGuard, this._locationCarouselScreen);
 
   @override
   State<StatefulWidget> createState() => HomeScreenState();

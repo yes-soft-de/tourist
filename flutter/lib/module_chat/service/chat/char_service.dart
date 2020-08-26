@@ -3,14 +3,12 @@ import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tourists/module_chat/manager/chat/chat_manager.dart';
 import 'package:tourists/module_chat/model/chat/chat_model.dart';
-import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 
 @provide
 class ChatService {
   final ChatManager _chatManager;
-  SharedPreferencesHelper _preferencesHelper;
 
-  ChatService(this._chatManager, this._preferencesHelper);
+  ChatService(this._chatManager);
 
   // This is Real Time, That is Why I went this way
   final PublishSubject<List<ChatModel>> _chatPublishSubject =

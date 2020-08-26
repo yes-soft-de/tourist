@@ -215,7 +215,7 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
     );
   }
 
-  _createIntentionProfile() {
+  void _createIntentionProfile() {
     List<String> interests = [];
     widget._interests.forEach((key, value) {
       if (value) {
@@ -223,7 +223,7 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
       }
     });
 
-    if (interests.length < 1) {
+    if (interests.isEmpty) {
       return;
     }
 

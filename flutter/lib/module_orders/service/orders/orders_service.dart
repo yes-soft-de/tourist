@@ -9,8 +9,8 @@ import 'package:tourists/module_orders/response/update_order_response.dart';
 
 @provide
 class OrdersService {
-  OrdersManager _ordersManager;
-  GuideListService _guideListService;
+  final OrdersManager _ordersManager;
+  final GuideListService _guideListService;
   final FirebaseAuth _authService = FirebaseAuth.instance;
 
   OrdersService(this._ordersManager, this._guideListService);

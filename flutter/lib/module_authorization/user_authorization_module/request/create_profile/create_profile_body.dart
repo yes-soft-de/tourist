@@ -114,7 +114,7 @@ class Timezone {
   Timezone.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     if (json['transitions'] != null) {
-      transitions = new List<Transitions>();
+      transitions = <Transitions>[];
       json['transitions'].forEach((v) {
         transitions.add(new Transitions.fromJson(v));
       });

@@ -11,7 +11,7 @@ class OrderResponse {
     statusCode = json['status_code'];
     msg = json['msg'];
     if (json['data'] != null) {
-      orderList = new List<OrderModel>();
+      orderList = <OrderModel>[];
       json['data'].forEach((v) {
         orderList.add(new OrderModel.fromJson(v));
       });

@@ -5,17 +5,14 @@ import 'package:tourists/module_forms/user_orders_module/model/request_guide/req
 import 'package:tourists/module_forms/user_orders_module/request/request_guide/request_guide.dart';
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
 import 'package:tourists/module_guide/service/guide_list/guide_list.dart';
-import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 
 @provide
 class RequestGuideService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final SharedPreferencesHelper _preferencesHelper;
   final GuideListService _guidesService;
   final RequestGuideManager _requestGuideManager;
 
-  RequestGuideService(
-      this._preferencesHelper, this._guidesService, this._requestGuideManager);
+  RequestGuideService(this._guidesService, this._requestGuideManager);
 
   Future<bool> requestGuide(RequestGuideModel requestGuide) async {
     FirebaseUser user = await _auth.currentUser();

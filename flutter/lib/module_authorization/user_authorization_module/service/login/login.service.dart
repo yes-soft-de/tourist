@@ -26,14 +26,14 @@ class LoginService {
         return null;
       }
     } catch (e) {
-      Fluttertoast.showToast(
+      await Fluttertoast.showToast(
           msg: 'Can\'t Find user or Error Connecting to Server');
       log(e.toString());
       return null;
     }
   }
 
-  _cacheLoggedInUser(FirebaseUser user) {
+  void _cacheLoggedInUser(FirebaseUser user) {
     _preferencesHelper.setUserUID(user.uid);
   }
 }

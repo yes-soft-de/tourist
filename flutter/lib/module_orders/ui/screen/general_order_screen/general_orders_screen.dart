@@ -7,5 +7,7 @@ class GeneralOrdersScreen extends StatefulWidget {
 
 class _GeneralOrdersScreenState extends State<GeneralOrdersScreen> {
   @override
-  Widget build(BuildContext context) {}
+  Widget build(BuildContext context) {
+    return Scaffold();
+  }
 }

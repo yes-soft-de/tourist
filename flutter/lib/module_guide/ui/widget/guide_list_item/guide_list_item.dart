@@ -67,9 +67,7 @@ class GuideListItemWidget extends StatelessWidget {
                           direction: Axis.horizontal,
                           children: <Widget>[
                             Text(
-                              availability != null
-                                  ? availability
-                                  : S.of(context).available,
+                              availability ?? S.of(context).available,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(),
                             ),

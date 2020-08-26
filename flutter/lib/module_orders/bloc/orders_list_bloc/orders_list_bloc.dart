@@ -43,7 +43,7 @@ class OrdersListBloc {
     });
   }
 
-  dispose() {
+  void dispose() {
     _orderSubject.close();
   }
 }

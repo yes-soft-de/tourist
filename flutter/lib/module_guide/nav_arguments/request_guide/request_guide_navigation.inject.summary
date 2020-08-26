@@ -1,8 +1,8 @@
 {
-  "asset": "asset:tourists/lib/module_guide/nav_arguments/request_guide/request_guide_navigation.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": []
+  'asset': 'asset:tourists/lib/module_guide/nav_arguments/request_guide/request_guide_navigation.dart',
+  'summary': {
+    'injector': [],
+    'module': [],
+    'injectable': []
   }
 }

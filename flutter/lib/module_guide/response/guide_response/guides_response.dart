@@ -19,7 +19,7 @@ class GuidesResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['status_code'] = this.statusCode;
     data['msg'] = this.msg;
     if (this.data != null) {

@@ -1,37 +1,37 @@
 {
-  "asset": "asset:tourists/lib/module_settings/ui/settings/settings.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": [
+  'asset': 'asset:tourists/lib/module_settings/ui/settings/settings.dart',
+  'summary': {
+    'injector': [],
+    'module': [],
+    'injectable': [
       {
-        "name": "SettingsScreen",
-        "constructor": {
-          "name": "",
-          "kind": "constructor",
-          "injectedType": {
-            "lookupKey": {
-              "root": "asset:tourists/lib/module_settings/ui/settings/settings.dart#SettingsScreen",
-              "qualifier": null
+        'name': 'SettingsScreen',
+        'constructor': {
+          'name': '',
+          'kind': 'constructor',
+          'injectedType': {
+            'lookupKey': {
+              'root': 'asset:tourists/lib/module_settings/ui/settings/settings.dart#SettingsScreen',
+              'qualifier': null
             },
-            "isProvider": false
+            'isProvider': false
           },
-          "singleton": false,
-          "asynchronous": false,
-          "dependencies": [
+          'singleton': false,
+          'asynchronous': false,
+          'dependencies': [
             {
-              "lookupKey": {
-                "root": "asset:tourists/lib/utils/auth_guard/auth_gard.dart#AuthGuard",
-                "qualifier": null
+              'lookupKey': {
+                'root': 'asset:tourists/lib/utils/auth_guard/auth_gard.dart#AuthGuard',
+                'qualifier': null
               },
-              "isProvider": false
+              'isProvider': false
             },
             {
-              "lookupKey": {
-                "root": "asset:tourists/lib/utils/language/language.dart#LanguageHelper",
-                "qualifier": null
+              'lookupKey': {
+                'root': 'asset:tourists/lib/utils/language/language.dart#LanguageHelper',
+                'qualifier': null
               },
-              "isProvider": false
+              'isProvider': false
             }
           ]
         }

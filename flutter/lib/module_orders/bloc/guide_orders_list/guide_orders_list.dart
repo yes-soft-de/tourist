@@ -14,15 +14,16 @@ class GuideOrdersListBloc {
   static const String KEY_STATUS = 'status';
   static const String KEY_PAYLOAD = 'payload';
 
-  GuideOrdersService _ordersService;
+  final GuideOrdersService _ordersService;
 
   GuideOrdersListBloc(this._ordersService);
 
-  PublishSubject<Map<String, dynamic>> _stateSubject = new PublishSubject();
+  final PublishSubject<Map<String, dynamic>> _stateSubject =
+      new PublishSubject();
 
   Stream<Map<String, dynamic>> get stateStream => _stateSubject.stream;
 
-  getAvailableOrders() {
+  void getAvailableOrders() {
     _stateSubject.add({KEY_STATUS: STATUS_CODE_LOADING});
     _ordersService.getAllPossibleOrders().then((ordersList) {
       if (ordersList != null) {
@@ -34,7 +35,7 @@ class GuideOrdersListBloc {
     });
   }
 
-  acceptOrder(OrderModel orderModel) {
+  void acceptOrder(OrderModel orderModel) {
     _stateSubject.add({KEY_STATUS: STATUS_CODE_LOADING});
     _ordersService.acceptOrder(orderModel).then((value) {
       if (value == null) {
@@ -45,7 +46,7 @@ class GuideOrdersListBloc {
     });
   }
 
-  acceptAvailableOrder(OrderModel orderModel) {
+  void acceptAvailableOrder(OrderModel orderModel) {
     _stateSubject.add({KEY_STATUS: STATUS_CODE_LOADING});
     _ordersService.acceptAvailableOrder(orderModel).then((value) {
       if (value == null) {
@@ -56,7 +57,7 @@ class GuideOrdersListBloc {
     });
   }
 
-  payOrder(OrderModel orderModel) {
+  void payOrder(OrderModel orderModel) {
     _stateSubject.add({KEY_STATUS: STATUS_CODE_LOADING});
     _ordersService.payOrder(orderModel).then((value) {
       if (value == null) {
@@ -67,7 +68,7 @@ class GuideOrdersListBloc {
     });
   }
 
-  payAvailableOrder(OrderModel orderModel) {
+  void payAvailableOrder(OrderModel orderModel) {
     _stateSubject.add({KEY_STATUS: STATUS_CODE_LOADING});
     _ordersService.payAvailableOrder(orderModel).then((value) {
       if (value == null) {
@@ -78,7 +79,7 @@ class GuideOrdersListBloc {
     });
   }
 
-  dispose() {
+  void dispose() {
     _stateSubject.close();
   }
 }

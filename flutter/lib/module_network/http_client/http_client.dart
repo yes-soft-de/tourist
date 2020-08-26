@@ -13,7 +13,7 @@ class HttpClient {
   Dio _client;
   final Logger _logger;
 
-  final String tag = "HttpClient";
+  final String tag = 'HttpClient';
 
   HttpClient(this._logger) {
     _client = new Dio(BaseOptions());
@@ -35,9 +35,9 @@ class HttpClient {
       } else {
         _logger.error(tag, response.statusCode.toString() + ' for link ' + url);
         Fluttertoast.showToast(
-            msg: "Error Code " +
+            msg: 'Error Code ' +
                 response.statusCode.toString() +
-                " Please Retry",
+                ' Please Retry',
             toastLength: Toast.LENGTH_SHORT,
             timeInSecForIosWeb: 1,
             backgroundColor: Colors.red,

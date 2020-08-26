@@ -300,7 +300,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
                   child: TextFormField(
                     controller: _stayingTime,
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(labelText: "Staying For"),
+                    decoration: const InputDecoration(labelText: 'Staying For'),
                     validator: (String value) {
                       if (value.isEmpty) {
                         return 'Please enter some text';
@@ -394,7 +394,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
   }
 
   _requestGuide() {
-    log("Request the guide");
+    log('Request the guide');
     List<String> servicesList = [];
     servicesMap.forEach((key, value) {
       if (value == true) servicesList.add(key);
@@ -414,7 +414,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
   }
 
   _requestLocation() {
-    log("Request a City");
+    log('Request a City');
     List<String> servicesList = [];
     servicesMap.forEach((key, value) {
       if (value == true) servicesList.add(key);

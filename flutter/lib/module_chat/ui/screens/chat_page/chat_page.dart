@@ -67,7 +67,7 @@ class ChatPageState extends State<ChatPage> {
                     reverse: false,
                   )
                 : Center(
-                    child: Text("Loading"),
+                    child: Text('Loading'),
                   ),
           ),
           Flex(
@@ -121,7 +121,7 @@ class ChatPageState extends State<ChatPage> {
   }
 
   sendMessage() {
-    log("Sending: " + _msgController.text);
+    log('Sending: ' + _msgController.text);
     widget._chatPageBloc.sendMessage(chatRoomId, _msgController.text.trim());
     _msgController.clear();
   }

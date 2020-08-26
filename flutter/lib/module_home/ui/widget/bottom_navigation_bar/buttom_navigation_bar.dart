@@ -178,12 +178,13 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   ),
                   GestureDetector(
                       onTap: () {
-                        if (isLoggedIn)
+                        if (isLoggedIn) {
                           Navigator.of(context)
                               .pushNamed(AuthorizationRoutes.logout);
-                        else
+                        } else {
                           Navigator.of(context)
                               .pushNamed(AuthorizationRoutes.loginTypeSelector);
+                        }
                       },
                       child: Text(isLoggedIn
                           ? S.of(context).logout

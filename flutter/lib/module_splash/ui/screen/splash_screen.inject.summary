@@ -1,24 +1,24 @@
 {
-  "asset": "asset:tourists/lib/module_splash/ui/screen/splash_screen.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": [
+  'asset': 'asset:tourists/lib/module_splash/ui/screen/splash_screen.dart',
+  'summary': {
+    'injector': [],
+    'module': [],
+    'injectable': [
       {
-        "name": "SplashScreen",
-        "constructor": {
-          "name": "",
-          "kind": "constructor",
-          "injectedType": {
-            "lookupKey": {
-              "root": "asset:tourists/lib/module_splash/ui/screen/splash_screen.dart#SplashScreen",
-              "qualifier": null
+        'name': 'SplashScreen',
+        'constructor': {
+          'name': '',
+          'kind': 'constructor',
+          'injectedType': {
+            'lookupKey': {
+              'root': 'asset:tourists/lib/module_splash/ui/screen/splash_screen.dart#SplashScreen',
+              'qualifier': null
             },
-            "isProvider": false
+            'isProvider': false
           },
-          "singleton": false,
-          "asynchronous": false,
-          "dependencies": []
+          'singleton': false,
+          'asynchronous': false,
+          'dependencies': []
         }
       }
     ]

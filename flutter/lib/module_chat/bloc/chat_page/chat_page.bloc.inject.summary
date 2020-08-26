@@ -1,30 +1,30 @@
 {
-  "asset": "asset:tourists/lib/module_chat/bloc/chat_page/chat_page.bloc.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": [
+  'asset': 'asset:tourists/lib/module_chat/bloc/chat_page/chat_page.bloc.dart',
+  'summary': {
+    'injector': [],
+    'module': [],
+    'injectable': [
       {
-        "name": "ChatPageBloc",
-        "constructor": {
-          "name": "",
-          "kind": "constructor",
-          "injectedType": {
-            "lookupKey": {
-              "root": "asset:tourists/lib/module_chat/bloc/chat_page/chat_page.bloc.dart#ChatPageBloc",
-              "qualifier": null
+        'name': 'ChatPageBloc',
+        'constructor': {
+          'name': '',
+          'kind': 'constructor',
+          'injectedType': {
+            'lookupKey': {
+              'root': 'asset:tourists/lib/module_chat/bloc/chat_page/chat_page.bloc.dart#ChatPageBloc',
+              'qualifier': null
             },
-            "isProvider": false
+            'isProvider': false
           },
-          "singleton": false,
-          "asynchronous": false,
-          "dependencies": [
+          'singleton': false,
+          'asynchronous': false,
+          'dependencies': [
             {
-              "lookupKey": {
-                "root": "asset:tourists/lib/module_chat/service/chat/char_service.dart#ChatService",
-                "qualifier": null
+              'lookupKey': {
+                'root': 'asset:tourists/lib/module_chat/service/chat/char_service.dart#ChatService',
+                'qualifier': null
               },
-              "isProvider": false
+              'isProvider': false
             }
           ]
         }

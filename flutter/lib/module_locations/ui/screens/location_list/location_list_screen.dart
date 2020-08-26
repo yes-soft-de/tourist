@@ -52,7 +52,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
   Widget _getSuccessScreen() {
     List<Widget> locationWidgetList = [];
 
-    if (locationModelList != null)
+    if (locationModelList != null) {
       locationModelList.forEach((location) {
         locationWidgetList.add(GestureDetector(
           onTap: () {
@@ -75,6 +75,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
           ),
         ));
       });
+    }
 
     return Flex(
       direction: Axis.vertical,

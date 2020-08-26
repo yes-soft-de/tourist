@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/module_forms/user_orders_module/manager/request_manager/request_guide_manager.dart';
@@ -43,8 +40,7 @@ class RequestGuideService {
             .add(Duration(days: requestGuide.stayingDays)),
         services: requestGuide.services);
 
-    Map requestResult =
-    await _requestGuideManager.requestGuide(requestObject);
+    Map requestResult = await _requestGuideManager.requestGuide(requestObject);
 
     if (requestResult != null) {
       return true;
@@ -55,7 +51,7 @@ class RequestGuideService {
 
   Future<GuideListItemModel> getGuideInfoWithId(String guideId) async {
     List<GuideListItemModel> availableGuides =
-    await _guidesService.getAllGuides();
+        await _guidesService.getAllGuides();
 
     GuideListItemModel targetGuide;
 

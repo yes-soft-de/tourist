@@ -1,24 +1,24 @@
 {
-  "asset": "asset:tourists/lib/module_authorization/guide_authorization_module/bloc/guide_login/guide_login.bloc.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": [
+  'asset': 'asset:tourists/lib/module_authorization/guide_authorization_module/bloc/guide_login/guide_login.bloc.dart',
+  'summary': {
+    'injector': [],
+    'module': [],
+    'injectable': [
       {
-        "name": "GuideLoginBloc",
-        "constructor": {
-          "name": "",
-          "kind": "constructor",
-          "injectedType": {
-            "lookupKey": {
-              "root": "asset:tourists/lib/module_authorization/guide_authorization_module/bloc/guide_login/guide_login.bloc.dart#GuideLoginBloc",
-              "qualifier": null
+        'name': 'GuideLoginBloc',
+        'constructor': {
+          'name': '',
+          'kind': 'constructor',
+          'injectedType': {
+            'lookupKey': {
+              'root': 'asset:tourists/lib/module_authorization/guide_authorization_module/bloc/guide_login/guide_login.bloc.dart#GuideLoginBloc',
+              'qualifier': null
             },
-            "isProvider": false
+            'isProvider': false
           },
-          "singleton": false,
-          "asynchronous": false,
-          "dependencies": []
+          'singleton': false,
+          'asynchronous': false,
+          'dependencies': []
         }
       }
     ]

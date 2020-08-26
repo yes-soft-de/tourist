@@ -11,7 +11,7 @@ class LocationListResponse {
     statusCode = json['status_code'];
     msg = json['msg'];
     if (json['data'] != null) {
-      locationList = new List<LocationListItem>();
+      locationList = <LocationListItem>[];
       json['data'].forEach((v) {
         locationList.add(new LocationListItem.fromJson(v));
       });

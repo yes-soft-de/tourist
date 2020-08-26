@@ -1,24 +1,24 @@
 {
-  "asset": "asset:tourists/lib/module_home/bloc/event_list/event_list_bloc.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": [
+  'asset': 'asset:tourists/lib/module_home/bloc/event_list/event_list_bloc.dart',
+  'summary': {
+    'injector': [],
+    'module': [],
+    'injectable': [
       {
-        "name": "EventListBloc",
-        "constructor": {
-          "name": "",
-          "kind": "constructor",
-          "injectedType": {
-            "lookupKey": {
-              "root": "asset:tourists/lib/module_home/bloc/event_list/event_list_bloc.dart#EventListBloc",
-              "qualifier": null
+        'name': 'EventListBloc',
+        'constructor': {
+          'name': '',
+          'kind': 'constructor',
+          'injectedType': {
+            'lookupKey': {
+              'root': 'asset:tourists/lib/module_home/bloc/event_list/event_list_bloc.dart#EventListBloc',
+              'qualifier': null
             },
-            "isProvider": false
+            'isProvider': false
           },
-          "singleton": false,
-          "asynchronous": false,
-          "dependencies": []
+          'singleton': false,
+          'asynchronous': false,
+          'dependencies': []
         }
       }
     ]

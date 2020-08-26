@@ -1,30 +1,30 @@
 {
-  "asset": "asset:tourists/lib/user/bloc/home/home_bloc.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": [
+  'asset': 'asset:tourists/lib/user/bloc/home/home_bloc.dart',
+  'summary': {
+    'injector': [],
+    'module': [],
+    'injectable': [
       {
-        "name": "HomeBloc",
-        "constructor": {
-          "name": "",
-          "kind": "constructor",
-          "injectedType": {
-            "lookupKey": {
-              "root": "asset:tourists/lib/user/bloc/home/home_bloc.dart#HomeBloc",
-              "qualifier": null
+        'name': 'HomeBloc',
+        'constructor': {
+          'name': '',
+          'kind': 'constructor',
+          'injectedType': {
+            'lookupKey': {
+              'root': 'asset:tourists/lib/user/bloc/home/home_bloc.dart#HomeBloc',
+              'qualifier': null
             },
-            "isProvider": false
+            'isProvider': false
           },
-          "singleton": false,
-          "asynchronous": false,
-          "dependencies": [
+          'singleton': false,
+          'asynchronous': false,
+          'dependencies': [
             {
-              "lookupKey": {
-                "root": "asset:tourists/lib/user/services/location_list/location_list_service.dart#LocationListService",
-                "qualifier": null
+              'lookupKey': {
+                'root': 'asset:tourists/lib/user/services/location_list/location_list_service.dart#LocationListService',
+                'qualifier': null
               },
-              "isProvider": false
+              'isProvider': false
             }
           ]
         }

@@ -57,7 +57,7 @@ class _GuideListScreenState extends State<GuideListScreen> {
     }
 
     return Center(
-      child: Text("Unidentified State!"),
+      child: Text('Unidentified State!'),
     );
   }
 
@@ -66,16 +66,16 @@ class _GuideListScreenState extends State<GuideListScreen> {
 
     // Construct the List into CSV text
     _guidesList.forEach((guide) {
-      String citiesInText = " ";
+      String citiesInText = ' ';
       guide.city.forEach((cityName) {
-        citiesInText = citiesInText + cityName + " ";
+        citiesInText = citiesInText + cityName + ' ';
       });
       print(citiesInText);
 
       // Construct the List into CSV text
-      String languagesInText = " ";
+      String languagesInText = ' ';
       guide.language.forEach((language) {
-        languagesInText = languagesInText + language + " ";
+        languagesInText = languagesInText + language + ' ';
       });
 
       guidesList.add(GestureDetector(

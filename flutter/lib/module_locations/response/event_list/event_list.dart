@@ -19,7 +19,7 @@ class EventListResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['status_code'] = this.statusCode;
     data['msg'] = this.msg;
     if (this.data != null) {
@@ -42,14 +42,14 @@ class Data {
 
   Data(
       {this.id,
-        this.name,
-        this.type,
-        this.subType,
-        this.date,
-        this.status,
-        this.location,
-        this.description,
-        this.images});
+      this.name,
+      this.type,
+      this.subType,
+      this.date,
+      this.status,
+      this.location,
+      this.description,
+      this.images});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -64,7 +64,7 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['name'] = this.name;
     data['type'] = this.type;
@@ -79,4 +79,3 @@ class Data {
     return data;
   }
 }
-

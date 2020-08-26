@@ -1,8 +1,8 @@
 {
-  "asset": "asset:tourists/lib/module_locations/bloc/locations_module/bloc/location_list/location_list_bloc.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": []
+  'asset': 'asset:tourists/lib/module_locations/bloc/locations_module/bloc/location_list/location_list_bloc.dart',
+  'summary': {
+    'injector': [],
+    'module': [],
+    'injectable': []
   }
 }

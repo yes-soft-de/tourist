@@ -62,7 +62,7 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
   Scaffold _getUndefinedScreenScaffold() {
     return Scaffold(
       body: Center(
-        child: Text("Unknown State: " + currentState.toString()),
+        child: Text('Unknown State: ' + currentState.toString()),
       ),
     );
   }
@@ -74,11 +74,11 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
     List<String> eventImages = [];
     if (eventDetails.images == null) {
       eventImages = [
-        "https://cdn.pixabay.com/photo/2017/07/21/23/57/concert-2527495__340.jpg"
+        'https://cdn.pixabay.com/photo/2017/07/21/23/57/concert-2527495__340.jpg'
       ];
     } else if (eventDetails.images.length == 0) {
       eventImages = [
-        "https://cdn.pixabay.com/photo/2017/07/21/23/57/concert-2527495__340.jpg"
+        'https://cdn.pixabay.com/photo/2017/07/21/23/57/concert-2527495__340.jpg'
       ];
     } else {
       eventImages = eventDetails.images;

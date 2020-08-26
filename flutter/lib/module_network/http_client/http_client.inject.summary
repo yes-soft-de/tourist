@@ -1,30 +1,30 @@
 {
-  "asset": "asset:tourists/lib/module_network/http_client/http_client.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": [
+  'asset': 'asset:tourists/lib/module_network/http_client/http_client.dart',
+  'summary': {
+    'injector': [],
+    'module': [],
+    'injectable': [
       {
-        "name": "HttpClient",
-        "constructor": {
-          "name": "",
-          "kind": "constructor",
-          "injectedType": {
-            "lookupKey": {
-              "root": "asset:tourists/lib/module_network/http_client/http_client.dart#HttpClient",
-              "qualifier": null
+        'name': 'HttpClient',
+        'constructor': {
+          'name': '',
+          'kind': 'constructor',
+          'injectedType': {
+            'lookupKey': {
+              'root': 'asset:tourists/lib/module_network/http_client/http_client.dart#HttpClient',
+              'qualifier': null
             },
-            "isProvider": false
+            'isProvider': false
           },
-          "singleton": false,
-          "asynchronous": false,
-          "dependencies": [
+          'singleton': false,
+          'asynchronous': false,
+          'dependencies': [
             {
-              "lookupKey": {
-                "root": "asset:tourists/lib/utils/logger/logger.dart#Logger",
-                "qualifier": null
+              'lookupKey': {
+                'root': 'asset:tourists/lib/utils/logger/logger.dart#Logger',
+                'qualifier': null
               },
-              "isProvider": false
+              'isProvider': false
             }
           ]
         }

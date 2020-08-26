@@ -5,7 +5,7 @@ import 'package:tourists/module_network/http_client/http_client.dart';
 
 @provide
 class LocationDetailsRepository {
-  HttpClient _client;
+  final HttpClient _client;
 
   LocationDetailsRepository(this._client);
 

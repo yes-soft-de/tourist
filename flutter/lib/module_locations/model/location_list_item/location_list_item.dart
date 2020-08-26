@@ -9,12 +9,12 @@ class LocationListItem {
 
   LocationListItem(
       {this.id,
-        this.name,
-        this.description,
-        this.location,
-        this.commentNumber,
-        this.ratingAverage,
-        this.path});
+      this.name,
+      this.description,
+      this.location,
+      this.commentNumber,
+      this.ratingAverage,
+      this.path});
 
   LocationListItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -32,7 +32,7 @@ class LocationListItem {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['name'] = this.name;
     data['description'] = this.description;
@@ -56,7 +56,7 @@ class Path {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['path'] = this.path;
     return data;
   }

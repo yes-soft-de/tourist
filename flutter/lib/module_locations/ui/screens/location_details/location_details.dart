@@ -44,20 +44,22 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
     // Get the Location Id
     locationId = ModalRoute.of(context).settings.arguments;
 
-    if (canSendComments == null)
+    if (canSendComments == null) {
       widget._authGuard.isLoggedIn().then((value) {
         canSendComments = value;
         if (this.mounted) setState(() {});
       });
+    }
 
     widget._locationBloc.locationDetailsStream.listen((event) {
       currentStatus = event[LocationDetailsBloc.KEY_STATUS];
       if (currentStatus == LocationDetailsBloc.STATUS_CODE_LOAD_SUCCESS) {
-        if (this.mounted)
+        if (this.mounted) {
           setState(() {
             _locationDetails = event[LocationDetailsBloc.KEY_LOCATION_INFO];
             _guidesList = event[LocationDetailsBloc.KEY_GUIDES];
           });
+        }
       }
     });
 
@@ -98,7 +100,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
 
     return Scaffold(
       body: Center(
-        child: Text("Undefined State"),
+        child: Text('Undefined State'),
       ),
     );
   }
@@ -206,22 +208,22 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
     List<GuideListItemModel> visibleGuides;
 
     // No Expansion Needed
-    if (_guidesList.length > 0) guidesListExpanded = true;
+    if (_guidesList.isNotEmpty) guidesListExpanded = true;
 
     visibleGuides =
         guidesListExpanded ? _guidesList : _guidesList.sublist(0, 3);
 
     // Construct the List into CSV text
     visibleGuides.forEach((guide) {
-      String citiesInText = "";
+      String citiesInText = '';
       guide.city.forEach((cityName) {
-        citiesInText = citiesInText + " " + cityName;
+        citiesInText = citiesInText + ' ' + cityName;
       });
 
       // Construct the List into CSV text
-      String languagesInText = "";
+      String languagesInText = '';
       guide.language.forEach((language) {
-        languagesInText = languagesInText + language + " ";
+        languagesInText = languagesInText + language + ' ';
       });
 
       guidesList.add(GestureDetector(

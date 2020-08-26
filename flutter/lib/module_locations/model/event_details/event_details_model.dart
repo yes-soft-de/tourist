@@ -1,6 +1,6 @@
 import 'package:tourists/module_shared/model/date/date.dart';
 
-class EventDetailsModel  {
+class EventDetailsModel {
   int id;
   String name;
   String type;
@@ -13,14 +13,14 @@ class EventDetailsModel  {
 
   EventDetailsModel(
       {this.id,
-        this.name,
-        this.type,
-        this.subType,
-        this.date,
-        this.status,
-        this.location,
-        this.description,
-        this.images});
+      this.name,
+      this.type,
+      this.subType,
+      this.date,
+      this.status,
+      this.location,
+      this.description,
+      this.images});
 
   EventDetailsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -35,7 +35,7 @@ class EventDetailsModel  {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['name'] = this.name;
     data['type'] = this.type;

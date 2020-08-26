@@ -6,7 +6,7 @@ import 'package:tourists/module_network/http_client/http_client.dart';
 
 @provide
 class EventRepository {
-  HttpClient _httpClient;
+  final HttpClient _httpClient;
   EventRepository(this._httpClient);
 
   Future<EventListResponse> getAllEvents() async {

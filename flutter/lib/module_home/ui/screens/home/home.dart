@@ -34,22 +34,23 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> {
   int position;
   bool loggedIn;
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
     print('In Main Page');
 
-    if  (loggedIn == null)
-    widget._authGuard.isLoggedIn().then((value) {
-      loggedIn = value;
-      setState(() {});
-    });
+    if (loggedIn == null) {
+      widget._authGuard.isLoggedIn().then((value) {
+        loggedIn = value;
+        setState(() {});
+      });
+    }
 
     return _getUI();
   }
 
-  _getUI() {
+  Widget _getUI() {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
@@ -88,9 +89,9 @@ class HomeScreenState extends State<HomeScreen> {
               left: 0,
               right: 0,
               child: CustomBottomNavigationBar(
-                activePosition: position != null ? position : 0,
+                activePosition: position ?? 0,
                 context: context,
-                isLoggedIn: loggedIn == null ? false : loggedIn,
+                isLoggedIn: loggedIn ?? false,
                 onLocationChanged: (int position) {
                   _changePosition(position);
                 },
@@ -102,7 +103,7 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  _changePosition(position) {
+  void _changePosition(position) {
     if (position < 3) _pageController.jumpToPage(position);
     setState(() {
       this.position = position;

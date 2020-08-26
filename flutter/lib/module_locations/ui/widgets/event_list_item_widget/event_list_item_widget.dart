@@ -52,7 +52,7 @@ class EventListItemWidget extends StatelessWidget {
                     time.toString().substring(0, 16),
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Text(location != null ? location : ''),
+                  Text(location ?? ''),
                   Flex(
                     direction: Axis.horizontal,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,7 +74,9 @@ class EventListItemWidget extends StatelessWidget {
                             Container(
                               width: 8,
                             ),
-                            Text(commentNumber.toString() + ' ' + S.of(context).comments),
+                            Text(commentNumber.toString() +
+                                ' ' +
+                                S.of(context).comments),
                           ],
                         ),
                       )
@@ -84,7 +86,6 @@ class EventListItemWidget extends StatelessWidget {
               ),
             ),
           )
-
         ],
       ),
     );

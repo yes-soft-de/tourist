@@ -1,51 +1,51 @@
 {
-  "asset": "asset:tourists/lib/module_authorization/authprization_module.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": [
+  'asset': 'asset:tourists/lib/module_authorization/authprization_module.dart',
+  'summary': {
+    'injector': [],
+    'module': [],
+    'injectable': [
       {
-        "name": "AuthorizationModule",
-        "constructor": {
-          "name": "",
-          "kind": "constructor",
-          "injectedType": {
-            "lookupKey": {
-              "root": "asset:tourists/lib/module_authorization/authprization_module.dart#AuthorizationModule",
-              "qualifier": null
+        'name': 'AuthorizationModule',
+        'constructor': {
+          'name': '',
+          'kind': 'constructor',
+          'injectedType': {
+            'lookupKey': {
+              'root': 'asset:tourists/lib/module_authorization/authprization_module.dart#AuthorizationModule',
+              'qualifier': null
             },
-            "isProvider": false
+            'isProvider': false
           },
-          "singleton": false,
-          "asynchronous": false,
-          "dependencies": [
+          'singleton': false,
+          'asynchronous': false,
+          'dependencies': [
             {
-              "lookupKey": {
-                "root": "asset:tourists/lib/module_authorization/user_authorization_module/user_auth.dart#UserAuthorizationModule",
-                "qualifier": null
+              'lookupKey': {
+                'root': 'asset:tourists/lib/module_authorization/user_authorization_module/user_auth.dart#UserAuthorizationModule',
+                'qualifier': null
               },
-              "isProvider": false
+              'isProvider': false
             },
             {
-              "lookupKey": {
-                "root": "asset:tourists/lib/module_authorization/login_selector_module/ui/screens/logout/logout.dart#LogoutScreen",
-                "qualifier": null
+              'lookupKey': {
+                'root': 'asset:tourists/lib/module_authorization/login_selector_module/ui/screens/logout/logout.dart#LogoutScreen',
+                'qualifier': null
               },
-              "isProvider": false
+              'isProvider': false
             },
             {
-              "lookupKey": {
-                "root": "asset:tourists/lib/module_authorization/guide_authorization_module/guide_authorization_module.dart#GuideAuthorizationModule",
-                "qualifier": null
+              'lookupKey': {
+                'root': 'asset:tourists/lib/module_authorization/guide_authorization_module/guide_authorization_module.dart#GuideAuthorizationModule',
+                'qualifier': null
               },
-              "isProvider": false
+              'isProvider': false
             },
             {
-              "lookupKey": {
-                "root": "asset:tourists/lib/module_authorization/login_selector_module/ui/screens/account_type_selector/login_type_selector.dart#LoginTypeSelectorScreen",
-                "qualifier": null
+              'lookupKey': {
+                'root': 'asset:tourists/lib/module_authorization/login_selector_module/ui/screens/account_type_selector/login_type_selector.dart#LoginTypeSelectorScreen',
+                'qualifier': null
               },
-              "isProvider": false
+              'isProvider': false
             }
           ]
         }

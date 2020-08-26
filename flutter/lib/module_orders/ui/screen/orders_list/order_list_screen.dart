@@ -101,7 +101,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
   Scaffold _getErrorUI() {
     return Scaffold(
       body: Center(
-        child: Text("Undefined State?!! " + currentStatus.toString()),
+        child: Text('Undefined State?!! ' + currentStatus.toString()),
       ),
     );
   }
@@ -115,7 +115,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [Text("Loading"), CircularProgressIndicator()],
+          children: [Text('Loading'), CircularProgressIndicator()],
         ),
       ],
     ));
@@ -211,7 +211,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
       return ListView(
         children: <Widget>[
           Center(
-            child: Text("Empty List"),
+            child: Text('Empty List'),
           ),
         ],
       );
@@ -227,7 +227,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
     return ListView(
       children: ordersWidgetList.length > 0
           ? ordersWidgetList
-          : <Widget>[Center(child: Text("Empty List"))],
+          : <Widget>[Center(child: Text('Empty List'))],
     );
   }
 
@@ -236,7 +236,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
       return ListView(
         children: <Widget>[
           Center(
-            child: Text("Empty List"),
+            child: Text('Empty List'),
           ),
         ],
       );
@@ -258,7 +258,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
     return ListView(
       children: ordersWidgetList.length > 0
           ? ordersWidgetList
-          : <Widget>[Center(child: Text("Empty List"))],
+          : <Widget>[Center(child: Text('Empty List'))],
     );
   }
 
@@ -267,7 +267,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
       return ListView(
         children: <Widget>[
           Center(
-            child: Text("Empty List"),
+            child: Text('Empty List'),
           ),
         ],
       );
@@ -283,7 +283,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
     return ListView(
       children: ordersWidgetList.length > 0
           ? ordersWidgetList
-          : <Widget>[Center(child: Text("Empty List"))],
+          : <Widget>[Center(child: Text('Empty List'))],
     );
   }
 
@@ -292,7 +292,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
       return ListView(
         children: <Widget>[
           Center(
-            child: Text("Empty List"),
+            child: Text('Empty List'),
           ),
         ],
       );
@@ -308,7 +308,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
     return ListView(
       children: ordersWidgetList.length > 0
           ? ordersWidgetList
-          : <Widget>[Center(child: Text("Empty List"))],
+          : <Widget>[Center(child: Text('Empty List'))],
     );
   }
 }

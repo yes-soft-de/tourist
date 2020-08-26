@@ -64,7 +64,7 @@ class LocationDetailsBloc {
     return true;
   }
 
-  createRate(int rate, String locationId) {
+  void createRate(int rate, String locationId) {
     _locationDetailsService.createRate(rate, locationId).then((value) {
       if (value != null) {
         getLocation(locationId);

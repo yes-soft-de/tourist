@@ -1,37 +1,37 @@
 {
-  "asset": "asset:tourists/lib/module_locations/location_module.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": [
+  'asset': 'asset:tourists/lib/module_locations/location_module.dart',
+  'summary': {
+    'injector': [],
+    'module': [],
+    'injectable': [
       {
-        "name": "LocationModule",
-        "constructor": {
-          "name": "",
-          "kind": "constructor",
-          "injectedType": {
-            "lookupKey": {
-              "root": "asset:tourists/lib/module_locations/location_module.dart#LocationModule",
-              "qualifier": null
+        'name': 'LocationModule',
+        'constructor': {
+          'name': '',
+          'kind': 'constructor',
+          'injectedType': {
+            'lookupKey': {
+              'root': 'asset:tourists/lib/module_locations/location_module.dart#LocationModule',
+              'qualifier': null
             },
-            "isProvider": false
+            'isProvider': false
           },
-          "singleton": false,
-          "asynchronous": false,
-          "dependencies": [
+          'singleton': false,
+          'asynchronous': false,
+          'dependencies': [
             {
-              "lookupKey": {
-                "root": "asset:tourists/lib/module_locations/ui/screens/location_details/location_details.dart#LocationDetailsScreen",
-                "qualifier": null
+              'lookupKey': {
+                'root': 'asset:tourists/lib/module_locations/ui/screens/location_details/location_details.dart#LocationDetailsScreen',
+                'qualifier': null
               },
-              "isProvider": false
+              'isProvider': false
             },
             {
-              "lookupKey": {
-                "root": "asset:tourists/lib/module_locations/ui/screens/event_details/event_details_screen.dart#EventDetailsScreen",
-                "qualifier": null
+              'lookupKey': {
+                'root': 'asset:tourists/lib/module_locations/ui/screens/event_details/event_details_screen.dart#EventDetailsScreen',
+                'qualifier': null
               },
-              "isProvider": false
+              'isProvider': false
             }
           ]
         }

@@ -36,7 +36,7 @@ class SharedPreferencesHelper {
   Future<void> setLoggedInState(LoggedInState state) async {
     SharedPreferences _sharedPreferences =
         await SharedPreferences.getInstance();
-    _sharedPreferences.setString("loggedInState", state.toString());
+    await _sharedPreferences.setString('loggedInState', state.toString());
   }
 
   Future<LoggedInState> getLoggedInState() async {
@@ -44,12 +44,15 @@ class SharedPreferencesHelper {
         await SharedPreferences.getInstance();
     String loggedInState = _sharedPreferences.getString('loggedInState');
     if (loggedInState == null) return LoggedInState.NOT_LOGGED_ID;
-    if (loggedInState == LoggedInState.NOT_LOGGED_ID.toString())
+    if (loggedInState == LoggedInState.NOT_LOGGED_ID.toString()) {
       return LoggedInState.NOT_LOGGED_ID;
-    if (loggedInState == LoggedInState.TOURISTS.toString())
+    }
+    if (loggedInState == LoggedInState.TOURISTS.toString()) {
       return LoggedInState.TOURISTS;
-    if (loggedInState == LoggedInState.GUIDE.toString())
+    }
+    if (loggedInState == LoggedInState.GUIDE.toString()) {
       return LoggedInState.GUIDE;
+    }
     return LoggedInState.NOT_LOGGED_ID;
   }
 

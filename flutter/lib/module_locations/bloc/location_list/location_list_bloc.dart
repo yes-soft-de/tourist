@@ -40,7 +40,7 @@ class LocationListBloc {
     });
   }
 
-  dispose() {
+  void dispose() {
     _stateSubject.close();
   }
 }

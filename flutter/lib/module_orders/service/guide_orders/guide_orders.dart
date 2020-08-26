@@ -9,9 +9,9 @@ import 'package:uuid/uuid.dart';
 
 @provide
 class GuideOrdersService {
-  GuideOrdersManager _ordersManager;
-  RequestGuideService _requestGuideService;
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final GuideOrdersManager _ordersManager;
+  final RequestGuideService _requestGuideService;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   GuideOrdersService(this._ordersManager, this._requestGuideService);
 

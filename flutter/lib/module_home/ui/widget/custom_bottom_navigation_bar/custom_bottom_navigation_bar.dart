@@ -183,12 +183,13 @@ class _CustomGuideBottomNavigatorState
                   ),
                   GestureDetector(
                       onTap: () {
-                        if (widget.loggedIn)
+                        if (widget.loggedIn) {
                           Navigator.of(context)
                               .pushNamed(AuthorizationRoutes.logout);
-                        else
+                        } else {
                           Navigator.of(context)
                               .pushNamed(AuthorizationRoutes.loginTypeSelector);
+                        }
                       },
                       child: Text(widget.loggedIn
                           ? S.of(context).logout

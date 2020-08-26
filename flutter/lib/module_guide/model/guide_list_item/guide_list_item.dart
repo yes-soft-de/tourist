@@ -10,12 +10,12 @@ class GuideListItemModel {
 
   GuideListItemModel(
       {this.user,
-        this.name,
-        this.status,
-        this.city,
-        this.language,
-        this.rating,
-        this.image});
+      this.name,
+      this.status,
+      this.city,
+      this.language,
+      this.rating,
+      this.image});
 
   GuideListItemModel.fromJson(Map<String, dynamic> json) {
     user = json['user'];
@@ -29,7 +29,7 @@ class GuideListItemModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['user'] = this.user;
     data['name'] = this.name;
     data['status'] = this.status;

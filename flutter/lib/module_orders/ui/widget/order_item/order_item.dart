@@ -71,7 +71,7 @@ class OrderItemWidget extends StatelessWidget {
                 height: 72,
                 width: 72,
                 decoration: BoxDecoration(),
-                child: Image.asset("resources/images/logo.jpg"),
+                child: Image.asset('resources/images/logo.jpg'),
               ),
             ),
             Flexible(
@@ -98,7 +98,7 @@ class OrderItemWidget extends StatelessWidget {
                         ),
                         Padding(
                           padding: EdgeInsets.all(8),
-                          child: Text("|"),
+                          child: Text('|'),
                         ),
                         Padding(
                           padding: EdgeInsets.all(8),

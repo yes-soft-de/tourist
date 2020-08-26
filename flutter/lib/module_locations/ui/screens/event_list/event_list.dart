@@ -57,7 +57,7 @@ class _EventListScreenState extends State<EventListScreen> {
   }
 
   Widget _getErrorUI() {
-    return Center(child: Text("Error fetching Data"));
+    return Center(child: Text('Error fetching Data'));
   }
 
   Widget _getSuccessUI() {

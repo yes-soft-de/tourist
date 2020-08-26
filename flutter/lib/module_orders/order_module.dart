@@ -20,14 +20,14 @@ class OrderModule extends YesModule {
   Map<String, WidgetBuilder> getRoutes() {
     return {
       OrdersRoutes.ordersList: (context) => FutureBuilder(
-            future: _authGuard.isLoggedIn(),
-            builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-              if (snapshot.hasData) {
-                if (snapshot.data) return _ordersListScreen;
-              }
-              return _loginTypeSelectorScreen;
-            },
-          )
+        future: _authGuard.isLoggedIn(),
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.data) return _ordersListScreen;
+          }
+          return _loginTypeSelectorScreen;
+        },
+      )
     };
   }
 }

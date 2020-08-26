@@ -18,12 +18,12 @@ class EventListBloc {
 
   EventListBloc(this._eventService);
 
-  PublishSubject<Pair<int, List<EventModel>>> _eventSubject =
+  final PublishSubject<Pair<int, List<EventModel>>> _eventSubject =
       new PublishSubject<Pair<int, List<EventModel>>>();
 
   Stream<Pair<int, List<EventModel>>> get eventStream => _eventSubject.stream;
 
-  getAllEvents() {
+  void getAllEvents() {
     _eventService.getAllEvents().then((value) {
       if (value == null) {
         _eventSubject.add(Pair(STATUS_CODE_LOAD_ERROR, null));
@@ -32,5 +32,4 @@ class EventListBloc {
       }
     });
   }
-
 }

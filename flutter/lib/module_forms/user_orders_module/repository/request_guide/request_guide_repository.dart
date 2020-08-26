@@ -5,7 +5,7 @@ import 'package:tourists/module_network/http_client/http_client.dart';
 
 @provide
 class RequestGuideRepository {
-  HttpClient _httpClient;
+  final HttpClient _httpClient;
   RequestGuideRepository(this._httpClient);
 
   Future<Map> requestGuide(RequestGuideRequest request) {

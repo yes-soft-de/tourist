@@ -9,9 +9,9 @@ import 'ui/screens/chat_page/chat_page.dart';
 
 @provide
 class ChatModule extends YesModule {
-  ChatPage _chatPage;
-  AuthGuard _authGuard;
-  LoginTypeSelectorScreen _loginTypeSelectorScreen;
+  final ChatPage _chatPage;
+  final AuthGuard _authGuard;
+  final LoginTypeSelectorScreen _loginTypeSelectorScreen;
 
   ChatModule(this._chatPage, this._authGuard, this._loginTypeSelectorScreen);
 

@@ -9,8 +9,8 @@ import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper
 
 @provide
 class ProfileService {
-  ProfileManager _profileManager;
-  SharedPreferencesHelper _preferencesHelper;
+  final ProfileManager _profileManager;
+  final SharedPreferencesHelper _preferencesHelper;
 
   ProfileService(this._profileManager, this._preferencesHelper);
 
@@ -29,11 +29,14 @@ class ProfileService {
     profile.userID = uid;
 
     // Bye Bye, Sending Request
-    CreateProfileResponse createProfileResponse = await this._profileManager.createProfile(profile);
+    CreateProfileResponse createProfileResponse =
+        await this._profileManager.createProfile(profile);
 
     if (createProfileResponse != null) {
       // Cache Result
-      this._preferencesHelper.setCurrentUsername(createProfileResponse.profileData.name);
+      await this
+          ._preferencesHelper
+          .setCurrentUsername(createProfileResponse.profileData.name);
 
       return createProfileResponse;
     }

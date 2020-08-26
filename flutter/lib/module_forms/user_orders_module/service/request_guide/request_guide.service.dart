@@ -44,7 +44,7 @@ class RequestGuideService {
         services: requestGuide.services);
 
     Map requestResult =
-        await _requestGuideManager.requestGuide(requestObject);
+    await _requestGuideManager.requestGuide(requestObject);
 
     if (requestResult != null) {
       return true;
@@ -55,7 +55,7 @@ class RequestGuideService {
 
   Future<GuideListItemModel> getGuideInfoWithId(String guideId) async {
     List<GuideListItemModel> availableGuides =
-        await _guidesService.getAllGuides();
+    await _guidesService.getAllGuides();
 
     GuideListItemModel targetGuide;
 

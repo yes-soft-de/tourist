@@ -5,7 +5,7 @@ import 'package:tourists/module_authorization/user_authorization_module/service/
 
 @provide
 class CreateIntentionBloc {
-  IntentionService _intentionService;
+  final IntentionService _intentionService;
   final _intentionsCreationSubject = PublishSubject<bool>();
 
   CreateIntentionBloc(this._intentionService);

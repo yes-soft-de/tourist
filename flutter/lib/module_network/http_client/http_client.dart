@@ -88,7 +88,7 @@ class HttpClient {
       }
     } catch (e) {
       _logger.error(tag, e.toString());
-      Fluttertoast.showToast(msg: e.toString());
+      await Fluttertoast.showToast(msg: e.toString());
       return null;
     }
   }

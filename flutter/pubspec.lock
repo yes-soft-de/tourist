@@ -7,14 +7,14 @@ packages:
       name: _fe_analyzer_shared
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.0"
+    version: "7.0.0"
   analyzer:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
       name: analyzer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.39.10"
+    version: "0.39.17"
   analyzer_plugin:
     dependency: "direct main"
     description:
@@ -134,6 +134,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  cli_util:
+    dependency: transitive
+    description:
+      name: cli_util
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   clock:
     dependency: transitive
     description:
@@ -168,7 +175,7 @@ packages:
       name: code_builder
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.3.0"
+    version: "3.4.1"
   collection:
     dependency: transitive
     description:
@@ -347,13 +354,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_mobx:
-    dependency: "direct main"
-    description:
-      name: flutter_mobx
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -431,18 +431,18 @@ packages:
     dependency: "direct main"
     description:
       path: "package/inject"
-      ref: "7c3cbf6"
-      resolved-ref: "7c3cbf6a4da2bc8357152b9c7bbcb9891cbfa320"
-      url: "https://github.com/google/inject.dart.git"
+      ref: HEAD
+      resolved-ref: "10c541837af6dc8bbc9c835e7f4c6fc4edb42af6"
+      url: "https://github.com/yes-soft-de/inject.dart.git"
     source: git
     version: "1.0.0-alpha"
   inject_generator:
     dependency: "direct dev"
     description:
       path: "package/inject_generator"
-      ref: "7c3cbf6"
-      resolved-ref: "7c3cbf6a4da2bc8357152b9c7bbcb9891cbfa320"
-      url: "https://github.com/google/inject.dart.git"
+      ref: HEAD
+      resolved-ref: "10c541837af6dc8bbc9c835e7f4c6fc4edb42af6"
+      url: "https://github.com/yes-soft-de/inject.dart.git"
     source: git
     version: "1.0.0-alpha"
   intl:
@@ -536,13 +536,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.6+3"
-  mobx:
-    dependency: "direct main"
-    description:
-      name: mobx
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.1"
   nested:
     dependency: transitive
     description:
@@ -724,7 +717,7 @@ packages:
     source: sdk
     version: "0.0.99"
   source_gen:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
       name: source_gen
       url: "https://pub.dartlang.org"

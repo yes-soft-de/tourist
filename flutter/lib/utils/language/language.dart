@@ -4,7 +4,8 @@ import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper
 
 @provide
 class LanguageHelper {
-  final Subject<String> _languageSubject = PublishSubject();
+  static final PublishSubject<String> _languageSubject =
+      PublishSubject<String>();
   Stream<String> get languageStream => _languageSubject.stream;
 
   final SharedPreferencesHelper _prefsHelper;
@@ -19,6 +20,7 @@ class LanguageHelper {
 
   void setLanguage(String newLang) {
     _prefsHelper.setCurrentLocal(newLang).then((value) {
+      print('Updating Local to: $newLang');
       _languageSubject.add(newLang);
     });
   }

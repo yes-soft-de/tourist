@@ -16,7 +16,7 @@ class CreateCommentResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['comment'] = this.comment;
     if (this.date != null) {
       data['date'] = this.date.toJson();

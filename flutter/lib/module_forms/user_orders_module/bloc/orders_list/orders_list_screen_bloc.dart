@@ -12,11 +12,12 @@ class OrdersListScreenBloc {
   final OrdersService _ordersService;
   OrdersListScreenBloc(this._ordersService);
 
-  PublishSubject<Pair<int, dynamic>> _orderListSubject = new PublishSubject();
+  final PublishSubject<Pair<int, dynamic>> _orderListSubject =
+      new PublishSubject();
   Stream<Pair<int, dynamic>> get ordersStream => _orderListSubject.stream;
 
-  getOrdersList() {
-    _ordersService.getOrders().then( (ordersList) {
+  void getOrdersList() {
+    _ordersService.getOrders().then((ordersList) {
       if (ordersList == null) {
         _orderListSubject.add(Pair(STATUS_CODE_LOAD_ERROR, null));
       } else {
@@ -24,5 +25,4 @@ class OrdersListScreenBloc {
       }
     });
   }
-
 }

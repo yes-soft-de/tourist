@@ -5,7 +5,7 @@ import 'package:tourists/module_chat/repository/chat/chat_repository.dart';
 
 @provide
 class ChatManager {
-  ChatRepository _chatRepository;
+  final ChatRepository _chatRepository;
 
   ChatManager(this._chatRepository);
 

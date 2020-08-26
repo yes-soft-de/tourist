@@ -4,7 +4,7 @@ import 'package:tourists/module_forms/user_orders_module/request/request_guide/r
 
 @provide
 class RequestGuideManager {
-  RequestGuideRepository _requestGuideRepository;
+  final RequestGuideRepository _requestGuideRepository;
 
   RequestGuideManager(this._requestGuideRepository);
 

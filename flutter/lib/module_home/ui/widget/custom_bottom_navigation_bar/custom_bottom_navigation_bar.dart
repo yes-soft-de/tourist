@@ -3,6 +3,7 @@ import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_authorization/authorization_routes.dart';
 import 'package:tourists/module_authorization/guide_authorization_module/guide_authorization_routes.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
+import 'package:tourists/module_settings/settings_routes.dart';
 
 class CustomGuideBottomNavigationBar extends StatefulWidget {
   final Function(int) onNavigationChanged;
@@ -127,6 +128,27 @@ class _CustomGuideBottomNavigatorState
                 ],
               ),
             ),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed(SettingsRoute.settingsRoutes);
+              },
+              child: Container(
+                color: Colors.white,
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Flex(
+                    direction: Axis.horizontal,
+                    children: <Widget>[
+                      Icon(Icons.settings),
+                      Container(
+                        width: 16,
+                      ),
+                      Text('Settings'),
+                    ],
+                  ),
+                ),
+              ),
+            )
           ]),
     ));
 

@@ -8,7 +8,7 @@ import 'package:rxdart/rxdart.dart';
 
 @provide
 class GuideLoginBloc {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   static const int STATUS_CODE_INIT = -1;
   static const int STATUS_CODE_SENT = 1;
@@ -18,11 +18,11 @@ class GuideLoginBloc {
 
   String _verificationId;
 
-  PublishSubject<Pair<int, dynamic>> _stateSubject = new PublishSubject();
+  final PublishSubject<Pair<int, dynamic>> _stateSubject = new PublishSubject();
 
   Stream<Pair<int, dynamic>> get stateStream => _stateSubject.stream;
 
-  login(String phoneNumber) async {
+  void login(String phoneNumber) {
     _auth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
         timeout: Duration(seconds: 30),
@@ -36,7 +36,7 @@ class GuideLoginBloc {
               _stateSubject.add(Pair(STATUS_CODE_RECEIVED, user));
             } else {
               _stateSubject.add(Pair(STATUS_CODE_CONFIRM_ERROR, null));
-              print("Error");
+              print('Error');
             }
           });
         },
@@ -53,7 +53,7 @@ class GuideLoginBloc {
         codeAutoRetrievalTimeout: null);
   }
 
-  confirmCode(String code) async {
+  void confirmCode(String code) async {
     AuthCredential credential = PhoneAuthProvider.getCredential(
         verificationId: _verificationId, smsCode: code);
 
@@ -66,8 +66,7 @@ class GuideLoginBloc {
       _stateSubject.add(Pair(STATUS_CODE_RECEIVED, user));
     } else {
       _stateSubject.add(Pair(STATUS_CODE_CONFIRM_ERROR, null));
-      print("Error");
+      print('Error');
     }
   }
-
 }

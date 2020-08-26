@@ -32,15 +32,16 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
   PageController signUpController = PageController(initialPage: 0);
 
   String _userId;
-  List<String> _languages = [];
-  List<String> _cities = [];
+  final List<String> _languages = [];
+  final List<String> _cities = [];
   List<String> _availableLocations;
   String _phoneNumber;
-  List<String> _services = [];
+  final List<String> _services = [];
 
-  TextEditingController _userNameController = new TextEditingController();
-  TextEditingController _aboutMeController = new TextEditingController();
-  TextEditingController _costPerDayController = new TextEditingController();
+  final TextEditingController _userNameController = new TextEditingController();
+  final TextEditingController _aboutMeController = new TextEditingController();
+  final TextEditingController _costPerDayController =
+      new TextEditingController();
 
   int currentState = GuideRegisterBloc.STATUS_CODE_INIT;
 
@@ -304,7 +305,7 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
     );
   }
 
-  _getLocations() {
+  void _getLocations() {
     _availableLocations = [];
     widget.locationListService.getLocationList().then((locationList) {
       locationList.forEach((city) {
@@ -313,12 +314,12 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
     });
   }
 
-  _createGuideProfile() {
+  void _createGuideProfile() {
     print('Requesting Create Profile');
     widget._guideRegisterBloc.registerGuide(_userNameController.text, _userId);
   }
 
-  _updateGuideProfile() {
+  void _updateGuideProfile() {
     print('Requesting Update Profile');
     widget._guideRegisterBloc.updateGuide(
       uid: _userId,
@@ -331,8 +332,8 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
     );
   }
 
-  updateStatus() {
-    print("Updating From Event: " + currentState.toString());
+  void updateStatus() {
+    print('Updating From Event: ' + currentState.toString());
     if (this.mounted) setState(() {});
   }
 }

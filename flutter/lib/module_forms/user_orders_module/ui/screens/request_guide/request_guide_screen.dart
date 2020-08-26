@@ -13,7 +13,7 @@ import 'package:tourists/utils/logger/logger.dart';
 
 @provide
 class RequestGuideScreen extends StatefulWidget {
-  final String tag = "RequestGuideScreen";
+  final String tag = 'RequestGuideScreen';
 
   final RequestGuideBloc _requestGuideBloc;
   final Logger _logger;
@@ -58,7 +58,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
         },
         child: Scaffold(
           body: Center(
-            child: Text("Null Arguments"),
+            child: Text('Null Arguments'),
           ),
         ),
       );
@@ -73,7 +73,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
         },
         child: Scaffold(
           body: Center(
-            child: Text("Null Arguments"),
+            child: Text('Null Arguments'),
           ),
         ),
       );
@@ -85,7 +85,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
       _arrivalCity = _requestGuideArguments.cityId;
     }
 
-    widget._logger.info(widget.tag, "Mode: " + this.locationMode.toString());
+    widget._logger.info(widget.tag, 'Mode: ' + this.locationMode.toString());
     // endregion
 
     // listen for guide Info
@@ -94,7 +94,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
       requestInProgress = false;
       if (currentStatus == RequestGuideBloc.STATUS_CODE_LOAD_SUCCESS) {
         locationMode ? _locationInfo = event.last : _guideInfo = event.last;
-        widget._logger.info(widget.tag, "Guide Info: " + _guideInfo.toString());
+        widget._logger.info(widget.tag, 'Guide Info: ' + _guideInfo.toString());
       }
       if (this.mounted) setState(() {});
     });
@@ -166,7 +166,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
     }
 
     return Center(
-      child: Text("Undefined State" + currentStatus.toString()),
+      child: Text('Undefined State' + currentStatus.toString()),
     );
   }
 
@@ -189,7 +189,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
     List<String> availableLanguage = [];
 
     if (locationMode) {
-      availableLanguage = ["العربية", "English"];
+      availableLanguage = ['العربية', 'English'];
     } else {
       availableLanguage = _guideInfo.language;
     }

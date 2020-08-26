@@ -75,11 +75,13 @@ class __SettingsScreenState extends State<SettingsScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'item',
+                      'Language',
                       style: TextStyle(fontSize: 16),
                     ),
                     DropdownButton(
+                        value: Localizations.localeOf(context).toString(),
                         onChanged: (newLocal) {
+                          print('Setting local $newLocal');
                           widget.languageHelper.setLanguage(newLocal);
                         },
                         items: [
@@ -98,55 +100,7 @@ class __SettingsScreenState extends State<SettingsScreen> {
             ),
             Container(
               height: 8,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.black12,
-                  borderRadius: BorderRadius.all(Radius.circular(8))),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'item',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    Text(
-                      'value',
-                      style: TextStyle(fontSize: 16),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              height: 8,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.black12,
-                  borderRadius: BorderRadius.all(Radius.circular(8))),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'item',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    Text(
-                      'value',
-                      style: TextStyle(fontSize: 16),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              height: 8,
-            ),
+            )
           ],
         ),
       ),

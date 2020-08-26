@@ -25,7 +25,7 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
 
   bool canRequest = true;
 
-  loginUser(String phoneNumber, BuildContext context) {
+  void loginUser(String phoneNumber, BuildContext context) {
     widget._guideLoginBloc.login(phoneNumber);
   }
 

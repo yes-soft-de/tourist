@@ -6,11 +6,11 @@ class ProfileModel {
   String _stayingTime;
   int _age;
 
-  ProfileModel(this._name, this._age, this._lang, this._arrivalCity, this._arrivalDate,
-      this._stayingTime);
+  ProfileModel(this._name, this._age, this._lang, this._arrivalCity,
+      this._arrivalDate, this._stayingTime);
 
   Map<String, dynamic> toMap() {
-    Map<String, dynamic> object = new Map();
+    Map<String, dynamic> object = {};
     object['name'] = _name;
     object['lang'] = _lang;
     object['age'] = _age;

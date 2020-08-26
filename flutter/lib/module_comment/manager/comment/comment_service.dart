@@ -5,10 +5,11 @@ import 'package:tourists/module_comment/response/create_comment/create_comment_r
 
 @provide
 class CommentManager {
-  CommentRepository _repository;
+  final CommentRepository _repository;
   CommentManager(this._repository);
 
-  Future<CreateCommentResponse> createComment(CreateCommentRequest createCommentRequest) {
+  Future<CreateCommentResponse> createComment(
+      CreateCommentRequest createCommentRequest) {
     return this._repository.createComment(createCommentRequest);
   }
 

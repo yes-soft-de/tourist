@@ -7,17 +7,18 @@ import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper
 
 @provide
 class ChatService {
-  ChatManager _chatManager;
+  final ChatManager _chatManager;
   SharedPreferencesHelper _preferencesHelper;
 
   ChatService(this._chatManager, this._preferencesHelper);
 
   // This is Real Time, That is Why I went this way
-  PublishSubject<List<ChatModel>> _chatPublishSubject = new PublishSubject();
+  final PublishSubject<List<ChatModel>> _chatPublishSubject =
+      new PublishSubject();
 
   Stream<List<ChatModel>> get chatMessagesStream => _chatPublishSubject.stream;
 
-  requestMessages(String chatRoomID) async {
+  void requestMessages(String chatRoomID) async {
     _chatManager.getMessages(chatRoomID).listen((event) {
       List<ChatModel> chatMessagesList = [];
       event.documents.forEach((element) {
@@ -28,14 +29,14 @@ class ChatService {
     });
   }
 
-  sendMessage(String chatRoomID, String msg) async {
+  void sendMessage(String chatRoomID, String msg) async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     ChatModel model = new ChatModel(
         msg: msg, sender: user.uid, sentDate: DateTime.now().toIso8601String());
     _chatManager.sendMessage(chatRoomID, model);
   }
 
-  dispose() {
+  void dispose() {
     _chatPublishSubject.close();
   }
 }

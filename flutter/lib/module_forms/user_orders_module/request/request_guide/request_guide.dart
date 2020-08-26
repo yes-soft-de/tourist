@@ -27,42 +27,42 @@ class RequestGuideRequest {
   Map<String, dynamic> toJson() {
     Map<String, dynamic> jsonData = {};
     if (this.date != null) {
-      jsonData["date"] = this.date.toIso8601String();
+      jsonData['date'] = this.date.toIso8601String();
     }
     if (this.touristUserID != null) {
-      jsonData["touristUserID"] = this.touristUserID;
+      jsonData['touristUserID'] = this.touristUserID;
     }
     if (this.guidUserID != null) {
-      jsonData["guidUserID"] = this.guidUserID;
+      jsonData['guidUserID'] = this.guidUserID;
     }
     if (this.city != null) {
-      jsonData["city"] = this.city;
+      jsonData['city'] = this.city;
     }
     if (this.language != null) {
-      jsonData["language"] = this.language;
+      jsonData['language'] = this.language;
     }
     if (this.arriveDate != null) {
-      jsonData["arriveDate"] = this.arriveDate.toIso8601String();
+      jsonData['arriveDate'] = this.arriveDate.toIso8601String();
     }
 
     if (this.leaveDate != null) {
-      jsonData["leaveDate"] = this.leaveDate.toIso8601String();
+      jsonData['leaveDate'] = this.leaveDate.toIso8601String();
     }
 
     if (this.services != null) {
-      jsonData["services "] = this.services;
+      jsonData['services '] = this.services;
     }
 
     if (this.roomID != null) {
-      jsonData["roomID"] = this.roomID;
+      jsonData['roomID'] = this.roomID;
     }
 
     if (this.status != null) {
-      jsonData["status"] = this.status;
+      jsonData['status'] = this.status;
     }
 
     if (this.cost != null) {
-      jsonData["cost"] = this.cost;
+      jsonData['cost'] = this.cost;
     }
 
     return jsonData;

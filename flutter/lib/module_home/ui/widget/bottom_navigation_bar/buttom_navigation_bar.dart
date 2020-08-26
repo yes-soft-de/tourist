@@ -3,6 +3,7 @@ import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_authorization/authorization_routes.dart';
 import 'package:tourists/module_orders/orders_routes.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
+import 'package:tourists/module_settings/settings_routes.dart';
 import 'package:tourists/module_shared/ui/widgets/request_guide_button/request_guide_button.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
@@ -136,6 +137,27 @@ class CustomBottomNavigationBar extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
+            Navigator.of(context).pushNamed(SettingsRoute.settingsRoutes);
+          },
+          child: Container(
+            color: Colors.white,
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: Flex(
+                direction: Axis.horizontal,
+                children: <Widget>[
+                  Icon(Icons.settings),
+                  Container(
+                    width: 16,
+                  ),
+                  Text('Settings'),
+                ],
+              ),
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
             SharedPreferencesHelper preferencesHelper =
                 new SharedPreferencesHelper();
             preferencesHelper.clearData().then((value) {
@@ -157,9 +179,11 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   GestureDetector(
                       onTap: () {
                         if (isLoggedIn)
-                          Navigator.of(context).pushNamed(AuthorizationRoutes.logout);
+                          Navigator.of(context)
+                              .pushNamed(AuthorizationRoutes.logout);
                         else
-                          Navigator.of(context).pushNamed(AuthorizationRoutes.loginTypeSelector);
+                          Navigator.of(context)
+                              .pushNamed(AuthorizationRoutes.loginTypeSelector);
                       },
                       child: Text(isLoggedIn
                           ? S.of(context).logout

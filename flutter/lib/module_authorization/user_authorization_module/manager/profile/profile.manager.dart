@@ -5,7 +5,7 @@ import 'package:tourists/module_authorization/user_authorization_module/response
 
 @provide
 class ProfileManager {
-  ProfileRepository _profileRepository;
+  final ProfileRepository _profileRepository;
 
   ProfileManager(this._profileRepository);
 

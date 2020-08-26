@@ -6,7 +6,7 @@ import 'package:tourists/module_network/http_client/http_client.dart';
 
 @provide
 class ProfileRepository {
-  HttpClient _httpClient;
+  final HttpClient _httpClient;
 
   ProfileRepository(this._httpClient);
 

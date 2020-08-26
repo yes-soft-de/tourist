@@ -11,11 +11,11 @@ import 'user_auth_routes.dart';
 
 @provide
 class UserAuthorizationModule extends YesModule {
-  LoginScreen _loginScreen;
-  RegisterScreen _registerScreen;
-  CreateProfileScreen _createProfileScreen;
-  IntentionProfileScreen _intentionProfileScreen;
-  LogoutScreen _logoutScreen;
+  final LoginScreen _loginScreen;
+  final RegisterScreen _registerScreen;
+  final CreateProfileScreen _createProfileScreen;
+  final IntentionProfileScreen _intentionProfileScreen;
+  final LogoutScreen _logoutScreen;
 
   UserAuthorizationModule(this._createProfileScreen, this._registerScreen,
       this._loginScreen, this._intentionProfileScreen, this._logoutScreen);

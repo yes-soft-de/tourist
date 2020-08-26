@@ -37,7 +37,8 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
         widget._preferencesHelper
             .setLoggedInState(LoggedInState.TOURISTS)
             .then((value) {
-          Navigator.of(context).pushNamedAndRemoveUntil(HomeRoutes.home, (r) => false);
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(HomeRoutes.home, (r) => false);
         });
       }
     });

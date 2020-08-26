@@ -12,7 +12,7 @@ class CreateCommentRequest {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['comment'] = this.comment;
     data['region'] = this.region;
     data['user'] = this.user;

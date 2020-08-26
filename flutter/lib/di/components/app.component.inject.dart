@@ -238,8 +238,8 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i34.GuideRegisterBloc _createGuideRegisterBloc() =>
       _i34.GuideRegisterBloc(_createGuideRegisterService());
   _i35.GuideRegisterService _createGuideRegisterService() =>
-      _i35.GuideRegisterService(_createGuideRegisterManager(),
-          _createSharedPreferencesHelper(), _createGuideListService());
+      _i35.GuideRegisterService(
+          _createGuideRegisterManager(), _createGuideListService());
   _i36.GuideRegisterManager _createGuideRegisterManager() =>
       _i36.GuideRegisterManager(_createGuideRegisterRepository());
   _i37.GuideRegisterRepository _createGuideRegisterRepository() =>

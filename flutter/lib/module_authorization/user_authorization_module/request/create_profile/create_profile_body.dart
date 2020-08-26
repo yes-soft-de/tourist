@@ -16,19 +16,19 @@ class CreateProfileBody {
 
   CreateProfileBody(
       {this.userID,
-        this.roles,
-        this.name,
-        this.sex,
-        this.nationality,
-        this.guideLanguage,
-        this.arrivalCity,
-        this.arrivalDate,
-        this.stayDays,
-        this.interests,
-        this.email,
-        this.phoneNumber,
-        this.image,
-        this.createDate});
+      this.roles,
+      this.name,
+      this.sex,
+      this.nationality,
+      this.guideLanguage,
+      this.arrivalCity,
+      this.arrivalDate,
+      this.stayDays,
+      this.interests,
+      this.email,
+      this.phoneNumber,
+      this.image,
+      this.createDate});
 
   CreateProfileBody.fromJson(Map<String, dynamic> json) {
     userID = json['userID'];
@@ -57,7 +57,7 @@ class CreateProfileBody {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['userID'] = this.userID;
     data['roles'] = this.roles;
     data['name'] = this.name;

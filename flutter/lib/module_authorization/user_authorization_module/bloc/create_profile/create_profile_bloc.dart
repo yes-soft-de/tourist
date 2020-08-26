@@ -5,20 +5,15 @@ import 'package:tourists/module_authorization/user_authorization_module/service/
 
 @provide
 class CreateProfileBloc {
-  ProfileService _profileService;
+  final ProfileService _profileService;
   final _profileCreationSubject = PublishSubject<bool>();
 
   CreateProfileBloc(this._profileService);
   Stream<bool> get profileStatus => _profileCreationSubject.stream;
 
   createProfile(String name, String gender, String language) async {
-
     CreateProfileBody profile =
-        new CreateProfileBody(
-          name: name,
-          sex: gender,
-          guideLanguage: language
-        );
+        new CreateProfileBody(name: name, sex: gender, guideLanguage: language);
 
     var profileCreated = await this._profileService.createProfile(profile);
 

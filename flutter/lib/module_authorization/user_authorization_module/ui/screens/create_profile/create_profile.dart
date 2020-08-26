@@ -149,7 +149,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     );
   }
 
-  _createProfile() {
+  void _createProfile() {
     if (_guideLanguage == null) {
       log('Null Language');
       Fluttertoast.showToast(

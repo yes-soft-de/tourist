@@ -19,11 +19,12 @@ class RequestGuideBloc {
 
   RequestGuideBloc(this._requestGuideService, this._locationDetailsService);
 
-  PublishSubject<Pair<int, dynamic>> _requestGuideForm = new PublishSubject();
+  final PublishSubject<Pair<int, dynamic>> _requestGuideForm =
+      new PublishSubject();
 
   Stream<Pair<int, dynamic>> get guideInfoStream => _requestGuideForm.stream;
 
-  requestGuide(String guideId, List<String> requiredServices,
+  void requestGuide(String guideId, List<String> requiredServices,
       DateTime arrivalDate, int stayingDays, String language, String location) {
     print('Requesting Guide');
     _requestGuideService

@@ -4,7 +4,7 @@ import 'package:tourists/module_authorization/user_authorization_module/service/
 
 @provide
 class LoginBloc {
-  LoginService _loginService;
+  final LoginService _loginService;
 
   LoginBloc(this._loginService);
 

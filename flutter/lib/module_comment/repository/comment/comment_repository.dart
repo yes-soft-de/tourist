@@ -10,7 +10,7 @@ class CommentRepository {
 
   CommentRepository(this._client);
 
-  getCommentsOfLocation() {}
+  void getCommentsOfLocation() {}
 
   Future<CreateCommentResponse> createComment(
       CreateCommentRequest request) async {

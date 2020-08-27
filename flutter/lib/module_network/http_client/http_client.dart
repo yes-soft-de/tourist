@@ -26,7 +26,7 @@ class HttpClient {
     try {
       Response response = await _client.get(
         url,
-        options: buildCacheOptions(Duration(seconds: 15)),
+        options: buildCacheOptions(Duration(seconds: 2)),
       );
 
       if (response.statusCode >= 200 && response.statusCode < 300) {

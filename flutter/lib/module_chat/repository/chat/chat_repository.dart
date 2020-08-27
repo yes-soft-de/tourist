@@ -4,7 +4,7 @@ import 'package:tourists/module_chat/model/chat/chat_model.dart';
 
 @provide
 class ChatRepository {
-  Firestore _firestore = Firestore.instance;
+  final Firestore _firestore = Firestore.instance;
 
   Stream<QuerySnapshot> requestMessages(String chatRoomID) {
     return _firestore

@@ -3,24 +3,6 @@
   "summary": {
     "injector": [],
     "module": [],
-    "injectable": [
-      {
-        "name": "EventListBloc",
-        "constructor": {
-          "name": "",
-          "kind": "constructor",
-          "injectedType": {
-            "lookupKey": {
-              "root": "asset:tourists/lib/module_home/bloc/event_list/event_list_bloc.dart#EventListBloc",
-              "qualifier": null
-            },
-            "isProvider": false
-          },
-          "singleton": false,
-          "asynchronous": false,
-          "dependencies": []
-        }
-      }
-    ]
+    "injectable": []
   }
 }

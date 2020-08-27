@@ -25,13 +25,6 @@
                 "qualifier": null
               },
               "isProvider": false
-            },
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/module_forms/user_orders_module/service/request_guide/request_guide.service.dart#RequestGuideService",
-                "qualifier": null
-              },
-              "isProvider": false
             }
           ]
         }

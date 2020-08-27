@@ -25,7 +25,7 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
 
   bool canRequest = true;
 
-  loginUser(String phoneNumber, BuildContext context) {
+  void loginUser(String phoneNumber, BuildContext context) {
     widget._guideLoginBloc.login(phoneNumber);
   }
 
@@ -63,7 +63,7 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
             barrierDismissible: false,
             builder: (context) {
               return AlertDialog(
-                title: Text("Please Provide the Code from the SMS"),
+                title: Text('Please Provide the Code from the SMS'),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -77,7 +77,7 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
                 ),
                 actions: <Widget>[
                   FlatButton(
-                    child: Text("Confirm"),
+                    child: Text('Confirm'),
                     textColor: Colors.white,
                     color: Colors.blue,
                     onPressed: () async {
@@ -92,62 +92,66 @@ class _GuideLoginScreenState extends State<GuideLoginScreen> {
     });
 
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.all(32),
-        child: Form(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                "Login",
-                style: TextStyle(
-                    color: Colors.lightBlue,
-                    fontSize: 36,
-                    fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
-                        borderSide: BorderSide(color: Colors.grey[200])),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
-                        borderSide: BorderSide(color: Colors.grey[300])),
-                    filled: true,
-                    fillColor: Colors.grey[100],
-                    hintText: "Mobile Number"),
-                controller: _phoneController,
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              Container(
-                width: double.infinity,
-                child: FlatButton(
-                  child: Text("LOGIN"),
-                  textColor: Colors.white,
-                  padding: EdgeInsets.all(16),
-                  onPressed: () {
-                    if (!canRequest) return;
-                    final phone = _phoneController.text.trim();
-                    setState(() {
-                      canRequest = false;
-                    });
-                    loginUser(phone, context);
-                  },
-                  color: canRequest ? Colors.blue : Colors.grey,
-                ),
-              )
-            ],
-          ),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
         ),
-      ),
-    ));
+        body: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(32),
+            child: Form(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Login',
+                    style: TextStyle(
+                        color: Colors.lightBlue,
+                        fontSize: 36,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            borderSide: BorderSide(color: Colors.grey[200])),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            borderSide: BorderSide(color: Colors.grey[300])),
+                        filled: true,
+                        fillColor: Colors.grey[100],
+                        hintText: 'Mobile Number'),
+                    controller: _phoneController,
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    width: double.infinity,
+                    child: FlatButton(
+                      child: Text('LOGIN'),
+                      textColor: Colors.white,
+                      padding: EdgeInsets.all(16),
+                      onPressed: () {
+                        if (!canRequest) return;
+                        final phone = _phoneController.text.trim();
+                        setState(() {
+                          canRequest = false;
+                        });
+                        loginUser(phone, context);
+                      },
+                      color: canRequest ? Colors.blue : Colors.grey,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 }

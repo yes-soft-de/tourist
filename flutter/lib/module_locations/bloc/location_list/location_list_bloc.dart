@@ -26,7 +26,7 @@ class LocationListBloc {
 
   Stream<Map<String, dynamic>> get stateStream => _stateSubject.stream;
 
-  requestLocationList() {
+  void requestLocationList() {
     _stateSubject.add({KEY_STATUS: STATUS_CODE_LOADING});
     _locationListService.getLocationList().then((locationList) {
       if (locationList != null) {
@@ -40,7 +40,7 @@ class LocationListBloc {
     });
   }
 
-  dispose() {
+  void dispose() {
     _stateSubject.close();
   }
 }

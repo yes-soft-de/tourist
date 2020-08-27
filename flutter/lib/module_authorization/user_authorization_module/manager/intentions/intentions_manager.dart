@@ -5,11 +5,12 @@ import 'package:tourists/module_authorization/user_authorization_module/response
 
 @provide
 class IntentionsManager {
-  IntentionsRepository _intentionsRepository;
-  
+  final IntentionsRepository _intentionsRepository;
+
   IntentionsManager(this._intentionsRepository);
-  
-  Future<CreateProfileResponse> createIntentions(CreateProfileBody createProfileBody) {
+
+  Future<CreateProfileResponse> createIntentions(
+      CreateProfileBody createProfileBody) {
     return _intentionsRepository.createIntentions(createProfileBody);
   }
 }

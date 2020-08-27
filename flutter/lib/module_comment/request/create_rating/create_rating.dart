@@ -17,7 +17,7 @@ class CreateRatingRequest {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['user'] = this.user;
     data['rate'] = this.rate;
     if (region != null) data['region'] = this.region;

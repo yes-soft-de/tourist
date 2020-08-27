@@ -37,12 +37,14 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
         widget._preferencesHelper
             .setLoggedInState(LoggedInState.TOURISTS)
             .then((value) {
-          Navigator.of(context).pushNamedAndRemoveUntil(HomeRoutes.home, (r) => false);
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(HomeRoutes.home, (r) => false);
         });
       }
     });
 
     return Scaffold(
+      appBar: AppBar(),
       body: ListView(
         children: <Widget>[
           // LOGO
@@ -84,7 +86,8 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
                   ),
                   TextFormField(
                     controller: _arrivalCity,
-                    decoration: const InputDecoration(labelText: 'City'),
+                    decoration:
+                        InputDecoration(labelText: S.of(context).targetCity),
                     validator: (String value) {
                       if (value.isEmpty) {
                         return S.of(context).error_null_text;
@@ -105,7 +108,7 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
                                 TextFormField(
                                   controller: _arrivalDateField,
                                   decoration: InputDecoration(
-                                      labelText: 'Arrival Date'),
+                                      labelText: S.of(context).arrivalDate),
                                 ),
                                 Positioned(
                                   top: 0,
@@ -150,8 +153,8 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
                                 child: TextFormField(
                                   controller: _stayingTime,
                                   keyboardType: TextInputType.number,
-                                  decoration: const InputDecoration(
-                                      labelText: 'Staying for'),
+                                  decoration: InputDecoration(
+                                      labelText: S.of(context).stayingFor),
                                   validator: (String value) {
                                     if (value.isEmpty) {
                                       return S.of(context).error_null_text;
@@ -165,7 +168,7 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
                                 child: Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
-                                  child: Text('Days'),
+                                  child: Text(S.of(context).days),
                                 ),
                               )
                             ],
@@ -173,6 +176,10 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
                         ),
                       ),
                     ],
+                  ),
+                  Flex(
+                    direction: Axis.horizontal,
+                    children: [Text(S.of(context).iCameFor)],
                   ),
                   Flex(
                     direction: Axis.horizontal,
@@ -214,7 +221,7 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
     );
   }
 
-  _createIntentionProfile() {
+  void _createIntentionProfile() {
     List<String> interests = [];
     widget._interests.forEach((key, value) {
       if (value) {
@@ -222,7 +229,7 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
       }
     });
 
-    if (interests.length < 1) {
+    if (interests.isEmpty) {
       return;
     }
 
@@ -232,34 +239,98 @@ class _IntentionProfileScreenState extends State<IntentionProfileScreen> {
 
   List<Widget> _createInterestList() {
     List<Widget> interestList = [];
-    widget._interests.forEach((key, value) {
-      interestList.add(Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GestureDetector(
-          onTap: () {
-            widget._interests[key] = !widget._interests[key];
-            setState(() {});
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(90)),
-              color: widget._interests[key] ? Colors.greenAccent : Colors.white,
-              border: Border.all(
-                  color: widget._interests[key]
-                      ? Colors.white
-                      : Colors.greenAccent),
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(8),
-              child: Text(
-                key,
-                style: TextStyle(color: Colors.black),
-              ),
+
+    // region Mountains
+    interestList.add(Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        onTap: () {
+          widget._interests['Mountains'] = !widget._interests['Mountains'];
+          setState(() {});
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(90)),
+            color: widget._interests['Mountains']
+                ? Colors.greenAccent
+                : Colors.white,
+            border: Border.all(
+                color: widget._interests['Mountains']
+                    ? Colors.white
+                    : Colors.greenAccent),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(8),
+            child: Text(
+              S.of(context).mountains,
+              style: TextStyle(color: Colors.black),
             ),
           ),
         ),
-      ));
-    });
+      ),
+    ));
+    // endregion
+
+    // region Dessert
+    interestList.add(Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        onTap: () {
+          widget._interests['Dessert'] = !widget._interests['Dessert'];
+          setState(() {});
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(90)),
+            color: widget._interests['Dessert']
+                ? Colors.greenAccent
+                : Colors.white,
+            border: Border.all(
+                color: widget._interests['Dessert']
+                    ? Colors.white
+                    : Colors.greenAccent),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(8),
+            child: Text(
+              S.of(context).dessert,
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+        ),
+      ),
+    ));
+    // endregion
+
+    // region Malls
+    interestList.add(Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        onTap: () {
+          widget._interests['Malls'] = !widget._interests['Malls'];
+          setState(() {});
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(90)),
+            color:
+                widget._interests['Malls'] ? Colors.greenAccent : Colors.white,
+            border: Border.all(
+                color: widget._interests['Malls']
+                    ? Colors.white
+                    : Colors.greenAccent),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(8),
+            child: Text(
+              S.of(context).malls,
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+        ),
+      ),
+    ));
+    // endregion
 
     return interestList;
   }

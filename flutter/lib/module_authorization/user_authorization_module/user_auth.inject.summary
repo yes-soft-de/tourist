@@ -46,13 +46,6 @@
                 "qualifier": null
               },
               "isProvider": false
-            },
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/module_authorization/login_selector_module/ui/screens/logout/logout.dart#LogoutScreen",
-                "qualifier": null
-              },
-              "isProvider": false
             }
           ]
         }

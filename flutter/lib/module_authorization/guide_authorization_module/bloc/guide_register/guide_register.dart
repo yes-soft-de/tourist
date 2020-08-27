@@ -20,12 +20,12 @@ class GuideRegisterBloc {
 
   GuideRegisterBloc(this._guideRegisterService);
 
-  PublishSubject<Pair<int, dynamic>> _guideRegisterSubject =
+  final PublishSubject<Pair<int, dynamic>> _guideRegisterSubject =
       new PublishSubject();
 
   Stream<Pair<int, dynamic>> get guideStream => _guideRegisterSubject.stream;
 
-  registerGuide(String name, String uid) {
+  void registerGuide(String name, String uid) {
     _guideRegisterSubject.add(Pair(STATUS_CODE_LOADING, null));
     _guideRegisterService.registerGuide(name, uid).then((value) {
       if (value == null || value == false) {
@@ -36,7 +36,7 @@ class GuideRegisterBloc {
     });
   }
 
-  updateGuide(
+  void updateGuide(
       {@required String name,
       @required String uid,
       @required List<String> languages,
@@ -66,7 +66,7 @@ class GuideRegisterBloc {
     });
   }
 
-  checkIfGuideRegistered() {
+  void checkIfGuideRegistered() {
     _guideRegisterSubject.add(Pair(STATUS_CODE_LOADING, null));
     _guideRegisterService.checkIfRegistered().then((value) {
       _guideRegisterSubject
@@ -74,7 +74,7 @@ class GuideRegisterBloc {
     });
   }
 
-  moveToProfile() {
+  void moveToProfile() {
     _guideRegisterSubject.add(Pair(STATUS_CODE_EDIT_MODE, null));
   }
 }

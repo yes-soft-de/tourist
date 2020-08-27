@@ -73,7 +73,9 @@ class LocationListItemWidget extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                commentsNumber.toString() + ' ' + S.of(context).comments,
+                                commentsNumber.toString() +
+                                    ' ' +
+                                    S.of(context).comments,
                                 style: TextStyle(fontSize: 12),
                               )
                             ],
@@ -91,7 +93,7 @@ class LocationListItemWidget extends StatelessWidget {
   }
 
   List<Widget> getStarsBar(int rate) {
-    List<Widget> starsBar = new List();
+    List<Widget> starsBar = [];
     for (int i = 0; i < 5; i++) {
       i <= rate
           ? starsBar.add(Icon(

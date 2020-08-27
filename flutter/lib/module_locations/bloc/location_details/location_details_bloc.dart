@@ -33,7 +33,7 @@ class LocationDetailsBloc {
   Stream<Map<int, dynamic>> get locationDetailsStream =>
       locationDetailsSubject.stream;
 
-  getLocation(String locationId) async {
+  Future<void> getLocation(String locationId) async {
     LocationDetailsModel model =
         await _locationDetailsService.getLocationDetails(locationId);
     List<GuideListItemModel> guides =
@@ -64,7 +64,7 @@ class LocationDetailsBloc {
     return true;
   }
 
-  createRate(int rate, String locationId) {
+  void createRate(int rate, String locationId) {
     _locationDetailsService.createRate(rate, locationId).then((value) {
       if (value != null) {
         getLocation(locationId);

@@ -47,12 +47,12 @@ class NewCommentWidget extends StatelessWidget {
     );
   }
 
-  createComment() {
+  void createComment() {
     if (!active) {
       return;
     }
     if (commentController.text == null) return;
-    if (commentController.text.length > 0) {
+    if (commentController.text.isNotEmpty) {
       onCommentAdded(commentController.text);
     }
 

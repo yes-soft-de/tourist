@@ -11,7 +11,7 @@ class GuidesResponse {
     statusCode = json['status_code'];
     msg = json['msg'];
     if (json['data'] != null) {
-      data = new List<GuideListItemModel>();
+      data = <GuideListItemModel>[];
       json['data'].forEach((v) {
         if (v != null) data.add(new GuideListItemModel.fromJson(v));
       });
@@ -19,7 +19,7 @@ class GuidesResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['status_code'] = this.statusCode;
     data['msg'] = this.msg;
     if (this.data != null) {

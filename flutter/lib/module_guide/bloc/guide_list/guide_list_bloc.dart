@@ -3,24 +3,28 @@ import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
 import 'package:tourists/module_guide/service/guide_list/guide_list.dart';
+
 @provide
 class GuideListBloc {
   static const int STATUS_CODE_INIT = 845;
   static const int STATUS_CODE_LOAD_SUCCESS = 855;
   static const int STATUS_CODE_LOAD_ERROR = 865;
 
-  GuideListService _guideListService;
+  final GuideListService _guideListService;
   GuideListBloc(this._guideListService);
 
-  PublishSubject<Pair<int, List<GuideListItemModel>>> _guidesListSubject = new PublishSubject();
-  Stream<Pair<int, List<GuideListItemModel>>> get guidesStream => _guidesListSubject.stream;
+  final PublishSubject<Pair<int, List<GuideListItemModel>>> _guidesListSubject =
+      new PublishSubject();
+  Stream<Pair<int, List<GuideListItemModel>>> get guidesStream =>
+      _guidesListSubject.stream;
 
-  getAllGuides(){
+  void getAllGuides() {
     _guideListService.getAllGuides().then((value) {
-      if (value != null)
+      if (value != null) {
         _guidesListSubject.add(Pair(STATUS_CODE_LOAD_SUCCESS, value));
-      else
+      } else {
         _guidesListSubject.add(Pair(STATUS_CODE_LOAD_ERROR, null));
+      }
     });
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/abstracts/module/yes_module.dart';
-import 'package:tourists/module_authorization/login_selector_module/ui/screens/logout/logout.dart';
 
 import 'ui/screens/create_profile/create_profile.dart';
 import 'ui/screens/intention_profile/intention_profile.dart';
@@ -11,14 +10,13 @@ import 'user_auth_routes.dart';
 
 @provide
 class UserAuthorizationModule extends YesModule {
-  LoginScreen _loginScreen;
-  RegisterScreen _registerScreen;
-  CreateProfileScreen _createProfileScreen;
-  IntentionProfileScreen _intentionProfileScreen;
-  LogoutScreen _logoutScreen;
+  final LoginScreen _loginScreen;
+  final RegisterScreen _registerScreen;
+  final CreateProfileScreen _createProfileScreen;
+  final IntentionProfileScreen _intentionProfileScreen;
 
   UserAuthorizationModule(this._createProfileScreen, this._registerScreen,
-      this._loginScreen, this._intentionProfileScreen, this._logoutScreen);
+      this._loginScreen, this._intentionProfileScreen);
 
   @override
   Map<String, WidgetBuilder> getRoutes() {

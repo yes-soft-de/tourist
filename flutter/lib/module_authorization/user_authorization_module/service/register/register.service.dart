@@ -9,7 +9,7 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
 
 @provide
 class RegisterService {
-  SharedPreferencesHelper _sharedPrefsHelper;
+  final SharedPreferencesHelper _sharedPrefsHelper;
 
   RegisterService(this._sharedPrefsHelper);
 
@@ -25,7 +25,8 @@ class RegisterService {
       );
 
       print('User Registeration: ' + (authResult.user != null).toString());
-      AuthResult user = await _auth.signInWithEmailAndPassword(email: username, password: password);
+      AuthResult user = await _auth.signInWithEmailAndPassword(
+          email: username, password: password);
 
       if (user.user != null) {
         this.cacheLoggedInUser(user.user);
@@ -35,13 +36,13 @@ class RegisterService {
         return null;
       }
     } catch (e) {
-      Fluttertoast.showToast(msg: e.toString());
+      await Fluttertoast.showToast(msg: e.toString());
       log(e.toString());
       return null;
     }
   }
 
-  cacheLoggedInUser(FirebaseUser user) {
+  void cacheLoggedInUser(FirebaseUser user) {
     _sharedPrefsHelper.setCurrentUsername(user.email);
     _sharedPrefsHelper.setUserUID(user.uid);
   }

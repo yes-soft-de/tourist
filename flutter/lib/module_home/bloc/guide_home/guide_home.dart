@@ -15,12 +15,12 @@ class GuideHomeBloc {
 
   GuideHomeBloc(this._ordersService);
 
-  PublishSubject<Pair<int, List<OrderModel>>> _orderSubject =
+  final PublishSubject<Pair<int, List<OrderModel>>> _orderSubject =
       new PublishSubject();
 
   Stream<Pair<int, List<OrderModel>>> get ordersStream => _orderSubject.stream;
 
-  getOrdersList() {
+  void getOrdersList() {
     _orderSubject.add(Pair(STATUS_CODE_LOADING, null));
     _ordersService.getOrders().then((value) {
       if (value == null) {
@@ -29,6 +29,4 @@ class GuideHomeBloc {
       _orderSubject.add(Pair(STATUS_CODE_LOAD_SUCCESS, value));
     });
   }
-
-
 }

@@ -12,15 +12,15 @@ class UpdateGuideRequest {
 
   UpdateGuideRequest(
       {this.user,
-        this.name,
-        this.language,
-        this.city,
-        this.phoneNumber,
-        this.status,
-        this.about,
-        this.cost,
-        this.service,
-        this.path});
+      this.name,
+      this.language,
+      this.city,
+      this.phoneNumber,
+      this.status,
+      this.about,
+      this.cost,
+      this.service,
+      this.path});
 
   UpdateGuideRequest.fromJson(Map<String, dynamic> json) {
     user = json['user'];
@@ -36,7 +36,7 @@ class UpdateGuideRequest {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['user'] = this.user;
     data['name'] = this.name;
     data['language'] = this.language;

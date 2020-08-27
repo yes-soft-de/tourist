@@ -83,45 +83,18 @@ class _PendingPaymentOrdersState extends State<PendingPaymentOrders> {
   Widget _getAvailableOrders() {
     List<Widget> orderCards = [];
 
-    if (ordersList != null)
+    if (ordersList != null) {
       ordersList.forEach((order) {
-        if (order.status == 'pendingPayment')
+        if (order.status == 'pendingPayment') {
           orderCards.add(OrderItemWidget(order, onPayOrder: (order) {
             widget.bloc.payOrder(order);
           }));
+        }
       });
+    }
 
     return ListView(
       children: orderCards,
-    );
-  }
-
-  Widget _getUIHeader() {
-    return Flex(
-      direction: Axis.horizontal,
-      children: <Widget>[
-        Flexible(
-          flex: 1,
-          child: GestureDetector(
-            onTap: () {},
-            child: Container(
-              child: Text('Available'),
-            ),
-          ),
-        ),
-        Flexible(
-          flex: 1,
-          child: Container(
-            child: Text('On Going'),
-          ),
-        ),
-        Flexible(
-          flex: 1,
-          child: Container(
-            child: Text('Done'),
-          ),
-        ),
-      ],
     );
   }
 }

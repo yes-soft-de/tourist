@@ -57,7 +57,7 @@ class _EventListScreenState extends State<EventListScreen> {
   }
 
   Widget _getErrorUI() {
-    return Center(child: Text("Error fetching Data"));
+    return Center(child: Text('Error fetching Data'));
   }
 
   Widget _getSuccessUI() {
@@ -135,7 +135,7 @@ class _EventListScreenState extends State<EventListScreen> {
 
     List<EventModel> eventsList = getActiveList();
 
-    if (eventsList.length > 0) {
+    if (eventsList.isNotEmpty) {
       getActiveList().forEach((event) {
         pageLayout.add(GestureDetector(
           onTap: () {
@@ -172,7 +172,7 @@ class _EventListScreenState extends State<EventListScreen> {
     return events;
   }
 
-  getDate(int timeStamp) {
+  DateTime getDate(int timeStamp) {
     return new DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
   }
 }

@@ -1,91 +1,88 @@
 import 'app.component.dart' as _i1;
 import '../../utils/logger/logger.dart' as _i2;
+import '../../utils/auth_guard/auth_gard.dart' as _i3;
 import '../../module_locations/bloc/location_list/location_list_bloc.dart'
-    as _i3;
-import '../../utils/auth_guard/auth_gard.dart' as _i4;
+    as _i4;
 import 'dart:async' as _i5;
 import '../../main.dart' as _i6;
-import '../../module_authorization/authprization_module.dart' as _i7;
-import '../../module_authorization/user_authorization_module/user_auth.dart'
-    as _i8;
-import '../../module_authorization/user_authorization_module/ui/screens/create_profile/create_profile.dart'
-    as _i9;
-import '../../module_authorization/user_authorization_module/bloc/create_profile/create_profile_bloc.dart'
-    as _i10;
-import '../../module_authorization/user_authorization_module/service/profile/profile.service.dart'
-    as _i11;
-import '../../module_authorization/user_authorization_module/manager/profile/profile.manager.dart'
-    as _i12;
-import '../../module_authorization/user_authorization_module/repository/profile/profile.repository.dart'
-    as _i13;
-import '../../module_network/http_client/http_client.dart' as _i14;
+import '../../utils/language/language.dart' as _i7;
 import '../../module_persistence/sharedpref/shared_preferences_helper.dart'
+    as _i8;
+import '../../module_authorization/authprization_module.dart' as _i9;
+import '../../module_authorization/user_authorization_module/user_auth.dart'
+    as _i10;
+import '../../module_authorization/user_authorization_module/ui/screens/create_profile/create_profile.dart'
+    as _i11;
+import '../../module_authorization/user_authorization_module/bloc/create_profile/create_profile_bloc.dart'
+    as _i12;
+import '../../module_authorization/user_authorization_module/service/profile/profile.service.dart'
+    as _i13;
+import '../../module_authorization/user_authorization_module/manager/profile/profile.manager.dart'
+    as _i14;
+import '../../module_authorization/user_authorization_module/repository/profile/profile.repository.dart'
     as _i15;
+import '../../module_network/http_client/http_client.dart' as _i16;
 import '../../module_authorization/user_authorization_module/ui/screens/register/register.dart'
-    as _i16;
-import '../../module_authorization/user_authorization_module/bloc/register/register.bloc.dart'
     as _i17;
-import '../../module_authorization/user_authorization_module/service/register/register.service.dart'
+import '../../module_authorization/user_authorization_module/bloc/register/register.bloc.dart'
     as _i18;
-import '../../module_authorization/user_authorization_module/ui/screens/login/login.dart'
+import '../../module_authorization/user_authorization_module/service/register/register.service.dart'
     as _i19;
-import '../../module_authorization/user_authorization_module/bloc/login/login.bloc.dart'
+import '../../module_authorization/user_authorization_module/ui/screens/login/login.dart'
     as _i20;
-import '../../module_authorization/user_authorization_module/service/login/login.service.dart'
+import '../../module_authorization/user_authorization_module/bloc/login/login.bloc.dart'
     as _i21;
-import '../../module_authorization/user_authorization_module/ui/screens/intention_profile/intention_profile.dart'
+import '../../module_authorization/user_authorization_module/service/login/login.service.dart'
     as _i22;
-import '../../module_authorization/user_authorization_module/bloc/create_intentions/create_intention_bloc.dart'
+import '../../module_authorization/user_authorization_module/ui/screens/intention_profile/intention_profile.dart'
     as _i23;
-import '../../module_authorization/user_authorization_module/service/intentions/intentions_service.dart'
+import '../../module_authorization/user_authorization_module/bloc/create_intentions/create_intention_bloc.dart'
     as _i24;
-import '../../module_authorization/user_authorization_module/manager/intentions/intentions_manager.dart'
+import '../../module_authorization/user_authorization_module/service/intentions/intentions_service.dart'
     as _i25;
-import '../../module_authorization/user_authorization_module/repository/intentions/intentions_repository.dart'
+import '../../module_authorization/user_authorization_module/manager/intentions/intentions_manager.dart'
     as _i26;
-import '../../module_authorization/login_selector_module/ui/screens/logout/logout.dart'
+import '../../module_authorization/user_authorization_module/repository/intentions/intentions_repository.dart'
     as _i27;
-import '../../module_authorization/guide_authorization_module/guide_authorization_module.dart'
+import '../../module_authorization/login_selector_module/ui/screens/logout/logout.dart'
     as _i28;
-import '../../module_authorization/guide_authorization_module/ui/screens/guide_profile/guide_profile.dart'
+import '../../module_authorization/guide_authorization_module/guide_authorization_module.dart'
     as _i29;
-import '../../module_locations/service/location_list/location_list_service.dart'
+import '../../module_authorization/guide_authorization_module/ui/screens/guide_profile/guide_profile.dart'
     as _i30;
-import '../../module_locations/manager/location_list/location_list_manager.dart'
+import '../../module_locations/service/location_list/location_list_service.dart'
     as _i31;
-import '../../module_locations/repository/location_list/location_list_repository.dart'
+import '../../module_locations/manager/location_list/location_list_manager.dart'
     as _i32;
-import '../../module_authorization/guide_authorization_module/bloc/guide_register/guide_register.dart'
+import '../../module_locations/repository/location_list/location_list_repository.dart'
     as _i33;
-import '../../module_authorization/guide_authorization_module/service/guide_register/guide_register.dart'
+import '../../module_authorization/guide_authorization_module/bloc/guide_register/guide_register.dart'
     as _i34;
-import '../../module_authorization/guide_authorization_module/manager/guide_register/guide_register.dart'
+import '../../module_authorization/guide_authorization_module/service/guide_register/guide_register.dart'
     as _i35;
-import '../../module_authorization/guide_authorization_module/repository/guide_register/guide_register.dart'
+import '../../module_authorization/guide_authorization_module/manager/guide_register/guide_register.dart'
     as _i36;
-import '../../module_guide/service/guide_list/guide_list.dart' as _i37;
-import '../../module_guide/manager/guides_manager/guides_manager.dart' as _i38;
-import '../../module_guide/repository/guides/guide_repository.dart' as _i39;
+import '../../module_authorization/guide_authorization_module/repository/guide_register/guide_register.dart'
+    as _i37;
+import '../../module_guide/service/guide_list/guide_list.dart' as _i38;
+import '../../module_guide/manager/guides_manager/guides_manager.dart' as _i39;
+import '../../module_guide/repository/guides/guide_repository.dart' as _i40;
 import '../../module_authorization/guide_authorization_module/ui/screens/guide_login/guide_login.dart'
-    as _i40;
-import '../../module_authorization/guide_authorization_module/bloc/guide_login/guide_login.bloc.dart'
     as _i41;
-import '../../module_authorization/login_selector_module/ui/screens/account_type_selector/login_type_selector.dart'
+import '../../module_authorization/guide_authorization_module/bloc/guide_login/guide_login.bloc.dart'
     as _i42;
-import '../../module_home/home_module.dart' as _i43;
-import '../../module_home/ui/screens/guide_home/guide_home.dart' as _i44;
-import '../../module_orders/ui/screen/guide_orders/guide_orders.dart' as _i45;
+import '../../module_authorization/login_selector_module/ui/screens/account_type_selector/login_type_selector.dart'
+    as _i43;
+import '../../module_settings/settings_module.dart' as _i44;
+import '../../module_settings/ui/settings/settings.dart' as _i45;
+import '../../module_home/home_module.dart' as _i46;
+import '../../module_home/ui/screens/guide_home/guide_home.dart' as _i47;
+import '../../module_orders/ui/screen/guide_orders/guide_orders.dart' as _i48;
 import '../../module_orders/bloc/guide_orders_list/guide_orders_list.dart'
-    as _i46;
-import '../../module_orders/service/guide_orders/guide_orders.dart' as _i47;
-import '../../module_orders/manager/guide_orders/guide_orders.dart' as _i48;
-import '../../module_orders/repository/guide_orders/guide_orders.dart' as _i49;
-import '../../module_forms/user_orders_module/service/request_guide/request_guide.service.dart'
-    as _i50;
-import '../../module_forms/user_orders_module/manager/request_manager/request_guide_manager.dart'
-    as _i51;
-import '../../module_forms/user_orders_module/repository/request_guide/request_guide_repository.dart'
-    as _i52;
+    as _i49;
+import '../../module_orders/service/guide_orders/guide_orders.dart' as _i50;
+import '../../module_orders/manager/guide_orders/guide_orders.dart' as _i51;
+import '../../module_orders/repository/guide_orders/guide_orders.dart' as _i52;
 import '../../module_locations/ui/screens/location_list/location_list_screen.dart'
     as _i53;
 import '../../module_locations/ui/screens/event_list/event_list.dart' as _i54;
@@ -139,15 +136,21 @@ import '../../module_forms/user_orders_module/ui/screens/request_guide/request_g
     as _i91;
 import '../../module_forms/user_orders_module/bloc/request_guide/request_guide.bloc.dart'
     as _i92;
+import '../../module_forms/user_orders_module/service/request_guide/request_guide.service.dart'
+    as _i93;
+import '../../module_forms/user_orders_module/manager/request_manager/request_guide_manager.dart'
+    as _i94;
+import '../../module_forms/user_orders_module/repository/request_guide/request_guide_repository.dart'
+    as _i95;
 
 class AppComponent$Injector implements _i1.AppComponent {
   AppComponent$Injector._();
 
   _i2.Logger _singletonLogger;
 
-  _i3.LocationListBloc _singletonLocationListBloc;
+  _i3.AuthGuard _singletonAuthGuard;
 
-  _i4.AuthGuard _singletonAuthGuard;
+  _i4.LocationListBloc _singletonLocationListBloc;
 
   static _i5.Future<_i1.AppComponent> create() async {
     final injector = AppComponent$Injector._();
@@ -156,129 +159,129 @@ class AppComponent$Injector implements _i1.AppComponent {
   }
 
   _i6.MyApp _createMyApp() => _i6.MyApp(
+      _createLanguageHelper(),
       _createAuthorizationModule(),
+      _createSettingsModule(),
       _createHomeModule(),
       _createSplashModule(),
       _createChatModule(),
       _createLocationModule(),
       _createGuideListModule(),
       _createOrderModule(),
-      _createFormsModule(),
-      _createSharedPreferencesHelper());
-  _i7.AuthorizationModule _createAuthorizationModule() =>
-      _i7.AuthorizationModule(
+      _createFormsModule());
+  _i7.LanguageHelper _createLanguageHelper() =>
+      _i7.LanguageHelper(_createSharedPreferencesHelper());
+  _i8.SharedPreferencesHelper _createSharedPreferencesHelper() =>
+      _i8.SharedPreferencesHelper();
+  _i9.AuthorizationModule _createAuthorizationModule() =>
+      _i9.AuthorizationModule(
           _createUserAuthorizationModule(),
           _createLogoutScreen(),
           _createGuideAuthorizationModule(),
           _createLoginTypeSelectorScreen());
-  _i8.UserAuthorizationModule _createUserAuthorizationModule() =>
-      _i8.UserAuthorizationModule(
+  _i10.UserAuthorizationModule _createUserAuthorizationModule() =>
+      _i10.UserAuthorizationModule(
           _createCreateProfileScreen(),
           _createRegisterScreen(),
           _createLoginScreen(),
-          _createIntentionProfileScreen(),
-          _createLogoutScreen());
-  _i9.CreateProfileScreen _createCreateProfileScreen() =>
-      _i9.CreateProfileScreen(
+          _createIntentionProfileScreen());
+  _i11.CreateProfileScreen _createCreateProfileScreen() =>
+      _i11.CreateProfileScreen(
           _createCreateProfileBloc(), _createSharedPreferencesHelper());
-  _i10.CreateProfileBloc _createCreateProfileBloc() =>
-      _i10.CreateProfileBloc(_createProfileService());
-  _i11.ProfileService _createProfileService() => _i11.ProfileService(
+  _i12.CreateProfileBloc _createCreateProfileBloc() =>
+      _i12.CreateProfileBloc(_createProfileService());
+  _i13.ProfileService _createProfileService() => _i13.ProfileService(
       _createProfileManager(), _createSharedPreferencesHelper());
-  _i12.ProfileManager _createProfileManager() =>
-      _i12.ProfileManager(_createProfileRepository());
-  _i13.ProfileRepository _createProfileRepository() =>
-      _i13.ProfileRepository(_createHttpClient());
-  _i14.HttpClient _createHttpClient() => _i14.HttpClient(_createLogger());
+  _i14.ProfileManager _createProfileManager() =>
+      _i14.ProfileManager(_createProfileRepository());
+  _i15.ProfileRepository _createProfileRepository() =>
+      _i15.ProfileRepository(_createHttpClient());
+  _i16.HttpClient _createHttpClient() => _i16.HttpClient(_createLogger());
   _i2.Logger _createLogger() => _singletonLogger ??= _i2.Logger();
-  _i15.SharedPreferencesHelper _createSharedPreferencesHelper() =>
-      _i15.SharedPreferencesHelper();
-  _i16.RegisterScreen _createRegisterScreen() =>
-      _i16.RegisterScreen(_createRegisterBloc());
-  _i17.RegisterBloc _createRegisterBloc() =>
-      _i17.RegisterBloc(_createRegisterService());
-  _i18.RegisterService _createRegisterService() =>
-      _i18.RegisterService(_createSharedPreferencesHelper());
-  _i19.LoginScreen _createLoginScreen() =>
-      _i19.LoginScreen(_createLoginBloc(), _createSharedPreferencesHelper());
-  _i20.LoginBloc _createLoginBloc() => _i20.LoginBloc(_createLoginService());
-  _i21.LoginService _createLoginService() =>
-      _i21.LoginService(_createSharedPreferencesHelper());
-  _i22.IntentionProfileScreen _createIntentionProfileScreen() =>
-      _i22.IntentionProfileScreen(
+  _i17.RegisterScreen _createRegisterScreen() =>
+      _i17.RegisterScreen(_createRegisterBloc());
+  _i18.RegisterBloc _createRegisterBloc() =>
+      _i18.RegisterBloc(_createRegisterService());
+  _i19.RegisterService _createRegisterService() =>
+      _i19.RegisterService(_createSharedPreferencesHelper());
+  _i20.LoginScreen _createLoginScreen() =>
+      _i20.LoginScreen(_createLoginBloc(), _createSharedPreferencesHelper());
+  _i21.LoginBloc _createLoginBloc() => _i21.LoginBloc(_createLoginService());
+  _i22.LoginService _createLoginService() =>
+      _i22.LoginService(_createSharedPreferencesHelper());
+  _i23.IntentionProfileScreen _createIntentionProfileScreen() =>
+      _i23.IntentionProfileScreen(
           _createCreateIntentionBloc(), _createSharedPreferencesHelper());
-  _i23.CreateIntentionBloc _createCreateIntentionBloc() =>
-      _i23.CreateIntentionBloc(_createIntentionService());
-  _i24.IntentionService _createIntentionService() =>
-      _i24.IntentionService(_createIntentionsManager());
-  _i25.IntentionsManager _createIntentionsManager() =>
-      _i25.IntentionsManager(_createIntentionsRepository());
-  _i26.IntentionsRepository _createIntentionsRepository() =>
-      _i26.IntentionsRepository(_createHttpClient());
-  _i27.LogoutScreen _createLogoutScreen() =>
-      _i27.LogoutScreen(_createSharedPreferencesHelper());
-  _i28.GuideAuthorizationModule _createGuideAuthorizationModule() =>
-      _i28.GuideAuthorizationModule(
+  _i24.CreateIntentionBloc _createCreateIntentionBloc() =>
+      _i24.CreateIntentionBloc(_createIntentionService());
+  _i25.IntentionService _createIntentionService() =>
+      _i25.IntentionService(_createIntentionsManager());
+  _i26.IntentionsManager _createIntentionsManager() =>
+      _i26.IntentionsManager(_createIntentionsRepository());
+  _i27.IntentionsRepository _createIntentionsRepository() =>
+      _i27.IntentionsRepository(_createHttpClient());
+  _i28.LogoutScreen _createLogoutScreen() =>
+      _i28.LogoutScreen(_createSharedPreferencesHelper());
+  _i29.GuideAuthorizationModule _createGuideAuthorizationModule() =>
+      _i29.GuideAuthorizationModule(
           _createGuideProfileScreen(), _createGuideLoginScreen());
-  _i29.GuideProfileScreen _createGuideProfileScreen() =>
-      _i29.GuideProfileScreen(_createLocationListService(),
+  _i30.GuideProfileScreen _createGuideProfileScreen() =>
+      _i30.GuideProfileScreen(_createLocationListService(),
           _createGuideRegisterBloc(), _createSharedPreferencesHelper());
-  _i30.LocationListService _createLocationListService() =>
-      _i30.LocationListService(_createLocationListManager());
-  _i31.LocationListManager _createLocationListManager() =>
-      _i31.LocationListManager(_createLocationListRepository());
-  _i32.LocationListRepository _createLocationListRepository() =>
-      _i32.LocationListRepository(_createHttpClient());
-  _i33.GuideRegisterBloc _createGuideRegisterBloc() =>
-      _i33.GuideRegisterBloc(_createGuideRegisterService());
-  _i34.GuideRegisterService _createGuideRegisterService() =>
-      _i34.GuideRegisterService(_createGuideRegisterManager(),
-          _createSharedPreferencesHelper(), _createGuideListService());
-  _i35.GuideRegisterManager _createGuideRegisterManager() =>
-      _i35.GuideRegisterManager(_createGuideRegisterRepository());
-  _i36.GuideRegisterRepository _createGuideRegisterRepository() =>
-      _i36.GuideRegisterRepository(_createHttpClient());
-  _i37.GuideListService _createGuideListService() =>
-      _i37.GuideListService(_createGuidesManager());
-  _i38.GuidesManager _createGuidesManager() =>
-      _i38.GuidesManager(_createGuidesRepository());
-  _i39.GuidesRepository _createGuidesRepository() =>
-      _i39.GuidesRepository(_createHttpClient());
-  _i40.GuideLoginScreen _createGuideLoginScreen() =>
-      _i40.GuideLoginScreen(_createGuideLoginBloc());
-  _i41.GuideLoginBloc _createGuideLoginBloc() => _i41.GuideLoginBloc();
-  _i42.LoginTypeSelectorScreen _createLoginTypeSelectorScreen() =>
-      _i42.LoginTypeSelectorScreen();
-  _i43.HomeModule _createHomeModule() => _i43.HomeModule(
+  _i31.LocationListService _createLocationListService() =>
+      _i31.LocationListService(_createLocationListManager());
+  _i32.LocationListManager _createLocationListManager() =>
+      _i32.LocationListManager(_createLocationListRepository());
+  _i33.LocationListRepository _createLocationListRepository() =>
+      _i33.LocationListRepository(_createHttpClient());
+  _i34.GuideRegisterBloc _createGuideRegisterBloc() =>
+      _i34.GuideRegisterBloc(_createGuideRegisterService());
+  _i35.GuideRegisterService _createGuideRegisterService() =>
+      _i35.GuideRegisterService(
+          _createGuideRegisterManager(), _createGuideListService());
+  _i36.GuideRegisterManager _createGuideRegisterManager() =>
+      _i36.GuideRegisterManager(_createGuideRegisterRepository());
+  _i37.GuideRegisterRepository _createGuideRegisterRepository() =>
+      _i37.GuideRegisterRepository(_createHttpClient());
+  _i38.GuideListService _createGuideListService() =>
+      _i38.GuideListService(_createGuidesManager());
+  _i39.GuidesManager _createGuidesManager() =>
+      _i39.GuidesManager(_createGuidesRepository());
+  _i40.GuidesRepository _createGuidesRepository() =>
+      _i40.GuidesRepository(_createHttpClient());
+  _i41.GuideLoginScreen _createGuideLoginScreen() =>
+      _i41.GuideLoginScreen(_createGuideLoginBloc());
+  _i42.GuideLoginBloc _createGuideLoginBloc() => _i42.GuideLoginBloc();
+  _i43.LoginTypeSelectorScreen _createLoginTypeSelectorScreen() =>
+      _i43.LoginTypeSelectorScreen();
+  _i44.SettingsModule _createSettingsModule() =>
+      _i44.SettingsModule(_createSettingsScreen());
+  _i45.SettingsScreen _createSettingsScreen() =>
+      _i45.SettingsScreen(_createAuthGuard(), _createLanguageHelper());
+  _i3.AuthGuard _createAuthGuard() =>
+      _singletonAuthGuard ??= _i3.AuthGuard(_createSharedPreferencesHelper());
+  _i46.HomeModule _createHomeModule() => _i46.HomeModule(
       _createGuideHomeScreen(), _createHomeScreen(), _createAuthGuard());
-  _i44.GuideHomeScreen _createGuideHomeScreen() => _i44.GuideHomeScreen(
+  _i47.GuideHomeScreen _createGuideHomeScreen() => _i47.GuideHomeScreen(
       _createGuideOrdersScreen(),
       _createLocationListScreen(),
       _createEventListScreen(),
       _createSharedPreferencesHelper());
-  _i45.GuideOrdersScreen _createGuideOrdersScreen() =>
-      _i45.GuideOrdersScreen(_createGuideOrdersListBloc());
-  _i46.GuideOrdersListBloc _createGuideOrdersListBloc() =>
-      _i46.GuideOrdersListBloc(_createGuideOrdersService());
-  _i47.GuideOrdersService _createGuideOrdersService() =>
-      _i47.GuideOrdersService(
-          _createGuideOrdersManager(), _createRequestGuideService());
-  _i48.GuideOrdersManager _createGuideOrdersManager() =>
-      _i48.GuideOrdersManager(_createGuideOrdersRepository());
-  _i49.GuideOrdersRepository _createGuideOrdersRepository() =>
-      _i49.GuideOrdersRepository(_createHttpClient());
-  _i50.RequestGuideService _createRequestGuideService() =>
-      _i50.RequestGuideService(_createSharedPreferencesHelper(),
-          _createGuideListService(), _createRequestGuideManager());
-  _i51.RequestGuideManager _createRequestGuideManager() =>
-      _i51.RequestGuideManager(_createRequestGuideRepository());
-  _i52.RequestGuideRepository _createRequestGuideRepository() =>
-      _i52.RequestGuideRepository(_createHttpClient());
+  _i48.GuideOrdersScreen _createGuideOrdersScreen() =>
+      _i48.GuideOrdersScreen(_createGuideOrdersListBloc());
+  _i49.GuideOrdersListBloc _createGuideOrdersListBloc() =>
+      _i49.GuideOrdersListBloc(_createGuideOrdersService());
+  _i50.GuideOrdersService _createGuideOrdersService() =>
+      _i50.GuideOrdersService(_createGuideOrdersManager());
+  _i51.GuideOrdersManager _createGuideOrdersManager() =>
+      _i51.GuideOrdersManager(_createGuideOrdersRepository());
+  _i52.GuideOrdersRepository _createGuideOrdersRepository() =>
+      _i52.GuideOrdersRepository(_createHttpClient());
   _i53.LocationListScreen _createLocationListScreen() =>
       _i53.LocationListScreen(_createLocationListBloc());
-  _i3.LocationListBloc _createLocationListBloc() =>
+  _i4.LocationListBloc _createLocationListBloc() =>
       _singletonLocationListBloc ??=
-          _i3.LocationListBloc(_createLocationListService(), _createLogger());
+          _i4.LocationListBloc(_createLocationListService(), _createLogger());
   _i54.EventListScreen _createEventListScreen() =>
       _i54.EventListScreen(_createEventListBloc());
   _i55.EventListBloc _createEventListBloc() =>
@@ -293,28 +296,25 @@ class AppComponent$Injector implements _i1.AppComponent {
       _createLocationListScreen(),
       _createGuideListScreen(),
       _createEventListScreen(),
-      _createSharedPreferencesHelper(),
       _createAuthGuard(),
       _createLocationCarouselScreen());
   _i60.GuideListScreen _createGuideListScreen() =>
       _i60.GuideListScreen(_createGuideListBloc());
   _i61.GuideListBloc _createGuideListBloc() =>
       _i61.GuideListBloc(_createGuideListService());
-  _i4.AuthGuard _createAuthGuard() =>
-      _singletonAuthGuard ??= _i4.AuthGuard(_createSharedPreferencesHelper());
   _i62.LocationCarouselScreen _createLocationCarouselScreen() =>
       _i62.LocationCarouselScreen(_createLocationListBloc());
   _i63.SplashModule _createSplashModule() =>
       _i63.SplashModule(_createSplashScreen());
-  _i64.SplashScreen _createSplashScreen() => _i64.SplashScreen();
+  _i64.SplashScreen _createSplashScreen() =>
+      _i64.SplashScreen(_createLanguageHelper());
   _i65.ChatModule _createChatModule() => _i65.ChatModule(
       _createChatPage(), _createAuthGuard(), _createLoginTypeSelectorScreen());
-  _i66.ChatPage _createChatPage() =>
-      _i66.ChatPage(_createChatPageBloc(), _createSharedPreferencesHelper());
+  _i66.ChatPage _createChatPage() => _i66.ChatPage(_createChatPageBloc());
   _i67.ChatPageBloc _createChatPageBloc() =>
       _i67.ChatPageBloc(_createChatService());
   _i68.ChatService _createChatService() =>
-      _i68.ChatService(_createChatManager(), _createSharedPreferencesHelper());
+      _i68.ChatService(_createChatManager());
   _i69.ChatManager _createChatManager() =>
       _i69.ChatManager(_createChatRepository());
   _i70.ChatRepository _createChatRepository() => _i70.ChatRepository();
@@ -364,13 +364,18 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i89.OrdersRepository _createOrdersRepository() =>
       _i89.OrdersRepository(_createHttpClient());
   _i90.FormsModule _createFormsModule() => _i90.FormsModule(
-      _createRequestGuideScreen(),
-      _createAuthGuard(),
-      _createLoginTypeSelectorScreen());
+      _createRequestGuideScreen(), _createAuthGuard(), _createLoginScreen());
   _i91.RequestGuideScreen _createRequestGuideScreen() =>
       _i91.RequestGuideScreen(_createRequestGuideBloc(), _createLogger());
   _i92.RequestGuideBloc _createRequestGuideBloc() => _i92.RequestGuideBloc(
       _createRequestGuideService(), _createLocationDetailsService());
+  _i93.RequestGuideService _createRequestGuideService() =>
+      _i93.RequestGuideService(
+          _createGuideListService(), _createRequestGuideManager());
+  _i94.RequestGuideManager _createRequestGuideManager() =>
+      _i94.RequestGuideManager(_createRequestGuideRepository());
+  _i95.RequestGuideRepository _createRequestGuideRepository() =>
+      _i95.RequestGuideRepository(_createHttpClient());
   @override
   _i6.MyApp get app => _createMyApp();
 }

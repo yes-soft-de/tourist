@@ -8,8 +8,8 @@ import 'package:tourists/module_orders/response/update_order_response.dart';
 
 @provide
 class GuideOrdersRepository {
-  HttpClient _httpClient;
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final HttpClient _httpClient;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   GuideOrdersRepository(this._httpClient);
 

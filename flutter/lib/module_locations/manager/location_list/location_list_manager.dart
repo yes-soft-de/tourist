@@ -5,12 +5,13 @@ import 'package:tourists/module_locations/response/location_list/location_list_r
 
 @provide
 class LocationListManager {
-  LocationListRepository _locationListRepository;
+  final LocationListRepository _locationListRepository;
 
   LocationListManager(this._locationListRepository);
 
   Future<List<LocationListItem>> getLocationList() async {
-    LocationListResponse response = await _locationListRepository.getLocationList();
+    LocationListResponse response =
+        await _locationListRepository.getLocationList();
 
     if (response != null) {
       return response.locationList;

@@ -11,7 +11,7 @@ class OrderResponse {
     statusCode = json['status_code'];
     msg = json['msg'];
     if (json['data'] != null) {
-      orderList = new List<OrderModel>();
+      orderList = <OrderModel>[];
       json['data'].forEach((v) {
         orderList.add(new OrderModel.fromJson(v));
       });
@@ -19,7 +19,7 @@ class OrderResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['status_code'] = this.statusCode;
     data['msg'] = this.msg;
     if (this.orderList != null) {

@@ -8,17 +8,14 @@ import 'package:tourists/module_authorization/guide_authorization_module/request
 import 'package:tourists/module_authorization/guide_authorization_module/response/update_guide/update_guide_response.dart';
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
 import 'package:tourists/module_guide/service/guide_list/guide_list.dart';
-import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 
 @provide
 class GuideRegisterService {
   final GuideRegisterManager _guideRegisterManager;
-  final SharedPreferencesHelper _preferencesHelper;
   final GuideListService _guideListService;
   final FirebaseAuth _authService = FirebaseAuth.instance;
 
-  GuideRegisterService(this._guideRegisterManager, this._preferencesHelper,
-      this._guideListService);
+  GuideRegisterService(this._guideRegisterManager, this._guideListService);
 
   Future<bool> registerGuide(String name, String uid) async {
     RegisterGuideRequest request = new RegisterGuideRequest();
@@ -26,7 +23,7 @@ class GuideRegisterService {
     request.userID = uid;
     request.email = uid;
     request.password = uid.hashCode.toString();
-    request.roles = "guide";
+    request.roles = 'guide';
 
     dynamic response = await _guideRegisterManager.registerGuide(request);
     if (response == null) return false;
@@ -45,7 +42,7 @@ class GuideRegisterService {
 
     guidesList.forEach((element) {
       if (element.userID == uid) {
-        log("User Already Exists with ID: " + uid);
+        log('User Already Exists with ID: ' + uid);
         guideLoggedId = element;
       }
     });

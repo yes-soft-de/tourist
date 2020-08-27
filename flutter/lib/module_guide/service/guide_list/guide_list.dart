@@ -5,7 +5,7 @@ import 'package:tourists/module_guide/response/guide_response/guides_response.da
 
 @provide
 class GuideListService {
-  GuidesManager _guidesManager;
+  final GuidesManager _guidesManager;
 
   GuideListService(this._guidesManager);
 

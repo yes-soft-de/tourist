@@ -20,11 +20,11 @@ class EventDetailsBloc {
 
   EventDetailsBloc(this._eventService, this._locationListService);
 
-  PublishSubject<Map<int, dynamic>> _eventSubject = new PublishSubject();
+  final PublishSubject<Map<int, dynamic>> _eventSubject = new PublishSubject();
 
   Stream<Map<int, dynamic>> get eventStream => _eventSubject.stream;
 
-  getEventDetails(String id) async {
+  void getEventDetails(String id) async {
     EventModel eventDetailsModel = await this._eventService.getEvent(id);
     if (eventDetailsModel == null) {
       _eventSubject.add({KEY_STATUS: STATUS_CODE_LOAD_ERROR});

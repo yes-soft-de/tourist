@@ -5,12 +5,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 
-
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
 @provide
 class LoginService {
-  SharedPreferencesHelper _preferencesHelper;
+  final SharedPreferencesHelper _preferencesHelper;
 
   LoginService(this._preferencesHelper);
 
@@ -27,13 +26,16 @@ class LoginService {
         return null;
       }
     } catch (e) {
-      Fluttertoast.showToast(msg: 'Can\'t Find user or Error Connecting to Server');
+      await Fluttertoast.showToast(
+          msg: e.toString(),
+          toastLength: Toast.LENGTH_LONG,
+          timeInSecForIosWeb: 3000);
       log(e.toString());
       return null;
     }
   }
 
-  _cacheLoggedInUser(FirebaseUser user) {
+  void _cacheLoggedInUser(FirebaseUser user) {
     _preferencesHelper.setUserUID(user.uid);
   }
 }

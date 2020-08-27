@@ -9,9 +9,9 @@ import 'ui/screen/orders_list/order_list_screen.dart';
 
 @provide
 class OrderModule extends YesModule {
-  OrdersListScreen _ordersListScreen;
-  LoginTypeSelectorScreen _loginTypeSelectorScreen;
-  AuthGuard _authGuard;
+  final OrdersListScreen _ordersListScreen;
+  final LoginTypeSelectorScreen _loginTypeSelectorScreen;
+  final AuthGuard _authGuard;
 
   OrderModule(
       this._ordersListScreen, this._loginTypeSelectorScreen, this._authGuard);

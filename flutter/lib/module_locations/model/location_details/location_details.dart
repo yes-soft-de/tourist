@@ -13,12 +13,12 @@ class LocationDetailsModel {
 
   LocationDetailsModel(
       {this.id,
-        this.name,
-        this.description,
-        this.location,
-        this.comments,
-        this.ratingAverage,
-        this.paths});
+      this.name,
+      this.description,
+      this.location,
+      this.comments,
+      this.ratingAverage,
+      this.paths});
 
   LocationDetailsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -27,13 +27,13 @@ class LocationDetailsModel {
     location = json['location'].cast<String>();
     ratingAverage = json['ratingAverage'];
     if (json['comments'] != null) {
-      comments = new List<CommentModel>();
+      comments = <CommentModel>[];
       json['comments'].forEach((v) {
         comments.add(new CommentModel.fromJson(v));
       });
     }
     if (json['regionImage'] != null) {
-      paths = new List<Paths>();
+      paths = <Paths>[];
       json['regionImage'].forEach((v) {
         paths.add(new Paths.fromJson(v));
         log('Added an Image');
@@ -44,7 +44,7 @@ class LocationDetailsModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['name'] = this.name;
     data['description'] = this.description;
@@ -70,7 +70,7 @@ class Paths {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['path'] = this.path;
     return data;
   }

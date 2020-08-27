@@ -26,8 +26,13 @@ class GuideRegisterRepository {
     return GuidesResponse.fromJson(response);
   }
 
-  loginGuide() {
-    return this._client.get(Urls.guideList);
+  Future<GuidesResponse> loginGuide() async {
+    Map<String, dynamic> guide = await this._client.get(Urls.guideList);
+
+    if (guide == null) {
+      return null;
+    }
+    return GuidesResponse.fromJson(guide);
   }
 
   Future<UpdateGuidResponse> updateGuide(

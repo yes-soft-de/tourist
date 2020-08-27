@@ -742,6 +742,176 @@ class S {
       args: [],
     );
   }
+
+  /// `Logged in:`
+  String get loggedIn {
+    return Intl.message(
+      'Logged in:',
+      name: 'loggedIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Guide`
+  String get guide {
+    return Intl.message(
+      'Guide',
+      name: 'guide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tourist`
+  String get tourist {
+    return Intl.message(
+      'Tourist',
+      name: 'tourist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Arrival Date`
+  String get arrivalDate {
+    return Intl.message(
+      'Arrival Date',
+      name: 'arrivalDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not Logged In`
+  String get notLoggedIn {
+    return Intl.message(
+      'Not Logged In',
+      name: 'notLoggedIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mountains`
+  String get mountains {
+    return Intl.message(
+      'Mountains',
+      name: 'mountains',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dessert`
+  String get dessert {
+    return Intl.message(
+      'Dessert',
+      name: 'dessert',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Malls`
+  String get malls {
+    return Intl.message(
+      'Malls',
+      name: 'malls',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I came for:`
+  String get iCameFor {
+    return Intl.message(
+      'I came for:',
+      name: 'iCameFor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sent / Pending`
+  String get sentPending {
+    return Intl.message(
+      'Sent / Pending',
+      name: 'sentPending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pending Payment`
+  String get pendingPayment {
+    return Intl.message(
+      'Pending Payment',
+      name: 'pendingPayment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payed / On going`
+  String get payedOnGoing {
+    return Intl.message(
+      'Payed / On going',
+      name: 'payedOnGoing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Finished Orders`
+  String get finishedOrders {
+    return Intl.message(
+      'Finished Orders',
+      name: 'finishedOrders',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

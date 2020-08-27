@@ -6,7 +6,7 @@ import 'package:tourists/module_splash/ui/splash_routes.dart';
 
 @provide
 class SplashModule extends YesModule {
-  SplashScreen _splashScreen;
+  final SplashScreen _splashScreen;
 
   SplashModule(this._splashScreen);
 

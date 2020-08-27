@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_orders/bloc/orders_list_bloc/orders_list_bloc.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
 import 'package:tourists/module_orders/ui/widget/order_item/order_item.dart';
@@ -16,12 +17,12 @@ class OrdersListScreen extends StatefulWidget {
 }
 
 class _OrderListScreenState extends State<OrdersListScreen> {
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
   int activePosition = 0;
   List<OrderModel> ordersList;
   int currentStatus = OrdersListBloc.STATUS_CODE_INIT;
 
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   String currentUserId;
 
   @override
@@ -53,7 +54,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
     }
   }
 
-  _getSuccessUI() {
+  Widget _getSuccessUI() {
     List<Widget> pageLayout = [];
     pageLayout.add(Container(
       height: 36,
@@ -101,12 +102,12 @@ class _OrderListScreenState extends State<OrdersListScreen> {
   Scaffold _getErrorUI() {
     return Scaffold(
       body: Center(
-        child: Text("Undefined State?!! " + currentStatus.toString()),
+        child: Text('Undefined State?!! ' + currentStatus.toString()),
       ),
     );
   }
 
-  _getLoadingUI() {
+  Scaffold _getLoadingUI() {
     return Scaffold(
         body: Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -115,7 +116,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [Text("Loading"), CircularProgressIndicator()],
+          children: [Text('Loading'), CircularProgressIndicator()],
         ),
       ],
     ));
@@ -137,7 +138,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
               child: Container(
                   alignment: Alignment.center,
                   child: Text(
-                    'Sent / Pending',
+                    S.of(context).sentPending,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: activePosition == 0
@@ -156,7 +157,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
               child: Container(
                   alignment: Alignment.center,
                   child: Text(
-                    'Pending Payment',
+                    S.of(context).pendingPayment,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: activePosition == 1
@@ -175,7 +176,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
               child: Container(
                   alignment: Alignment.center,
                   child: Text(
-                    'Payed / On going',
+                    S.of(context).payedOnGoing,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: activePosition == 2
@@ -194,7 +195,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
               child: Container(
                   alignment: Alignment.center,
                   child: Text(
-                    'Finished Orders',
+                    S.of(context).finishedOrders,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: activePosition == 3
@@ -211,23 +212,24 @@ class _OrderListScreenState extends State<OrdersListScreen> {
       return ListView(
         children: <Widget>[
           Center(
-            child: Text("Empty List"),
+            child: Text('Empty List'),
           ),
         ],
       );
     }
     List<Widget> ordersWidgetList = [];
     ordersList.forEach((element) {
-      if (element.status == 'waitingPayment')
+      if (element.status == 'waitingPayment') {
         ordersWidgetList.add(OrderItemWidget(
           element,
           canPay: currentUserId == element.touristUserID,
         ));
+      }
     });
     return ListView(
-      children: ordersWidgetList.length > 0
+      children: ordersWidgetList.isNotEmpty
           ? ordersWidgetList
-          : <Widget>[Center(child: Text("Empty List"))],
+          : <Widget>[Center(child: Text('Empty List'))],
     );
   }
 
@@ -236,14 +238,14 @@ class _OrderListScreenState extends State<OrdersListScreen> {
       return ListView(
         children: <Widget>[
           Center(
-            child: Text("Empty List"),
+            child: Text('Empty List'),
           ),
         ],
       );
     }
     List<Widget> ordersWidgetList = [];
     ordersList.forEach((element) {
-      if (element.status == 'pending')
+      if (element.status == 'pending') {
         ordersWidgetList.add(OrderItemWidget(
           element,
           canPay: currentUserId == element.touristUserID,
@@ -254,11 +256,12 @@ class _OrderListScreenState extends State<OrdersListScreen> {
             widget._bloc.payOrder(order);
           },
         ));
+      }
     });
     return ListView(
-      children: ordersWidgetList.length > 0
+      children: ordersWidgetList.isNotEmpty
           ? ordersWidgetList
-          : <Widget>[Center(child: Text("Empty List"))],
+          : <Widget>[Center(child: Text('Empty List'))],
     );
   }
 
@@ -267,23 +270,24 @@ class _OrderListScreenState extends State<OrdersListScreen> {
       return ListView(
         children: <Widget>[
           Center(
-            child: Text("Empty List"),
+            child: Text('Empty List'),
           ),
         ],
       );
     }
     List<Widget> ordersWidgetList = [];
     ordersList.forEach((element) {
-      if (element.status == 'onGoing')
+      if (element.status == 'onGoing') {
         ordersWidgetList.add(OrderItemWidget(
           element,
           canPay: currentUserId == element.touristUserID,
         ));
+      }
     });
     return ListView(
-      children: ordersWidgetList.length > 0
+      children: ordersWidgetList.isNotEmpty
           ? ordersWidgetList
-          : <Widget>[Center(child: Text("Empty List"))],
+          : <Widget>[Center(child: Text('Empty List'))],
     );
   }
 
@@ -292,23 +296,24 @@ class _OrderListScreenState extends State<OrdersListScreen> {
       return ListView(
         children: <Widget>[
           Center(
-            child: Text("Empty List"),
+            child: Text('Empty List'),
           ),
         ],
       );
     }
     List<Widget> ordersWidgetList = [];
     ordersList.forEach((element) {
-      if (element.status == 'finished')
+      if (element.status == 'finished') {
         ordersWidgetList.add(OrderItemWidget(
           element,
           canPay: currentUserId == element.touristUserID,
         ));
+      }
     });
     return ListView(
-      children: ordersWidgetList.length > 0
+      children: ordersWidgetList.isNotEmpty
           ? ordersWidgetList
-          : <Widget>[Center(child: Text("Empty List"))],
+          : <Widget>[Center(child: Text('Empty List'))],
     );
   }
 }

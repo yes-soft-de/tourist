@@ -16,12 +16,12 @@ class OrdersListBloc {
 
   OrdersListBloc(this._ordersService);
 
-  PublishSubject<Pair<int, List<OrderModel>>> _orderSubject =
+  final PublishSubject<Pair<int, List<OrderModel>>> _orderSubject =
       new PublishSubject();
 
   Stream<Pair<int, List<OrderModel>>> get ordersStream => _orderSubject.stream;
 
-  getOrdersList() {
+  void getOrdersList() {
     _orderSubject.add(Pair(STATUS_CODE_LOADING, null));
     _ordersService.getOrders().then((value) {
       if (value == null) {
@@ -31,7 +31,7 @@ class OrdersListBloc {
     });
   }
 
-  payOrder(OrderModel orderModel) {
+  void payOrder(OrderModel orderModel) {
     _orderSubject.add(Pair(STATUS_CODE_LOADING, null));
     orderModel.roomID = Uuid().v1();
     _ordersService.payOrder(orderModel).then((value) {
@@ -43,7 +43,7 @@ class OrdersListBloc {
     });
   }
 
-  dispose() {
+  void dispose() {
     _orderSubject.close();
   }
 }

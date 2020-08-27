@@ -77,7 +77,8 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                   children: <Widget>[
                     TextFormField(
                       controller: _nameController,
-                      decoration: const InputDecoration(labelText: 'Name'),
+                      decoration:
+                          InputDecoration(labelText: S.of(context).name),
                       validator: (String value) {
                         if (value.isEmpty) {
                           return S.of(context).error_null_text;
@@ -149,7 +150,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     );
   }
 
-  _createProfile() {
+  void _createProfile() {
     if (_guideLanguage == null) {
       log('Null Language');
       Fluttertoast.showToast(

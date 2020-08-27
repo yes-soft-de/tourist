@@ -97,7 +97,7 @@ class _GuideOrdersScreenState extends State<GuideOrdersScreen> {
 
     print('Got ' + ordersList.length.toString() + ' Length');
 
-    if (ordersList != null)
+    if (ordersList != null) {
       ordersList.forEach((order) {
         print(order.toJson().toString());
         orderCards.add(OrderItemWidget(order,
@@ -111,38 +111,10 @@ class _GuideOrdersScreenState extends State<GuideOrdersScreen> {
           widget.bloc.payAvailableOrder(orderModel);
         }));
       });
+    }
 
     return ListView(
       children: orderCards,
-    );
-  }
-
-  Widget _getUIHeader() {
-    return Flex(
-      direction: Axis.horizontal,
-      children: <Widget>[
-        Flexible(
-          flex: 1,
-          child: GestureDetector(
-            onTap: () {},
-            child: Container(
-              child: Text('Available'),
-            ),
-          ),
-        ),
-        Flexible(
-          flex: 1,
-          child: Container(
-            child: Text('On Going'),
-          ),
-        ),
-        Flexible(
-          flex: 1,
-          child: Container(
-            child: Text('Done'),
-          ),
-        ),
-      ],
     );
   }
 }

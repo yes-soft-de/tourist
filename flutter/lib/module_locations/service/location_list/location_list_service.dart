@@ -4,7 +4,7 @@ import 'package:tourists/module_locations/model/location_list_item/location_list
 
 @provide
 class LocationListService {
-  LocationListManager _locationListManager;
+  final LocationListManager _locationListManager;
 
   LocationListService(this._locationListManager);
 

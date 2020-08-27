@@ -4,12 +4,11 @@ import 'package:tourists/module_locations/response/location_details/location_res
 
 @provide
 class LocationDetailsManager {
-  LocationDetailsRepository _repository;
-  
+  final LocationDetailsRepository _repository;
+
   LocationDetailsManager(this._repository);
-  
+
   Future<LocationDetailsResponse> getLocationDetails(String locationId) {
     return this._repository.getLocationDetails(locationId);
   }
-  
 }

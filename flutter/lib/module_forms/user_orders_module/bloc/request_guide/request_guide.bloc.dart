@@ -19,11 +19,12 @@ class RequestGuideBloc {
 
   RequestGuideBloc(this._requestGuideService, this._locationDetailsService);
 
-  PublishSubject<Pair<int, dynamic>> _requestGuideForm = new PublishSubject();
+  final PublishSubject<Pair<int, dynamic>> _requestGuideForm =
+      new PublishSubject();
 
   Stream<Pair<int, dynamic>> get guideInfoStream => _requestGuideForm.stream;
 
-  requestGuide(String guideId, List<String> requiredServices,
+  void requestGuide(String guideId, List<String> requiredServices,
       DateTime arrivalDate, int stayingDays, String language, String location) {
     print('Requesting Guide');
     _requestGuideService
@@ -36,28 +37,32 @@ class RequestGuideBloc {
             location: location))
         .then((requestSuccess) {
       print('Requesting Guide Complete');
-      if (requestSuccess)
-        _requestGuideForm.add(Pair(STATUS_CODE_REQUEST_SUCCESS, null));
-      else
+      if (requestSuccess != null) {
+        _requestGuideForm
+            .add(Pair(STATUS_CODE_REQUEST_SUCCESS, requestSuccess));
+      } else {
         _requestGuideForm.add(Pair(STATUS_CODE_REQUEST_ERROR, null));
+      }
     });
   }
 
-  getGuideWithId(String guid) {
+  void getGuideWithId(String guid) {
     _requestGuideService.getGuideInfoWithId(guid).then((guideInfo) {
-      if (guideInfo != null)
+      if (guideInfo != null) {
         _requestGuideForm.add(Pair(STATUS_CODE_LOAD_SUCCESS, guideInfo));
-      else
+      } else {
         _requestGuideForm.add(Pair(STATUS_CODE_LOAD_ERROR, null));
+      }
     });
   }
 
-  getLocationWithId(String locationId) {
+  void getLocationWithId(String locationId) {
     _locationDetailsService.getLocationDetails(locationId).then((value) {
-      if (value != null)
+      if (value != null) {
         _requestGuideForm.add(Pair(STATUS_CODE_LOAD_SUCCESS, value));
-      else
+      } else {
         _requestGuideForm.add(Pair(STATUS_CODE_LOAD_ERROR, null));
+      }
     });
   }
 }

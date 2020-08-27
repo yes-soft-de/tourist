@@ -13,7 +13,7 @@ class HttpClient {
   Dio _client;
   final Logger _logger;
 
-  final String tag = "HttpClient";
+  final String tag = 'HttpClient';
 
   HttpClient(this._logger) {
     _client = new Dio(BaseOptions());
@@ -26,7 +26,7 @@ class HttpClient {
     try {
       Response response = await _client.get(
         url,
-        options: buildCacheOptions(Duration(seconds: 15)),
+        options: buildCacheOptions(Duration(seconds: 2)),
       );
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
@@ -34,10 +34,10 @@ class HttpClient {
         return response.data;
       } else {
         _logger.error(tag, response.statusCode.toString() + ' for link ' + url);
-        Fluttertoast.showToast(
-            msg: "Error Code " +
+        await Fluttertoast.showToast(
+            msg: 'Error Code ' +
                 response.statusCode.toString() +
-                " Please Retry",
+                ' Please Retry',
             toastLength: Toast.LENGTH_SHORT,
             timeInSecForIosWeb: 1,
             backgroundColor: Colors.red,
@@ -47,7 +47,7 @@ class HttpClient {
       }
     } catch (e) {
       _logger.error(tag, e.toString());
-      Fluttertoast.showToast(msg: e.toString());
+      await Fluttertoast.showToast(msg: e.toString());
       return null;
     }
   }
@@ -68,7 +68,7 @@ class HttpClient {
       }
     } catch (e) {
       _logger.error(tag, e.toString());
-      Fluttertoast.showToast(msg: e.toString());
+      await Fluttertoast.showToast(msg: e.toString());
       return null;
     }
   }
@@ -88,7 +88,7 @@ class HttpClient {
       }
     } catch (e) {
       _logger.error(tag, e.toString());
-      Fluttertoast.showToast(msg: e.toString());
+      await Fluttertoast.showToast(msg: e.toString());
       return null;
     }
   }

@@ -24,7 +24,7 @@ class GuideHomeScreen extends StatefulWidget {
 
 class GuideHomeScreenState extends State<GuideHomeScreen> {
   int currentPosition;
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
 
   GuideHomeScreenState(this.currentPosition);
 
@@ -81,7 +81,7 @@ class GuideHomeScreenState extends State<GuideHomeScreen> {
     );
   }
 
-  moveToPage(int position) {
+  void moveToPage(int position) {
     _pageController.jumpToPage(position);
   }
 }

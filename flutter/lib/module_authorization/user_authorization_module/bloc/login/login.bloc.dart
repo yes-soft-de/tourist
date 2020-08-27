@@ -4,7 +4,7 @@ import 'package:tourists/module_authorization/user_authorization_module/service/
 
 @provide
 class LoginBloc {
-  LoginService _loginService;
+  final LoginService _loginService;
 
   LoginBloc(this._loginService);
 
@@ -12,13 +12,13 @@ class LoginBloc {
 
   Stream<String> get loginStatus => _loginChecker.stream;
 
-  login(String username, String password) async {
+  void login(String username, String password) async {
     String loginResponse = await _loginService.login(username, password);
 
     _loginChecker.add(loginResponse);
   }
 
-  dispose() {
+  void dispose() {
     _loginChecker.close();
   }
 }

@@ -36,7 +36,7 @@ class EventService {
   Future<EventModel> getEvent(String id) async {
     EventResponse response = await _manager.getEvent(id);
 
-    if (response != null)
+    if (response != null) {
       return EventModel(
           id: response.data.id,
           name: response.data.name,
@@ -46,6 +46,7 @@ class EventService {
           images: response.data.images,
           date: response.data.date,
           status: response.data.status);
+    }
     return null;
   }
 }

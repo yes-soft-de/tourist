@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/user/bloc/home/home_bloc.dart",
+  "asset": "asset:tourists/lib/utils/language/language.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "HomeBloc",
+        "name": "LanguageHelper",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/user/bloc/home/home_bloc.dart#HomeBloc",
+              "root": "asset:tourists/lib/utils/language/language.dart#LanguageHelper",
               "qualifier": null
             },
             "isProvider": false
@@ -21,7 +21,7 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/user/services/location_list/location_list_service.dart#LocationListService",
+                "root": "asset:tourists/lib/module_persistence/sharedpref/shared_preferences_helper.dart#SharedPreferencesHelper",
                 "qualifier": null
               },
               "isProvider": false

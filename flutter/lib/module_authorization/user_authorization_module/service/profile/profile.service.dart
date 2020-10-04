@@ -17,7 +17,7 @@ class ProfileService {
   Future<CreateProfileResponse> createProfile(CreateProfileBody profile) async {
     // Get UID
     FirebaseAuth auth = FirebaseAuth.instance;
-    FirebaseUser user = await auth.currentUser();
+    User user = auth.currentUser;
     String uid = user.uid;
 
     if (uid == null) {

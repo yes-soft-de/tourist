@@ -24,7 +24,7 @@ class GuideOrdersService {
   }
 
   Future<List<OrderModel>> getGuideId() async {
-    FirebaseUser user = await _auth.currentUser();
+    User user = await _auth.currentUser;
     String userId = user.uid;
 
     OrderResponse response = await _ordersManager.getGuideOrders(userId);
@@ -65,7 +65,7 @@ class GuideOrdersService {
     orderModel.roomID = new Uuid().v1();
     orderModel.status = 'pendingPayment';
 
-    FirebaseUser user = await _auth.currentUser();
+    User user = await _auth.currentUser;
     orderModel.guidUserID = user.uid;
 
     UpdateOrderResponse response =

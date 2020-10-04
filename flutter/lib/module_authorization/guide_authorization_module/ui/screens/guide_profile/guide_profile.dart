@@ -51,10 +51,9 @@ class _GuideProfileScreenState extends State<GuideProfileScreen> {
       _getLocations();
     }
 
-    _auth.currentUser().then((value) {
-      _phoneNumber = value.phoneNumber;
-      _userId = value.uid;
-    });
+    User user = _auth.currentUser;
+    _phoneNumber = user.phoneNumber;
+    _userId = user.uid;
 
     widget._guideRegisterBloc.guideStream.listen((event) {
       print('Event: ' + event.first.toString());

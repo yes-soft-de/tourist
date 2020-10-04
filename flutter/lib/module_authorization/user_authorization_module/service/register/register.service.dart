@@ -19,13 +19,14 @@ class RegisterService {
         ' and Password: ' +
         password);
     try {
-      final AuthResult authResult = await _auth.createUserWithEmailAndPassword(
+      final UserCredential authResult =
+          await _auth.createUserWithEmailAndPassword(
         email: username,
         password: password,
       );
 
       print('User Registeration: ' + (authResult.user != null).toString());
-      AuthResult user = await _auth.signInWithEmailAndPassword(
+      UserCredential user = await _auth.signInWithEmailAndPassword(
           email: username, password: password);
 
       if (user.user != null) {

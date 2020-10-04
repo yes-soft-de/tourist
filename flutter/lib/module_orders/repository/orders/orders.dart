@@ -31,7 +31,7 @@ class OrdersRepository {
   }
 
   Future<OrderResponse> getAvailableOrders() async {
-    FirebaseUser guideUser = await _auth.currentUser();
+    FirebaseUser guideUser = await _auth.currentUser;
     String guideId = guideUser.uid;
 
     Map response = await _httpClient.get(Urls.orderLookup + '/$guideId');

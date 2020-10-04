@@ -16,7 +16,7 @@ class OrdersService {
   OrdersService(this._ordersManager, this._guideListService);
 
   Future<List<OrderModel>> getOrders() async {
-    FirebaseUser user = await _authService.currentUser();
+    User user = await _authService.currentUser;
     if (user == null) {
       return null;
     }
@@ -30,7 +30,7 @@ class OrdersService {
   }
 
   Future<List<OrderModel>> getGeneralOrders() async {
-    FirebaseUser user = await _authService.currentUser();
+    User user = await _authService.currentUser;
 
     OrderResponse response = await _ordersManager.getGeneralOrderList(user.uid);
 

@@ -17,7 +17,7 @@ class RequestGuideService {
   RequestGuideService(this._guidesService, this._requestGuideManager);
 
   Future<String> requestGuide(RequestGuideModel requestGuide) async {
-    FirebaseUser user = await _auth.currentUser();
+    User user = await _auth.currentUser;
     if (user == null) {
       return null;
     }

@@ -29,7 +29,7 @@ class GuideLoginBloc {
         verificationCompleted: (AuthCredential credentials) {
           log('Verification Complete');
           _auth.signInWithCredential(credentials).then((result) {
-            FirebaseUser user = result.user;
+            User user = result.user;
 
             if (user != null) {
               log('Code Verify complete');
@@ -54,7 +54,7 @@ class GuideLoginBloc {
   }
 
   void confirmCode(String code) async {
-    AuthCredential credential = PhoneAuthProvider.getCredential(
+    AuthCredential credential = PhoneAuthProvider.credential(
         verificationId: _verificationId, smsCode: code);
 
     UserCredential result = await _auth.signInWithCredential(credential);

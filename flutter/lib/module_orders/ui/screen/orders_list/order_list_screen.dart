@@ -32,7 +32,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
 
       if (currentStatus == OrdersListBloc.STATUS_CODE_LOAD_SUCCESS) {
         ordersList = event.last;
-        FirebaseUser user = await _auth.currentUser;
+        User user = await _auth.currentUser;
         currentUserId = user.uid;
       }
 

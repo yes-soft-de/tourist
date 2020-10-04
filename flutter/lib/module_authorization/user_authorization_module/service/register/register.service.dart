@@ -43,7 +43,7 @@ class RegisterService {
     }
   }
 
-  void cacheLoggedInUser(FirebaseUser user) {
+  void cacheLoggedInUser(User user) {
     _sharedPrefsHelper.setCurrentUsername(user.email);
     _sharedPrefsHelper.setUserUID(user.uid);
   }

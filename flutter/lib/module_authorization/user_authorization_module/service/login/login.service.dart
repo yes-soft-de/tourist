@@ -35,7 +35,7 @@ class LoginService {
     }
   }
 
-  void _cacheLoggedInUser(FirebaseUser user) {
+  void _cacheLoggedInUser(User user) {
     _preferencesHelper.setUserUID(user.uid);
   }
 }

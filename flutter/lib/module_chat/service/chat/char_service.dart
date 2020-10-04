@@ -19,7 +19,7 @@ class ChatService {
   void requestMessages(String chatRoomID) async {
     _chatManager.getMessages(chatRoomID).listen((event) {
       List<ChatModel> chatMessagesList = [];
-      event.documents.forEach((element) {
+      event.docs.forEach((element) {
         chatMessagesList.add(new ChatModel.fromJson(element.data()));
       });
 

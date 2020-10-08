@@ -8,18 +8,24 @@ import 'package:tourists/module_home/home_routes.dart';
 import 'package:tourists/utils/language/language.dart';
 
 @provide
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   final LanguageHelper _languageHelper;
-
   SplashScreen(this._languageHelper);
 
   @override
-  Widget build(BuildContext context) {
-    _languageHelper.getLanguage();
+  State<StatefulWidget> createState() => _SplashScreenState();
+}
 
-    Future.delayed(Duration(seconds: 1), () {
+class _SplashScreenState extends State<SplashScreen> {
+  bool configLoaded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    widget._languageHelper.getLanguage();
+
+    if (configLoaded != true) {
       setUpRemoteConfig(context);
-    });
+    }
 
     return Scaffold(
         body: Row(
@@ -64,7 +70,7 @@ class SplashScreen extends StatelessWidget {
       Urls.baseAPI = base != null
           ? remoteConfig.getString('server')
           : 'http://35.228.120.165/';
-
+      configLoaded = true;
       await Navigator.of(context)
           .pushNamedAndRemoveUntil(HomeRoutes.home, (r) => false);
     } catch (e) {

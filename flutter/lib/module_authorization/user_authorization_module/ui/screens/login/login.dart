@@ -1,6 +1,8 @@
 import 'dart:developer' as developer;
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
@@ -99,17 +101,41 @@ class _LoginScreenState extends State<LoginScreen> {
                     Container(
                       height: 16,
                     ),
-                    TextFormField(
-                      controller: _passwordController,
-                      obscureText: true,
-                      decoration:
-                          InputDecoration(labelText: S.of(context).password),
-                      validator: (String value) {
-                        if (value.isEmpty || value.length < 6) {
-                          return S.of(context).error_null_text;
-                        }
-                        return null;
-                      },
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            border: Border.all(width: 0.5),
+                          ),
+                          child: GestureDetector(
+                              onTap: () {
+                                widget._loginBlock.loginWithGoogle();
+                              },
+                              child: Flex(
+                                direction: Axis.horizontal,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: 36,
+                                    width: 36,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: SvgPicture.asset(
+                                        'resources/images/google-logo.svg',
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text('Sign in With Google'),
+                                  ),
+                                ],
+                              )),
+                        ),
+                      ],
                     ),
                     Container(
                       height: 16,

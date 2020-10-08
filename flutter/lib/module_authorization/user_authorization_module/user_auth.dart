@@ -15,8 +15,12 @@ class UserAuthorizationModule extends YesModule {
   final CreateProfileScreen _createProfileScreen;
   final IntentionProfileScreen _intentionProfileScreen;
 
-  UserAuthorizationModule(this._createProfileScreen, this._registerScreen,
-      this._loginScreen, this._intentionProfileScreen);
+  UserAuthorizationModule(
+    this._createProfileScreen,
+    this._registerScreen,
+    this._loginScreen,
+    this._intentionProfileScreen,
+  );
 
   @override
   Map<String, WidgetBuilder> getRoutes() {

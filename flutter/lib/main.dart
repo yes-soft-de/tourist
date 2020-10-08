@@ -1,5 +1,6 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -21,15 +22,15 @@ import 'module_splash/splash_module.dart';
 
 typedef Provider<T> = T Function();
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  SystemChrome.setPreferredOrientations([
+  await Firebase.initializeApp();
+  await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
-  ]).then((_) async {
-    final container = await AppComponent.create();
-    runApp(container.app);
-  });
+  ]);
+
+  final container = await AppComponent.create();
+  runApp(container.app);
 }
 
 @provide

@@ -5,7 +5,6 @@ import 'package:tourists/module_authorization/user_authorization_module/service/
 @provide
 class LoginBloc {
   final LoginService _loginService;
-
   LoginBloc(this._loginService);
 
   final _loginChecker = PublishSubject<String>();
@@ -15,6 +14,11 @@ class LoginBloc {
   void login(String username, String password) async {
     String loginResponse = await _loginService.login(username, password);
 
+    _loginChecker.add(loginResponse);
+  }
+
+  void loginWithGoogle() async {
+    String loginResponse = await _loginService.loginWithGoogle();
     _loginChecker.add(loginResponse);
   }
 

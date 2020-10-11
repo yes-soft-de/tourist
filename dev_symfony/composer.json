@@ -27,6 +27,7 @@
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
+        "symfony/phpunit-bridge": "^5.1"
     },
     "config": {
         "preferred-install": {
@@ -66,7 +67,9 @@
         ]
     },
     "conflict": {
-        "symfony/symfony": "*"
+        "symfony/symfony": "*",
+        "doctrine/common": ">=3.0",
+        "doctrine/persistence": "<1.3"
     },
     "extra": {
         "symfony": {

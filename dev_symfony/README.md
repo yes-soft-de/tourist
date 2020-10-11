@@ -166,3 +166,42 @@ methods={"GET"}
 /event/{eventID}
 methods={"GET"}
 ```
+
+### Payment
+
+------------
+#### Create payment
+```
+/payment
+methods={"POST"}
+```
+
+#### Update payment
+```
+/payment
+methods={"PUT"}
+```
+
+#### Get all payments
+```
+/payment
+methods={"GET"}
+```
+
+#### Get payment by id
+```
+/payment/{id}
+methods={"GET"}
+```
+
+#### Get payments by touristUserID
+```
+/paymenttourist/{id}
+methods={"GET"}
+```
+
+#### Get payment by guidUserID
+```
+/paymentguid/{id}
+methods={"GET"}
+```

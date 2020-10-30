@@ -39,13 +39,6 @@
                 "qualifier": null
               },
               "isProvider": false
-            },
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/module_authorization/user_authorization_module/ui/screens/intention_profile/intention_profile.dart#IntentionProfileScreen",
-                "qualifier": null
-              },
-              "isProvider": false
             }
           ]
         }

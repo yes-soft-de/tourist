@@ -1,73 +1,33 @@
+import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
+import 'dart:math';
 
+import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:inject/inject.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:tourists/module_authorization/user_authorization_module/bloc/login/login.bloc.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
 @provide
 class LoginService {
-  final SharedPreferencesHelper _preferencesHelper;
+  final SharedPreferencesHelper _prefsHelper;
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
-  LoginService(this._preferencesHelper);
+  LoginService(this._prefsHelper);
 
-  Future<String> login(String username, String password) async {
-    // Login User to Firebase
-    try {
-      var user = await _auth.signInWithEmailAndPassword(
-          email: username, password: password);
+  Future<dynamic> get isLoggedIn => _prefsHelper.getUserUID();
 
-      if (user.user.uid != null) {
-        _cacheLoggedInUser(user.user);
-        return user.user.uid;
-      } else {
-        return null;
-      }
-    } catch (e) {
-      await Fluttertoast.showToast(
-          msg: e.toString(),
-          toastLength: Toast.LENGTH_LONG,
-          timeInSecForIosWeb: 3000);
-      log(e.toString());
-      return null;
-    }
-  }
-
-  Future<String> loginWithGoogle() async {
-    // Login User to Firebase
-    try {
-      GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
-      GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount.authentication;
-      AuthCredential credential = await GoogleAuthProvider.credential(
-        accessToken: googleSignInAuthentication.accessToken,
-        idToken: googleSignInAuthentication.idToken,
-      );
-      await _auth.signInWithCredential(credential);
-
-      var user = _auth.currentUser;
-
-      if (user.uid != null) {
-        _cacheLoggedInUser(user);
-        return user.uid;
-      } else {
-        return null;
-      }
-    } catch (e) {
-      await Fluttertoast.showToast(
-          msg: e.toString(),
-          toastLength: Toast.LENGTH_LONG,
-          timeInSecForIosWeb: 3000);
-      log(e.toString());
-      return null;
-    }
-  }
-
-  void _cacheLoggedInUser(User user) {
-    _preferencesHelper.setUserUID(user.uid);
+  Future<bool> loginUser(
+      String uid, String name, String email, AUTH_SOURCE authSource) async {
+    await _prefsHelper.setUserUID(uid);
+    await _prefsHelper.setUsername(name);
+    await _prefsHelper.setAuthSource(authSource);
+    return true;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:inject/inject.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tourists/module_authorization/user_authorization_module/bloc/login/login.bloc.dart';
 
 @provide
 class SharedPreferencesHelper {
@@ -25,6 +26,31 @@ class SharedPreferencesHelper {
     SharedPreferences _sharedPreferences =
         await SharedPreferences.getInstance();
     return _sharedPreferences.getString('uid');
+  }
+
+  Future<void> setUsername(String username) async {
+    SharedPreferences _sharedPreferences =
+        await SharedPreferences.getInstance();
+    return _sharedPreferences.setString('username', username);
+  }
+
+  Future<String> getUsername() async {
+    SharedPreferences _sharedPreferences =
+        await SharedPreferences.getInstance();
+    return _sharedPreferences.getString('username');
+  }
+
+  Future<void> setAuthSource(AUTH_SOURCE source) async {
+    SharedPreferences _sharedPreferences =
+        await SharedPreferences.getInstance();
+    return _sharedPreferences.setInt('source', source.index);
+  }
+
+  Future<AUTH_SOURCE> getAuthSource() async {
+    SharedPreferences _sharedPreferences =
+        await SharedPreferences.getInstance();
+    int source = await _sharedPreferences.getInt('source');
+    return source as AUTH_SOURCE;
   }
 
   Future<bool> clearData() async {
@@ -67,6 +93,24 @@ class SharedPreferencesHelper {
         await SharedPreferences.getInstance();
     return _sharedPreferences.setString('local', local);
   }
+
+  Future<void> cacheLoggedInUser(String uid, LoginSource source) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('uid', uid);
+    await prefs.setInt('source', source.index);
+  }
+
+  Future<void> setLoginPending(bool status) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('pending_login', status);
+  }
+
+  Future<bool> getLoginPending() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('pending_login');
+  }
 }
+
+enum LoginSource { APPLE, GOOGLE, EMAIL, PHONE }
 
 enum LoggedInState { NOT_LOGGED_ID, TOURISTS, GUIDE }

@@ -11,23 +11,9 @@ class AuthGuard {
   AuthGuard(this._sharedPreferencesHelper);
 
   Future<bool> isLoggedIn() async {
-    LoggedInState state = await _sharedPreferencesHelper.getLoggedInState();
+    String uid = await _sharedPreferencesHelper.getUserUID();
 
-    if (state == null) {
-      return false;
-    }
-
-    log('Auth Guard' + state.toString());
-
-    if (state == LoggedInState.NOT_LOGGED_ID) {
-      return false;
-    }
-
-    if (state == LoggedInState.GUIDE || state == LoggedInState.TOURISTS) {
-      return true;
-    }
-
-    return state != null;
+    return uid != null;
   }
 
   Future<bool> isGuide() async {

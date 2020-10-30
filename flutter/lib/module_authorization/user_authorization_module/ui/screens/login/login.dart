@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_authorization/user_authorization_module/bloc/login/login.bloc.dart';
+import 'package:tourists/module_authorization/user_authorization_module/states/login_state.dart';
 import 'package:tourists/module_home/home_routes.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 
@@ -26,7 +27,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
 
   bool _error;
   String _userEmail;
@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     widget._loginBlock.loginStatus.listen((event) {
-      if (event != null && event.isNotEmpty) {
+      if (event is LoginStateSuccess) {
         widget._preferencesHelper
             .setLoggedInState(LoggedInState.TOURISTS)
             .then((value) {
@@ -52,33 +52,34 @@ class _LoginScreenState extends State<LoginScreen> {
       body: ListView(children: <Widget>[
         Flex(
           direction: Axis.vertical,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             // LOGO
             Container(
               height: 156,
               width: 156,
-              child: Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  Container(
-                    height: 156,
-                    width: 156,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(78),
-                        color: Color(0xFF00FFA8)),
-                  ),
-                  Image.asset(
-                    'resources/images/logo.jpg',
-                    fit: BoxFit.contain,
-                  ),
-                ],
-              ),
+              child: MediaQuery.of(context).viewInsets.bottom == 0
+                  ? Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        Container(
+                          height: 156,
+                          width: 156,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(78),
+                              color: Color(0xFF00FFA8)),
+                        ),
+                        Image.asset(
+                          'resources/images/logo.jpg',
+                          fit: BoxFit.contain,
+                        ),
+                      ],
+                    )
+                  : Container(),
             ),
-            Container(
-              height: 56,
-            ),
+
+            // Login Form
             Container(
               width: 256,
               child: Form(
@@ -89,56 +90,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextFormField(
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
-                      decoration:
-                          InputDecoration(labelText: S.of(context).email),
+                      decoration: InputDecoration(labelText: 'Send Login Link'),
                       validator: (String value) {
                         if (value.isEmpty) {
                           return S.of(context).error_null_text;
                         }
                         return null;
                       },
-                    ),
-                    Container(
-                      height: 16,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            border: Border.all(width: 0.5),
-                          ),
-                          child: GestureDetector(
-                              onTap: () {
-                                widget._loginBlock.loginWithGoogle();
-                              },
-                              child: Flex(
-                                direction: Axis.horizontal,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: 36,
-                                    width: 36,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: SvgPicture.asset(
-                                        'resources/images/google-logo.svg',
-                                        fit: BoxFit.contain,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text('Sign in With Google'),
-                                  ),
-                                ],
-                              )),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      height: 16,
                     ),
                     GestureDetector(
                       child: Container(
@@ -165,6 +123,42 @@ class _LoginScreenState extends State<LoginScreen> {
                           )),
                       onTap: () => _login(),
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            border: Border.all(width: 0.5),
+                          ),
+                          child: GestureDetector(
+                              onTap: () {
+                                widget._loginBlock.authWithGoogle();
+                              },
+                              child: Flex(
+                                direction: Axis.horizontal,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: 36,
+                                    width: 36,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: SvgPicture.asset(
+                                        'resources/images/google-logo.svg',
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text('Sign in With Google'),
+                                  ),
+                                ],
+                              )),
+                        ),
+                      ],
+                    ),
                     Container(
                       alignment: Alignment.center,
                       child: Text(_error == null
@@ -178,22 +172,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            Container(
-              height: 56,
-            ),
-            GestureDetector(
-              onTap: () {
-                developer.log('Register Requested');
-                Navigator.pushNamed(context, UserAuthorizationRoutes.register);
-              },
-              child: Container(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(S.of(context).move_to_register),
-                ),
-              ),
-            )
           ],
         )
       ]),
@@ -204,7 +182,6 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     // Clean up the controller when the Widget is disposed
     _emailController.dispose();
-    _passwordController.dispose();
     super.dispose();
   }
 
@@ -212,8 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (submitAvailable) {
       submitAvailable = false;
       setState(() {});
-      widget._loginBlock
-          .login(_emailController.text.trim(), _passwordController.text.trim());
+      widget._loginBlock.sendLoginEmail(_emailController.text.trim());
     } else {
       Fluttertoast.showToast(msg: 'Please Wait...');
     }

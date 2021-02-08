@@ -1,0 +1,67 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: tourist-mysql
+  namespace: tourist
+spec:
+  selector:
+    matchLabels:
+      app: mysql8
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql8
+    spec:
+      containers:
+      - image: mysql:8.0
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: sweetpwd.
+        - name: MYSQL_DATABASE
+          value: my_db
+        - name: MYSQL_USER
+          value: db_user
+        - name: MYSQL_PASSWORD
+          value: mypwd
+        args: ["--default-authentication-plugin=mysql_native_password"]
+        ports:
+        - containerPort: 3306
+          name: mysql8
+        volumeMounts:
+          - name: tourist-mysql-persistent-storage
+            mountPath: /var/
+      volumes:
+      - name: tourist-mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: tourist-mysql-pv-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tourist-mysql-pv-claim
+  namespace: tourist
+  labels:
+    app: mysql8
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi #5 GB
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tourist-mysql8-service
+  namespace: tourist
+  labels:
+    app: mysql8
+spec:
+  ports:
+  - port: 3306
+    protocol: TCP
+  selector:
+    app: mysql8

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/consts/urls.dart';
 import 'package:tourists/utils/logger/logger.dart';
@@ -34,20 +33,10 @@ class HttpClient {
         return response.data;
       } else {
         _logger.error(tag, response.statusCode.toString() + ' for link ' + url);
-        await Fluttertoast.showToast(
-            msg: 'Error Code ' +
-                response.statusCode.toString() +
-                ' Please Retry',
-            toastLength: Toast.LENGTH_SHORT,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
         return null;
       }
     } catch (e) {
       _logger.error(tag, e.toString());
-      await Fluttertoast.showToast(msg: e.toString());
       return null;
     }
   }
@@ -68,7 +57,6 @@ class HttpClient {
       }
     } catch (e) {
       _logger.error(tag, e.toString());
-      await Fluttertoast.showToast(msg: e.toString());
       return null;
     }
   }
@@ -88,7 +76,6 @@ class HttpClient {
       }
     } catch (e) {
       _logger.error(tag, e.toString());
-      await Fluttertoast.showToast(msg: e.toString());
       return null;
     }
   }

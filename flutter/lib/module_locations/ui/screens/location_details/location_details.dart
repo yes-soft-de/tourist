@@ -210,8 +210,12 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
     // No Expansion Needed
     if (_guidesList.isNotEmpty) guidesListExpanded = true;
 
-    visibleGuides =
-        guidesListExpanded ? _guidesList : _guidesList.sublist(0, 3);
+    if (_guidesList.length > 3) {
+      visibleGuides =
+          guidesListExpanded ? _guidesList : _guidesList.sublist(0, 3);
+    } else {
+      visibleGuides = _guidesList;
+    }
 
     // Construct the List into CSV text
     visibleGuides.forEach((guide) {

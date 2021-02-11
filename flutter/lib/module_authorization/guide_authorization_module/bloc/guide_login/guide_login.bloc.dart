@@ -30,7 +30,6 @@ class GuideLoginBloc {
           log('Verification Complete');
           _auth.signInWithCredential(credentials).then((result) {
             User user = result.user;
-
             if (user != null) {
               log('Code Verify complete');
               _stateSubject.add(Pair(STATUS_CODE_RECEIVED, user));

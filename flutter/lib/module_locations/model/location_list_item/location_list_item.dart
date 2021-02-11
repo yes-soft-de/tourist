@@ -2,7 +2,7 @@ class LocationListItem {
   int id;
   String name;
   String description;
-  List<String> location;
+  String location;
   String commentNumber;
   int ratingAverage;
   List<Path> path;
@@ -20,7 +20,7 @@ class LocationListItem {
     id = json['id'];
     name = json['name'];
     description = json['description'];
-    location = json['location'].cast<String>();
+    location = json['location'];
     commentNumber = json['commentNumber'];
     ratingAverage = json['ratingAverage'];
     if (json['path'] != null) {

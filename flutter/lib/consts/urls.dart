@@ -1,5 +1,5 @@
 class Urls {
-  static String baseAPI = 'http://35.232.254.228/html/public/index.php/';
+  static String baseAPI = 'http://tourist.yes-cloud.de/html/public/index.php/';
 
   static final loginAPI = baseAPI + 'login';
   static final loginGuideAPI = baseAPI + 'guid';

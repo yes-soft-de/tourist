@@ -142,8 +142,8 @@ dev_dependencies:
 flutter:
     uses-material-design: true
     assets:
-        - assets/images/
-        - assets/animations/
+        - resources/images/
+        - resources/animations/
 
 flutter_intl:
     enabled: true

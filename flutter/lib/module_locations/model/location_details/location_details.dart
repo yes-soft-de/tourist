@@ -6,7 +6,7 @@ class LocationDetailsModel {
   int id;
   String name;
   String description;
-  List<String> location;
+  String location;
   List<CommentModel> comments;
   int ratingAverage;
   List<Paths> paths;
@@ -24,7 +24,7 @@ class LocationDetailsModel {
     id = json['id'];
     name = json['name'];
     description = json['description'];
-    location = json['location'].cast<String>();
+    location = json['location'];
     ratingAverage = json['ratingAverage'];
     if (json['comments'] != null) {
       comments = <CommentModel>[];

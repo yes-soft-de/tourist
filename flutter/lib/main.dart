@@ -48,7 +48,6 @@ class MyApp extends StatelessWidget {
   final OrderModule _orderModule;
   final SplashModule _splashModule;
   final SettingsModule _settingsModule;
-
   final LanguageHelper _languageHelper;
 
   MyApp(
@@ -82,12 +81,10 @@ class MyApp extends StatelessWidget {
       stream: _languageHelper.languageStream,
       initialData: 'en',
       builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-        print('Building App!');
         String currentLang;
         if (snapshot.hasData) {
           if (snapshot.data != null) {
             currentLang = snapshot.data;
-            print('Got Local Update: $currentLang');
           } else {
             currentLang = 'en';
           }
@@ -96,21 +93,22 @@ class MyApp extends StatelessWidget {
         }
 
         return MaterialApp(
-            navigatorObservers: <NavigatorObserver>[observer],
-            locale: Locale(currentLang),
-            localizationsDelegates: [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            theme: ThemeData(
-                primaryColor: Colors.greenAccent,
-                accentColor: Colors.greenAccent),
-            supportedLocales: S.delegate.supportedLocales,
-            title: 'Soyah',
-            routes: fullRoutesList,
-            initialRoute: SplashRoutes.splash);
+          navigatorObservers: <NavigatorObserver>[observer],
+          locale: Locale(currentLang),
+          localizationsDelegates: [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          theme: ThemeData(
+              primaryColor: Colors.greenAccent,
+              accentColor: Colors.greenAccent),
+          supportedLocales: S.delegate.supportedLocales,
+          title: 'Soyah',
+          routes: fullRoutesList,
+          initialRoute: SplashRoutes.splash,
+        );
       },
     );
   }

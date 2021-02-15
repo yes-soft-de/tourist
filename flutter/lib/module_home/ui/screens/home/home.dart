@@ -6,6 +6,7 @@ import 'package:tourists/module_home/ui/widget/bottom_navigation_bar/buttom_navi
 import 'package:tourists/module_locations/ui/screens/event_list/event_list.dart';
 import 'package:tourists/module_locations/ui/screens/location_carousel/location_carousel.dart';
 import 'package:tourists/module_locations/ui/screens/location_list/location_list_screen.dart';
+import 'package:tourists/module_search/search_routes.dart';
 import 'package:tourists/utils/auth_guard/auth_gard.dart';
 
 @provide
@@ -49,6 +50,14 @@ class HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           title: Text('سياح'),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                Navigator.of(context).pushNamed(SearchRoutes.ROUTE_SEARCH);
+              },
+            ),
+          ],
         ),
         body: Stack(
           children: <Widget>[

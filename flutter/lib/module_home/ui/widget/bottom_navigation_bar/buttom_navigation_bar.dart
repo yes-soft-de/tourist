@@ -85,7 +85,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               onLocationChanged(0);
             },
             child:
-                navItem(S.of(context).home, Icons.home, activePosition == 0)),
+                navItem(S.of(context).home, Icons.home, activePosition == 0),),
         GestureDetector(
             onTap: () {
               onLocationChanged(1);

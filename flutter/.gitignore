@@ -45,3 +45,5 @@ app.*.map.json
 key.properties
 key.jks
 google-services.jks
+
+keys.dart

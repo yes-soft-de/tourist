@@ -5,22 +5,24 @@ import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/consts/urls.dart';
+import 'package:tourists/module_network/network_client/network_client.dart';
 import 'package:tourists/utils/logger/logger.dart';
 
 @provide
-class HttpClient {
+class HttpClient extends NetworkClient {
   Dio _client;
-  final Logger _logger;
+  final _logger = Logger();
 
   final String tag = 'HttpClient';
 
-  HttpClient(this._logger) {
+  HttpClient() {
     _client = new Dio(BaseOptions());
     _client.interceptors
         .add(DioCacheManager(CacheConfig(baseUrl: Urls.baseAPI)).interceptor);
   }
 
-  Future<Map> get(String url) async {
+  @override
+  Future<Map<String, dynamic>> get(String url) async {
     _logger.info(tag, 'GET $url');
     try {
       Response response = await _client.get(
@@ -41,7 +43,9 @@ class HttpClient {
     }
   }
 
-  Future<Map> post(String url, Map<String, dynamic> payLoad) async {
+  @override
+  Future<Map<String, dynamic>> post(
+      String url, Map<String, dynamic> payLoad) async {
     try {
       _logger.info(tag, 'Requesting Post to: ' + url);
       _logger.info(tag, 'POST: ' + jsonEncode(payLoad));
@@ -61,7 +65,9 @@ class HttpClient {
     }
   }
 
-  Future<Map> put(String url, Map<String, dynamic> payLoad) async {
+  @override
+  Future<Map<String, dynamic>> put(
+      String url, Map<String, dynamic> payLoad) async {
     try {
       _logger.info(tag, 'Requesting Put to: ' + url);
       _logger.info(tag, 'PUT: ' + jsonEncode(payLoad));

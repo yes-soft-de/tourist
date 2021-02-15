@@ -114,6 +114,14 @@ dependencies:
     # Lottie and Flare for animations
     lottie: ^0.7.0+1
 
+    # Maps and Locations
+    google_maps_flutter: ^1.2.0
+    flutter_google_places: ^0.2.6
+    location: ^3.2.4
+
+    # Autocomplete
+    flutter_typeahead: ^2.0.0
+
 dev_dependencies:
     flutter_test:
         sdk: flutter

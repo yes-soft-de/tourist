@@ -34,27 +34,3 @@ spec:
         - name: tourist-pvc-sym-m
           persistentVolumeClaim:
             claimName: tourist-pvc-sym-uploud
----
-apiVersion: v1
-kind: Service
-metadata:
-  annotations:
-    cloud.google.com/neg: '{"ingress":true}'
-  finalizers:
-    - service.kubernetes.io/load-balancer-cleanup
-  labels:
-    run: web-service
-  name: tourist-web-service
-  namespace: tourist
-spec:
-  clusterIP: 10.4.5.29
-  externalTrafficPolicy: Cluster
-  ports:
-    - nodePort: 31476
-      port: 80
-      protocol: TCP
-      targetPort: 80
-  selector:
-    app: apache
-  sessionAffinity: None
-  type: LoadBalancer

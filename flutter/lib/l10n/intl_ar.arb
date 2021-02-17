@@ -87,5 +87,20 @@
   "sentPending": "Sent / Pending",
   "pendingPayment": "Pending Payment",
   "payedOnGoing": "Payed / On going",
-  "finishedOrders": "Finished Orders"
+  "finishedOrders": "Finished Orders",
+  "confirmCode": "Confirm Code",
+  "pleaseInputYourPhoneNumber": "Please input your phone number",
+  "resendCode": "Resend Code",
+  "confirm": "Confirm",
+  "registerSuccessSetupMyProfile": "Register Success, Setup My Profile",
+  "emailAddressIsRequired": "Email Address is Required",
+  "passwordIsTooShort": "Password is too short",
+  "nameIsRequired": "Name is required",
+  "iHaveAnAccount": "I have an account",
+  "saudiArabia": "Saudi Arabia",
+  "lebanon": "Lebanon",
+  "syria": "Syria",
+  "phoneNumber": "Phone Number",
+  "sendMeCode": "Send Me Code",
+  "register": "Register"
 }

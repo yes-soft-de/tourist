@@ -49,132 +49,121 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
       appBar: AppBar(),
-      body: ListView(children: <Widget>[
-        Flex(
-          direction: Axis.vertical,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            // LOGO
-            Container(
-              height: 156,
-              width: 156,
-              child: MediaQuery.of(context).viewInsets.bottom == 0
-                  ? Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        Container(
-                          height: 156,
-                          width: 156,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(78),
-                              color: Color(0xFF00FFA8)),
-                        ),
-                        Image.asset(
-                          'resources/images/logo.jpg',
-                          fit: BoxFit.contain,
-                        ),
-                      ],
-                    )
-                  : Container(),
-            ),
+      resizeToAvoidBottomPadding: false,
+      body: Flex(
+        direction: Axis.vertical,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          // LOGO
+          Container(
+            height: 156,
+            width: 156,
+            child: MediaQuery.of(context).viewInsets.bottom == 0
+                ? Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Container(
+                        height: 156,
+                        width: 156,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(78),
+                            color: Color(0xFF00FFA8)),
+                      ),
+                      Image.asset(
+                        'resources/images/logo.jpg',
+                        fit: BoxFit.contain,
+                      ),
+                    ],
+                  )
+                : Container(),
+          ),
 
-            // Login Form
-            Container(
-              width: 256,
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    TextFormField(
-                      controller: _emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(labelText: 'Send Login Link'),
-                      validator: (String value) {
-                        if (value.isEmpty) {
-                          return S.of(context).error_null_text;
-                        }
-                        return null;
-                      },
+          // Login Form
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextFormField(
+              controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(labelText: 'Send Login Link'),
+              validator: (String value) {
+                if (value.isEmpty) {
+                  return S.of(context).error_null_text;
+                }
+                return null;
+              },
+            ),
+          ),
+          GestureDetector(
+            child: Container(
+                alignment: Alignment.center,
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Container(
+                    height: 40,
+                    width: 160,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(90)),
+                      color: _emailController.text.isNotEmpty ? Colors.greenAccent : Colors.grey,
                     ),
-                    GestureDetector(
-                      child: Container(
-                          alignment: Alignment.center,
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Container(
-                              height: 40,
-                              width: 160,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(90)),
-                                color: submitAvailable
-                                    ? Colors.greenAccent
-                                    : Colors.grey,
-                              ),
-                              child: Text(
-                                S.of(context).login,
-                                style: TextStyle(
-                                    fontSize: 20, color: Colors.white),
-                              ),
-                            ),
-                          )),
-                      onTap: () => _login(),
+                    child: Text(
+                      S.of(context).login,
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                )),
+            onTap: () => _login(),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  border: Border.all(width: 0.5),
+                ),
+                child: GestureDetector(
+                    onTap: () {
+                      widget._loginBlock.authWithGoogle();
+                    },
+                    child: Flex(
+                      direction: Axis.horizontal,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            border: Border.all(width: 0.5),
+                          height: 36,
+                          width: 36,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SvgPicture.asset(
+                              'resources/images/google-logo.svg',
+                              fit: BoxFit.contain,
+                            ),
                           ),
-                          child: GestureDetector(
-                              onTap: () {
-                                widget._loginBlock.authWithGoogle();
-                              },
-                              child: Flex(
-                                direction: Axis.horizontal,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: 36,
-                                    width: 36,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: SvgPicture.asset(
-                                        'resources/images/google-logo.svg',
-                                        fit: BoxFit.contain,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text('Sign in With Google'),
-                                  ),
-                                ],
-                              )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('Sign in With Google'),
                         ),
                       ],
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text(_error == null
-                          ? ''
-                          : (_error
-                              ? S.of(context).successfully_registered +
-                                  _userEmail
-                              : S.of(context).registration_failed)),
-                    )
-                  ],
-                ),
+                    )),
               ),
-            ),
-          ],
-        )
-      ]),
+            ],
+          ),
+          Container(
+            alignment: Alignment.center,
+            child: Text(_error == null
+                ? ''
+                : (_error
+                    ? S.of(context).successfully_registered + _userEmail
+                    : S.of(context).registration_failed)),
+          ),
+        ],
+      ),
     );
   }
 
@@ -186,8 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _login() {
-    if (submitAvailable) {
-      submitAvailable = false;
+    if (submitAvailable && _emailController.text.isNotEmpty) {
       setState(() {});
       widget._loginBlock.sendLoginEmail(_emailController.text.trim());
     } else {

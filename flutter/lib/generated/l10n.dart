@@ -914,6 +914,156 @@ class S {
       args: [],
     );
   }
+
+  /// `Confirm Code`
+  String get confirmCode {
+    return Intl.message(
+      'Confirm Code',
+      name: 'confirmCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please input your phone number`
+  String get pleaseInputYourPhoneNumber {
+    return Intl.message(
+      'Please input your phone number',
+      name: 'pleaseInputYourPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resend Code`
+  String get resendCode {
+    return Intl.message(
+      'Resend Code',
+      name: 'resendCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register Success, Setup My Profile`
+  String get registerSuccessSetupMyProfile {
+    return Intl.message(
+      'Register Success, Setup My Profile',
+      name: 'registerSuccessSetupMyProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email Address is Required`
+  String get emailAddressIsRequired {
+    return Intl.message(
+      'Email Address is Required',
+      name: 'emailAddressIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password is too short`
+  String get passwordIsTooShort {
+    return Intl.message(
+      'Password is too short',
+      name: 'passwordIsTooShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name is required`
+  String get nameIsRequired {
+    return Intl.message(
+      'Name is required',
+      name: 'nameIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I have an account`
+  String get iHaveAnAccount {
+    return Intl.message(
+      'I have an account',
+      name: 'iHaveAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saudi Arabia`
+  String get saudiArabia {
+    return Intl.message(
+      'Saudi Arabia',
+      name: 'saudiArabia',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lebanon`
+  String get lebanon {
+    return Intl.message(
+      'Lebanon',
+      name: 'lebanon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Syria`
+  String get syria {
+    return Intl.message(
+      'Syria',
+      name: 'syria',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone Number`
+  String get phoneNumber {
+    return Intl.message(
+      'Phone Number',
+      name: 'phoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Me Code`
+  String get sendMeCode {
+    return Intl.message(
+      'Send Me Code',
+      name: 'sendMeCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register`
+  String get register {
+    return Intl.message(
+      'Register',
+      name: 'register',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

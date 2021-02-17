@@ -103,7 +103,7 @@ dependencies:
     step_progress_indicator: ^0.2.5+8
 
     # Deep Linking, for quick send
-    # uni_links: ^0.4.0
+    uni_links: ^0.4.0
 
     # Charts and Diagrams
     charts_flutter: ^0.9.0

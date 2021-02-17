@@ -3,6 +3,10 @@ import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
 import 'package:tourists/module_guide/service/guide_list/guide_list.dart';
+import 'package:tourists/module_guide/ui/screen/guide_list/guide_list_screen.dart';
+import 'package:tourists/module_guide/ui/states/guide_list_state.dart';
+import 'package:tourists/module_guide/ui/states/guide_list_state_load_error.dart';
+import 'package:tourists/module_guide/ui/states/guide_list_state_load_success.dart';
 
 @provide
 class GuideListBloc {
@@ -13,18 +17,24 @@ class GuideListBloc {
   final GuideListService _guideListService;
   GuideListBloc(this._guideListService);
 
-  final PublishSubject<Pair<int, List<GuideListItemModel>>> _guidesListSubject =
+  final PublishSubject<GuideListState> _guidesListSubject =
       new PublishSubject();
-  Stream<Pair<int, List<GuideListItemModel>>> get guidesStream =>
+  Stream<GuideListState> get guidesStream =>
       _guidesListSubject.stream;
 
-  void getAllGuides() {
+  void getAllGuides(GuideListScreen screen) {
     _guideListService.getAllGuides().then((value) {
       if (value != null) {
-        _guidesListSubject.add(Pair(STATUS_CODE_LOAD_SUCCESS, value));
+        _guidesListSubject.add(GuideListStateLoadSuccess(screen, value));
       } else {
-        _guidesListSubject.add(Pair(STATUS_CODE_LOAD_ERROR, null));
+        _guidesListSubject.add(GuideListStateLoadError(screen, 'Null Data Error'));
       }
     });
   }
+
+  void sortGuideByNearist() {
+
+  }
+
+  void sortGuideBy() {}
 }

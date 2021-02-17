@@ -1,6 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -20,11 +21,17 @@ import 'generated/l10n.dart';
 import 'module_chat/chat_module.dart';
 import 'module_splash/splash_module.dart';
 
-typedef Provider<T> = T Function();
+import 'package:timeago/timeago.dart' as timeago;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await timeago.setLocaleMessages('ar', timeago.ArMessages());
+  await timeago.setLocaleMessages('en', timeago.EnMessages());
   await Firebase.initializeApp();
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FirebaseCrashlytics.instance.recordFlutterError(details);
+  };
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
@@ -81,35 +88,30 @@ class MyApp extends StatelessWidget {
       stream: _languageHelper.languageStream,
       initialData: 'en',
       builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-        String currentLang;
-        if (snapshot.hasData) {
-          if (snapshot.data != null) {
-            currentLang = snapshot.data;
-          } else {
-            currentLang = 'en';
-          }
-        } else {
-          currentLang = 'en';
-        }
-
-        return MaterialApp(
-          navigatorObservers: <NavigatorObserver>[observer],
-          locale: Locale(currentLang),
-          localizationsDelegates: [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          theme: ThemeData(
-              primaryColor: Color(0xff05F29B),
-              accentColor: Color(0xffF2DC6B)),
-          supportedLocales: S.delegate.supportedLocales,
-          title: 'Soyah',
-          routes: fullRoutesList,
-          initialRoute: SplashRoutes.splash,
+        return getConfiguratedApp(
+          fullRoutesList,
+          snapshot.data ?? 'en',
         );
       },
+    );
+  }
+
+  Widget getConfiguratedApp(Map<String, WidgetBuilder> fullRoutesList, String currentLang) {
+    return MaterialApp(
+      navigatorObservers: <NavigatorObserver>[observer],
+      locale: Locale(currentLang),
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      theme: ThemeData(
+          primaryColor: Color(0xff05F29B), accentColor: Color(0xffF2DC6B)),
+      supportedLocales: S.delegate.supportedLocales,
+      title: 'Soyah',
+      routes: fullRoutesList,
+      initialRoute: SplashRoutes.splash,
     );
   }
 }

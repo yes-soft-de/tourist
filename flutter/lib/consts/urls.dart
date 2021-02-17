@@ -1,7 +1,7 @@
 class Urls {
   static String baseAPI = 'http://tourist.yes-cloud.de/html/public/index.php/';
 
-  static final loginAPI = baseAPI + 'login';
+  static final loginAPI = baseAPI + 'login_check';
   static final loginGuideAPI = baseAPI + 'guid';
   static final createProfileAPI = baseAPI + 'tourist';
   static final getProfileAPI = baseAPI + 'tourist';

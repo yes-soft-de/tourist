@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
+import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
 import 'package:tourists/module_guide/ui/screen/guide_list/guide_list_screen.dart';
+import 'package:tourists/module_home/home_routes.dart';
 import 'package:tourists/module_home/ui/widget/bottom_navigation_bar/buttom_navigation_bar.dart';
 import 'package:tourists/module_locations/ui/screens/event_list/event_list.dart';
 import 'package:tourists/module_locations/ui/screens/location_carousel/location_carousel.dart';
@@ -15,10 +17,15 @@ class HomeScreen extends StatefulWidget {
   final EventListScreen _eventListScreen;
   final LocationListScreen _locationListScreen;
   final LocationCarouselScreen _locationCarouselScreen;
-  final AuthGuard _authGuard;
+  final AuthService _authService;
 
-  HomeScreen(this._locationListScreen, this._guideListScreen,
-      this._eventListScreen, this._authGuard, this._locationCarouselScreen);
+  HomeScreen(
+    this._locationListScreen,
+    this._guideListScreen,
+    this._eventListScreen,
+    this._authService,
+    this._locationCarouselScreen,
+  );
 
   @override
   State<StatefulWidget> createState() => HomeScreenState();
@@ -34,7 +41,7 @@ class HomeScreenState extends State<HomeScreen> {
     print('In Main Page');
 
     if (loggedIn == null) {
-      widget._authGuard.isLoggedIn().then((value) {
+      widget._authService.isLoggedIn.then((value) {
         loggedIn = value;
         setState(() {});
       });
@@ -95,6 +102,12 @@ class HomeScreenState extends State<HomeScreen> {
                 isLoggedIn: loggedIn ?? false,
                 onLocationChanged: (int position) {
                   _changePosition(position);
+                },
+                onLogout: () {
+                  widget._authService.logout().then((value) {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        HomeRoutes.home, (route) => false);
+                  });
                 },
               ),
             )

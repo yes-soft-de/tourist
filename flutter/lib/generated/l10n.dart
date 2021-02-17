@@ -1084,6 +1084,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Please Check your Email!`
+  String get pleaseCheckYourEmail {
+    return Intl.message(
+      'Please Check your Email!',
+      name: 'pleaseCheckYourEmail',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -61,7 +61,7 @@ class LoginStateCodeSent extends LoginState {
                   loading = false;
                 });
                 screen.refresh();
-                screen.confirmCaptainSMS(_confirmationController.text);
+                screen.confirmSMS(_confirmationController.text);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

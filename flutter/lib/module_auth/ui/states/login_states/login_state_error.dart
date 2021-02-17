@@ -35,13 +35,13 @@ class LoginStateError extends LoginState {
                   onLoginRequested: (phone) {
                     loading = true;
                     screen.refresh();
-                    screen.loginCaptain(phone);
+                    screen.loginViaPhone(phone);
                   },
                   onRetry: () {},
                   onConfirm: (confirmCode) {
                     loading = true;
                     screen.refresh();
-                    screen.confirmCaptainSMS(confirmCode);
+                    screen.confirmSMS(confirmCode);
                   },
                 ),
                 EmailPasswordForm(

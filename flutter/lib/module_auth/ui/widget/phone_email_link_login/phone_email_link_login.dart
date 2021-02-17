@@ -25,12 +25,16 @@ class PhoneEmailLinkLoginFormWidget extends StatelessWidget {
         Expanded(
             child: Center(child: Image.asset('resources/images/logo.jpg'))),
         Form(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Flex(
             direction: Axis.vertical,
             children: [
-              TextFormField(
-                controller: _emailController,
-                decoration: InputDecoration(hintText: S.of(context).email),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextFormField(
+                  controller: _emailController,
+                  decoration: InputDecoration(hintText: S.of(context).email),
+                ),
               ),
               Container(
                 decoration: BoxDecoration(

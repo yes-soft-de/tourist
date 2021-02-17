@@ -102,5 +102,7 @@
   "syria": "Syria",
   "phoneNumber": "Phone Number",
   "sendMeCode": "Send Me Code",
-  "register": "Register"
+  "register": "Register",
+  "pleaseCompleteTheForm": "Please complete the form",
+  "sendLoginLink": "Send Login Link"
 }

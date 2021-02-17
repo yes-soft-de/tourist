@@ -1064,6 +1064,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Please complete the form`
+  String get pleaseCompleteTheForm {
+    return Intl.message(
+      'Please complete the form',
+      name: 'pleaseCompleteTheForm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Login Link`
+  String get sendLoginLink {
+    return Intl.message(
+      'Send Login Link',
+      name: 'sendLoginLink',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

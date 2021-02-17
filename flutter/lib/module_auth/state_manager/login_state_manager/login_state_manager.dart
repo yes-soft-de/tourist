@@ -4,6 +4,7 @@ import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
 import 'package:tourists/module_auth/ui/screen/login_screen/login_screen.dart';
 import 'package:tourists/module_auth/ui/states/login_states/login_state.dart';
 import 'package:tourists/module_auth/ui/states/login_states/login_state_code_sent.dart';
+import 'package:tourists/module_auth/ui/states/login_states/login_state_email_sent.dart';
 import 'package:tourists/module_auth/ui/states/login_states/login_state_error.dart';
 import 'package:tourists/module_auth/ui/states/login_states/login_state_init.dart';
 import 'package:tourists/module_auth/ui/states/login_states/login_state_success.dart';
@@ -25,7 +26,7 @@ class LoginStateManager {
 
   Stream<LoginState> get stateStream => _loginStateSubject.stream;
 
-  void loginCaptain(String phoneNumber, LoginScreenState _loginScreenState) {
+  void loginViaPhoneNumber(String phoneNumber, LoginScreenState _loginScreenState) {
     _authService.authListener.listen((event) {
       switch (event) {
         case AuthStatus.AUTHORIZED:
@@ -50,7 +51,7 @@ class LoginStateManager {
     _authService.verifyWithPhone(phoneNumber, UserRole.ROLE_GUIDE);
   }
 
-  void loginOwner(
+  void loginViaEmailAndPassword(
       String email, String password, LoginScreenState _loginScreenState) {
     _email = email;
     _password = password;
@@ -72,8 +73,17 @@ class LoginStateManager {
         email, password, UserRole.ROLE_OWNER);
   }
 
-  void confirmCaptainCode(String smsCode, LoginScreenState screenState) {
+  void confirmSMSCode(String smsCode, LoginScreenState screenState) {
     _screenState = screenState;
     _authService.confirmWithCode(smsCode, UserRole.ROLE_GUIDE);
+  }
+
+  void loginViaGoogle(LoginScreenState screenState, UserRole role) {
+    _authService.verifyWithGoogle(role);
+  }
+
+  void sendLoginLink(LoginScreenState screenState, String email, UserRole role) {
+    _authService.sendEmailLink(email, role);
+    _loginStateSubject.add(LoginStateEmailSent(screenState));
   }
 }

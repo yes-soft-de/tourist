@@ -84,6 +84,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "payedOnGoing" : MessageLookupByLibrary.simpleMessage("Payed / On going"),
     "pendingPayment" : MessageLookupByLibrary.simpleMessage("Pending Payment"),
     "phoneNumber" : MessageLookupByLibrary.simpleMessage("Phone Number"),
+    "pleaseCheckYourEmail" : MessageLookupByLibrary.simpleMessage("Please Check your Email!"),
     "pleaseCompleteTheForm" : MessageLookupByLibrary.simpleMessage("Please complete the form"),
     "pleaseInputYourPhoneNumber" : MessageLookupByLibrary.simpleMessage("Please input your phone number"),
     "register" : MessageLookupByLibrary.simpleMessage("Register"),

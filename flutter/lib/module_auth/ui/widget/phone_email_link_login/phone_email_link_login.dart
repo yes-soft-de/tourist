@@ -23,8 +23,12 @@ class PhoneEmailLinkLoginFormWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Expanded(
-            child: Center(child: Image.asset('resources/images/logo.jpg'))),
+        Container(
+          height: 120,
+          child: Center(
+            child: Image.asset('resources/images/logo.jpg'),
+          ),
+        ),
         Form(
           autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Flex(
@@ -48,6 +52,8 @@ class PhoneEmailLinkLoginFormWidget extends StatelessWidget {
                   onPressed: () {
                     if (_emailController.text.isEmpty) {
                       onSnackBarRequested(S.of(context).pleaseCompleteTheForm);
+                    } else {
+                      onEmailLinkRequest(_emailController.text);
                     }
                   },
                 ),
@@ -55,21 +61,25 @@ class PhoneEmailLinkLoginFormWidget extends StatelessWidget {
             ],
           ),
         ),
-        GestureDetector(
-          onTap: () {
-            onGmailLoginRequested();
-          },
-          child: Container(
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: Theme.of(context).primaryColor,
-                )),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FaIcon(
-                FontAwesomeIcons.google,
-                color: Theme.of(context).primaryColor,
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: GestureDetector(
+            onTap: () {
+              onGmailLoginRequested();
+            },
+            child: Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Colors.black,
+                  )),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FaIcon(
+                  FontAwesomeIcons.google,
+                  color: Colors.black,
+                ),
               ),
             ),
           ),

@@ -19,6 +19,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:inject/inject.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:uuid/uuid.dart';
 
 @provide
 class AuthService {
@@ -127,6 +128,38 @@ class AuthService {
       await _registerApiUser(AppUser(userCredential, AuthSource.PHONE, role));
     } catch (e) {
       Logger().error('AuthStateManager', e.toString(), StackTrace.current);
+    }
+  }
+
+  Future<void> sendEmailLink(String email, UserRole role) async {
+    await _prefsHelper.setCurrentRole(role);
+    await _prefsHelper.setEmail(email);
+    await _auth.sendSignInLinkToEmail(
+      email: email,
+      actionCodeSettings: ActionCodeSettings(
+          url: 'https://soyah.page.link/' + Uuid().v1(),
+          androidPackageName: 'com.fast_prog.soyah',
+          iOSBundleId: 'de.yes-soft.soyah',
+          handleCodeInApp: true,
+          androidMinimumVersion: '21',
+          androidInstallApp: true),
+    );
+  }
+
+  Future<void> verifyLoginLink(String link) async {
+    var email = await _prefsHelper.getEmail();
+    var role = await _prefsHelper.getCurrentRole();
+    try {
+      var userCredential = await _auth.signInWithEmailLink(email: email, emailLink: link);
+      await _registerApiUser(AppUser(userCredential, AuthSource.EMAIL, role));
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        FirebaseAuthException x = e;
+        Logger().info('AuthService', 'Got Authorization Error: ${x.message}');
+        _authSubject.addError(x.message);
+      } else {
+        _authSubject.addError(e.toString());
+      }
     }
   }
 

@@ -104,5 +104,6 @@
   "sendMeCode": "Send Me Code",
   "register": "Register",
   "pleaseCompleteTheForm": "Please complete the form",
-  "sendLoginLink": "Send Login Link"
+  "sendLoginLink": "Send Login Link",
+  "pleaseCheckYourEmail": "Please Check your Email!"
 }

@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/module_auth/authoriazation_module.dart';
+import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
 import 'package:tourists/module_forms/forms_module.dart';
 import 'package:tourists/module_guide/guide_list_module.dart';
 import 'package:tourists/module_home/home_module.dart';
@@ -15,6 +16,8 @@ import 'package:tourists/module_orders/order_module.dart';
 import 'package:tourists/module_settings/settings_module.dart';
 import 'package:tourists/module_splash/ui/splash_routes.dart';
 import 'package:tourists/utils/language/language.dart';
+import 'package:tourists/utils/logger/logger.dart';
+import 'package:uni_links/uni_links.dart';
 
 import 'di/components/app.component.dart';
 import 'generated/l10n.dart';
@@ -56,6 +59,7 @@ class MyApp extends StatelessWidget {
   final SplashModule _splashModule;
   final SettingsModule _settingsModule;
   final LanguageHelper _languageHelper;
+  final AuthService _authService;
 
   MyApp(
     this._languageHelper,
@@ -68,6 +72,7 @@ class MyApp extends StatelessWidget {
     this._guideListModule,
     this._orderModule,
     this._formsModule,
+    this._authService,
   );
 
   @override
@@ -83,6 +88,18 @@ class MyApp extends StatelessWidget {
     fullRoutesList.addAll(_orderModule.getRoutes());
     fullRoutesList.addAll(_settingsModule.getRoutes());
     fullRoutesList.addAll(_splashModule.getRoutes());
+    try {
+      getInitialLink().then((value) {
+        if (value != null) {
+          print('Got Login Link: $value');
+          _authService.verifyLoginLink(value);
+        } else {
+          Logger().info('Main', 'No Link :)');
+        }
+      });
+    } catch (e) {
+      print('No Initial Link');
+    }
 
     return StreamBuilder(
       stream: _languageHelper.languageStream,
@@ -96,7 +113,8 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  Widget getConfiguratedApp(Map<String, WidgetBuilder> fullRoutesList, String currentLang) {
+  Widget getConfiguratedApp(
+      Map<String, WidgetBuilder> fullRoutesList, String currentLang) {
     return MaterialApp(
       navigatorObservers: <NavigatorObserver>[observer],
       locale: Locale(currentLang),

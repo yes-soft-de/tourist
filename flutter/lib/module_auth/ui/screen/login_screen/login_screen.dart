@@ -21,11 +21,12 @@ class LoginScreen extends StatefulWidget {
 
 class LoginScreenState extends State<LoginScreen> {
   UserRole currentUserRole;
-
   LoginState _currentStates;
 
   StreamSubscription _stateSubscription;
   bool deepLinkChecked = false;
+
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void refresh() {
     if (mounted) setState(() {});
@@ -34,7 +35,7 @@ class LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    _currentStates = LoginStateInit(this);
+    _currentStates ??= LoginStateInit(this);
     _stateSubscription = widget._stateManager.stateStream.listen((event) {
       if (mounted) {
         setState(() {
@@ -47,6 +48,8 @@ class LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      appBar: AppBar(),
       body: SafeArea(
         child: _currentStates.getUI(context),
       ),
@@ -69,19 +72,33 @@ class LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  void loginCaptain(String phoneNumber) {
-    currentUserRole = UserRole.ROLE_GUIDE;
-    widget._stateManager.loginCaptain(phoneNumber, this);
+  void loginViaPhone(String phoneNumber) {
+    currentUserRole = UserRole.ROLE_OWNER;
+    widget._stateManager.loginViaPhoneNumber(phoneNumber, this);
+  }
+
+  void loginViaGoogle() {
+    currentUserRole = UserRole.ROLE_OWNER;
+    widget._stateManager.loginViaGoogle(this, UserRole.ROLE_OWNER);
+  }
+
+  void sendLoginLink(String email, UserRole role) {
+    print('Sending Email to $email');
+    widget._stateManager.sendLoginLink(this, email, role);
   }
 
   void loginOwner(String email, String password) {
     currentUserRole = UserRole.ROLE_OWNER;
-    widget._stateManager.loginOwner(email, password, this);
+    widget._stateManager.loginViaEmailAndPassword(email, password, this);
   }
 
-  void confirmCaptainSMS(String smsCode) {
+  void showSnackBar(String msg) {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(msg)));
+  }
+
+  void confirmSMS(String smsCode) {
     currentUserRole = UserRole.ROLE_GUIDE;
-    widget._stateManager.confirmCaptainCode(smsCode, this);
+    widget._stateManager.confirmSMSCode(smsCode, this);
   }
 
   void retryPhone() {

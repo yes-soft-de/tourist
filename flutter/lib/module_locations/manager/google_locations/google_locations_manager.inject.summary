@@ -1,17 +1,17 @@
 {
-  "asset": "asset:tourists/lib/module_network/http_client/http_client.dart",
+  "asset": "asset:tourists/lib/module_locations/manager/google_locations/google_locations_manager.dart",
   "summary": {
     "injector": [],
     "module": [],
     "injectable": [
       {
-        "name": "HttpClient",
+        "name": "GoogleLocationsManager",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/module_network/http_client/http_client.dart#HttpClient",
+              "root": "asset:tourists/lib/module_locations/manager/google_locations/google_locations_manager.dart#GoogleLocationsManager",
               "qualifier": null
             },
             "isProvider": false

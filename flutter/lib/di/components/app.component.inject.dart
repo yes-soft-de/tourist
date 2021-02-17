@@ -1,6 +1,6 @@
 import 'app.component.dart' as _i1;
-import '../../utils/logger/logger.dart' as _i2;
-import '../../utils/auth_guard/auth_gard.dart' as _i3;
+import '../../utils/auth_guard/auth_gard.dart' as _i2;
+import '../../utils/logger/logger.dart' as _i3;
 import '../../module_locations/bloc/location_list/location_list_bloc.dart'
     as _i4;
 import 'dart:async' as _i5;
@@ -136,9 +136,9 @@ import '../../module_forms/user_orders_module/repository/request_guide/request_g
 class AppComponent$Injector implements _i1.AppComponent {
   AppComponent$Injector._();
 
-  _i2.Logger _singletonLogger;
+  _i2.AuthGuard _singletonAuthGuard;
 
-  _i3.AuthGuard _singletonAuthGuard;
+  _i3.Logger _singletonLogger;
 
   _i4.LocationListBloc _singletonLocationListBloc;
 
@@ -183,8 +183,7 @@ class AppComponent$Injector implements _i1.AppComponent {
       _i14.ProfileManager(_createProfileRepository());
   _i15.ProfileRepository _createProfileRepository() =>
       _i15.ProfileRepository(_createHttpClient());
-  _i16.HttpClient _createHttpClient() => _i16.HttpClient(_createLogger());
-  _i2.Logger _createLogger() => _singletonLogger ??= _i2.Logger();
+  _i16.HttpClient _createHttpClient() => _i16.HttpClient();
   _i17.RegisterScreen _createRegisterScreen() =>
       _i17.RegisterScreen(_createRegisterBloc());
   _i18.RegisterBloc _createRegisterBloc() =>
@@ -197,8 +196,8 @@ class AppComponent$Injector implements _i1.AppComponent {
       _i21.LoginBloc(_createLoginService(), _createAuthGuard());
   _i22.LoginService _createLoginService() =>
       _i22.LoginService(_createSharedPreferencesHelper());
-  _i3.AuthGuard _createAuthGuard() =>
-      _singletonAuthGuard ??= _i3.AuthGuard(_createSharedPreferencesHelper());
+  _i2.AuthGuard _createAuthGuard() =>
+      _singletonAuthGuard ??= _i2.AuthGuard(_createSharedPreferencesHelper());
   _i23.LogoutScreen _createLogoutScreen() =>
       _i23.LogoutScreen(_createSharedPreferencesHelper());
   _i24.GuideAuthorizationModule _createGuideAuthorizationModule() =>
@@ -259,6 +258,7 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i4.LocationListBloc _createLocationListBloc() =>
       _singletonLocationListBloc ??=
           _i4.LocationListBloc(_createLocationListService(), _createLogger());
+  _i3.Logger _createLogger() => _singletonLogger ??= _i3.Logger();
   _i49.EventListScreen _createEventListScreen() =>
       _i49.EventListScreen(_createEventListBloc());
   _i50.EventListBloc _createEventListBloc() =>

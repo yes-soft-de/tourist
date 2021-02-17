@@ -1,0 +1,8 @@
+{
+  "asset": "asset:tourists/test/mock_api/MockApiClient.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": []
+  }
+}

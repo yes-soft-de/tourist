@@ -47,3 +47,7 @@ key.jks
 google-services.jks
 
 keys.dart
+
+# Generated Stuff
+*.summary
+*.inject.dart

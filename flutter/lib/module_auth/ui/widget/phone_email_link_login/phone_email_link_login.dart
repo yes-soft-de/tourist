@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tourists/generated/l10n.dart';
 
 class PhoneEmailLinkLoginFormWidget extends StatelessWidget {
@@ -52,6 +53,25 @@ class PhoneEmailLinkLoginFormWidget extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
+            onGmailLoginRequested();
+          },
+          child: Container(
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Theme.of(context).primaryColor,
+                )),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FaIcon(
+                FontAwesomeIcons.google,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
           ),
         ),
       ],

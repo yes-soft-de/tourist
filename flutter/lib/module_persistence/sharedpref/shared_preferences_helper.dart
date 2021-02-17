@@ -1,6 +1,5 @@
 import 'package:inject/inject.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tourists/module_authorization/user_authorization_module/bloc/login/login.bloc.dart';
 
 @provide
 class SharedPreferencesHelper {
@@ -38,19 +37,6 @@ class SharedPreferencesHelper {
     SharedPreferences _sharedPreferences =
         await SharedPreferences.getInstance();
     return _sharedPreferences.getString('username');
-  }
-
-  Future<void> setAuthSource(AUTH_SOURCE source) async {
-    SharedPreferences _sharedPreferences =
-        await SharedPreferences.getInstance();
-    return _sharedPreferences.setInt('source', source.index);
-  }
-
-  Future<AUTH_SOURCE> getAuthSource() async {
-    SharedPreferences _sharedPreferences =
-        await SharedPreferences.getInstance();
-    int source = await _sharedPreferences.getInt('source');
-    return source as AUTH_SOURCE;
   }
 
   Future<bool> clearData() async {

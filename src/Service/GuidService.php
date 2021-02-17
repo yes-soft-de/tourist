@@ -65,18 +65,31 @@ class GuidService
     public function getGuides()
     {
         $guidesResponse = [];
+        $guidArray = [];
         $guides = $this->guidManager->getGuides();
 
         foreach ($guides as $guid)
         {
             //rating
             $ratingGuidCalculate = $this->ratingManager->getGuidRatingByID($guid['user']);
+          
             $guidRate = $ratingGuidCalculate[1];
             $guid['rating'] = $guidRate;
-            //
-            $guidesResponse[] = $this->autoMapping->map('array', GuidesResponse::class, $guid);
-        }
 
+            //-------> Start of editing
+            $guidArray[] = $guid;
+            //Sort the matrix in descending order by rating
+            array_multisort(array_column($guidArray, 'rating'), SORT_DESC, $guidArray);
+            //end of editing <-------
+
+            // $guidesResponse[] = $this->autoMapping->map('array', GuidesResponse::class, $guid);
+        }
+        //-------> Start of editing
+        foreach ($guidArray as $guidArr) {
+            $guidesResponse[] = $this->autoMapping->map('array', GuidesResponse::class, $guidArr);
+        }
+        //end of editing <-------
+        
         return $guidesResponse;
     }
 }

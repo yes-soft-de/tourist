@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tourists/generated/l10n.dart';
-import 'package:tourists/module_authorization/authorization_routes.dart';
+import 'package:tourists/module_auth/authorization_routes.dart';
 import 'package:tourists/module_orders/orders_routes.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 import 'package:tourists/module_settings/settings_routes.dart';
@@ -11,15 +11,18 @@ class CustomBottomNavigationBar extends StatelessWidget {
   final Color inactiveColor = Colors.black;
   final int activePosition;
   final bool isLoggedIn;
+  final Function() onLogout;
 
   final void Function(int) onLocationChanged;
   final BuildContext context;
 
-  CustomBottomNavigationBar(
-      {@required this.activePosition,
-      @required this.context,
-      @required this.isLoggedIn,
-      @required this.onLocationChanged});
+  CustomBottomNavigationBar({
+    @required this.activePosition,
+    @required this.context,
+    @required this.isLoggedIn,
+    @required this.onLocationChanged,
+    this.onLogout,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -81,11 +84,11 @@ class CustomBottomNavigationBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         GestureDetector(
-            onTap: () {
-              onLocationChanged(0);
-            },
-            child:
-                navItem(S.of(context).home, Icons.home, activePosition == 0),),
+          onTap: () {
+            onLocationChanged(0);
+          },
+          child: navItem(S.of(context).home, Icons.home, activePosition == 0),
+        ),
         GestureDetector(
             onTap: () {
               onLocationChanged(1);
@@ -161,8 +164,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             SharedPreferencesHelper preferencesHelper =
                 new SharedPreferencesHelper();
             preferencesHelper.clearData().then((value) {
-              Navigator.pushNamed(
-                  context, AuthorizationRoutes.loginTypeSelector);
+              Navigator.pushNamed(context, AuthorizationRoutes.LOGIN_SCREEN);
             });
           },
           child: Container(
@@ -179,11 +181,10 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   GestureDetector(
                       onTap: () {
                         if (isLoggedIn) {
-                          Navigator.of(context)
-                              .pushNamed(AuthorizationRoutes.logout);
+                          onLogout();
                         } else {
                           Navigator.of(context)
-                              .pushNamed(AuthorizationRoutes.loginTypeSelector);
+                              .pushNamed(AuthorizationRoutes.LOGIN_SCREEN);
                         }
                       },
                       child: Text(isLoggedIn

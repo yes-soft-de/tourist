@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/module_authorization/authprization_module.dart';
+import 'package:tourists/module_auth/authoriazation_module.dart';
 import 'package:tourists/module_forms/forms_module.dart';
 import 'package:tourists/module_guide/guide_list_module.dart';
 import 'package:tourists/module_home/home_module.dart';
@@ -102,8 +102,8 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           theme: ThemeData(
-              primaryColor: Colors.greenAccent,
-              accentColor: Colors.greenAccent),
+              primaryColor: Color(0xff05F29B),
+              accentColor: Color(0xffF2DC6B)),
           supportedLocales: S.delegate.supportedLocales,
           title: 'Soyah',
           routes: fullRoutesList,

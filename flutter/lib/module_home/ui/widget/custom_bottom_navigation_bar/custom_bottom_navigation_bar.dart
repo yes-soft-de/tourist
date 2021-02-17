@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tourists/generated/l10n.dart';
-import 'package:tourists/module_authorization/authorization_routes.dart';
-import 'package:tourists/module_authorization/guide_authorization_module/guide_authorization_routes.dart';
+import 'package:tourists/module_auth/authorization_routes.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 import 'package:tourists/module_settings/settings_routes.dart';
 
@@ -9,11 +8,14 @@ class CustomGuideBottomNavigationBar extends StatefulWidget {
   final Function(int) onNavigationChanged;
   final int currentPosition;
   final bool loggedIn;
+  final Function() onLogout;
 
-  CustomGuideBottomNavigationBar(
-      {@required this.loggedIn,
-      @required this.currentPosition,
-      @required this.onNavigationChanged});
+  CustomGuideBottomNavigationBar({
+    @required this.loggedIn,
+    @required this.currentPosition,
+    @required this.onNavigationChanged,
+    this.onLogout,
+  });
 
   @override
   State<StatefulWidget> createState() =>
@@ -166,8 +168,7 @@ class _CustomGuideBottomNavigatorState
             SharedPreferencesHelper preferencesHelper =
                 new SharedPreferencesHelper();
             preferencesHelper.clearData().then((value) {
-              Navigator.pushNamed(
-                  context, AuthorizationRoutes.loginTypeSelector);
+              Navigator.pushNamed(context, AuthorizationRoutes.LOGIN_SCREEN);
             });
           },
           child: Container(
@@ -184,11 +185,11 @@ class _CustomGuideBottomNavigatorState
                   GestureDetector(
                       onTap: () {
                         if (widget.loggedIn) {
-                          Navigator.of(context)
-                              .pushNamed(AuthorizationRoutes.logout);
+                          // Navigator.of(context)
+                          //     .pushNamed(AuthorizationRoutes.logout);
                         } else {
                           Navigator.of(context)
-                              .pushNamed(AuthorizationRoutes.loginTypeSelector);
+                              .pushNamed(AuthorizationRoutes.LOGIN_SCREEN);
                         }
                       },
                       child: Text(widget.loggedIn
@@ -201,8 +202,8 @@ class _CustomGuideBottomNavigatorState
         ),
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(
-                context, GuideAuthorizationRoutes.guideUpdateProfile);
+            // Navigator.pushNamed(
+            //     context, GuideAuthorizationRoutes.guideUpdateProfile);
           },
           child: !widget.loggedIn
               ? Container()
@@ -219,8 +220,8 @@ class _CustomGuideBottomNavigatorState
                         ),
                         GestureDetector(
                             onTap: () {
-                              Navigator.of(context).pushNamed(
-                                  GuideAuthorizationRoutes.guideUpdateProfile);
+                              // Navigator.of(context).pushNamed(
+                              //     GuideAuthorizationRoutes.guideUpdateProfile);
                             },
                             child: Text(S.of(context).updateMyProfile)),
                       ],

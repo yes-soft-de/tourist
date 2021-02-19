@@ -6,6 +6,8 @@ import 'package:tourists/module_locations/response/google_locations/google_locat
 class GoogleLocationsManager {
   GoogleLocationRepository _repository;
 
-  Future<GoogleLocationsResponse> getPredictions(String query) =>
-      _repository.getPredictions(query);
+  Future<String> getKey() => _repository.getMapKey();
+
+  Future<GoogleLocationsResponse> getPredictions(String key, String query) =>
+      _repository.getPredictions(query, key);
 }

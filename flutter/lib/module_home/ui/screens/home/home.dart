@@ -82,9 +82,7 @@ class HomeScreenState extends State<HomeScreen> {
                       widget._locationListScreen,
                     ],
                   ),
-                  ListView(
-                    children: <Widget>[widget._guideListScreen],
-                  ),
+                  widget._guideListScreen,
                   widget._eventListScreen
                 ],
                 onPageChanged: (pos) {

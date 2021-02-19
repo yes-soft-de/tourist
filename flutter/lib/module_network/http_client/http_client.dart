@@ -22,12 +22,13 @@ class HttpClient extends NetworkClient {
   }
 
   @override
-  Future<Map<String, dynamic>> get(String url) async {
+  Future<Map<String, dynamic>> get(String url, {Map<String, String> queryParams}) async {
     _logger.info(tag, 'GET $url');
     try {
       Response response = await _client.get(
         url,
         options: buildCacheOptions(Duration(seconds: 2)),
+        queryParameters: queryParams
       );
 
       if (response.statusCode >= 200 && response.statusCode < 300) {

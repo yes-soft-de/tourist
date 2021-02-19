@@ -17,4 +17,6 @@ class Urls {
   static final comment = baseAPI + 'comment';
   static final event = baseAPI + 'event';
   static final rate = baseAPI + 'rating';
+  static final mapHelper = baseAPI + 'maphelper';
+  static final googleAutoComplete = 'https://maps.googleapis.com/maps/api/place/autocomplete/json';
 }

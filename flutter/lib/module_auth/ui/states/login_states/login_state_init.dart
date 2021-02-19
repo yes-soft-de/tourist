@@ -21,6 +21,9 @@ class LoginStateInit extends LoginState {
           onEmailLinkRequest: (email) {
             screen.sendLoginLink(email, UserRole.ROLE_OWNER);
           },
+          onCodeRequested: (phoneNumber) {
+            screen.loginViaPhone(phoneNumber);
+          },
           onGmailLoginRequested: () {
             screen.loginViaGoogle();
           },

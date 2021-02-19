@@ -2,6 +2,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -12,6 +13,7 @@ import 'package:tourists/module_forms/forms_module.dart';
 import 'package:tourists/module_guide/guide_list_module.dart';
 import 'package:tourists/module_home/home_module.dart';
 import 'package:tourists/module_locations/location_module.dart';
+import 'package:tourists/module_locations/utils/UserLocationHelper.dart';
 import 'package:tourists/module_orders/order_module.dart';
 import 'package:tourists/module_settings/settings_module.dart';
 import 'package:tourists/module_splash/ui/splash_routes.dart';
@@ -76,6 +78,25 @@ class MyApp extends StatelessWidget {
   );
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (state == AppLifecycleState.resumed) {
+      final PendingDynamicLinkData data =
+      await FirebaseDynamicLinks.instance.getInitialLink();
+      if( data?.link != null ) {
+        await _authService.verifyLoginLink(data.link.toString());
+      }
+      FirebaseDynamicLinks.instance.onLink(
+          onSuccess: (PendingDynamicLinkData dynamicLink) async {
+            final Uri deepLink = dynamicLink?.link;
+            await _authService.verifyLoginLink(data.link.toString());
+          }, onError: (OnLinkErrorException e) async {
+        print('onLinkError');
+        print(e.message);
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     Map<String, WidgetBuilder> fullRoutesList = {};
 
@@ -89,6 +110,10 @@ class MyApp extends StatelessWidget {
     fullRoutesList.addAll(_settingsModule.getRoutes());
     fullRoutesList.addAll(_splashModule.getRoutes());
     try {
+      UserLocationHelper().getCurrentLocation().then((value) {
+        print(value.toString());
+      });
+
       getInitialLink().then((value) {
         if (value != null) {
           print('Got Login Link: $value');

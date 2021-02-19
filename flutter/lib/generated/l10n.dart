@@ -1094,6 +1094,146 @@ class S {
       args: [],
     );
   }
+
+  /// `Email/Phone`
+  String get emailphone {
+    return Intl.message(
+      'Email/Phone',
+      name: 'emailphone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please input an Email or a phone number`
+  String get pleaseInputAnEmailOrAPhoneNumber {
+    return Intl.message(
+      'Please input an Email or a phone number',
+      name: 'pleaseInputAnEmailOrAPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Requesting Profile From the Server`
+  String get requestingProfileFromTheServer {
+    return Intl.message(
+      'Requesting Profile From the Server',
+      name: 'requestingProfileFromTheServer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Name`
+  String get myName {
+    return Intl.message(
+      'My Name',
+      name: 'myName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About Me`
+  String get aboutMe {
+    return Intl.message(
+      'About Me',
+      name: 'aboutMe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Profile`
+  String get saveProfile {
+    return Intl.message(
+      'Save Profile',
+      name: 'saveProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saving`
+  String get saving {
+    return Intl.message(
+      'Saving',
+      name: 'saving',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Image from Gallery`
+  String get selectImageFromGallery {
+    return Intl.message(
+      'Select Image from Gallery',
+      name: 'selectImageFromGallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Capture My Image From Camera`
+  String get captureMyImageFromCamera {
+    return Intl.message(
+      'Capture My Image From Camera',
+      name: 'captureMyImageFromCamera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Capture My Image`
+  String get captureMyImage {
+    return Intl.message(
+      'Capture My Image',
+      name: 'captureMyImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload`
+  String get upload {
+    return Intl.message(
+      'Upload',
+      name: 'upload',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Uploading`
+  String get uploading {
+    return Intl.message(
+      'Uploading',
+      name: 'uploading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Upload Your Image`
+  String get pleaseUploadYourImage {
+    return Intl.message(
+      'Please Upload Your Image',
+      name: 'pleaseUploadYourImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter Your Name`
+  String get pleaseEnterYourName {
+    return Intl.message(
+      'Please Enter Your Name',
+      name: 'pleaseEnterYourName',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

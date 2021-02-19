@@ -1,151 +1,174 @@
 class GoogleLocationsResponse {
-  List<Features> features;
-  String type;
+  List<Predictions> predictions;
+  String status;
 
-  GoogleLocationsResponse({this.features, this.type});
+  GoogleLocationsResponse({this.predictions, this.status});
 
   GoogleLocationsResponse.fromJson(Map<String, dynamic> json) {
-    if (json['features'] != null) {
-      features = new List<Features>();
-      json['features'].forEach((v) {
-        features.add(new Features.fromJson(v));
+    if (json['predictions'] != null) {
+      predictions = <Predictions>[];
+      json['predictions'].forEach((v) {
+        predictions.add(new Predictions.fromJson(v));
       });
     }
-    type = json['type'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.features != null) {
-      data['features'] = this.features.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (this.predictions != null) {
+      data['predictions'] = this.predictions.map((v) => v.toJson()).toList();
     }
-    data['type'] = this.type;
+    data['status'] = this.status;
     return data;
   }
 }
 
-class Features {
-  Geometry geometry;
-  String type;
-  Properties properties;
+class Predictions {
+  String description;
+  List<MatchedSubstrings> matchedSubstrings;
+  String placeId;
+  String reference;
+  StructuredFormatting structuredFormatting;
+  List<Terms> terms;
+  List<String> types;
 
-  Features({this.geometry, this.type, this.properties});
+  Predictions(
+      {this.description,
+        this.matchedSubstrings,
+        this.placeId,
+        this.reference,
+        this.structuredFormatting,
+        this.terms,
+        this.types});
 
-  Features.fromJson(Map<String, dynamic> json) {
-    geometry = json['geometry'] != null
-        ? new Geometry.fromJson(json['geometry'])
+  Predictions.fromJson(Map<String, dynamic> json) {
+    description = json['description'];
+    if (json['matched_substrings'] != null) {
+      matchedSubstrings = <MatchedSubstrings>[];
+      json['matched_substrings'].forEach((v) {
+        matchedSubstrings.add(new MatchedSubstrings.fromJson(v));
+      });
+    }
+    placeId = json['place_id'];
+    reference = json['reference'];
+    structuredFormatting = json['structured_formatting'] != null
+        ? new StructuredFormatting.fromJson(json['structured_formatting'])
         : null;
-    type = json['type'];
-    properties = json['properties'] != null
-        ? new Properties.fromJson(json['properties'])
-        : null;
+    if (json['terms'] != null) {
+      terms = <Terms>[];
+      json['terms'].forEach((v) {
+        terms.add(new Terms.fromJson(v));
+      });
+    }
+    types = json['types'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.geometry != null) {
-      data['geometry'] = this.geometry.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['description'] = this.description;
+    if (this.matchedSubstrings != null) {
+      data['matched_substrings'] =
+          this.matchedSubstrings.map((v) => v.toJson()).toList();
     }
-    data['type'] = this.type;
-    if (this.properties != null) {
-      data['properties'] = this.properties.toJson();
+    data['place_id'] = this.placeId;
+    data['reference'] = this.reference;
+    if (this.structuredFormatting != null) {
+      data['structured_formatting'] = this.structuredFormatting.toJson();
     }
+    if (this.terms != null) {
+      data['terms'] = this.terms.map((v) => v.toJson()).toList();
+    }
+    data['types'] = this.types;
     return data;
   }
 }
 
-class Geometry {
-  List<double> coordinates;
-  String type;
+class MatchedSubstrings {
+  int length;
+  int offset;
 
-  Geometry({this.coordinates, this.type});
+  MatchedSubstrings({this.length, this.offset});
 
-  Geometry.fromJson(Map<String, dynamic> json) {
-    coordinates = json['coordinates'].cast<double>();
-    type = json['type'];
+  MatchedSubstrings.fromJson(Map<String, dynamic> json) {
+    length = json['length'];
+    offset = json['offset'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['coordinates'] = this.coordinates;
-    data['type'] = this.type;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['length'] = this.length;
+    data['offset'] = this.offset;
     return data;
   }
 }
 
-class Properties {
-  int osmId;
-  String osmType;
-  String country;
-  String osmKey;
-  String countrycode;
-  String osmValue;
-  String postcode;
-  String name;
-  String state;
-  String type;
-  List<double> extent;
-  String city;
-  String housenumber;
-  String street;
-  String district;
-  String locality;
+class StructuredFormatting {
+  String mainText;
+  List<MainTextMatchedSubstrings> mainTextMatchedSubstrings;
+  String secondaryText;
 
-  Properties(
-      {this.osmId,
-      this.osmType,
-      this.country,
-      this.osmKey,
-      this.countrycode,
-      this.osmValue,
-      this.postcode,
-      this.name,
-      this.state,
-      this.type,
-      this.extent,
-      this.city,
-      this.housenumber,
-      this.street,
-      this.district,
-      this.locality});
+  StructuredFormatting(
+      {this.mainText, this.mainTextMatchedSubstrings, this.secondaryText});
 
-  Properties.fromJson(Map<String, dynamic> json) {
-    osmId = json['osm_id'];
-    osmType = json['osm_type'];
-    country = json['country'];
-    osmKey = json['osm_key'];
-    countrycode = json['countrycode'];
-    osmValue = json['osm_value'];
-    postcode = json['postcode'];
-    name = json['name'];
-    state = json['state'];
-    type = json['type'];
-    extent = json['extent'].cast<double>();
-    city = json['city'];
-    housenumber = json['housenumber'];
-    street = json['street'];
-    district = json['district'];
-    locality = json['locality'];
+  StructuredFormatting.fromJson(Map<String, dynamic> json) {
+    mainText = json['main_text'];
+    if (json['main_text_matched_substrings'] != null) {
+      mainTextMatchedSubstrings = <MainTextMatchedSubstrings>[];
+      json['main_text_matched_substrings'].forEach((v) {
+        mainTextMatchedSubstrings
+            .add(new MainTextMatchedSubstrings.fromJson(v));
+      });
+    }
+    secondaryText = json['secondary_text'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['osm_id'] = this.osmId;
-    data['osm_type'] = this.osmType;
-    data['country'] = this.country;
-    data['osm_key'] = this.osmKey;
-    data['countrycode'] = this.countrycode;
-    data['osm_value'] = this.osmValue;
-    data['postcode'] = this.postcode;
-    data['name'] = this.name;
-    data['state'] = this.state;
-    data['type'] = this.type;
-    data['extent'] = this.extent;
-    data['city'] = this.city;
-    data['housenumber'] = this.housenumber;
-    data['street'] = this.street;
-    data['district'] = this.district;
-    data['locality'] = this.locality;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['main_text'] = this.mainText;
+    if (this.mainTextMatchedSubstrings != null) {
+      data['main_text_matched_substrings'] =
+          this.mainTextMatchedSubstrings.map((v) => v.toJson()).toList();
+    }
+    data['secondary_text'] = this.secondaryText;
+    return data;
+  }
+}
+
+class Terms {
+  int offset;
+  String value;
+
+  Terms({this.offset, this.value});
+
+  Terms.fromJson(Map<String, dynamic> json) {
+    offset = json['offset'];
+    value = json['value'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['offset'] = this.offset;
+    data['value'] = this.value;
+    return data;
+  }
+}
+
+class MainTextMatchedSubstrings {
+  int length;
+  int offset;
+
+  MainTextMatchedSubstrings({this.length, this.offset});
+
+  MainTextMatchedSubstrings.fromJson(Map<String, dynamic> json) {
+    length = json['length'];
+    offset = json['offset'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['length'] = this.length;
+    data['offset'] = this.offset;
     return data;
   }
 }

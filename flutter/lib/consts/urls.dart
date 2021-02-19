@@ -1,8 +1,10 @@
 class Urls {
   static String baseAPI = 'http://tourist.yes-cloud.de/html/public/index.php/';
+  static final imagesRoot = 'http://tourist.yes-cloud.de/upload/';
 
   static final loginAPI = baseAPI + 'login_check';
   static final loginGuideAPI = baseAPI + 'guid';
+  static final uploadAPI = baseAPI + 'upload';
   static final createProfileAPI = baseAPI + 'tourist';
   static final getProfileAPI = baseAPI + 'tourist';
   static final locationList = baseAPI + 'regions';
@@ -17,4 +19,6 @@ class Urls {
   static final comment = baseAPI + 'comment';
   static final event = baseAPI + 'event';
   static final rate = baseAPI + 'rating';
+  static final mapHelper = baseAPI + 'maphelper';
+  static final googleAutoComplete = 'https://maps.googleapis.com/maps/api/place/autocomplete/json';
 }

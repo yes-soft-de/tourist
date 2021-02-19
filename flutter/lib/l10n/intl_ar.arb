@@ -105,5 +105,19 @@
   "register": "Register",
   "pleaseCompleteTheForm": "Please complete the form",
   "sendLoginLink": "Send Login Link",
-  "pleaseCheckYourEmail": "Please Check your Email!"
+  "pleaseCheckYourEmail": "Please Check your Email!",
+  "emailphone": "Email/Phone",
+  "pleaseInputAnEmailOrAPhoneNumber": "Please input an Email or a phone number",
+  "requestingProfileFromTheServer": "Requesting Profile From the Server",
+  "myName": "My Name",
+  "aboutMe": "About Me",
+  "saveProfile": "Save Profile",
+  "saving": "Saving",
+  "selectImageFromGallery": "Select Image from Gallery",
+  "captureMyImageFromCamera": "Capture My Image From Camera",
+  "captureMyImage": "Capture My Image",
+  "upload": "Upload",
+  "uploading": "Uploading",
+  "pleaseUploadYourImage": "Please Upload Your Image",
+  "pleaseEnterYourName": "Please Enter Your Name"
 }

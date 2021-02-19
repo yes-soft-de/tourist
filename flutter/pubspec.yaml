@@ -54,6 +54,7 @@ dependencies:
     dio_flutter_transformer: ^3.0.2
     dio_http_cache: ^0.2.11
     dio_firebase_performance: ^0.2.0
+    firebase_dynamic_links: ^0.6.3
 
     # Pair and Other Types
     analyzer_plugin: ^0.3.0

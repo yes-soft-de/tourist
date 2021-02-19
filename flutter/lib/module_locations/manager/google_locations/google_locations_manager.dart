@@ -4,7 +4,8 @@ import 'package:tourists/module_locations/response/google_locations/google_locat
 
 @provide
 class GoogleLocationsManager {
-  GoogleLocationRepository _repository;
+  final GoogleLocationRepository _repository;
+  GoogleLocationsManager(this._repository);
 
   Future<String> getKey() => _repository.getMapKey();
 

@@ -15,6 +15,7 @@ import 'package:tourists/module_home/home_module.dart';
 import 'package:tourists/module_locations/location_module.dart';
 import 'package:tourists/module_locations/utils/UserLocationHelper.dart';
 import 'package:tourists/module_orders/order_module.dart';
+import 'package:tourists/module_search/search_module.dart';
 import 'package:tourists/module_settings/settings_module.dart';
 import 'package:tourists/module_splash/ui/splash_routes.dart';
 import 'package:tourists/utils/language/language.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
   final SettingsModule _settingsModule;
   final LanguageHelper _languageHelper;
   final AuthService _authService;
+  final SearchModule _searchModule;
 
   MyApp(
     this._languageHelper,
@@ -75,21 +77,22 @@ class MyApp extends StatelessWidget {
     this._orderModule,
     this._formsModule,
     this._authService,
+    this._searchModule,
   );
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
       final PendingDynamicLinkData data =
-      await FirebaseDynamicLinks.instance.getInitialLink();
-      if( data?.link != null ) {
+          await FirebaseDynamicLinks.instance.getInitialLink();
+      if (data?.link != null) {
         await _authService.verifyLoginLink(data.link.toString());
       }
       FirebaseDynamicLinks.instance.onLink(
           onSuccess: (PendingDynamicLinkData dynamicLink) async {
-            final Uri deepLink = dynamicLink?.link;
-            await _authService.verifyLoginLink(data.link.toString());
-          }, onError: (OnLinkErrorException e) async {
+        final Uri deepLink = dynamicLink?.link;
+        await _authService.verifyLoginLink(data.link.toString());
+      }, onError: (OnLinkErrorException e) async {
         print('onLinkError');
         print(e.message);
       });
@@ -109,6 +112,7 @@ class MyApp extends StatelessWidget {
     fullRoutesList.addAll(_orderModule.getRoutes());
     fullRoutesList.addAll(_settingsModule.getRoutes());
     fullRoutesList.addAll(_splashModule.getRoutes());
+    fullRoutesList.addAll(_searchModule.getRoutes());
     try {
       UserLocationHelper().getCurrentLocation().then((value) {
         print(value.toString());

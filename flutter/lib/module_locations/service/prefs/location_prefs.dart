@@ -1,5 +1,7 @@
+import 'package:inject/inject.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+@provide
 class LocationPreferencesHelper {
   Future<void> setKey(String key) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();

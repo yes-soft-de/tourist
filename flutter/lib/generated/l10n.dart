@@ -1094,6 +1094,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Email/Phone`
+  String get emailphone {
+    return Intl.message(
+      'Email/Phone',
+      name: 'emailphone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please input an Email or a phone number`
+  String get pleaseInputAnEmailOrAPhoneNumber {
+    return Intl.message(
+      'Please input an Email or a phone number',
+      name: 'pleaseInputAnEmailOrAPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

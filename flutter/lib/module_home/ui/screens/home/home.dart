@@ -38,8 +38,6 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('In Main Page');
-
     if (loggedIn == null) {
       widget._authService.isLoggedIn.then((value) {
         loggedIn = value;
@@ -54,18 +52,6 @@ class HomeScreenState extends State<HomeScreen> {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: Text('سياح'),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                Navigator.of(context).pushNamed(SearchRoutes.ROUTE_SEARCH);
-              },
-            ),
-          ],
-        ),
         body: Stack(
           children: <Widget>[
             Positioned(
@@ -76,11 +62,25 @@ class HomeScreenState extends State<HomeScreen> {
               child: PageView(
                 controller: _pageController,
                 children: <Widget>[
-                  ListView(
-                    children: <Widget>[
-                      widget._locationCarouselScreen,
-                      widget._locationListScreen,
-                    ],
+                  Scaffold(
+                    appBar: AppBar(
+                      backgroundColor: Colors.white,
+                      title: Text('سياح'),
+                      actions: [
+                        IconButton(
+                          icon: Icon(Icons.search),
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(SearchRoutes.ROUTE_SEARCH);
+                          },
+                        ),
+                      ],
+                    ),
+                    body: ListView(
+                      children: <Widget>[
+                        widget._locationCarouselScreen,
+                        widget._locationListScreen,
+                      ],
+                    ),
                   ),
                   widget._guideListScreen,
                   widget._eventListScreen

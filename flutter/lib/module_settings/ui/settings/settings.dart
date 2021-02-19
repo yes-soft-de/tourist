@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
+import 'package:tourists/module_home/home_routes.dart';
 import 'package:tourists/utils/auth_guard/auth_gard.dart';
 import 'package:tourists/utils/language/language.dart';
 
@@ -57,7 +59,16 @@ class __SettingsScreenState extends State<SettingsScreen> {
                             },
                           );
                         }
-                        return Text(S.of(context).notLoggedIn);
+                        return GestureDetector(
+                            onTap: () {
+                              FirebaseAuth.instance.signOut().then((value) {
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                  HomeRoutes.home,
+                                  (route) => false,
+                                );
+                              });
+                            },
+                            child: Text(S.of(context).notLoggedIn));
                       },
                     )
                   ],

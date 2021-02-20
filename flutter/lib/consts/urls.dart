@@ -4,6 +4,9 @@ class Urls {
 
   static final loginAPI = baseAPI + 'login_check';
   static final loginGuideAPI = baseAPI + 'guid';
+  static final loginTouristsAPI = baseAPI + 'tourist';
+  static final registerGuideAPI = baseAPI + 'guid';
+  static final registerTouristsAPI = baseAPI + 'tourist';
   static final uploadAPI = baseAPI + 'upload';
   static final createProfileAPI = baseAPI + 'tourist';
   static final getProfileAPI = baseAPI + 'tourist';

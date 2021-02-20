@@ -53,7 +53,7 @@ class LoginStateCodeSent extends LoginState {
             child: Text(S.of(context).resendCode),
           ),
           loading ? Text(S.of(context).loading) : Container(
-            decoration: BoxDecoration(color: Theme.of(context).accentColor),
+            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
             child: GestureDetector(
               onTap: () {
                 loading = true;

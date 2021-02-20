@@ -51,3 +51,6 @@ keys.dart
 # Generated Stuff
 *.summary
 *.inject.dart
+
+# Sensitive Data
+google-services.json

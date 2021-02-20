@@ -72,8 +72,8 @@ class AuthService {
       await _authManager.register(RegisterRequest(
         userID: user.credential.user.email ?? user.credential.user.uid,
         password: user.credential.user.uid,
-        // This should change from the API side
-        roles: [user.userRole.toString().split('.')[1]],
+        name: user.credential.user.displayName ?? 'user',
+        roles: user.userRole == UserRole.ROLE_GUIDE ? 'guide' : 'tourist',
       ));
     } catch (e) {
       // Failed Register Attempt means the process has stopped at some point
@@ -150,7 +150,8 @@ class AuthService {
     var email = await _prefsHelper.getEmail();
     var role = await _prefsHelper.getCurrentRole();
     try {
-      var userCredential = await _auth.signInWithEmailLink(email: email, emailLink: link);
+      var userCredential =
+          await _auth.signInWithEmailLink(email: email, emailLink: link);
       await _registerApiUser(AppUser(userCredential, AuthSource.EMAIL, role));
     } catch (e) {
       if (e is FirebaseAuthException) {

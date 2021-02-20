@@ -7,4 +7,4 @@ gradle-wrapper.jar
 GeneratedPluginRegistrant.java
 
 google-services.json
-key.jks
+app/key.jks

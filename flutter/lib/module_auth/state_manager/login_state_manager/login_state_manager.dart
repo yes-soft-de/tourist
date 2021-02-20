@@ -7,6 +7,7 @@ import 'package:tourists/module_auth/ui/states/login_states/login_state_code_sen
 import 'package:tourists/module_auth/ui/states/login_states/login_state_email_sent.dart';
 import 'package:tourists/module_auth/ui/states/login_states/login_state_error.dart';
 import 'package:tourists/module_auth/ui/states/login_states/login_state_init.dart';
+import 'package:tourists/module_auth/ui/states/login_states/login_state_loading.dart';
 import 'package:tourists/module_auth/ui/states/login_states/login_state_success.dart';
 import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
@@ -27,6 +28,7 @@ class LoginStateManager {
   Stream<LoginState> get stateStream => _loginStateSubject.stream;
 
   void loginViaPhoneNumber(String phoneNumber, LoginScreenState _loginScreenState) {
+    _loginStateSubject.add(LoginStateLoading(_loginScreenState));
     _authService.authListener.listen((event) {
       switch (event) {
         case AuthStatus.AUTHORIZED:
@@ -53,6 +55,7 @@ class LoginStateManager {
 
   void loginViaEmailAndPassword(
       String email, String password, LoginScreenState _loginScreenState) {
+    _loginStateSubject.add(LoginStateLoading(_loginScreenState));
     _email = email;
     _password = password;
     _authService.authListener.listen((event) {

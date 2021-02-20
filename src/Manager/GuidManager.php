@@ -75,6 +75,7 @@ class GuidManager
 
         $profile->user = $user;
         $profile->name = $request->name;
+        $profile->placeId = $request->placeId;
 
         //$request->setUserID($user);
 
@@ -95,7 +96,7 @@ class GuidManager
         $user = $this->userRepository->getUser($request->user);
 
         $guid = $this->guidEntityRepository->getGuid($user);
-         //dd($guid);
+         
 
         $request->setUser($user);
 
@@ -115,6 +116,11 @@ class GuidManager
         $city = $this->regionsManager->getRegion($regionID);
 
         return $this->guidEntityRepository->getGuidByRegion($city['name']);
+    }
+
+    public function guidByPlaceId($placeId)
+    {
+        return $this->guidEntityRepository->guidByPlaceId($placeId);
     }
 
     public function getGuides()

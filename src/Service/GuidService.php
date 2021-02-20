@@ -62,6 +62,18 @@ class GuidService
         return $guidesResponse;
     }
 
+    public function guidByPlaceId($placeId)
+    {
+        $guidesResponse = [];
+        $guides = $this->guidManager->guidByPlaceId($placeId);
+     
+        foreach ($guides as $guid)
+        {
+            $guidesResponse[] = $this->autoMapping->map('array', GuidByRegionResponse::class, $guid);
+        }
+        return $guidesResponse;
+    }
+
     public function getGuides()
     {
         $guidesResponse = [];

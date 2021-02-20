@@ -67,6 +67,11 @@ class GuidEntity
      */
     private $path;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $placeId;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -188,6 +193,18 @@ class GuidEntity
     public function setPath(?string $path): self
     {
         $this->path = $path;
+
+        return $this;
+    }
+
+    public function getPlaceId(): ?string
+    {
+        return $this->placeId;
+    }
+
+    public function setPlaceId(?string $placeId): self
+    {
+        $this->placeId = $placeId;
 
         return $this;
     }

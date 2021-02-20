@@ -31,6 +31,11 @@ class RegionsEntity
      */
     private $location = [];
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $placeId;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +73,18 @@ class RegionsEntity
     public function setLocation(?array $location): self
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    public function getPlaceId(): ?string
+    {
+        return $this->placeId;
+    }
+
+    public function setPlaceId(?string $placeId): self
+    {
+        $this->placeId = $placeId;
 
         return $this;
     }

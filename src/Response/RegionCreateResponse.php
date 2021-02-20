@@ -16,6 +16,8 @@ class RegionCreateResponse
 
     public $path;
 
+    public $placeId;
+
     /**
      * @param mixed $path
      */

@@ -9,4 +9,6 @@ class GuidProfileCreateRequest
     public $user;
 
     public $name;
+
+    public $placeId;
 }

@@ -44,6 +44,8 @@ App\Request\GuidRegisterRequest:
   properties:
     userID:
       - NotBlank: ~
+    placeId:
+      - NotBlank: ~
 
 App\Request\GuidProfileCreateRequest:
   properties:
@@ -62,6 +64,8 @@ App\Request\RegionCreateRequest:
     name:
       - NotBlank: ~
     description:
+      - NotBlank: ~
+    placeId:
       - NotBlank: ~
 
 App\Request\TouristOrderCreateRequest:
@@ -82,4 +86,19 @@ App\Request\TouristOrderCreateRequest:
 App\Request\TouristRegisterRequest:
   properties:
     userID:
+      - NotBlank: ~
+
+App\Request\GuidProfileUpdateRequest:
+  properties:
+    user:
+      - NotBlank: ~
+    name:
+      - NotBlank: ~
+    language:
+      - NotBlank: ~
+    phoneNumber:
+      - NotBlank: ~
+    service:
+      - NotBlank: ~
+    placeId:
       - NotBlank: ~

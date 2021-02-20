@@ -63,6 +63,12 @@ class GuidController extends BaseController
 
         $request = $this->autoMapping->map(stdClass::class,GuidProfileUpdateRequest::class,(object)$data);
 
+        $violations = $this->validator->validate($request);
+        if (\count($violations) > 0) {
+            $violationsString = (string) $violations;
+
+            return new JsonResponse($violationsString, Response::HTTP_OK);
+        }
         $response = $this->guidService->guidProfileUpdate($request);
 
         return $this->response($response, self::UPDATE);
@@ -77,6 +83,22 @@ class GuidController extends BaseController
     {
         $response = $this->guidService->getGuidByRegion($request->get('id'));
         //dd($request->get('id'));
+        return $this->response($response,self::FETCH);
+    }
+
+    /**
+     * @Route("/guid", name="guidByPlaceId", methods={"GET"})
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function guidByPlaceId(Request $request)
+    { 
+        $data = json_decode($request->getContent(), true);
+
+        $request = $this->autoMapping->map(stdClass::class,GuidProfileUpdateRequest::class,(object)$data);
+       
+        $response = $this->guidService->guidByPlaceId($request->placeId);
+       
         return $this->response($response,self::FETCH);
     }
 

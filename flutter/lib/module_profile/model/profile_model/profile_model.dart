@@ -1,8 +1,8 @@
 class ProfileModel {
   String name;
   String image;
-  List<String> locations;
-  List<String> languages;
+  List<String> locations = <String>[];
+  List<String> languages = <String>[];
 
   ProfileModel({this.name, this.image, this.locations, this.languages});
 
@@ -10,22 +10,22 @@ class ProfileModel {
     name = json['name'];
     image = json['image'];
     if (json['languages'] != null) {
-      List<String> cities = json['languages'];
+      List<String> cities = json['languages'].cast<String>();
       languages = [];
       cities.forEach((element) {
         languages.add(element);
       });
     } else {
-      languages = [];
+      languages = <String>[];
     }
     if (json['city'] != null) {
-      List<String> cities = json['city'];
+      List<String> cities = json['city'].cast<String>();
       locations = [];
       cities.forEach((element) {
         locations.add(element);
       });
     } else {
-      locations = [];
+      locations = <String>[];
     }
   }
 

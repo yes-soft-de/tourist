@@ -9,6 +9,7 @@ class EditProfileStateLoading extends EditProfileState {
 
   @override
   Widget getUI(BuildContext context) {
+    screen.getProfile();
     return Center(
       child: Flex(
         direction: Axis.vertical,

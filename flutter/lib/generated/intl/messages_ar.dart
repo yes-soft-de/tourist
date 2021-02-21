@@ -95,6 +95,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseInputAnEmailOrAPhoneNumber" : MessageLookupByLibrary.simpleMessage("Please input an Email or a phone number"),
     "pleaseInputYourPhoneNumber" : MessageLookupByLibrary.simpleMessage("Please input your phone number"),
     "pleaseUploadYourImage" : MessageLookupByLibrary.simpleMessage("Please Upload Your Image"),
+    "profile" : MessageLookupByLibrary.simpleMessage("Profile"),
     "register" : MessageLookupByLibrary.simpleMessage("Register"),
     "registerSuccessSetupMyProfile" : MessageLookupByLibrary.simpleMessage("Register Success, Setup My Profile"),
     "register_submit" : MessageLookupByLibrary.simpleMessage("تسجيل حساب جديد"),

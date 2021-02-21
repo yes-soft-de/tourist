@@ -2,16 +2,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
+import 'package:tourists/module_auth/enums/user_type.dart';
+import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
 import 'package:tourists/module_home/home_routes.dart';
 import 'package:tourists/utils/auth_guard/auth_gard.dart';
 import 'package:tourists/utils/language/language.dart';
 
 @provide
 class SettingsScreen extends StatefulWidget {
-  final AuthGuard authGuard;
+  final AuthService _authService;
   final LanguageHelper languageHelper;
 
-  SettingsScreen(this.authGuard, this.languageHelper);
+  SettingsScreen(this.languageHelper, this._authService,);
 
   @override
   State<StatefulWidget> createState() => __SettingsScreenState();
@@ -44,15 +46,15 @@ class __SettingsScreenState extends State<SettingsScreen> {
                       style: TextStyle(fontSize: 16),
                     ),
                     FutureBuilder(
-                      future: widget.authGuard.isLoggedIn(),
+                      future: widget._authService.isLoggedIn,
                       builder:
                           (BuildContext context, AsyncSnapshot<bool> snapshot) {
                         if (snapshot.data == true) {
                           return FutureBuilder(
-                            future: widget.authGuard.isGuide(),
+                            future: widget._authService.userRole,
                             builder: (BuildContext context,
                                 AsyncSnapshot<dynamic> snapshot) {
-                              if (snapshot.data) {
+                              if (snapshot.data == UserRole.ROLE_GUIDE) {
                                 return Text(S.of(context).guide);
                               }
                               return Text(S.of(context).tourist);
@@ -107,6 +109,34 @@ class __SettingsScreenState extends State<SettingsScreen> {
                             child: Text('العربية'),
                           ),
                         ]),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              height: 8,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  color: Colors.black12,
+                  borderRadius: BorderRadius.all(Radius.circular(8))),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      S.of(context).logout,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    IconButton(icon: Icon(Icons.logout), onPressed: () {
+                      FirebaseAuth.instance.signOut().then((value) {
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                          HomeRoutes.home,
+                              (route) => false,
+                        );
+                      });
+                    }),
                   ],
                 ),
               ),

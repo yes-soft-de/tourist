@@ -75,15 +75,16 @@ class AuthService {
         name: user.credential.user.displayName ?? 'user',
         roles: user.userRole == UserRole.ROLE_GUIDE ? 'guide' : 'tourist',
       ));
-    } catch (e) {
-      // Failed Register Attempt means the process has stopped at some point
+    } catch (e, s) {
+      print('AuthService' + e.toString() + '\n' + s.toString());
       Logger().info('AuthService', 'User Already Exists');
     }
     await _loginApiUser(user);
   }
 
   void verifyWithPhone(String phone, UserRole role) {
-    _auth.verifyPhoneNumber(
+    if (_auth.currentUser == null) {
+      _auth.verifyPhoneNumber(
         phoneNumber: phone,
         verificationCompleted: (authCredentials) {
           _auth.signInWithCredential(authCredentials).then((credential) {
@@ -100,6 +101,10 @@ class AuthService {
         codeAutoRetrievalTimeout: (verificationId) {
           _authSubject.add(AuthStatus.CODE_TIMEOUT);
         });
+    }
+    else {
+      print('Logged in!');
+    }
   }
 
   Future<void> verifyWithGoogle(UserRole role) async {

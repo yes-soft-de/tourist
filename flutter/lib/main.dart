@@ -15,6 +15,7 @@ import 'package:tourists/module_home/home_module.dart';
 import 'package:tourists/module_locations/location_module.dart';
 import 'package:tourists/module_locations/utils/UserLocationHelper.dart';
 import 'package:tourists/module_orders/order_module.dart';
+import 'package:tourists/module_profile/profile_module.dart';
 import 'package:tourists/module_search/search_module.dart';
 import 'package:tourists/module_settings/settings_module.dart';
 import 'package:tourists/module_splash/ui/splash_routes.dart';
@@ -64,6 +65,7 @@ class MyApp extends StatelessWidget {
   final LanguageHelper _languageHelper;
   final AuthService _authService;
   final SearchModule _searchModule;
+  final ProfileModule _profileModule;
 
   MyApp(
     this._languageHelper,
@@ -78,6 +80,7 @@ class MyApp extends StatelessWidget {
     this._formsModule,
     this._authService,
     this._searchModule,
+    this._profileModule,
   );
 
   @override

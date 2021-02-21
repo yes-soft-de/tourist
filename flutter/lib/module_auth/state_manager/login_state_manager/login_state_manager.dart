@@ -27,7 +27,8 @@ class LoginStateManager {
 
   Stream<LoginState> get stateStream => _loginStateSubject.stream;
 
-  void loginViaPhoneNumber(String phoneNumber, LoginScreenState _loginScreenState) {
+  void loginViaPhoneNumber(
+      String phoneNumber, UserRole role, LoginScreenState _loginScreenState) {
     _loginStateSubject.add(LoginStateLoading(_loginScreenState));
     _authService.authListener.listen((event) {
       switch (event) {
@@ -39,7 +40,7 @@ class LoginStateManager {
           break;
         case AuthStatus.CODE_TIMEOUT:
           _loginStateSubject.add(LoginStateError(
-              _loginScreenState, 'Code Timeout', _email, _password));
+              _loginScreenState, 'Code Timeout', _email, _password, role));
           break;
         default:
           _loginStateSubject.add(LoginStateInit(_loginScreenState));
@@ -47,21 +48,22 @@ class LoginStateManager {
       }
     }).onError((err) {
       _loginStateSubject.add(LoginStateError(
-          _loginScreenState, err.toString(), _email, _password));
+          _loginScreenState, err.toString(), _email, _password, role));
     });
 
     _authService.verifyWithPhone(phoneNumber, UserRole.ROLE_GUIDE);
   }
 
-  void loginViaEmailAndPassword(
-      String email, String password, LoginScreenState _loginScreenState) {
+  void loginViaEmailAndPassword( LoginScreenState _loginScreenState,
+      String email, String password, UserRole role) {
     _loginStateSubject.add(LoginStateLoading(_loginScreenState));
     _email = email;
     _password = password;
     _authService.authListener.listen((event) {
       switch (event) {
         case AuthStatus.AUTHORIZED:
-          _loginStateSubject.add(LoginStateSuccess(_loginScreenState ?? _screenState));
+          _loginStateSubject
+              .add(LoginStateSuccess(_loginScreenState ?? _screenState));
           break;
         default:
           _loginStateSubject.add(LoginStateInit(_loginScreenState));
@@ -69,11 +71,11 @@ class LoginStateManager {
       }
     }).onError((err) {
       _loginStateSubject.add(LoginStateError(
-          _loginScreenState, err.toString(), _email, _password));
+          _loginScreenState, err.toString(), _email, _password, role));
     });
 
     _authService.signInWithEmailAndPassword(
-        email, password, UserRole.ROLE_OWNER);
+        email, password, UserRole.ROLE_TOURIST);
   }
 
   void confirmSMSCode(String smsCode, LoginScreenState screenState) {
@@ -85,7 +87,8 @@ class LoginStateManager {
     _authService.verifyWithGoogle(role);
   }
 
-  void sendLoginLink(LoginScreenState screenState, String email, UserRole role) {
+  void sendLoginLink(
+      LoginScreenState screenState, String email, UserRole role) {
     _authService.sendEmailLink(email, role);
     _loginStateSubject.add(LoginStateEmailSent(screenState));
   }

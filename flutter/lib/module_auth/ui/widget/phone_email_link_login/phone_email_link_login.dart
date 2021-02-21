@@ -4,11 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tourists/generated/l10n.dart';
+import 'package:tourists/module_auth/enums/user_type.dart';
 
 class PhoneEmailLinkLoginFormWidget extends StatefulWidget {
-  final Function(String) onEmailLinkRequest;
-  final Function(String) onCodeRequested;
-  final Function() onGmailLoginRequested;
+  final Function(String, UserRole) onEmailLinkRequest;
+  final Function(String, UserRole) onCodeRequested;
+  final Function(UserRole) onGmailLoginRequested;
   final Function(String) onSnackBarRequested;
 
   PhoneEmailLinkLoginFormWidget({
@@ -96,9 +97,9 @@ class _PhoneEmailLinkLoginWidgetState
                           S.of(context).pleaseCompleteTheForm);
                     } else if (_emailController.text.contains('@') &&
                         _emailController.text.contains('.')) {
-                      widget.onEmailLinkRequest(_emailController.text);
+                      widget.onEmailLinkRequest(_emailController.text, isGuide ? UserRole.ROLE_GUIDE : UserRole.ROLE_TOURIST);
                     } else if (int.tryParse(_emailController.text) != null) {
-                      widget.onCodeRequested(_emailController.text);
+                      widget.onCodeRequested(_emailController.text, isGuide ? UserRole.ROLE_GUIDE : UserRole.ROLE_TOURIST);
                     } else {
                       widget.onSnackBarRequested(
                           S.of(context).pleaseInputAnEmailOrAPhoneNumber);
@@ -143,7 +144,7 @@ class _PhoneEmailLinkLoginWidgetState
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
                 onTap: () {
-                  widget.onGmailLoginRequested();
+                  widget.onGmailLoginRequested(isGuide ? UserRole.ROLE_GUIDE : UserRole.ROLE_TOURIST);
                 },
                 child: Container(
                   alignment: Alignment.center,
@@ -237,7 +238,7 @@ class _PhoneEmailLinkLoginWidgetState
                     if (phone.startsWith('0')) {
                       phone = phone.substring(1);
                     }
-                    widget.onCodeRequested(countryCode + phone);
+                    widget.onCodeRequested(countryCode + phone, isGuide ? UserRole.ROLE_GUIDE : UserRole.ROLE_TOURIST);
                   },
                 ),
               ),
@@ -276,7 +277,7 @@ class _PhoneEmailLinkLoginWidgetState
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
                 onTap: () {
-                  widget.onGmailLoginRequested();
+                  widget.onGmailLoginRequested(isGuide ? UserRole.ROLE_GUIDE : UserRole.ROLE_TOURIST);
                 },
                 child: Container(
                   alignment: Alignment.center,

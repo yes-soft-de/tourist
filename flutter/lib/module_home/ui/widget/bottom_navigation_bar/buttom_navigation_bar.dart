@@ -3,6 +3,7 @@ import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_auth/authorization_routes.dart';
 import 'package:tourists/module_orders/orders_routes.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
+import 'package:tourists/module_profile/profile_routes.dart';
 import 'package:tourists/module_settings/settings_routes.dart';
 import 'package:tourists/module_shared/ui/widgets/request_guide_button/request_guide_button.dart';
 
@@ -87,27 +88,41 @@ class CustomBottomNavigationBar extends StatelessWidget {
           onTap: () {
             onLocationChanged(0);
           },
-          child: navItem(S.of(context).home, Icons.home, activePosition == 0),
+          child: navItem(
+            S.of(context).home,
+            Icons.home,
+            activePosition == 0,
+          ),
         ),
         GestureDetector(
-            onTap: () {
-              onLocationChanged(1);
-            },
-            child: navItem(S.of(context).guides, Icons.account_circle,
-                activePosition == 1)),
+          onTap: () {
+            onLocationChanged(1);
+          },
+          child: navItem(
+            S.of(context).guides,
+            Icons.account_circle,
+            activePosition == 1,
+          ),
+        ),
         GestureDetector(
           onTap: () {
             onLocationChanged(2);
           },
-          child:
-              navItem(S.of(context).events, Icons.event, activePosition == 2),
+          child: navItem(
+            S.of(context).events,
+            Icons.event,
+            activePosition == 2,
+          ),
         ),
         GestureDetector(
           onTap: () {
             onLocationChanged(3);
           },
           child: navItem(
-              S.of(context).more, Icons.more_horiz, activePosition == 3),
+            S.of(context).more,
+            Icons.more_horiz,
+            activePosition == 3,
+          ),
         ),
       ],
     );
@@ -154,6 +169,27 @@ class CustomBottomNavigationBar extends StatelessWidget {
                     width: 16,
                   ),
                   Text(S.of(context).settings),
+                ],
+              ),
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, ProfileRoutes.MY_ROUTE_PROFILE);
+          },
+          child: Container(
+            color: Colors.white,
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: Flex(
+                direction: Axis.horizontal,
+                children: <Widget>[
+                  Icon(Icons.person),
+                  Container(
+                    width: 16,
+                  ),
+                  Text(S.of(context).profile)
                 ],
               ),
             ),

@@ -8,9 +8,9 @@ import 'package:flutter/src/widgets/framework.dart';
 
 class RegisterStateError extends RegisterState {
   String errorMsg;
-  UserRole userType = UserRole.ROLE_OWNER;
+  UserRole userType = UserRole.ROLE_TOURIST;
   final registerTypeController =
-      PageController(initialPage: UserRole.ROLE_OWNER.index);
+      PageController(initialPage: UserRole.ROLE_TOURIST.index);
   bool loading = false;
 
   RegisterStateError(RegisterScreenState screen, this.errorMsg) : super(screen);

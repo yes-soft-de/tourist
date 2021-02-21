@@ -54,7 +54,7 @@ class RegisterScreenState extends State<RegisterScreen> {
   }
 
   void registerOwner(String email, String username, String password) {
-    currentUserRole = UserRole.ROLE_OWNER;
+    currentUserRole = UserRole.ROLE_TOURIST;
     widget._stateManager.registerOwner(email, username, password, this);
   }
 
@@ -74,7 +74,7 @@ class RegisterScreenState extends State<RegisterScreen> {
         Navigator.of(context).pushNamedAndRemoveUntil(
             HomeRoutes.guideHome, (r) => false);
         break;
-      case UserRole.ROLE_OWNER:
+      case UserRole.ROLE_TOURIST:
         Navigator.of(context).pushNamedAndRemoveUntil(
             HomeRoutes.home, (r) => false);
         break;

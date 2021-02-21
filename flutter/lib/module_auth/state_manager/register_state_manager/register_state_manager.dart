@@ -62,7 +62,7 @@ class RegisterStateManager {
     });
 
     _authService.registerWithEmailAndPassword(
-        email, password, name, UserRole.ROLE_OWNER);
+        email, password, name, UserRole.ROLE_TOURIST);
   }
 
   void confirmCaptainCode(String smsCode) {

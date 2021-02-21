@@ -93,7 +93,6 @@ class MyApp extends StatelessWidget {
       }
       FirebaseDynamicLinks.instance.onLink(
           onSuccess: (PendingDynamicLinkData dynamicLink) async {
-        final Uri deepLink = dynamicLink?.link;
         await _authService.verifyLoginLink(data.link.toString());
       }, onError: (OnLinkErrorException e) async {
         print('onLinkError');
@@ -116,6 +115,7 @@ class MyApp extends StatelessWidget {
     fullRoutesList.addAll(_settingsModule.getRoutes());
     fullRoutesList.addAll(_splashModule.getRoutes());
     fullRoutesList.addAll(_searchModule.getRoutes());
+    fullRoutesList.addAll(_profileModule.getRoutes());
     try {
       UserLocationHelper().getCurrentLocation().then((value) {
         print(value.toString());

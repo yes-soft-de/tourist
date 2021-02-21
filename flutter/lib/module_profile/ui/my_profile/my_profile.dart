@@ -1,14 +1,12 @@
-import 'dart:io';
+
+import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:inject/inject.dart';
-import 'package:tourists/consts/urls.dart';
-import 'package:tourists/generated/l10n.dart';
-import 'package:tourists/module_profile/state/my_profile_state.dart';
+import 'package:tourists/module_profile/model/profile_model/profile_model.dart';
 import 'package:tourists/module_profile/state_manager/my_profile/my_profile_state_manager.dart';
-import 'package:tourists/module_home/home_routes.dart';
+import 'package:tourists/module_profile/ui/states/edit_profile_state.dart';
+import 'package:tourists/module_profile/ui/states/edit_profile_state_loading.dart';
 
 @provide
 class MyProfileScreen extends StatefulWidget {
@@ -18,582 +16,54 @@ class MyProfileScreen extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _MyProfileScreenState();
+
+  void onImageSelected(String imagePath, ProfileModel profileModel) {
+    _stateManager.upload(this, imagePath, profileModel);
+  }
+
+  void saveProfile(ProfileModel profileModel) {
+    _stateManager.setMyProfile(this, profileModel);
+  }
+
+  void refresh(ProfileModel model) {
+    _stateManager.refresh(this, model);
+  }
+
+  void getProfile() {
+    _stateManager.getMyProfile(this);
+  }
 }
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
-  final TextEditingController _nameController = TextEditingController();
-
-  String imageUrl;
-  String imageLocation;
-  bool uploading = false;
-  bool submittingProfile = false;
-  final picker = ImagePicker();
-  MyProfileState currentState = MyProfileStateLoading();
-
-  bool searchActive = false;
-  bool editMode = false;
+  StreamSubscription _stateSubscription;
+  EditProfileState currentState;
 
   @override
   void initState() {
     super.initState();
-    widget._stateManager.getMyProfile();
-    widget._stateManager.stateStream.listen((event) {
+    currentState ??= EditProfileStateLoading(widget);
+    widget._stateManager.getMyProfile(widget);
+    _stateSubscription = widget._stateManager.stateStream.listen((event) {
       currentState = event;
-      uploading = false;
-      processEvent();
       setState(() {});
     });
   }
 
-  void processEvent() {
-    if (currentState is MyProfileStateGetSuccess) {
-      MyProfileStateGetSuccess state = currentState;
-      // If not edit mode, redirect
-      if (editMode != true) {
-        Navigator.of(context).pushNamed(HomeRoutes.home);
-      } else {
-        _nameController.text = state.profile.name;
-        imageUrl = state.profile.image.path;
-        if (mounted) setState(() {});
-      }
-    } else if (currentState is MyProfileStateImageUploadSuccess) {
-      MyProfileStateImageUploadSuccess state = currentState;
-      imageUrl = state.imageUrl;
-      if (mounted) setState(() {});
-    } else if (currentState is MyProfileStateUpdateSuccess) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          HomeRoutes.home,
-          (route) => false,
-        );
-      });
-    }
+  @override
+  Widget build(BuildContext context) {
+    print(currentState.runtimeType.toString());
+    currentState ??= EditProfileStateLoading(widget);
+    return Scaffold(
+      appBar: AppBar(),
+      body: currentState.getUI(context),
+    );
   }
 
   @override
-  Widget build(BuildContext context) {
-    if (ModalRoute.of(context).settings.arguments == true) {
-      editMode = true;
+  void dispose() {
+    if (_stateSubscription != null) {
+      _stateSubscription.cancel();
     }
-    return Scaffold(
-      appBar: AppBar(),
-      body: getUI(),
-    );
-  }
-
-  Widget getUI() {
-    if (imageUrl != null) {
-      // My old profile is here!!
-      return Flex(
-        direction: Axis.vertical,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          MediaQuery.of(context).viewInsets.bottom == 0
-              ? Container(
-                  height: 256,
-                  width: MediaQuery.of(context).size.width,
-                  child: Stack(
-                    children: [
-                      Positioned.fill(
-                          child: Image.network(
-                        imageUrl.contains('http')
-                            ? imageUrl
-                            : Urls.imagesRoot + imageUrl,
-                        fit: BoxFit.cover,
-                      )),
-                      Positioned(
-                        right: 16,
-                        top: 16,
-                        child: GestureDetector(
-                          onTap: () {
-                            picker
-                                .getImage(
-                                    source: ImageSource.gallery,
-                                    imageQuality: 70)
-                                .then((image) {
-                              if (image != null) {
-                                imageLocation = image.path;
-                                imageUrl = null;
-                                setState(() {});
-                              }
-                            });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.image,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              : Container(),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: TextFormField(
-              controller: _nameController,
-              decoration: InputDecoration(
-                labelText: S.of(context).myName,
-                hintText: S.of(context).myName,
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              saveProfile();
-            },
-            child: GestureDetector(
-              onTap: () {
-                saveProfile();
-              },
-              child: Container(
-                decoration:
-                    BoxDecoration(color: Theme.of(context).accentColor),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        !submittingProfile
-                            ? S.of(context).saveProfile
-                            : S.of(context).saving,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          )
-        ],
-      );
-    }
-    if (imageLocation == null) {
-      // Take My Picture
-      return Flex(
-        direction: Axis.vertical,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Stack(
-              children: [
-                // BG
-                Positioned.fill(
-                    child: Container(
-                        height: 256,
-                        width: double.infinity,
-                        child: Image.asset(
-                          'resources/images/logo.jpg',
-                          fit: BoxFit.cover,
-                        ))),
-                // Buttons
-                Positioned.fill(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(24)),
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        child: GestureDetector(
-                          onTap: () {
-                            picker
-                                .getImage(
-                                    source: ImageSource.gallery,
-                                    imageQuality: 70)
-                                .then((image) {
-                              if (image != null) {
-                                imageLocation = image.path;
-                                setState(() {});
-                              }
-                            });
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Text(
-                              S.of(context).selectImageFromGallery,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(24)),
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        child: GestureDetector(
-                          onTap: () {
-                            picker
-                                .getImage(
-                                    source: ImageSource.camera,
-                                    imageQuality: 70)
-                                .then((image) {
-                              if (image != null) {
-                                imageLocation = image.path;
-                                setState(() {});
-                              }
-                            });
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Text(
-                              S.of(context).captureMyImageFromCamera,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                )),
-              ],
-            ),
-          ),
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              decoration:
-                  BoxDecoration(color: Theme.of(context).accentColor),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      S.of(context).captureMyImage,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          )
-        ],
-      );
-    } else if (imageLocation != null && imageUrl == null) {
-      // Upload My Picture
-      return Flex(
-        direction: Axis.vertical,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: Image.file(
-                    File(imageLocation),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Positioned(
-                  right: 8,
-                  top: 8,
-                  child: Flex(
-                    direction: Axis.horizontal,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            picker
-                                .getImage(
-                                    source: ImageSource.gallery,
-                                    imageQuality: 70)
-                                .then((image) {
-                              if (image != null) {
-                                imageLocation = image.path;
-                                setState(() {});
-                              }
-                            });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.refresh,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            picker
-                                .getImage(
-                                    source: ImageSource.camera,
-                                    imageQuality: 70)
-                                .then((image) {
-                              if (image != null) {
-                                imageLocation = image.path;
-                                setState(() {});
-                              }
-                            });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.camera_alt,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Positioned.fill(
-                    child: Container(
-                  alignment: Alignment.center,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.all(Radius.circular(16))),
-                    child: GestureDetector(
-                      onTap: () {
-                        uploading = true;
-                        setState(() {});
-                        widget._stateManager.upload(imageLocation);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          uploading != true
-                              ? S.of(context).upload
-                              : S.of(context).uploading,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ))
-              ],
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              widget._stateManager.upload(imageLocation);
-            },
-            child: Container(
-              decoration:
-                  BoxDecoration(color: Theme.of(context).primaryColor,),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      uploading != true
-                          ? S.of(context).upload
-                          : S.of(context).uploading,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          )
-        ],
-      );
-    } else {
-      // Save the Full Profile
-      return Flex(
-        direction: Axis.vertical,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          MediaQuery.of(context).viewInsets.bottom == 0
-              ? Container(
-                  height: 256,
-                  width: MediaQuery.of(context).size.width,
-                  child: Stack(
-                    children: [
-                      Positioned.fill(
-                          child: Image.network(
-                        imageUrl.contains('http')
-                            ? imageUrl
-                            : Urls.imagesRoot + imageUrl,
-                        fit: BoxFit.cover,
-                      )),
-                      Positioned(
-                        right: 16,
-                        top: 16,
-                        child: Flex(
-                          direction: Axis.horizontal,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                picker
-                                    .getImage(
-                                        source: ImageSource.camera,
-                                        imageQuality: 70)
-                                    .then((image) {
-                                  if (image != null) {
-                                    imageLocation = image.path;
-                                    imageUrl = null;
-                                    setState(() {});
-                                  }
-                                });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Icon(
-                                      Icons.image,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                picker
-                                    .getImage(
-                                        source: ImageSource.gallery,
-                                        imageQuality: 70)
-                                    .then((image) {
-                                  if (image != null) {
-                                    imageLocation = image.path;
-                                    imageUrl = null;
-                                    setState(() {});
-                                  }
-                                });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Icon(
-                                      Icons.camera_alt,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              : Container(),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: TextFormField(
-              controller: _nameController,
-              decoration: InputDecoration(
-                labelText: S.of(context).myName,
-                hintText: S.of(context).myName,
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              saveProfile();
-            },
-            child: GestureDetector(
-              onTap: () {
-                saveProfile();
-              },
-              child: Container(
-                decoration:
-                    BoxDecoration(color: Theme.of(context).accentColor),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        !submittingProfile
-                            ? S.of(context).saveProfile
-                            : S.of(context).saving,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          )
-        ],
-      );
-    }
-  }
-
-  void saveProfile() {
-    if (imageUrl == null) {
-      Fluttertoast.showToast(msg: S.of(context).pleaseUploadYourImage);
-      return;
-    }
-    if (_nameController.text.isEmpty) {
-      Fluttertoast.showToast(msg: S.of(context).pleaseEnterYourName);
-      return;
-    }
-    submittingProfile = true;
-    setState(() {});
-    widget._stateManager.setMyProfile(
-      _nameController.text.trim(),
-      imageUrl.contains('http')
-          ? imageUrl.substring(Urls.imagesRoot.length)
-          : imageUrl,
-    );
+    super.dispose();
   }
 }

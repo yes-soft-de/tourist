@@ -6,7 +6,6 @@ import 'package:tourists/module_profile/model/profile_model/profile_model.dart';
 import 'package:tourists/module_profile/presistance/profile_shared_preferences.dart';
 import 'package:tourists/module_profile/request/create_profile.dart';
 import 'package:tourists/module_profile/response/profile_response/profile_response.dart';
-import 'package:tourists/utils/logger/logger.dart';
 
 @provide
 class ProfileService {
@@ -31,30 +30,35 @@ class ProfileService {
     return ProfileModel(name: username, image: image);
   }
 
-  Future<ProfileResponse> createProfile(
-    String username,
-    String userImage,
+  Future<ProfileModel> createProfile(
+    ProfileModel profileModel
   ) async {
     String userId = await _authService.userID;
-
     CreateProfileRequest request = CreateProfileRequest(
-        userName: username,
-        image: userImage,
+        userName: profileModel.name,
+        image: profileModel.image,
         location: 'Saudi Arabia',
         userID: userId);
 
     ProfileResponse response = await _manager.createMyProfile(request);
     if (response == null) return null;
-    await cacheProfile(response);
-    return response;
+    var result = ProfileModel(
+      languages: response.language,
+      locations: response.city,
+      name: response.name,
+      image: response.image.path,
+    );
+    await cacheProfile(result);
+    return result;
   }
 
-  Future<void> cacheProfile(ProfileResponse response) async {
+  Future<void> cacheProfile(ProfileModel response) async {
     await _preferencesHelper.setUserName(response.name);
-    if (response.image.path.contains('http')) {
-      await _preferencesHelper.setUserImage(response.image.path);
+    if (response.image.contains('http')) {
+      await _preferencesHelper.setUserImage(response.image);
     } else {
-      await _preferencesHelper.setUserImage(Urls.imagesRoot + response.image.path);
+      await _preferencesHelper
+          .setUserImage(Urls.imagesRoot + response.image);
     }
   }
 
@@ -64,18 +68,24 @@ class ProfileService {
       var myProfile = await profile;
       if (myProfile.name != null) {
         return ProfileResponse(
-          name: myProfile.name,
-          image: ApiImage(path: myProfile.image),
-          language: myProfile.languages,
-          city: myProfile.locations
-        );
+            name: myProfile.name,
+            image: ApiImage(path: myProfile.image),
+            language: myProfile.languages,
+            city: myProfile.locations);
       }
     }
     return _manager.getUserProfile(userId);
   }
 
-  Future<ProfileResponse> getMyProfile() async {
+  Future<ProfileModel> getMyProfile() async {
     String uid = await _authService.userID;
-    return await getUserProfile(uid);
+    var response = await getUserProfile(uid);
+
+    return ProfileModel(
+      languages: response != null ? response.language : [],
+      locations: response != null ? response.city : [],
+      name: response != null ? response.name : 'user',
+      image: response != null ? response.image.path : '',
+    );
   }
 }

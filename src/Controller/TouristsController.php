@@ -69,4 +69,16 @@ class TouristsController extends BaseController
 
         return $this->response($response, self::UPDATE);
     }
+
+   /**
+     * @Route("/tourist/{userId}", name="touristByUserId", methods={"GET"})
+     * @return JsonResponse
+     */
+    
+    public function getTouristByUserID($userId)
+    {
+        $response = $this->touristsService->getTouristByUserID($userId);
+
+        return $this->response($response, self::FETCH);
+    }
 }

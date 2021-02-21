@@ -3,7 +3,6 @@ import 'package:tourists/module_auth/ui/screen/login_screen/login_screen.dart';
 import 'package:tourists/module_auth/ui/states/login_states/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginStateCodeSent extends LoginState {
   final _confirmationController = TextEditingController();

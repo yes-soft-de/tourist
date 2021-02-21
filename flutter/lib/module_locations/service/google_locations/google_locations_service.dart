@@ -1,4 +1,3 @@
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/module_locations/manager/google_locations/google_locations_manager.dart';
 import 'package:tourists/module_locations/service/prefs/location_prefs.dart';

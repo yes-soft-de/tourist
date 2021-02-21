@@ -5,7 +5,6 @@ import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_auth/enums/user_type.dart';
 import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
 import 'package:tourists/module_home/home_routes.dart';
-import 'package:tourists/utils/auth_guard/auth_gard.dart';
 import 'package:tourists/utils/language/language.dart';
 
 @provide

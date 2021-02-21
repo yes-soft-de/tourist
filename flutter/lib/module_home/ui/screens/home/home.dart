@@ -9,7 +9,6 @@ import 'package:tourists/module_locations/ui/screens/event_list/event_list.dart'
 import 'package:tourists/module_locations/ui/screens/location_carousel/location_carousel.dart';
 import 'package:tourists/module_locations/ui/screens/location_list/location_list_screen.dart';
 import 'package:tourists/module_search/search_routes.dart';
-import 'package:tourists/utils/auth_guard/auth_gard.dart';
 
 @provide
 class HomeScreen extends StatefulWidget {

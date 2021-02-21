@@ -3,7 +3,6 @@ import 'package:tourists/module_auth/state_manager/register_state_manager/regist
 import 'package:tourists/module_auth/ui/states/register_states/register_state.dart';
 import 'package:tourists/module_auth/ui/states/register_states/register_state_init.dart';
 import 'package:tourists/module_home/home_routes.dart';
-import 'package:tourists/module_orders/orders_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 

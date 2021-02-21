@@ -30,7 +30,7 @@ class ProfileResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['user'] = this.user;
     data['userID'] = this.userID;
     data['name'] = this.name;
@@ -55,7 +55,7 @@ class ApiImage {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['path'] = this.path;
     return data;
   }

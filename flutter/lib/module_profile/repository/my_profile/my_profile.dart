@@ -1,5 +1,6 @@
 import 'package:inject/inject.dart';
 import 'package:tourists/consts/urls.dart';
+import 'package:tourists/module_auth/enums/user_type.dart';
 import 'package:tourists/module_network/http_client/http_client.dart';
 import 'package:tourists/module_profile/request/create_profile.dart';
 import 'package:tourists/module_profile/response/profile_list/profile_list_response.dart';
@@ -10,16 +11,16 @@ class MyProfileRepository {
   final _apiClient = HttpClient();
   MyProfileRepository();
 
-  Future<ProfileResponse> getMyProfile() async {
-    Map<String, dynamic> response = await _apiClient.get(Urls.createProfileAPI);
+  Future<ProfileResponse> getMyProfile(UserRole role) async {
+    Map<String, dynamic> response = await _apiClient.get(Urls.getTouristProfileAPI);
 
     return response ?? ProfileResponse.fromJson(response);
   }
 
   Future<ProfileResponse> createMyProfile(
-      CreateProfileRequest profileRequest) async {
+      CreateProfileRequest profileRequest, UserRole role) async {
     Map<String, dynamic> response =
-        await _apiClient.post(Urls.getProfileAPI, profileRequest.toJson());
+        await _apiClient.post(Urls.getTouristProfileAPI, profileRequest.toJson());
 
     return response == null
         ? null
@@ -28,7 +29,7 @@ class MyProfileRepository {
 
   Future<ProfileResponse> getUserProfile(String userId) async {
     Map<String, dynamic> response =
-        await _apiClient.get(Urls.getProfileAPI + '/$userId');
+        await _apiClient.get(Urls.getTouristProfileAPI + '/$userId');
 
     return response != null && ProfileListResponse.fromJson(response).data.isNotEmpty
         ? ProfileListResponse.fromJson(response).data.last

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/abstracts/module/yes_module.dart';
 import 'package:tourists/module_orders/orders_routes.dart';
-import 'package:tourists/utils/auth_guard/auth_gard.dart';
 
 import 'ui/screen/orders_list/order_list_screen.dart';
 

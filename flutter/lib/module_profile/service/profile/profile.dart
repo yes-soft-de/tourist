@@ -1,5 +1,6 @@
 import 'package:inject/inject.dart';
 import 'package:tourists/consts/urls.dart';
+import 'package:tourists/module_auth/enums/user_type.dart';
 import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
 import 'package:tourists/module_profile/manager/my_profile_manager/my_profile_manager.dart';
 import 'package:tourists/module_profile/model/profile_model/profile_model.dart';
@@ -30,17 +31,18 @@ class ProfileService {
     return ProfileModel(name: username, image: image);
   }
 
-  Future<ProfileModel> createProfile(
-    ProfileModel profileModel
-  ) async {
+  Future<ProfileModel> createProfile(ProfileModel profileModel) async {
     String userId = await _authService.userID;
-    CreateProfileRequest request = CreateProfileRequest(
-        userName: profileModel.name,
-        image: profileModel.image,
-        location: 'Saudi Arabia',
-        userID: userId);
+    UserRole role = await _authService.userRole;
 
-    ProfileResponse response = await _manager.createMyProfile(request);
+    CreateProfileRequest request = CreateProfileRequest(
+      userName: profileModel.name,
+      image: profileModel.image,
+      location: 'Saudi Arabia',
+      userID: userId,
+    );
+
+    ProfileResponse response = await _manager.createMyProfile(request, role);
     if (response == null) return null;
     var result = ProfileModel(
       languages: response.language,
@@ -57,8 +59,7 @@ class ProfileService {
     if (response.image.contains('http')) {
       await _preferencesHelper.setUserImage(response.image);
     } else {
-      await _preferencesHelper
-          .setUserImage(Urls.imagesRoot + response.image);
+      await _preferencesHelper.setUserImage(Urls.imagesRoot + response.image);
     }
   }
 

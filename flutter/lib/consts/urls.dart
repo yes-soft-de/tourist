@@ -9,7 +9,7 @@ class Urls {
   static final registerTouristsAPI = baseAPI + 'tourist';
   static final uploadAPI = baseAPI + 'upload';
   static final createProfileAPI = baseAPI + 'tourist';
-  static final getProfileAPI = baseAPI + 'tourist';
+  static final getTouristProfileAPI = baseAPI + 'tourist';
   static final locationList = baseAPI + 'regions';
   static final locationDetails = baseAPI + 'region/';
   static final guideList = baseAPI + 'guides';

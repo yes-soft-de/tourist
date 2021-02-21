@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tourists/module_locations/service/google_locations/google_locations_service.dart';
-import 'package:tourists/utils/debouncer/debouncer.dart';
 
 @provide
 class SearchBloc {

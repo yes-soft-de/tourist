@@ -92,7 +92,7 @@ class AuthPrefsHelper {
 
   Future<void> cleanAll() async {
     SharedPreferences preferencesHelper = await SharedPreferences.getInstance();
-    preferencesHelper.clear();
+    return preferencesHelper.clear();
   }
 
   /// @return String Token String

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/abstracts/module/yes_module.dart';
-import 'package:tourists/utils/auth_guard/auth_gard.dart';
 
 import 'chat_routes.dart';
 import 'ui/screens/chat_page/chat_page.dart';

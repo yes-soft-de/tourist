@@ -1,7 +1,5 @@
-import 'package:analyzer_plugin/utilities/pair.dart';
 import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
 import 'package:tourists/module_guide/service/guide_list/guide_list.dart';
 import 'package:tourists/module_guide/ui/screen/guide_list/guide_list_screen.dart';
 import 'package:tourists/module_guide/ui/states/guide_list_state.dart';

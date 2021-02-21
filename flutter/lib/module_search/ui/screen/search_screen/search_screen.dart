@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/module_search/bloc/search_bloc/search_bloc.dart';
 

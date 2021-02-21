@@ -104,4 +104,11 @@ class GuidService
         
         return $guidesResponse;
     }
+
+    public function getguideByUserID($userId)
+    {
+        $item = $this->guidManager->getguideByUserID($userId);
+        
+        return $this->autoMapping->map('array', GuidByRegionResponse::class, $item);
+    }
 }

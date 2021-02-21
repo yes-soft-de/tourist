@@ -40,4 +40,11 @@ class TouristsService
 
         return $response;
     }
+
+    public function getTouristByUserID($userId)
+    {
+        $item = $this->touristsManager->getTouristByUserID($userId);
+        
+        return $this->autoMapping->map(User::class, TouristUpdateResponse::class, $item);
+    }
 }

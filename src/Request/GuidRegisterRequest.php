@@ -18,6 +18,8 @@ class GuidRegisterRequest
 
     public $createDate;
 
+    public $placeId;
+
     /**
      * @param array $roles
      */
@@ -67,6 +69,23 @@ class GuidRegisterRequest
         $this->userID = $userID;
     }
 
+    /**
+     * Get the value of placeId
+     */ 
+    public function getPlaceId()
+    {
+        return $this->placeId;
+    }
 
+    /**
+     * Set the value of placeId
+     *
+     * @return  self
+     */ 
+    public function setPlaceId($placeId)
+    {
+        $this->placeId = $placeId;
 
+        return $this;
+    }
 }

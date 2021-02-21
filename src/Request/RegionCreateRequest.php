@@ -14,4 +14,6 @@ class RegionCreateRequest
     public $location = [];
 
     public $path;
+
+    public $placeId;
 }

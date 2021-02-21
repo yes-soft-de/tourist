@@ -25,6 +25,8 @@ class GuidProfileUpdateRequest
     public $service = [];
 
     public $path;
+    
+    public $placeId;
 
     /**
      * @param mixed $user

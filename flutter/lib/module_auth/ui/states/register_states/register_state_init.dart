@@ -6,9 +6,9 @@ import 'package:tourists/module_auth/ui/widget/phone_login/phone_login.dart';
 import 'package:flutter/material.dart';
 
 class RegisterStateInit extends RegisterState {
-  UserRole userType = UserRole.ROLE_OWNER;
+  UserRole userType = UserRole.ROLE_TOURIST;
   final registerTypeController =
-      PageController(initialPage: UserRole.ROLE_OWNER.index);
+      PageController(initialPage: UserRole.ROLE_TOURIST.index);
   bool loading = false;
 
   RegisterStateInit(RegisterScreenState screen) : super(screen);

@@ -15,8 +15,8 @@ class MyProfileStateManager {
 
   MyProfileStateManager(this._uploadService, this._myProfileService);
 
-  void setMyProfile(String username, String about, String image) {
-    _myProfileService.createProfile(username, image, about).then((value) {
+  void setMyProfile(String username, String image) {
+    _myProfileService.createProfile(username, image).then((value) {
       if (value == null) {
         _stateSubject
             .add(MyProfileStateUpdateError('Error Submitting Profile'));

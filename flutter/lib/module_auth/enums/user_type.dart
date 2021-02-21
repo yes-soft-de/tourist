@@ -1,4 +1,4 @@
 enum UserRole {
   ROLE_GUIDE,
-  ROLE_OWNER
+  ROLE_TOURIST
 }

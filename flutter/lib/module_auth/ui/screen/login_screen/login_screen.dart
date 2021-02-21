@@ -64,7 +64,7 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   void moveToNext() {
-    if (currentUserRole == UserRole.ROLE_OWNER) {
+    if (currentUserRole == UserRole.ROLE_TOURIST) {
       Navigator.of(context).pushNamedAndRemoveUntil(
           HomeRoutes.home, (r) => false);
     } else if (currentUserRole == UserRole.ROLE_GUIDE) {
@@ -73,14 +73,12 @@ class LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  void loginViaPhone(String phoneNumber) {
-    currentUserRole = UserRole.ROLE_OWNER;
-    widget._stateManager.loginViaPhoneNumber(phoneNumber, this);
+  void loginViaPhone(String phoneNumber, UserRole role) {
+    widget._stateManager.loginViaPhoneNumber(phoneNumber, role, this);
   }
 
-  void loginViaGoogle() {
-    currentUserRole = UserRole.ROLE_OWNER;
-    widget._stateManager.loginViaGoogle(this, UserRole.ROLE_OWNER);
+  void loginViaGoogle(UserRole role) {
+    widget._stateManager.loginViaGoogle(this, role);
   }
 
   void sendLoginLink(String email, UserRole role) {
@@ -88,9 +86,8 @@ class LoginScreenState extends State<LoginScreen> {
     widget._stateManager.sendLoginLink(this, email, role);
   }
 
-  void loginOwner(String email, String password) {
-    currentUserRole = UserRole.ROLE_OWNER;
-    widget._stateManager.loginViaEmailAndPassword(email, password, this);
+  void loginOwner(String email, String password, UserRole role) {
+    widget._stateManager.loginViaEmailAndPassword(this, email, password, role);
   }
 
   void showSnackBar(String msg) {

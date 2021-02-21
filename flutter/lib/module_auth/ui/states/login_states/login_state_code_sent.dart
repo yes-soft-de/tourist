@@ -26,7 +26,7 @@ class LoginStateCodeSent extends LoginState {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           MediaQuery.of(context).viewInsets.bottom == 0
-              ? SvgPicture.asset('assets/images/logo.svg')
+              ? Center(child: Image.asset('resources/images/logo.jpg', height: 88, width: 88,))
               : Container(),
           Padding(
             padding: const EdgeInsets.all(16.0),

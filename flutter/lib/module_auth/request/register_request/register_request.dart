@@ -23,6 +23,7 @@ class RegisterRequest {
     data['userID'] = this.userID;
     data['password'] = this.password;
     data['roles'] = this.roles;
+    data['name'] = this.name;
     return data;
   }
 }

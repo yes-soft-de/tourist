@@ -22,7 +22,6 @@ class MyProfileScreen extends StatefulWidget {
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _aboutController = TextEditingController();
 
   String imageUrl;
   String imageLocation;
@@ -53,9 +52,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       if (editMode != true) {
         Navigator.of(context).pushNamed(HomeRoutes.home);
       } else {
-        _nameController.text = state.profile.userName;
-        imageUrl = state.profile.image;
-        _aboutController.text = state.profile.story;
+        _nameController.text = state.profile.name;
+        imageUrl = state.profile.image.path;
         if (mounted) setState(() {});
       }
     } else if (currentState is MyProfileStateImageUploadSuccess) {
@@ -84,20 +82,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   }
 
   Widget getUI() {
-    if (currentState is MyProfileStateLoading) {
-      return Center(
-        child: Flex(
-          direction: Axis.vertical,
-          children: [
-            LinearProgressIndicator(),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(S.of(context).requestingProfileFromTheServer),
-            ),
-          ],
-        ),
-      );
-    }
     if (imageUrl != null) {
       // My old profile is here!!
       return Flex(
@@ -159,16 +143,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               decoration: InputDecoration(
                 labelText: S.of(context).myName,
                 hintText: S.of(context).myName,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: TextFormField(
-              controller: _aboutController,
-              decoration: InputDecoration(
-                labelText: S.of(context).aboutMe,
-                hintText: S.of(context).aboutMe,
               ),
             ),
           ),
@@ -568,16 +542,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: TextFormField(
-              controller: _aboutController,
-              decoration: InputDecoration(
-                labelText: S.of(context).aboutMe,
-                hintText: S.of(context).aboutMe,
-              ),
-            ),
-          ),
           GestureDetector(
             onTap: () {
               saveProfile();
@@ -627,7 +591,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     setState(() {});
     widget._stateManager.setMyProfile(
       _nameController.text.trim(),
-      _aboutController.text.trim(),
       imageUrl.contains('http')
           ? imageUrl.substring(Urls.imagesRoot.length)
           : imageUrl,

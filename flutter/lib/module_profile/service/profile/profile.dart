@@ -28,14 +28,12 @@ class ProfileService {
   Future<ProfileModel> get profile async {
     var username = await _preferencesHelper.getUsername();
     var image = await _preferencesHelper.getImage();
-    var story = await _preferencesHelper.getUserStory();
-    return ProfileModel(name: username, image: image, story: story);
+    return ProfileModel(name: username, image: image);
   }
 
   Future<ProfileResponse> createProfile(
     String username,
     String userImage,
-    String story,
   ) async {
     String userId = await _authService.userID;
 
@@ -43,7 +41,6 @@ class ProfileService {
         userName: username,
         image: userImage,
         location: 'Saudi Arabia',
-        story: story,
         userID: userId);
 
     ProfileResponse response = await _manager.createMyProfile(request);
@@ -53,14 +50,12 @@ class ProfileService {
   }
 
   Future<void> cacheProfile(ProfileResponse response) async {
-    await _preferencesHelper.setUserName(response.userName);
-    if (response.image.contains('http')) {
-      await _preferencesHelper.setUserImage(response.image);
+    await _preferencesHelper.setUserName(response.name);
+    if (response.image.path.contains('http')) {
+      await _preferencesHelper.setUserImage(response.image.path);
     } else {
-      await _preferencesHelper.setUserImage(Urls.imagesRoot + response.image);
+      await _preferencesHelper.setUserImage(Urls.imagesRoot + response.image.path);
     }
-    await _preferencesHelper.setUserLocation(response.location);
-    await _preferencesHelper.setUserStory(response.story);
   }
 
   Future<ProfileResponse> getUserProfile(String userId) async {
@@ -69,9 +64,10 @@ class ProfileService {
       var myProfile = await profile;
       if (myProfile.name != null) {
         return ProfileResponse(
-          userName: myProfile.name,
-          image: myProfile.image,
-          story: myProfile.story,
+          name: myProfile.name,
+          image: ApiImage(path: myProfile.image),
+          language: myProfile.languages,
+          city: myProfile.locations
         );
       }
     }

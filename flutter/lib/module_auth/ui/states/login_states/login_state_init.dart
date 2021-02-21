@@ -7,9 +7,9 @@ import 'package:tourists/module_auth/ui/widget/phone_login/phone_login.dart';
 import 'package:flutter/material.dart';
 
 class LoginStateInit extends LoginState {
-  UserRole userType = UserRole.ROLE_OWNER;
+  UserRole userType = UserRole.ROLE_TOURIST;
   final loginTypeController =
-      PageController(initialPage: UserRole.ROLE_OWNER.index);
+      PageController(initialPage: UserRole.ROLE_TOURIST.index);
 
   LoginStateInit(LoginScreenState screen) : super(screen);
 
@@ -18,14 +18,14 @@ class LoginStateInit extends LoginState {
     return SafeArea(
       child: Center(
         child: PhoneEmailLinkLoginFormWidget(
-          onEmailLinkRequest: (email) {
-            screen.sendLoginLink(email, UserRole.ROLE_OWNER);
+          onEmailLinkRequest: (email, UserRole role) {
+            screen.sendLoginLink(email, UserRole.ROLE_TOURIST);
           },
-          onCodeRequested: (phoneNumber) {
-            screen.loginViaPhone(phoneNumber);
+          onCodeRequested: (phoneNumber, role) {
+            screen.loginViaPhone(phoneNumber, role);
           },
-          onGmailLoginRequested: () {
-            screen.loginViaGoogle();
+          onGmailLoginRequested: (role) {
+            screen.loginViaGoogle(role);
           },
           onSnackBarRequested: (msg) {
             screen.showSnackBar(msg);

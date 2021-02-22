@@ -83,4 +83,18 @@ class GuidEntityRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    
+    public function getUser($userID)
+    {
+        return $this->createQueryBuilder('guid')
+            ->select('IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image', 'guid.placeId', 'guid.about', 'guid.phoneNumber', 'guid.service')
+            ->andWhere('guid.user = :userID')
+            ->setParameter('userID', $userID)
+
+            ->getQuery()
+            ->getOneOrNullResult();
+        
+    }
+
 }

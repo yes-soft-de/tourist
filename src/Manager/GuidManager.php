@@ -128,4 +128,8 @@ class GuidManager
         return $this->guidEntityRepository->getGuides();
     }
 
+    public function getguideByUserID($userID)
+    {
+        return $this->guidEntityRepository->getUser($userID);
+    }
 }

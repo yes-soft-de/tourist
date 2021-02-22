@@ -112,4 +112,16 @@ class GuidController extends BaseController
 
         return $this->response($response,self::FETCH);
     }
+
+    /**
+     * @Route("/guide/{userId}", name="guideByUserId", methods={"GET"})
+     * @return JsonResponse
+     */
+    
+    public function getguideByUserID($userId)
+    {
+        $response = $this->guidService->getguideByUserID($userId);
+
+        return $this->response($response, self::FETCH);
+    }
 }

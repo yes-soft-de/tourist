@@ -22,7 +22,7 @@ class CommentsEntityRepository extends ServiceEntityRepository
     public function getCommentsByID($id)
     {
         $r = $this->createQueryBuilder('comments')
-            ->select('comments.id', 'comments.comment', 'comments.date', 'user.name as userName')
+            ->select('comments.id', 'comments.comment', 'comments.date', 'user.name as userName', 'user.roles')
             //->from('App:User', 'user')
             ->join('App:User', 'user')
             //'IDENTITY(comments.region)'

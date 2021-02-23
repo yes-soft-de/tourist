@@ -13,4 +13,6 @@ class GetCommentsByIdResponse
     //public $region;
 
     public $userName;
+
+    public $roles;
 }

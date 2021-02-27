@@ -13,7 +13,7 @@ spec:
   strategy:
     rollingUpdate:
       maxSurge: 25%
-      maxUnavailable: 25%
+      maxUnavailable: 1
     type: RollingUpdate
   template:
     metadata:
@@ -34,6 +34,11 @@ spec:
         - name: tourist-pvc-sym-m
           persistentVolumeClaim:
             claimName: tourist-pvc-sym-uploud
+       tolerations:
+      - key: "env"
+        operator: "Equal"
+        value: "dev"
+        effect: "NoExecute"
  ---
  apiVersion: v1
 kind: Service

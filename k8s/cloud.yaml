@@ -62,4 +62,4 @@ spec:
   selector:
     app: apache
   sessionAffinity: None
-  type: clusterIP
+  type: ClusterIP

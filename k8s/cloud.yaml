@@ -21,7 +21,7 @@ spec:
         app: apache
     spec:
       containers:
-        - image: gcr.io/pc-api-6479467557629758909-343/github_yes-soft-de_tourist
+        - image: gcr.io/pc-api-6479467557629758909-343/github.com/yes-soft-de/tourist
           imagePullPolicy: Always
           name: php-apache
           ports:
@@ -30,30 +30,27 @@ spec:
           volumeMounts:
             - mountPath: /var/www/upload/image
               name: tourist-pvc-sym-m
+      tolerations:
+        - effect: NoExecute
+          key: env
+          operator: Equal
+          value: dev
       volumes:
         - name: tourist-pvc-sym-m
           persistentVolumeClaim:
             claimName: tourist-pvc-sym-uploud
-      tolerations:
-      - key: "env"
-        operator: "Equal"
-        value: "dev"
-        effect: "NoExecute"
 ---
 apiVersion: v1
 kind: Service
 metadata:
   annotations:
     cloud.google.com/neg: '{"ingress":true}'
-  finalizers:
-    - service.kubernetes.io/load-balancer-cleanup
   labels:
-    run: web-service
-  name: tourist-web-service
+    app: apache
+  name: tourist-webserver-service
   namespace: tourist
 spec:
-  clusterIP: 10.4.5.29
-  externalTrafficPolicy: Cluster
+  clusterIP: 10.4.2.58
   ports:
     - port: 80
       protocol: TCP

@@ -34,7 +34,7 @@ spec:
         - name: tourist-pvc-sym-m
           persistentVolumeClaim:
             claimName: tourist-pvc-sym-uploud
-       tolerations:
+      tolerations:
       - key: "env"
         operator: "Equal"
         value: "dev"

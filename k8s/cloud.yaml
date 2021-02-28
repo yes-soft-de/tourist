@@ -35,12 +35,12 @@ spec:
           persistentVolumeClaim:
             claimName: tourist-pvc-sym-uploud
       tolerations:
-        - key: "env"
-          operator: "Equal"
-          value: "dev"
-          effect: "NoExecute"
- ---
- apiVersion: v1
+      - key: "env"
+        operator: "Equal"
+        value: "dev"
+        effect: "NoExecute"
+---
+apiVersion: v1
 kind: Service
 metadata:
   annotations:

@@ -40,6 +40,7 @@ class _GuideListScreenState extends State<GuideListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('سياح'),
         backgroundColor: Colors.white,
       ),

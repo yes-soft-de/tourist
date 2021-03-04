@@ -64,6 +64,7 @@ class HomeScreenState extends State<HomeScreen> {
                   Scaffold(
                     appBar: AppBar(
                       backgroundColor: Colors.white,
+                      centerTitle: true,
                       title: Text('سياح'),
                       actions: [
                         IconButton(

@@ -5,9 +5,10 @@ class CommentItemWidget extends StatelessWidget {
   final String userImage;
   final DateTime commentDate;
   final String comment;
+  final String role;
 
   CommentItemWidget(
-      {Key key, this.comment, this.commentDate, this.userImage, this.userName});
+      {Key key, this.comment, this.commentDate, this.userImage, this.userName,this.role});
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +56,13 @@ class CommentItemWidget extends StatelessWidget {
                               textAlign: TextAlign.start,
                               style: TextStyle(fontSize: 20))
                         ],
+                      ),
+                    ),
+                    if(role=='guid')  Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.security,
+                        color:  Colors.greenAccent,
                       ),
                     ),
                   ],

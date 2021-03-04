@@ -121,6 +121,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
 
     List<Widget> pageLayout = [
       AppBar(
+        centerTitle: true,
         title: Text(
           _locationDetails.name,
           style: TextStyle(
@@ -133,7 +134,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Text(_locationDetails.description),
       ),
-      Padding(
+      if(_guidesList.isNotEmpty)Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
           S.of(context).guides,
@@ -153,6 +154,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
     ));
 
     pageLayout.add(CommentListWidget(_locationDetails.comments));
+    pageLayout.add(SizedBox(height: 75,));
 
     return Scaffold(
       body: Stack(
@@ -168,7 +170,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
                   print(lastLocation > t.metrics.pixels ? 'up' : 'down');
                   scrollPosition = lastLocation > t.metrics.pixels ? 1 : -1;
                   lastLocation = t.metrics.pixels;
-                  setState(() {});
+//                  setState(() {});
                 }
                 return true;
               },
@@ -178,8 +180,8 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
               ),
             ),
           ),
-          scrollPosition > 0 || lastLocation == 0
-              ? Positioned(
+         /* scrollPosition > 0 || lastLocation == 0
+              ? */Positioned(
                   bottom: 16,
                   left: 0,
                   right: 0,
@@ -196,7 +198,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
                     ),
                   ),
                 )
-              : Container()
+//              : Container()
         ],
       ),
     );
@@ -272,7 +274,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
       ));
     }
 
-    return guidesList;
+    return (_guidesList.isNotEmpty)?guidesList:[];
   }
 
   void createComment(String newComment) {

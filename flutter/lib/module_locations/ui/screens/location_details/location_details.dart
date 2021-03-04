@@ -10,6 +10,7 @@ import 'package:tourists/module_guide/nav_arguments/request_guide/request_guide_
 import 'package:tourists/module_guide/ui/widget/guide_list_item/guide_list_item.dart';
 import 'package:tourists/module_locations/bloc/location_details/location_details_bloc.dart';
 import 'package:tourists/module_locations/model/location_details/location_details.dart';
+import 'package:tourists/module_locations/ui/widgets/guides_list/guides_list.dart';
 import 'package:tourists/module_shared/ui/widgets/carousel/carousel.dart';
 import 'package:tourists/module_shared/ui/widgets/request_guide_button/request_guide_button.dart';
 import 'package:tourists/utils/auth_guard/auth_gard.dart';
@@ -144,8 +145,11 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
       )
     ];
 
-    pageLayout.addAll(getGuidesList());
+//    pageLayout.addAll(getGuidesList());
 
+    pageLayout.add(
+        GuidesListWidget(_guidesList,_locationDetails.id)
+    );
     pageLayout.add(NewCommentWidget(
       active: canSendComments,
       onCommentAdded: (String msg) {
@@ -154,7 +158,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
     ));
 
     pageLayout.add(CommentListWidget(_locationDetails.comments));
-    pageLayout.add(SizedBox(height: 75,));
+    pageLayout.add(SizedBox(height: 80,));
 
     return Scaffold(
       body: Stack(
@@ -180,8 +184,8 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
               ),
             ),
           ),
-         /* scrollPosition > 0 || lastLocation == 0
-              ? */Positioned(
+          scrollPosition > 0 || lastLocation == 0
+              ? Positioned(
                   bottom: 16,
                   left: 0,
                   right: 0,
@@ -198,7 +202,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
                     ),
                   ),
                 )
-//              : Container()
+              : Container()
         ],
       ),
     );

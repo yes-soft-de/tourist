@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:tourists/module_auth/enums/auth_status.dart';
 import 'package:tourists/module_auth/enums/user_type.dart';
 import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
@@ -23,7 +24,14 @@ class LoginStateManager {
 
   LoginScreenState _screenState;
 
-  LoginStateManager(this._authService);
+  LoginStateManager(this._authService) {
+    _authService.authListener.listen((event) {
+      debugPrint(event.toString());
+      if (event == AuthStatus.AUTHORIZED) {
+        _screenState.moveToNext();
+      }
+    });
+  }
 
   Stream<LoginState> get stateStream => _loginStateSubject.stream;
 
@@ -84,6 +92,7 @@ class LoginStateManager {
   }
 
   void loginViaGoogle(LoginScreenState screenState, UserRole role) {
+    _screenState = screenState;
     _authService.verifyWithGoogle(role);
   }
 

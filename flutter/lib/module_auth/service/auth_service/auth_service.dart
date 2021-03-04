@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/material.dart';
 import 'package:tourists/module_auth/enums/auth_source.dart';
 import 'package:tourists/module_auth/enums/auth_status.dart';
 import 'package:tourists/module_auth/enums/user_type.dart';
@@ -64,6 +65,7 @@ class AuthService {
       _prefsHelper.setCurrentRole(user.userRole),
     ]);
 
+    debugPrint('Authorized');
     _authSubject.add(AuthStatus.AUTHORIZED);
   }
 

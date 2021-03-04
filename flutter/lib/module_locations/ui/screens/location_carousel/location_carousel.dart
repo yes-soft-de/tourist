@@ -70,7 +70,7 @@ class _LocationCarouselScreenState extends State<LocationCarouselScreen> {
           commentsNumber:  location.commentNumber != null
               ? int.parse(location.commentNumber)
               : 0,
-          stars: 2,
+          stars: location.ratingAverage ?? 5,
         ),
       ));
     });

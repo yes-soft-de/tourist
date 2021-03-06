@@ -23,7 +23,7 @@ class AcceptedOrderEntityRepository extends ServiceEntityRepository
     {
         $r = $this->createQueryBuilder('acceptedOrder')
             ->select('acceptedOrder.id', 'acceptedOrder.orderID', 'acceptedOrder.cost', 'acceptedOrder.date', 'acceptedOrder.status', 'acceptedOrder.guidUserID',
-                'acceptedOrder.touristUserID', 'touristOrder as order')
+                'acceptedOrder.touristUserID', 'touristOrder as order', 'acceptedOrder.uuid')
 
             ->join('App:TouristOrderEntity', 'touristOrder')
 

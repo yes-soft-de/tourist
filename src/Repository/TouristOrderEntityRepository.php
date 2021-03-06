@@ -25,7 +25,11 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
 
         $e = $this->createQueryBuilder('orders')
             ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.guidUserID', 'orders.city', 'orders.language',
-                'orders.arriveDate', 'orders.leaveDate', 'orders.roomID', 'orders.cost', 'orders.status')
+                'orders.arriveDate', 'orders.leaveDate', 'orders.roomID', 'orders.cost', 'orders.status', 'acceptedOrderEntity.uuid')
+
+            ->join('App:AcceptedOrderEntity', 'acceptedOrderEntity')
+
+            ->andWhere('orders.id = acceptedOrderEntity.orderID')
 
             ->andWhere('orders.touristUserID=:touristID')
             ->setParameter('touristID', $touristID)
@@ -81,8 +85,11 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
     {
         $e = $this->createQueryBuilder('orders')
         ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.guidUserID', 'orders.city', 'orders.language',
-            'orders.arriveDate', 'orders.leaveDate', 'orders.roomID', 'orders.cost', 'orders.status')
+            'orders.arriveDate', 'orders.leaveDate', 'orders.roomID', 'orders.cost', 'orders.status', 'acceptedOrderEntity.uuid')
 
+            ->join('App:AcceptedOrderEntity', 'acceptedOrderEntity')
+
+            ->andWhere('orders.id = acceptedOrderEntity.orderID')
         ->andWhere('orders.guidUserID=:guidID')
         ->setParameter('guidID', $guidUserID)
         ->groupBy('orders.id')

@@ -15,4 +15,6 @@ class AcceptedOrderCreateResponse
     public $guidUserID;
 
     public $cost;
+    
+    public $uuid;
 }

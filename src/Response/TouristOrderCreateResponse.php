@@ -29,4 +29,6 @@ class TouristOrderCreateResponse
     public $status;
 
     public $cost;
+    
+    public $uuid;
 }

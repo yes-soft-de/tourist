@@ -20,6 +20,8 @@ class AcceptedOrderCreateRequest
 
     public $status;
 
+    private $uuid;
+
     /**
      * @param mixed $date
      */
@@ -46,6 +48,17 @@ class AcceptedOrderCreateRequest
         } catch (\Exception $e) {
         }
     }
+    
+    public function getUuid(): ?string
+    {
+        return $this->uuid;
+    }
 
+    public function setUuid(?string $uuid): self
+    {
+        $this->uuid = $uuid;
+
+        return $this;
+    }
 
 }

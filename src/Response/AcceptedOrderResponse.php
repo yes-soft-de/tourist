@@ -19,4 +19,6 @@ class AcceptedOrderResponse
     public $cost;
 
     public $status;
+    
+    public $uuid;
 }

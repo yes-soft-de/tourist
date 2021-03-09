@@ -60,7 +60,6 @@ class AuthService {
 
     String password = existingProfile.data()['password'];
 
-    // Change This
     LoginResponse loginResult = await _authManager.login(LoginRequest(
       username: user.email ?? user.uid,
       password: password,
@@ -92,25 +91,27 @@ class AuthService {
 
     // This means that this guy is not registered
     if (existingProfile.data() == null) {
+
       // Create the profile password
       password = Uuid().v1();
-
-      // Create the profile in our database
-      await _authManager.register(RegisterRequest(
-        userID: user.credential.email ?? user.credential.uid,
-        password: password,
-        // This should change from the API side
-        roles: [user.userRole.toString().split('.')[1]],
-      ));
 
       // Save the profile password in his account
       await store
           .collection('users')
           .doc(user.credential.uid)
           .set({'password': password});
+
     } else {
       password = await existingProfile.data()['password'];
     }
+
+    // Create the profile in our database
+    await _authManager.register(RegisterRequest(
+      userID: user.credential.email ?? user.credential.uid,
+      password: password,
+      // This should change from the API side
+      roles: user.userRole == UserRole.ROLE_GUIDE ? 'guid' : 'tourist',
+    ));
 
     await _loginApiUser(user.userRole, user.authSource);
   }

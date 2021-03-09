@@ -1,7 +1,7 @@
 class RegisterRequest {
   String userID;
   String password;
-  List<String> roles;
+  String roles;
 
   RegisterRequest({this.userID, this.password, this.roles});
 
@@ -15,7 +15,7 @@ class RegisterRequest {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['userID'] = this.userID;
     data['password'] = this.password;
-    data['roles'] = this.roles;
+    // data['roles'] = this.roles;
     return data;
   }
 }

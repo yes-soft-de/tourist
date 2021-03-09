@@ -12,7 +12,12 @@ class AuthRepository {
   AuthRepository();
 
   Future<bool> createUser(RegisterRequest request) async {
-    var result = await _apiClient.post(Urls.SIGN_UP_API, request.toJson());
+    var result;
+    if (!request.roles.contains('guid')) {
+      result = await _apiClient.post(Urls.registerGuideAPI, request.toJson());
+    } else {
+      result = await _apiClient.post(Urls.registerTouristsAPI, request.toJson());
+    }
 
     return result != null;
   }

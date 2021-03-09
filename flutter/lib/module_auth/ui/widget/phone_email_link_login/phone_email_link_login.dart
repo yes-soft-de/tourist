@@ -44,9 +44,9 @@ class _PhoneEmailLinkLoginWidgetState
               key: ValueKey<bool>(false),
               padding: const EdgeInsets.all(16.0),
               child: Card(
-                  color:
-                      isGuide ? Theme.of(context).primaryColor : Colors.white,
-                  child: _EmailSide()),
+                color: isGuide ? Theme.of(context).primaryColor : Colors.white,
+                child: _EmailSide(),
+              ),
             )
           : Padding(
               key: ValueKey<bool>(true),
@@ -70,6 +70,7 @@ class _PhoneEmailLinkLoginWidgetState
             child: Image.asset('resources/images/logo.jpg'),
           ),
         ),
+        Text(isGuide ? 'Login as guide' : 'Login as tourist'),
         Form(
           autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Flex(
@@ -97,9 +98,17 @@ class _PhoneEmailLinkLoginWidgetState
                           S.of(context).pleaseCompleteTheForm);
                     } else if (_emailController.text.contains('@') &&
                         _emailController.text.contains('.')) {
-                      widget.onEmailLinkRequest(_emailController.text, isGuide ? UserRole.ROLE_GUIDE : UserRole.ROLE_TOURIST);
+                      widget.onEmailLinkRequest(
+                          _emailController.text,
+                          isGuide
+                              ? UserRole.ROLE_GUIDE
+                              : UserRole.ROLE_TOURIST);
                     } else if (int.tryParse(_emailController.text) != null) {
-                      widget.onCodeRequested(_emailController.text, isGuide ? UserRole.ROLE_GUIDE : UserRole.ROLE_TOURIST);
+                      widget.onCodeRequested(
+                          _emailController.text,
+                          isGuide
+                              ? UserRole.ROLE_GUIDE
+                              : UserRole.ROLE_TOURIST);
                     } else {
                       widget.onSnackBarRequested(
                           S.of(context).pleaseInputAnEmailOrAPhoneNumber);
@@ -144,7 +153,8 @@ class _PhoneEmailLinkLoginWidgetState
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
                 onTap: () {
-                  widget.onGmailLoginRequested(isGuide ? UserRole.ROLE_GUIDE : UserRole.ROLE_TOURIST);
+                  widget.onGmailLoginRequested(
+                      isGuide ? UserRole.ROLE_GUIDE : UserRole.ROLE_TOURIST);
                 },
                 child: Container(
                   alignment: Alignment.center,
@@ -179,6 +189,13 @@ class _PhoneEmailLinkLoginWidgetState
           height: 88,
           child: Center(
             child: Image.asset('resources/images/logo.jpg'),
+          ),
+        ),
+        Text(
+          isGuide ? 'Login as guide' : 'Login as tourist',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
           ),
         ),
         Form(
@@ -231,14 +248,15 @@ class _PhoneEmailLinkLoginWidgetState
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                 ),
                 child: FlatButton(
-                  color: Colors.transparent,
+                  color: isGuide ? Colors.white : Colors.transparent,
                   child: Text(S.of(context).sendMeCode),
                   onPressed: () {
                     var phone = _phoneController.text;
                     if (phone.startsWith('0')) {
                       phone = phone.substring(1);
                     }
-                    widget.onCodeRequested(countryCode + phone, isGuide ? UserRole.ROLE_GUIDE : UserRole.ROLE_TOURIST);
+                    widget.onCodeRequested(countryCode + phone,
+                        isGuide ? UserRole.ROLE_GUIDE : UserRole.ROLE_TOURIST);
                   },
                 ),
               ),
@@ -277,7 +295,8 @@ class _PhoneEmailLinkLoginWidgetState
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
                 onTap: () {
-                  widget.onGmailLoginRequested(isGuide ? UserRole.ROLE_GUIDE : UserRole.ROLE_TOURIST);
+                  widget.onGmailLoginRequested(
+                      isGuide ? UserRole.ROLE_GUIDE : UserRole.ROLE_TOURIST);
                 },
                 child: Container(
                   alignment: Alignment.center,

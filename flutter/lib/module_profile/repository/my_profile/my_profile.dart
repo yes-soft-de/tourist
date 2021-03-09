@@ -21,7 +21,7 @@ class MyProfileRepository {
         : ProfileListResponse.fromJson(response).data.last;
   }
 
-  Future<ProfileResponse> getTouristProfile(String userId) async {
+  Future<ProfileResponse> getTouristProfile(String userId, UserRole role) async {
     Map<String, dynamic> response =
         await _apiClient.get(Urls.getTouristProfileAPI + '/$userId');
 

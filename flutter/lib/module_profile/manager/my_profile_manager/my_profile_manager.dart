@@ -7,10 +7,13 @@ import 'package:tourists/module_profile/response/profile_response/profile_respon
 @provide
 class MyProfileManager {
   final MyProfileRepository _repository;
+
   MyProfileManager(this._repository);
 
-  Future<ProfileResponse> getUserProfile(String userId) => _repository.getTouristProfile(userId);
+  Future<ProfileResponse> getUserProfile(String userId, UserRole role) =>
+      _repository.getTouristProfile(userId, role);
 
   Future<ProfileResponse> createMyProfile(
-      CreateProfileRequest createProfileRequest, UserRole role) => _repository.createTouristProfile(createProfileRequest, role);
+          CreateProfileRequest createProfileRequest, UserRole role) =>
+      _repository.createTouristProfile(createProfileRequest, role);
 }

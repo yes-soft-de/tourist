@@ -53,22 +53,15 @@ class ProfileService {
       name: '${response.data.name}',
       image: '${response.data.image}',
     );
-    await cacheProfile(result);
     return result;
   }
 
-  Future<void> cacheProfile(ProfileModel response) async {
-    await _preferencesHelper.setUserName(response.name);
-    if (response.image.contains('http')) {
-      await _preferencesHelper.setUserImage(response.image);
-    } else {
-      await _preferencesHelper.setUserImage(Urls.imagesRoot + response.image);
-    }
-  }
+
 
   Future<ProfileModel> getUserProfile(String userId) async {
     var me = await _authService.userID;
-    var myProfile = await _manager.getUserProfile(me);
+    var role = await _authService.userRole;
+    var myProfile = await _manager.getUserProfile(me, role);
 
     return ProfileModel(
         name: '${myProfile.data.name} ',
@@ -78,9 +71,9 @@ class ProfileService {
   }
 
   Future<ProfileModel> getMyProfile() async {
-    String uid = await _authService.userID;
     var me = await _authService.userID;
-    var myProfile = await _manager.getUserProfile(me);
+    var role = await _authService.userRole;
+    var myProfile = await _manager.getUserProfile(me, role);
 
     return ProfileModel(
         name: '${myProfile.data?.name} ',

@@ -9,6 +9,7 @@ import 'package:tourists/module_profile/ui/states/edit_profile_state.dart';
 import 'package:tourists/module_profile/ui/states/edit_profile_state_error.dart';
 import 'package:tourists/module_profile/ui/states/edit_profile_state_guide_load_success.dart';
 import 'package:tourists/module_profile/ui/states/edit_profile_state_tourist_load_success.dart';
+import 'package:tourists/module_search/bloc/search_bloc/search_bloc.dart';
 import 'package:tourists/module_upload/service/image_upload/image_upload_service.dart';
 
 @provide
@@ -20,14 +21,20 @@ class MyProfileStateManager {
   final ImageUploadService _uploadService;
   final ProfileService _myProfileService;
   final AuthService _authService;
+  final SearchBloc _searchProvider;
 
   MyProfileStateManager(
-      this._uploadService, this._myProfileService, this._authService);
+    this._uploadService,
+    this._myProfileService,
+    this._authService,
+    this._searchProvider,
+  );
 
   Future<void> refresh(MyProfileScreen screen, ProfileModel model) async {
     var userType = await this._authService.userRole;
     if (userType == UserRole.ROLE_GUIDE) {
-      _stateSubject.add(EditProfileStateGuideLoadSuccess(screen, model));
+      _stateSubject.add(
+          EditProfileStateGuideLoadSuccess(screen, model, _searchProvider));
     } else {
       _stateSubject
           .add(EditProfileStateTouristLoadSuccess(screen, profile: model));
@@ -39,8 +46,8 @@ class MyProfileStateManager {
     var userType = await this._authService.userRole;
     var createdProfile = await _myProfileService.createProfile(profile);
     if (userType == UserRole.ROLE_GUIDE) {
-      _stateSubject
-          .add(EditProfileStateGuideLoadSuccess(screen, createdProfile));
+      _stateSubject.add(EditProfileStateGuideLoadSuccess(
+          screen, createdProfile, _searchProvider));
     } else {
       _stateSubject.add(
           EditProfileStateTouristLoadSuccess(screen, profile: createdProfile));
@@ -50,7 +57,8 @@ class MyProfileStateManager {
   void getMyProfile(MyProfileScreen screen) {
     this._myProfileService.getMyProfile().then((value) {
       if (value != null) {
-        this._stateSubject.add(EditProfileStateGuideLoadSuccess(screen, value));
+        this._stateSubject.add(
+            EditProfileStateGuideLoadSuccess(screen, value, _searchProvider));
       } else {
         this._stateSubject.add(null);
       }
@@ -66,7 +74,8 @@ class MyProfileStateManager {
         model.image = value;
         _authService.userRole.then((value) {
           if (value == UserRole.ROLE_GUIDE) {
-            _stateSubject.add(EditProfileStateGuideLoadSuccess(screen, model));
+            _stateSubject.add(EditProfileStateGuideLoadSuccess(
+                screen, model, _searchProvider));
           } else {
             _stateSubject.add(
                 EditProfileStateTouristLoadSuccess(screen, profile: model));

@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:inject/inject.dart';
 import 'package:tourists/module_search/bloc/search_bloc/search_bloc.dart';
 
-@provide
-class SearchScreen extends StatefulWidget {
-  final SearchBloc bloc;
+class AddLocationDialog extends StatefulWidget {
+  final SearchBloc predictionProvider;
 
-  SearchScreen(this.bloc);
+  AddLocationDialog(this.predictionProvider);
 
   @override
-  State<StatefulWidget> createState() => _SearchScreenState();
+  State<StatefulWidget> createState() => _AddLocationDialogState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class _AddLocationDialogState extends State<AddLocationDialog> {
   String currentLocation;
   bool showPredictions = true;
   Map<String, String> predictions = {};
@@ -21,7 +19,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void initState() {
-    widget.bloc.predictionStream.listen((event) {
+    widget.predictionProvider.predictionStream.listen((event) {
       predictions = event;
       if (mounted) {
         setState(() {});
@@ -32,26 +30,25 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: _searchController,
-                onChanged: (query) {
-                  if (query.isNotEmpty) {
-                    showPredictions = true;
-                    widget.bloc.getPredictions(query);
-                  }
-                },
-              ),
+    return Dialog(
+      child: Flex(
+        direction: Axis.vertical,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              controller: _searchController,
+              onChanged: (query) {
+                if (query.isNotEmpty) {
+                  showPredictions = true;
+                  widget.predictionProvider.getPredictions(query);
+                }
+              },
             ),
-            showPredictions ? buildPredictionList(predictions) : Container(),
-            // TODO: Show Filtered Locations based on search location
-          ],
-        ),
+          ),
+          showPredictions ? buildPredictionList(predictions) : Container(),
+          // TODO: Show result
+        ],
       ),
     );
   }

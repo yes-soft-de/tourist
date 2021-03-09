@@ -120,5 +120,7 @@
   "uploading": "Uploading",
   "pleaseUploadYourImage": "Please Upload Your Image",
   "pleaseEnterYourName": "Please Enter Your Name",
-  "profile": "Profile"
+  "profile": "Profile",
+  "search": "Search",
+  "locationsYouWorkIn": "Locations you work in"
 }

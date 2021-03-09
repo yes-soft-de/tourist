@@ -24,4 +24,6 @@ class Urls {
   static final rate = baseAPI + 'rating';
   static final mapHelper = baseAPI + 'maphelper';
   static final googleAutoComplete = 'https://maps.googleapis.com/maps/api/place/autocomplete/json';
+
+  static final CREATE_TOKEN_API = baseAPI + 'login_check';
 }

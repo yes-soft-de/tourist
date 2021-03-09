@@ -2,6 +2,7 @@ class LocationListItem {
   int id;
   String name;
   String description;
+  List<dynamic> location;
 //  String location;
   String commentNumber;
   int ratingAverage;

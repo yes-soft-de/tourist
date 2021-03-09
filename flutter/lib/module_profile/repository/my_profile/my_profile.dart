@@ -11,13 +11,7 @@ class MyProfileRepository {
   final _apiClient = HttpClient();
   MyProfileRepository();
 
-  Future<ProfileResponse> getMyProfile(UserRole role) async {
-    Map<String, dynamic> response = await _apiClient.get(Urls.getTouristProfileAPI);
-
-    return response ?? ProfileResponse.fromJson(response);
-  }
-
-  Future<ProfileResponse> createMyProfile(
+  Future<ProfileResponse> createTouristProfile(
       CreateProfileRequest profileRequest, UserRole role) async {
     Map<String, dynamic> response =
         await _apiClient.post(Urls.getTouristProfileAPI, profileRequest.toJson());
@@ -27,7 +21,7 @@ class MyProfileRepository {
         : ProfileListResponse.fromJson(response).data.last;
   }
 
-  Future<ProfileResponse> getUserProfile(String userId) async {
+  Future<ProfileResponse> getTouristProfile(String userId) async {
     Map<String, dynamic> response =
         await _apiClient.get(Urls.getTouristProfileAPI + '/$userId');
 

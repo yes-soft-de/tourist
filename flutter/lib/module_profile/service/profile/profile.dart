@@ -2,6 +2,7 @@ import 'package:inject/inject.dart';
 import 'package:tourists/consts/urls.dart';
 import 'package:tourists/module_auth/enums/user_type.dart';
 import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
+import 'package:tourists/module_locations/service/location_list/location_list_service.dart';
 import 'package:tourists/module_profile/manager/my_profile_manager/my_profile_manager.dart';
 import 'package:tourists/module_profile/model/profile_model/profile_model.dart';
 import 'package:tourists/module_profile/presistance/profile_shared_preferences.dart';
@@ -13,11 +14,13 @@ class ProfileService {
   final MyProfileManager _manager;
   final ProfileSharedPreferencesHelper _preferencesHelper;
   final AuthService _authService;
+  final LocationListService _locationListService;
 
   ProfileService(
     this._manager,
     this._preferencesHelper,
     this._authService,
+    this._locationListService,
   );
 
   Future<bool> hasProfile() async {
@@ -68,14 +71,10 @@ class ProfileService {
     var myProfile = await _manager.getUserProfile(me);
 
     return ProfileModel(
-      name: '${myProfile.data.name} ',
-      image: '${myProfile.data.image} ',
-      locations: [],
-      languages: [
-        'en',
-        'ar'
-      ]
-    );
+        name: '${myProfile.data.name} ',
+        image: '${myProfile.data.image} ',
+        locations: [],
+        languages: ['en', 'ar']);
   }
 
   Future<ProfileModel> getMyProfile() async {
@@ -87,10 +86,6 @@ class ProfileService {
         name: '${myProfile.data?.name} ',
         image: '${myProfile.data?.image} ',
         locations: [],
-        languages: [
-          'en',
-          'ar'
-        ]
-    );
+        languages: myProfile.data.guideLanguage);
   }
 }

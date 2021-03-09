@@ -9,16 +9,8 @@ class MyProfileManager {
   final MyProfileRepository _repository;
   MyProfileManager(this._repository);
 
-  Future<ProfileResponse> getMyProfile(UserRole role) {
-    return _repository.getMyProfile(role);
-  }
-
-  Future<ProfileResponse> getUserProfile(String userId) {
-    return _repository.getUserProfile(userId);
-  }
+  Future<ProfileResponse> getUserProfile(String userId) => _repository.getTouristProfile(userId);
 
   Future<ProfileResponse> createMyProfile(
-      CreateProfileRequest createProfileRequest, UserRole role) {
-    return _repository.createMyProfile(createProfileRequest, role);
-  }
+      CreateProfileRequest createProfileRequest, UserRole role) => _repository.createTouristProfile(createProfileRequest, role);
 }

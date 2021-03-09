@@ -16,6 +16,7 @@ class CreateCommentRequest {
     data['comment'] = this.comment;
     data['region'] = this.region;
     data['user'] = this.user;
+    data['date'] = DateTime.now().toIso8601String();
     return data;
   }
 }

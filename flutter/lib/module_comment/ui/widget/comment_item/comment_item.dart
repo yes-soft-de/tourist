@@ -37,7 +37,7 @@ class CommentItemWidget extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(100))),
                       child: Center(
                           child: Text(
-                        userName.substring(0, 1).toUpperCase(),
+                        userName == null ? ' ' : userName.substring(0, 1).toUpperCase(),
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
                       )),

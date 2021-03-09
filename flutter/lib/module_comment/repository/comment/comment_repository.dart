@@ -1,20 +1,26 @@
 import 'package:inject/inject.dart';
 import 'package:tourists/consts/urls.dart';
+import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
 import 'package:tourists/module_comment/request/create_comments/create_comments.dart';
 import 'package:tourists/module_comment/response/create_comment/create_comment_response.dart';
 import 'package:tourists/module_network/http_client/http_client.dart';
 
 @provide
 class CommentRepository {
-  final HttpClient _client;
+  final _client = HttpClient();
+  final AuthService _authService;
 
-  CommentRepository(this._client);
+  CommentRepository(this._authService);
 
   void getCommentsOfLocation() {}
 
   Future<CreateCommentResponse> createComment(
       CreateCommentRequest request) async {
-    Map response = await _client.post(Urls.comment, request.toJson());
+    await _authService.refreshToken();
+    var token = await _authService.getToken();
+    Map response = await _client.post(Urls.comment, request.toJson(), headers: {
+      'Authorization': 'Bearer ' + token,
+    });
 
     if (response != null) {
       return CreateCommentResponse.fromJson(response);

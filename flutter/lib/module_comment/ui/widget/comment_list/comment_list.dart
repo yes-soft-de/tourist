@@ -8,12 +8,9 @@ class CommentListWidget extends StatefulWidget {
   final List<CommentModel> comments;
   List<CommentModel> displayedComments = [];
 
-
-
-  CommentListWidget(this.comments){
-    displayedComments = (comments.length > 3)
-        ? comments.sublist(0, 3)
-        : comments;
+  CommentListWidget(this.comments) {
+    displayedComments =
+        (comments.length > 3) ? comments.sublist(0, 3) : comments;
   }
 
   @override
@@ -64,29 +61,32 @@ class _CommentListWidgetState extends State<CommentListWidget> {
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: widget.displayedComments.length,
-            itemBuilder: (BuildContext context, int index){
-              return CommentItemWidget(
-                comment: widget.displayedComments[index].comment,
-                userName: widget.displayedComments[index].userName,
-                commentDate: TimeFormatter.getDartDate(widget.displayedComments[index].date),
-              );
-            }
-        ),
-        if(widget.comments.length > widget.displayedComments.length)
-            RaisedButton(
-                onPressed: (){
-                  setState(() {
-
-                    int startIndex = widget.displayedComments.length-1;
-                    widget.displayedComments.addAll((widget.comments.length -widget. displayedComments.length >3)
-                        ? widget.comments.sublist(startIndex,startIndex+3)
-                        :widget.comments.sublist(startIndex));
-                  });
-                },
-              child:Text(
-                  S.of(context).show_more
-              )
-        )
+            itemBuilder: (BuildContext context, int index) {
+              if (widget.displayedComments[index].comment != null &&
+                  widget.displayedComments[index].userName != null) {
+                return CommentItemWidget(
+                  comment: widget.displayedComments[index].comment,
+                  userName: widget.displayedComments[index].userName,
+                  commentDate: TimeFormatter.getDartDate(
+                      widget.displayedComments[index].date),
+                );
+              } else {
+                return Container();
+              }
+            }),
+        if (widget.comments.length > widget.displayedComments.length)
+          RaisedButton(
+              onPressed: () {
+                setState(() {
+                  int startIndex = widget.displayedComments.length - 1;
+                  widget.displayedComments.addAll((widget.comments.length -
+                              widget.displayedComments.length >
+                          3)
+                      ? widget.comments.sublist(startIndex, startIndex + 3)
+                      : widget.comments.sublist(startIndex));
+                });
+              },
+              child: Text(S.of(context).show_more))
       ],
     );
   }

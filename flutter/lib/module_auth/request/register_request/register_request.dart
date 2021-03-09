@@ -1,21 +1,14 @@
 class RegisterRequest {
   String userID;
   String password;
-  String name;
-  String roles;
+  List<String> roles;
 
-  RegisterRequest({
-    this.userID,
-    this.password,
-    this.roles,
-    this.name,
-  });
+  RegisterRequest({this.userID, this.password, this.roles});
 
   RegisterRequest.fromJson(Map<String, dynamic> json) {
     userID = json['userID'];
     password = json['password'];
     roles = json['roles'];
-    name = json['name'];
   }
 
   Map<String, dynamic> toJson() {
@@ -23,7 +16,6 @@ class RegisterRequest {
     data['userID'] = this.userID;
     data['password'] = this.password;
     data['roles'] = this.roles;
-    data['name'] = this.name;
     return data;
   }
 }

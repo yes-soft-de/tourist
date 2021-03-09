@@ -59,7 +59,7 @@ class LoginStateManager {
           _loginScreenState, err.toString(), _email, _password, role));
     });
 
-    _authService.verifyWithPhone(phoneNumber, UserRole.ROLE_GUIDE);
+    _authService.verifyWithPhone(true, phoneNumber, UserRole.ROLE_GUIDE);
   }
 
   void loginViaEmailAndPassword( LoginScreenState _loginScreenState,
@@ -83,17 +83,17 @@ class LoginStateManager {
     });
 
     _authService.signInWithEmailAndPassword(
-        email, password, UserRole.ROLE_TOURIST);
+        email, password, UserRole.ROLE_TOURIST, true);
   }
 
   void confirmSMSCode(String smsCode, LoginScreenState screenState) {
     _screenState = screenState;
-    _authService.confirmWithCode(smsCode, UserRole.ROLE_GUIDE);
+    _authService.confirmWithCode(smsCode, UserRole.ROLE_GUIDE, true);
   }
 
   void loginViaGoogle(LoginScreenState screenState, UserRole role) {
     _screenState = screenState;
-    _authService.verifyWithGoogle(role);
+    _authService.verifyWithGoogle(role, true);
   }
 
   void sendLoginLink(

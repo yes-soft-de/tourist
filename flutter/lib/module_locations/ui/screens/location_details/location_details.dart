@@ -14,6 +14,7 @@ import 'package:tourists/module_locations/ui/widgets/guides_list/guides_list.dar
 import 'package:tourists/module_shared/ui/widgets/carousel/carousel.dart';
 import 'package:tourists/module_shared/ui/widgets/request_guide_button/request_guide_button.dart';
 import 'package:tourists/utils/auth_guard/auth_gard.dart';
+import 'package:tourists/utils/keyboard_detector/keyboard_detector.dart';
 
 @provide
 class LocationDetailsScreen extends StatefulWidget {
@@ -184,7 +185,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
               ),
             ),
           ),
-          scrollPosition > 0 || lastLocation == 0
+          (scrollPosition > 0 || lastLocation == 0) && !KeyboardDetector.isUp(context)
               ? Positioned(
                   bottom: 16,
                   left: 0,

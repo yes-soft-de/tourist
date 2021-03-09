@@ -45,9 +45,7 @@ class MyProfileStateManager {
   void getMyProfile(MyProfileScreen screen) {
     this._myProfileService.getMyProfile().then((value) {
       if (value != null) {
-        this._myProfileService.cacheProfile(value).then((_) {
-          this._stateSubject.add(EditProfileStateGuideLoadSuccess(screen, profile: value));
-        });
+        this._stateSubject.add(EditProfileStateGuideLoadSuccess(screen, profile: value));
       } else {
         this._stateSubject.add(null);
       }

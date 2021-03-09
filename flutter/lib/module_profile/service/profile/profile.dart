@@ -45,10 +45,10 @@ class ProfileService {
     ProfileResponse response = await _manager.createMyProfile(request, role);
     if (response == null) return null;
     var result = ProfileModel(
-      languages: response.language,
-      locations: response.city,
-      name: response.name,
-      image: response.image.path,
+      languages: [],
+      locations: [],
+      name: '${response.data.name}',
+      image: '${response.data.image}',
     );
     await cacheProfile(result);
     return result;
@@ -63,30 +63,34 @@ class ProfileService {
     }
   }
 
-  Future<ProfileResponse> getUserProfile(String userId) async {
+  Future<ProfileModel> getUserProfile(String userId) async {
     var me = await _authService.userID;
-    if (userId == me) {
-      var myProfile = await profile;
-      if (myProfile.name != null) {
-        return ProfileResponse(
-            name: myProfile.name,
-            image: ApiImage(path: myProfile.image),
-            language: myProfile.languages,
-            city: myProfile.locations);
-      }
-    }
-    return _manager.getUserProfile(userId);
+    var myProfile = await _manager.getUserProfile(me);
+
+    return ProfileModel(
+      name: '${myProfile.data.name} ',
+      image: '${myProfile.data.image} ',
+      locations: [],
+      languages: [
+        'en',
+        'ar'
+      ]
+    );
   }
 
   Future<ProfileModel> getMyProfile() async {
     String uid = await _authService.userID;
-    var response = await getUserProfile(uid);
+    var me = await _authService.userID;
+    var myProfile = await _manager.getUserProfile(me);
 
     return ProfileModel(
-      languages: response != null ? response.language : [],
-      locations: response != null ? response.city : [],
-      name: response != null ? response.name : 'user',
-      image: response != null ? response.image.path : '',
+        name: '${myProfile.data.name} ',
+        image: '${myProfile.data.image} ',
+        locations: [],
+        languages: [
+          'en',
+          'ar'
+        ]
     );
   }
 }

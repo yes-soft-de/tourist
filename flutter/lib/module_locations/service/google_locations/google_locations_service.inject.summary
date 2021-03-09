@@ -25,6 +25,13 @@
                 "qualifier": null
               },
               "isProvider": false
+            },
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_locations/service/prefs/location_prefs.dart#LocationPreferencesHelper",
+                "qualifier": null
+              },
+              "isProvider": false
             }
           ]
         }

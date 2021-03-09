@@ -21,14 +21,14 @@
           "dependencies": [
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/utils/auth_guard/auth_gard.dart#AuthGuard",
+                "root": "asset:tourists/lib/utils/language/language.dart#LanguageHelper",
                 "qualifier": null
               },
               "isProvider": false
             },
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/utils/language/language.dart#LanguageHelper",
+                "root": "asset:tourists/lib/module_auth/service/auth_service/auth_service.dart#AuthService",
                 "qualifier": null
               },
               "isProvider": false

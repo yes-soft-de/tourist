@@ -84,8 +84,8 @@ class ProfileService {
     var myProfile = await _manager.getUserProfile(me);
 
     return ProfileModel(
-        name: '${myProfile.data.name} ',
-        image: '${myProfile.data.image} ',
+        name: '${myProfile.data?.name} ',
+        image: '${myProfile.data?.image} ',
         locations: [],
         languages: [
           'en',

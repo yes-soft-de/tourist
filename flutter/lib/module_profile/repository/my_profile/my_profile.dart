@@ -12,14 +12,41 @@ class MyProfileRepository {
   MyProfileRepository();
 
   Future<ProfileResponse> createTouristProfile(
-      CreateProfileRequest profileRequest, UserRole role) async {
-    Map<String, dynamic> response =
-        await _apiClient.post(Urls.getTouristProfileAPI, profileRequest.toJson());
+      CreateProfileRequest profileRequest) async {
+    Map<String, dynamic> response;
+    try {
+      response =
+      await _apiClient.post(Urls.getTouristProfileAPI, profileRequest.toJson());
+    } catch (e){};
+
+    try {
+      response =
+      await _apiClient.put(Urls.getTouristProfileAPI, profileRequest.toJson());
+    } catch (e){};
 
     return response == null
         ? null
         : ProfileListResponse.fromJson(response).data.last;
   }
+
+  Future<ProfileResponse> createGuideProfile(
+      CreateProfileRequest profileRequest) async {
+    Map<String, dynamic> response;
+    try {
+      response =
+      await _apiClient.post(Urls.registerGuideAPI, profileRequest.toJson());
+    } catch (e){};
+
+    try {
+      response =
+      await _apiClient.put(Urls.registerGuideAPI, profileRequest.toJson());
+    } catch (e){};
+
+    return response == null
+        ? null
+        : ProfileListResponse.fromJson(response).data.last;
+  }
+
 
   Future<ProfileResponse> getTouristProfile(String userId, UserRole role) async {
     Map<String, dynamic> response =

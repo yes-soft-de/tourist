@@ -13,7 +13,11 @@ class MyProfileManager {
   Future<ProfileResponse> getUserProfile(String userId, UserRole role) =>
       _repository.getTouristProfile(userId, role);
 
-  Future<ProfileResponse> createMyProfile(
-          CreateProfileRequest createProfileRequest, UserRole role) =>
-      _repository.createTouristProfile(createProfileRequest, role);
+  Future<ProfileResponse> createTouristProfile(
+          CreateProfileRequest createProfileRequest) =>
+      _repository.createTouristProfile(createProfileRequest);
+
+  Future<ProfileResponse> createGuideProfile(
+      CreateProfileRequest createProfileRequest) =>
+      _repository.createGuideProfile(createProfileRequest);
 }

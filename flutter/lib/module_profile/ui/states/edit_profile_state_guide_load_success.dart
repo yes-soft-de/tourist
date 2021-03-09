@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tourists/consts/urls.dart';
 import 'package:tourists/generated/l10n.dart';
+import 'package:tourists/module_locations/ui/widgets/guide_locations/guide_locations.dart';
 import 'package:tourists/module_profile/model/profile_model/profile_model.dart';
 import 'package:tourists/module_profile/ui/my_profile/my_profile.dart';
 import 'package:tourists/utils/keyboard_detector/keyboard_detector.dart';
@@ -18,8 +19,8 @@ class EditProfileStateGuideLoadSuccess extends EditProfileState {
 
   EditProfileStateGuideLoadSuccess(MyProfileScreen screen, this.userProfile)
       : super(screen) {
-    languages.addAll(userProfile.languages);
-    locations.addAll(userProfile.locations);
+    languages.addAll(userProfile.languages ?? []);
+    locations.addAll(userProfile.locations ?? []);
   }
 
   @override
@@ -34,53 +35,53 @@ class EditProfileStateGuideLoadSuccess extends EditProfileState {
         children: [
           !KeyboardDetector.isUp(context)
               ? Container(
-            height: 88,
-            width: MediaQuery.of(context).size.width,
-            child: Stack(
-              children: [
-                Positioned.fill(
-                    child: FadeInImage.assetNetwork(
-                      placeholder: 'resources/images/logo.jpg',
-                      image: '${profile.image}'.contains('http')
-                          ? '${profile.image}'
-                          : Urls.imagesRoot + '${profile.image}',
-                      fit: BoxFit.contain,
-                      imageErrorBuilder: (o, e, s) {
-                        return Image.asset('resources/images/logo.jpg');
-                      },
-                    )),
-                Positioned(
-                  right: 16,
-                  top: 16,
-                  child: GestureDetector(
-                    onTap: () {
-                      picker
-                          .getImage(
-                          source: ImageSource.gallery,
-                          imageQuality: 70)
-                          .then((image) {
-                        if (image != null) {
-                          screen.onImageSelected(image.path, profile);
-                        }
-                      });
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.image,
-                          color: Colors.white,
+                  height: 88,
+                  width: MediaQuery.of(context).size.width,
+                  child: Stack(
+                    children: [
+                      Positioned.fill(
+                          child: FadeInImage.assetNetwork(
+                        placeholder: 'resources/images/logo.jpg',
+                        image: '${profile.image}'.contains('http')
+                            ? '${profile.image}'
+                            : Urls.imagesRoot + '${profile.image}',
+                        fit: BoxFit.contain,
+                        imageErrorBuilder: (o, e, s) {
+                          return Image.asset('resources/images/logo.jpg');
+                        },
+                      )),
+                      Positioned(
+                        right: 16,
+                        top: 16,
+                        child: GestureDetector(
+                          onTap: () {
+                            picker
+                                .getImage(
+                                    source: ImageSource.gallery,
+                                    imageQuality: 70)
+                                .then((image) {
+                              if (image != null) {
+                                screen.onImageSelected(image.path, profile);
+                              }
+                            });
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(
+                                Icons.image,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
+                      )
+                    ],
                   ),
                 )
-              ],
-            ),
-          )
               : Container(),
           ListTile(
             title: TextFormField(
@@ -126,6 +127,25 @@ class EditProfileStateGuideLoadSuccess extends EditProfileState {
               screen.refresh(profile);
             },
           ),
+          Expanded(
+            // This is where we add locations
+            child: GuideLocations(
+                locations: profile.availableLocations,
+                selectedLocations: locations.toList(),
+                onLocationSelected: (id) {
+                  if (locations.contains(id.toString())) {
+                    locations.remove(id.toString());
+                    print('remove location $id');
+                    print(locations.toString());
+                  } else {
+                    locations.add(id.toString());
+                    print('add location $id');
+                    print(locations.toString());
+                  }
+                  profile.locations = locations.toList();
+                  screen.refresh(profile);
+                }),
+          ),
           GestureDetector(
             onTap: () {
               var createProfileRequest = ProfileModel(
@@ -136,8 +156,7 @@ class EditProfileStateGuideLoadSuccess extends EditProfileState {
               screen.saveProfile(createProfileRequest);
             },
             child: Container(
-              decoration:
-              BoxDecoration(color: Theme.of(context).accentColor),
+              decoration: BoxDecoration(color: Theme.of(context).accentColor),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Row(

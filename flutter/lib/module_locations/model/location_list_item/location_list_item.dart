@@ -2,8 +2,7 @@ class LocationListItem {
   int id;
   String name;
   String description;
-  List<dynamic> location;
-//  String location;
+  dynamic location;
   String commentNumber;
   int ratingAverage;
   List<Path> path;
@@ -12,7 +11,7 @@ class LocationListItem {
       {this.id,
       this.name,
       this.description,
-//      this.location,
+      this.location,
       this.commentNumber,
       this.ratingAverage,
       this.path});
@@ -21,7 +20,7 @@ class LocationListItem {
     id = json['id'];
     name = json['name'];
     description = json['description'];
-//    location = json['location'];
+   location = json['location'];
     commentNumber = json['commentNumber'];
     ratingAverage = json['ratingAverage'];
     if (json['path'] != null) {

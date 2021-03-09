@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:tourists/module_auth/enums/auth_status.dart';
 import 'package:tourists/module_auth/enums/user_type.dart';
 import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
@@ -23,7 +24,14 @@ class LoginStateManager {
 
   LoginScreenState _screenState;
 
-  LoginStateManager(this._authService);
+  LoginStateManager(this._authService) {
+    _authService.authListener.listen((event) {
+      debugPrint(event.toString());
+      if (event == AuthStatus.AUTHORIZED) {
+        _screenState.moveToNext();
+      }
+    });
+  }
 
   Stream<LoginState> get stateStream => _loginStateSubject.stream;
 
@@ -51,7 +59,7 @@ class LoginStateManager {
           _loginScreenState, err.toString(), _email, _password, role));
     });
 
-    _authService.verifyWithPhone(phoneNumber, UserRole.ROLE_GUIDE);
+    _authService.verifyWithPhone(true, phoneNumber, UserRole.ROLE_GUIDE);
   }
 
   void loginViaEmailAndPassword( LoginScreenState _loginScreenState,
@@ -75,16 +83,17 @@ class LoginStateManager {
     });
 
     _authService.signInWithEmailAndPassword(
-        email, password, UserRole.ROLE_TOURIST);
+        email, password, UserRole.ROLE_TOURIST, true);
   }
 
   void confirmSMSCode(String smsCode, LoginScreenState screenState) {
     _screenState = screenState;
-    _authService.confirmWithCode(smsCode, UserRole.ROLE_GUIDE);
+    _authService.confirmWithCode(smsCode, UserRole.ROLE_GUIDE, true);
   }
 
   void loginViaGoogle(LoginScreenState screenState, UserRole role) {
-    _authService.verifyWithGoogle(role);
+    _screenState = screenState;
+    _authService.verifyWithGoogle(role, true);
   }
 
   void sendLoginLink(

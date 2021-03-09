@@ -8,22 +8,25 @@ class ProfileResponse {
   double rating;
   ApiImage image;
 
-  ProfileResponse(
-      {this.user,
-        this.userID,
-        this.name,
-        this.status,
-        this.city,
-        this.language,
-        this.rating,
-        this.image});
+  ProfileResponse({
+    this.user,
+    this.userID,
+    this.name,
+    this.status,
+    this.city,
+    this.language,
+    this.rating,
+    this.image,
+  });
 
   ProfileResponse.fromJson(Map<String, dynamic> json) {
     user = json['user'];
     userID = json['userID'];
     name = json['name'];
     status = json['status'];
-    city = json['city'].cast<String>();
+    if (json['city'] != null) {
+      city = json['city'].cast<String>();
+    }
     language = json['language'].cast<String>();
     rating = json['rating'];
     image = json['image'] != null ? new ApiImage.fromJson(json['image']) : null;

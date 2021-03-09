@@ -3,7 +3,7 @@ import 'package:tourists/module_auth/enums/user_type.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AppUser {
-  UserCredential credential;
+  User credential;
   AuthSource authSource;
   UserRole userRole;
 

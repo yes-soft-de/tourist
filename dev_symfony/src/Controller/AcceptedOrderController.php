@@ -9,21 +9,25 @@ use App\Service\OrderService;
 use stdClass;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AcceptedOrderController extends BaseController
 {
     private $serializer;
     private $autoMapping;
     private $orderService;
+    private $validator;
 
-    public function __construct(SerializerInterface $serializer, AutoMapping $autoMapping, OrderService $orderService)
+    public function __construct(SerializerInterface $serializer, AutoMapping $autoMapping, OrderService $orderService, ValidatorInterface $validator)
     {
         parent::__construct($serializer);
         $this->serializer = $serializer;
         $this->autoMapping = $autoMapping;
         $this->orderService = $orderService;
+        $this->validator = $validator;
     }
 
     /**
@@ -36,6 +40,13 @@ class AcceptedOrderController extends BaseController
         $data = json_decode($request->getContent(), true);
 
         $request = $this->autoMapping->map(stdClass::class,AcceptedOrderCreateRequest::class,(object)$data);
+
+        $violations = $this->validator->validate($request);
+        if (\count($violations) > 0) {
+            $violationsString = (string) $violations;
+
+            return new JsonResponse($violationsString, Response::HTTP_OK);
+        }
 
         $response = $this->orderService->acceptOrderCreate($request);
 

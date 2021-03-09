@@ -6,7 +6,7 @@ class LocationDetailsModel {
   int id;
   String name;
   String description;
-  List<String> location;
+//  String location;
   List<CommentModel> comments;
   int ratingAverage;
   List<Paths> paths;
@@ -15,7 +15,7 @@ class LocationDetailsModel {
       {this.id,
       this.name,
       this.description,
-      this.location,
+//      this.location,
       this.comments,
       this.ratingAverage,
       this.paths});
@@ -24,7 +24,7 @@ class LocationDetailsModel {
     id = json['id'];
     name = json['name'];
     description = json['description'];
-    location = json['location'].cast<String>();
+//    location = json['location'];
     ratingAverage = json['ratingAverage'];
     if (json['comments'] != null) {
       comments = <CommentModel>[];
@@ -48,7 +48,7 @@ class LocationDetailsModel {
     data['id'] = this.id;
     data['name'] = this.name;
     data['description'] = this.description;
-    data['location'] = this.location;
+//    data['location'] = this.location;
     data['ratingAverage'] = this.ratingAverage;
     if (this.comments != null) {
       data['comments'] = this.comments.map((v) => v.toJson()).toList();

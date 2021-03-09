@@ -93,7 +93,7 @@ class _GuideOrdersScreenState extends State<GuideOrdersScreen> {
 
   Future<Widget> _getAvailableOrders() async {
     List<Widget> orderCards = [];
-    FirebaseUser _user = await widget.auth.currentUser();
+    User _user = await widget.auth.currentUser;
 
     print('Got ' + ordersList.length.toString() + ' Length');
 

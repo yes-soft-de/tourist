@@ -2,31 +2,32 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/consts/urls.dart';
+import 'package:tourists/module_network/network_client/network_client.dart';
 import 'package:tourists/utils/logger/logger.dart';
 
 @provide
-class HttpClient {
+class HttpClient extends NetworkClient {
   Dio _client;
-  final Logger _logger;
+  final _logger = Logger();
 
   final String tag = 'HttpClient';
 
-  HttpClient(this._logger) {
+  HttpClient() {
     _client = new Dio(BaseOptions());
     _client.interceptors
         .add(DioCacheManager(CacheConfig(baseUrl: Urls.baseAPI)).interceptor);
   }
 
-  Future<Map> get(String url) async {
+  @override
+  Future<Map<String, dynamic>> get(String url, {Map<String, String> queryParams}) async {
     _logger.info(tag, 'GET $url');
     try {
       Response response = await _client.get(
         url,
         options: buildCacheOptions(Duration(seconds: 2)),
+        queryParameters: queryParams
       );
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
@@ -34,25 +35,17 @@ class HttpClient {
         return response.data;
       } else {
         _logger.error(tag, response.statusCode.toString() + ' for link ' + url);
-        await Fluttertoast.showToast(
-            msg: 'Error Code ' +
-                response.statusCode.toString() +
-                ' Please Retry',
-            toastLength: Toast.LENGTH_SHORT,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
         return null;
       }
     } catch (e) {
       _logger.error(tag, e.toString());
-      await Fluttertoast.showToast(msg: e.toString());
       return null;
     }
   }
 
-  Future<Map> post(String url, Map<String, dynamic> payLoad) async {
+  @override
+  Future<Map<String, dynamic>> post(
+      String url, Map<String, dynamic> payLoad) async {
     try {
       _logger.info(tag, 'Requesting Post to: ' + url);
       _logger.info(tag, 'POST: ' + jsonEncode(payLoad));
@@ -68,12 +61,13 @@ class HttpClient {
       }
     } catch (e) {
       _logger.error(tag, e.toString());
-      await Fluttertoast.showToast(msg: e.toString());
       return null;
     }
   }
 
-  Future<Map> put(String url, Map<String, dynamic> payLoad) async {
+  @override
+  Future<Map<String, dynamic>> put(
+      String url, Map<String, dynamic> payLoad) async {
     try {
       _logger.info(tag, 'Requesting Put to: ' + url);
       _logger.info(tag, 'PUT: ' + jsonEncode(payLoad));
@@ -88,7 +82,6 @@ class HttpClient {
       }
     } catch (e) {
       _logger.error(tag, e.toString());
-      await Fluttertoast.showToast(msg: e.toString());
       return null;
     }
   }

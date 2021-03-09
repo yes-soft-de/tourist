@@ -41,3 +41,16 @@ app.*.map.json
 
 # Exceptions to above rules.
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+
+key.properties
+key.jks
+google-services.jks
+
+keys.dart
+
+# Generated Stuff
+*.summary
+*.inject.dart
+
+# Sensitive Data
+google-services.json

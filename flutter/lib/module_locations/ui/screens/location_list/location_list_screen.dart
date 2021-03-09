@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
@@ -21,9 +23,11 @@ class _LocationListScreenState extends State<LocationListScreen> {
   List<LocationListItem> locationModelList;
   int currentStatus = LocationListBloc.STATUS_CODE_INIT;
 
+  StreamSubscription _stateSubscription;
+
   @override
   Widget build(BuildContext context) {
-    widget.bloc.stateStream.listen((event) {
+    _stateSubscription = widget.bloc.stateStream.listen((event) {
       currentStatus = event[LocationListBloc.KEY_STATUS];
       if (currentStatus == LocationListBloc.STATUS_CODE_LOAD_SUCCESS) {
         locationModelList = event[LocationListBloc.KEY_PAYLOAD];
@@ -110,5 +114,13 @@ class _LocationListScreenState extends State<LocationListScreen> {
         Text('Loading Data from Network')
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    if (_stateSubscription != null) {
+      _stateSubscription.cancel();
+    }
+    super.dispose();
   }
 }

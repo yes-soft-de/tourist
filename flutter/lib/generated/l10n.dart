@@ -9,6 +9,8 @@ import 'intl/messages_all.dart';
 // **************************************************************************
 
 // ignore_for_file: non_constant_identifier_names, lines_longer_than_80_chars
+// ignore_for_file: join_return_with_assignment, prefer_final_in_for_each
+// ignore_for_file: avoid_redundant_argument_values
 
 class S {
   S();
@@ -908,6 +910,336 @@ class S {
     return Intl.message(
       'Finished Orders',
       name: 'finishedOrders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Code`
+  String get confirmCode {
+    return Intl.message(
+      'Confirm Code',
+      name: 'confirmCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please input your phone number`
+  String get pleaseInputYourPhoneNumber {
+    return Intl.message(
+      'Please input your phone number',
+      name: 'pleaseInputYourPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resend Code`
+  String get resendCode {
+    return Intl.message(
+      'Resend Code',
+      name: 'resendCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register Success, Setup My Profile`
+  String get registerSuccessSetupMyProfile {
+    return Intl.message(
+      'Register Success, Setup My Profile',
+      name: 'registerSuccessSetupMyProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email Address is Required`
+  String get emailAddressIsRequired {
+    return Intl.message(
+      'Email Address is Required',
+      name: 'emailAddressIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password is too short`
+  String get passwordIsTooShort {
+    return Intl.message(
+      'Password is too short',
+      name: 'passwordIsTooShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name is required`
+  String get nameIsRequired {
+    return Intl.message(
+      'Name is required',
+      name: 'nameIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I have an account`
+  String get iHaveAnAccount {
+    return Intl.message(
+      'I have an account',
+      name: 'iHaveAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saudi Arabia`
+  String get saudiArabia {
+    return Intl.message(
+      'Saudi Arabia',
+      name: 'saudiArabia',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lebanon`
+  String get lebanon {
+    return Intl.message(
+      'Lebanon',
+      name: 'lebanon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Syria`
+  String get syria {
+    return Intl.message(
+      'Syria',
+      name: 'syria',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone Number`
+  String get phoneNumber {
+    return Intl.message(
+      'Phone Number',
+      name: 'phoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Me Code`
+  String get sendMeCode {
+    return Intl.message(
+      'Send Me Code',
+      name: 'sendMeCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register`
+  String get register {
+    return Intl.message(
+      'Register',
+      name: 'register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please complete the form`
+  String get pleaseCompleteTheForm {
+    return Intl.message(
+      'Please complete the form',
+      name: 'pleaseCompleteTheForm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Login Link`
+  String get sendLoginLink {
+    return Intl.message(
+      'Send Login Link',
+      name: 'sendLoginLink',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Check your Email!`
+  String get pleaseCheckYourEmail {
+    return Intl.message(
+      'Please Check your Email!',
+      name: 'pleaseCheckYourEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email/Phone`
+  String get emailphone {
+    return Intl.message(
+      'Email/Phone',
+      name: 'emailphone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please input an Email or a phone number`
+  String get pleaseInputAnEmailOrAPhoneNumber {
+    return Intl.message(
+      'Please input an Email or a phone number',
+      name: 'pleaseInputAnEmailOrAPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Requesting Profile From the Server`
+  String get requestingProfileFromTheServer {
+    return Intl.message(
+      'Requesting Profile From the Server',
+      name: 'requestingProfileFromTheServer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Name`
+  String get myName {
+    return Intl.message(
+      'My Name',
+      name: 'myName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About Me`
+  String get aboutMe {
+    return Intl.message(
+      'About Me',
+      name: 'aboutMe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Profile`
+  String get saveProfile {
+    return Intl.message(
+      'Save Profile',
+      name: 'saveProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saving`
+  String get saving {
+    return Intl.message(
+      'Saving',
+      name: 'saving',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Image from Gallery`
+  String get selectImageFromGallery {
+    return Intl.message(
+      'Select Image from Gallery',
+      name: 'selectImageFromGallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Capture My Image From Camera`
+  String get captureMyImageFromCamera {
+    return Intl.message(
+      'Capture My Image From Camera',
+      name: 'captureMyImageFromCamera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Capture My Image`
+  String get captureMyImage {
+    return Intl.message(
+      'Capture My Image',
+      name: 'captureMyImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload`
+  String get upload {
+    return Intl.message(
+      'Upload',
+      name: 'upload',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Uploading`
+  String get uploading {
+    return Intl.message(
+      'Uploading',
+      name: 'uploading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Upload Your Image`
+  String get pleaseUploadYourImage {
+    return Intl.message(
+      'Please Upload Your Image',
+      name: 'pleaseUploadYourImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter Your Name`
+  String get pleaseEnterYourName {
+    return Intl.message(
+      'Please Enter Your Name',
+      name: 'pleaseEnterYourName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message(
+      'Profile',
+      name: 'profile',
       desc: '',
       args: [],
     );

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
+import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
 import 'package:tourists/module_guide/ui/screen/guide_list/guide_list_screen.dart';
+import 'package:tourists/module_home/home_routes.dart';
 import 'package:tourists/module_home/ui/widget/bottom_navigation_bar/buttom_navigation_bar.dart';
 import 'package:tourists/module_locations/ui/screens/event_list/event_list.dart';
 import 'package:tourists/module_locations/ui/screens/location_carousel/location_carousel.dart';
 import 'package:tourists/module_locations/ui/screens/location_list/location_list_screen.dart';
-import 'package:tourists/utils/auth_guard/auth_gard.dart';
+import 'package:tourists/module_search/search_routes.dart';
 
 @provide
 class HomeScreen extends StatefulWidget {
@@ -14,10 +16,15 @@ class HomeScreen extends StatefulWidget {
   final EventListScreen _eventListScreen;
   final LocationListScreen _locationListScreen;
   final LocationCarouselScreen _locationCarouselScreen;
-  final AuthGuard _authGuard;
+  final AuthService _authService;
 
-  HomeScreen(this._locationListScreen, this._guideListScreen,
-      this._eventListScreen, this._authGuard, this._locationCarouselScreen);
+  HomeScreen(
+    this._locationListScreen,
+    this._guideListScreen,
+    this._eventListScreen,
+    this._authService,
+    this._locationCarouselScreen,
+  );
 
   @override
   State<StatefulWidget> createState() => HomeScreenState();
@@ -30,10 +37,8 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('In Main Page');
-
     if (loggedIn == null) {
-      widget._authGuard.isLoggedIn().then((value) {
+      widget._authService.isLoggedIn.then((value) {
         loggedIn = value;
         setState(() {});
       });
@@ -46,10 +51,6 @@ class HomeScreenState extends State<HomeScreen> {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: Text('سياح'),
-        ),
         body: Stack(
           children: <Widget>[
             Positioned(
@@ -60,15 +61,28 @@ class HomeScreenState extends State<HomeScreen> {
               child: PageView(
                 controller: _pageController,
                 children: <Widget>[
-                  ListView(
-                    children: <Widget>[
-                      widget._locationCarouselScreen,
-                      widget._locationListScreen,
-                    ],
+                  Scaffold(
+                    appBar: AppBar(
+                      backgroundColor: Colors.white,
+                      centerTitle: true,
+                      title: Text('سياح'),
+                      actions: [
+                        IconButton(
+                          icon: Icon(Icons.search),
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(SearchRoutes.ROUTE_SEARCH);
+                          },
+                        ),
+                      ],
+                    ),
+                    body: ListView(
+                      children: <Widget>[
+                        widget._locationCarouselScreen,
+                        widget._locationListScreen,
+                      ],
+                    ),
                   ),
-                  ListView(
-                    children: <Widget>[widget._guideListScreen],
-                  ),
+                  widget._guideListScreen,
                   widget._eventListScreen
                 ],
                 onPageChanged: (pos) {
@@ -86,6 +100,12 @@ class HomeScreenState extends State<HomeScreen> {
                 isLoggedIn: loggedIn ?? false,
                 onLocationChanged: (int position) {
                   _changePosition(position);
+                },
+                onLogout: () {
+                  widget._authService.logout().then((value) {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        HomeRoutes.home, (route) => false);
+                  });
                 },
               ),
             )

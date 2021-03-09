@@ -1,33 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/abstracts/module/yes_module.dart';
-import 'package:tourists/module_authorization/login_selector_module/ui/screens/account_type_selector/login_type_selector.dart';
 import 'package:tourists/module_orders/orders_routes.dart';
-import 'package:tourists/utils/auth_guard/auth_gard.dart';
 
 import 'ui/screen/orders_list/order_list_screen.dart';
 
 @provide
 class OrderModule extends YesModule {
   final OrdersListScreen _ordersListScreen;
-  final LoginTypeSelectorScreen _loginTypeSelectorScreen;
-  final AuthGuard _authGuard;
 
-  OrderModule(
-      this._ordersListScreen, this._loginTypeSelectorScreen, this._authGuard);
+  OrderModule(this._ordersListScreen);
 
   @override
   Map<String, WidgetBuilder> getRoutes() {
     return {
-      OrdersRoutes.ordersList: (context) => FutureBuilder(
-            future: _authGuard.isLoggedIn(),
-            builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-              if (snapshot.hasData) {
-                if (snapshot.data) return _ordersListScreen;
-              }
-              return _loginTypeSelectorScreen;
-            },
-          )
+      OrdersRoutes.ordersList: (context) => _ordersListScreen
     };
   }
 }

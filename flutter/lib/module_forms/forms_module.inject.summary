@@ -25,20 +25,6 @@
                 "qualifier": null
               },
               "isProvider": false
-            },
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/utils/auth_guard/auth_gard.dart#AuthGuard",
-                "qualifier": null
-              },
-              "isProvider": false
-            },
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/module_authorization/user_authorization_module/ui/screens/login/login.dart#LoginScreen",
-                "qualifier": null
-              },
-              "isProvider": false
             }
           ]
         }

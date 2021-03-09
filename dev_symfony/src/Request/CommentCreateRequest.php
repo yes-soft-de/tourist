@@ -18,6 +18,24 @@ class CommentCreateRequest
 
     public $guid;
 
+    public $event;
+
+    /**
+     * @return mixed
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * @param mixed $event
+     */
+    public function setEvent($event): void
+    {
+        $this->event = $event;
+    }
+
     /**
      * @param mixed $region
      */

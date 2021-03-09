@@ -8,6 +8,8 @@ import 'package:tourists/module_locations/bloc/location_list/location_list_bloc.
 import 'package:tourists/module_shared/ui/widgets/carousel/carousel.dart';
 import 'package:tourists/module_shared/ui/widgets/carousel_card/carousel_card.dart';
 
+import '../../../location_routes.dart';
+
 @provide
 class LocationCarouselScreen extends StatefulWidget {
   final LocationListBloc bloc;
@@ -53,12 +55,23 @@ class _LocationCarouselScreenState extends State<LocationCarouselScreen> {
     List<Widget> locationWidgetList = [];
 
     locationList.forEach((location) {
-      locationWidgetList.add(CarouselCard(
-        title: location.name,
-        description: location.description,
-        image: location.path[0].path,
-        commentsNumber: 2,
-        stars: 2,
+      locationWidgetList.add(
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              LocationRoutes.locationDetails,
+              arguments: location.id.toString(),
+            );
+          },
+        child: CarouselCard(
+          title: location.name,
+          description: location.description,
+          image: location.path[0].path,
+          commentsNumber:  location.commentNumber != null
+              ? int.parse(location.commentNumber)
+              : 0,
+          stars: location.ratingAverage ?? 5,
+        ),
       ));
     });
 

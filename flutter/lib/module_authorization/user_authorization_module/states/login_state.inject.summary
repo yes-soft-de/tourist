@@ -1,8 +1,0 @@
-{
-  "asset": "asset:tourists/lib/module_authorization/user_authorization_module/states/login_state.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": []
-  }
-}

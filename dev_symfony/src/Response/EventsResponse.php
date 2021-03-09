@@ -23,4 +23,18 @@ class EventsResponse
     public $description;
 
     public $images = [];
+
+    public $commentNumber;
+
+    public $comments = [];
+
+    /**
+     * @param array $comments
+     */
+    public function setComments(array $comments): void
+    {
+        $this->comments = $comments;
+    }
+
+
 }

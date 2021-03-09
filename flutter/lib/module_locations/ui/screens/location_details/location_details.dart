@@ -10,6 +10,7 @@ import 'package:tourists/module_guide/nav_arguments/request_guide/request_guide_
 import 'package:tourists/module_guide/ui/widget/guide_list_item/guide_list_item.dart';
 import 'package:tourists/module_locations/bloc/location_details/location_details_bloc.dart';
 import 'package:tourists/module_locations/model/location_details/location_details.dart';
+import 'package:tourists/module_locations/ui/widgets/guides_list/guides_list.dart';
 import 'package:tourists/module_shared/ui/widgets/carousel/carousel.dart';
 import 'package:tourists/module_shared/ui/widgets/request_guide_button/request_guide_button.dart';
 import 'package:tourists/utils/auth_guard/auth_gard.dart';
@@ -121,6 +122,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
 
     List<Widget> pageLayout = [
       AppBar(
+        centerTitle: true,
         title: Text(
           _locationDetails.name,
           style: TextStyle(
@@ -133,7 +135,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Text(_locationDetails.description),
       ),
-      Padding(
+      if(_guidesList.isNotEmpty)Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
           S.of(context).guides,
@@ -143,8 +145,11 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
       )
     ];
 
-    pageLayout.addAll(getGuidesList());
+//    pageLayout.addAll(getGuidesList());
 
+    pageLayout.add(
+        GuidesListWidget(_guidesList,_locationDetails.id)
+    );
     pageLayout.add(NewCommentWidget(
       active: canSendComments,
       onCommentAdded: (String msg) {
@@ -153,6 +158,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
     ));
 
     pageLayout.add(CommentListWidget(_locationDetails.comments));
+    pageLayout.add(SizedBox(height: 80,));
 
     return Scaffold(
       body: Stack(
@@ -168,7 +174,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
                   print(lastLocation > t.metrics.pixels ? 'up' : 'down');
                   scrollPosition = lastLocation > t.metrics.pixels ? 1 : -1;
                   lastLocation = t.metrics.pixels;
-                  setState(() {});
+//                  setState(() {});
                 }
                 return true;
               },
@@ -272,7 +278,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
       ));
     }
 
-    return guidesList;
+    return (_guidesList.isNotEmpty)?guidesList:[];
   }
 
   void createComment(String newComment) {

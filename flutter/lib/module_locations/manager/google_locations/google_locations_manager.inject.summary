@@ -18,7 +18,15 @@
           },
           "singleton": false,
           "asynchronous": false,
-          "dependencies": []
+          "dependencies": [
+            {
+              "lookupKey": {
+                "root": "asset:tourists/lib/module_locations/repository/google_location/google_location_repository.dart#GoogleLocationRepository",
+                "qualifier": null
+              },
+              "isProvider": false
+            }
+          ]
         }
       }
     ]

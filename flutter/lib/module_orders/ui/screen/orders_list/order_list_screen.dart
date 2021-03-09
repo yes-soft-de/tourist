@@ -57,10 +57,12 @@ class _OrderListScreenState extends State<OrdersListScreen> {
   Widget _getSuccessUI() {
     List<Widget> pageLayout = [];
     pageLayout.add(Container(
-      height: 36,
+      height: 20,
     ));
     // region Header
     pageLayout.add(_getFilterBar());
+
+    pageLayout.add(SizedBox(height: 20,));
     // endregion
 
     ordersList.forEach((element) {
@@ -87,6 +89,17 @@ class _OrderListScreenState extends State<OrdersListScreen> {
     ));
 
     return Scaffold(
+        appBar: AppBar(
+
+          leading: IconButton(
+            onPressed: (){
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back,color: Colors.white,),
+          ),
+          title: Text(''),
+
+        ),
         body: WillPopScope(
       onWillPop: () {
         Navigator.pop(context);
@@ -136,13 +149,25 @@ class _OrderListScreenState extends State<OrdersListScreen> {
                 setState(() {});
               },
               child: Container(
+                height: 50, 
+                  decoration: BoxDecoration(
+                    border: Border(
+                      right: BorderSide(
+                        color: Colors.white,
+                        width: 1
+                      )
+                    ),
+                    color:  activePosition == 0
+                  ? Colors.greenAccent
+                      : Colors.black12
+                  ),
                   alignment: Alignment.center,
                   child: Text(
                     S.of(context).sentPending,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: activePosition == 0
-                            ? Colors.greenAccent
+                            ? Colors.white
                             : Colors.black),
                   )),
             )),
@@ -155,13 +180,25 @@ class _OrderListScreenState extends State<OrdersListScreen> {
                 setState(() {});
               },
               child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                      border: Border(
+                          right: BorderSide(
+                              color: Colors.white,
+                              width: 1
+                          )
+                      ),
+                      color:  activePosition == 1
+                          ? Colors.greenAccent
+                          : Colors.black12
+                  ),
                   alignment: Alignment.center,
                   child: Text(
                     S.of(context).pendingPayment,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: activePosition == 1
-                            ? Colors.greenAccent
+                            ? Colors.white
                             : Colors.black),
                   )),
             )),
@@ -174,13 +211,25 @@ class _OrderListScreenState extends State<OrdersListScreen> {
                 setState(() {});
               },
               child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                      border: Border(
+                          right: BorderSide(
+                              color: Colors.white,
+                              width: 1
+                          )
+                      ),
+                      color:  activePosition == 2
+                          ? Colors.greenAccent
+                          : Colors.black12
+                  ),
                   alignment: Alignment.center,
                   child: Text(
                     S.of(context).payedOnGoing,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: activePosition == 2
-                            ? Colors.greenAccent
+                            ? Colors.white
                             : Colors.black),
                   )),
             )),
@@ -193,13 +242,25 @@ class _OrderListScreenState extends State<OrdersListScreen> {
                 setState(() {});
               },
               child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                      border: Border(
+                          right: BorderSide(
+                              color: Colors.white,
+                              width: 1
+                          )
+                      ),
+                      color:  activePosition == 3
+                          ? Colors.greenAccent
+                          : Colors.black12
+                  ),
                   alignment: Alignment.center,
                   child: Text(
                     S.of(context).finishedOrders,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: activePosition == 3
-                            ? Colors.greenAccent
+                            ? Colors.white
                             : Colors.black),
                   )),
             )),
@@ -229,7 +290,9 @@ class _OrderListScreenState extends State<OrdersListScreen> {
     return ListView(
       children: ordersWidgetList.isNotEmpty
           ? ordersWidgetList
-          : <Widget>[Center(child: Text('Empty List'))],
+          : <Widget>[Container(
+          height: 300,
+          child: Center(child: Text('Empty List')))],
     );
   }
 
@@ -261,7 +324,9 @@ class _OrderListScreenState extends State<OrdersListScreen> {
     return ListView(
       children: ordersWidgetList.isNotEmpty
           ? ordersWidgetList
-          : <Widget>[Center(child: Text('Empty List'))],
+          :<Widget>[Container(
+          height: 300,
+          child: Center(child: Text('Empty List')))],
     );
   }
 
@@ -287,7 +352,9 @@ class _OrderListScreenState extends State<OrdersListScreen> {
     return ListView(
       children: ordersWidgetList.isNotEmpty
           ? ordersWidgetList
-          : <Widget>[Center(child: Text('Empty List'))],
+          :<Widget>[Container(
+          height: 300,
+          child: Center(child: Text('Empty List')))],
     );
   }
 
@@ -313,7 +380,9 @@ class _OrderListScreenState extends State<OrdersListScreen> {
     return ListView(
       children: ordersWidgetList.isNotEmpty
           ? ordersWidgetList
-          : <Widget>[Center(child: Text('Empty List'))],
+          : <Widget>[Container(
+          height: 300,
+          child: Center(child: Text('Empty List')))],
     );
   }
 }

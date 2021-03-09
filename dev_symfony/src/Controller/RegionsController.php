@@ -8,8 +8,10 @@ use App\Service\RegionsService;
 use stdClass;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RegionsController extends BaseController
 {
@@ -17,13 +19,15 @@ class RegionsController extends BaseController
     private $serializer;
     private $regionsService;
     private $autoMapping;
+    private $validator;
 
-    public function __construct(SerializerInterface $serializer, AutoMapping $autoMapping, RegionsService $regionsService)
+    public function __construct(ValidatorInterface $validator, SerializerInterface $serializer, AutoMapping $autoMapping, RegionsService $regionsService)
     {
         parent::__construct($serializer);
         $this->serializer = $serializer;
         $this->regionsService = $regionsService;
         $this->autoMapping = $autoMapping;
+        $this->validator = $validator;
     }
 
     /**
@@ -46,6 +50,13 @@ class RegionsController extends BaseController
         $data = json_decode($request->getContent(), true);
 
         $request = $this->autoMapping->map(stdClass::class,RegionCreateRequest::class,(object)$data);
+
+        $violations = $this->validator->validate($request);
+        if (\count($violations) > 0) {
+            $violationsString = (string) $violations;
+
+            return new JsonResponse($violationsString, Response::HTTP_OK);
+        }
 
         $response = $this->regionsService->regionCreate($request);
 

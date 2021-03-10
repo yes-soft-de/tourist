@@ -2,6 +2,9 @@
     "aws/aws-sdk-php": {
         "version": "3.147.5"
     },
+    "behat/transliterator": {
+        "version": "v1.3.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -84,6 +87,9 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.3"
     },
+    "gedmo/doctrine-extensions": {
+        "version": "v3.0.3"
+    },
     "guzzlehttp/guzzle": {
         "version": "7.0.1"
     },
@@ -92,6 +98,9 @@
     },
     "guzzlehttp/psr7": {
         "version": "1.6.1"
+    },
+    "imagine/imagine": {
+        "version": "1.2.4"
     },
     "laminas/laminas-code": {
         "version": "4.0.0"
@@ -127,6 +136,19 @@
         },
         "files": [
             "./config/packages/lexik_jwt_authentication.yaml"
+        ]
+    },
+    "liip/imagine-bundle": {
+        "version": "1.8",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.8",
+            "ref": "5a5bdc2d0e2533ed6935d5ae562f2b318a8fc1ee"
+        },
+        "files": [
+            "./config/packages/liip_imagine.yaml",
+            "./config/routes/liip_imagine.yaml"
         ]
     },
     "mark-gerarts/auto-mapper-plus": {
@@ -318,6 +340,9 @@
     "symfony/mime": {
         "version": "v5.0.5"
     },
+    "symfony/options-resolver": {
+        "version": "v5.0.11"
+    },
     "symfony/orm-pack": {
         "version": "v1.0.8"
     },
@@ -350,6 +375,9 @@
     },
     "symfony/polyfill-php80": {
         "version": "v1.18.1"
+    },
+    "symfony/process": {
+        "version": "v5.0.11"
     },
     "symfony/profiler-pack": {
         "version": "v1.0.4"

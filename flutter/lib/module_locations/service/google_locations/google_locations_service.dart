@@ -1,5 +1,6 @@
 import 'package:inject/inject.dart';
 import 'package:tourists/module_locations/manager/google_locations/google_locations_manager.dart';
+import 'package:tourists/module_locations/response/google_locations/google_location_details_response.dart';
 import 'package:tourists/module_locations/service/prefs/location_prefs.dart';
 
 @provide
@@ -24,5 +25,16 @@ class GoogleLocationsService {
     });
 
     return predictions;
+  }
+
+  Future<GoogleLocationDetailsResponse> getLocationDetails(String locationId) async {
+    var mapsKey = await _preferencesHelper.getKey();
+    if (mapsKey == null) {
+      var mapsApiKey = await this._manager.getKey();
+      await _preferencesHelper.setKey(mapsApiKey);
+      mapsKey = mapsApiKey;
+    }
+
+    return _manager.getPlaceDetails(mapsKey, locationId);
   }
 }

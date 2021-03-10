@@ -6,7 +6,9 @@ import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart
 import 'package:tourists/module_guide/response/guide_response/guides_response.dart';
 import 'package:tourists/module_locations/manager/location_details/location_details.dart';
 import 'package:tourists/module_locations/model/location_details/location_details.dart';
+import 'package:tourists/module_locations/request/create_location_request.dart';
 import 'package:tourists/module_locations/response/location_details/location_response.dart';
+import 'package:tourists/module_locations/service/google_locations/google_locations_service.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 
 @provide
@@ -14,29 +16,70 @@ class LocationDetailsService {
   final LocationDetailsManager _locationManager;
   final GuidesManager _guidesManager;
   final RatingManager _ratingManager;
+  final GoogleLocationsService _googleLocationsService;
   final SharedPreferencesHelper _preferencesHelper;
 
-  LocationDetailsService(this._locationManager, this._guidesManager,
-      this._ratingManager, this._preferencesHelper);
+  LocationDetailsService(
+    this._locationManager,
+    this._guidesManager,
+    this._ratingManager,
+    this._preferencesHelper,
+    this._googleLocationsService,
+  );
 
   Future<LocationDetailsModel> getLocationDetails(String locationId) async {
-    LocationDetailsResponse response =
+    // Check out DB
+    LocationDetailsResponse apiResponse =
         await _locationManager.getLocationDetails(locationId);
 
-    if (response == null) {
+    var locationModel = apiResponse?.locationDetails;
+
+    locationModel ??= await createLocation(locationId);
+
+    if (locationModel == null) {
+      // There is a problem in the request. it should be validated and reported
+      // on the Dio Level
       return null;
     }
 
-    return response.locationDetails;
+    return locationModel;
   }
 
   Future<List<GuideListItemModel>> getGuidesByLocationId(
       String locationId) async {
     GuidesResponse guidesResponse =
         await this._guidesManager.getGuidesByLocationId(locationId);
-    List<GuideListItemModel> guidesList = guidesResponse.data;
+    List<GuideListItemModel> guidesList = guidesResponse?.data;
+    guidesList ??= [];
 
     return guidesList;
+  }
+
+  Future<LocationDetailsModel> createLocation(String locationId) async {
+    // First request the details from google
+    var locationDetails =
+        await _googleLocationsService.getLocationDetails(locationId);
+
+    var request = CreateLocationRequest();
+    request.name = locationDetails.result.name;
+    if (locationDetails.result.reviews != null) {
+      if (locationDetails.result.reviews.isNotEmpty) {
+        request.description = locationDetails.result.reviews[0].text;
+      }
+    }
+    request.description ??= request.name;
+    request.placeId = locationId;
+    request.path = 'asd';
+    if (locationDetails.result.geometry != null) {
+      request.location = {
+        'lat': locationDetails.result.geometry.location.lat,
+        'lng': locationDetails.result.geometry.location.lng,
+      };
+    }
+
+    var response = await _locationManager.createLocationDetails(request);
+    if (response == null) return null;
+    return response.locationDetails;
   }
 
   Future<dynamic> createRate(int rate, String locationId) async {

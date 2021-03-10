@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
+import 'package:tourists/generated/l10n.dart';
+import 'package:tourists/module_locations/location_routes.dart';
 import 'package:tourists/module_search/bloc/search_bloc/search_bloc.dart';
 
 @provide
@@ -33,25 +35,25 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: _searchController,
-                onChanged: (query) {
-                  if (query.isNotEmpty) {
-                    showPredictions = true;
-                    widget.bloc.getPredictions(query);
-                  }
-                },
-              ),
-            ),
-            showPredictions ? buildPredictionList(predictions) : Container(),
-            // TODO: Show Filtered Locations based on search location
-          ],
+      appBar: AppBar(
+        title: TextFormField(
+          controller: _searchController,
+          decoration: InputDecoration(
+            hintText: S.of(context).search,
+            labelText: S.of(context).search,
+          ),
+          onChanged: (query) {
+            if (query.isNotEmpty) {
+              showPredictions = true;
+              widget.bloc.getPredictions(query);
+            }
+          },
         ),
+      ),
+      body: Column(
+        children: [
+          buildPredictionList(predictions),
+        ],
       ),
     );
   }
@@ -60,21 +62,20 @@ class _SearchScreenState extends State<SearchScreen> {
     var tiles = <Widget>[];
 
     predictions.forEach((key, value) {
-      tiles.add(GestureDetector(
-        onTap: () {
-          showPredictions = false;
-          _searchController.text = key;
-          if (mounted) setState(() {});
-        },
-        child: ListTile(
-          title: Text(' ' + key),
+      tiles.add(Card(
+        child: GestureDetector(
+          onTap: () {
+            Navigator.of(context)
+                .pushNamed(LocationRoutes.locationDetails, arguments: value);
+            if (mounted) setState(() {});
+          },
+          child: ListTile(
+            title: Text(' ' + key),
+            trailing: Icon(Icons.navigate_next),
+          ),
         ),
       ));
     });
-
-    if (tiles.length > 3) {
-      tiles = tiles.sublist(0, 3);
-    }
 
     return Flex(
       direction: Axis.vertical,

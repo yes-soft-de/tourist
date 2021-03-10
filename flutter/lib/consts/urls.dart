@@ -12,6 +12,7 @@ class Urls {
   static final getTouristProfileAPI = baseAPI + 'tourist';
   static final locationList = baseAPI + 'regions';
   static final locationDetails = baseAPI + 'region/';
+  static final createLocationDetails = baseAPI + 'region';
   static final guideList = baseAPI + 'guides';
   static final guidesByRegion = baseAPI + 'guid';
   static final orderGuide = baseAPI + 'order';
@@ -24,6 +25,7 @@ class Urls {
   static final rate = baseAPI + 'rating';
   static final mapHelper = baseAPI + 'maphelper';
   static final googleAutoComplete = 'https://maps.googleapis.com/maps/api/place/autocomplete/json';
+  static final googlePlaceDetails = 'https://maps.googleapis.com/maps/api/place/details/json';
 
   static final CREATE_TOKEN_API = baseAPI + 'login_check';
 }

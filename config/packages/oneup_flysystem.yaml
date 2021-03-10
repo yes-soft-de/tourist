@@ -1,13 +1,23 @@
 # Read the documentation: https://github.com/1up-lab/OneupFlysystemBundle/tree/master/Resources/doc/index.md
 oneup_flysystem:
     adapters:
-        default_adapter:
+        default_adapterS3:
             awss3v3:
                 client: Aws\S3\S3Client
                 bucket: '%env(S3_BUCKET)%'
                 prefix: ~
 
+        default_adapter:
+            local:
+                directory: '%kernel.project_dir%/../%upload_dir_name%/'
+
+        resolve_adapter:
+            local:
+                directory: '%kernel.project_dir%/../%upload_dir_name%/%image_folder%/%original_image%'
+
     filesystems:
         default_filesystem:
             adapter: default_adapter
-            alias: League\Flysystem\Filesystem
+            #alias: League\Flysystem\Filesystem
+        resolve_fileSystem:
+            adapter: resolve_adapter

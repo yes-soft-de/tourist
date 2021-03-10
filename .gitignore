@@ -81,3 +81,6 @@ fabric.properties
 !.gitignore
 !.gitkeep
 config/jwt
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###

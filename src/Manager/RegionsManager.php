@@ -43,4 +43,9 @@ class RegionsManager
     {
         return $this->regionsEntityRepository->getRegion($id);
     }
+
+    public function getRegionByPlaceID($placeId)
+    {
+        return $this->regionsEntityRepository->getRegionByPlaceID($placeId);
+    }
 }

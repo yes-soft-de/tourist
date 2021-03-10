@@ -22,6 +22,8 @@ class RegionResponse
 
     public $guides = [];
 
+    public $placeId;
+
     /**
      * @param array $comments
      */

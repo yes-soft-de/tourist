@@ -149,6 +149,58 @@ class RegionsService
 
         return $response;
     }
+    public function getRegionByPlaceID($placeId)
+    {
+        //get region
+        $result = $this->regionsManager->getRegionByPlaceID($placeId);
+        $response = $this->autoMapping->map('array', RegionResponse::class, $result);
+
+        //get comments
+        $commentsResponse= [];
+        $comments = $this->commentsManager->getCommentsByID($result['id']);
+
+        foreach ($comments as $comment)
+        {
+            $commentsResponse[] = $this->autoMapping->map('array', GetCommentsByIdResponse::class, $comment);
+        }
+
+        //get images
+        $imagesResponse = [];
+        $images = $this->getRegionImages($result['id']);
+        foreach ($images as $image)
+        {
+            $imagesResponse[] = $this->autoMapping->map('array', ImagesPathsResponse::class, $image);
+        }
+
+        //get rating
+        $ratingRegionCalculate = $this->ratingRegionCalculate($result['id']);
+        $rate = $ratingRegionCalculate[1];
+
+        //get guides region
+        $guidesResponse = [];
+        $guides = $this->getGuidByRegion($result['id']);
+
+        foreach ($guides as $guid)
+        {
+            //rating
+            $ratingGuidCalculate = $this->ratingManager->getGuidRatingByID($guid['user']);
+            $guidRate = $ratingGuidCalculate[1];
+            $guid['rating'] = $guidRate;
+            //
+            $guidesResponse[] = $this->autoMapping->map('array', GuidByRegionResponse::class, $guid);
+        }
+
+        //add comments to response
+        $response->setComments($commentsResponse);
+        //add images to response
+        $response->setRegionImage($imagesResponse);
+        //add rating to response
+        $response->setRatingAverage($rate);
+        //add guides to response
+        $response->setGuides($guidesResponse);
+
+        return $response;
+    }
 
     public function commentsCount($id)
     {

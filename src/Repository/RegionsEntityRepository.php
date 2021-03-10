@@ -46,4 +46,17 @@ class RegionsEntityRepository extends ServiceEntityRepository
             //->getArrayResult();
             ->getOneOrNullResult();
     }
+
+    public function getRegionByPlaceID($placeId)
+    {
+        return $this->createQueryBuilder('regions')
+
+            ->select('regions.id', 'regions.name', 'regions.description', 'regions.location', 'regions.location', 'regions.placeId')
+
+            ->andWhere('regions.placeId=:placeId')
+            ->setParameter('placeId',$placeId)
+
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

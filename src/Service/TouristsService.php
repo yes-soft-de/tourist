@@ -47,10 +47,11 @@ class TouristsService
     public function getTouristByUserID($userId)
     {
         $item = $this->touristsManager->getTouristByUserID($userId);
-     
-        $item->imageURL = $item->getImage();
-        $item->setImage($this->params.$item->getImage());
-        $item->baseURL = $this->params;
+        if($item){
+            $item->imageURL = $item->getImage();
+            $item->setImage($this->params.$item->getImage());
+            $item->baseURL = $this->params;
+         }
         
         return $this->autoMapping->map(User::class, TouristUpdateResponse::class, $item);
     }

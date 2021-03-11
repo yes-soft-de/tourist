@@ -76,11 +76,12 @@ class EventService
         //images
         $eventImages = $this->imageManager->getEventImage($id);
         $images = $eventImages;
-        // $images['image'] = $images;
+        if ($eventImages) {
         $images['imageURL'] = $images[0]['path'];
         $images['image'] = $this->params.$images[0]['path'];
         $images['baseURL'] = $this->params;
         $response->images = $images;
+        }
         //get comments
         $commentsResponse= [];
         $comments = $this->commentsManager->getEventCommentsByID($id);
@@ -89,10 +90,10 @@ class EventService
         {
             $commentsResponse[] = $this->autoMapping->map('array', GetCommentsByIdResponse::class, $comment);
         }
-
+        if ($eventImages) {
         //add comments to response
         $response->setComments($commentsResponse);
-
+        }
         return $response;
     }
 

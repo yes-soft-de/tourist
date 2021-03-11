@@ -1,0 +1,171 @@
+<div class="w-100 mb-4" *ngIf="allStatistics">
+  <div class="container">
+    <!--Start Home States Page-->
+    <div class="home-stat">
+      <h1 class="my-4 text-center">{{'dashboard-page' | translate}}</h1>
+      <div class="row">
+        <div class="col-md-6 col-lg-4">
+          <div class="stat mb-3 st_categories">
+            <i class="fa fa-car fa-fw fa-5x"></i>
+            <div>
+              <h6>{{'total-cars' | translate }}</h6>
+              <span><a routerLink="/cars">23</a></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="stat mb-3 st_animes">
+            <i class="fa fa-tv fa-fw fa-5x"></i>
+            <div>
+              <h6>{{'total-devices' | translate }}</h6>
+              <span><a routerLink="/devices">25</a></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="stat mb-3 st_episode_coming_soon">
+            <i class="fa fa-building fa-fw fa-5x"></i>
+            <div>
+              <h6>{{'total-real-estate' | translate }}</h6>
+              <span><a routerLink="/real-estate">45</a></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mx-auto">
+          <div class="stat mb-3 st_clients">
+            <i class="fa fa-files-o fa-fw fa-5x"></i>
+            <div>
+              <h6>{{'total-reports' | translate }}</h6>
+              <span><a routerLink="/reports">3</a></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mx-auto">
+          <div class="stat mb-3 st_pending">
+            <i class="fa fa-comments fa-fw fa-5x"></i>
+            <div>
+              <h6>{{'total-chats' | translate }}</h6>
+              <span><a routerLink="/chats">10</a></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!--Start Latest Section-->
+    <div class="latest mt-5">
+      <div class="row">
+
+        <div class="col-12 col-md-6 mb-3">
+          <div class="card bg-gradient-x-dark-blue text-white border-0">
+            <div class="card-content">
+              <div class="card-body">
+                <div class="weather-details text-center">
+                  <span class="block white darken-1">{{'chats-number' | translate}}</span>
+<!--                  <span class="font-large-2 block white darken-4">-5&deg;</span>-->
+<!--                  <span class="font-medium-4 text-bold-500 white darken-1">London, UK</span>-->
+                </div>
+              </div>
+              <div class="card-footer bg-gradient-x-dark-blue border-0">
+                <div class="row">
+                  <div title="{{'chats-with-lawyer' | translate}}" class="col-6 text-center display-table-cell white">
+                    <i class="fa fa-graduation-cap fa-fw mx-1"></i> <span>15</span>
+                  </div>
+                  <div title="{{'chats-with-users' | translate}}" class="col-6 text-center display-table-cell white">
+                    <i class="fa fa-users fa-fw mx-1"></i> <span>5</span>
+                  </div>
+                </div>
+              </div>
+            </div><!--.card-content-->
+          </div><!--.card-->
+        </div><!--.col-12-->
+
+        <div class="col-12 col-md-6 mb-3">
+          <div class="card bg-gradient-x-info text-white border-0">
+            <div class="card-content">
+              <div class="card-body">
+                <div class="weather-details text-center">
+                  <span class="block white darken-1">{{'reactions' | translate}}</span>
+                  <!--                  <span class="font-large-2 block white darken-4">-5&deg;</span>-->
+                  <!--                  <span class="font-medium-4 text-bold-500 white darken-1">London, UK</span>-->
+                </div>
+              </div>
+              <div class="card-footer bg-gradient-x-info border-0">
+                <div class="row">
+                  <div title="{{'car-reaction-number' | translate}}" class="col-4 text-center display-table-cell white">
+                    <i class="fa fa-car fa-fw mx-1"></i> <span>5</span>
+                  </div>
+                  <div title="{{'device-reaction-number' | translate}}" class="col-4 text-center display-table-cell white">
+                    <i class="fa fa-tv fa-fw mx-1"></i> <span>20</span>
+                  </div>
+                  <div title="{{'real-estate-reaction-number' | translate}}" class="col-4 text-center display-table-cell white">
+                    <i class="fa fa-building fa-fw mx-1"></i> <span>30</span>
+                  </div>
+                </div>
+              </div>
+            </div><!--.card-content-->
+          </div><!--.card-->
+        </div><!--.col-12-->
+
+        <div class="col-12 col-md-6">
+          <!--Start Latest ArtistAdmin-->
+          <div class="late mb-3">
+            <div class="card">
+              <div class="card-header">
+                {{'latest' | translate }} {{latestCarsNumber}} {{'cars' | translate }}
+              </div>
+              <div class="card-body" *ngIf="allCars?.length != 0">
+                <ng-container *ngFor="let car of allCars; let i = index">
+                  <ng-container *ngIf="i < latestCarsNumber">
+                    <div class="late_info">
+                      {{car?.company.slice(0, 20)}}
+                      <a routerLink="/cars/{{car?.id}}" class="btn btn-success btn-sm py-0 float-right">{{'view' | translate}}</a>
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </div>
+              <div class="card-body" *ngIf="allCars?.length == 0">
+                <div class="late_info">
+                  {{'car-not-found' | translate}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Start Latest Painting-->
+        <div class="col-12 col-md-6">
+          <div class="late mb-3">
+            <div class="card">
+              <div class="card-header">
+                {{'latest' | translate }} {{latestDevicesNumber}} {{'devices' | translate }}
+              </div>
+              <div class="card-body" *ngIf="allDevices?.length != 0">
+                <ng-container *ngFor="let device of allDevices; let i = index">
+                  <ng-container *ngIf="i < latestDevicesNumber">
+                    <div class="late_info">
+                      {{(device?.brand).slice(0, 20)}}
+                      <a routerLink="/devices/{{device?.id}}"
+                         class="btn btn-success btn-sm py-0 float-right">{{'view' | translate}}</a>
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </div>
+              <div class="card-body" *ngIf="allDevices?.length == 0">
+                <div class="late_info">
+                  {{'device-not-found' | translate}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="allStatistics == null">
+  <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</div>
+
+
+<app-footer></app-footer>

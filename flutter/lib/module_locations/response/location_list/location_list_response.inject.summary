@@ -1,8 +1,0 @@
-{
-  "asset": "asset:tourists/lib/module_locations/response/location_list/location_list_response.dart",
-  "summary": {
-    "injector": [],
-    "module": [],
-    "injectable": []
-  }
-}

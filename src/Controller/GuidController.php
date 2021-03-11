@@ -114,7 +114,7 @@ class GuidController extends BaseController
     }
 
     /**
-     * @Route("/guide/{userId}", name="guideByUserId", methods={"GET"})
+     * @Route("/guidebyuseriD/{userId}", name="guideByUserId", methods={"GET"})
      * @return JsonResponse
      */
     

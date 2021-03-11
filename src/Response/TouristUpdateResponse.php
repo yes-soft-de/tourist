@@ -31,6 +31,9 @@ class TouristUpdateResponse
     public $phoneNumber;
 
     public $image;
+    public $imageURL;
+    
+    public $baseURL;
 
     public $createDate;
 }

@@ -13,6 +13,7 @@ use App\Request\EventCreateRequest;
 use App\Response\EventCreateResponse;
 use App\Response\EventsResponse;
 use App\Response\GetCommentsByIdResponse;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class EventService
 {
@@ -21,13 +22,15 @@ class EventService
     private $eventManager;
     private $imageManager;
     private $commentsManager;
+    private $params;
 
-    public function __construct(AutoMapping $autoMapping, EventManager $eventManager, ImageManager $imageManager, CommentsManager $commentsManager)
+    public function __construct(AutoMapping $autoMapping, EventManager $eventManager, ImageManager $imageManager, CommentsManager $commentsManager, ParameterBagInterface $params)
     {
         $this->autoMapping = $autoMapping;
         $this->eventManager = $eventManager;
         $this->imageManager = $imageManager;
         $this->commentsManager = $commentsManager;
+        $this->params = $params->get('upload_base_url') . '/';
     }
 
     public function eventCreate(EventCreateRequest $request)
@@ -49,7 +52,9 @@ class EventService
             //images
             $eventImages = $this->imageManager->getEventImage($event['id']);
             $images = $eventImages;
-            $event['images'] = $images;
+            $event['imagesURL'] = $images[0]['path'];
+            $event['images'] = $this->params.$images[0]['path'];
+            $event['baseURL'] = $this->params;
             //
 
             //count comment for each event
@@ -71,8 +76,11 @@ class EventService
         //images
         $eventImages = $this->imageManager->getEventImage($id);
         $images = $eventImages;
+        // $images['image'] = $images;
+        $images['imageURL'] = $images[0]['path'];
+        $images['image'] = $this->params.$images[0]['path'];
+        $images['baseURL'] = $this->params;
         $response->images = $images;
-
         //get comments
         $commentsResponse= [];
         $comments = $this->commentsManager->getEventCommentsByID($id);

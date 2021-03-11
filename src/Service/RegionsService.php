@@ -22,7 +22,7 @@ use App\Response\RegionCreateResponse;
 use App\Response\ImageCreateResponse;
 use App\Response\RegionResponse;
 use App\Response\RegionsResponse;
-
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 class RegionsService
 {
     private $regionsManager;
@@ -31,9 +31,10 @@ class RegionsService
     private $ratingManager;
     private $commentsManager;
     private $guidManager;
+    private $params;
 
     public function __construct(AutoMapping $autoMapping, RegionsManager $regionsManager, ImageManager $imageManager, RatingManager $ratingManager,
-                                CommentsManager $commentsManager, GuidManager $guidManager)
+                                CommentsManager $commentsManager, GuidManager $guidManager, ParameterBagInterface $params)
     {
         $this->regionsManager = $regionsManager;
         $this->autoMapping = $autoMapping;
@@ -41,6 +42,7 @@ class RegionsService
         $this->ratingManager = $ratingManager;
         $this->commentsManager = $commentsManager;
         $this->guidManager = $guidManager;
+        $this->params = $params->get('upload_base_url') . '/';
     }
 
     public function regionCreate(RegionCreateRequest $request)
@@ -87,6 +89,9 @@ class RegionsService
             $images = $this->getRegionImages($result['id']);
             foreach ($images as $image)
             {
+                $image['pathURL'] = $image['path'];
+                $image['path'] = $this->params.$image['path'];
+                $image['baseURL'] = $this->params;
                 $imagesResponse[] = $this->autoMapping->map('array', ImagesPathsResponse::class, $image);
             }
             $result['path'] = $imagesResponse;
@@ -117,6 +122,9 @@ class RegionsService
         $images = $this->getRegionImages($id);
         foreach ($images as $image)
         {
+            $image['pathURL'] = $image['path'];
+            $image['path'] = $this->params.$image['path'];
+            $image['baseURL'] = $this->params;
             $imagesResponse[] = $this->autoMapping->map('array', ImagesPathsResponse::class, $image);
         }
 
@@ -179,6 +187,10 @@ class RegionsService
             $images = $this->getRegionImages($result['id']);
             foreach ($images as $image)
             {
+                
+                $image['pathURL'] = $image['path'];
+                $image['path'] = $this->params.$image['path'];
+                $image['baseURL'] = $this->params;
                 $imagesResponse[] = $this->autoMapping->map('array', ImagesPathsResponse::class, $image);
             }
         }

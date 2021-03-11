@@ -16,19 +16,23 @@ use App\Response\GuidByRegionResponse;
 use App\Response\GuidesResponse;
 use App\Response\GuidProfileUpdateResponse;
 use App\Response\GuidRegisterResponse;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+
 class GuidService
 {
     private $autoMapping;
     private $guidManager;
     private $imageManager;
     private $ratingManager;
+    private $params;
 
-    public function __construct(AutoMapping $autoMapping, GuidManager $guidManager, ImageManager $imageManager, RatingManager $ratingManager)
+    public function __construct(AutoMapping $autoMapping, GuidManager $guidManager, ImageManager $imageManager, RatingManager $ratingManager, ParameterBagInterface $params)
     {
         $this->autoMapping = $autoMapping;
         $this->guidManager = $guidManager;
         $this->imageManager = $imageManager;
         $this->ratingManager = $ratingManager;
+        $this->params = $params->get('upload_base_url') . '/';
     }
 
     public function guidRegister(GuidRegisterRequest $request)
@@ -57,6 +61,10 @@ class GuidService
         if ($guides) {
         foreach ($guides as $guid)
         {
+            $guid['imageURL'] = $guid['image'];
+            $guid['image'] = $this->params.$guid['image'];
+            $guid['baseURL'] = $this->params;
+
             $guidesResponse[] = $this->autoMapping->map('array', GuidByRegionResponse::class, $guid);
         }
     }
@@ -71,6 +79,10 @@ class GuidService
      
         foreach ($guides as $guid)
         {
+            $guid['imageURL'] = $guid['image'];
+            $guid['image'] = $this->params.$guid['image'];
+            $guid['baseURL'] = $this->params;
+
             $guidesResponse[] = $this->autoMapping->map('array', GuidByRegionResponse::class, $guid);
         }
         return $guidesResponse;
@@ -110,6 +122,10 @@ class GuidService
     public function getguideByUserID($userId)
     {
         $item = $this->guidManager->getguideByUserID($userId);
+
+        $item['imageURL'] = $item['image'];
+        $item['image'] = $this->params.$item['image'];
+        $item['baseURL'] = $this->params;
         
         return $this->autoMapping->map('array', GuidByRegionResponse::class, $item);
     }

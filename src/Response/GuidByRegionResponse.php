@@ -28,6 +28,10 @@ class GuidByRegionResponse
 
     public $image = [];
 
+    public $baseURL;
+    
+    public $imageURL;
+
     /**
      * @param array $image
      */

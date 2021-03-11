@@ -30,7 +30,7 @@ class GuidController extends BaseController
     }
 
     /**
-     * @Route("/guid", name="guidRegister", methods={"POST"})
+     * @Route("/guide", name="guidRegister", methods={"POST"})
      * @param Request $request
      * @return JsonResponse
      */
@@ -53,7 +53,7 @@ class GuidController extends BaseController
     }
 
     /**
-     * @Route("/guid", name="guidProfileUpdate", methods={"PUT"})
+     * @Route("/guide", name="guidProfileUpdate", methods={"PUT"})
      * @param Request $request
      * @return JsonResponse
      */
@@ -75,7 +75,7 @@ class GuidController extends BaseController
     }
 
     /**
-     * @Route("/guid/{id}", name="guidByRegion", methods={"GET"})
+     * @Route("/guide/{id}", name="guidByRegion", methods={"GET"})
      * @param Request $request
      * @return JsonResponse
      */
@@ -87,7 +87,7 @@ class GuidController extends BaseController
     }
 
     /**
-     * @Route("/guid", name="guidByPlaceId", methods={"GET"})
+     * @Route("/guide", name="guidByPlaceId", methods={"GET"})
      * @param Request $request
      * @return JsonResponse
      */

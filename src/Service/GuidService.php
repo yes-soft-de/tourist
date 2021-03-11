@@ -54,10 +54,12 @@ class GuidService
     {
         $guidesResponse = [];
         $guides = $this->guidManager->getGuidByRegion($regionID);
+        if ($guides) {
         foreach ($guides as $guid)
         {
             $guidesResponse[] = $this->autoMapping->map('array', GuidByRegionResponse::class, $guid);
         }
+    }
         //dd($guidesResponse);
         return $guidesResponse;
     }

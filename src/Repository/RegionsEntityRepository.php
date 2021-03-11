@@ -24,7 +24,7 @@ class RegionsEntityRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('regions')
 
-            ->select('regions.id', 'regions.name', 'regions.description', 'regions.location')
+            ->select('regions.id', 'regions.name', 'regions.description', 'regions.location', 'regions.placeId')
 
             ->groupBy('regions.id')
             ->orderBy('regions.id', 'ASC')
@@ -37,7 +37,7 @@ class RegionsEntityRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('regions')
 
-            ->select('regions.id', 'regions.name', 'regions.description', 'regions.location')
+            ->select('regions.id', 'regions.name', 'regions.description', 'regions.location', 'regions.placeId')
 
             ->andWhere('regions.id=:id')
             ->setParameter('id',$id)

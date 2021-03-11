@@ -94,7 +94,7 @@ class OrderController extends BaseController
     }
 
       /**
-     * @Route("/guidorder/{id}", name="getOrderByGuid", methods="GET")
+     * @Route("/guideorder/{id}", name="getOrderByGuid", methods="GET")
      * @param Request $request
      * @return JsonResponse
      */

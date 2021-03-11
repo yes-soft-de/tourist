@@ -113,9 +113,12 @@ class GuidManager
 
     public function getGuidByRegion($regionID)
     {
+        $city =[];
         $city = $this->regionsManager->getRegion($regionID);
-
-        return $this->guidEntityRepository->getGuidByRegion($city['name']);
+        if ($city) {
+             return $this->guidEntityRepository->getGuidByRegion($city['name']);
+        }
+        return $city;
     }
 
     public function guidByPlaceId($placeId)

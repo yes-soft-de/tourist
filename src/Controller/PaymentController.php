@@ -101,7 +101,7 @@ class PaymentController extends BaseController
     }
 
     /**
-     * @Route("/paymentguid/{id}", name="getpaymentguid", methods="GET")
+     * @Route("/paymentguide/{id}", name="getpaymentguid", methods="GET")
      * @param Request $request
      * @return JsonResponse
      */

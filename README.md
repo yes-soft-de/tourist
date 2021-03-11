@@ -53,6 +53,11 @@ methods={"GET"}
 /region/{id}
 methods={"GET"}
 ```
+#### get Region By PlaceId
+```
+//regionbyplaceid/{placeId}
+methods={"GET"}
+```
 #### Create image (region or event)
 ```
 /image
@@ -68,19 +73,24 @@ methods={"POST"}
 /rating
 methods={"POST"}
 ```
-#### Register guid
+#### Register guide
 ```
-/guid 
+/guide
 methods={"POST"}
 ```
-#### Update guid Profile 
+#### Update guide Profile 
 ```
-/guid 
+/guide 
 methods={"PUT"}
 ```
 #### Get all guided
 ```
 /guides
+methods={"GET"}
+```
+#### guid by PlaceId
+```
+/guide
 methods={"GET"}
 ```
 ### Orders System
@@ -108,7 +118,7 @@ methods={"GET"}
 ```
 #### Get all orders by GuidUserID
 ```
-guidorder/{guidUserID}
+guideorder/{guidUserID}
 methods={"GET"}
 key='id'
 ```
@@ -203,7 +213,7 @@ methods={"GET"}
 
 #### Get payment by guidUserID
 ```
-/paymentguid/{id}
+/paymentguide/{id}
 methods={"GET"}
 ```
 

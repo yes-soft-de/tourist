@@ -21,6 +21,8 @@ class RegionsResponse
 
     public $path = [];
 
+    public $placeId;
+
     /**
      * @param mixed $commentNumber
      */

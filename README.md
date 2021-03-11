@@ -93,6 +93,11 @@ methods={"GET"}
 /guide
 methods={"GET"}
 ```
+#### guid by UserId
+```
+/guidebyuseriD/{userId}
+methods={"GET"}
+```
 ### Orders System
 
 ------------

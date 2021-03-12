@@ -221,4 +221,3 @@ methods={"GET"}
 /paymentguide/{id}
 methods={"GET"}
 ```
-

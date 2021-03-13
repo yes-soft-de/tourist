@@ -63,6 +63,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "language_english" : MessageLookupByLibrary.simpleMessage("English"),
     "lebanon" : MessageLookupByLibrary.simpleMessage("Lebanon"),
     "loading" : MessageLookupByLibrary.simpleMessage("جار التحميل"),
+    "locationDescription" : MessageLookupByLibrary.simpleMessage("Location Description"),
+    "locationName" : MessageLookupByLibrary.simpleMessage("Location Name"),
     "locationsYouWorkIn" : MessageLookupByLibrary.simpleMessage("Locations you work in"),
     "loggedIn" : MessageLookupByLibrary.simpleMessage("مسجل الدخول"),
     "login" : MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),

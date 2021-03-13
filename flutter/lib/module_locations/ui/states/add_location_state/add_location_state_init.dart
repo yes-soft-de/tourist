@@ -1,0 +1,66 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:tourists/generated/l10n.dart';
+import 'package:tourists/module_locations/model/location_details/location_details.dart';
+import 'package:tourists/module_locations/ui/screens/add_location/add_location.dart';
+import 'package:tourists/module_locations/ui/states/add_location_state/add_location_state.dart';
+
+class AddLocationStateInit extends AddLocationState {
+  final LocationDetailsModel detailsModel;
+  final _nameController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  String image;
+
+  AddLocationStateInit(AddLocationScreen screen, this.detailsModel)
+      : super(screen) {
+    if (this.detailsModel != null) {
+      _nameController.text = detailsModel.name;
+      _descriptionController.text = detailsModel.description;
+      if (detailsModel.paths != null) {
+        if (detailsModel.paths.isNotEmpty) {
+          image = detailsModel.paths[0].path;
+        }
+      }
+    }
+  }
+
+  @override
+  Widget getUI(BuildContext context) {
+    return Form(
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: () {
+              ImagePicker().getImage(source: ImageSource.gallery).then((value) {
+                screen.uploadImage(value.path, detailsModel);
+              });
+            },
+          ),
+          TextFormField(
+            controller: _nameController,
+            decoration: InputDecoration(
+              hintText: S.of(context).locationName,
+              labelText: S.of(context).locationName,
+            ),
+          ),
+          TextFormField(
+            controller: _descriptionController,
+            decoration: InputDecoration(
+              hintText: S.of(context).locationDescription,
+              labelText: S.of(context).locationDescription,
+            ),
+          ),
+          RaisedButton(
+            onPressed: () {
+              detailsModel.name = _nameController.text;
+              detailsModel.description = _descriptionController.text;
+              screen.saveLocation(detailsModel);
+            },
+            child: Text(S.of(context).save),
+          ),
+        ],
+      ),
+    );
+  }
+}

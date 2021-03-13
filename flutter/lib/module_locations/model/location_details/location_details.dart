@@ -1,15 +1,19 @@
 import 'dart:developer';
 
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:tourists/module_comment/response/comment/comment_response.dart';
 
 class LocationDetailsModel {
   int id;
   String name;
   String description;
+  LatLng locationJson;
+
 //  String location;
   List<CommentModel> comments;
   int ratingAverage;
-  List<Paths> paths;
+  List<DetailsImagePaths> paths;
+  String locationId;
 
   LocationDetailsModel(
       {this.id,
@@ -17,13 +21,16 @@ class LocationDetailsModel {
       this.description,
 //      this.location,
       this.comments,
+      this.locationId,
       this.ratingAverage,
+      this.locationJson,
       this.paths});
 
   LocationDetailsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
+    locationId = json['placeId'];
 //    location = json['location'];
     ratingAverage = json['ratingAverage'];
     if (json['comments'] != null) {
@@ -33,9 +40,9 @@ class LocationDetailsModel {
       });
     }
     if (json['regionImage'] != null) {
-      paths = <Paths>[];
+      paths = <DetailsImagePaths>[];
       json['regionImage'].forEach((v) {
-        paths.add(new Paths.fromJson(v));
+        paths.add(new DetailsImagePaths.fromJson(v));
         log('Added an Image');
       });
     } else {
@@ -50,6 +57,7 @@ class LocationDetailsModel {
     data['description'] = this.description;
 //    data['location'] = this.location;
     data['ratingAverage'] = this.ratingAverage;
+    data['placeId'] = locationId;
     if (this.comments != null) {
       data['comments'] = this.comments.map((v) => v.toJson()).toList();
     }
@@ -60,12 +68,12 @@ class LocationDetailsModel {
   }
 }
 
-class Paths {
+class DetailsImagePaths {
   String path;
 
-  Paths({this.path});
+  DetailsImagePaths({this.path});
 
-  Paths.fromJson(Map<String, dynamic> json) {
+  DetailsImagePaths.fromJson(Map<String, dynamic> json) {
     path = json['path'];
   }
 

@@ -15,4 +15,8 @@ class LocationDetailsManager {
   Future<LocationDetailsResponse> createLocationDetails(
           CreateLocationRequest createLocationRequest) =>
       this._repository.createLocationDetails(createLocationRequest);
+
+  Future<LocationDetailsResponse> updateLocationDetails(
+      CreateLocationRequest createLocationRequest) =>
+      this._repository.updateLocationDetails(createLocationRequest);
 }

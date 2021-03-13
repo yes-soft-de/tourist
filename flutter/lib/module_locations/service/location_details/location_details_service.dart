@@ -34,7 +34,7 @@ class LocationDetailsService {
 
     var locationModel = apiResponse?.locationDetails;
 
-    locationModel ??= await createLocation(locationId);
+    locationModel ??= await createLocationByGoogleId(locationId);
 
     if (locationModel == null) {
       // There is a problem in the request. it should be validated and reported
@@ -55,7 +55,7 @@ class LocationDetailsService {
     return guidesList;
   }
 
-  Future<LocationDetailsModel> createLocation(String locationId) async {
+  Future<LocationDetailsModel> createLocationByGoogleId(String locationId) async {
     // First request the details from google
     var locationDetails =
         await _googleLocationsService.getLocationDetails(locationId);
@@ -81,6 +81,24 @@ class LocationDetailsService {
     if (response == null) return null;
     return response.locationDetails;
   }
+
+  Future<LocationDetailsModel> updateLocation(LocationDetailsModel locationDetails) async {
+    var request = CreateLocationRequest();
+    request.name = locationDetails.name;
+    request.description = locationDetails.description;
+
+    request.placeId = locationDetails.locationId;
+    request.path = 'asd';
+    request.location = {
+      'lat': locationDetails.locationJson.latitude,
+      'lng': locationDetails.locationJson.longitude,
+    };
+
+    var response = await _locationManager.createLocationDetails(request);
+    if (response == null) return null;
+    return response.locationDetails;
+  }
+
 
   Future<dynamic> createRate(int rate, String locationId) async {
     String uid = await _preferencesHelper.getUserUID();

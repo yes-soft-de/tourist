@@ -122,5 +122,7 @@
   "pleaseEnterYourName": "Please Enter Your Name",
   "profile": "Profile",
   "search": "Search",
-  "locationsYouWorkIn": "Locations you work in"
+  "locationsYouWorkIn": "Locations you work in",
+  "locationName": "Location Name",
+  "locationDescription": "Location Description"
 }

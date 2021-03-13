@@ -174,12 +174,8 @@ class AuthService {
       var userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
 
-      if (isRegister) {
-        await _registerApiNewUser(
-            AppUser(userCredential.user, AuthSource.PHONE, role));
-      } else {
-        await _loginApiUser(role, AuthSource.GOOGLE);
-      }
+      await _registerApiNewUser(
+          AppUser(userCredential.user, AuthSource.PHONE, role));
     } catch (e) {
       Logger().error('AuthStateManager', e.toString(), StackTrace.current);
     }

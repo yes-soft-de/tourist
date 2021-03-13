@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tourists/module_locations/location_routes.dart';
 import 'package:tourists/module_search/bloc/search_bloc/search_bloc.dart';
 
 class AddLocationDialog extends StatefulWidget {
@@ -59,19 +60,16 @@ class _AddLocationDialogState extends State<AddLocationDialog> {
     predictions.forEach((key, value) {
       tiles.add(GestureDetector(
         onTap: () {
-          showPredictions = false;
-          _searchController.text = key;
-          if (mounted) setState(() {});
+          Navigator.of(context).pushNamed(
+            LocationRoutes.addLocation,
+            arguments: value,
+          );
         },
         child: ListTile(
           title: Text(' ' + key),
         ),
       ));
     });
-
-    if (tiles.length > 3) {
-      tiles = tiles.sublist(0, 3);
-    }
 
     return Flex(
       direction: Axis.vertical,

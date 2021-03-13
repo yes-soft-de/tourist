@@ -2,6 +2,7 @@ import 'package:inject/inject.dart';
 import 'package:tourists/module_locations/model/location_list_item/location_list_item.dart';
 import 'package:tourists/module_locations/repository/location_list/location_list_repository.dart';
 import 'package:tourists/module_locations/response/location_list/location_list_response.dart';
+import 'package:tourists/utils/logger/logger.dart';
 
 @provide
 class LocationListManager {

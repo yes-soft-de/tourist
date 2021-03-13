@@ -29,4 +29,14 @@ class LocationDetailsRepository {
       return null;
     }
   }
+
+  Future<LocationDetailsResponse> updateLocationDetails(CreateLocationRequest createLocationRequest) async {
+    Map response = await _client.put('${Urls.createLocationDetails}/${createLocationRequest.placeId}', createLocationRequest.toJson());
+
+    if (response != null) {
+      return new LocationDetailsResponse.fromJson(response);
+    } else {
+      return null;
+    }
+  }
 }

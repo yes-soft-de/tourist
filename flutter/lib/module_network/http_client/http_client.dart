@@ -16,7 +16,7 @@ class HttpClient extends NetworkClient {
     receiveTimeout: 300,
     sendTimeout: 300,
   ));
-  
+
   final _logger = Logger();
   final performanceInterceptor = DioFirebasePerformanceInterceptor();
   final String tag = 'HttpClient';
@@ -27,9 +27,9 @@ class HttpClient extends NetworkClient {
     _client.interceptors.add(performanceInterceptor);
   }
 
-
   @override
-  Future<Map<String, dynamic>> get(String url, {
+  Future<Map<String, dynamic>> get(
+    String url, {
     Map<String, dynamic> queryParams,
     Map<String, String> headers,
   }) async {
@@ -66,11 +66,12 @@ class HttpClient extends NetworkClient {
   }
 
   @override
-  Future<Map<String, dynamic>> post(String url,
-      Map<String, dynamic> payLoad, {
-        Map<String, String> queryParams,
-        Map<String, String> headers,
-      }) async {
+  Future<Map<String, dynamic>> post(
+    String url,
+    Map<String, dynamic> payLoad, {
+    Map<String, String> queryParams,
+    Map<String, String> headers,
+  }) async {
     try {
       _logger.info(tag, 'Requesting Post to: ' + url);
       _logger.info(tag, 'POST: ' + jsonEncode(payLoad));
@@ -104,11 +105,12 @@ class HttpClient extends NetworkClient {
   }
 
   @override
-  Future<Map<String, dynamic>> put(String url,
-      Map<String, dynamic> payLoad, {
-        Map<String, String> queryParams,
-        Map<String, String> headers,
-      }) async {
+  Future<Map<String, dynamic>> put(
+    String url,
+    Map<String, dynamic> payLoad, {
+    Map<String, String> queryParams,
+    Map<String, String> headers,
+  }) async {
     try {
       _logger.info(tag, 'Requesting PUT to: ' + url);
       _logger.info(tag, 'PUT: ' + jsonEncode(payLoad));
@@ -141,7 +143,8 @@ class HttpClient extends NetworkClient {
     }
   }
 
-  Future<Map<String, dynamic>> delete(String url, {
+  Future<Map<String, dynamic>> delete(
+    String url, {
     Map<String, String> queryParams,
     Map<String, String> headers,
   }) async {
@@ -166,10 +169,12 @@ class HttpClient extends NetworkClient {
       if (e is DioError) {
         DioError err = e;
         if (err.response.statusCode != 404) {
-          _logger.error(tag, err.message + ', DELETE: ' + url, StackTrace.current);
+          _logger.error(
+              tag, err.message + ', DELETE: ' + url, StackTrace.current);
         }
       } else {
-        _logger.error(tag, e.toString() + ', DELETE: ' + url, StackTrace.current);
+        _logger.error(
+            tag, e.toString() + ', DELETE: ' + url, StackTrace.current);
       }
       return null;
     }
@@ -180,11 +185,12 @@ class HttpClient extends NetworkClient {
       _logger.info(tag, response.data.toString());
       return response.data;
     } else if (response.statusCode <= 400 && response.statusCode < 500) {
+      _logger.error(tag,
+          '${response.statusCode}\n\nBad Request: ${response.data} \n${StackTrace.current}');
       return null;
     } else {
       _logger.error(tag,
-          response.statusCode.toString() + '\n\n' + response.data.toString(),
-          StackTrace.current);
+          '${response.statusCode}\n\nUnknown Error from response: ${response.data} \n${StackTrace.current}');
       return null;
     }
   }

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -44,9 +45,16 @@ void main() async {
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-
   final container = await AppComponent.create();
-  runApp(container.app);
+  FlutterError.onError = (FlutterErrorDetails details) async {
+    new Logger().error('Main', details.toString(), StackTrace.current);
+  };
+  await runZoned<Future<void>>(() async {
+    runApp(container.app);
+  }, onError: (error, stackTrace) {
+    new Logger().error(
+        'Main', error.toString() + stackTrace.toString(), StackTrace.current);
+  });
 }
 
 @provide

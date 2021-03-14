@@ -3,11 +3,12 @@ import 'package:rxdart/rxdart.dart';
 import 'package:tourists/module_auth/enums/user_type.dart';
 import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
 import 'package:tourists/module_profile/model/profile_model/profile_model.dart';
-import 'package:tourists/module_profile/service/profile/profile.dart';
+import 'package:tourists/module_profile/service/profile/profile_service.dart';
 import 'package:tourists/module_profile/ui/my_profile/my_profile.dart';
 import 'package:tourists/module_profile/ui/states/edit_profile_state.dart';
 import 'package:tourists/module_profile/ui/states/edit_profile_state_error.dart';
 import 'package:tourists/module_profile/ui/states/edit_profile_state_guide_load_success.dart';
+import 'package:tourists/module_profile/ui/states/edit_profile_state_loading.dart';
 import 'package:tourists/module_profile/ui/states/edit_profile_state_tourist_load_success.dart';
 import 'package:tourists/module_search/bloc/search_bloc/search_bloc.dart';
 import 'package:tourists/module_upload/service/image_upload/image_upload_service.dart';
@@ -37,12 +38,14 @@ class MyProfileStateManager {
           EditProfileStateGuideLoadSuccess(screen, model, _searchProvider));
     } else {
       _stateSubject
-          .add(EditProfileStateTouristLoadSuccess(screen, profile: model));
+          .add(EditProfileStateTouristLoadSuccess(screen, model));
     }
   }
 
   Future<void> setMyProfile(
       MyProfileScreen screen, ProfileModel profile) async {
+    _stateSubject.add(EditProfileStateLoading(screen));
+
     var userType = await this._authService.userRole;
     var createdProfile = await _myProfileService.createProfile(profile);
     if (userType == UserRole.ROLE_GUIDE) {
@@ -50,18 +53,20 @@ class MyProfileStateManager {
           screen, createdProfile, _searchProvider));
     } else {
       _stateSubject.add(
-          EditProfileStateTouristLoadSuccess(screen, profile: createdProfile));
+          EditProfileStateTouristLoadSuccess(screen, createdProfile));
     }
   }
 
   void getMyProfile(MyProfileScreen screen) {
-    this._myProfileService.getMyProfile().then((value) {
-      if (value != null) {
-        this._stateSubject.add(
-            EditProfileStateGuideLoadSuccess(screen, value, _searchProvider));
-      } else {
-        this._stateSubject.add(null);
-      }
+    this._authService.userRole.then((role) {
+      this._myProfileService.getMyProfile().then((profile) {
+        if (role == UserRole.ROLE_GUIDE) {
+          this._stateSubject.add(
+              EditProfileStateGuideLoadSuccess(screen, profile, _searchProvider));
+        } else {
+          this._stateSubject.add(EditProfileStateTouristLoadSuccess(screen, profile));
+        }
+      });
     });
   }
 
@@ -78,7 +83,7 @@ class MyProfileStateManager {
                 screen, model, _searchProvider));
           } else {
             _stateSubject.add(
-                EditProfileStateTouristLoadSuccess(screen, profile: model));
+                EditProfileStateTouristLoadSuccess(screen, model));
           }
         });
       }

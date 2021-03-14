@@ -8,7 +8,9 @@ class ProfileResponse {
   ProfileResponse.fromJson(Map<String, dynamic> json) {
     statusCode = json['status_code'];
     msg = json['msg'];
-    data = json['Data'] != null ? new Data.fromJson(json['Data']) : null;
+    if (json['Data'] != null) {
+      data = Data.fromJson(json['Data']);
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -56,15 +58,15 @@ class Data {
 
   Data.fromJson(Map<String, dynamic> json) {
     userID = json['userID'];
-    roles = json['roles'].cast<String>();
+    roles = json['roles']?.cast<String>();
     name = json['name'];
     sex = json['sex'];
     nationality = json['nationality'];
-    guideLanguage = json['guideLanguage'].cast<String>();
-    arrivalCity = json['arrivalCity'].cast<String>();
-    arrivalDate = json['arrivalDate'].cast<String>();
+    guideLanguage = json['guideLanguage']?.cast<String>();
+    arrivalCity = json['arrivalCity']?.cast<String>();
+    arrivalDate = json['arrivalDate']?.cast<String>();
     stayDays = json['stayDays'];
-    interests = json['interests'].cast<String>();
+    interests = json['interests']?.cast<String>();
     email = json['email'];
     phoneNumber = json['phoneNumber'];
     image = json['image'];

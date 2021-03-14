@@ -13,8 +13,12 @@ class EditProfileStateTouristLoadSuccess extends EditProfileState {
   final Set<String> languages = {};
   final Set<String> locations = {};
 
-  EditProfileStateTouristLoadSuccess(MyProfileScreen screen, {this.profile})
-      : super(screen);
+  EditProfileStateTouristLoadSuccess(MyProfileScreen screen, this.profile)
+      : super(screen) {
+    if (profile != null) {
+      _nameController.text = profile.name;
+    }
+  }
 
   @override
   Widget getUI(BuildContext context) {
@@ -139,28 +143,25 @@ class EditProfileStateTouristLoadSuccess extends EditProfileState {
           ),
           GestureDetector(
             onTap: () {
+              profile.name = _nameController.text;
+              profile.languages = languages.toList();
               screen.saveProfile(profile);
             },
-            child: GestureDetector(
-              onTap: () {
-                screen.saveProfile(profile);
-              },
-              child: Container(
-                decoration: BoxDecoration(color: Theme.of(context).primaryColor),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        S.of(context).saveProfile,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+            child: Container(
+              decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      S.of(context).saveProfile,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),

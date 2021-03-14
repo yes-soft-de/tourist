@@ -53,31 +53,20 @@ class ProfileService {
     }
 
     if (response == null) return null;
-    var result = ProfileModel(
-      languages: [],
-      locations: [],
-      name: '${response.data.name}',
-      image: '${response.data.image}',
-    );
-    return result;
+
+    return getUserProfile(userId);
   }
 
   Future<ProfileModel> getUserProfile(String userId) async {
     var role = await _authService.userRole;
-    var results = await Future.wait([
-      _manager.getUserProfile(userId, role),
-      _locationListService.getLocationList()
-    ]);
 
-    ProfileResponse myProfile = results[0];
-    List<LocationListItem> locations = results[1];
+    ProfileResponse myProfile = await _manager.getUserProfile(userId, role);
 
     return ProfileModel(
-      name: '${myProfile.data?.name} ',
-      image: '${myProfile.data?.image} ',
+      name: '${myProfile.data.name} ',
+      image: '${myProfile.data.image} ',
       locations: [],
       languages: ['en', 'ar'],
-      availableLocations: locations,
     );
   }
 

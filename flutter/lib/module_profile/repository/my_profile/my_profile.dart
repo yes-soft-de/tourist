@@ -64,8 +64,8 @@ class MyProfileRepository {
     Map<String, dynamic> response =
         await _apiClient.get(Urls.getTouristProfileAPI + '/$userId');
 
-    return response != null && ProfileListResponse.fromJson(response).data.isNotEmpty
-        ? ProfileListResponse.fromJson(response).data.last
-        : null;
+    if (response == null) return null;
+
+    return ProfileResponse.fromJson(response);
   }
 }

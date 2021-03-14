@@ -17,6 +17,7 @@ class CreateProfileRequest {
     return {
       'userID': this.userID,
       'userName': this.userName,
+      'name': this.userName,
       'story': this.story,
       'location': this.location,
       'image': this.image,

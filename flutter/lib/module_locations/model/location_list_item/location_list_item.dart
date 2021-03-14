@@ -17,7 +17,7 @@ class LocationListItem {
       this.path});
 
   LocationListItem.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = int.tryParse(json['placeId'] ?? '2');
     name = json['name'];
     description = json['description'];
    location = json['location'];

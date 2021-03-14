@@ -11,7 +11,7 @@ class Urls {
   static final createProfileAPI = 'tourist';
   static final getTouristProfileAPI = 'tourist';
   static final locationList = 'regions';
-  static final locationDetails = 'region/';
+  static final locationDetails = 'regionbyplaceid/';
   static final createLocationDetails = 'region';
   static final guideList = 'guides';
   static final guidesByRegion = 'guide';

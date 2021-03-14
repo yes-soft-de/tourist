@@ -30,6 +30,11 @@ class _CommentListWidgetState extends State<CommentListWidget> {
   bool canShowMore = false;
 
   _CommentListWidgetState(List<CommentModel> comments) {
+    if (comments == null) {
+      allComments = [];
+      displayedComments = [];
+      return;
+    }
     comments.reversed.forEach((element) {
       if (element.userName != null && element.comment != null) {
         allComments.add(element);
@@ -74,7 +79,7 @@ class _CommentListWidgetState extends State<CommentListWidget> {
       ));
     }
 
-    displayedComments.forEach((element) {
+    displayedComments?.forEach((element) {
       if (element.comment == null || element.userName == null) {
         return;
       }

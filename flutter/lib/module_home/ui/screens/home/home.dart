@@ -76,6 +76,7 @@ class HomeScreenState extends State<HomeScreen> {
                         ),
                         widget._locationCarouselScreen,
                         widget._locationListScreen,
+                        Container(height: 112,),
                       ],
                     ),
                   ),

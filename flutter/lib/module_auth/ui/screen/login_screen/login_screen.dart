@@ -72,6 +72,7 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   void loginViaGoogle(UserRole role) {
+    currentUserRole = role;
     widget._stateManager.loginViaGoogle(this, role);
   }
 
@@ -89,7 +90,6 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   void confirmSMS(String smsCode) {
-    currentUserRole = UserRole.ROLE_GUIDE;
     widget._stateManager.confirmSMSCode(smsCode, this);
   }
 

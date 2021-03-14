@@ -176,7 +176,7 @@ class EditProfileStateGuideLoadSuccess extends EditProfileState {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        S.of(context).profile,
+                        S.of(context).saveProfile,
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

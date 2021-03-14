@@ -110,7 +110,7 @@ class AuthService {
       userID: user.credential.email ?? user.credential.uid,
       password: password,
       // This should change from the API side
-      roles: user.userRole == UserRole.ROLE_GUIDE ? 'guid' : 'tourist',
+      roles: user.userRole,
     ));
 
     await _loginApiUser(user.userRole, user.authSource);

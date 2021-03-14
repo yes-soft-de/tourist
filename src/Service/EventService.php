@@ -53,9 +53,11 @@ class EventService
             //images
             $eventImages = $this->imageManager->getEventImage($event['id']);
             $images = $eventImages;
+            if ($images) {
             $event['imagesURL'] = $images[0]['path'];
             $event['images'] = $this->params.$images[0]['path'];
             $event['baseURL'] = $this->params;
+            }
             //
 
             //count comment for each event

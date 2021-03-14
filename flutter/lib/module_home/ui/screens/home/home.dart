@@ -113,7 +113,7 @@ class HomeScreenState extends State<HomeScreen> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-          currentIndex: position,
+          currentIndex: position ?? 0,
           selectedIconTheme:
               IconThemeData(color: Theme.of(context).primaryColor),
           unselectedIconTheme: IconThemeData(color: Colors.grey),

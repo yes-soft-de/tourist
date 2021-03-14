@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_chat/chat_routes.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
-import 'package:tourists/utils/time/time_formatter.dart';
 
 class OrderItemWidget extends StatelessWidget {
   final OrderModel orderModel;
@@ -112,7 +111,9 @@ class OrderItemWidget extends StatelessWidget {
             ),
             // Order date
             Flexible(
-                child: Text(TimeFormatter.getDartDate(orderModel.date)
+                child: Text(DateTime.fromMillisecondsSinceEpoch(
+                        orderModel.date.timestamp * 1000)
+                    .toIso8601String()
                     .toString()
                     .substring(5, 10)))
           ],
@@ -176,7 +177,8 @@ class OrderItemWidget extends StatelessWidget {
             ),
             // Order date
             Flexible(
-                child: Text(TimeFormatter.getDartDate(orderModel.date)
+                child: Text(DateTime.fromMillisecondsSinceEpoch(
+                        orderModel.date.timestamp * 1000)
                     .toString()
                     .substring(5, 10)))
           ],
@@ -243,7 +245,8 @@ class OrderItemWidget extends StatelessWidget {
             ),
             // Order date
             Flexible(
-                child: Text(TimeFormatter.getDartDate(orderModel.date)
+                child: Text(DateTime.fromMillisecondsSinceEpoch(
+                        orderModel.date.timestamp * 1000)
                     .toString()
                     .substring(5, 10)))
           ],
@@ -306,7 +309,8 @@ class OrderItemWidget extends StatelessWidget {
         // Order date
         Flexible(
             flex: 1,
-            child: Text(TimeFormatter.getDartDate(orderModel.date)
+            child: Text(DateTime.fromMillisecondsSinceEpoch(
+                    orderModel.date.timestamp * 1000)
                 .toString()
                 .substring(5, 10)))
       ],

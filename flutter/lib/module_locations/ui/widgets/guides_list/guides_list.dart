@@ -9,8 +9,13 @@ import '../../../../module_guide/ui/widget/guide_list_item/guide_list_item.dart'
 class GuidesListWidget extends StatefulWidget {
   final List<GuideListItemModel> guides;
   final int cityId;
+  final int pageSize;
 
-  GuidesListWidget(this.guides, this.cityId);
+  GuidesListWidget(
+    this.guides,
+    this.cityId, [
+    this.pageSize = 10,
+  ]);
 
   @override
   State<StatefulWidget> createState() => _GuidesListWidgetState();
@@ -39,7 +44,7 @@ class _GuidesListWidgetState extends State<GuidesListWidget> {
               // Construct the List into CSV text
               String citiesInText = '';
               displayedGuides[index].city.forEach((cityName) {
-                citiesInText = citiesInText + ' ' + cityName;
+                citiesInText = '${citiesInText ?? ''} ${cityName ?? ''}';
               });
 
               // Construct the List into CSV text
@@ -52,8 +57,9 @@ class _GuidesListWidgetState extends State<GuidesListWidget> {
                   Navigator.of(context).pushNamed(
                     FormsRoutes.requestGuideForm,
                     arguments: RequestGuideNavigationArguments(
-                        guideId: displayedGuides[index].user,
-                        cityId: widget.cityId.toString()),
+                      guideId: displayedGuides[index].user,
+                      cityId: widget.cityId.toString(),
+                    ),
                   );
                 },
                 child: GuideListItemWidget(
@@ -62,7 +68,7 @@ class _GuidesListWidgetState extends State<GuidesListWidget> {
                   guideLanguage: languagesInText,
                   availability: displayedGuides[index].status,
                   rate: 3,
-                  guideImage: displayedGuides[index].image,
+                  guideImage: displayedGuides[index].name,
                 ),
               );
             }),

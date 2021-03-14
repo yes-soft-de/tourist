@@ -40,9 +40,9 @@ class GuideListItemWidget extends StatelessWidget {
                         width: 56,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                            color: Colors.greenAccent,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(90))),
+                          color: Colors.greenAccent,
+                          borderRadius: BorderRadius.all(Radius.circular(90)),
+                        ),
                         child: Text(
                           guideName[0],
                           style: TextStyle(

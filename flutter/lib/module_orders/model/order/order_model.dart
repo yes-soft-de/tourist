@@ -1,6 +1,5 @@
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
 import 'package:tourists/module_shared/model/date/date.dart';
-import 'package:tourists/utils/time/time_formatter.dart';
 
 class OrderModel {
   int id;
@@ -53,7 +52,7 @@ class OrderModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     if (this.date != null) {
-      data['date'] = TimeFormatter.getDartDate(this.date).toString();
+      data['date'] = DateTime.fromMillisecondsSinceEpoch(this.date.timestamp * 1000);
     }
     data['touristUserID'] = this.touristUserID;
     data['guidUserID'] = this.guidUserID;
@@ -61,11 +60,10 @@ class OrderModel {
     data['id'] = this.id;
     data['language'] = this.language;
     if (this.arriveDate != null) {
-      data['arriveDate'] =
-          TimeFormatter.getDartDate(this.arriveDate).toString();
+      data['arriveDate'] = DateTime.fromMillisecondsSinceEpoch(this.arriveDate.timestamp * 1000);
     }
     if (this.leaveDate != null) {
-      data['leaveDate'] = TimeFormatter.getDartDate(this.leaveDate).toString();
+      data['leaveDate'] = DateTime.fromMillisecondsSinceEpoch(this.leaveDate.timestamp * 1000);
     }
     if (this.services != null) {
       data['services'] = this.services;

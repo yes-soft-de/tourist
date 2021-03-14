@@ -12,9 +12,9 @@ import 'package:tourists/utils/logger/logger.dart';
 class HttpClient extends NetworkClient {
   final _client = Dio(BaseOptions(
     baseUrl: Urls.baseAPI,
-    connectTimeout: 300,
-    receiveTimeout: 300,
-    sendTimeout: 300,
+    connectTimeout: 3000,
+    receiveTimeout: 3000,
+    sendTimeout: 3000,
   ));
 
   final _logger = Logger();
@@ -49,6 +49,7 @@ class HttpClient extends NetworkClient {
         queryParameters: queryParams,
       );
       return _processResponse(response);
+
     } catch (e) {
       if (e is DioError) {
         DioError err = e;
@@ -181,6 +182,7 @@ class HttpClient extends NetworkClient {
   }
 
   Map<String, dynamic> _processResponse(Response response) {
+    _logger.info(tag, 'Processing Response');
     if (response.statusCode >= 200 && response.statusCode < 400) {
       _logger.info(tag, response.data.toString());
       return response.data;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:tourists/module_auth/authorization_routes.dart';
 import 'package:tourists/module_forms/forms_routes.dart';
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
 import 'package:tourists/module_guide/nav_arguments/request_guide/request_guide_navigation.dart';
@@ -9,8 +10,9 @@ import 'package:tourists/module_guide/ui/widget/guide_list_item/guide_list_item.
 
 class GuideListStateLoadSuccess extends GuideListState {
   final List<GuideListItemModel> _guidesList;
+  final bool isLoggedId;
 
-  GuideListStateLoadSuccess(GuideListScreen screen, this._guidesList)
+  GuideListStateLoadSuccess(GuideListScreen screen, this._guidesList, this.isLoggedId)
       : super(screen);
 
   @override
@@ -37,8 +39,12 @@ class GuideListStateLoadSuccess extends GuideListState {
 
       guidesList.add(GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamed(FormsRoutes.requestGuideForm,
-              arguments: RequestGuideNavigationArguments(guideId: guide.user));
+          if (isLoggedId) {
+            Navigator.of(context).pushNamed(FormsRoutes.requestGuideForm,
+                arguments: RequestGuideNavigationArguments(guideId: guide.user));
+          } else {
+            Navigator.of(context).pushNamed(AuthorizationRoutes.LOGIN_SCREEN);
+          }
         },
         child: GuideListItemWidget(
           guideCity: citiesInText,

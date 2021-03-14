@@ -22,6 +22,7 @@ class Urls {
   static final guideOrders = 'guidorder';
   static final comment = 'comment';
   static final event = 'event';
+  static final eventList = 'events';
   static final rate = 'rating';
   static final mapHelper = 'maphelper';
   static final googleAutoComplete =

@@ -30,8 +30,13 @@ class LocationListItemWidget extends StatelessWidget {
                 height: 128,
                 width: 128,
                 child: Image.network(
-                  imageLink,
+                  '$imageLink'.contains('http')
+                      ? imageLink.substring(imageLink.lastIndexOf('http'))
+                      : imageLink,
                   fit: BoxFit.fitHeight,
+                  errorBuilder: (c, e, s) {
+                    return Image.asset('resources/images/logo.jpg');
+                  },
                 ),
               ),
             ),

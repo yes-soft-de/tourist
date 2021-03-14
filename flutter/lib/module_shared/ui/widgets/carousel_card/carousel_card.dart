@@ -25,8 +25,13 @@ class CarouselCard extends StatelessWidget {
           Container(
               width: double.infinity,
               child: Image.network(
-                image,
+                  '$image'.contains('http')
+                      ? image.substring(image.lastIndexOf('http'))
+                      : image,
                 fit: BoxFit.fill,
+                errorBuilder: (context, object, stack) {
+                  return Image.asset('resources/images/logo.jpg');
+                },
               )),
           Container(
             height: 240,

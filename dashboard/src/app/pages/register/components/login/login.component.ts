@@ -3,6 +3,10 @@ import { RegisterService } from '../../service/register.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenService } from 'src/app/@theme/admin-service/token/token.service';
 import { AuthService } from 'src/app/@theme/admin-service/auth/auth.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/@theme/store/app-state';
+import { startLogin } from '../../store/auth.actions';
+import { getErrorAuth } from '../../store/auth.selector';
 
 @Component({
   selector: 'app-login',
@@ -19,42 +23,22 @@ export class LoginComponent implements OnInit {
   };
   process = false;
 
-  constructor(
-    private registerService: RegisterService,
-    private tokenService: TokenService,
-    private authService: AuthService,
-    private router: Router,
-    private route: ActivatedRoute
-    ) { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
+    this.store.select(getErrorAuth).subscribe(
+      error => {
+        this.process = false;
+        this.error = error;  
+      }
+    );
   }
 
   onSubmit() {
     this.process = true;
     // Form Code
-    this.registerService.login(this.form).subscribe(
-      response => this.handleResponse(response),
-      error => this.handleError(error)
-    );
+    this.store.dispatch(startLogin({data: this.form}));    
   }
 
-  handleResponse(response) {
-    this.process = false;
-    this.tokenService.handle(this.form.username, response.token);
-    this.authService.changeAuthStatus(true);
-    this.router.navigate(['../'], {relativeTo: this.route});
-  }
-
-  handleError(error) {
-    this.process = false;
-    if (error.error.error) {
-      this.error = error.error.error;
-    } else if (error.error.message) {
-      this.error = error.error.message;
-    } else if (error.error.errors) {
-      this.errors = error.error.errors;
-    }
-  }
 
 }

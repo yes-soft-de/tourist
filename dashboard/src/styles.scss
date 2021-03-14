@@ -110,6 +110,10 @@ td { font-size: 14px; vertical-align: middle !important; }
   background-color: $warm_green;
 }
 
+.bg-sidebar-item-button {
+  background: $sidebar_item_button
+}
+
 .bg-grey {
   background-color: $quiet_green;
 }
@@ -225,7 +229,7 @@ table tr:last-child {
 }
 .td-custom {
   max-height: 100px;
-  width: 250px;
+  min-width: 250px;
   overflow-y: scroll;
   display: block;
   border-bottom: none !important;

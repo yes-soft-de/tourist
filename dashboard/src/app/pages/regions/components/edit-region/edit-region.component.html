@@ -1,0 +1,61 @@
+<!-- general form elements -->
+<div class="container-fluid">
+    <div class="content-header">
+        <h1 class="text-center my-5">{{'update-region-page' | translate}}</h1>
+    </div>
+    <div class="card card-info">
+        <div class="card-header bg-sidebar-item-button text-white">
+            <h3 class="card-title mb-0">{{'new-region' | translate}}</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form [formGroup]="editRegionForm" (ngSubmit)="onSubmit()">
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="col-form-label" for="inputNameSuccess">{{'name' | translate}}</label>
+                    <input class="form-control"
+                           [ngClass]="{'is-invalid': editRegionForm.get('name').errors &&
+                           (editRegionForm.get('name').touched || editRegionForm.get('name').dirty)}"
+                           type="text"
+                           name="name"
+                           id="inputNameSuccess"
+                           formControlName="name"
+                           placeholder="{{'name-type-placeholder' | translate}}">
+                    <span class="invalid-feedback" *ngIf="editRegionForm.get('name').errors?.required">{{'name-field-required' | translate}}</span>                      
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Location</label>
+                    <input type="text"
+                           [ngClass]="{'is-invalid': editRegionForm.get('location').errors &&
+                           (editRegionForm.get('location').touched || editRegionForm.get('location').dirty)}"
+                           name="location"
+                           formControlName="location"
+                           id="exampleInputlocation1"
+                           class="form-control"
+                           placeholder="Type The location">
+                    <span class="invalid-feedback" *ngIf="editRegionForm.get('location').errors?.required">location Field Is Required</span>
+                    <span class="invalid-feedback" *ngIf="editRegionForm.get('location').errors?.location">Please enter a vaild location address</span>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputdescription1">{{'description' | translate}}</label>
+                    <textarea class="form-control" 
+                           [ngClass]="{'is-invalid': editRegionForm.get('description').errors &&
+                           (editRegionForm.get('description').touched || editRegionForm.get('description').dirty)}"
+                           name="description"
+                           formControlName="description"
+                           id="exampleInputdescription1" 
+                           placeholder="{{'description-type-placeholder' | translate}}">
+                    </textarea>
+                    <span class="invalid-feedback" *ngIf="editRegionForm.get('description').errors?.required">{{'descriptioon-field-required' | translate}}</span>
+                    <span class="invalid-feedback" *ngIf="editRegionForm.get('description').errors?.minlength">description Must Be Greater Than 3</span>       
+                </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn bg-sidebar-item-button text-white" [disabled]="editRegionForm.invalid || isSubmited">Submit</button>
+            </div>
+        </form>
+    </div>
+    <!-- /.card -->
+</div>

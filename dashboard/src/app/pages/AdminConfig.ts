@@ -9,9 +9,9 @@ export class AdminConfig {
   public static loginAPI                    = AdminConfig.sourceAPI + 'login_check';
   public static userAPI                     = AdminConfig.sourceAPI + 'user';
 
-  // Chats
-  public static chatsAPI                    = AdminConfig.sourceAPI + 'getallchat';
-
+  // Regions
+  public static regionsAPI                  = AdminConfig.sourceAPI + 'regions';
+  public static regionAPI                   = AdminConfig.sourceAPI + 'region';
 
   // Upload
   public static generalUploadAPI            = AdminConfig.sourceAPI + 'uploadfile';

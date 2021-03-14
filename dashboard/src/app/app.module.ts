@@ -17,6 +17,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { environment } from 'src/environments/environment';
+import { appReducer } from './@theme/store/app-state';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -44,7 +45,7 @@ const firebaseConfig = {
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
     ThemeModule.forRoot(),
-    StoreModule.forRoot({}, {}), StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }), EffectsModule.forRoot([]), // ToastrModule added
+    StoreModule.forRoot(appReducer, {}), StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }), EffectsModule.forRoot([]), // ToastrModule added
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireDatabaseModule,

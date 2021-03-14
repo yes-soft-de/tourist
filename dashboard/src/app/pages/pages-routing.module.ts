@@ -15,6 +15,11 @@ const routes: Routes = [
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
         canActivate: [AfterLoginService]
       },
+      {
+        path: 'regions',
+        loadChildren: () => import('./regions/regions.module').then(m => m.RegionsModule),
+        canActivate: [AfterLoginService]
+      },
       { path: '**', component: NotFoundComponent }
     ]
   }

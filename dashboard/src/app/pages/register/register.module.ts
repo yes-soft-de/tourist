@@ -20,7 +20,6 @@ import { AuthEffects } from './store/auth.effects';
   imports: [
     ThemeModule,
     RegisterRoutingModule,
-    StoreModule.forFeature(fromAuth.authsFeatureKey, fromAuth.reducer),
     EffectsModule.forFeature([AuthEffects])
   ],
   providers: [RegisterService]

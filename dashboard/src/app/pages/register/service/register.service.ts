@@ -18,13 +18,13 @@ export class RegisterService {
   }
 
 
-  login(data): Observable<LoginRequest> {
+  login(data): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
     };
-    return this.httpClient.post<LoginRequest>(
+    return this.httpClient.post<any>(
       AdminConfig.loginAPI, 
       JSON.stringify(data),
       httpOptions

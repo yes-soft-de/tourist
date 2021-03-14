@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>396882908080-ju46hrqja5s0g9gkk9ad99m1vdkk1ah5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.396882908080-ju46hrqja5s0g9gkk9ad99m1vdkk1ah5</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>396882908080-22grsjhkbbp78qed8hamrie7vcu1ah48.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDJ9fg6e7-4xhfiif9ahtDE27ZXet5IkvU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>396882908080</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>de.yes-soft.soyah</string>
+	<key>PROJECT_ID</key>
+	<string>yes-soft-6866a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>yes-soft-6866a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:396882908080:ios:adc1ed37dbb26e4ffabc75</string>
+	<key>DATABASE_URL</key>
+	<string>https://yes-soft-6866a.firebaseio.com</string>
+</dict>
+</plist>

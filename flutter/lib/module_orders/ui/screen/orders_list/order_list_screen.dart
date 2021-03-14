@@ -65,7 +65,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
     pageLayout.add(SizedBox(height: 20,));
     // endregion
 
-    ordersList.forEach((element) {
+    ordersList?.forEach((element) {
       print(element.status);
     });
 

@@ -10,9 +10,9 @@ class OrderResponse {
   OrderResponse.fromJson(Map<String, dynamic> json) {
     statusCode = json['status_code'];
     msg = json['msg'];
-    if (json['data'] != null) {
+    if (json['Data'] != null) {
       orderList = <OrderModel>[];
-      json['data'].forEach((v) {
+      json['Data'].forEach((v) {
         orderList.add(new OrderModel.fromJson(v));
       });
     }
@@ -23,7 +23,7 @@ class OrderResponse {
     data['status_code'] = this.statusCode;
     data['msg'] = this.msg;
     if (this.orderList != null) {
-      data['data'] = this.orderList.map((v) => v.toJson()).toList();
+      data['Data'] = this.orderList.map((v) => v.toJson()).toList();
     }
     return data;
   }

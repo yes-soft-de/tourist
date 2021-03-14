@@ -20,6 +20,9 @@ class HttpClient extends NetworkClient {
     _client.interceptors
         .add(DioCacheManager(CacheConfig(baseUrl: Urls.baseAPI)).interceptor);
   }
+
+
+  @override
   Future<Map<String, dynamic>> get(String url, {
     Map<String, dynamic> queryParams,
     Map<String, String> headers,
@@ -62,16 +65,12 @@ class HttpClient extends NetworkClient {
     }
   }
 
+  @override
   Future<Map<String, dynamic>> post(String url,
       Map<String, dynamic> payLoad, {
         Map<String, String> queryParams,
         Map<String, String> headers,
       }) async {
-    Dio client = Dio(BaseOptions(
-      sendTimeout: 60000,
-      receiveTimeout: 60000,
-      connectTimeout: 60000,
-    ));
     try {
       _logger.info(tag, 'Requesting Post to: ' + url);
       _logger.info(tag, 'POST: ' + jsonEncode(payLoad));
@@ -79,11 +78,11 @@ class HttpClient extends NetworkClient {
       if (headers != null) {
         if (headers['Authorization'] != null) {
           _logger.info(tag, 'Adding Auth Header');
-          client.options.headers['Authorization'] = headers['Authorization'];
+          _client.options.headers['Authorization'] = headers['Authorization'];
         }
       }
-      client.interceptors.add(performanceInterceptor);
-      var response = await client.post(
+      _client.interceptors.add(performanceInterceptor);
+      var response = await _client.post(
         url,
         queryParameters: queryParams,
         data: json.encode(payLoad),
@@ -92,15 +91,11 @@ class HttpClient extends NetworkClient {
     } catch (e) {
       if (e is DioError) {
         DioError err = e;
-        if (err != null) {
-          if (err.response != null) {
-            if (err.response.statusCode != 404) {
-              _logger.error(
-                  tag, err.message + ', POST: ' + url, StackTrace.current);
-              return null;
-            }
-          }
+        if (err?.response?.statusCode != 404) {
+          _logger.error(
+              tag, err.message + ', POST: ' + url, StackTrace.current);
         }
+        return null;
       } else {
         _logger.error(tag, e.toString() + ', POST: ' + url, StackTrace.current);
         return null;
@@ -108,6 +103,7 @@ class HttpClient extends NetworkClient {
     }
   }
 
+  @override
   Future<Map<String, dynamic>> put(String url,
       Map<String, dynamic> payLoad, {
         Map<String, String> queryParams,

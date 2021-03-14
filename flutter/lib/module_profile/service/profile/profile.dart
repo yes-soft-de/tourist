@@ -1,5 +1,4 @@
 import 'package:inject/inject.dart';
-import 'package:tourists/consts/urls.dart';
 import 'package:tourists/module_auth/enums/user_type.dart';
 import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
 import 'package:tourists/module_locations/model/location_list_item/location_list_item.dart';

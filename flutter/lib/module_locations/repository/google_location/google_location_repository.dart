@@ -15,7 +15,7 @@ class GoogleLocationRepository {
     if (response == null) {
       return null;
     }
-    return response == null ? null : response['data'];
+    return response == null ? null : response['Data'];
   }
 
   Future<GoogleLocationsResponse> getPredictions(
@@ -33,7 +33,8 @@ class GoogleLocationRepository {
     return GoogleLocationsResponse.fromJson(response);
   }
 
-  Future<GoogleLocationDetailsResponse> getPlaceDetails(String key, String placeId) async {
+  Future<GoogleLocationDetailsResponse> getPlaceDetails(
+      String key, String placeId) async {
     Map<String, dynamic> response =
         await _client.get(Urls.googlePlaceDetails, queryParams: {
       'place_id': placeId,

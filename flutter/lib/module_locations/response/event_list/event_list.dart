@@ -10,9 +10,9 @@ class EventListResponse {
   EventListResponse.fromJson(Map<String, dynamic> json) {
     statusCode = json['status_code'];
     msg = json['msg'];
-    if (json['data'] != null) {
+    if (json['Data'] != null) {
       data = <Data>[];
-      json['data'].forEach((v) {
+      json['Data'].forEach((v) {
         data.add(new Data.fromJson(v));
       });
     }
@@ -23,7 +23,7 @@ class EventListResponse {
     data['status_code'] = this.statusCode;
     data['msg'] = this.msg;
     if (this.data != null) {
-      data['data'] = this.data.map((v) => v.toJson()).toList();
+      data['Data'] = this.data.map((v) => v.toJson()).toList();
     }
     return data;
   }

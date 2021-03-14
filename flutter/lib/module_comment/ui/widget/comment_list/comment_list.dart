@@ -6,21 +6,21 @@ import 'package:tourists/utils/time/time_formatter.dart';
 
 class CommentListWidget extends StatefulWidget {
   final List<CommentModel> comments;
-  List<CommentModel> displayedComments = [];
 
-  CommentListWidget(this.comments) {
-    displayedComments =
-        (comments.length > 3) ? comments.sublist(0, 3) : comments;
-  }
+  CommentListWidget(this.comments);
 
   @override
-  State<StatefulWidget> createState() => _CommentListWidgetState();
+  State<StatefulWidget> createState() => _CommentListWidgetState(this.comments);
 }
 
 class _CommentListWidgetState extends State<CommentListWidget> {
 //  bool commentListCollapsed = true;
+  List<CommentModel> displayedComments;
 
-  _CommentListWidgetState();
+  _CommentListWidgetState(List<CommentModel> comments) {
+    displayedComments =
+        (comments.length > 3) ? comments.sublist(0, 3) : comments;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,27 +60,27 @@ class _CommentListWidgetState extends State<CommentListWidget> {
         ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: widget.displayedComments.length,
+            itemCount: displayedComments.length,
             itemBuilder: (BuildContext context, int index) {
-              if (widget.displayedComments[index].comment != null &&
-                  widget.displayedComments[index].userName != null) {
+              if (displayedComments[index].comment != null &&
+                  displayedComments[index].userName != null) {
                 return CommentItemWidget(
-                  comment: widget.displayedComments[index].comment,
-                  userName: widget.displayedComments[index].userName,
+                  comment: displayedComments[index].comment,
+                  userName: displayedComments[index].userName,
                   commentDate: TimeFormatter.getDartDate(
-                      widget.displayedComments[index].date),
+                      displayedComments[index].date),
                 );
               } else {
                 return Container();
               }
             }),
-        if (widget.comments.length > widget.displayedComments.length)
+        if (widget.comments.length > displayedComments.length)
           RaisedButton(
               onPressed: () {
                 setState(() {
-                  int startIndex = widget.displayedComments.length - 1;
-                  widget.displayedComments.addAll((widget.comments.length -
-                              widget.displayedComments.length >
+                  int startIndex = displayedComments.length - 1;
+                  displayedComments.addAll((widget.comments.length -
+                              displayedComments.length >
                           3)
                       ? widget.comments.sublist(startIndex, startIndex + 3)
                       : widget.comments.sublist(startIndex));

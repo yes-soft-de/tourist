@@ -5,7 +5,6 @@ import 'package:inject/inject.dart';
 import 'package:tourists/module_locations/bloc/add_location/add_location.dart';
 import 'package:tourists/module_locations/model/location_details/location_details.dart';
 import 'package:tourists/module_locations/ui/states/add_location_state/add_location_state.dart';
-import 'package:tourists/module_locations/ui/states/add_location_state/add_location_state_init.dart';
 import 'package:tourists/module_locations/ui/states/add_location_state/add_location_state_loading.dart';
 
 @provide

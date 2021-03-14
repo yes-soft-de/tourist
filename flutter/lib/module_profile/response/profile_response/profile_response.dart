@@ -8,7 +8,7 @@ class ProfileResponse {
   ProfileResponse.fromJson(Map<String, dynamic> json) {
     statusCode = json['status_code'];
     msg = json['msg'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['Data'] != null ? new Data.fromJson(json['Data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -16,7 +16,7 @@ class ProfileResponse {
     data['status_code'] = this.statusCode;
     data['msg'] = this.msg;
     if (this.data != null) {
-      data['data'] = this.data.toJson();
+      data['Data'] = this.data.toJson();
     }
     return data;
   }
@@ -40,19 +40,19 @@ class Data {
 
   Data(
       {this.userID,
-        this.roles,
-        this.name,
-        this.sex,
-        this.nationality,
-        this.guideLanguage,
-        this.arrivalCity,
-        this.arrivalDate,
-        this.stayDays,
-        this.interests,
-        this.email,
-        this.phoneNumber,
-        this.image,
-        this.createDate});
+      this.roles,
+      this.name,
+      this.sex,
+      this.nationality,
+      this.guideLanguage,
+      this.arrivalCity,
+      this.arrivalDate,
+      this.stayDays,
+      this.interests,
+      this.email,
+      this.phoneNumber,
+      this.image,
+      this.createDate});
 
   Data.fromJson(Map<String, dynamic> json) {
     userID = json['userID'];

@@ -5,10 +5,14 @@ import 'package:tourists/module_network/http_client/http_client.dart';
 import 'package:tourists/module_profile/request/create_profile.dart';
 import 'package:tourists/module_profile/response/profile_list/profile_list_response.dart';
 import 'package:tourists/module_profile/response/profile_response/profile_response.dart';
+import 'package:tourists/utils/logger/logger.dart';
 
 @provide
 class MyProfileRepository {
+  final TAG = 'MyProfileRepository';
   final _apiClient = HttpClient();
+  final _logger = Logger();
+
   MyProfileRepository();
 
   Future<ProfileResponse> createTouristProfile(
@@ -17,12 +21,16 @@ class MyProfileRepository {
     try {
       response =
       await _apiClient.post(Urls.getTouristProfileAPI, profileRequest.toJson());
-    } catch (e){};
+    } catch (e){
+      _logger.info(TAG, '${e.toString()}');
+    };
 
     try {
       response =
       await _apiClient.put(Urls.getTouristProfileAPI, profileRequest.toJson());
-    } catch (e){};
+    } catch (e){
+      _logger.info(TAG, '${e.toString()}');
+    };
 
     return response == null
         ? null
@@ -35,12 +43,16 @@ class MyProfileRepository {
     try {
       response =
       await _apiClient.post(Urls.registerGuideAPI, profileRequest.toJson());
-    } catch (e){};
+    } catch (e){
+      _logger.info(TAG, '${e.toString()}');
+    }
 
     try {
       response =
       await _apiClient.put(Urls.registerGuideAPI, profileRequest.toJson());
-    } catch (e){};
+    } catch (e){
+      _logger.info(TAG, '${e.toString()}');
+    }
 
     return response == null
         ? null

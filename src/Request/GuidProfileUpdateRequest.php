@@ -10,7 +10,7 @@ class GuidProfileUpdateRequest
 
     public $name;
 
-    public $status;
+    // public $status;
 
     public $about;
 
@@ -20,7 +20,7 @@ class GuidProfileUpdateRequest
 
     public $phoneNumber;
 
-    public $cost;
+    // public $cost;
 
     public $service = [];
 

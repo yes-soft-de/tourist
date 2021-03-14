@@ -6,6 +6,8 @@ namespace App\Response;
 
 class GuidesResponse
 {
+    public $id;
+    
     public $user;
 
     public $userID;

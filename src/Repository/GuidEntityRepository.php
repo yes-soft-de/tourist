@@ -31,6 +31,15 @@ class GuidEntityRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    public function getGuidByGuidId($id)
+    {
+        return $this->createQueryBuilder('guid')
+            ->andWhere('guid.id =:id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     public function getGuidByRegion($city)
     {
         $r =  $this->createQueryBuilder('guid')
@@ -61,7 +70,7 @@ class GuidEntityRepository extends ServiceEntityRepository
     public function getGuides()
     {
         return $this->createQueryBuilder('guid')
-            ->select('IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image',
+            ->select('guid.id','IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image',
                 'userEntity.userID as userID')
 
             ->from('App:User', 'userEntity')
@@ -95,6 +104,16 @@ class GuidEntityRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
         
+    }
+
+    public function guideById($id)
+    {
+        return $this->createQueryBuilder('guid')
+        ->select('guid.id', 'IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image', 'guid.placeId', 'guid.about', 'guid.phoneNumber', 'guid.service')
+            ->andWhere('guid.id =:id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
 }

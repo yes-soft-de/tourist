@@ -84,20 +84,20 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
     public function getOrdersByGuidUserID($guidUserID)
     {
         $e = $this->createQueryBuilder('orders')
-        ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.guidUserID', 'orders.city', 'orders.language',
+            ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.guidUserID', 'orders.city', 'orders.language',
             'orders.arriveDate', 'orders.leaveDate', 'orders.roomID', 'orders.cost', 'orders.status', 'acceptedOrderEntity.uuid')
 
             ->join('App:AcceptedOrderEntity', 'acceptedOrderEntity')
 
             ->andWhere('orders.id = acceptedOrderEntity.orderID')
-        ->andWhere('orders.guidUserID=:guidID')
-        ->setParameter('guidID', $guidUserID)
-        ->groupBy('orders.id')
-        ->orderBy('orders.id', 'ASC')
+            ->andWhere('orders.guidUserID=:guidID')
+            ->setParameter('guidID', $guidUserID)
+            ->groupBy('orders.id')
+            ->orderBy('orders.id', 'ASC')
 
-        ->getQuery()
-        ->getResult();
+            ->getQuery()
+            ->getResult();
 
-    return $e;
+             return $e;
     }
 }

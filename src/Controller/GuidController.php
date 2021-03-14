@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\AutoMapping;
 use App\Request\GuidProfileUpdateRequest;
+use App\Request\guidByAdminUpdateRequest;
 use App\Request\GuidRegisterRequest;
 use App\Service\GuidService;
 use stdClass;
@@ -73,6 +74,28 @@ class GuidController extends BaseController
 
         return $this->response($response, self::UPDATE);
     }
+//for ADMIN
+    /**
+     * @Route("/guidbyadminupdate", name="guidByAdminUpdate", methods={"PUT"})
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function guidByAdminUpdate(Request $request)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $request = $this->autoMapping->map(stdClass::class, guidByAdminUpdateRequest::class,(object)$data);
+
+        $violations = $this->validator->validate($request);
+        if (\count($violations) > 0) {
+            $violationsString = (string) $violations;
+
+            return new JsonResponse($violationsString, Response::HTTP_OK);
+        }
+        $response = $this->guidService->guidByAdminUpdate($request);
+
+        return $this->response($response, self::UPDATE);
+    }
 
     /**
      * @Route("/guide/{id}", name="guidByRegion", methods={"GET"})
@@ -121,6 +144,18 @@ class GuidController extends BaseController
     public function getguideByUserID($userId)
     {
         $response = $this->guidService->getguideByUserID($userId);
+
+        return $this->response($response, self::FETCH);
+    }
+
+    /**
+     * @Route("/guidebyid/{id}", name="guideById", methods={"GET"})
+     * @return JsonResponse
+     */
+    
+    public function guideById($id)
+    {
+        $response = $this->guidService->guideById($id);
 
         return $this->response($response, self::FETCH);
     }

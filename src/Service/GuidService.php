@@ -11,11 +11,14 @@ use App\Manager\GuidManager;
 use App\Manager\ImageManager;
 use App\Manager\RatingManager;
 use App\Request\GuidProfileUpdateRequest;
+use App\Request\guidByAdminUpdateRequest;
 use App\Request\GuidRegisterRequest;
 use App\Response\GuidByRegionResponse;
 use App\Response\GuidesResponse;
 use App\Response\GuidProfileUpdateResponse;
 use App\Response\GuidRegisterResponse;
+use App\Service\OrderService;
+
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class GuidService
@@ -25,13 +28,15 @@ class GuidService
     private $imageManager;
     private $ratingManager;
     private $params;
+    private $orderService;
 
-    public function __construct(AutoMapping $autoMapping, GuidManager $guidManager, ImageManager $imageManager, RatingManager $ratingManager, ParameterBagInterface $params)
+    public function __construct(AutoMapping $autoMapping, GuidManager $guidManager, ImageManager $imageManager, RatingManager $ratingManager, ParameterBagInterface $params, OrderService $orderService)
     {
         $this->autoMapping = $autoMapping;
         $this->guidManager = $guidManager;
         $this->imageManager = $imageManager;
         $this->ratingManager = $ratingManager;
+        $this->orderService = $orderService;
         $this->params = $params->get('upload_base_url') . '/';
     }
 
@@ -47,6 +52,16 @@ class GuidService
     public function guidProfileUpdate(GuidProfileUpdateRequest $request)
     {
         $guidProfileUpdate = $this->guidManager->updateGuidProfile($request);
+
+        $response = $this->autoMapping->map(GuidEntity::class,GuidProfileUpdateResponse::class, $guidProfileUpdate);
+        //dd($response->id);
+
+        return $response;
+    }
+
+    public function guidByAdminUpdate(guidByAdminUpdateRequest $request)
+    {
+        $guidProfileUpdate = $this->guidManager->guidByAdminUpdate($request);
 
         $response = $this->autoMapping->map(GuidEntity::class,GuidProfileUpdateResponse::class, $guidProfileUpdate);
         //dd($response->id);
@@ -127,6 +142,18 @@ class GuidService
         $item['image'] = $this->params.$item['image'];
         $item['baseURL'] = $this->params;
         
+        return $this->autoMapping->map('array', GuidByRegionResponse::class, $item);
+    }
+
+    public function guideById($id)
+    {
+        $item = $this->guidManager->guideById($id);
+        if($item) {
+            $item['imageURL'] = $item['image'];
+            $item['image'] = $this->params.$item['image'];
+            $item['baseURL'] = $this->params;
+            $item['myOrders'] = $this->orderService->getOrderByGuid($item['user']);
+        }
         return $this->autoMapping->map('array', GuidByRegionResponse::class, $item);
     }
 }

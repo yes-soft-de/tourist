@@ -11,6 +11,7 @@ use App\Repository\GuidEntityRepository;
 use App\Repository\UserRepository;
 use App\Request\GuidProfileCreateRequest;
 use App\Request\GuidProfileUpdateRequest;
+use App\Request\guidByAdminUpdateRequest;
 use App\Request\GuidRegisterRequest;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -111,6 +112,21 @@ class GuidManager
         }
     }
 
+    public function guidByAdminUpdate(guidByAdminUpdateRequest $request)
+    {
+        $guid = $this->guidEntityRepository->getGuidByGuidId($request->getId());
+
+         if ($guid)
+        {
+            $profile = $this->autoMapping->mapToObject(guidByAdminUpdateRequest::class,
+                GuidEntity::class, $request, $guid);
+
+            $this->entityManager->flush();
+            $this->entityManager->clear();
+            return $profile;
+        }
+    }
+
     public function getGuidByRegion($regionID)
     {
         $city =[];
@@ -134,5 +150,10 @@ class GuidManager
     public function getguideByUserID($userID)
     {
         return $this->guidEntityRepository->getUser($userID);
+    }
+
+    public function guideById($id)
+    {
+        return $this->guidEntityRepository->guideById($id);
     }
 }

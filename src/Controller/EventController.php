@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\AutoMapping;
 use App\Request\EventCreateRequest;
+use App\Request\EventUpdateRequest;
 use App\Service\EventService;
 use stdClass;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -53,7 +54,7 @@ class EventController extends BaseController
     }
 
     /**
-     * @Route("/event", name="event", methods={"GET"})
+     * @Route("/events", name="event", methods={"GET"})
      * @return JsonResponse
      */
     public function event()
@@ -75,4 +76,27 @@ class EventController extends BaseController
         return $this->response($response,self::FETCH);
     }
 
+    //for ADMIN
+    /**
+     * @Route("/event", name="eventUpdate", methods={"PUT"})
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function eventUpdate(Request $request)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $request = $this->autoMapping->map(stdClass::class, EventUpdateRequest::class,(object)$data);
+        $violations = $this->validator->validate($request);
+      
+        if (\count($violations) > 0) {
+            $violationsString = (string) $violations;
+
+            return new JsonResponse($violationsString, Response::HTTP_OK);
+        }
+
+        $response = $this->eventService->eventUpdate($request);
+
+        return $this->response($response, self::UPDATE);
+    }
 }

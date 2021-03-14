@@ -98,6 +98,16 @@ methods={"GET"}
 /guidebyuseriD/{userId}
 methods={"GET"}
 ```
+#### guid by admin update
+```
+/guidbyadminupdate
+methods={"PUT"}
+```
+#### guid by id
+```
+/guidebyid/{id}
+methods={"GET"}
+```
 ### Orders System
 
 ------------
@@ -173,7 +183,7 @@ methods={"POST"}
 
 #### Get all Events
 ```
-/event
+/events
 methods={"GET"}
 ```
 
@@ -181,6 +191,11 @@ methods={"GET"}
 ```
 /event/{eventID}
 methods={"GET"}
+```
+#### Update event by admin
+```
+/event
+methods={"PUT"}
 ```
 
 ### Payment

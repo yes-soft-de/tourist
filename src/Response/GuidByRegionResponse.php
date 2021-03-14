@@ -6,6 +6,8 @@ namespace App\Response;
 
 class GuidByRegionResponse
 {
+    public $id;
+
     public $user;
 
     public $name;
@@ -31,6 +33,8 @@ class GuidByRegionResponse
     public $baseURL;
     
     public $imageURL;
+
+    public $myOrders;
 
     /**
      * @param array $image

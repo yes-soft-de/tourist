@@ -8,6 +8,7 @@ use App\AutoMapping;
 use App\Entity\EventEntity;
 use App\Repository\EventEntityRepository;
 use App\Request\EventCreateRequest;
+use App\Request\EventUpdateRequest;
 use Doctrine\ORM\EntityManagerInterface;
 
 class EventManager
@@ -44,5 +45,20 @@ class EventManager
     public function getEventByID($id)
     {
         return $this->eventEntityRepository->getEventByID($id);
+    }
+
+    public function eventUpdate(EventUpdateRequest $request)
+    {
+        $entity = $this->eventEntityRepository->find($request->getId());
+
+         if ($entity)
+        {
+            $item = $this->autoMapping->mapToObject(EventUpdateRequest::class,
+            EventEntity::class, $request, $entity);
+
+            $this->entityManager->flush();
+            $this->entityManager->clear();
+            return $item;
+        }
     }
 }

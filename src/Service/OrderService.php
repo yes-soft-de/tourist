@@ -110,6 +110,7 @@ class OrderService
     {
         $ordersResponse = [];
         $orders = $this->touristOrderManager->getOrderByGuid($guidUserID);
+       
         foreach ($orders as $order)
         {
             $ordersResponse[] = $this->autoMapping->map('array', TouristOrderCreateResponse::class, $order);

@@ -102,3 +102,20 @@ App\Request\GuidProfileUpdateRequest:
       - NotBlank: ~
     placeId:
       - NotBlank: ~
+
+App\Request\EventUpdateRequest:
+  properties:
+    id:
+      - NotBlank: ~
+    name:
+      - NotBlank: ~
+    type:
+      - NotBlank: ~
+    subType:
+      - NotBlank: ~
+    status:
+      - NotBlank: ~
+    location:
+      - NotBlank: ~
+    description:
+      - NotBlank: ~

@@ -10,6 +10,7 @@ use App\Manager\CommentsManager;
 use App\Manager\EventManager;
 use App\Manager\ImageManager;
 use App\Request\EventCreateRequest;
+use App\Request\EventUpdateRequest;
 use App\Response\EventCreateResponse;
 use App\Response\EventsResponse;
 use App\Response\GetCommentsByIdResponse;
@@ -101,4 +102,12 @@ class EventService
     {
         return $this->commentsManager->eventCommentsNumber($id);
     }
+
+    public function eventUpdate(EventUpdateRequest $request)
+    {
+        $item = $this->eventManager->eventUpdate($request);
+
+        return $this->autoMapping->map(EventEntity::class, EventCreateResponse::class, $item);
+    }
+
 }

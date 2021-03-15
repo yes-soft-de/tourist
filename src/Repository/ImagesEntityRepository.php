@@ -31,6 +31,16 @@ class ImagesEntityRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function getRegionImage($id)
+    {
+        return $this->createQueryBuilder('images')
+            ->andWhere('images.region = :id')
+            ->setParameter('id', $id)
+
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     public function getEventImages($id)
     {
         return $this->createQueryBuilder('images')

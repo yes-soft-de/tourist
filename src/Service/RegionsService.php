@@ -13,6 +13,7 @@ use App\Manager\ImageManager;
 use App\Manager\RatingManager;
 use App\Manager\RegionsManager;
 use App\Request\RatingCreateRequest;
+use App\Request\RegionUpdateRequest;
 use App\Request\RegionCreateRequest;
 use App\Request\ImageCreateRequest;
 use App\Response\GetCommentsByIdResponse;
@@ -259,4 +260,15 @@ class RegionsService
     {
         return $this->imageManager->getGuidImage($guidID);
     }
+
+    public function update(RegionUpdateRequest $request)
+    {
+        $item = $this->regionsManager->update($request);
+
+        $response = $this->autoMapping->map(GuidEntity::class,RegionCreateResponse::class, $item);
+        //dd($response->id);
+
+        return $response;
+    }
+
 }

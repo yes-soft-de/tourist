@@ -7,20 +7,28 @@ namespace App\Manager;
 use App\AutoMapping;
 use App\Entity\RegionsEntity;
 use App\Repository\RegionsEntityRepository;
+use App\Repository\ImagesEntityRepository;
 use App\Request\RegionCreateRequest;
+use App\Request\RegionUpdateRequest;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Request\ImageCreateRequest;
+use App\Manager\ImageManager;
 
 class RegionsManager
 {
     private $autoMapping;
     private $entityManager;
     private $regionsEntityRepository;
+    private $imagesEntityRepository;
+    private $imageManager;
 
-    public function __construct(AutoMapping $autoMapping, EntityManagerInterface $entityManager, RegionsEntityRepository $regionsEntityRepository)
+    public function __construct(AutoMapping $autoMapping, EntityManagerInterface $entityManager, RegionsEntityRepository $regionsEntityRepository,  ImagesEntityRepository $imagesEntityRepository,  ImageManager $imageManager)
     {
         $this->autoMapping = $autoMapping;
         $this->entityManager = $entityManager;
         $this->regionsEntityRepository = $regionsEntityRepository;
+        $this->imagesEntityRepository = $imagesEntityRepository;
+        $this->imageManager = $imageManager;
     }
 
     public function regionCreate(RegionCreateRequest $request)
@@ -47,5 +55,44 @@ class RegionsManager
     public function getRegionByPlaceID($placeId)
     {
         return $this->regionsEntityRepository->getRegionByPlaceID($placeId);
+    }
+
+    public function update(RegionUpdateRequest $request)
+    {
+       
+        $region = $this->regionsEntityRepository->Region($request->getId());
+
+        $image = $this->imagesEntityRepository->getRegionImage($region);
+         
+        if($image) {
+            $image->setPath($request->getPath());
+            $region = $this->autoMapping->mapToObject(RegionUpdateRequest::class,
+            RegionsEntity::class, $request, $region);
+            $this->entityManager->flush();
+            $this->entityManager->clear();
+            return $region;
+            }
+       
+        if(!$image){
+
+            $region = $this->autoMapping->mapToObject(RegionUpdateRequest::class,
+            RegionsEntity::class, $request, $region);
+            $this->entityManager->flush();
+            $this->entityManager->clear();
+
+             //save image
+            $regionImage =  new ImageCreateRequest();
+            $regionImage->path = $request->path;
+            $regionImage->region = $region->getId();
+    
+            $path = $this->imageManager->imageCreate($regionImage);
+        
+            $imagePathResponse = $this->autoMapping->map(ImagesEntity::class,ImageCreateResponse::class, $path);
+            $region->setPath($imagePathResponse->getPath());
+            return $region;
+        }
+
+      
+        
     }
 }

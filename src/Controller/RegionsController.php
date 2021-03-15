@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\AutoMapping;
 use App\Request\RegionCreateRequest;
+use App\Request\RegionUpdateRequest;
 use App\Service\RegionsService;
 use stdClass;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -85,4 +86,21 @@ class RegionsController extends BaseController
 
         return $this->response($response,self::FETCH);
     }
+
+     /**
+     * @Route("/updateRegion", name="regionUpdate", methods={"PUT"})
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function regionUpdate(Request $request)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $request = $this->autoMapping->map(stdClass::class, RegionUpdateRequest::class,(object)$data);
+        
+        $response = $this->regionsService->update($request);
+
+        return $this->response($response, self::UPDATE);
+    }
+
 }

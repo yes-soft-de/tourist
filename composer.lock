@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.173.25",
+            "version": "3.173.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "69e4653acf8cd855e9010ec4e0e0a7d074c77ee1"
+                "reference": "593baa5930896bb443c437032daf4016e1e3878d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/69e4653acf8cd855e9010ec4e0e0a7d074c77ee1",
-                "reference": "69e4653acf8cd855e9010ec4e0e0a7d074c77ee1",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/593baa5930896bb443c437032daf4016e1e3878d",
+                "reference": "593baa5930896bb443c437032daf4016e1e3878d",
                 "shasum": ""
             },
             "require": {
@@ -92,9 +92,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.173.25"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.173.28"
             },
-            "time": "2021-03-09T19:14:56+00:00"
+            "time": "2021-03-12T19:29:55+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -1206,16 +1206,16 @@
         },
         {
             "name": "doctrine/migrations",
-            "version": "2.3.2",
+            "version": "2.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "39520699043d9bfaaebeb81fa026bf2b02a8f735"
+                "reference": "c4c46f7064f6e7795bd7f26549579918b46790fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/39520699043d9bfaaebeb81fa026bf2b02a8f735",
-                "reference": "39520699043d9bfaaebeb81fa026bf2b02a8f735",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/c4c46f7064f6e7795bd7f26549579918b46790fa",
+                "reference": "c4c46f7064f6e7795bd7f26549579918b46790fa",
                 "shasum": ""
             },
             "require": {
@@ -1286,7 +1286,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/migrations/issues",
-                "source": "https://github.com/doctrine/migrations/tree/2.3.2"
+                "source": "https://github.com/doctrine/migrations/tree/2.3.3"
             },
             "funding": [
                 {
@@ -1302,7 +1302,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-23T14:06:04+00:00"
+            "time": "2021-03-14T10:22:48+00:00"
         },
         {
             "name": "doctrine/orm",

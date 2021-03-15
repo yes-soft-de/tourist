@@ -16,6 +16,7 @@
 /vendor/
 /web/bundles/
 /Migrations
+/src/Migrations
 
 # jetbrain
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm

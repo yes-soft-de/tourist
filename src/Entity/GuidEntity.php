@@ -68,9 +68,9 @@ class GuidEntity
     private $path;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="json", nullable=true)
      */
-    private $placeId;
+    private $places = [];
 
     public function getId(): ?int
     {
@@ -197,14 +197,14 @@ class GuidEntity
         return $this;
     }
 
-    public function getPlaceId(): ?string
+    public function getPlaces(): ?array
     {
-        return $this->placeId;
+        return $this->places;
     }
 
-    public function setPlaceId(?string $placeId): self
+    public function setPlaces(?array $places): self
     {
-        $this->placeId = $placeId;
+        $this->places = $places;
 
         return $this;
     }

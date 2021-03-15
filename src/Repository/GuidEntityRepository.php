@@ -59,8 +59,9 @@ class GuidEntityRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('guid')
             ->select('IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image')
-            ->andWhere('guid.placeId = :placeId')
-            ->setParameter('placeId', $placeId)
+            
+            ->andWhere('guid.places LIKE :placeId')
+            ->setParameter('placeId', '%'.$placeId.'%')
 
             ->getQuery()
             ->getResult();
@@ -97,7 +98,7 @@ class GuidEntityRepository extends ServiceEntityRepository
     public function getUser($userID)
     {
         return $this->createQueryBuilder('guid')
-            ->select('IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image', 'guid.placeId', 'guid.about', 'guid.phoneNumber', 'guid.service')
+            ->select('IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image', 'guid.places', 'guid.about', 'guid.phoneNumber', 'guid.service')
             ->andWhere('guid.user = :userID')
             ->setParameter('userID', $userID)
 
@@ -109,7 +110,7 @@ class GuidEntityRepository extends ServiceEntityRepository
     public function guideById($id)
     {
         return $this->createQueryBuilder('guid')
-        ->select('guid.id', 'IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image', 'guid.placeId', 'guid.about', 'guid.phoneNumber', 'guid.service')
+        ->select('guid.id', 'IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image', 'guid.places', 'guid.about', 'guid.phoneNumber', 'guid.service')
             ->andWhere('guid.id =:id')
             ->setParameter('id', $id)
             ->getQuery()

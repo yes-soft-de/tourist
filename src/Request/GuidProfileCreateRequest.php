@@ -10,5 +10,5 @@ class GuidProfileCreateRequest
 
     public $name;
 
-    public $placeId;
+    public $places;
 }

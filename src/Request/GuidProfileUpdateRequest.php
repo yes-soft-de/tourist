@@ -26,6 +26,8 @@ class GuidProfileUpdateRequest
 
     public $path;
     
+    public $places = [];
+    
     public $placeId;
 
     /**

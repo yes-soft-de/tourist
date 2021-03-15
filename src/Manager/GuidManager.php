@@ -76,7 +76,7 @@ class GuidManager
 
         $profile->user = $user;
         $profile->name = $request->name;
-        $profile->placeId = $request->placeId;
+        $profile->places = $request->places;
 
         //$request->setUserID($user);
 

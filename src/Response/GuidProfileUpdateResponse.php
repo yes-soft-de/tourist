@@ -28,7 +28,7 @@ class GuidProfileUpdateResponse
 
     public $path;
     
-    public $placeId;
+    public $places = [];
 
     /**
      * @param mixed $path

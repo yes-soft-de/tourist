@@ -18,7 +18,7 @@ class GuidRegisterRequest
 
     public $createDate;
 
-    public $placeId;
+    public $places = [];
 
     /**
      * @param array $roles
@@ -70,21 +70,21 @@ class GuidRegisterRequest
     }
 
     /**
-     * Get the value of placeId
+     * Get the value of places
      */ 
-    public function getPlaceId()
+    public function getPlaces(): array
     {
-        return $this->placeId;
+        return $this->places;
     }
 
     /**
-     * Set the value of placeId
+     * Set the value of places
      *
      * @return  self
      */ 
-    public function setPlaceId($placeId)
+    public function setPlaces(array $places)
     {
-        $this->placeId = $placeId;
+        $this->places = $places;
 
         return $this;
     }

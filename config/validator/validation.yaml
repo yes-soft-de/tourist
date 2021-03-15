@@ -44,7 +44,7 @@ App\Request\GuidRegisterRequest:
   properties:
     userID:
       - NotBlank: ~
-    placeId:
+    places:
       - NotBlank: ~
 
 App\Request\GuidProfileCreateRequest:
@@ -100,7 +100,7 @@ App\Request\GuidProfileUpdateRequest:
       - NotBlank: ~
     service:
       - NotBlank: ~
-    placeId:
+    places:
       - NotBlank: ~
 
 App\Request\EventUpdateRequest:

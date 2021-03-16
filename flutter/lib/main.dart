@@ -40,6 +40,7 @@ void main() async {
   await Firebase.initializeApp();
   await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
   FlutterError.onError = (FlutterErrorDetails details) {
+    print('Err: ' + details.exception.toString());
     FirebaseCrashlytics.instance.recordFlutterError(details);
   };
   await SystemChrome.setPreferredOrientations([
@@ -128,8 +129,6 @@ class MyApp extends StatelessWidget {
       getInitialLink().then((value) {
         if (value != null) {
           _authService.verifyLoginLink(value);
-        } else {
-          Logger().info('Main', 'No Link :)');
         }
       });
     } catch (e) {}

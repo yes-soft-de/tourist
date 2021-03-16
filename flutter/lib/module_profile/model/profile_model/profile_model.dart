@@ -3,16 +3,29 @@ import 'package:tourists/module_locations/model/location_list_item/location_list
 class ProfileModel {
   String name;
   String image;
+  String phone;
   List<String> locations = <String>[];
   List<String> languages = <String>[];
+  List<String> services = <String>[];
   List<LocationListItem> availableLocations = <LocationListItem>[];
 
-  ProfileModel({this.name, this.image, this.locations, this.languages, this.availableLocations}) {
+  ProfileModel({
+    this.name,
+    this.image,
+    this.locations,
+    this.languages,
+    this.availableLocations,
+    this.phone,
+    this.services,
+  }) {
     if (this.languages == null) {
       this.languages = [];
     }
     if (this.locations == null) {
       this.locations = [];
+    }
+    if (this.services == null) {
+      this.services = [];
     }
   }
 

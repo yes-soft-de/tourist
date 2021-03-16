@@ -41,8 +41,11 @@ class ProfileService {
     CreateProfileRequest request = CreateProfileRequest(
       userName: profileModel.name,
       image: profileModel.image,
-      location: 'Saudi Arabia',
+      phoneNumber: profileModel.phone,
+      location: profileModel.locations,
       userID: userId,
+      languages: profileModel.languages,
+      services: profileModel.services,
     );
 
     ProfileResponse response;
@@ -61,12 +64,19 @@ class ProfileService {
     var role = await _authService.userRole;
 
     ProfileResponse myProfile = await _manager.getUserProfile(userId, role);
+    var places = [];
+
+    if (role == UserRole.ROLE_GUIDE) {
+      places = await _locationListService.getLocationList();
+    }
+
 
     return ProfileModel(
       name: '${myProfile.data.name} ',
       image: '${myProfile.data.image} ',
       locations: [],
       languages: ['en', 'ar'],
+      availableLocations: places,
     );
   }
 

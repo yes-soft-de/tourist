@@ -78,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "move_to_login" : MessageLookupByLibrary.simpleMessage("I have an account!"),
     "move_to_register" : MessageLookupByLibrary.simpleMessage("Register a new Account"),
     "myName" : MessageLookupByLibrary.simpleMessage("My Name"),
+    "myPhoneNumber" : MessageLookupByLibrary.simpleMessage("My Phone number"),
     "name" : MessageLookupByLibrary.simpleMessage("Name"),
     "nameIsRequired" : MessageLookupByLibrary.simpleMessage("Name is required"),
     "next" : MessageLookupByLibrary.simpleMessage("Next"),

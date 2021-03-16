@@ -78,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "move_to_login" : MessageLookupByLibrary.simpleMessage("املك حسابا"),
     "move_to_register" : MessageLookupByLibrary.simpleMessage("تسجيل حساب جديد"),
     "myName" : MessageLookupByLibrary.simpleMessage("My Name"),
+    "myPhoneNumber" : MessageLookupByLibrary.simpleMessage("My Phone number"),
     "name" : MessageLookupByLibrary.simpleMessage("الاسم"),
     "nameIsRequired" : MessageLookupByLibrary.simpleMessage("Name is required"),
     "next" : MessageLookupByLibrary.simpleMessage("التالي"),

@@ -37,6 +37,8 @@
 	<string>We need to access location to sort your orders</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need to access location to sort your orders</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need to access your profile photo</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

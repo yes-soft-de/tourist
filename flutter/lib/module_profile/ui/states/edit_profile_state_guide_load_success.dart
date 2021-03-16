@@ -16,14 +16,27 @@ class EditProfileStateGuideLoadSuccess extends EditProfileState {
   final ProfileModel userProfile;
   final SearchBloc _searchBloc;
   final _nameController = TextEditingController();
+  final _phoneController = TextEditingController();
 
   final languages = <String>{};
   final locations = <String>{};
+  final services = <String>{};
 
-  EditProfileStateGuideLoadSuccess(MyProfileScreen screen, this.userProfile, this._searchBloc,)
-      : super(screen) {
+  final _registerGuideFormKey = GlobalKey<FormState>();
+
+  EditProfileStateGuideLoadSuccess(
+    MyProfileScreen screen,
+    this.userProfile,
+    this._searchBloc,
+  ) : super(screen) {
     languages.addAll(userProfile.languages ?? []);
     locations.addAll(userProfile.locations ?? []);
+    services.addAll(userProfile.services ?? []);
+
+    if (userProfile != null) {
+      _nameController.text = userProfile.name;
+      _phoneController.text = userProfile.phone;
+    }
   }
 
   @override
@@ -33,6 +46,8 @@ class EditProfileStateGuideLoadSuccess extends EditProfileState {
 
     var picker = ImagePicker();
     return Form(
+      key: _registerGuideFormKey,
+      autovalidateMode: AutovalidateMode.always,
       child: SingleChildScrollView(
         child: Flex(
           direction: Axis.vertical,
@@ -90,13 +105,32 @@ class EditProfileStateGuideLoadSuccess extends EditProfileState {
             ListTile(
               title: TextFormField(
                 controller: _nameController,
-                onEditingComplete: () {
-                  profile.name = _nameController.text;
-                },
                 decoration: InputDecoration(
                   labelText: S.of(context).myName,
                   hintText: S.of(context).myName,
                 ),
+                validator: (val) {
+                  if (val.isEmpty) {
+                    return 'This value is required';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            ListTile(
+              title: TextFormField(
+                controller: _phoneController,
+                decoration: InputDecoration(
+                  labelText: S.of(context).myPhoneNumber,
+                  hintText: S.of(context).myPhoneNumber,
+                ),
+                keyboardType: TextInputType.phone,
+                validator: (val) {
+                  if (val.isEmpty) {
+                    return 'This value is required';
+                  }
+                  return null;
+                },
               ),
             ),
             ListTile(
@@ -114,8 +148,7 @@ class EditProfileStateGuideLoadSuccess extends EditProfileState {
                 } else {
                   languages.remove('ar');
                 }
-                profile.languages = languages.toList();
-                screen.refresh(profile);
+                refreshLayout();
               },
             ),
             CheckboxListTile(
@@ -127,8 +160,37 @@ class EditProfileStateGuideLoadSuccess extends EditProfileState {
                 } else {
                   languages.remove('en');
                 }
-                profile.languages = languages.toList();
-                screen.refresh(profile);
+                refreshLayout();
+              },
+            ),
+            ListTile(
+              title: Text(
+                S.of(context).services,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            CheckboxListTile(
+              title: Text(S.of(context).car),
+              value: services.contains('car'),
+              onChanged: (bool value) {
+                if (value) {
+                  services.add('car');
+                } else {
+                  services.remove('car');
+                }
+                refreshLayout();
+              },
+            ),
+            CheckboxListTile(
+              title: Text(S.of(context).hotel),
+              value: profile.services.contains('hotel'),
+              onChanged: (bool value) {
+                if (value) {
+                  services.add('hotel');
+                } else {
+                  services.remove('hotel');
+                }
+                refreshLayout();
               },
             ),
             ListTile(
@@ -138,9 +200,13 @@ class EditProfileStateGuideLoadSuccess extends EditProfileState {
               ),
               trailing: IconButton(
                 onPressed: () {
-                  showDialog(context: context, child: AddLocationDialog(_searchBloc));
+                  showDialog(
+                      context: context, child: AddLocationDialog(_searchBloc));
                 },
-                icon: Icon(Icons.add_circle, color: Theme.of(context).primaryColor,),
+                icon: Icon(
+                  Icons.add_circle,
+                  color: Theme.of(context).primaryColor,
+                ),
               ),
             ),
             Container(
@@ -155,18 +221,22 @@ class EditProfileStateGuideLoadSuccess extends EditProfileState {
                     } else {
                       locations.add(id.toString());
                     }
-                    profile.locations = locations.toList();
-                    screen.refresh(profile);
+                    refreshLayout();
                   }),
             ),
             GestureDetector(
               onTap: () {
-                var createProfileRequest = ProfileModel(
-                  name: _nameController.text,
-                  image: profile.image,
-                  languages: languages.toList(),
-                );
-                screen.saveProfile(createProfileRequest);
+                if (_registerGuideFormKey.currentState.validate()) {
+                  var createProfileRequest = ProfileModel(
+                    name: _nameController.text,
+                    phone: _phoneController.text,
+                    image: profile.image,
+                    languages: languages.toList(),
+                    locations: locations.toList(),
+                    services: services.toList(),
+                  );
+                  screen.saveProfile(createProfileRequest);
+                }
               },
               child: Container(
                 decoration: BoxDecoration(color: Theme.of(context).accentColor),
@@ -191,5 +261,18 @@ class EditProfileStateGuideLoadSuccess extends EditProfileState {
         ),
       ),
     );
+  }
+
+  void refreshLayout() {
+    var createProfileRequest = ProfileModel(
+      name: _nameController.text,
+      phone: _phoneController.text,
+      image: userProfile.image,
+      languages: languages.toList(),
+      locations: locations.toList(),
+      services: services.toList(),
+      availableLocations: userProfile.availableLocations,
+    );
+    screen.refresh(createProfileRequest);
   }
 }

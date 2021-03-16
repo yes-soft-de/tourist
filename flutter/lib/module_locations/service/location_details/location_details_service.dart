@@ -90,8 +90,8 @@ class LocationDetailsService {
     request.placeId = locationDetails.locationId;
     request.path = 'asd';
     request.location = {
-      'lat': locationDetails.locationJson.latitude,
-      'lng': locationDetails.locationJson.longitude,
+      'lat': locationDetails.locationJson?.latitude,
+      'lng': locationDetails.locationJson?.longitude,
     };
 
     var response = await _locationManager.createLocationDetails(request);

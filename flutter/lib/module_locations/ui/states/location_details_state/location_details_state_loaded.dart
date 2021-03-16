@@ -64,7 +64,6 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
               ? '${path.path}'.substring(path.path.lastIndexOf('http'))
               : path.path,
           errorBuilder: (c, e, s) {
-            print('Got Error Loading Image');
             return Image.asset('resources/images/logo.png');
           },
         ));

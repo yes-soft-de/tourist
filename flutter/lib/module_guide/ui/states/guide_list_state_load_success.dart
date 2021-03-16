@@ -12,7 +12,8 @@ class GuideListStateLoadSuccess extends GuideListState {
   final List<GuideListItemModel> _guidesList;
   final bool isLoggedId;
 
-  GuideListStateLoadSuccess(GuideListScreen screen, this._guidesList, this.isLoggedId)
+  GuideListStateLoadSuccess(
+      GuideListScreen screen, this._guidesList, this.isLoggedId)
       : super(screen);
 
   @override
@@ -29,7 +30,6 @@ class GuideListStateLoadSuccess extends GuideListState {
       guide.city.forEach((cityName) {
         citiesInText = citiesInText + cityName + ' ';
       });
-      print(citiesInText);
 
       // Construct the List into CSV text
       String languagesInText = ' ';
@@ -41,7 +41,8 @@ class GuideListStateLoadSuccess extends GuideListState {
         onTap: () {
           if (isLoggedId) {
             Navigator.of(context).pushNamed(FormsRoutes.requestGuideForm,
-                arguments: RequestGuideNavigationArguments(guideId: guide.user));
+                arguments:
+                    RequestGuideNavigationArguments(guideId: guide.user));
           } else {
             Navigator.of(context).pushNamed(AuthorizationRoutes.LOGIN_SCREEN);
           }

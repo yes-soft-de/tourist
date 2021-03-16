@@ -39,50 +39,50 @@ class EditProfileStateTouristLoadSuccess extends EditProfileState {
         children: [
           MediaQuery.of(context).viewInsets.bottom == 0
               ? Container(
-            height: 88,
-            width: MediaQuery.of(context).size.width,
-            child: Stack(
-              children: [
-                Positioned.fill(
-                    child: FadeInImage.assetNetwork(
-                      placeholder: 'resources/images/logo.jpg',
-                      image: profile.image.contains('http')
-                          ? profile.image
-                          : Urls.imagesRoot + profile.image,
-                      fit: BoxFit.contain,
-                    )),
-                Positioned(
-                  right: 16,
-                  top: 16,
-                  child: GestureDetector(
-                    onTap: () {
-                      picker
-                          .getImage(
-                          source: ImageSource.gallery,
-                          imageQuality: 70)
-                          .then((image) {
-                        if (image != null) {
-                          screen.onImageSelected(image.path, profile);
-                        }
-                      });
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.image,
-                          color: Colors.white,
+                  height: 88,
+                  width: MediaQuery.of(context).size.width,
+                  child: Stack(
+                    children: [
+                      Positioned.fill(
+                          child: FadeInImage.assetNetwork(
+                        placeholder: 'resources/images/logo.jpg',
+                        image: profile.image.contains('http')
+                            ? profile.image
+                            : Urls.imagesRoot + profile.image,
+                        fit: BoxFit.contain,
+                      )),
+                      Positioned(
+                        right: 16,
+                        top: 16,
+                        child: GestureDetector(
+                          onTap: () {
+                            picker
+                                .getImage(
+                                    source: ImageSource.gallery,
+                                    imageQuality: 70)
+                                .then((image) {
+                              if (image != null) {
+                                screen.onImageSelected(image.path, profile);
+                              }
+                            });
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(
+                                Icons.image,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
+                      )
+                    ],
                   ),
                 )
-              ],
-            ),
-          )
               : Container(),
           Padding(
             padding: EdgeInsets.all(16.0),
@@ -121,7 +121,9 @@ class EditProfileStateTouristLoadSuccess extends EditProfileState {
                       profile.languages = languages.toList();
                       screen.refresh(profile);
                     },
-                    value: profile.languages != null ? profile.languages.contains('ar') : false,
+                    value: profile.languages != null
+                        ? profile.languages.contains('ar')
+                        : false,
                   ),
                   CheckboxListTile(
                     title: Text(S.of(context).language_english),
@@ -132,10 +134,11 @@ class EditProfileStateTouristLoadSuccess extends EditProfileState {
                         languages.remove('en');
                       }
                       profile.languages = languages.toList();
-                      print(profile.languages.toString());
                       screen.refresh(profile);
                     },
-                    value: profile.languages != null ? profile.languages.contains('en') : false,
+                    value: profile.languages != null
+                        ? profile.languages.contains('en')
+                        : false,
                   ),
                 ],
               ),
@@ -198,8 +201,8 @@ class EditProfileStateTouristLoadSuccess extends EditProfileState {
                           onTap: () {
                             picker
                                 .getImage(
-                                source: ImageSource.gallery,
-                                imageQuality: 70)
+                                    source: ImageSource.gallery,
+                                    imageQuality: 70)
                                 .then((image) {
                               if (image != null) {
                                 screen.onImageSelected(image.path, profile);
@@ -226,8 +229,8 @@ class EditProfileStateTouristLoadSuccess extends EditProfileState {
                           onTap: () {
                             picker
                                 .getImage(
-                                source: ImageSource.camera,
-                                imageQuality: 70)
+                                    source: ImageSource.camera,
+                                    imageQuality: 70)
                                 .then((image) {
                               if (image != null) {
                                 screen.onImageSelected(image.path, profile);
@@ -278,7 +281,7 @@ class EditProfileStateTouristLoadSuccess extends EditProfileState {
                   },
                   child: Container(
                     decoration:
-                    BoxDecoration(color: Theme.of(context).accentColor),
+                        BoxDecoration(color: Theme.of(context).accentColor),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Row(

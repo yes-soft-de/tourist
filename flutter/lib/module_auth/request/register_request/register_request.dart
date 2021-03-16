@@ -18,6 +18,7 @@ class RegisterRequest {
     data['password'] = this.password;
     data['roles'] =
         this.roles == UserRole.ROLE_GUIDE ? 'ROLE_GUIDE' : 'ROLE_TOURIST';
+    data['places'] = ['-1'];
     return data;
   }
 }

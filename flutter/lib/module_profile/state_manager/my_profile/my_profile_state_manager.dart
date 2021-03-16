@@ -9,6 +9,7 @@ import 'package:tourists/module_profile/ui/states/edit_profile_state.dart';
 import 'package:tourists/module_profile/ui/states/edit_profile_state_error.dart';
 import 'package:tourists/module_profile/ui/states/edit_profile_state_guide_load_success.dart';
 import 'package:tourists/module_profile/ui/states/edit_profile_state_loading.dart';
+import 'package:tourists/module_profile/ui/states/edit_profile_state_save_success.dart';
 import 'package:tourists/module_profile/ui/states/edit_profile_state_tourist_load_success.dart';
 import 'package:tourists/module_search/bloc/search_bloc/search_bloc.dart';
 import 'package:tourists/module_upload/service/image_upload/image_upload_service.dart';
@@ -53,7 +54,7 @@ class MyProfileStateManager {
           screen, createdProfile, _searchProvider));
     } else {
       _stateSubject.add(
-          EditProfileStateTouristLoadSuccess(screen, createdProfile));
+          EditProfileStateSaveSuccess(screen));
     }
   }
 

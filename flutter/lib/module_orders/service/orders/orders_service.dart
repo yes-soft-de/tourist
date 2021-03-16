@@ -43,21 +43,18 @@ class OrdersService {
   List<OrderModel> formatOrders(
       List<GuideListItemModel> allGuides, OrderResponse orderResponse) {
     Map<String, GuideListItemModel> guidesMap = {};
-    allGuides.forEach((guide) {
+    allGuides?.forEach((guide) {
       guidesMap[guide.userID] = guide;
     });
 
-    orderResponse.orderList.forEach((order) {
+    orderResponse?.orderList?.forEach((order) {
       if (order.guidUserID != null) {
         // Get the info from the list
-        print('Matched Guide to Order');
         order.guideInfo = guidesMap[order.guidUserID];
       }
     });
 
-    print(orderResponse.orderList[0].guideInfo.name);
-
-    return orderResponse.orderList;
+    return orderResponse?.orderList;
   }
 
   Future<UpdateOrderResponse> payOrder(OrderModel orderModel) async {

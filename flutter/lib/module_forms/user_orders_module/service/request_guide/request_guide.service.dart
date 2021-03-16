@@ -24,8 +24,6 @@ class RequestGuideService {
 
     String uid = user.uid;
 
-    print('Requesting Guide with ID: ' + requestGuide.guideId);
-
     RequestGuideRequest requestObject = RequestGuideRequest(
         touristUserID: uid,
         guidUserID: requestGuide.guideId,

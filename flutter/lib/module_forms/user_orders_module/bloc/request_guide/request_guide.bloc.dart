@@ -26,7 +26,6 @@ class RequestGuideBloc {
 
   void requestGuide(String guideId, List<String> requiredServices,
       DateTime arrivalDate, int stayingDays, String language, String location) {
-    print('Requesting Guide');
     _requestGuideService
         .requestGuide(RequestGuideModel(
             services: requiredServices,
@@ -36,7 +35,6 @@ class RequestGuideBloc {
             guideId: guideId,
             location: location))
         .then((requestSuccess) {
-      print('Requesting Guide Complete');
       if (requestSuccess != null) {
         _requestGuideForm
             .add(Pair(STATUS_CODE_REQUEST_SUCCESS, requestSuccess));

@@ -63,8 +63,7 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   void moveToNext() {
-    Navigator.of(context).pushReplacementNamed(
-        ProfileRoutes.MY_ROUTE_PROFILE);
+    Navigator.of(context).pushReplacementNamed(ProfileRoutes.MY_ROUTE_PROFILE);
   }
 
   void loginViaPhone(String phoneNumber, UserRole role) {
@@ -77,7 +76,6 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   void sendLoginLink(String email, UserRole role) {
-    print('Sending Email to $email');
     widget._stateManager.sendLoginLink(this, email, role);
   }
 

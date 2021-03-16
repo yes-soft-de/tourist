@@ -47,8 +47,11 @@ class _AddLocationDialogState extends State<AddLocationDialog> {
               },
             ),
           ),
-          showPredictions ? buildPredictionList(predictions) : Container(),
-          // TODO: Show result
+          Expanded(
+            child: showPredictions
+                ? SingleChildScrollView(child: buildPredictionList(predictions))
+                : Container(),
+          ),
         ],
       ),
     );

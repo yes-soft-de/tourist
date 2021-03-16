@@ -95,11 +95,8 @@ class _GuideOrdersScreenState extends State<GuideOrdersScreen> {
     List<Widget> orderCards = [];
     User _user = await widget.auth.currentUser;
 
-    print('Got ' + ordersList.length.toString() + ' Length');
-
     if (ordersList != null) {
       ordersList.forEach((order) {
-        print(order.toJson().toString());
         orderCards.add(OrderItemWidget(order,
             canPay: _user.uid == order.touristUserID, onAcceptOrder: (order) {
           widget.bloc.acceptOrder(order);

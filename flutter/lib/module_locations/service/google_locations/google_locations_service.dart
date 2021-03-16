@@ -20,7 +20,7 @@ class GoogleLocationsService {
 
     var response = await _manager.getPredictions(mapsKey, query);
     var predictions = <String, String>{};
-    response.predictions.forEach((feature) {
+    response.predictions?.forEach((feature) {
       predictions[feature.description] = feature.placeId;
     });
 

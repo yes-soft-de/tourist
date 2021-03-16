@@ -411,10 +411,6 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
       if (value == true) servicesList.add(key);
     });
 
-    print(_requestGuideArguments != null
-        ? 'Active Guide: ' + _requestGuideArguments.guideId
-        : 'No Guide ID');
-
     widget._requestGuideBloc.requestGuide(
         _guideInfo.userID,
         servicesList,

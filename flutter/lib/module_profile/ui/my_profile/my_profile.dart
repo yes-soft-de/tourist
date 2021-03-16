@@ -50,7 +50,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(currentState.runtimeType.toString());
     currentState ??= EditProfileStateLoading(widget);
     return Scaffold(
       appBar: AppBar(),

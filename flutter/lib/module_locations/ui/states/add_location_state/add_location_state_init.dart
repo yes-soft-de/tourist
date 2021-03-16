@@ -30,25 +30,54 @@ class AddLocationStateInit extends AddLocationState {
     return Form(
       child: Column(
         children: [
-          GestureDetector(
-            onTap: () {
-              ImagePicker().getImage(source: ImageSource.gallery).then((value) {
-                screen.uploadImage(value.path, detailsModel);
-              });
-            },
-          ),
-          TextFormField(
-            controller: _nameController,
-            decoration: InputDecoration(
-              hintText: S.of(context).locationName,
-              labelText: S.of(context).locationName,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+              onTap: () {
+                ImagePicker()
+                    .getImage(source: ImageSource.gallery)
+                    .then((value) {
+                  screen.uploadImage(value.path, detailsModel);
+                });
+              },
+              child: Center(
+                child: image == null
+                    ? Image.asset(
+                        'resources/images/logo.png',
+                        height: 96,
+                        width: 96,
+                      )
+                    : Image.network(
+                        image,
+                        errorBuilder: (c, e, s) {
+                          return Image.asset(
+                            'resources/images/logo.png',
+                            height: 96,
+                            width: 96,
+                          );
+                        },
+                      ),
+              ),
             ),
           ),
-          TextFormField(
-            controller: _descriptionController,
-            decoration: InputDecoration(
-              hintText: S.of(context).locationDescription,
-              labelText: S.of(context).locationDescription,
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextFormField(
+              controller: _nameController,
+              decoration: InputDecoration(
+                hintText: S.of(context).locationName,
+                labelText: S.of(context).locationName,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextFormField(
+              controller: _descriptionController,
+              decoration: InputDecoration(
+                hintText: S.of(context).locationDescription,
+                labelText: S.of(context).locationDescription,
+              ),
             ),
           ),
           RaisedButton(

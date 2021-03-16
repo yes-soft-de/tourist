@@ -196,8 +196,6 @@ class OrderItemWidget extends StatelessWidget {
   }
 
   Widget _getOnGoingOrder(OrderModel orderModel, BuildContext context) {
-    print((orderModel.guideInfo != null).toString());
-
     return Flex(
       direction: Axis.vertical,
       children: [

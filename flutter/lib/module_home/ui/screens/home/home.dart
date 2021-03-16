@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_auth/authorization_routes.dart';
+import 'package:tourists/module_auth/enums/user_type.dart';
 import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
 import 'package:tourists/module_guide/ui/screen/guide_list/guide_list_screen.dart';
 import 'package:tourists/module_home/home_routes.dart';
@@ -76,7 +77,9 @@ class HomeScreenState extends State<HomeScreen> {
                         ),
                         widget._locationCarouselScreen,
                         widget._locationListScreen,
-                        Container(height: 112,),
+                        Container(
+                          height: 112,
+                        ),
                       ],
                     ),
                   ),
@@ -141,113 +144,151 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Flex moreColumn() {
-    return Flex(
-      direction: Axis.vertical,
-      children: <Widget>[
-        GestureDetector(
-          onTap: () {
-            Navigator.of(context).pushNamed(OrdersRoutes.ordersList);
-          },
-          child: Container(
-            color: Colors.white,
-            child: Padding(
-              padding: EdgeInsets.all(8),
-              child: Flex(
-                direction: Axis.horizontal,
-                children: <Widget>[
-                  Icon(Icons.credit_card),
-                  Container(
-                    width: 16,
+  Widget moreColumn() {
+    return FutureBuilder(
+      future: widget._authService.userRole,
+      builder: (BuildContext context, AsyncSnapshot<UserRole> snapshot) {
+
+        if (snapshot.hasData) {
+          return Flex(
+          direction: Axis.vertical,
+          children: <Widget>[
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed(OrdersRoutes.ordersList);
+              },
+              child: Container(
+                color: Colors.white,
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Flex(
+                    direction: Axis.horizontal,
+                    children: <Widget>[
+                      Icon(Icons.credit_card),
+                      Container(
+                        width: 16,
+                      ),
+                      Text(S.of(context).orders),
+                    ],
                   ),
-                  Text(S.of(context).orders),
-                ],
+                ),
               ),
             ),
-          ),
-        ),
-        GestureDetector(
-          onTap: () {
-            Navigator.of(context).pushNamed(SettingsRoute.settingsRoutes);
-          },
-          child: Container(
-            color: Colors.white,
-            child: Padding(
-              padding: EdgeInsets.all(8),
-              child: Flex(
-                direction: Axis.horizontal,
-                children: <Widget>[
-                  Icon(Icons.settings),
-                  Container(
-                    width: 16,
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed(SettingsRoute.settingsRoutes);
+              },
+              child: Container(
+                color: Colors.white,
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Flex(
+                    direction: Axis.horizontal,
+                    children: <Widget>[
+                      Icon(Icons.settings),
+                      Container(
+                        width: 16,
+                      ),
+                      Text(S.of(context).settings),
+                    ],
                   ),
-                  Text(S.of(context).settings),
-                ],
+                ),
               ),
             ),
-          ),
-        ),
-        GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(context, ProfileRoutes.MY_ROUTE_PROFILE);
-          },
-          child: Container(
-            color: Colors.white,
-            child: Padding(
-              padding: EdgeInsets.all(8),
-              child: Flex(
-                direction: Axis.horizontal,
-                children: <Widget>[
-                  Icon(Icons.person),
-                  Container(
-                    width: 16,
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, ProfileRoutes.MY_ROUTE_PROFILE);
+              },
+              child: Container(
+                color: Colors.white,
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Flex(
+                    direction: Axis.horizontal,
+                    children: <Widget>[
+                      Icon(Icons.person),
+                      Container(
+                        width: 16,
+                      ),
+                      Text(S.of(context).profile)
+                    ],
                   ),
-                  Text(S.of(context).profile)
-                ],
+                ),
               ),
             ),
-          ),
-        ),
-        GestureDetector(
-          onTap: () {
-            SharedPreferencesHelper preferencesHelper =
-                new SharedPreferencesHelper();
-            preferencesHelper.clearData().then((value) {
-              Navigator.pushNamed(context, AuthorizationRoutes.LOGIN_SCREEN);
-            });
-          },
-          child: Container(
-            color: Colors.white,
-            child: Padding(
-              padding: EdgeInsets.all(8),
-              child: Flex(
-                direction: Axis.horizontal,
-                children: <Widget>[
-                  Icon(Icons.exit_to_app),
-                  Container(
-                    width: 16,
+
+          ],
+        );
+        }
+        else {
+          return Flex(
+            direction: Axis.vertical,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  SharedPreferencesHelper preferencesHelper =
+                  new SharedPreferencesHelper();
+                  preferencesHelper.clearData().then((value) {
+                    Navigator.pushNamed(
+                        context, AuthorizationRoutes.LOGIN_SCREEN);
+                  });
+                },
+                child: Container(
+                  color: Colors.white,
+                  child: Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Flex(
+                      direction: Axis.horizontal,
+                      children: <Widget>[
+                        Icon(Icons.exit_to_app),
+                        Container(
+                          width: 16,
+                        ),
+                        GestureDetector(
+                            onTap: () {
+                              if (loggedIn == true) {
+                                widget._authService.logout().then((value) {
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      HomeRoutes.home, (route) => false);
+                                });
+                              } else {
+                                Navigator.of(context)
+                                    .pushNamed(AuthorizationRoutes.LOGIN_SCREEN);
+                              }
+                            },
+                            child: Text(loggedIn == true
+                                ? S.of(context).logout
+                                : S.of(context).login)),
+                      ],
+                    ),
                   ),
-                  GestureDetector(
-                      onTap: () {
-                        if (loggedIn == true) {
-                          widget._authService.logout().then((value) {
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                                HomeRoutes.home, (route) => false);
-                          });
-                        } else {
-                          Navigator.of(context)
-                              .pushNamed(AuthorizationRoutes.LOGIN_SCREEN);
-                        }
-                      },
-                      child: Text(loggedIn == true
-                          ? S.of(context).logout
-                          : S.of(context).login)),
-                ],
+                ),
               ),
-            ),
-          ),
-        ),
-      ],
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed(SettingsRoute.settingsRoutes);
+                },
+                child: Container(
+                  color: Colors.white,
+                  child: Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Flex(
+                      direction: Axis.horizontal,
+                      children: <Widget>[
+                        Icon(Icons.settings),
+                        Container(
+                          width: 16,
+                        ),
+                        Text(S.of(context).settings),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        }
+      },
     );
   }
 

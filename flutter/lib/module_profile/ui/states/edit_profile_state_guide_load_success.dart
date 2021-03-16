@@ -147,7 +147,7 @@ class EditProfileStateGuideLoadSuccess extends EditProfileState {
               height: 96,
               // This is where we add locations
               child: GuideLocations(
-                  locations: profile.availableLocations,
+                  locations: profile.availableLocations ?? [],
                   selectedLocations: locations.toList(),
                   onLocationSelected: (id) {
                     if (locations.contains(id.toString())) {

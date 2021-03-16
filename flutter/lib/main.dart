@@ -61,7 +61,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   static FirebaseAnalytics analytics = FirebaseAnalytics();
   static FirebaseAnalyticsObserver observer =
-  FirebaseAnalyticsObserver(analytics: analytics);
+      FirebaseAnalyticsObserver(analytics: analytics);
 
   final AuthorizationModule _authorizationModule;
   final HomeModule _homeModule;
@@ -77,35 +77,35 @@ class MyApp extends StatelessWidget {
   final SearchModule _searchModule;
   final ProfileModule _profileModule;
 
-  MyApp(this._languageHelper,
-      this._authorizationModule,
-      this._settingsModule,
-      this._homeModule,
-      this._splashModule,
-      this._chatModule,
-      this._locationModule,
-      this._guideListModule,
-      this._orderModule,
-      this._formsModule,
-      this._authService,
-      this._searchModule,
-      this._profileModule,);
+  MyApp(
+    this._languageHelper,
+    this._authorizationModule,
+    this._settingsModule,
+    this._homeModule,
+    this._splashModule,
+    this._chatModule,
+    this._locationModule,
+    this._guideListModule,
+    this._orderModule,
+    this._formsModule,
+    this._authService,
+    this._searchModule,
+    this._profileModule,
+  );
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
       final PendingDynamicLinkData data =
-      await FirebaseDynamicLinks.instance.getInitialLink();
+          await FirebaseDynamicLinks.instance.getInitialLink();
       if (data?.link != null) {
         await _authService.verifyLoginLink(data.link.toString());
       }
       FirebaseDynamicLinks.instance.onLink(
           onSuccess: (PendingDynamicLinkData dynamicLink) async {
             await _authService.verifyLoginLink(data.link.toString());
-          }, onError: (OnLinkErrorException e) async {
-        print('onLinkError');
-        print(e.message);
-      });
+          },
+          onError: (OnLinkErrorException e) async {});
     }
   }
 
@@ -125,21 +125,14 @@ class MyApp extends StatelessWidget {
     fullRoutesList.addAll(_searchModule.getRoutes());
     fullRoutesList.addAll(_profileModule.getRoutes());
     try {
-      UserLocationHelper().getCurrentLocation().then((value) {
-        print(value.toString());
-      });
-
       getInitialLink().then((value) {
         if (value != null) {
-          print('Got Login Link: $value');
           _authService.verifyLoginLink(value);
         } else {
           Logger().info('Main', 'No Link :)');
         }
       });
-    } catch (e) {
-      print('No Initial Link');
-    }
+    } catch (e) {}
 
     return StreamBuilder(
       stream: _languageHelper.languageStream,
@@ -153,8 +146,8 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  Widget getConfiguratedApp(Map<String, WidgetBuilder> fullRoutesList,
-      String currentLang) {
+  Widget getConfiguratedApp(
+      Map<String, WidgetBuilder> fullRoutesList, String currentLang) {
     return MaterialApp(
       navigatorObservers: <NavigatorObserver>[observer],
       locale: Locale(currentLang),
@@ -165,7 +158,9 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       theme: ThemeData(
-        primaryColor: Color(0xff05F29B), accentColor: Color(0xffF2DC6B),),
+        primaryColor: Color(0xff05F29B),
+        accentColor: Color(0xffF2DC6B),
+      ),
       supportedLocales: S.delegate.supportedLocales,
       title: 'Soyah',
       routes: fullRoutesList,

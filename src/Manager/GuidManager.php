@@ -97,18 +97,17 @@ class GuidManager
         $user = $this->userRepository->getUser($request->user);
 
         $guid = $this->guidEntityRepository->getGuid($user);
-         
 
         $request->setUser($user);
 
-         if ($guid)
+        if ($guid)
         {
-            $profile = $this->autoMapping->mapToObject(GuidProfileUpdateRequest::class,
-                GuidEntity::class, $request, $guid);
+            $guid = $this->autoMapping->mapToObject(GuidProfileUpdateRequest::class, GuidEntity::class, $request, $guid);
 
             $this->entityManager->flush();
             $this->entityManager->clear();
-            return $profile;
+
+            return $guid;
         }
     }
 

@@ -6,6 +6,8 @@ namespace App\Request;
 
 class GuidProfileUpdateRequest
 {
+    public $id;
+    
     public $user;
 
     public $name;

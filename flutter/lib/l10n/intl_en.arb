@@ -125,5 +125,6 @@
   "locationsYouWorkIn": "Locations you work in",
   "locationName": "Location Name",
   "locationDescription": "Location Description",
-  "myPhoneNumber": "My Phone number"
+  "myPhoneNumber": "My Phone number",
+  "guidesArea": "Guides Area"
 }

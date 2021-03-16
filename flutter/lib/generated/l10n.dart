@@ -1294,6 +1294,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Guides Area`
+  String get guidesArea {
+    return Intl.message(
+      'Guides Area',
+      name: 'guidesArea',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

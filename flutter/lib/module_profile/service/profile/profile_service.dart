@@ -64,7 +64,7 @@ class ProfileService {
     var role = await _authService.userRole;
 
     ProfileResponse myProfile = await _manager.getUserProfile(userId, role);
-    var places = [];
+    var places = <LocationListItem>[];
 
     if (role == UserRole.ROLE_GUIDE) {
       places = await _locationListService.getLocationList();

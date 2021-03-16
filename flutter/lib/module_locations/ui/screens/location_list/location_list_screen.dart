@@ -81,9 +81,11 @@ class _LocationListScreenState extends State<LocationListScreen> {
       });
     }
 
-    return Flex(
-      direction: Axis.vertical,
-      children: locationWidgetList,
+    return SingleChildScrollView(
+      child: Flex(
+        direction: Axis.vertical,
+        children: locationWidgetList,
+      ),
     );
   }
 

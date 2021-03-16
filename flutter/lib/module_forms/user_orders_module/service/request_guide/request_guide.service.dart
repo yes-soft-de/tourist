@@ -28,11 +28,10 @@ class RequestGuideService {
         touristUserID: uid,
         guidUserID: requestGuide.guideId,
         city: requestGuide.location,
-        roomID: Uuid().v1(),
         language: requestGuide.language,
         arriveDate: requestGuide.arrivalDate,
         cost: 7,
-        status: 'onGoing',
+        status: 'pending',
         date: DateTime.now(),
         leaveDate: requestGuide.arrivalDate
             .add(Duration(days: requestGuide.stayingDays)),

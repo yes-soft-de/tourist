@@ -18,18 +18,8 @@ class HomeModule extends YesModule {
   @override
   Map<String, WidgetBuilder> getRoutes() {
     return {
-      HomeRoutes.home: (context) => FutureBuilder(
-            future: _authGuard.isGuide(),
-            initialData: false,
-            builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-              if (snapshot.data == true) {
-                return _guideHomeScreen;
-              } else {
-                return _homeScreen;
-              }
-            },
-          ),
-      HomeRoutes.guideHome: (context) => _homeScreen
+      HomeRoutes.home: (context) => _homeScreen,
+      HomeRoutes.guideHome: (context) => _guideHomeScreen,
     };
   }
 }

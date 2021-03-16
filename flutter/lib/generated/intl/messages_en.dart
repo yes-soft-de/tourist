@@ -53,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "go_to_tourist_login" : MessageLookupByLibrary.simpleMessage("Next"),
     "guide" : MessageLookupByLibrary.simpleMessage("Guide"),
     "guides" : MessageLookupByLibrary.simpleMessage("Guides"),
+    "guidesArea" : MessageLookupByLibrary.simpleMessage("Guides Area"),
     "home" : MessageLookupByLibrary.simpleMessage("Home"),
     "hotel" : MessageLookupByLibrary.simpleMessage("Hotel"),
     "iAmAGuideOperatingInSaudiArabia" : MessageLookupByLibrary.simpleMessage("I am a Guide Operating in Saudi Arabia"),

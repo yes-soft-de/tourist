@@ -1,4 +1,7 @@
 security:
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
     encoders:
         App\Entity\User:
             algorithm: auto
@@ -22,6 +25,16 @@ security:
                 success_handler:          lexik_jwt_authentication.handler.authentication_success
                 failure_handler:          lexik_jwt_authentication.handler.authentication_failure
 
+        main:
+            stateless: true
+            anonymous: ~
+            logout:
+                path: /logout
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+                entry_point: lexik_jwt_authentication.jwt_token_authenticator
+        
         register:
             pattern:  ^/register
             stateless: true

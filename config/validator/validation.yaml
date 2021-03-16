@@ -119,3 +119,10 @@ App\Request\EventUpdateRequest:
       - NotBlank: ~
     description:
       - NotBlank: ~
+
+App\Request\AdminCreateRequest:
+  properties:
+    userID:
+      - NotBlank: ~
+    password:
+      - NotBlank: ~

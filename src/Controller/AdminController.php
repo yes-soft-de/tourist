@@ -20,12 +20,9 @@ class AdminController extends BaseController
     private $validator;
     private $adminService;
 
-    public function __construct(
-        SerializerInterface $serializer,
-        AutoMapping $autoMapping,
-        ValidatorInterface $validator,
-        AdminService $adminService
-    ) {
+    public function __construct(SerializerInterface $serializer, AutoMapping $autoMapping, ValidatorInterface $validator, 
+    AdminService $adminService) 
+    {
         parent::__construct($serializer);
         $this->autoMapping = $autoMapping;
         $this->validator = $validator;
@@ -33,7 +30,6 @@ class AdminController extends BaseController
     }
 
     /**
-     * @IsGranted("ROLE_SUPER_ADMIN", message="Access denied")
      * @Route("/createadmin", name="adminCreate", methods={"POST"})
      * @param Request $request
      * @return JsonResponse

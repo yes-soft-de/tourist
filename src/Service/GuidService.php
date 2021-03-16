@@ -138,10 +138,15 @@ class GuidService
     {
         $item = $this->guidManager->getguideByUserID($userId);
 
-        $item['imageURL'] = $item['image'];
-        $item['image'] = $this->params.$item['image'];
+        if(isset($item['image']))
+        {
+            $item['imageURL'] = $item['image'];
+            
+            $item['image'] = $this->params.$item['image'];
+        }
+
         $item['baseURL'] = $this->params;
-        
+
         return $this->autoMapping->map('array', GuidByRegionResponse::class, $item);
     }
 

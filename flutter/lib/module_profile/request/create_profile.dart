@@ -21,7 +21,6 @@ class CreateProfileRequest {
 
   Map<String, dynamic> toJson() {
     return {
-      'userID': this.userID,
       'user': this.userID,
       'userName': this.userName,
       'name': this.userName,

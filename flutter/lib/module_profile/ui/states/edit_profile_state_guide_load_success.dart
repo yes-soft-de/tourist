@@ -29,6 +29,10 @@ class EditProfileStateGuideLoadSuccess extends EditProfileState {
     this.userProfile,
     this._searchBloc,
   ) : super(screen) {
+    if (userProfile == null) {
+      return;
+    }
+
     languages.addAll(userProfile.languages ?? []);
     locations.addAll(userProfile.locations ?? []);
     services.addAll(userProfile.services ?? []);

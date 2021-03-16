@@ -16,8 +16,8 @@ class RegisterRequest {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['userID'] = this.userID;
     data['password'] = this.password;
-    data['roles'] =
-        this.roles == UserRole.ROLE_GUIDE ? 'ROLE_GUIDE' : 'ROLE_TOURIST';
+    // data['roles'] =
+    //     this.roles == UserRole.ROLE_GUIDE ? 'ROLE_GUIDE' : 'ROLE_TOURIST';
     data['places'] = ['-1'];
     return data;
   }

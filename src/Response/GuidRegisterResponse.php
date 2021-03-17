@@ -6,5 +6,17 @@ namespace App\Response;
 
 class GuidRegisterResponse
 {
-    public $user;
+    public $id;
+    
+    public $userID;
+
+    public $email;
+
+    public $name;
+
+    public $roles = [];
+
+    public $createDate;
+
+    public $places = [];
 }

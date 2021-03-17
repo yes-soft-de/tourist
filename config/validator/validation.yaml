@@ -44,8 +44,6 @@ App\Request\GuidRegisterRequest:
   properties:
     userID:
       - NotBlank: ~
-    places:
-      - NotBlank: ~
 
 App\Request\GuidProfileCreateRequest:
   properties:

@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\GuidEntity;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * @method GuidEntity|null find($id, $lockMode = null, $lockVersion = null)
@@ -98,8 +100,14 @@ class GuidEntityRepository extends ServiceEntityRepository
     public function getUser($userID)
     {
         return $this->createQueryBuilder('guid')
-            ->select('IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image', 'guid.places', 'guid.about', 'guid.phoneNumber', 'guid.service')
-            ->andWhere('guid.user = :userID')
+            ->select('guid.id', 'IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image', 'guid.places', 'guid.about', 
+            'guid.phoneNumber', 'guid.service', 'user_entity.userID')
+            
+            ->join('App:User', 'user_entity')
+
+            ->andWhere('user_entity.id = guid.user')
+            
+            ->andWhere('user_entity.userID = :userID')
             ->setParameter('userID', $userID)
 
             ->getQuery()

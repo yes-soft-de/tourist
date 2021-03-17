@@ -23,10 +23,14 @@ class OrdersService {
 
     String uid = user.uid;
 
-    OrderResponse orderResponse = await _ordersManager.getOrders(uid);
-    List<GuideListItemModel> allGuides = await _guideListService.getAllGuides();
-
-    return formatOrders(allGuides, orderResponse);
+    try {
+      OrderResponse orderResponse = await _ordersManager.getOrders(uid);
+      List<GuideListItemModel> allGuides = await _guideListService.getAllGuides();
+      return formatOrders(allGuides, orderResponse);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
   }
 
   Future<List<OrderModel>> getGeneralOrders() async {
@@ -41,20 +45,23 @@ class OrdersService {
   }
 
   List<OrderModel> formatOrders(
-      List<GuideListItemModel> allGuides, OrderResponse orderResponse) {
+    List<GuideListItemModel> allGuides,
+    OrderResponse orderResponse,
+  ) {
+    print('Guide List: ${allGuides.length} & ordersList ${orderResponse}');
     Map<String, GuideListItemModel> guidesMap = {};
-    allGuides?.forEach((guide) {
+    allGuides.forEach((guide) {
       guidesMap[guide.userID] = guide;
     });
 
-    orderResponse?.orderList?.forEach((order) {
+    orderResponse.orderList.forEach((order) {
       if (order.guidUserID != null) {
         // Get the info from the list
         order.guideInfo = guidesMap[order.guidUserID];
       }
     });
 
-    return orderResponse?.orderList;
+    return orderResponse.orderList;
   }
 
   Future<UpdateOrderResponse> payOrder(OrderModel orderModel) async {

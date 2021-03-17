@@ -274,6 +274,7 @@ class _OrderListScreenState extends State<OrdersListScreen> {
 
   Widget _getPendingPaymentList() {
     if (ordersList == null) {
+      print('Null Orders List');
       return ListView(
         children: <Widget>[
           Center(
@@ -284,7 +285,8 @@ class _OrderListScreenState extends State<OrdersListScreen> {
     }
     List<Widget> ordersWidgetList = [];
     ordersList.forEach((element) {
-      if (element.status == 'pending') {
+      print(element.status);
+      if (element.status == 'pending' || element.status == null) {
         ordersWidgetList.add(OrderItemWidget(
           element,
           canPay: currentUserId == element.touristUserID,

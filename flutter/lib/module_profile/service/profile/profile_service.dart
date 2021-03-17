@@ -62,8 +62,13 @@ class ProfileService {
 
   Future<ProfileModel> getUserProfile(String userId) async {
     var role = await _authService.userRole;
+    ProfileResponse myProfile;
 
-    ProfileResponse myProfile = await _manager.getUserProfile(userId, role);
+    if (role == UserRole.ROLE_GUIDE) {
+      myProfile = await _manager.getGuideProfile(userId);
+    } else {
+      myProfile = await _manager.getTouristProfile(userId);
+    }
     var places = <LocationListItem>[];
 
     if (role == UserRole.ROLE_GUIDE) {

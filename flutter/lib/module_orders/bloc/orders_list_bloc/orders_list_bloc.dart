@@ -25,9 +25,12 @@ class OrdersListBloc {
     _orderSubject.add(Pair(STATUS_CODE_LOADING, null));
     _ordersService.getOrders().then((value) {
       if (value == null) {
+        print('Error Loading Orders');
         _orderSubject.add(Pair(STATUS_CODE_LOAD_ERROR, null));
+      } else {
+        print('Got Orders: ${value.length}');
+        _orderSubject.add(Pair(STATUS_CODE_LOAD_SUCCESS, value));
       }
-      _orderSubject.add(Pair(STATUS_CODE_LOAD_SUCCESS, value));
     });
   }
 

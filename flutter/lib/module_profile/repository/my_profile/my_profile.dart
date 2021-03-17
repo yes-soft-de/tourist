@@ -19,18 +19,20 @@ class MyProfileRepository {
       CreateProfileRequest profileRequest) async {
     Map<String, dynamic> response;
     try {
-      response =
-      await _apiClient.post(Urls.getTouristProfileAPI, profileRequest.toJson());
-    } catch (e){
+      response = await _apiClient.post(
+          Urls.getTouristProfileAPI, profileRequest.toJson());
+    } catch (e) {
       _logger.info(TAG, '${e.toString()}');
-    };
+    }
+    ;
 
     try {
-      response =
-      await _apiClient.put(Urls.getTouristProfileAPI, profileRequest.toJson());
-    } catch (e){
+      response = await _apiClient.put(
+          Urls.getTouristProfileAPI, profileRequest.toJson());
+    } catch (e) {
       _logger.info(TAG, '${e.toString()}');
-    };
+    }
+    ;
 
     return response == null
         ? null
@@ -42,15 +44,15 @@ class MyProfileRepository {
     Map<String, dynamic> response;
     try {
       response =
-      await _apiClient.post(Urls.registerGuideAPI, profileRequest.toJson());
-    } catch (e){
+          await _apiClient.post(Urls.registerGuideAPI, profileRequest.toJson());
+    } catch (e) {
       _logger.info(TAG, '${e.toString()}');
     }
 
     try {
       response =
-      await _apiClient.put(Urls.registerGuideAPI, profileRequest.toJson());
-    } catch (e){
+          await _apiClient.put(Urls.registerGuideAPI, profileRequest.toJson());
+    } catch (e) {
       _logger.info(TAG, '${e.toString()}');
     }
 
@@ -59,10 +61,18 @@ class MyProfileRepository {
         : ProfileListResponse.fromJson(response).data.last;
   }
 
-
-  Future<ProfileResponse> getTouristProfile(String userId, UserRole role) async {
+  Future<ProfileResponse> getTouristProfile(String userId) async {
     Map<String, dynamic> response =
         await _apiClient.get(Urls.getTouristProfileAPI + '/$userId');
+
+    if (response == null) return null;
+
+    return ProfileResponse.fromJson(response);
+  }
+
+  Future<ProfileResponse> getGuideProfile(String userId) async {
+    Map<String, dynamic> response =
+        await _apiClient.get(Urls.getGuideProfile + '/$userId');
 
     if (response == null) return null;
 

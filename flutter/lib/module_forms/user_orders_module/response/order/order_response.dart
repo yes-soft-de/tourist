@@ -15,6 +15,8 @@ class OrderResponse {
       json['Data'].forEach((v) {
         orderList.add(new OrderModel.fromJson(v));
       });
+
+      orderList ??= [];
     }
   }
 

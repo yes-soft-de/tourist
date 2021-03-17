@@ -18,7 +18,7 @@ class GuideListStateLoadSuccess extends GuideListState {
 
   @override
   Widget getUI(BuildContext context) {
-    return Flex(direction: Axis.vertical, children: getGuidesList(context));
+    return SingleChildScrollView(child: Flex(direction: Axis.vertical, children: getGuidesList(context)));
   }
 
   List<Widget> getGuidesList(BuildContext context) {

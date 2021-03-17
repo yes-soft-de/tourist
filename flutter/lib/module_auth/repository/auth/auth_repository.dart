@@ -14,7 +14,7 @@ class AuthRepository {
 
   Future<bool> createUser(RegisterRequest request) async {
     var result;
-    if (request.roles == UserRole.ROLE_GUIDE) {
+    if (request.role == UserRole.ROLE_GUIDE) {
       result = await _apiClient.post(Urls.registerGuideAPI, request.toJson());
     } else {
       result = await _apiClient.post(Urls.registerTouristsAPI, request.toJson());

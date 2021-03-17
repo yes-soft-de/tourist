@@ -28,6 +28,7 @@ php bin/console doctrine:migration:migrate
 
 ## API guide
 
+### Tourist
 #### Register tourist
 ```
 /tourist 
@@ -38,6 +39,8 @@ methods={"POST"}
 /tourist 
 methods={"PUT"}
 ```
+
+### Region
 #### Create region
 ```
 /region

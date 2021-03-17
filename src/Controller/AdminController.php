@@ -30,6 +30,7 @@ class AdminController extends BaseController
     }
 
     /**
+     * @IsGranted("ROLE_SUPER_ADMIN", message="Access denied")
      * @Route("/createadmin", name="adminCreate", methods={"POST"})
      * @param Request $request
      * @return JsonResponse

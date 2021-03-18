@@ -63,9 +63,16 @@ class TouristOrderManager
         }
     }
 
+    // Get only accepted orders of a tourist
     public function getOrderByTourist($touristID)
     {
         return $this->orderEntityRepository->getOrderByTourist($touristID);
+    }
+
+    // Get all orders of a tourist either they are accepted or not
+    public function getAllOrdersByTouristID($touristID)
+    {
+        return $this->orderEntityRepository->getAllOrdersByTouristID($touristID);
     }
 
     public function getOrderByGuidCityAndLanguage($guidUserID)

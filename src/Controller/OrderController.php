@@ -82,6 +82,18 @@ class OrderController extends BaseController
     }
 
     /**
+     * @Route("/orders/{touristID}", name="getAllOrdersByTouristID", methods="GET")
+     * @return JsonResponse
+     */
+    public function getAllOrdersByTouristID($touristID)
+    {
+        //Get all orders of a tourist either they are accepted or not
+        $response = $this->orderService->getAllOrdersByTouristID($touristID);
+
+        return $this->response($response, self::FETCH);
+    }
+
+    /**
      * @Route("/orderlookup/{id}", name="getOrderByGuidCityAndLanguage", methods="GET")
      * @param Request $request
      * @return JsonResponse

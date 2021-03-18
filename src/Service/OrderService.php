@@ -50,10 +50,25 @@ class OrderService
         return $response;
     }
 
+    // Get only accepted orders of a tourist
     public function getOrderByTourist($touristID)
     {
         $ordersResponse = [];
         $orders = $this->touristOrderManager->getOrderByTourist($touristID);
+        foreach ($orders as $order)
+        {
+            $ordersResponse[] = $this->autoMapping->map('array', TouristOrderCreateResponse::class, $order);
+        }
+
+        return $ordersResponse;
+    }
+
+    // Get all orders of a tourist either they are accepted or not
+    public function getAllOrdersByTouristID($touristID)
+    {
+        $ordersResponse = [];
+        $orders = $this->touristOrderManager->getAllOrdersByTouristID($touristID);
+
         foreach ($orders as $order)
         {
             $ordersResponse[] = $this->autoMapping->map('array', TouristOrderCreateResponse::class, $order);

@@ -21,8 +21,7 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
 
     public function getOrderByTourist($touristID)
     {
-        //dd($touristID);
-
+        // Get only accepted orders
         $e = $this->createQueryBuilder('orders')
             ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.guidUserID', 'orders.city', 'orders.language',
                 'orders.arriveDate', 'orders.leaveDate', 'orders.roomID', 'orders.cost', 'orders.status', 'acceptedOrderEntity.uuid')
@@ -40,6 +39,22 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
             ->getResult();
 
         return $e;
+    }
+
+    public function getAllOrdersByTouristID($touristID)
+    {
+        // Get all orders of a tourist either they are accepted or not
+        return $this->createQueryBuilder('orders')
+            ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.guidUserID', 'orders.city', 'orders.language',
+                'orders.arriveDate', 'orders.leaveDate', 'orders.roomID', 'orders.cost', 'orders.status')
+
+            ->andWhere('orders.touristUserID = :touristID')
+            ->setParameter('touristID', $touristID)
+            ->groupBy('orders.id')
+            ->orderBy('orders.id', 'ASC')
+
+            ->getQuery()
+            ->getResult();
     }
 
     public function getOrderByGuidCityAndLanguage($city, $language)

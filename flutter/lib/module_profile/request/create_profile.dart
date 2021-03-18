@@ -1,3 +1,5 @@
+import 'package:tourists/module_auth/enums/user_type.dart';
+
 class CreateProfileRequest {
   String userName;
   String userID;
@@ -7,9 +9,11 @@ class CreateProfileRequest {
   List<String> location;
   List<String> services;
   List<String> languages;
+  UserRole role;
 
   CreateProfileRequest({
     this.userID,
+    this.role,
     this.story,
     this.userName,
     this.phoneNumber,
@@ -21,7 +25,7 @@ class CreateProfileRequest {
 
   Map<String, dynamic> toJson() {
     return {
-      'user': this.userID,
+      role == UserRole.ROLE_GUIDE ? 'user' : 'userID': this.userID,
       'userName': this.userName,
       'name': this.userName,
       'story': this.story,

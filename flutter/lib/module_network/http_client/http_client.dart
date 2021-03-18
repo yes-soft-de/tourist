@@ -12,9 +12,9 @@ import 'package:tourists/utils/logger/logger.dart';
 class HttpClient extends NetworkClient {
   final _client = Dio(BaseOptions(
     baseUrl: Urls.baseAPI,
-    connectTimeout: 3000,
-    receiveTimeout: 3000,
-    sendTimeout: 3000,
+    connectTimeout: 5000,
+    receiveTimeout: 5000,
+    sendTimeout: 5000,
   ));
 
   final _logger = Logger();

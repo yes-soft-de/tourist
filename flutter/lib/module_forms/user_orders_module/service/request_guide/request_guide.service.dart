@@ -16,7 +16,7 @@ class RequestGuideService {
 
   RequestGuideService(this._guidesService, this._requestGuideManager);
 
-  Future<String> requestGuide(RequestGuideModel requestGuide) async {
+  Future<bool> requestGuide(RequestGuideModel requestGuide) async {
     User user = await _auth.currentUser;
     if (user == null) {
       return null;
@@ -41,7 +41,7 @@ class RequestGuideService {
         await _requestGuideManager.requestGuide(requestObject);
 
     if (requestResult != null) {
-      return requestResult.data.roomID;
+      return requestResult.statusCode == '201';
     }
 
     return null;

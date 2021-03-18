@@ -21,6 +21,14 @@ class OrdersRepository {
     return null;
   }
 
+  Future<OrderResponse> getTouristOrders(String uid) async {
+    Map response = await _httpClient.get(Urls.touristOrders + '/' + uid);
+    if (response != null) {
+      return OrderResponse.fromJson(response);
+    }
+    return null;
+  }
+
   Future<OrderResponse> getGeneralOrderList(String guideId) async {
     Map response = await _httpClient.get(Urls.orderLookup + '/' + guideId);
     if (response == null) {

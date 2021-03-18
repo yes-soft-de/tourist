@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:inject/inject.dart';
+import 'package:tourists/module_auth/enums/user_type.dart';
+import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
 import 'package:tourists/module_forms/user_orders_module/response/order/order_response.dart';
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
 import 'package:tourists/module_guide/service/guide_list/guide_list.dart';
@@ -11,22 +13,35 @@ import 'package:tourists/module_orders/response/update_order_response.dart';
 class OrdersService {
   final OrdersManager _ordersManager;
   final GuideListService _guideListService;
-  final FirebaseAuth _authService = FirebaseAuth.instance;
+  final AuthService _authService;
 
-  OrdersService(this._ordersManager, this._guideListService);
+  OrdersService(this._ordersManager, this._guideListService,
+      this._authService,);
 
   Future<List<OrderModel>> getOrders() async {
-    User user = await _authService.currentUser;
-    if (user == null) {
+    String uid = await _authService.userID;
+    if (uid == null) {
       return null;
     }
 
-    String uid = user.uid;
+    UserRole role = await _authService.userRole;
 
     try {
-      OrderResponse orderResponse = await _ordersManager.getOrders(uid);
-      List<GuideListItemModel> allGuides = await _guideListService.getAllGuides();
-      return formatOrders(allGuides, orderResponse);
+      OrderResponse orderResponse;
+      if (role == UserRole.ROLE_GUIDE) {
+        var response = await Future.wait([
+          _ordersManager.getOrders(uid),
+          _guideListService.getAllGuides(),
+        ]);
+        return formatOrders(response[1], response[0]);
+      } else {
+        var response = await Future.wait([
+          _ordersManager.getTouristOrders(uid),
+          _guideListService.getAllGuides(),
+        ]);
+        return formatOrders(response[1], response[0]);
+      }
+
     } catch (e) {
       print(e.toString());
       return null;
@@ -34,9 +49,9 @@ class OrdersService {
   }
 
   Future<List<OrderModel>> getGeneralOrders() async {
-    User user = await _authService.currentUser;
+    String uid = await _authService.userID;
 
-    OrderResponse response = await _ordersManager.getGeneralOrderList(user.uid);
+    OrderResponse response = await _ordersManager.getGeneralOrderList(uid);
 
     if (response != null) {
       return response.orderList;
@@ -44,11 +59,9 @@ class OrdersService {
     return null;
   }
 
-  List<OrderModel> formatOrders(
-    List<GuideListItemModel> allGuides,
-    OrderResponse orderResponse,
-  ) {
-    print('Guide List: ${allGuides.length} & ordersList ${orderResponse}');
+  List<OrderModel> formatOrders(List<GuideListItemModel> allGuides,
+      OrderResponse orderResponse,) {
+    orderResponse ??= OrderResponse(orderList: []);
     Map<String, GuideListItemModel> guidesMap = {};
     allGuides.forEach((guide) {
       guidesMap[guide.userID] = guide;

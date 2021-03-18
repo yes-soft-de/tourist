@@ -35,7 +35,8 @@ class RequestGuideBloc {
             guideId: guideId,
             location: location))
         .then((requestSuccess) {
-      if (requestSuccess != null) {
+          print('Request $requestSuccess');
+      if (requestSuccess) {
         _requestGuideForm
             .add(Pair(STATUS_CODE_REQUEST_SUCCESS, requestSuccess));
       } else {

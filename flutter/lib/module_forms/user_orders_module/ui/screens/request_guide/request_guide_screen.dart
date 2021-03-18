@@ -104,15 +104,6 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
         }
         widget._logger.info(widget.tag, 'Guide Info: ' + _guideInfo.toString());
       }
-      if (currentStatus == RequestGuideBloc.STATUS_CODE_REQUEST_SUCCESS) {
-        Future.delayed(Duration(seconds: 1), () {
-          Navigator.of(context).pushReplacementNamed(ChatRoutes.chatRoute,
-              arguments: event.last);
-          widget._logger
-              .info(widget.tag, 'Guide Info: ' + _guideInfo.toString());
-        });
-        return Scaffold();
-      }
       if (this.mounted) setState(() {});
     });
 
@@ -154,13 +145,13 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
     if (currentStatus == RequestGuideBloc.STATUS_CODE_REQUEST_SUCCESS) {
       // Go to Home
       Fluttertoast.showToast(msg: S.of(context).requestSent);
-      Navigator.pushReplacementNamed(context, HomeRoutes.home);
       return WillPopScope(
         onWillPop: () {
           Navigator.of(context).pop();
           return;
         },
         child: Scaffold(
+          appBar: AppBar(),
           body: Center(
             child: Text(S.of(context).success),
           ),
@@ -414,7 +405,7 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
     widget._requestGuideBloc.requestGuide(
         _guideInfo.userID,
         servicesList,
-        DateTime.parse(_arrivalDateField.text),
+        _arrivalDateField.text.isNotEmpty ? DateTime.parse(_arrivalDateField.text) : DateTime.now(),
         int.parse(_stayingTime.text),
         _guideLanguage,
         _arrivalCity);

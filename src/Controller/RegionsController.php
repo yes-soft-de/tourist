@@ -6,6 +6,7 @@ use App\AutoMapping;
 use App\Request\RegionCreateRequest;
 use App\Request\RegionUpdateRequest;
 use App\Service\RegionsService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use stdClass;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,6 +43,7 @@ class RegionsController extends BaseController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN", message="Access denied")
      * @Route("/region", name="regionCreate", methods={"POST"})
      * @param Request $request
      * @return JsonResponse

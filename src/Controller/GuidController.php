@@ -7,6 +7,7 @@ use App\Request\GuidProfileUpdateRequest;
 use App\Request\guidByAdminUpdateRequest;
 use App\Request\GuidRegisterRequest;
 use App\Service\GuidService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use stdClass;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,8 +75,9 @@ class GuidController extends BaseController
 
         return $this->response($response, self::UPDATE);
     }
-//for ADMIN
+
     /**
+     * @IsGranted("ROLE_ADMIN", message="Access denied")
      * @Route("/guidbyadminupdate", name="guidByAdminUpdate", methods={"PUT"})
      * @param Request $request
      * @return JsonResponse

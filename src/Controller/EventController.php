@@ -6,6 +6,7 @@ use App\AutoMapping;
 use App\Request\EventCreateRequest;
 use App\Request\EventUpdateRequest;
 use App\Service\EventService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use stdClass;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +32,7 @@ class EventController extends BaseController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN", message="Access denied")
      * @Route("/event", name="eventCreate", methods={"POST"})
      * @param Request $request
      * @return JsonResponse
@@ -76,8 +78,9 @@ class EventController extends BaseController
         return $this->response($response,self::FETCH);
     }
 
-    //for ADMIN
+    
     /**
+     * @IsGranted("ROLE_ADMIN", message="Access denied")
      * @Route("/event", name="eventUpdate", methods={"PUT"})
      * @param Request $request
      * @return JsonResponse

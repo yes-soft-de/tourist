@@ -265,10 +265,7 @@ class RegionsService
     {
         $item = $this->regionsManager->update($request);
 
-        $response = $this->autoMapping->map(GuidEntity::class,RegionCreateResponse::class, $item);
-        //dd($response->id);
-
-        return $response;
+        return $this->autoMapping->map(RegionsEntity::class,RegionCreateResponse::class, $item);
     }
 
 }

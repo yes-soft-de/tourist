@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Request\TouristRegisterRequest;
 use App\Request\TouristUpdateRequest;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -63,6 +64,8 @@ class TouristsManager
         {
             $tourist = $this->autoMapping->mapToObject(TouristUpdateRequest::class,
                 User::class, $request, $tourist);
+
+            $tourist->setArrivalDate(new DateTime($request->arrivalDate));
 
             $this->entityManager->flush();
             $this->entityManager->clear();

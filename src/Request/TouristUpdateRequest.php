@@ -30,6 +30,6 @@ class TouristUpdateRequest
 
     public $image;
 
-    public $createDate;
+    // public $createDate;
 
 }

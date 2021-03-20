@@ -8,10 +8,6 @@ class TouristUpdateRequest
 {
     public $userID;
 
-    public $roles = [];
-
-    public $password;
-
     public $name;
 
     public $sex;
@@ -36,11 +32,4 @@ class TouristUpdateRequest
 
     public $createDate;
 
-    /**
-     * @param mixed $password
-     */
-    public function setPassword($password): void
-    {
-        $this->password = $password;
-    }
 }

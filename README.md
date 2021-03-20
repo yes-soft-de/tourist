@@ -134,6 +134,11 @@ methods={"PUT"}
 order/{touristUserID}
 methods={"GET"}
 ```
+#### Get all tourist orders, either accepted or not
+```
+orders/{touristID}
+methods={"GET"}
+```
 #### Get all orders by GuidUserID
 ```
 guideorder/{guidUserID}

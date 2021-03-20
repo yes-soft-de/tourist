@@ -101,7 +101,7 @@ class GuidEntityRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('guid')
             ->select('guid.id', 'IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image', 'guid.places', 'guid.about', 
-            'guid.phoneNumber', 'guid.service', 'user_entity.userID')
+            'guid.phoneNumber', 'guid.service', 'guid.cost', 'user_entity.userID')
             
             ->join('App:User', 'user_entity')
 

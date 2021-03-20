@@ -14,6 +14,7 @@ use App\Request\GuidProfileUpdateRequest;
 use App\Request\guidByAdminUpdateRequest;
 use App\Request\GuidRegisterRequest;
 use App\Response\GuidByRegionResponse;
+use App\Response\GuideProfileGetResponse;
 use App\Response\GuidesResponse;
 use App\Response\GuidProfileUpdateResponse;
 use App\Response\GuidRegisterResponse;
@@ -147,7 +148,7 @@ class GuidService
 
         $item['baseURL'] = $this->params;
 
-        return $this->autoMapping->map('array', GuidByRegionResponse::class, $item);
+        return $this->autoMapping->map('array', GuideProfileGetResponse::class, $item);
     }
 
     public function guideById($id)

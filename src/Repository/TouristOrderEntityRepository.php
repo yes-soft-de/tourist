@@ -23,7 +23,7 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
     {
         // Get only accepted orders
         $e = $this->createQueryBuilder('orders')
-            ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.guidUserID', 'orders.city', 'orders.language',
+            ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.guidUserID', 'orders.city', 'orders.language', 'orders.services',
                 'orders.arriveDate', 'orders.leaveDate', 'orders.roomID', 'orders.cost', 'orders.status', 'acceptedOrderEntity.uuid')
 
             ->join('App:AcceptedOrderEntity', 'acceptedOrderEntity')
@@ -45,7 +45,7 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
     {
         // Get all orders of a tourist either they are accepted or not
         return $this->createQueryBuilder('orders')
-            ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.guidUserID', 'orders.city', 'orders.language',
+            ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.guidUserID', 'orders.city', 'orders.language', 'orders.services',
                 'orders.arriveDate', 'orders.leaveDate', 'orders.roomID', 'orders.cost', 'orders.status')
 
             ->andWhere('orders.touristUserID = :touristID')
@@ -99,7 +99,7 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
     public function getOrdersByGuidUserID($guidUserID)
     {
         $e = $this->createQueryBuilder('orders')
-            ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.guidUserID', 'orders.city', 'orders.language',
+            ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.guidUserID', 'orders.city', 'orders.language', 'orders.services',
             'orders.arriveDate', 'orders.leaveDate', 'orders.roomID', 'orders.cost', 'orders.status', 'acceptedOrderEntity.uuid')
 
             ->join('App:AcceptedOrderEntity', 'acceptedOrderEntity')

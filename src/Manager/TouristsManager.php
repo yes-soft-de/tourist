@@ -61,12 +61,6 @@ class TouristsManager
 
         if ($tourist)
         {
-            if ($request->password)
-            {
-                $user = new User($request->userID);
-                $request->setPassword($this->encoder->encodePassword($user, $request->password));
-            }
-
             $tourist = $this->autoMapping->mapToObject(TouristUpdateRequest::class,
                 User::class, $request, $tourist);
 

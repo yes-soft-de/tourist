@@ -89,14 +89,17 @@ class EventService
         $commentsResponse= [];
         $comments = $this->commentsManager->getEventCommentsByID($id);
 
+        $response->setCommentsNumber(count($comments));
         foreach ($comments as $comment)
         {
             $commentsResponse[] = $this->autoMapping->map('array', GetCommentsByIdResponse::class, $comment);
         }
-        if ($eventImages) {
+        if ($commentsResponse) 
+        {
         //add comments to response
-        $response->setComments($commentsResponse);
+            $response->setComments($commentsResponse);
         }
+
         return $response;
     }
 

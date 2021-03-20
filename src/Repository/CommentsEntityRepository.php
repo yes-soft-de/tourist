@@ -66,10 +66,10 @@ class CommentsEntityRepository extends ServiceEntityRepository
     public function getEventCommentsByID($id)
     {
         $r = $this->createQueryBuilder('comments')
-            ->select('comments.id', 'comments.comment', 'comments.date', 'user.name as userName')
+            ->select('comments.id', 'comments.comment', 'comments.date', 'user_entity.name as userName', 'user_entity.roles')
             //->from('App:User', 'user')
-            ->join('App:User', 'user')
-            ->andWhere('user.id = comments.user')
+            ->join('App:User', 'user_entity')
+            ->andWhere('user_entity.id = comments.user')
 
             ->andWhere('comments.event=:id')
             ->setParameter('id',$id)

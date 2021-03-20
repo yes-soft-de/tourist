@@ -36,5 +36,8 @@ class EventsResponse
         $this->comments = $comments;
     }
 
-
+    public function setCommentsNumber($commentsNumber): void
+    {
+        $this->commentNumber = $commentsNumber;
+    }
 }

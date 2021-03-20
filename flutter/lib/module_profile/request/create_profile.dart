@@ -25,7 +25,8 @@ class CreateProfileRequest {
 
   Map<String, dynamic> toJson() {
     return {
-      role == UserRole.ROLE_GUIDE ? 'user' : 'userID': this.userID,
+      'user': this.userID,
+      'userID': this.userID,
       'userName': this.userName,
       'name': this.userName,
       'story': this.story,

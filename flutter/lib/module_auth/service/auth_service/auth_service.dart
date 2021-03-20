@@ -320,16 +320,10 @@ class AuthService {
   }
 
   /// refresh API token, this is done using Firebase Token Refresh
-  Future<String> refreshToken() async {
-    String uid = await _prefsHelper.getUserId();
-    String password = await _prefsHelper.getPassword();
-    String email = await _prefsHelper.getEmail();
-    LoginResponse loginResponse = await _authManager.login(LoginRequest(
-      username: email ?? uid,
-      password: password,
-    ));
-    await _prefsHelper.setToken(loginResponse.token);
-    return loginResponse.token;
+  Future<void> refreshToken() async {
+    var source = await _prefsHelper.getAuthSource();
+    var role = await _prefsHelper.getCurrentRole();
+    await _loginApiUser(role, source);
   }
 
   /// apple specific function

@@ -55,14 +55,15 @@ class LocationDetailsService {
     return guidesList;
   }
 
-  Future<LocationDetailsModel> createLocationByGoogleId(String locationId) async {
+  Future<LocationDetailsModel> createLocationByGoogleId(
+      String locationId) async {
     // First request the details from google
     var locationDetails =
         await _googleLocationsService.getLocationDetails(locationId);
 
     var request = CreateLocationRequest();
-    request.name = locationDetails.result.name;
-    if (locationDetails.result.reviews != null) {
+    request.name = locationDetails.result?.name;
+    if (locationDetails.result?.reviews != null) {
       if (locationDetails.result.reviews.isNotEmpty) {
         request.description = locationDetails.result.reviews[0].text;
       }
@@ -70,7 +71,7 @@ class LocationDetailsService {
     request.description ??= request.name;
     request.placeId = locationId;
     request.path = 'asd';
-    if (locationDetails.result.geometry != null) {
+    if (locationDetails.result?.geometry != null) {
       request.location = {
         'lat': locationDetails.result.geometry.location.lat,
         'lng': locationDetails.result.geometry.location.lng,
@@ -82,7 +83,8 @@ class LocationDetailsService {
     return response.locationDetails;
   }
 
-  Future<LocationDetailsModel> updateLocation(LocationDetailsModel locationDetails) async {
+  Future<LocationDetailsModel> updateLocation(
+      LocationDetailsModel locationDetails) async {
     var request = CreateLocationRequest();
     request.name = locationDetails.name;
     request.description = locationDetails.description;
@@ -98,7 +100,6 @@ class LocationDetailsService {
     if (response == null) return null;
     return response.locationDetails;
   }
-
 
   Future<dynamic> createRate(int rate, String locationId) async {
     String uid = await _preferencesHelper.getUserUID();

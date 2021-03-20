@@ -49,23 +49,6 @@ class LocationDetailsModel {
       log('No Images?!!');
     }
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['description'] = this.description;
-//    data['location'] = this.location;
-    data['ratingAverage'] = this.ratingAverage;
-    data['placeId'] = locationId;
-    if (this.comments != null) {
-      data['comments'] = this.comments.map((v) => v.toJson()).toList();
-    }
-    if (this.paths != null) {
-      data['paths'] = this.paths.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
 }
 
 class DetailsImagePaths {

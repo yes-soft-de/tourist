@@ -52,21 +52,25 @@ class LocationDetailsBloc {
         guides: locationGuides,
         isLoggedIn: loggedIn,
         onPostComment: (commentMsg) {
-          postComment(commentMsg, locationId);
+          postComment(commentMsg, locationInfo.id.toString(), locationInfo.locationId);
         }));
   }
 
-  void postComment(String commentMsg, String regionId) async {
+  void postComment(String commentMsg, String regionId, String detailsId) async {
     String uid = await this._preferencesHelper.getUserUID();
     if (uid == null) {
       return;
     }
 
-    CreateCommentResponse response = await this._commentManager.createComment(
-        CreateCommentRequest(comment: commentMsg, user: uid, region: regionId));
+    CreateCommentResponse response =
+        await this._commentManager.createComment(CreateCommentRequest(
+              comment: commentMsg,
+              user: uid,
+              region: regionId,
+            ));
     if (response == null) return;
 
-    return getLocation(regionId);
+    return getLocation(detailsId);
   }
 
   void createRate(int rate, String locationId) {

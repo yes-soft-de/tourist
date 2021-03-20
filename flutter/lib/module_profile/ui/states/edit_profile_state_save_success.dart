@@ -16,7 +16,7 @@ class EditProfileStateSaveSuccess extends EditProfileState {
           shape: BoxShape.circle
         ),
         child: IconButton(icon: Icon(Icons.check), onPressed: () {
-          Navigator.of(context).pushNamed(HomeRoutes.home);
+          Navigator.of(context).pushNamedAndRemoveUntil(HomeRoutes.home, (r) => false);
         }),
       ),
     );

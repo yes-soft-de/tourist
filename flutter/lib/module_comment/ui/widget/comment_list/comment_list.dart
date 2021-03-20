@@ -48,13 +48,14 @@ class _CommentListWidgetState extends State<CommentListWidget> {
 
     if (allComments.length > widget.pageSize) {
       canShowMore = true;
-      try {
-        displayedComments =
-            allComments.sublist(0, widget.pageSize * (1 + currentPage));
-      } catch (e) {
-        displayedComments = allComments;
-        canShowMore = false;
-      }
+    }
+
+    try {
+      displayedComments =
+          allComments.sublist(0, widget.pageSize * (1 + currentPage));
+    } catch (e) {
+      displayedComments = allComments;
+      canShowMore = false;
     }
 
     List<Widget> comments = [];

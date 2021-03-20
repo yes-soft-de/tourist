@@ -16,10 +16,10 @@ class CommentRepository {
 
   Future<CreateCommentResponse> createComment(
       CreateCommentRequest request) async {
-    await _authService.refreshToken();
-    var token = await _authService.getToken();
+    // await _authService.refreshToken();
+    // var token = await _authService.getToken();
     Map response = await _client.post(Urls.comment, request.toJson(), headers: {
-      'Authorization': 'Bearer ' + token,
+      // 'Authorization': 'Bearer ' + token,
     });
 
     if (response != null) {

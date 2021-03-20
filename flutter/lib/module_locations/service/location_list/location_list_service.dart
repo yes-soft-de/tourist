@@ -8,7 +8,10 @@ class LocationListService {
 
   LocationListService(this._locationListManager);
 
-  Future<List<LocationListItem>> getLocationList() {
-    return _locationListManager.getLocationList();
+  Future<List<LocationListItem>> getLocationList() async {
+    var locations = await _locationListManager.getLocationList();
+
+    if (locations == null) return null;
+    return locations.where((element) => element.id != null).toList();
   }
 }

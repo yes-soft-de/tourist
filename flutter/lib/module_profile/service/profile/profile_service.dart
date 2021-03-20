@@ -41,6 +41,7 @@ class ProfileService {
     CreateProfileRequest request = CreateProfileRequest(
       userName: profileModel.name,
       image: profileModel.image,
+      role: role,
       phoneNumber: profileModel.phone,
       location: profileModel.locations,
       userID: userId,
@@ -77,8 +78,8 @@ class ProfileService {
 
 
     return ProfileModel(
-      name: '${myProfile.data.name} ',
-      image: '${myProfile.data.image} ',
+      name: '${myProfile?.data?.name} ',
+      image: '${myProfile?.data?.image} ',
       locations: [],
       languages: ['en', 'ar'],
       availableLocations: places,

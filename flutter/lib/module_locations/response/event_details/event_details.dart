@@ -28,7 +28,7 @@ class Data {
   int id;
   String name;
   String type;
-  Null subType;
+  String subType;
   Date date;
   String status;
   String location;

@@ -39,6 +39,7 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   int position;
+  bool moreActive = false;
   bool loggedIn;
   final PageController _pageController = PageController();
 
@@ -109,11 +110,21 @@ class HomeScreenState extends State<HomeScreen> {
               },
             ),
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: position == 3 ? moreColumn() : Container(),
+          Positioned.fill(
+            child: position == 3
+                ? Column(
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          child: Container(
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ),
+                      moreColumn(),
+                    ],
+                  )
+                : Container(),
           ),
         ],
       ),
@@ -159,23 +170,26 @@ class HomeScreenState extends State<HomeScreen> {
                 },
                 child: Container(
                   color: Colors.white,
-                  child: ListTile(leading: Icon(Icons.credit_card),
+                  child: ListTile(
+                    leading: Icon(Icons.credit_card),
                     title: Text(S.of(context).orders),
                   ),
                 ),
               ),
-              snapshot.data == UserRole.ROLE_TOURIST ? Container() : GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushNamed(HomeRoutes.guideHome);
-                },
-                child: Container(
-                  color: Colors.white,
-                  child: ListTile(
-                    leading: FaIcon(FontAwesomeIcons.user),
-                    title: Text(S.of(context).guidesArea),
-                  ),
-                ),
-              ),
+              snapshot.data == UserRole.ROLE_TOURIST
+                  ? Container()
+                  : GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(HomeRoutes.guideHome);
+                      },
+                      child: Container(
+                        color: Colors.white,
+                        child: ListTile(
+                          leading: FaIcon(FontAwesomeIcons.user),
+                          title: Text(S.of(context).guidesArea),
+                        ),
+                      ),
+                    ),
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).pushNamed(SettingsRoute.settingsRoutes);
@@ -227,8 +241,8 @@ class HomeScreenState extends State<HomeScreen> {
                                   HomeRoutes.home, (route) => false);
                             });
                           } else {
-                            Navigator.of(context).pushNamed(
-                                AuthorizationRoutes.LOGIN_SCREEN);
+                            Navigator.of(context)
+                                .pushNamed(AuthorizationRoutes.LOGIN_SCREEN);
                           }
                         },
                         child: Text(loggedIn == true

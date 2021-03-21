@@ -43,7 +43,6 @@ class RegionsController extends BaseController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN", message="Access denied")
      * @Route("/region", name="regionCreate", methods={"POST"})
      * @param Request $request
      * @return JsonResponse

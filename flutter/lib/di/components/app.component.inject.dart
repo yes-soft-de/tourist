@@ -29,25 +29,25 @@ import '../../module_orders/service/guide_orders/guide_orders.dart' as _i23;
 import '../../module_orders/manager/guide_orders/guide_orders.dart' as _i24;
 import '../../module_orders/repository/guide_orders/guide_orders.dart' as _i25;
 import '../../module_network/http_client/http_client.dart' as _i26;
+import '../../module_home/ui/screens/home/home.dart' as _i27;
 import '../../module_locations/ui/screens/location_list/location_list_screen.dart'
-    as _i27;
-import '../../module_locations/service/location_list/location_list_service.dart'
     as _i28;
-import '../../module_locations/manager/location_list/location_list_manager.dart'
+import '../../module_locations/service/location_list/location_list_service.dart'
     as _i29;
-import '../../module_locations/repository/location_list/location_list_repository.dart'
+import '../../module_locations/manager/location_list/location_list_manager.dart'
     as _i30;
-import '../../module_locations/ui/screens/event_list/event_list.dart' as _i31;
-import '../../module_locations/bloc/event_list/event_list_bloc.dart' as _i32;
-import '../../module_locations/service/event/event_service.dart' as _i33;
-import '../../module_locations/manager/event/event_manager.dart' as _i34;
-import '../../module_locations/repository/event/event_repository.dart' as _i35;
-import '../../module_home/ui/screens/home/home.dart' as _i36;
-import '../../module_guide/ui/screen/guide_list/guide_list_screen.dart' as _i37;
-import '../../module_guide/bloc/guide_list/guide_list_bloc.dart' as _i38;
-import '../../module_guide/service/guide_list/guide_list.dart' as _i39;
-import '../../module_guide/manager/guides_manager/guides_manager.dart' as _i40;
-import '../../module_guide/repository/guides/guide_repository.dart' as _i41;
+import '../../module_locations/repository/location_list/location_list_repository.dart'
+    as _i31;
+import '../../module_guide/ui/screen/guide_list/guide_list_screen.dart' as _i32;
+import '../../module_guide/bloc/guide_list/guide_list_bloc.dart' as _i33;
+import '../../module_guide/service/guide_list/guide_list.dart' as _i34;
+import '../../module_guide/manager/guides_manager/guides_manager.dart' as _i35;
+import '../../module_guide/repository/guides/guide_repository.dart' as _i36;
+import '../../module_locations/ui/screens/event_list/event_list.dart' as _i37;
+import '../../module_locations/bloc/event_list/event_list_bloc.dart' as _i38;
+import '../../module_locations/service/event/event_service.dart' as _i39;
+import '../../module_locations/manager/event/event_manager.dart' as _i40;
+import '../../module_locations/repository/event/event_repository.dart' as _i41;
 import '../../module_locations/ui/screens/location_carousel/location_carousel.dart'
     as _i42;
 import '../../module_splash/splash_module.dart' as _i43;
@@ -180,10 +180,7 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i19.HomeModule _createHomeModule() => _i19.HomeModule(
       _createGuideHomeScreen(), _createHomeScreen(), _createAuthGuard());
   _i20.GuideHomeScreen _createGuideHomeScreen() => _i20.GuideHomeScreen(
-      _createGuideOrdersScreen(),
-      _createLocationListScreen(),
-      _createEventListScreen(),
-      _createSharedPreferencesHelper());
+      _createGuideOrdersScreen(), _createSharedPreferencesHelper());
   _i21.GuideOrdersScreen _createGuideOrdersScreen() =>
       _i21.GuideOrdersScreen(_createGuideOrdersListBloc());
   _i22.GuideOrdersListBloc _createGuideOrdersListBloc() =>
@@ -195,44 +192,44 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i25.GuideOrdersRepository _createGuideOrdersRepository() =>
       _i25.GuideOrdersRepository(_createHttpClient());
   _i26.HttpClient _createHttpClient() => _i26.HttpClient();
-  _i27.LocationListScreen _createLocationListScreen() =>
-      _i27.LocationListScreen(_createLocationListBloc());
-  _i3.LocationListBloc _createLocationListBloc() =>
-      _singletonLocationListBloc ??=
-          _i3.LocationListBloc(_createLocationListService(), _createLogger());
-  _i28.LocationListService _createLocationListService() =>
-      _i28.LocationListService(_createLocationListManager());
-  _i29.LocationListManager _createLocationListManager() =>
-      _i29.LocationListManager(_createLocationListRepository());
-  _i30.LocationListRepository _createLocationListRepository() =>
-      _i30.LocationListRepository(_createHttpClient());
-  _i2.Logger _createLogger() => _singletonLogger ??= _i2.Logger();
-  _i31.EventListScreen _createEventListScreen() =>
-      _i31.EventListScreen(_createEventListBloc());
-  _i32.EventListBloc _createEventListBloc() =>
-      _i32.EventListBloc(_createEventService());
-  _i33.EventService _createEventService() =>
-      _i33.EventService(_createEventManager());
-  _i34.EventManager _createEventManager() =>
-      _i34.EventManager(_createEventRepository());
-  _i35.EventRepository _createEventRepository() =>
-      _i35.EventRepository(_createHttpClient());
-  _i36.HomeScreen _createHomeScreen() => _i36.HomeScreen(
+  _i27.HomeScreen _createHomeScreen() => _i27.HomeScreen(
       _createLocationListScreen(),
       _createGuideListScreen(),
       _createEventListScreen(),
       _createAuthService(),
       _createLocationCarouselScreen());
-  _i37.GuideListScreen _createGuideListScreen() =>
-      _i37.GuideListScreen(_createGuideListBloc());
-  _i38.GuideListBloc _createGuideListBloc() =>
-      _i38.GuideListBloc(_createGuideListService(), _createAuthService());
-  _i39.GuideListService _createGuideListService() =>
-      _i39.GuideListService(_createGuidesManager());
-  _i40.GuidesManager _createGuidesManager() =>
-      _i40.GuidesManager(_createGuidesRepository());
-  _i41.GuidesRepository _createGuidesRepository() =>
-      _i41.GuidesRepository(_createHttpClient());
+  _i28.LocationListScreen _createLocationListScreen() =>
+      _i28.LocationListScreen(_createLocationListBloc());
+  _i3.LocationListBloc _createLocationListBloc() =>
+      _singletonLocationListBloc ??=
+          _i3.LocationListBloc(_createLocationListService(), _createLogger());
+  _i29.LocationListService _createLocationListService() =>
+      _i29.LocationListService(_createLocationListManager());
+  _i30.LocationListManager _createLocationListManager() =>
+      _i30.LocationListManager(_createLocationListRepository());
+  _i31.LocationListRepository _createLocationListRepository() =>
+      _i31.LocationListRepository(_createHttpClient());
+  _i2.Logger _createLogger() => _singletonLogger ??= _i2.Logger();
+  _i32.GuideListScreen _createGuideListScreen() =>
+      _i32.GuideListScreen(_createGuideListBloc());
+  _i33.GuideListBloc _createGuideListBloc() =>
+      _i33.GuideListBloc(_createGuideListService(), _createAuthService());
+  _i34.GuideListService _createGuideListService() =>
+      _i34.GuideListService(_createGuidesManager());
+  _i35.GuidesManager _createGuidesManager() =>
+      _i35.GuidesManager(_createGuidesRepository());
+  _i36.GuidesRepository _createGuidesRepository() =>
+      _i36.GuidesRepository(_createHttpClient());
+  _i37.EventListScreen _createEventListScreen() =>
+      _i37.EventListScreen(_createEventListBloc());
+  _i38.EventListBloc _createEventListBloc() =>
+      _i38.EventListBloc(_createEventService());
+  _i39.EventService _createEventService() =>
+      _i39.EventService(_createEventManager());
+  _i40.EventManager _createEventManager() =>
+      _i40.EventManager(_createEventRepository());
+  _i41.EventRepository _createEventRepository() =>
+      _i41.EventRepository(_createHttpClient());
   _i42.LocationCarouselScreen _createLocationCarouselScreen() =>
       _i42.LocationCarouselScreen(_createLocationListBloc());
   _i4.AuthGuard _createAuthGuard() =>
@@ -273,7 +270,7 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i55.LocationDetailsManager _createLocationDetailsManager() =>
       _i55.LocationDetailsManager(_createLocationDetailsRepository());
   _i56.LocationDetailsRepository _createLocationDetailsRepository() =>
-      _i56.LocationDetailsRepository(_createHttpClient());
+      _i56.LocationDetailsRepository(_createHttpClient(), _createAuthService());
   _i57.RatingManager _createRatingManager() =>
       _i57.RatingManager(_createRatingRepository());
   _i58.RatingRepository _createRatingRepository() =>
@@ -311,8 +308,8 @@ class AppComponent$Injector implements _i1.AppComponent {
       _i74.OrdersListScreen(_createOrdersListBloc());
   _i75.OrdersListBloc _createOrdersListBloc() =>
       _i75.OrdersListBloc(_createOrdersService());
-  _i76.OrdersService _createOrdersService() =>
-      _i76.OrdersService(_createOrdersManager(), _createGuideListService());
+  _i76.OrdersService _createOrdersService() => _i76.OrdersService(
+      _createOrdersManager(), _createGuideListService(), _createAuthService());
   _i77.OrdersManager _createOrdersManager() =>
       _i77.OrdersManager(_createOrdersRepository());
   _i78.OrdersRepository _createOrdersRepository() =>

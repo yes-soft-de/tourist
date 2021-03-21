@@ -1,5 +1,6 @@
 import 'package:inject/inject.dart';
 import 'package:tourists/consts/urls.dart';
+import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
 import 'package:tourists/module_locations/request/create_location_request.dart';
 import 'package:tourists/module_locations/response/location_details/location_response.dart';
 import 'package:tourists/module_network/http_client/http_client.dart';
@@ -7,8 +8,12 @@ import 'package:tourists/module_network/http_client/http_client.dart';
 @provide
 class LocationDetailsRepository {
   final HttpClient _client;
+  final AuthService _authService;
 
-  LocationDetailsRepository(this._client);
+  LocationDetailsRepository(
+    this._client,
+    this._authService,
+  );
 
   Future<LocationDetailsResponse> getLocationDetails(String locationId) async {
     Map response = await _client.get(Urls.locationDetails + locationId);
@@ -20,18 +25,41 @@ class LocationDetailsRepository {
     }
   }
 
-  Future<LocationDetailsResponse> createLocationDetails(CreateLocationRequest createLocationRequest) async {
-    Map response = await _client.post(Urls.createLocationDetails, createLocationRequest.toJson());
+  Future<LocationDetailsResponse> createLocationDetails(
+      CreateLocationRequest createLocationRequest) async {
+    await _authService.refreshToken();
+    var token = await _authService.getToken();
+    try {
+      var response = await _client.post(
+        Urls.createLocationDetails,
+        createLocationRequest.toJson(),
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
 
-    if (response != null) {
-      return new LocationDetailsResponse.fromJson(response);
-    } else {
+      if (response != null) {
+        return new LocationDetailsResponse.fromJson(response);
+      } else {
+        return null;
+      }
+    } catch (e) {
       return null;
     }
   }
 
-  Future<LocationDetailsResponse> updateLocationDetails(CreateLocationRequest createLocationRequest) async {
-    Map response = await _client.put('${Urls.createLocationDetails}/${createLocationRequest.placeId}', createLocationRequest.toJson());
+  Future<LocationDetailsResponse> updateLocationDetails(
+      CreateLocationRequest createLocationRequest) async {
+    await _authService.refreshToken();
+    var token = await _authService.getToken();
+
+    Map response = await _client.put(
+      '${Urls.createLocationDetails}/${createLocationRequest.placeId}',
+      createLocationRequest.toJson(),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
 
     if (response != null) {
       return new LocationDetailsResponse.fromJson(response);

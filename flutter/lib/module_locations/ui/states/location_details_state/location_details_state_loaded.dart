@@ -18,13 +18,17 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
     this.guides,
     this.onPostComment,
     this.isLoggedIn,
-  });
+  }) {
+    if (this.location == null) {
+      this.location = LocationDetailsModel();
+    }
+  }
 
   @override
   Widget getUI(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${location.name}'),
+        title: Text('${location?.name}'),
       ),
       body: SingleChildScrollView(
         child: Column(

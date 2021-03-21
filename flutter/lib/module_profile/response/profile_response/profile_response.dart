@@ -32,7 +32,7 @@ class Data {
   String nationality;
   List<String> guideLanguage;
   List<String> arrivalCity;
-  List<String> arrivalDate;
+  CreateDate arrivalDate;
   int stayDays;
   List<String> interests;
   String email;
@@ -64,7 +64,9 @@ class Data {
     nationality = json['nationality'];
     guideLanguage = json['guideLanguage']?.cast<String>();
     arrivalCity = json['arrivalCity']?.cast<String>();
-    arrivalDate = json['arrivalDate']?.cast<String>();
+    if (json['arrivalDate'] != null) {
+      arrivalDate = CreateDate.fromJson(json['arrivalDate']);
+    }
     stayDays = json['stayDays'];
     interests = json['interests']?.cast<String>();
     email = json['email'];

@@ -38,6 +38,7 @@ class LocationDetailsBloc {
     if (locationInfo == null) {
       stateStream.add(LocationDetailsStateError(
           'Error loading location or location does not exist!'));
+      return;
     }
 
     var locationGuides =

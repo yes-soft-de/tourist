@@ -46,6 +46,7 @@ class MyProfileStateManager {
   Future<void> setMyProfile(
       MyProfileScreen screen, ProfileModel profile) async {
     _stateSubject.add(EditProfileStateLoading(screen));
+    await _myProfileService.createProfile(profile);
     _stateSubject.add(
         EditProfileStateSaveSuccess(screen));
   }

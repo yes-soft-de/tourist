@@ -58,5 +58,4 @@ class EditProfileStateGuideLoadSuccess extends EditProfileState {
       },
     );
   }
-
 }

@@ -52,18 +52,19 @@ class OrderModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     if (this.date != null) {
-      data['date'] = DateTime.fromMillisecondsSinceEpoch(this.date.timestamp * 1000);
+      data['date'] = DateTime.fromMillisecondsSinceEpoch(this.date.timestamp * 1000).toIso8601String();
     }
     data['touristUserID'] = this.touristUserID;
     data['guidUserID'] = this.guidUserID;
     data['city'] = this.city;
     data['id'] = this.id;
+    data['orderID'] = this.id;
     data['language'] = this.language;
     if (this.arriveDate != null) {
-      data['arriveDate'] = DateTime.fromMillisecondsSinceEpoch(this.arriveDate.timestamp * 1000);
+      data['arriveDate'] = DateTime.fromMillisecondsSinceEpoch(this.arriveDate.timestamp * 1000).toIso8601String();
     }
     if (this.leaveDate != null) {
-      data['leaveDate'] = DateTime.fromMillisecondsSinceEpoch(this.leaveDate.timestamp * 1000);
+      data['leaveDate'] = DateTime.fromMillisecondsSinceEpoch(this.leaveDate.timestamp * 1000).toIso8601String();
     }
     if (this.services != null) {
       data['services'] = this.services;

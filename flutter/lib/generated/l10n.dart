@@ -1314,6 +1314,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Price proposal`
+  String get priceProposal {
+    return Intl.message(
+      'Price proposal',
+      name: 'priceProposal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pending`
+  String get pending {
+    return Intl.message(
+      'Pending',
+      name: 'pending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `On Going`
+  String get onGoing {
+    return Intl.message(
+      'On Going',
+      name: 'onGoing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Finished`
+  String get finished {
+    return Intl.message(
+      'Finished',
+      name: 'finished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Proposal`
+  String get proposal {
+    return Intl.message(
+      'Proposal',
+      name: 'proposal',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

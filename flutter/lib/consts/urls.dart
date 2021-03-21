@@ -22,7 +22,7 @@ class Urls {
   static final acceptOrder = 'acceptorder';
   static final updateOrder = 'order';
   static final touristOrders = 'orders';
-  static final guideOrders = 'guidorder';
+  static final guideOrders = 'guideorder';
   static final comment = 'comment';
   static final event = 'event';
   static final eventList = 'events';

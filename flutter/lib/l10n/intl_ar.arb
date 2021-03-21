@@ -127,5 +127,10 @@
   "locationDescription": "Location Description",
   "myPhoneNumber": "My Phone number",
   "guidesArea": "Guides Area",
-  "searchQuery": "Search Query"
+  "searchQuery": "Search Query",
+  "priceProposal": "Price proposal",
+  "pending": "Pending",
+  "onGoing": "On Going",
+  "finished": "Finished",
+  "proposal": "Proposal"
 }

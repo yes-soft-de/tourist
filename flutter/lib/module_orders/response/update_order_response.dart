@@ -47,7 +47,7 @@ class Data {
     guidUserID = json['guidUserID'];
     city = json['city'];
     language = json['language'];
-    services = json['services'].cast<String>();
+    services = json['services']?.cast<String>();
     roomID = json['roomID'];
     status = json['status'];
     cost = json['cost'];

@@ -4,6 +4,7 @@ import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_orders/bloc/guide_orders_list/guide_orders_list.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
+import 'package:tourists/module_orders/ui/widget/guide_order_item/guide_order_item.dart';
 import 'package:tourists/module_orders/ui/widget/order_item/order_item.dart';
 
 @provide
@@ -60,7 +61,11 @@ class _GuideOrdersScreenState extends State<GuideOrdersScreen> {
           FutureBuilder(
             future: _getAvailableOrders(),
             builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
-              return snapshot.data;
+              if (snapshot.hasData) {
+                return snapshot.data;
+              } else {
+                return Container();
+              }
             },
           )
         ],
@@ -69,25 +74,38 @@ class _GuideOrdersScreenState extends State<GuideOrdersScreen> {
   }
 
   Widget _getLoadingUI() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [CircularProgressIndicator(), Text(S.of(context).loading)],
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(child: CircularProgressIndicator()),
+          Text(S.of(context).loading, textAlign: TextAlign.center,),
+        ],
+      ),
     );
   }
 
   Widget _getErrorScreen() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Text(S.of(context).error_fetching_data),
-        RaisedButton(
-          onPressed: () {
-            widget.bloc.getAvailableOrders();
-          },
-          child: Text(S.of(context).reload),
-        )
-      ],
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            S.of(context).error_fetching_data,
+            textAlign: TextAlign.center,
+          ),
+          RaisedButton(
+            onPressed: () {
+              widget.bloc.getAvailableOrders();
+            },
+            child: Text(S.of(context).reload),
+          )
+        ],
+      ),
     );
   }
 
@@ -97,9 +115,8 @@ class _GuideOrdersScreenState extends State<GuideOrdersScreen> {
 
     if (ordersList != null) {
       ordersList.forEach((order) {
-        orderCards.add(OrderItemWidget(
+        orderCards.add(GuideOrderItemWidget(
           order,
-          canPay: _user.uid == order.touristUserID,
           onAcceptOrder: (order) {
             widget.bloc.acceptOrder(order);
           },

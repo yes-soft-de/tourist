@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_locations/location_routes.dart';
 import 'package:tourists/module_search/bloc/search_bloc/search_bloc.dart';
 
@@ -39,6 +40,10 @@ class _AddLocationDialogState extends State<AddLocationDialog> {
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               controller: _searchController,
+              decoration: InputDecoration(
+                hintText: S.of(context).searchQuery,
+                labelText: S.of(context).searchQuery,
+              ),
               onChanged: (query) {
                 if (query.isNotEmpty) {
                   showPredictions = true;

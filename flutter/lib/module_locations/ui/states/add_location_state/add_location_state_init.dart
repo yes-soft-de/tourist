@@ -49,6 +49,8 @@ class AddLocationStateInit extends AddLocationState {
                       )
                     : Image.network(
                         image,
+                        height: 96,
+                        width: 96,
                         errorBuilder: (c, e, s) {
                           return Image.asset(
                             'resources/images/logo.png',

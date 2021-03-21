@@ -36,7 +36,9 @@ class Data {
   int stayDays;
   List<String> interests;
   String email;
+  List<String> city;
   String phoneNumber;
+  List<String> service;
   String image;
   CreateDate createDate;
 
@@ -48,6 +50,8 @@ class Data {
       this.nationality,
       this.guideLanguage,
       this.arrivalCity,
+      this.service,
+      this.city,
       this.arrivalDate,
       this.stayDays,
       this.interests,
@@ -62,13 +66,15 @@ class Data {
     name = json['name'] ?? json['userName'];
     sex = json['sex'];
     nationality = json['nationality'];
-    guideLanguage = json['guideLanguage']?.cast<String>();
+    guideLanguage = json['language']?.cast<String>();
+    service = json['service']?.cast<String>();
     arrivalCity = json['arrivalCity']?.cast<String>();
     if (json['arrivalDate'] != null) {
       arrivalDate = CreateDate.fromJson(json['arrivalDate']);
     }
     stayDays = json['stayDays'];
     interests = json['interests']?.cast<String>();
+    city = json['city']?.cast<String>();
     email = json['email'];
     phoneNumber = json['phoneNumber'];
     image = json['image'];

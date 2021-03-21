@@ -12,6 +12,25 @@ class LocationListService {
     var locations = await _locationListManager.getLocationList();
 
     if (locations == null) return null;
-    return locations.where((element) => element.id != null).toList();
+    var locationResult = <LocationListItem>[];
+
+    locations.forEach((element) {
+      if (element.id == null) {
+        return;
+      }
+
+
+      element.path ??= <Path>[];
+      element.path.map((obj) {
+        if (obj.path.contains('http')) {
+          obj.path = obj.path.substring(obj.path.lastIndexOf('http'));
+        }
+        return obj;
+      });
+
+      locationResult.add(element);
+    });
+
+    return locationResult;
   }
 }

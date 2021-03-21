@@ -34,7 +34,7 @@ class ProfileModel {
     data['name'] = this.name;
     data['image'] = this.image;
     data['languages'] = languages;
-    data['cities'] = locations;
+    data['city'] = locations;
     return data;
   }
 }

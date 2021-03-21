@@ -32,6 +32,7 @@ class CreateProfileRequest {
       'story': this.story,
       'location': this.location,
       'places': this.location,
+      'city': this.location,
       'image': this.image,
       'service': this.services,
       'language': this.languages,

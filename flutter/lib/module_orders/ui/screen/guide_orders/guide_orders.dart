@@ -97,16 +97,22 @@ class _GuideOrdersScreenState extends State<GuideOrdersScreen> {
 
     if (ordersList != null) {
       ordersList.forEach((order) {
-        orderCards.add(OrderItemWidget(order,
-            canPay: _user.uid == order.touristUserID, onAcceptOrder: (order) {
-          widget.bloc.acceptOrder(order);
-        }, onAcceptAvailableOrder: (order) {
-          widget.bloc.acceptAvailableOrder(order);
-        }, onPayOrder: (order) {
-          widget.bloc.payOrder(order);
-        }, onPayAvailableOrder: (orderModel) {
-          widget.bloc.payAvailableOrder(orderModel);
-        }));
+        orderCards.add(OrderItemWidget(
+          order,
+          canPay: _user.uid == order.touristUserID,
+          onAcceptOrder: (order) {
+            widget.bloc.acceptOrder(order);
+          },
+          onAcceptAvailableOrder: (order) {
+            widget.bloc.acceptAvailableOrder(order);
+          },
+          onPayOrder: (order) {
+            widget.bloc.payOrder(order);
+          },
+          onPayAvailableOrder: (orderModel) {
+            widget.bloc.payAvailableOrder(orderModel);
+          },
+        ));
       });
     }
 

@@ -46,16 +46,8 @@ class MyProfileStateManager {
   Future<void> setMyProfile(
       MyProfileScreen screen, ProfileModel profile) async {
     _stateSubject.add(EditProfileStateLoading(screen));
-
-    var userType = await this._authService.userRole;
-    var createdProfile = await _myProfileService.createProfile(profile);
-    if (userType == UserRole.ROLE_GUIDE) {
-      _stateSubject.add(EditProfileStateGuideLoadSuccess(
-          screen, createdProfile, _searchProvider));
-    } else {
-      _stateSubject.add(
-          EditProfileStateSaveSuccess(screen));
-    }
+    _stateSubject.add(
+        EditProfileStateSaveSuccess(screen));
   }
 
   void getMyProfile(MyProfileScreen screen) {

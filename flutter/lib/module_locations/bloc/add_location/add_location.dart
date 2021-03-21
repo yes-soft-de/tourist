@@ -1,5 +1,6 @@
 import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:tourists/consts/urls.dart';
 import 'package:tourists/module_locations/model/location_details/location_details.dart';
 import 'package:tourists/module_locations/service/location_details/location_details_service.dart';
 import 'package:tourists/module_locations/ui/screens/add_location/add_location.dart';
@@ -18,11 +19,15 @@ class AddLocationBloc {
   AddLocationBloc(this._imageUploadService, this._locationDetailsService);
 
   void uploadImage(
-      AddLocationScreen screen, String imagePath, LocationDetailsModel model) {
+    AddLocationScreen screen,
+    String imagePath,
+    LocationDetailsModel model,
+  ) {
+    model ??= LocationDetailsModel();
     _imageUploadService.uploadImage(imagePath).then((value) {
       model.paths ??= [];
       if (model.paths.isEmpty) {
-        model.paths.add(DetailsImagePaths(path: value));
+        model.paths.add(DetailsImagePaths(path: Urls.imagesRoot + value));
       } else {
         model.paths = [DetailsImagePaths(path: value)];
       }

@@ -80,8 +80,10 @@ class ProfileService {
     return ProfileModel(
       name: '${myProfile?.data?.name} ',
       image: '${myProfile?.data?.image} ',
-      locations: [],
-      languages: ['en', 'ar'],
+      phone: '${myProfile?.data?.phoneNumber}',
+      locations: myProfile?.data?.city,
+      services: myProfile.data.service,
+      languages: myProfile.data.guideLanguage,
       availableLocations: places,
     );
   }

@@ -123,6 +123,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "saving" : MessageLookupByLibrary.simpleMessage("Saving"),
     "saving_cata" : MessageLookupByLibrary.simpleMessage("جار حفظ البيانات"),
     "search" : MessageLookupByLibrary.simpleMessage("Search"),
+    "searchQuery" : MessageLookupByLibrary.simpleMessage("Search Query"),
     "selectImageFromGallery" : MessageLookupByLibrary.simpleMessage("Select Image from Gallery"),
     "select_gender" : MessageLookupByLibrary.simpleMessage("الجنس"),
     "select_language" : MessageLookupByLibrary.simpleMessage("اختر لغة"),

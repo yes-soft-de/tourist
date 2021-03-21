@@ -126,5 +126,6 @@
   "locationName": "Location Name",
   "locationDescription": "Location Description",
   "myPhoneNumber": "My Phone number",
-  "guidesArea": "Guides Area"
+  "guidesArea": "Guides Area",
+  "searchQuery": "Search Query"
 }

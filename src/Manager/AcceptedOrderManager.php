@@ -45,6 +45,11 @@ class AcceptedOrderManager
         return $this->acceptedOrderEntityRepository->getAcceptedOrder($userID);
     }
 
+    public function getAcceptcdOrdersByGuide($guideID)
+    {
+        return $this->acceptedOrderEntityRepository->getAcceptcdOrdersByGuide($guideID);
+    }
+
     public function acceptedOrderUpdate(AcceptedOrderUpdateRequest $request)
     {
         $order = $this->acceptedOrderEntityRepository->find($request->id);

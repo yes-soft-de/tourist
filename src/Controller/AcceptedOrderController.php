@@ -66,6 +66,17 @@ class AcceptedOrderController extends BaseController
     }
 
     /**
+     * @Route("/acceptordersbyguide/{guideID}", name="getRefusedAcceptedOrderByGuideID", methods="GET")
+     * @return JsonResponse
+     */
+    public function getRefusedAcceptedOrderByGuide($guideID)
+    {
+        $response = $this->orderService->getAcceptcdOrdersByGuide($guideID);
+
+        return $this->response($response, self::FETCH);
+    }
+
+    /**
      * @Route("/acceptorder", name="acceptOrderUpdate", methods={"PUT"})
      * @param Request $request
      * @return JsonResponse

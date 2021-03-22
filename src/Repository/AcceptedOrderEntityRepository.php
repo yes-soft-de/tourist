@@ -40,4 +40,21 @@ class AcceptedOrderEntityRepository extends ServiceEntityRepository
 
         return $r;
     }
+
+    public function getAcceptcdOrdersByGuide($guideID)
+    {
+        return $this->createQueryBuilder('acceptedOrder')
+            ->select('acceptedOrder.id', 'acceptedOrder.orderID', 'acceptedOrder.cost', 'acceptedOrder.date', 'acceptedOrder.status', 'acceptedOrder.guidUserID',
+                'acceptedOrder.touristUserID', 'touristOrder as order', 'acceptedOrder.uuid')
+
+            ->join('App:TouristOrderEntity', 'touristOrder')
+
+            ->andWhere('touristOrder.id = acceptedOrder.orderID')
+
+            ->andWhere('acceptedOrder.guidUserID = :guidID')
+            ->setParameter('guidID', $guideID)
+
+            ->getQuery()
+            ->getResult();
+    }
 }

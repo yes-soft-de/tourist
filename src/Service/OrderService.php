@@ -112,6 +112,19 @@ class OrderService
         return $ordersResponse;
     }
 
+    public function getAcceptcdOrdersByGuide($guideID)
+    {
+        $ordersResponse = [];
+        $orders = $this->acceptedOrderManager->getAcceptcdOrdersByGuide($guideID);
+
+        foreach ($orders as $order)
+        {
+            $ordersResponse[] = $this->autoMapping->map('array', AcceptedOrderResponse::class, $order);
+        }
+
+        return $ordersResponse;
+    }
+
     public function acceptedOrderUpdate(AcceptedOrderUpdateRequest $request)
     {
         $orderUpdate = $this->acceptedOrderManager->acceptedOrderUpdate($request);

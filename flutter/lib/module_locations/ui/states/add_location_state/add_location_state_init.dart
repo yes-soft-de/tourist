@@ -17,9 +17,9 @@ class AddLocationStateInit extends AddLocationState {
     if (this.detailsModel != null) {
       _nameController.text = detailsModel.name;
       _descriptionController.text = detailsModel.description;
-      if (detailsModel.paths != null) {
-        if (detailsModel.paths.isNotEmpty) {
-          image = detailsModel.paths[0].path;
+      if (detailsModel.regionImage != null) {
+        if (detailsModel.regionImage.isNotEmpty) {
+          image = detailsModel.regionImage[0].path;
         }
       }
     }

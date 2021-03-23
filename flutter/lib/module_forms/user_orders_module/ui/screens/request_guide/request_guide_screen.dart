@@ -436,9 +436,9 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
           Container(
             height: 120,
             width: 160,
-            child: _locationInfo.paths[0].path != null
+            child: _locationInfo.regionImage[0].path != null
                 ? Image.network(
-                    _locationInfo.paths[0].path,
+                    _locationInfo.regionImage[0].path,
                     fit: BoxFit.cover,
                   )
                 : Icon(Icons.perm_identity),

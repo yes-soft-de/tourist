@@ -6,7 +6,7 @@ class GuideListItemModel {
   String status;
   List<String> city;
   List<String> language;
-  Null rating;
+  double rating;
   String image;
   List<Regions> regions;
 
@@ -33,7 +33,7 @@ class GuideListItemModel {
     rating = json['rating'];
     image = json['image'];
     if (json['regions'] != null) {
-      regions = new List<Regions>();
+      regions = <Regions>[];
       json['regions'].forEach((v) {
         regions.add(new Regions.fromJson(v));
       });

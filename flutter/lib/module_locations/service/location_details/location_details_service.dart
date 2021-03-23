@@ -45,16 +45,6 @@ class LocationDetailsService {
     return locationModel;
   }
 
-  Future<List<GuideListItemModel>> getGuidesByLocationId(
-      String locationId) async {
-    GuidesResponse guidesResponse =
-        await this._guidesManager.getGuidesByLocationId(locationId);
-    List<GuideListItemModel> guidesList = guidesResponse?.data;
-    guidesList ??= [];
-
-    return guidesList;
-  }
-
   Future<LocationDetailsModel> createLocationByGoogleId(
       String locationId) async {
     // First request the details from google
@@ -89,11 +79,11 @@ class LocationDetailsService {
     request.name = locationDetails.name;
     request.description = locationDetails.description;
 
-    request.placeId = locationDetails.locationId;
+    request.placeId = locationDetails.placeId;
     request.path = 'asd';
     request.location = {
-      'lat': locationDetails.locationJson?.latitude,
-      'lng': locationDetails.locationJson?.longitude,
+      'lat': locationDetails.location?.latitude,
+      'lng': locationDetails.location?.longitude,
     };
 
     var response = await _locationManager.createLocationDetails(request);

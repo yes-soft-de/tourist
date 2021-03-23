@@ -25,11 +25,11 @@ class AddLocationBloc {
   ) {
     model ??= LocationDetailsModel();
     _imageUploadService.uploadImage(imagePath).then((value) {
-      model.paths ??= [];
-      if (model.paths.isEmpty) {
-        model.paths.add(DetailsImagePaths(path: Urls.imagesRoot + value));
+      model.regionImage ??= [];
+      if (model.regionImage.isEmpty) {
+        model.regionImage.add(RegionImage(path: value));
       } else {
-        model.paths = [DetailsImagePaths(path: value)];
+        model.regionImage = [RegionImage(path: value)];
       }
       stateSubject.add(AddLocationStateInit(screen, model));
     });
@@ -39,7 +39,7 @@ class AddLocationBloc {
     _locationDetailsService.updateLocation(model).then((value) {
       stateSubject.add(AddLocationStateCreateSuccess(
         screen,
-        value.locationId,
+        value.placeId,
       ));
     });
   }

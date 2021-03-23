@@ -41,19 +41,15 @@ class LocationDetailsBloc {
       return;
     }
 
-    var locationGuides =
-        await _locationDetailsService.getGuidesByLocationId(locationId);
-    locationGuides ??= <GuideListItemModel>[];
-
     var loggedIn = await _authService.isLoggedIn;
     loggedIn ??= false;
 
     stateStream.add(LocationDetailsStateLoaded(
         location: locationInfo,
-        guides: locationGuides,
+        guides: locationInfo.guides ?? [],
         isLoggedIn: loggedIn,
         onPostComment: (commentMsg) {
-          postComment(commentMsg, locationInfo.id.toString(), locationInfo.locationId);
+          postComment(commentMsg, locationInfo.id.toString(), locationInfo.placeId);
         }));
   }
 

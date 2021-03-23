@@ -60,9 +60,9 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
 
   Widget _getCarousel() {
     List<Widget> carouselList = [];
-    location.paths ??= [];
-    if (location.paths != null) {
-      location.paths.forEach((path) {
+    location.regionImage ??= [];
+    if (location.regionImage != null) {
+      location.regionImage.forEach((path) {
         carouselList.add(Image.network(
           '${path.path}'.contains('http')
               ? '${path.path}'.substring(path.path.lastIndexOf('http'))

@@ -128,7 +128,13 @@ class GuidService
             // $guidesResponse[] = $this->autoMapping->map('array', GuidesResponse::class, $guid);
         }
         //-------> Start of editing
-        foreach ($guidArray as $guidArr) {
+        foreach ($guidArray as $guidArr) 
+        {
+            foreach($guidArr['places'] as $place)
+            {
+                $guidArr['regions'][] = $this->guidManager->getRegionByPlaceID($place); 
+            }
+             
             $guidesResponse[] = $this->autoMapping->map('array', GuidesResponse::class, $guidArr);
         }
         //end of editing <-------
@@ -157,6 +163,11 @@ class GuidService
         
         foreach ($guides as $guide) 
         {
+            foreach($guide['places'] as $place)
+            {
+                $guide['regions'][] = $this->guidManager->getRegionByPlaceID($place); 
+            }
+
             $response[] = $this->autoMapping->map('array', GuidesResponse::class, $guide);
         }
 

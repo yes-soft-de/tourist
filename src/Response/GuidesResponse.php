@@ -32,6 +32,8 @@ class GuidesResponse
 
     public $image = [];
 
+    public $regions = [];
+
     /**
      * @param array $image
      */

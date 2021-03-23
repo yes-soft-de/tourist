@@ -74,7 +74,7 @@ class GuidEntityRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('guid')
             ->select('guid.id','IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image',
-                'userEntity.userID as userID')
+                'userEntity.userID as userID', 'guid.places')
 
             ->from('App:User', 'userEntity')
             ->andWhere('userEntity.id = IDENTITY(guid.user)')
@@ -87,7 +87,7 @@ class GuidEntityRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('guid')
             ->select('guid.id','IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image',
-                'userEntity.userID as userID')
+                'userEntity.userID as userID', 'guid.places')
 
             ->from('App:User', 'userEntity')
             ->andWhere('userEntity.id = IDENTITY(guid.user)')
@@ -103,7 +103,7 @@ class GuidEntityRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('guid')
             ->select('guid.id','IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image',
-                'userEntity.userID as userID')
+                'userEntity.userID as userID', 'guid.places')
 
             ->from('App:User', 'userEntity')
             ->andWhere('userEntity.id = IDENTITY(guid.user)')
@@ -119,7 +119,7 @@ class GuidEntityRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('guid')
             ->select('guid.id','IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image',
-                'userEntity.userID as userID')
+                'userEntity.userID as userID', 'guid.places')
 
             ->from('App:User', 'userEntity')
             ->andWhere('userEntity.id = IDENTITY(guid.user)')

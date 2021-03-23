@@ -146,6 +146,11 @@ class GuidManager
         return $this->guidEntityRepository->getGuides();
     }
 
+    public function getRegionByPlaceID($placeId)
+    {
+        return $this->regionsManager->getRegionByPlaceID($placeId);
+    }
+
     public function guidesByLanguage($language)
     {
         return $this->guidEntityRepository->getGuidesByLanguage($language);

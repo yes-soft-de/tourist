@@ -86,10 +86,17 @@ methods={"POST"}
 /guide 
 methods={"PUT"}
 ```
-#### Get all guided
+#### Get all guides
 ```
 /guides
 methods={"GET"}
+```
+#### Filter guides by language and city
+_Note: the request takes two fields: language and city.
+And we can filter depending on one option or both._
+```
+/guidesfilter
+methods={"POST"}
 ```
 #### guid by PlaceId
 ```

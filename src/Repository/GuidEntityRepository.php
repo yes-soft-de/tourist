@@ -83,6 +83,57 @@ class GuidEntityRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function getGuidesByLanguage($language)
+    {
+        return $this->createQueryBuilder('guid')
+            ->select('guid.id','IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image',
+                'userEntity.userID as userID')
+
+            ->from('App:User', 'userEntity')
+            ->andWhere('userEntity.id = IDENTITY(guid.user)')
+
+            ->andWhere('guid.language LIKE :language')
+            ->setParameter('language', '%'.$language.'%')
+
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getGuidesByCity($city)
+    {
+        return $this->createQueryBuilder('guid')
+            ->select('guid.id','IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image',
+                'userEntity.userID as userID')
+
+            ->from('App:User', 'userEntity')
+            ->andWhere('userEntity.id = IDENTITY(guid.user)')
+
+            ->andWhere('guid.city LIKE :city')
+            ->setParameter('city', '%'.$city.'%')
+
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getGuidesByLanguageAndCity($language, $city)
+    {
+        return $this->createQueryBuilder('guid')
+            ->select('guid.id','IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image',
+                'userEntity.userID as userID')
+
+            ->from('App:User', 'userEntity')
+            ->andWhere('userEntity.id = IDENTITY(guid.user)')
+
+            ->andWhere('guid.language LIKE :language')
+            ->setParameter('language', '%'.$language.'%')
+            
+            ->andWhere('guid.city LIKE :city')
+            ->setParameter('city', '%'.$city.'%')
+
+            ->getQuery()
+            ->getResult();
+    }
+
     public function getGuidCityAndLanguage($guidUserID)
     {
         //get guid id

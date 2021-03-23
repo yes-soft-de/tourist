@@ -146,6 +146,21 @@ class GuidManager
         return $this->guidEntityRepository->getGuides();
     }
 
+    public function guidesByLanguage($language)
+    {
+        return $this->guidEntityRepository->getGuidesByLanguage($language);
+    }
+
+    public function guidesByCity($city)
+    {
+        return $this->guidEntityRepository->getGuidesByCity($city);
+    }
+
+    public function guidesByLanguageAndCity($language, $city)
+    {
+        return $this->guidEntityRepository->getGuidesByLanguageAndCity($language, $city);
+    }
+
     public function getguideByUserID($userID)
     {
         return $this->guidEntityRepository->getUser($userID);

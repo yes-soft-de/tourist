@@ -12,6 +12,7 @@ use App\Manager\ImageManager;
 use App\Manager\RatingManager;
 use App\Request\GuidProfileUpdateRequest;
 use App\Request\guidByAdminUpdateRequest;
+use App\Request\GuidesFilterRequest;
 use App\Request\GuidRegisterRequest;
 use App\Response\GuidByRegionResponse;
 use App\Response\GuideProfileGetResponse;
@@ -133,6 +134,33 @@ class GuidService
         //end of editing <-------
         
         return $guidesResponse;
+    }
+
+    public function filterGuides(GuidesFilterRequest $request)
+    {
+        $response = [];
+        $language = $request->getLanguage();
+        $city = $request->getCity();
+        
+        if($language != NULL && $city == NULL)
+        {
+            $guides = $this->guidManager->guidesByLanguage($language);
+        }
+        elseif($language == NULL && $city != NULL)
+        {
+            $guides = $this->guidManager->guidesByCity($city);
+        }
+        elseif($language != NULL && $city != NULL)
+        {
+            $guides = $this->guidManager->guidesByLanguageAndCity($language, $city);
+        }
+        
+        foreach ($guides as $guide) 
+        {
+            $response[] = $this->autoMapping->map('array', GuidesResponse::class, $guide);
+        }
+
+        return $response;
     }
 
     public function getguideByUserID($userId)

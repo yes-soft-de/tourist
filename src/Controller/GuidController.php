@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\AutoMapping;
 use App\Request\GuidProfileUpdateRequest;
 use App\Request\guidByAdminUpdateRequest;
+use App\Request\GuidesFilterRequest;
 use App\Request\GuidRegisterRequest;
 use App\Service\GuidService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -136,6 +137,21 @@ class GuidController extends BaseController
         $response = $this->guidService->getGuides();
 
         return $this->response($response,self::FETCH);
+    }
+
+    /**
+     * @Route("/guidesfilter", name="filterGuides", methods={"POST"})
+     * @return JsonResponse
+     */
+    public function filterGuides(Request $request)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $request = $this->autoMapping->map(stdClass::class, GuidesFilterRequest::class, (object)$data);
+
+        $response = $this->guidService->filterGuides($request);
+
+        return $this->response($response, self::FETCH);
     }
 
     /**

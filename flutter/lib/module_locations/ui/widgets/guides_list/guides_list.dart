@@ -8,7 +8,7 @@ import '../../../../module_guide/ui/widget/guide_list_item/guide_list_item.dart'
 
 class GuidesListWidget extends StatefulWidget {
   final List<GuideListItemModel> guides;
-  final int cityId;
+  final String cityId;
   final int pageSize;
 
   GuidesListWidget(
@@ -58,7 +58,7 @@ class _GuidesListWidgetState extends State<GuidesListWidget> {
                     FormsRoutes.requestGuideForm,
                     arguments: RequestGuideNavigationArguments(
                       guideId: displayedGuides[index].user,
-                      cityId: widget.cityId.toString(),
+                      cityId: widget.cityId,
                     ),
                   );
                 },

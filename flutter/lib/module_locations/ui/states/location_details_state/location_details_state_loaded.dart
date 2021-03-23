@@ -43,7 +43,7 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
               ),
             ),
             guides.isNotEmpty
-                ? GuidesListWidget(guides, location.id)
+                ? GuidesListWidget(guides, location.placeId)
                 : Container(
                     color: Colors.grey,
                     child: Padding(

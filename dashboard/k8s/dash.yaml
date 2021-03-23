@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tourist-dash-webserver
+  namespace: tourist
+  labels:
+    app: ngx-angular
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ngx-angular
+  template:
+    metadata:
+      labels:
+        app: ngx-angular
+    spec:
+      containers:
+      - name: ngx-angular-containers
+        image: gcr.io/pc-api-6479467557629758909-343/tourist-dash
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tourist-dash-web-service
+  namespace: c4d
+  labels:
+    run: tourist-dash-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: apache

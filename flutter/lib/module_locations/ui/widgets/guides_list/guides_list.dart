@@ -18,16 +18,16 @@ class GuidesListWidget extends StatefulWidget {
   ]);
 
   @override
-  State<StatefulWidget> createState() => _GuidesListWidgetState();
+  State<StatefulWidget> createState() => _GuidesListWidgetState(guides);
 }
 
 class _GuidesListWidgetState extends State<GuidesListWidget> {
   List<GuideListItemModel> displayedGuides = [];
 
-  _GuidesListWidgetState() {
-    displayedGuides = (widget.guides.length > 3)
-        ? widget.guides.sublist(0, 3)
-        : widget.guides;
+  _GuidesListWidgetState(List<GuideListItemModel> guides) {
+    displayedGuides = (guides.length > 3)
+        ? guides.sublist(0, 3)
+        : guides;
   }
 
   @override

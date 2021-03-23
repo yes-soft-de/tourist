@@ -82,7 +82,7 @@ class TouristOrdersService {
   }
 
   Future<UpdateOrderResponse> payOrder(OrderModel orderModel) async {
-    orderModel.status = OrderStatus.ON_GOING;
+    orderModel.status = 'onGoing';
 
     UpdateOrderResponse response = await _ordersManager.updateOrder(orderModel);
 

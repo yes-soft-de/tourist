@@ -6,7 +6,9 @@ import 'package:tourists/module_locations/model/location_details/location_detail
 
 class RequestGuideFormStateLocationMode extends RequestGuideFormState {
   LocationDetailsModel location;
-  RequestGuideFormStateLocationMode(RequestGuideScreen screen, this.location) : super(screen);
+
+  RequestGuideFormStateLocationMode(RequestGuideScreen screen, this.location)
+      : super(screen);
 
   @override
   Widget getUI(BuildContext context) {
@@ -17,5 +19,4 @@ class RequestGuideFormStateLocationMode extends RequestGuideFormState {
       },
     );
   }
-
 }

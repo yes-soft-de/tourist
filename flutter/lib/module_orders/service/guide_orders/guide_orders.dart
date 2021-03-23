@@ -50,7 +50,7 @@ class GuideOrdersService {
 
   Future<UpdateOrderResponse> acceptOrder(OrderModel orderModel) async {
     orderModel.roomID = new Uuid().v1();
-    orderModel.status = OrderStatus.ON_GOING;
+    orderModel.status = 'onGoing';
 
     UpdateOrderResponse response = await _ordersManager.updateOrder(orderModel);
 
@@ -64,7 +64,7 @@ class GuideOrdersService {
   Future<UpdateOrderResponse> acceptAvailableOrder(
       OrderModel orderModel) async {
     orderModel.roomID = new Uuid().v1();
-    orderModel.status = OrderStatus.PENDING_PAYMENT;
+    orderModel.status = 'pendingPayment';
 
     User user = await _auth.currentUser;
     orderModel.guidUserID = user.uid;
@@ -80,7 +80,7 @@ class GuideOrdersService {
   }
 
   Future<UpdateOrderResponse> payOrder(OrderModel orderModel) async {
-    orderModel.status = OrderStatus.ON_GOING;
+    orderModel.status = 'onGoing';
 
     UpdateOrderResponse response = await _ordersManager.updateOrder(orderModel);
 
@@ -92,7 +92,7 @@ class GuideOrdersService {
   }
 
   Future<UpdateOrderResponse> payAvailableOrder(OrderModel orderModel) async {
-    orderModel.status = OrderStatus.ON_GOING;
+    orderModel.status = 'onGoing';
 
     UpdateOrderResponse response = await _ordersManager.updateOrder(orderModel);
 
@@ -104,7 +104,7 @@ class GuideOrdersService {
   }
 
   Future<UpdateOrderResponse> startAvailableOrder(OrderModel orderModel) async {
-    orderModel.status = OrderStatus.ON_GOING;
+    orderModel.status = 'onGoing';
 
     UpdateOrderResponse response = await _ordersManager.updateOrder(orderModel);
 

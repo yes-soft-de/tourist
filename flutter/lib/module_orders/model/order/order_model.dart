@@ -13,7 +13,7 @@ class OrderModel {
   Date leaveDate;
   List<String> services;
   String roomID;
-  OrderStatus status;
+  String status;
   String cost;
   GuideListItemModel guideInfo;
 

@@ -36,13 +36,27 @@ class _RequestGuideFormState extends State<RequestGuideForm> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.baseline,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
           height: 88,
-          child: Image.network('${guide.image}'.contains('http')
-              ? '${guide.image.substring(guide.image.lastIndexOf('http'))}'
-              : '${guide.image}'),
+          child: Column(
+            children: [
+              Expanded(
+                child: Image.network(
+                  '${guide.image}'.contains('http')
+                      ? '${guide.image.substring(guide.image.lastIndexOf('http'))}'
+                      : '${guide.image}',
+                  errorBuilder: (c, e, s) {
+                    print(e.toString());
+                    return Image.asset('resources/images/logo.jpg');
+                  },
+                ),
+              ),
+              Text('${guide.name}'),
+            ],
+          ),
         ),
         Padding(
           padding: const EdgeInsets.all(16.0),
@@ -53,7 +67,7 @@ class _RequestGuideFormState extends State<RequestGuideForm> {
                 value: guideLanguage,
                 child: Text(guideLanguage),
               );
-            }),
+            }).toList(),
             hint: Text(S.of(context).expectedCommunicationLanguage),
             onChanged: (String value) {
               this._guideLanguage = value;
@@ -66,9 +80,9 @@ class _RequestGuideFormState extends State<RequestGuideForm> {
             items: (guide.regions ?? []).map((location) {
               return DropdownMenuItem(
                 value: location.placeId,
-                child: Text(location.name),
+                child: Text('${location.name}'),
               );
-            }),
+            }).toList(),
             hint: Text(S.of(context).expectedCommunicationLanguage),
             onChanged: (String value) {
               this._placeId = value;
@@ -161,7 +175,11 @@ class _RequestGuideFormState extends State<RequestGuideForm> {
                 secondary: Icon(Icons.local_taxi),
                 value: servicesMap.contains(KEY_CAR),
                 onChanged: (bool value) {
-                  servicesMap.contains(KEY_CAR);
+                  if (value) {
+                    servicesMap.add(KEY_CAR);
+                  } else {
+                    servicesMap.remove(KEY_CAR);
+                  }
                   setState(() {});
                 }),
             CheckboxListTile(

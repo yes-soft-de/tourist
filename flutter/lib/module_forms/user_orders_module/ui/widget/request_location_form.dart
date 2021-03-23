@@ -7,16 +7,18 @@ import 'package:tourists/module_locations/model/location_details/location_detail
 class RequestLocationFormWidget extends StatefulWidget {
   final LocationDetailsModel location;
   final Function(RequestGuideModel) onRequestGuide;
+
   RequestLocationFormWidget({this.location, this.onRequestGuide});
 
   @override
-  State<StatefulWidget> createState() => _RequestLocationFormWidgetState(location);
+  State<StatefulWidget> createState() =>
+      _RequestLocationFormWidgetState(location);
 }
 
 class _RequestLocationFormWidgetState extends State<RequestLocationFormWidget> {
   final LocationDetailsModel location;
-  _RequestLocationFormWidgetState(this.location);
 
+  _RequestLocationFormWidgetState(this.location);
 
   static const KEY_CAR = 'car';
   static const KEY_HOTEL = 'hotel';
@@ -31,24 +33,32 @@ class _RequestLocationFormWidgetState extends State<RequestLocationFormWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.baseline,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
           height: 88,
-          child: Image.network('${location.regionImage[0].path}'.contains('http')
-              ? '${location.regionImage[0].path.substring(location.regionImage[0].path.lastIndexOf('http'))}'
-              : '${location.regionImage[0].path}'),
+          child: Column(
+            children: [
+              Expanded(
+                child: Image.network('${location.regionImage[0].path}'
+                        .contains('http')
+                    ? '${location.regionImage[0].path.substring(location.regionImage[0].path.lastIndexOf('http'))}'
+                    : '${location.regionImage[0].path}'),
+              ),
+              Text('${location.name}'),
+            ],
+          ),
         ),
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: DropdownButtonFormField(
-            items:
-            ['العربية', 'English'].map((guideLanguage) {
+            items: ['العربية', 'English'].map((guideLanguage) {
               return DropdownMenuItem(
                 value: guideLanguage,
                 child: Text(guideLanguage),
               );
-            }),
+            }).toList(),
             hint: Text(S.of(context).expectedCommunicationLanguage),
             onChanged: (String value) {
               this._guideLanguage = value;
@@ -63,7 +73,7 @@ class _RequestLocationFormWidgetState extends State<RequestLocationFormWidget> {
                 value: theGuide.userID,
                 child: Text(theGuide.name),
               );
-            }),
+            }).toList(),
             hint: Text(S.of(context).expectedCommunicationLanguage),
             onChanged: (String value) {
               this._guideId = value;

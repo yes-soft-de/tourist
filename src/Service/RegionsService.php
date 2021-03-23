@@ -8,7 +8,6 @@ use App\AutoMapping;
 use App\Entity\ImagesEntity;
 use App\Entity\RegionsEntity;
 use App\Manager\CommentsManager;
-use App\Manager\GuidManager;
 use App\Manager\ImageManager;
 use App\Manager\RatingManager;
 use App\Manager\RegionsManager;
@@ -31,18 +30,18 @@ class RegionsService
     private $imageManager;
     private $ratingManager;
     private $commentsManager;
-    private $guidManager;
+    private $guidService;
     private $params;
 
     public function __construct(AutoMapping $autoMapping, RegionsManager $regionsManager, ImageManager $imageManager, RatingManager $ratingManager,
-                                CommentsManager $commentsManager, GuidManager $guidManager, ParameterBagInterface $params)
+                                CommentsManager $commentsManager, ParameterBagInterface $params, GuidService $guideService)
     {
         $this->regionsManager = $regionsManager;
         $this->autoMapping = $autoMapping;
         $this->imageManager = $imageManager;
         $this->ratingManager = $ratingManager;
         $this->commentsManager = $commentsManager;
-        $this->guidManager = $guidManager;
+        $this->guidService = $guideService;
         $this->params = $params->get('upload_base_url') . '/';
     }
 
@@ -135,7 +134,7 @@ class RegionsService
 
         //get guides region
         $guidesResponse = [];
-        $guides = $this->getGuidByRegion($id);
+        $guides = $this->guidService->getGuidesByPlaceId($result['placeId']);
         if ($guides) {
             foreach ($guides as $guid)
             {
@@ -173,14 +172,15 @@ class RegionsService
 
         //get comments
         $commentsResponse= [];
-        if ($result) {
-        $comments = $this->commentsManager->getCommentsByID($result['id']);
-
-        foreach ($comments as $comment)
+        if ($result) 
         {
-            $commentsResponse[] = $this->autoMapping->map('array', GetCommentsByIdResponse::class, $comment);
+            $comments = $this->commentsManager->getCommentsByID($result['id']);
+
+            foreach ($comments as $comment)
+            {
+                $commentsResponse[] = $this->autoMapping->map('array', GetCommentsByIdResponse::class, $comment);
+            }
         }
-    }
 
         //get images
         $imagesResponse = [];
@@ -203,9 +203,10 @@ class RegionsService
         }
         //get guides region
         $guidesResponse = [];
-        if($result) {
-            $guides = $this->getGuidByRegion($result['id']);
-
+        if($result) 
+        {
+            $guides = $this->guidService->getGuidesByPlaceId($result['placeId']);
+            //dd($result);
             foreach ($guides as $guid)
             {
                 //rating
@@ -215,7 +216,7 @@ class RegionsService
                 //
                 $guidesResponse[] = $this->autoMapping->map('array', GuidByRegionResponse::class, $guid);
             }
-         }
+        }
          if($commentsResponse) {
             //add comments to response
             $response->setComments($commentsResponse);
@@ -253,13 +254,18 @@ class RegionsService
     
     public function getGuidByRegion($id)
     {
-        return $this->guidManager->getGuidByRegion($id);
+        // return $this->regionsManager->getGuidByRegion($id);
     }
+    
+    // public function getGuidesByPlaceID($placeID)
+    // {
+    //     return $this->regionsManager->guidByPlaceId($placeID);
+    // }
 
-    public function getGuidImage($guidID)
-    {
-        return $this->imageManager->getGuidImage($guidID);
-    }
+    // public function getGuidImage($guidID)
+    // {
+    //     return $this->imageManager->getGuidImage($guidID);
+    // }
 
     public function update(RegionUpdateRequest $request)
     {

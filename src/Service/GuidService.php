@@ -105,6 +105,11 @@ class GuidService
         return $guidesResponse;
     }
 
+    public function getGuidesByPlaceId($placeId)
+    {
+        return $this->guidManager->guidByPlaceId($placeId);
+    }
+
     public function getGuides()
     {
         $guidesResponse = [];

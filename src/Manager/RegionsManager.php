@@ -21,14 +21,17 @@ class RegionsManager
     private $regionsEntityRepository;
     private $imagesEntityRepository;
     private $imageManager;
+    // private $guideManager;
 
-    public function __construct(AutoMapping $autoMapping, EntityManagerInterface $entityManager, RegionsEntityRepository $regionsEntityRepository,  ImagesEntityRepository $imagesEntityRepository,  ImageManager $imageManager)
+    public function __construct(AutoMapping $autoMapping, EntityManagerInterface $entityManager, RegionsEntityRepository $regionsEntityRepository,  
+    ImagesEntityRepository $imagesEntityRepository, ImageManager $imageManager)
     {
         $this->autoMapping = $autoMapping;
         $this->entityManager = $entityManager;
         $this->regionsEntityRepository = $regionsEntityRepository;
         $this->imagesEntityRepository = $imagesEntityRepository;
         $this->imageManager = $imageManager;
+        // $this->guideManager = $guideManager;
     }
 
     public function regionCreate(RegionCreateRequest $request)
@@ -91,8 +94,16 @@ class RegionsManager
             $region->setPath($imagePathResponse->getPath());
             return $region;
         }
-
-      
-        
+  
     }
+    
+    public function getGuidByRegion($id)
+    {
+        // return $this->guideManager->getGuidByRegion($id);
+    }
+    
+    // public function guidByPlaceId($placeID)
+    // {
+    //     return $this->guideManager->guidByPlaceId($placeID);
+    // }
 }

@@ -39,7 +39,7 @@ class AuthService {
   // Delegates
   Future<bool> get isLoggedIn => _prefsHelper.isSignedIn();
 
-  Future<String> get userID => _prefsHelper.getUserId();
+  Future<String> get userID async => _auth.currentUser.uid;
 
   Future<UserRole> get userRole => _prefsHelper.getCurrentRole();
 

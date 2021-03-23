@@ -13,7 +13,7 @@ class GuideListService {
     GuidesResponse response = await _guidesManager.getGuidesList();
     if (response == null) return null;
 
-    var guideList = response.data.where((element) => element.city?.isNotEmpty).toList();
+    var guideList = response.data.where((element) => element.regions?.isNotEmpty).toList();
     return guideList;
   }
 }

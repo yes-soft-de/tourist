@@ -32,23 +32,11 @@ class MyProfileStateManager {
     this._searchProvider,
   );
 
-  Future<void> refresh(MyProfileScreen screen, ProfileModel model) async {
-    var userType = await this._authService.userRole;
-    if (userType == UserRole.ROLE_GUIDE) {
-      _stateSubject.add(
-          EditProfileStateGuideLoadSuccess(screen, model, _searchProvider));
-    } else {
-      _stateSubject
-          .add(EditProfileStateTouristLoadSuccess(screen, model));
-    }
-  }
-
   Future<void> setMyProfile(
       MyProfileScreen screen, ProfileModel profile) async {
     _stateSubject.add(EditProfileStateLoading(screen));
     await _myProfileService.createProfile(profile);
-    _stateSubject.add(
-        EditProfileStateSaveSuccess(screen));
+    _stateSubject.add(EditProfileStateSaveSuccess(screen));
   }
 
   void getMyProfile(MyProfileScreen screen) {
@@ -56,28 +44,39 @@ class MyProfileStateManager {
       this._myProfileService.getMyProfile().then((profile) {
         if (role == UserRole.ROLE_GUIDE) {
           this._stateSubject.add(
-              EditProfileStateGuideLoadSuccess(screen, profile, _searchProvider));
+                EditProfileStateGuideLoadSuccess(
+                  screen,
+                  profile,
+                  _searchProvider,
+                ),
+              );
         } else {
-          this._stateSubject.add(EditProfileStateTouristLoadSuccess(screen, profile));
+          this
+              ._stateSubject
+              .add(EditProfileStateTouristLoadSuccess(screen, profile));
         }
       });
     });
   }
 
   void upload(MyProfileScreen screen, String imagePath, ProfileModel model) {
+    _stateSubject.add(EditProfileStateLoading(screen));
     this._uploadService.uploadImage(imagePath).then((value) {
       if (value == null) {
-        _stateSubject
-            .add(EditProfileStateError(screen, 'Error Submitting Profile'));
+        _stateSubject.add(
+          EditProfileStateError(screen, 'Error Submitting Profile'),
+        );
       } else {
         model.image = value;
+        print(model.image);
         _authService.userRole.then((value) {
           if (value == UserRole.ROLE_GUIDE) {
-            _stateSubject.add(EditProfileStateGuideLoadSuccess(
-                screen, model, _searchProvider));
-          } else {
             _stateSubject.add(
-                EditProfileStateTouristLoadSuccess(screen, model));
+              EditProfileStateGuideLoadSuccess(screen, model, _searchProvider),
+            );
+          } else {
+            _stateSubject
+                .add(EditProfileStateTouristLoadSuccess(screen, model));
           }
         });
       }

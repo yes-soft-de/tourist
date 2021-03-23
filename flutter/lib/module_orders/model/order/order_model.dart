@@ -1,4 +1,5 @@
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
+import 'package:tourists/module_orders/enum/order_status.dart';
 import 'package:tourists/module_shared/model/date/date.dart';
 
 class OrderModel {
@@ -12,7 +13,7 @@ class OrderModel {
   Date leaveDate;
   List<String> services;
   String roomID;
-  String status;
+  OrderStatus status;
   String cost;
   GuideListItemModel guideInfo;
 

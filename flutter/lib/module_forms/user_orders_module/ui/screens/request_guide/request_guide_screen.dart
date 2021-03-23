@@ -10,6 +10,7 @@ import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart
 import 'package:tourists/module_guide/nav_arguments/request_guide/request_guide_navigation.dart';
 import 'package:tourists/module_home/home_routes.dart';
 import 'package:tourists/module_locations/model/location_details/location_details.dart';
+import 'package:tourists/module_orders/orders_routes.dart';
 import 'package:tourists/utils/logger/logger.dart';
 
 @provide
@@ -145,17 +146,18 @@ class _RequestGuideScreenState extends State<RequestGuideScreen> {
     if (currentStatus == RequestGuideBloc.STATUS_CODE_REQUEST_SUCCESS) {
       // Go to Home
       Fluttertoast.showToast(msg: S.of(context).requestSent);
-      return WillPopScope(
-        onWillPop: () {
-          Navigator.of(context).pop();
-          return;
-        },
-        child: Scaffold(
-          appBar: AppBar(),
-          body: Center(
-            child: Text(S.of(context).success),
-          ),
-        ),
+      return Scaffold(
+        appBar: AppBar(),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(S.of(context).success, textAlign: TextAlign.center,),
+            IconButton(icon: Icon(Icons.send), onPressed: () {
+              Navigator.of(context).pushReplacementNamed(OrdersRoutes.ordersList);
+            }),
+          ],
+        )
       );
     }
 

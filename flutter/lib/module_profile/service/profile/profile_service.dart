@@ -78,12 +78,12 @@ class ProfileService {
 
 
     return ProfileModel(
-      name: '${myProfile?.data?.name} ',
-      image: '${myProfile?.data?.image} ',
-      phone: '${myProfile?.data?.phoneNumber}',
+      name: '${myProfile?.data?.name ?? ''}',
+      image: '${myProfile?.data?.image}',
+      phone: '${myProfile?.data?.phoneNumber ?? ''}',
       locations: myProfile?.data?.city,
-      services: myProfile.data.service,
-      languages: myProfile.data.guideLanguage,
+      services: myProfile?.data?.service,
+      languages: myProfile?.data?.guideLanguage,
       availableLocations: places,
     );
   }

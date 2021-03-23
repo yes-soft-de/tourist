@@ -18,7 +18,12 @@ class GuideListStateLoadSuccess extends GuideListState {
 
   @override
   Widget getUI(BuildContext context) {
-    return SingleChildScrollView(child: Flex(direction: Axis.vertical, children: getGuidesList(context)));
+    return SingleChildScrollView(
+      child: Flex(
+        direction: Axis.vertical,
+        children: getGuidesList(context),
+      ),
+    );
   }
 
   List<Widget> getGuidesList(BuildContext context) {
@@ -27,8 +32,8 @@ class GuideListStateLoadSuccess extends GuideListState {
     // Construct the List into CSV text
     _guidesList.forEach((guide) {
       String citiesInText = ' ';
-      guide.city.forEach((cityName) {
-        citiesInText = citiesInText + cityName + ' ';
+      guide.regions.forEach((region) {
+        citiesInText = '$citiesInText ${region.name}';
       });
 
       // Construct the List into CSV text

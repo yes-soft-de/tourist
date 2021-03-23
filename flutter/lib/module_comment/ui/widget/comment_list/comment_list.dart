@@ -87,6 +87,7 @@ class _CommentListWidgetState extends State<CommentListWidget> {
       comments.add(CommentItemWidget(
         comment: element.comment,
         userName: element.userName,
+        role: element.roles[0],
         commentDate:
             DateTime.fromMillisecondsSinceEpoch(element.date.timestamp * 1000),
       ));

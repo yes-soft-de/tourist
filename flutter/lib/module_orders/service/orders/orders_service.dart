@@ -5,18 +5,22 @@ import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
 import 'package:tourists/module_forms/user_orders_module/response/order/order_response.dart';
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
 import 'package:tourists/module_guide/service/guide_list/guide_list.dart';
+import 'package:tourists/module_orders/enum/order_status.dart';
 import 'package:tourists/module_orders/manager/orders/orders_manager.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
 import 'package:tourists/module_orders/response/update_order_response.dart';
 
 @provide
-class OrdersService {
+class TouristOrdersService {
   final OrdersManager _ordersManager;
   final GuideListService _guideListService;
   final AuthService _authService;
 
-  OrdersService(this._ordersManager, this._guideListService,
-      this._authService,);
+  TouristOrdersService(
+    this._ordersManager,
+    this._guideListService,
+    this._authService,
+  );
 
   Future<List<OrderModel>> getOrders() async {
     String uid = await _authService.userID;
@@ -27,7 +31,6 @@ class OrdersService {
     UserRole role = await _authService.userRole;
 
     try {
-      OrderResponse orderResponse;
       if (role == UserRole.ROLE_GUIDE) {
         var response = await Future.wait([
           _ordersManager.getOrders(uid),
@@ -41,7 +44,6 @@ class OrdersService {
         ]);
         return formatOrders(response[1], response[0]);
       }
-
     } catch (e) {
       print(e.toString());
       return null;
@@ -59,8 +61,10 @@ class OrdersService {
     return null;
   }
 
-  List<OrderModel> formatOrders(List<GuideListItemModel> allGuides,
-      OrderResponse orderResponse,) {
+  List<OrderModel> formatOrders(
+    List<GuideListItemModel> allGuides,
+    OrderResponse orderResponse,
+  ) {
     orderResponse ??= OrderResponse(orderList: []);
     Map<String, GuideListItemModel> guidesMap = {};
     allGuides.forEach((guide) {
@@ -78,7 +82,7 @@ class OrdersService {
   }
 
   Future<UpdateOrderResponse> payOrder(OrderModel orderModel) async {
-    orderModel.status = 'onGoing';
+    orderModel.status = OrderStatus.ON_GOING;
 
     UpdateOrderResponse response = await _ordersManager.updateOrder(orderModel);
 

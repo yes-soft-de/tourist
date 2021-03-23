@@ -30,18 +30,32 @@ class CommentItemWidget extends StatelessWidget {
             child: Container(
               height: 36,
               width: 36,
-              decoration: BoxDecoration(
-                color: Colors.greenAccent,
-                shape: BoxShape.circle,
+              child: Stack(
+                children: [
+                  role != 'guid'
+                      ? Container(
+                          height: 36,
+                          width: 36,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            shape: BoxShape.circle,
+                          ),
+                        )
+                      : Icon(
+                          Icons.security,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                  Center(
+                      child: Text(
+                    userName == null
+                        ? ' '
+                        : userName.substring(0, 1).toUpperCase(),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  )),
+                ],
               ),
-              child: Center(
-                  child: Text(
-                userName == null ? ' ' : userName.substring(0, 1).toUpperCase(),
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              )),
             ),
           ),
-
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -63,34 +77,6 @@ class CommentItemWidget extends StatelessWidget {
               ),
             ),
           ),
-          // User image and name
-          // Flex(
-          //   direction: Axis.vertical,
-          //   children: <Widget>[
-          //     Padding(
-          //       padding: const EdgeInsets.all(8.0),
-          //       child: Flex(
-          //         direction: Axis.vertical,
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         children: <Widget>[
-
-          //           Expanded(
-          //             child:
-          //           )
-          //         ],
-          //       ),
-          //     ),
-          //     if (role == 'guid')
-          //       Padding(
-          //         padding: const EdgeInsets.all(8.0),
-          //         child: Icon(
-          //           Icons.security,
-          //           color: Colors.greenAccent,
-          //         ),
-          //       ),
-          //   ],
-          // ),
-          // // Post Data
           Text(this.commentDate.toIso8601String().substring(0, 10))
         ],
       ),

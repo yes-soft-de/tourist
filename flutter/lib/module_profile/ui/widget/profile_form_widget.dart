@@ -73,6 +73,7 @@ class _GuideProfileFormWidgetState extends State<GuideProfileFormWidget> {
                           : Urls.imagesRoot + '${profile.image}',
                       fit: BoxFit.contain,
                       imageErrorBuilder: (o, e, s) {
+                        print(e.toString());
                         return Image.asset('resources/images/logo.jpg');
                       },
                     )),

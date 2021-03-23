@@ -11,7 +11,7 @@ class GuideHomeBloc {
   static const STATUS_CODE_LOAD_SUCCESS = 155;
   static const STATUS_CODE_LOAD_ERROR = 165;
 
-  final OrdersService _ordersService;
+  final TouristOrdersService _ordersService;
 
   GuideHomeBloc(this._ordersService);
 

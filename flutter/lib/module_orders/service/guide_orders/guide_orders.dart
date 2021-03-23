@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/module_forms/user_orders_module/response/order/order_response.dart';
+import 'package:tourists/module_orders/enum/order_status.dart';
 import 'package:tourists/module_orders/manager/guide_orders/guide_orders.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
 import 'package:tourists/module_orders/response/update_order_response.dart';
@@ -49,7 +50,7 @@ class GuideOrdersService {
 
   Future<UpdateOrderResponse> acceptOrder(OrderModel orderModel) async {
     orderModel.roomID = new Uuid().v1();
-    orderModel.status = 'onGoing';
+    orderModel.status = OrderStatus.ON_GOING;
 
     UpdateOrderResponse response = await _ordersManager.updateOrder(orderModel);
 
@@ -63,7 +64,7 @@ class GuideOrdersService {
   Future<UpdateOrderResponse> acceptAvailableOrder(
       OrderModel orderModel) async {
     orderModel.roomID = new Uuid().v1();
-    orderModel.status = 'pendingPayment';
+    orderModel.status = OrderStatus.PENDING_PAYMENT;
 
     User user = await _auth.currentUser;
     orderModel.guidUserID = user.uid;
@@ -79,7 +80,7 @@ class GuideOrdersService {
   }
 
   Future<UpdateOrderResponse> payOrder(OrderModel orderModel) async {
-    orderModel.status = 'onGoing';
+    orderModel.status = OrderStatus.ON_GOING;
 
     UpdateOrderResponse response = await _ordersManager.updateOrder(orderModel);
 
@@ -91,7 +92,7 @@ class GuideOrdersService {
   }
 
   Future<UpdateOrderResponse> payAvailableOrder(OrderModel orderModel) async {
-    orderModel.status = 'onGoing';
+    orderModel.status = OrderStatus.ON_GOING;
 
     UpdateOrderResponse response = await _ordersManager.updateOrder(orderModel);
 
@@ -103,7 +104,7 @@ class GuideOrdersService {
   }
 
   Future<UpdateOrderResponse> startAvailableOrder(OrderModel orderModel) async {
-    orderModel.status = 'onGoing';
+    orderModel.status = OrderStatus.ON_GOING;
 
     UpdateOrderResponse response = await _ordersManager.updateOrder(orderModel);
 

@@ -24,10 +24,6 @@ class MyProfileScreen extends StatefulWidget {
     _stateManager.setMyProfile(this, profileModel);
   }
 
-  void refresh(ProfileModel model) {
-    _stateManager.refresh(this, model);
-  }
-
   void getProfile() {
     _stateManager.getMyProfile(this);
   }

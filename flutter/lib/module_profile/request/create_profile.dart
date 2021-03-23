@@ -33,7 +33,7 @@ class CreateProfileRequest {
       'location': this.location,
       'places': this.location,
       'city': this.location,
-      'image': this.image,
+      'path': this.image,
       'service': this.services,
       'language': this.languages,
       'phoneNumber': this.phoneNumber,

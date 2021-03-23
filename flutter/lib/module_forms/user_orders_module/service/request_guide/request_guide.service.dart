@@ -25,17 +25,18 @@ class RequestGuideService {
     String uid = user.uid;
 
     RequestGuideRequest requestObject = RequestGuideRequest(
-        touristUserID: uid,
-        guidUserID: requestGuide.guideId,
-        city: requestGuide.location,
-        language: requestGuide.language,
-        arriveDate: requestGuide.arrivalDate,
-        cost: 7,
-        status: 'pending',
-        date: DateTime.now(),
-        leaveDate: requestGuide.arrivalDate
-            .add(Duration(days: requestGuide.stayingDays)),
-        services: requestGuide.services);
+      touristUserID: uid,
+      guidUserID: requestGuide.guideId,
+      city: requestGuide.location,
+      language: requestGuide.language,
+      arriveDate: requestGuide.arrivalDate,
+      cost: 7,
+      status: 'pending',
+      date: DateTime.now(),
+      leaveDate: requestGuide.arrivalDate
+          .add(Duration(days: requestGuide.stayingDays)),
+      services: requestGuide.services,
+    );
 
     RequestGuideResponse requestResult =
         await _requestGuideManager.requestGuide(requestObject);

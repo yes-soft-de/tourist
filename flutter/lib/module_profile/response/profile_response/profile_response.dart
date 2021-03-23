@@ -63,7 +63,8 @@ class Data {
   Data.fromJson(Map<String, dynamic> json) {
     userID = json['userID'];
     roles = json['roles']?.cast<String>();
-    name = json['name'] ?? json['userName'];
+    name = json['name'];
+    name ??= json['userName'];
     sex = json['sex'];
     nationality = json['nationality'];
     guideLanguage = json['language']?.cast<String>();

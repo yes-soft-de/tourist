@@ -114,6 +114,7 @@ class OrderService
         return $response;
     }
 
+    // Get all pending accepted orders of tourist
     public function getAcceptedOrder($userID)
     {
         $ordersResponse = [];
@@ -126,18 +127,19 @@ class OrderService
         return $ordersResponse;
     }
 
-    // public function getAllAcceptedOrdersByTourist($touristID)
-    // {
-    //     $ordersResponse = [];
-    //     $orders = $this->acceptedOrderManager->getAllAcceptedOrdersByTourist($touristID);
+    // Get all accepted orders of tourist whatever status is
+    public function getAllAcceptedOrdersOfTourist($touristID)
+    {
+        $ordersResponse = [];
+        $orders = $this->acceptedOrderManager->getAllAcceptedOrdersOfTourist($touristID);
 
-    //     foreach ($orders as $order)
-    //     {
-    //         $ordersResponse[] = $this->autoMapping->map('array', AcceptedOrderResponse::class, $order);
-    //     }
+        foreach ($orders as $order)
+        {
+            $ordersResponse[] = $this->autoMapping->map('array', AcceptedOrderResponse::class, $order);
+        }
 
-    //     return $ordersResponse;
-    // }
+        return $ordersResponse;
+    }
 
     public function getAcceptcdOrdersByGuide($guideID)
     {

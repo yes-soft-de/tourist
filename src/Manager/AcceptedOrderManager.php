@@ -40,9 +40,16 @@ class AcceptedOrderManager
         return $create;
     }
 
+    // Get all pending accepted orders of tourist
     public function getAcceptedOrder($userID)
     {
         return $this->acceptedOrderEntityRepository->getAcceptedOrder($userID);
+    }
+
+    // Get all accepted orders of tourist whatever status is
+    public function getAllAcceptedOrdersOfTourist($touristID)
+    {
+        return $this->acceptedOrderEntityRepository->getAllAcceptedOrdersOfTourist($touristID);
     }
 
     public function getAcceptcdOrdersByGuide($guideID)

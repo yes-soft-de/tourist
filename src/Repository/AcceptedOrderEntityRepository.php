@@ -19,6 +19,7 @@ class AcceptedOrderEntityRepository extends ServiceEntityRepository
         parent::__construct($registry, AcceptedOrderEntity::class);
     }
 
+    // Get all pending accepted orders of tourist
     public function getAcceptedOrder($userID)
     {
         $r = $this->createQueryBuilder('acceptedOrder')
@@ -39,6 +40,24 @@ class AcceptedOrderEntityRepository extends ServiceEntityRepository
             ->getArrayResult();
 
         return $r;
+    }
+
+    // Get all accepted orders of tourist whatever status is
+    public function getAllAcceptedOrdersOfTourist($touristID)
+    {
+        return $this->createQueryBuilder('acceptedOrder')
+            ->select('acceptedOrder.id', 'acceptedOrder.orderID', 'acceptedOrder.cost', 'acceptedOrder.date', 'acceptedOrder.status', 'acceptedOrder.guidUserID',
+                'acceptedOrder.touristUserID', 'touristOrder as order', 'acceptedOrder.uuid')
+
+            ->join('App:TouristOrderEntity', 'touristOrder')
+
+            ->andWhere('touristOrder.id = acceptedOrder.orderID')
+
+            ->andWhere('acceptedOrder.touristUserID=:id')
+            ->setParameter('id', $touristID)
+
+            ->getQuery()
+            ->getArrayResult();
     }
 
     public function getAcceptcdOrdersByGuide($guideID)

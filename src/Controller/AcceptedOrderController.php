@@ -64,12 +64,12 @@ class AcceptedOrderController extends BaseController
 
         return $this->response($response,self::FETCH);
     }
-
+    
     /**
-     * @Route("/acceptordersbyguide/{guideID}", name="getRefusedAcceptedOrderByGuideID", methods="GET")
+     * @Route("/acceptordersbyguide/{guideID}", name="getAcceptedOrderByGuideID", methods="GET")
      * @return JsonResponse
      */
-    public function getRefusedAcceptedOrderByGuide($guideID)
+    public function getAcceptedOrderByGuide($guideID)
     {
         $response = $this->orderService->getAcceptcdOrdersByGuide($guideID);
 

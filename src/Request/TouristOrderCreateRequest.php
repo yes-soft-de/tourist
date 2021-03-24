@@ -98,5 +98,13 @@ class TouristOrderCreateRequest
         }
     }
 
+    public function setCost($cost): void
+    {
+        $this->cost = $cost;
+    }
 
+    public function getCost()
+    {
+        return $this->cost;
+    }
 }

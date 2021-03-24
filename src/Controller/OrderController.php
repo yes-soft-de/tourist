@@ -105,6 +105,18 @@ class OrderController extends BaseController
         return $this->response($response,self::FETCH);
     }
 
+    /**
+     * @Route("/ordersbycityandlanguage/{guideID}", name="getOrdersByGuideCityAndLanguage", methods="GET")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getOrdersByGuideCityAndLanguage($guideID)
+    {
+        $response = $this->orderService->getOrdersByGuideCityAndLanguage($guideID);
+
+        return $this->response($response, self::FETCH);
+    }
+
       /**
      * @Route("/guideorder/{id}", name="getOrderByGuid", methods="GET")
      * @param Request $request

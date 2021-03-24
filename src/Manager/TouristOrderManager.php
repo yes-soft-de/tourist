@@ -19,18 +19,25 @@ class TouristOrderManager
     private $entityManager;
     private $orderEntityRepository;
     private $guidEntityRepository;
+    private $guideManager;
 
     public function __construct(AutoMapping $autoMapping, EntityManagerInterface $entityManager,
-                                TouristOrderEntityRepository $orderEntityRepository, GuidEntityRepository $guidEntityRepository)
+                                TouristOrderEntityRepository $orderEntityRepository, GuidEntityRepository $guidEntityRepository,
+                                 GuidManager $guideManager)
     {
         $this->autoMapping = $autoMapping;
         $this->entityManager = $entityManager;
         $this->orderEntityRepository = $orderEntityRepository;
         $this->guidEntityRepository = $guidEntityRepository;
+        $this->guideManager = $guideManager;
     }
 
     public function createOrder(TouristOrderCreateRequest $request)
     {
+        if($request->getCost() == null)
+        {
+            $request->setCost(0);
+        }
 
         $creteOrder = $this->autoMapping->map(TouristOrderCreateRequest::class, TouristOrderEntity::class, $request);
 
@@ -82,6 +89,15 @@ class TouristOrderManager
             //dd($city_language['language']);
         //get tourist orders
         return $this->orderEntityRepository->getOrderByGuidCityAndLanguage($city_language['city'], $city_language['language']);
+    }
+
+    //Get orders with undefined guidUserID
+    public function getOrdersByGuideCityAndLanguage($guideID)
+    {
+        //get guide city and language
+        $city_language = $this->guideManager->getCityAndLanguageOfGuide($guideID);
+        
+        return $this->orderEntityRepository->getOrdersByGuideCitiesAndLanguages($city_language['city'], $city_language['language']);
     }
 
     public function getOrderByGuid($guidUserID)

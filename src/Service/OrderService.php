@@ -90,6 +90,20 @@ class OrderService
         return $ordersResponse;
     }
 
+    //Get orders with undefined guidUserID
+    public function getOrdersByGuideCityAndLanguage($guideID)
+    {
+        $ordersResponse = [];
+        $orders = $this->touristOrderManager->getOrdersByGuideCityAndLanguage($guideID);
+        
+        foreach ($orders as $order)
+        {
+            $ordersResponse[] = $this->autoMapping->map('array', OrderByGuidCityAndLanguageResponse::class, $order);
+        }
+
+        return $ordersResponse;
+    }
+
     public function acceptOrderCreate(AcceptedOrderCreateRequest $request)
     {
         $request->setUuid($this->uuid());
@@ -111,6 +125,19 @@ class OrderService
 
         return $ordersResponse;
     }
+
+    // public function getAllAcceptedOrdersByTourist($touristID)
+    // {
+    //     $ordersResponse = [];
+    //     $orders = $this->acceptedOrderManager->getAllAcceptedOrdersByTourist($touristID);
+
+    //     foreach ($orders as $order)
+    //     {
+    //         $ordersResponse[] = $this->autoMapping->map('array', AcceptedOrderResponse::class, $order);
+    //     }
+
+    //     return $ordersResponse;
+    // }
 
     public function getAcceptcdOrdersByGuide($guideID)
     {

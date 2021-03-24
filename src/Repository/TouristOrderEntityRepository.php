@@ -96,6 +96,50 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
         }
     }
 
+    //Get orders with undefined guidUserID
+    public function getOrdersByGuideCitiesAndLanguages($cities, $languages)
+    {
+        $res = [];
+
+        foreach ($cities as $city)
+        {
+            foreach ($languages as $language)
+            {
+                $order = $this->createQueryBuilder('orders')
+                    ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.city', 'orders.language', 'orders.services',
+                        'orders.arriveDate', 'orders.leaveDate', 'orders.cost', 'orders.status')
+
+                    ->andWhere('orders.city = :city')
+                    ->setParameter('city', $city)
+
+                    ->andWhere('orders.language = :language')
+                    ->setParameter('language', $language)
+
+                    ->andWhere('orders.status = :pending')
+                    ->setParameter('pending', 'pending')
+
+                    ->andWhere('orders.guidUserID is NULL')
+
+                    ->getQuery()
+                    ->getResult();
+
+                if($order)
+                {
+                    $res[] = $order;
+                }
+            }
+        }
+
+        if ($res)
+        {
+            return $res[0];
+        }
+        else
+        {
+            return $res;
+        }      
+    }
+
     public function getOrdersByGuidUserID($guidUserID)
     {
         $e = $this->createQueryBuilder('orders')

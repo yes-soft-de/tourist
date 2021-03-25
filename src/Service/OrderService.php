@@ -81,12 +81,14 @@ class OrderService
     {
         $ordersResponse = [];
         $orders = $this->touristOrderManager->getOrderByGuidCityAndLanguage($guidUserID);
-        //dd($orders);
-        foreach ($orders as $order)
+        
+        if(isset($orders))
         {
-            $ordersResponse[] = $this->autoMapping->map('array', OrderByGuidCityAndLanguageResponse::class, $order);
+            foreach ($orders as $order)
+            {
+                $ordersResponse[] = $this->autoMapping->map('array', OrderByGuidCityAndLanguageResponse::class, $order);
+            }
         }
-
         return $ordersResponse;
     }
 

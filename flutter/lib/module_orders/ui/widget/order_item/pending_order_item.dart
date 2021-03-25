@@ -13,10 +13,10 @@ class OrderItemWidget extends StatelessWidget {
 
   OrderItemWidget(this.orderModel,
       {this.onAcceptOrder,
-        this.onPayAvailableOrder,
-        this.onAcceptAvailableOrder,
-        this.onPayOrder,
-        this.canPay = false});
+      this.onPayAvailableOrder,
+      this.onAcceptAvailableOrder,
+      this.onPayOrder,
+      this.canPay = false});
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +61,7 @@ class OrderItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      orderModel.guideInfo == null
-                          ? orderModel.touristUserID
-                          .substring(orderModel.touristUserID.length)
-                          : orderModel.guideInfo.name,
+                      'Pending',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Container(
@@ -79,20 +76,16 @@ class OrderItemWidget extends StatelessWidget {
               ),
             ),
             // Order date
-            Flexible(
-                child: Text(DateTime.fromMillisecondsSinceEpoch(
-                    orderModel.date.timestamp * 1000)
-                    .toString()
-                    .substring(5, 10)))
+            Flexible(child: Text(orderModel.date.toString().substring(5, 10)))
           ],
         ),
         canPay != null && canPay
             ? RaisedButton(
-          onPressed: () {
-            this.onAcceptOrder(orderModel);
-          },
-          child: Text(S.of(context).accept_order),
-        )
+                onPressed: () {
+                  this.onAcceptOrder(orderModel);
+                },
+                child: Text(S.of(context).accept_order),
+              )
             : Container()
       ],
     );

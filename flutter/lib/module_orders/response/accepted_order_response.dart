@@ -1,11 +1,11 @@
-class OrderListResponse {
+class AcceptedOrder {
   String statusCode;
   String msg;
   List<Data> data;
 
-  OrderListResponse({this.statusCode, this.msg, this.data});
+  AcceptedOrder({this.statusCode, this.msg, this.data});
 
-  OrderListResponse.fromJson(Map<String, dynamic> json) {
+  AcceptedOrder.fromJson(Map<String, dynamic> json) {
     statusCode = json['status_code'];
     msg = json['msg'];
     if (json['Data'] != null) {
@@ -30,49 +30,31 @@ class OrderListResponse {
 class Data {
   int id;
   Date date;
+  Order order;
   String touristUserID;
   String guidUserID;
-  String city;
-  String language;
-  Date arriveDate;
-  Date leaveDate;
-  List<String> services;
-  Null roomID;
-  String status;
   String cost;
+  String status;
   String uuid;
 
   Data(
       {this.id,
         this.date,
+        this.order,
         this.touristUserID,
         this.guidUserID,
-        this.city,
-        this.language,
-        this.arriveDate,
-        this.leaveDate,
-        this.services,
-        this.roomID,
-        this.status,
         this.cost,
+        this.status,
         this.uuid});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     date = json['date'] != null ? new Date.fromJson(json['date']) : null;
+    order = json['order'] != null ? new Order.fromJson(json['order']) : null;
     touristUserID = json['touristUserID'];
     guidUserID = json['guidUserID'];
-    city = json['city'];
-    language = json['language'];
-    arriveDate = json['arriveDate'] != null
-        ? new Date.fromJson(json['arriveDate'])
-        : null;
-    leaveDate =
-    json['leaveDate'] != null ? new Date.fromJson(json['leaveDate']) : null;
-    services = json['services'].cast<String>();
-    roomID = json['roomID'];
-    status = json['status'];
     cost = json['cost'];
+    status = json['status'];
     uuid = json['uuid'];
   }
 
@@ -82,20 +64,13 @@ class Data {
     if (this.date != null) {
       data['date'] = this.date.toJson();
     }
+    if (this.order != null) {
+      data['order'] = this.order.toJson();
+    }
     data['touristUserID'] = this.touristUserID;
     data['guidUserID'] = this.guidUserID;
-    data['city'] = this.city;
-    data['language'] = this.language;
-    if (this.arriveDate != null) {
-      data['arriveDate'] = this.arriveDate.toJson();
-    }
-    if (this.leaveDate != null) {
-      data['leaveDate'] = this.leaveDate.toJson();
-    }
-    data['services'] = this.services;
-    data['roomID'] = this.roomID;
-    data['status'] = this.status;
     data['cost'] = this.cost;
+    data['status'] = this.status;
     data['uuid'] = this.uuid;
     return data;
   }
@@ -209,6 +184,76 @@ class Location {
     data['latitude'] = this.latitude;
     data['longitude'] = this.longitude;
     data['comments'] = this.comments;
+    return data;
+  }
+}
+
+class Order {
+  int id;
+  Date date;
+  String touristUserID;
+  String guidUserID;
+  String city;
+  String language;
+  Date arriveDate;
+  Date leaveDate;
+  List<String> services;
+  String cost;
+  Null roomID;
+  String status;
+
+  Order(
+      {this.id,
+        this.date,
+        this.touristUserID,
+        this.guidUserID,
+        this.city,
+        this.language,
+        this.arriveDate,
+        this.leaveDate,
+        this.services,
+        this.cost,
+        this.roomID,
+        this.status});
+
+  Order.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    date = json['date'] != null ? new Date.fromJson(json['date']) : null;
+    touristUserID = json['touristUserID'];
+    guidUserID = json['guidUserID'];
+    city = json['city'];
+    language = json['language'];
+    arriveDate = json['arriveDate'] != null
+        ? new Date.fromJson(json['arriveDate'])
+        : null;
+    leaveDate =
+    json['leaveDate'] != null ? new Date.fromJson(json['leaveDate']) : null;
+    services = json['services'].cast<String>();
+    cost = json['cost'];
+    roomID = json['roomID'];
+    status = json['status'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    if (this.date != null) {
+      data['date'] = this.date.toJson();
+    }
+    data['touristUserID'] = this.touristUserID;
+    data['guidUserID'] = this.guidUserID;
+    data['city'] = this.city;
+    data['language'] = this.language;
+    if (this.arriveDate != null) {
+      data['arriveDate'] = this.arriveDate.toJson();
+    }
+    if (this.leaveDate != null) {
+      data['leaveDate'] = this.leaveDate.toJson();
+    }
+    data['services'] = this.services;
+    data['cost'] = this.cost;
+    data['roomID'] = this.roomID;
+    data['status'] = this.status;
     return data;
   }
 }

@@ -1,11 +1,11 @@
-class OrderListResponse {
+class OrderLookupResponse {
   String statusCode;
   String msg;
   List<Data> data;
 
-  OrderListResponse({this.statusCode, this.msg, this.data});
+  OrderLookupResponse({this.statusCode, this.msg, this.data});
 
-  OrderListResponse.fromJson(Map<String, dynamic> json) {
+  OrderLookupResponse.fromJson(Map<String, dynamic> json) {
     statusCode = json['status_code'];
     msg = json['msg'];
     if (json['Data'] != null) {
@@ -31,49 +31,40 @@ class Data {
   int id;
   Date date;
   String touristUserID;
-  String guidUserID;
   String city;
   String language;
+  List<String> services;
   Date arriveDate;
   Date leaveDate;
-  List<String> services;
-  Null roomID;
-  String status;
   String cost;
-  String uuid;
+  String status;
 
   Data(
       {this.id,
         this.date,
         this.touristUserID,
-        this.guidUserID,
         this.city,
         this.language,
+        this.services,
         this.arriveDate,
         this.leaveDate,
-        this.services,
-        this.roomID,
-        this.status,
         this.cost,
-        this.uuid});
+        this.status});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     date = json['date'] != null ? new Date.fromJson(json['date']) : null;
     touristUserID = json['touristUserID'];
-    guidUserID = json['guidUserID'];
     city = json['city'];
     language = json['language'];
+    services = json['services'].cast<String>();
     arriveDate = json['arriveDate'] != null
         ? new Date.fromJson(json['arriveDate'])
         : null;
     leaveDate =
     json['leaveDate'] != null ? new Date.fromJson(json['leaveDate']) : null;
-    services = json['services'].cast<String>();
-    roomID = json['roomID'];
-    status = json['status'];
     cost = json['cost'];
-    uuid = json['uuid'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -83,20 +74,17 @@ class Data {
       data['date'] = this.date.toJson();
     }
     data['touristUserID'] = this.touristUserID;
-    data['guidUserID'] = this.guidUserID;
     data['city'] = this.city;
     data['language'] = this.language;
+    data['services'] = this.services;
     if (this.arriveDate != null) {
       data['arriveDate'] = this.arriveDate.toJson();
     }
     if (this.leaveDate != null) {
       data['leaveDate'] = this.leaveDate.toJson();
     }
-    data['services'] = this.services;
-    data['roomID'] = this.roomID;
-    data['status'] = this.status;
     data['cost'] = this.cost;
-    data['uuid'] = this.uuid;
+    data['status'] = this.status;
     return data;
   }
 }

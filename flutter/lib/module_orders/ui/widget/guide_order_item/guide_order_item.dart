@@ -26,12 +26,15 @@ class GuideOrderItemWidget extends StatelessWidget {
     List<Widget> widgetLayout = [];
 
     // If there is guide assigned, Show Multiple Choices
-    if (orderModel.guidUserID != null) {
+    if (orderModel.guideUserID != null) {
       if (orderModel.status == 'pending') {
         widgetLayout.add(_getPendingOrder(orderModel, context));
       } else if (orderModel.status == 'onGoing') {
         // There is a chat here
         widgetLayout.add(_getOnGoingOrder(orderModel, context));
+      } else if (orderModel.status == 'pendingPayment') {
+        // There is a chat here
+        widgetLayout.add(_getPendingPaymentOrder(orderModel, context));
       } else if (orderModel.status == 'finished') {
         widgetLayout.add(_getFinishedOrder(orderModel, context));
       }
@@ -59,7 +62,7 @@ class GuideOrderItemWidget extends StatelessWidget {
     return Flex(
       direction: Axis.vertical,
       children: <Widget>[
-        Text(S.of(context).proposal),
+        Text(S.of(context).proposal + ' #' + orderModel.id.toString()),
         Flex(
           direction: Axis.horizontal,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -83,7 +86,7 @@ class GuideOrderItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      S.of(context).request_for_guide,
+                      '${S.of(context).request_for_guide} #${orderModel.id}',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Container(
@@ -94,7 +97,7 @@ class GuideOrderItemWidget extends StatelessWidget {
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.all(8),
-                          child: Text(orderModel.city),
+                          child: Text(orderModel.city ?? ''),
                         ),
                         Padding(
                           padding: EdgeInsets.all(8),
@@ -102,7 +105,7 @@ class GuideOrderItemWidget extends StatelessWidget {
                         ),
                         Padding(
                           padding: EdgeInsets.all(8),
-                          child: Text(orderModel.language),
+                          child: Text(orderModel.language ?? ''),
                         )
                       ],
                     ),
@@ -115,8 +118,7 @@ class GuideOrderItemWidget extends StatelessWidget {
             ),
             // Order date
             Flexible(
-                child: Text(DateTime.fromMillisecondsSinceEpoch(
-                        orderModel.date.timestamp * 1000)
+                child: Text(orderModel.arriveDate
                     .toIso8601String()
                     .toString()
                     .substring(5, 10)))
@@ -150,7 +152,7 @@ class GuideOrderItemWidget extends StatelessWidget {
     return Flex(
       direction: Axis.vertical,
       children: [
-        Text(S.of(context).pending),
+        Text(S.of(context).pending + ' #${orderModel.id.toString()}'),
         Flex(
           direction: Axis.horizontal,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -176,10 +178,7 @@ class GuideOrderItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      orderModel.guideInfo == null
-                          ? orderModel.touristUserID
-                              .substring(orderModel.touristUserID.length)
-                          : orderModel.guideInfo.name,
+                      'Pending',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Container(
@@ -195,10 +194,57 @@ class GuideOrderItemWidget extends StatelessWidget {
             ),
             // Order date
             Flexible(
-                child: Text(DateTime.fromMillisecondsSinceEpoch(
-                        orderModel.date.timestamp * 1000)
-                    .toString()
-                    .substring(5, 10)))
+                child: Text(orderModel.leaveDate.toString().substring(5, 10)))
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _getPendingPaymentOrder(OrderModel orderModel, BuildContext context) {
+    return Flex(
+      direction: Axis.vertical,
+      children: [
+        Text('Pending Payment'),
+        Flex(
+          direction: Axis.horizontal,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Flexible(
+              flex: 1,
+              child: Container(
+                  height: 72,
+                  width: 72,
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    'resources/images/logo.jpg',
+                    fit: BoxFit.contain,
+                  )),
+            ),
+            Flexible(
+              flex: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Flex(
+                  direction: Axis.vertical,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Pending Payment',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Container(
+                      height: 8,
+                    ),
+                    Text(orderModel.city + ' | ' + orderModel.language),
+                    Container(
+                      height: 8,
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ],
@@ -236,9 +282,7 @@ class GuideOrderItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      orderModel.guideInfo == null
-                          ? orderModel.touristUserID
-                          : orderModel.guideInfo.name,
+                      'On Going',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Container(
@@ -252,19 +296,13 @@ class GuideOrderItemWidget extends StatelessWidget {
                 ),
               ),
             ),
-            // Order date
-            Flexible(
-                child: Text(DateTime.fromMillisecondsSinceEpoch(
-                        orderModel.date.timestamp * 1000)
-                    .toString()
-                    .substring(5, 10)))
           ],
         ),
         RaisedButton(
           child: Text(S.of(context).openChat),
           onPressed: () {
             Navigator.of(context)
-                .pushNamed(ChatRoutes.chatRoute, arguments: orderModel.roomID);
+                .pushNamed(ChatRoutes.chatRoute, arguments: orderModel.roomId);
           },
         )
       ],
@@ -299,10 +337,7 @@ class GuideOrderItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  orderModel.guideInfo == null
-                      ? orderModel.touristUserID
-                          .substring(orderModel.touristUserID.length - 4)
-                      : orderModel.guideInfo.name,
+                  'Finished',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Container(
@@ -316,13 +351,6 @@ class GuideOrderItemWidget extends StatelessWidget {
             ),
           ),
         ),
-        // Order date
-        Flexible(
-            flex: 1,
-            child: Text(DateTime.fromMillisecondsSinceEpoch(
-                    orderModel.date.timestamp * 1000)
-                .toString()
-                .substring(5, 10)))
       ],
     );
   }

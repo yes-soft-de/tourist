@@ -40,7 +40,7 @@ class OrdersListBloc {
 
   void payOrder(OrdersListScreen screen, OrderModel orderModel) {
     _orderSubject.add(OrderListStateLoading(screen));
-    orderModel.roomID = Uuid().v1();
+    orderModel.roomId = Uuid().v1();
     _ordersService.payOrder(orderModel).then((value) {
       if (value == null) {
         _orderSubject.add(OrderListStateError(screen, 'Error Loading Data'));

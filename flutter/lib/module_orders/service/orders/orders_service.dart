@@ -8,7 +8,9 @@ import 'package:tourists/module_guide/service/guide_list/guide_list.dart';
 import 'package:tourists/module_orders/enum/order_status.dart';
 import 'package:tourists/module_orders/manager/orders/orders_manager.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
+import 'package:tourists/module_orders/request/update_order_request.dart';
 import 'package:tourists/module_orders/response/update_order_response.dart';
+import 'package:uuid/uuid.dart';
 
 @provide
 class TouristOrdersService {
@@ -32,17 +34,37 @@ class TouristOrdersService {
 
     try {
       if (role == UserRole.ROLE_GUIDE) {
-        var response = await Future.wait([
-          _ordersManager.getOrders(uid),
-          _guideListService.getAllGuides(),
-        ]);
-        return formatOrders(response[1], response[0]);
+        var orders = await _ordersManager.getGuideOrders(uid);
+        return orders.data.map((e) => OrderModel(
+          id: e.id,
+          touristId: e.touristUserID,
+          guideUserID: e.guidUserID,
+          language: e.language,
+          services: e.services,
+          arriveDate: DateTime.fromMillisecondsSinceEpoch(1000 * e.arriveDate.timestamp),
+          leaveDate: DateTime.fromMillisecondsSinceEpoch(1000 * e.leaveDate.timestamp),
+          date: DateTime.fromMillisecondsSinceEpoch(1000 * e.date.timestamp),
+          city: e.city,
+          cost: e.cost,
+          roomId: e.roomID,
+          status: e.status,
+        ));
       } else {
-        var response = await Future.wait([
-          _ordersManager.getTouristOrders(uid),
-          _guideListService.getAllGuides(),
-        ]);
-        return formatOrders(response[1], response[0]);
+        var orders = await _ordersManager.getTouristOrders(uid);
+        return orders.data.map((e) => OrderModel(
+          id: e.id,
+          touristId: e.touristUserID,
+          guideUserID: e.guidUserID,
+          language: e.language,
+          services: e.services,
+          arriveDate: DateTime.fromMillisecondsSinceEpoch(1000 * e.arriveDate.timestamp),
+          leaveDate: DateTime.fromMillisecondsSinceEpoch(1000 * e.leaveDate.timestamp),
+          date: DateTime.fromMillisecondsSinceEpoch(1000 * e.date.timestamp),
+          city: e.city,
+          cost: e.cost,
+          roomId: e.roomID,
+          status: e.status,
+        )).toList();
       }
     } catch (e) {
       print(e.toString());
@@ -53,43 +75,52 @@ class TouristOrdersService {
   Future<List<OrderModel>> getGeneralOrders() async {
     String uid = await _authService.userID;
 
-    OrderResponse response = await _ordersManager.getGeneralOrderList(uid);
+    OrderListResponse response = await _ordersManager.getGeneralOrderList(uid);
 
     if (response != null) {
-      return response.orderList;
+      return response.data.map((e) => OrderModel(
+        id: e.id,
+        touristId: e.touristUserID,
+        guideUserID: e.guidUserID,
+        language: e.language,
+        services: e.services,
+        arriveDate: DateTime.fromMillisecondsSinceEpoch(1000 * e.arriveDate.timestamp),
+        leaveDate: DateTime.fromMillisecondsSinceEpoch(1000 * e.leaveDate.timestamp),
+        date: DateTime.fromMillisecondsSinceEpoch(1000 * e.date.timestamp),
+        city: e.city,
+        cost: e.cost,
+        roomId: e.roomID,
+        status: e.status,
+      )).toList();
     }
     return null;
-  }
-
-  List<OrderModel> formatOrders(
-    List<GuideListItemModel> allGuides,
-    OrderResponse orderResponse,
-  ) {
-    orderResponse ??= OrderResponse(orderList: []);
-    Map<String, GuideListItemModel> guidesMap = {};
-    allGuides.forEach((guide) {
-      guidesMap[guide.userID] = guide;
-    });
-
-    orderResponse.orderList.forEach((order) {
-      if (order.guidUserID != null) {
-        // Get the info from the list
-        order.guideInfo = guidesMap[order.guidUserID];
-      }
-    });
-
-    return orderResponse.orderList;
   }
 
   Future<UpdateOrderResponse> payOrder(OrderModel orderModel) async {
     orderModel.status = 'onGoing';
 
-    UpdateOrderResponse response = await _ordersManager.updateOrder(orderModel);
+    UpdateOrderResponse response = await _ordersManager.updateOrder(_toUpdateOrderRequest(orderModel));
 
     if (response == null) {
       return null;
     }
 
     return response;
+  }
+
+  UpdateOrderRequest _toUpdateOrderRequest(OrderModel orderModel) {
+    return UpdateOrderRequest(
+        status: 'onGoing',
+        services: orderModel.services,
+        touristUserID: orderModel.touristId,
+        guidUserID: FirebaseAuth.instance.currentUser.uid,
+        cost: int.tryParse(orderModel.cost),
+        city: orderModel.city,
+        language: orderModel.language,
+        date: DateTime.now().toIso8601String(),
+        arriveDate: orderModel.arriveDate.toIso8601String(),
+        leaveDate: orderModel.leaveDate.toIso8601String(),
+        id: orderModel.id.toString()
+    );
   }
 }

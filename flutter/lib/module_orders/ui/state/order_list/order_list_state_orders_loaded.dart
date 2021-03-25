@@ -169,7 +169,7 @@ class OrderListStateOrdersLoaded extends OrdersListState {
     }
     List<Widget> ordersWidgetList = [];
     ordersList.forEach((element) {
-      if (element.status == 'pending' && element.roomID == null) {
+      if (element.status == 'pending' && element.roomId == null) {
         ordersWidgetList.add(OrderItemWidget(
           element,
           canPay: false,

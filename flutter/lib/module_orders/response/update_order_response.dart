@@ -50,7 +50,7 @@ class Data {
     services = json['services']?.cast<String>();
     roomID = json['roomID'];
     status = json['status'];
-    cost = json['cost'];
+    cost = json['cost'].toString();
   }
 
   Map<String, dynamic> toJson() {

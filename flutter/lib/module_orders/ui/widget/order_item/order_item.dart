@@ -24,7 +24,7 @@ class OrderItemWidget extends StatelessWidget {
     List<Widget> widgetLayout = [];
 
     // If there is guide assigned, Show Multiple Choices
-    if (orderModel.guidUserID != null) {
+    if (orderModel.guideUserID != null) {
       if (orderModel.status == 'pending') {
         widgetLayout.add(_getPendingOrder(orderModel, context));
       } else if (orderModel.status == 'onGoing') {
@@ -111,8 +111,7 @@ class OrderItemWidget extends StatelessWidget {
             ),
             // Order date
             Flexible(
-                child: Text(DateTime.fromMillisecondsSinceEpoch(
-                        orderModel.date.timestamp * 1000)
+                child: Text(orderModel.date
                     .toIso8601String()
                     .toString()
                     .substring(5, 10)))
@@ -158,10 +157,7 @@ class OrderItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      orderModel.guideInfo == null
-                          ? orderModel.touristUserID
-                              .substring(orderModel.touristUserID.length)
-                          : orderModel.guideInfo.name,
+                      'Pending',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Container(
@@ -176,11 +172,7 @@ class OrderItemWidget extends StatelessWidget {
               ),
             ),
             // Order date
-            Flexible(
-                child: Text(DateTime.fromMillisecondsSinceEpoch(
-                        orderModel.date.timestamp * 1000)
-                    .toString()
-                    .substring(5, 10)))
+            Flexible(child: Text(orderModel.date.toString().substring(5, 10)))
           ],
         ),
         canPay != null && canPay
@@ -225,9 +217,7 @@ class OrderItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      orderModel.guideInfo == null
-                          ? orderModel.touristUserID
-                          : orderModel.guideInfo.name,
+                      'On Going',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Container(
@@ -242,18 +232,14 @@ class OrderItemWidget extends StatelessWidget {
               ),
             ),
             // Order date
-            Flexible(
-                child: Text(DateTime.fromMillisecondsSinceEpoch(
-                        orderModel.date.timestamp * 1000)
-                    .toString()
-                    .substring(5, 10)))
+            Flexible(child: Text(orderModel.date.toString().substring(5, 10)))
           ],
         ),
         RaisedButton(
           child: Text(S.of(context).openChat),
           onPressed: () {
             Navigator.of(context)
-                .pushNamed(ChatRoutes.chatRoute, arguments: orderModel.roomID);
+                .pushNamed(ChatRoutes.chatRoute, arguments: orderModel.roomId);
           },
         )
       ],
@@ -287,10 +273,7 @@ class OrderItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  orderModel.guideInfo == null
-                      ? orderModel.touristUserID
-                          .substring(orderModel.touristUserID.length - 4)
-                      : orderModel.guideInfo.name,
+                  'Finished',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Container(
@@ -306,11 +289,7 @@ class OrderItemWidget extends StatelessWidget {
         ),
         // Order date
         Flexible(
-            flex: 1,
-            child: Text(DateTime.fromMillisecondsSinceEpoch(
-                    orderModel.date.timestamp * 1000)
-                .toString()
-                .substring(5, 10)))
+            flex: 1, child: Text(orderModel.date.toString().substring(5, 10)))
       ],
     );
   }

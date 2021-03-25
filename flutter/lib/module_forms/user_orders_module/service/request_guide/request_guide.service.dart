@@ -30,7 +30,6 @@ class RequestGuideService {
       city: requestGuide.location,
       language: requestGuide.language,
       arriveDate: requestGuide.arrivalDate,
-      cost: 7,
       status: 'pending',
       date: DateTime.now(),
       leaveDate: requestGuide.arrivalDate

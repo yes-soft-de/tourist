@@ -50,6 +50,10 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
 
             ->andWhere('orders.touristUserID = :touristID')
             ->setParameter('touristID', $touristID)
+            
+            ->andWhere('orders.status = :pending')
+            ->setParameter('pending', 'pending')
+
             ->groupBy('orders.id')
             ->orderBy('orders.id', 'ASC')
 
@@ -71,8 +75,10 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
 
                     ->andWhere('orders.city = :city')
                     ->setParameter('city', $c)
+                    
                     ->andWhere('orders.language = :language')
                     ->setParameter('language', $l)
+
                     ->andWhere('orders.status = :pending')
                     ->setParameter('pending', 'pending')
 
@@ -158,5 +164,16 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
             ->getResult();
 
              return $e;
+    }
+
+    public function getOrderByID($id)
+    {
+        return $this->createQueryBuilder('orders')
+
+            ->andWhere('orders.id = :id')
+            ->setParameter('id', $id)
+
+            ->getQuery()
+            ->getResult();
     }
 }

@@ -61,4 +61,9 @@ class AcceptedOrderCreateRequest
         return $this;
     }
 
+    public function getOrderID()
+    {
+        return $this->orderID;
+    }
+
 }

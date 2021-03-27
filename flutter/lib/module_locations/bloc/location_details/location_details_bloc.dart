@@ -5,8 +5,6 @@ import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
 import 'package:tourists/module_comment/manager/comment/comment_service.dart';
 import 'package:tourists/module_comment/request/create_comments/create_comments.dart';
 import 'package:tourists/module_comment/response/create_comment/create_comment_response.dart';
-import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
-import 'package:tourists/module_locations/model/location_details/location_details.dart';
 import 'package:tourists/module_locations/service/location_details/location_details_service.dart';
 import 'package:tourists/module_locations/ui/states/location_details_state/location_details_state.dart';
 import 'package:tourists/module_locations/ui/states/location_details_state/location_details_state_error.dart';

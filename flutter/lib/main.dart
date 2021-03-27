@@ -16,7 +16,6 @@ import 'package:tourists/module_forms/forms_module.dart';
 import 'package:tourists/module_guide/guide_list_module.dart';
 import 'package:tourists/module_home/home_module.dart';
 import 'package:tourists/module_locations/location_module.dart';
-import 'package:tourists/module_locations/utils/UserLocationHelper.dart';
 import 'package:tourists/module_orders/order_module.dart';
 import 'package:tourists/module_profile/profile_module.dart';
 import 'package:tourists/module_search/search_module.dart';

@@ -3,7 +3,6 @@ import 'package:inject/inject.dart';
 import 'package:tourists/consts/urls.dart';
 import 'package:tourists/module_forms/user_orders_module/response/order/order_response.dart';
 import 'package:tourists/module_network/http_client/http_client.dart';
-import 'package:tourists/module_orders/model/order/order_model.dart';
 import 'package:tourists/module_orders/request/update_order_request.dart';
 import 'package:tourists/module_orders/response/update_order_response.dart';
 
@@ -23,7 +22,7 @@ class OrdersRepository {
   }
 
   Future<OrderListResponse> getTouristOrders(String uid) async {
-    Map response = await _httpClient.get(Urls.touristOrders + '/' + uid);
+    Map response = await _httpClient.get(Urls.acceptOrder + '/' + uid);
     if (response != null) {
       return OrderListResponse.fromJson(response);
     }

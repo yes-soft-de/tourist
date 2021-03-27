@@ -3,7 +3,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tourists/consts/urls.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_profile/model/profile_model/profile_model.dart';
-import 'package:tourists/utils/keyboard_detector/keyboard_detector.dart';
 
 class TouristProfileForm extends StatefulWidget {
   final ProfileModel profile;

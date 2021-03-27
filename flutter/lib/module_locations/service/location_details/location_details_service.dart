@@ -1,9 +1,6 @@
 import 'package:inject/inject.dart';
 import 'package:tourists/module_comment/manager/rate/rate_manager.dart';
 import 'package:tourists/module_comment/request/create_rating/create_rating.dart';
-import 'package:tourists/module_guide/manager/guides_manager/guides_manager.dart';
-import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
-import 'package:tourists/module_guide/response/guide_response/guides_response.dart';
 import 'package:tourists/module_locations/manager/location_details/location_details.dart';
 import 'package:tourists/module_locations/model/location_details/location_details.dart';
 import 'package:tourists/module_locations/request/create_location_request.dart';
@@ -14,14 +11,12 @@ import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper
 @provide
 class LocationDetailsService {
   final LocationDetailsManager _locationManager;
-  final GuidesManager _guidesManager;
   final RatingManager _ratingManager;
   final GoogleLocationsService _googleLocationsService;
   final SharedPreferencesHelper _preferencesHelper;
 
   LocationDetailsService(
     this._locationManager,
-    this._guidesManager,
     this._ratingManager,
     this._preferencesHelper,
     this._googleLocationsService,

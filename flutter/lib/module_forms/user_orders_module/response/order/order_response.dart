@@ -9,7 +9,7 @@ class OrderListResponse {
     statusCode = json['status_code'];
     msg = json['msg'];
     if (json['Data'] != null) {
-      data = new List<Data>();
+      data = <Data>[];
       json['Data'].forEach((v) {
         data.add(new Data.fromJson(v));
       });
@@ -17,7 +17,7 @@ class OrderListResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['status_code'] = this.statusCode;
     data['msg'] = this.msg;
     if (this.data != null) {
@@ -77,7 +77,7 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     if (this.date != null) {
       data['date'] = this.date.toJson();
@@ -117,7 +117,7 @@ class Date {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (this.timezone != null) {
       data['timezone'] = this.timezone.toJson();
     }
@@ -137,7 +137,7 @@ class Timezone {
   Timezone.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     if (json['transitions'] != null) {
-      transitions = new List<Transitions>();
+      transitions = <Transitions>[];
       json['transitions'].forEach((v) {
         transitions.add(new Transitions.fromJson(v));
       });
@@ -148,7 +148,7 @@ class Timezone {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = this.name;
     if (this.transitions != null) {
       data['transitions'] = this.transitions.map((v) => v.toJson()).toList();
@@ -178,7 +178,7 @@ class Transitions {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['ts'] = this.ts;
     data['time'] = this.time;
     data['offset'] = this.offset;
@@ -204,7 +204,7 @@ class Location {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['country_code'] = this.countryCode;
     data['latitude'] = this.latitude;
     data['longitude'] = this.longitude;

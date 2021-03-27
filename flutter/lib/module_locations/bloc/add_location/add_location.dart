@@ -1,6 +1,5 @@
 import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:tourists/consts/urls.dart';
 import 'package:tourists/module_locations/model/location_details/location_details.dart';
 import 'package:tourists/module_locations/service/location_details/location_details_service.dart';
 import 'package:tourists/module_locations/ui/screens/add_location/add_location.dart';

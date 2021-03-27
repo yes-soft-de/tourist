@@ -1,6 +1,5 @@
 import 'package:inject/inject.dart';
 import 'package:tourists/consts/urls.dart';
-import 'package:tourists/module_auth/enums/user_type.dart';
 import 'package:tourists/module_network/http_client/http_client.dart';
 import 'package:tourists/module_profile/request/create_profile.dart';
 import 'package:tourists/module_profile/response/profile_list/profile_list_response.dart';

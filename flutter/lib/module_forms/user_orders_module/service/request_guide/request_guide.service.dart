@@ -6,7 +6,6 @@ import 'package:tourists/module_forms/user_orders_module/request/request_guide/r
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
 import 'package:tourists/module_guide/service/guide_list/guide_list.dart';
 import 'package:tourists/module_orders/response/request_guide_response/request_guide_response.dart';
-import 'package:uuid/uuid.dart';
 
 @provide
 class RequestGuideService {

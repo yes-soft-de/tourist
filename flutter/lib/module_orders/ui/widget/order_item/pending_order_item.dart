@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tourists/generated/l10n.dart';
-import 'package:tourists/module_chat/chat_routes.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
 
 class OrderItemWidget extends StatelessWidget {

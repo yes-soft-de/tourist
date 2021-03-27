@@ -5,7 +5,6 @@ import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_orders/bloc/guide_orders_list/guide_orders_list.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
 import 'package:tourists/module_orders/ui/widget/guide_order_item/guide_order_item.dart';
-import 'package:tourists/module_orders/ui/widget/order_item/order_item.dart';
 
 @provide
 class GuideOrdersScreen extends StatefulWidget {
@@ -111,22 +110,25 @@ class _GuideOrdersScreenState extends State<GuideOrdersScreen> {
 
   Future<Widget> _getAvailableOrders() async {
     List<Widget> orderCards = [];
-    User _user = await widget.auth.currentUser;
 
     if (ordersList != null) {
       ordersList.forEach((order) {
         orderCards.add(GuideOrderItemWidget(
           order,
           onAcceptOrder: (order) {
+            print('Accept Order');
             widget.bloc.acceptOrder(order);
           },
           onAcceptAvailableOrder: (order) {
+            print('Accept Available Order');
             widget.bloc.acceptAvailableOrder(order);
           },
           onPayOrder: (order) {
+            print('Pay Order');
             widget.bloc.payOrder(order);
           },
           onPayAvailableOrder: (orderModel) {
+            print('Pay available Order');
             widget.bloc.payAvailableOrder(orderModel);
           },
         ));

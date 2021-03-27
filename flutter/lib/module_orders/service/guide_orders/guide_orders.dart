@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/module_forms/user_orders_module/response/order/order_response.dart';
-import 'package:tourists/module_orders/enum/order_status.dart';
 import 'package:tourists/module_orders/manager/guide_orders/guide_orders.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
 import 'package:tourists/module_orders/request/update_order_request.dart';
@@ -157,7 +156,7 @@ class GuideOrdersService {
 
   UpdateOrderRequest _toUpdateOrderRequest(OrderModel orderModel) {
     return UpdateOrderRequest(
-        status: 'onGoing',
+        status: orderModel.status,
         roomID: new Uuid().v1(),
         services: orderModel.services,
         touristUserID: orderModel.touristId,

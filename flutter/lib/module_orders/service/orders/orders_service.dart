@@ -3,24 +3,18 @@ import 'package:inject/inject.dart';
 import 'package:tourists/module_auth/enums/user_type.dart';
 import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
 import 'package:tourists/module_forms/user_orders_module/response/order/order_response.dart';
-import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
-import 'package:tourists/module_guide/service/guide_list/guide_list.dart';
-import 'package:tourists/module_orders/enum/order_status.dart';
 import 'package:tourists/module_orders/manager/orders/orders_manager.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
 import 'package:tourists/module_orders/request/update_order_request.dart';
 import 'package:tourists/module_orders/response/update_order_response.dart';
-import 'package:uuid/uuid.dart';
 
 @provide
 class TouristOrdersService {
   final OrdersManager _ordersManager;
-  final GuideListService _guideListService;
   final AuthService _authService;
 
   TouristOrdersService(
     this._ordersManager,
-    this._guideListService,
     this._authService,
   );
 
@@ -48,7 +42,7 @@ class TouristOrdersService {
           cost: e.cost,
           roomId: e.roomID,
           status: e.status,
-        ));
+        )).toList();
       } else {
         var orders = await _ordersManager.getTouristOrders(uid);
         return orders.data.map((e) => OrderModel(

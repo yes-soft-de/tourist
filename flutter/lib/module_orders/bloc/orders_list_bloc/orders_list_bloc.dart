@@ -1,4 +1,3 @@
-import 'package:analyzer_plugin/utilities/pair.dart';
 import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';

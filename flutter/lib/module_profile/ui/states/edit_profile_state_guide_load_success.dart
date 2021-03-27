@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:tourists/consts/urls.dart';
-import 'package:tourists/generated/l10n.dart';
-import 'package:tourists/module_locations/ui/widgets/add_location_dialog/add_location_dialog.dart';
-import 'package:tourists/module_locations/ui/widgets/guide_locations/guide_locations.dart';
 import 'package:tourists/module_profile/model/profile_model/profile_model.dart';
 import 'package:tourists/module_profile/ui/my_profile/my_profile.dart';
 import 'package:tourists/module_profile/ui/widget/profile_form_widget.dart';
 import 'package:tourists/module_search/bloc/search_bloc/search_bloc.dart';
-import 'package:tourists/utils/keyboard_detector/keyboard_detector.dart';
 
 import 'edit_profile_state.dart';
 

@@ -157,7 +157,7 @@ class OrderItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Pending',
+                      'Order #${orderModel.id} Pending',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Container(

@@ -1,6 +1,5 @@
 import 'package:inject/inject.dart';
 import 'package:tourists/module_forms/user_orders_module/response/order/order_response.dart';
-import 'package:tourists/module_orders/model/order/order_model.dart';
 import 'package:tourists/module_orders/repository/guide_orders/guide_orders.dart';
 import 'package:tourists/module_orders/request/update_order_request.dart';
 import 'package:tourists/module_orders/response/order_lookup_response.dart';

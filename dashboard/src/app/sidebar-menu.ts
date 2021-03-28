@@ -23,5 +23,21 @@ export const SIDEBAR_MENU_ITEM: SidebarMenuItems[] = [
                 link: '/regions/add'
             }
         ]
+    },
+    {
+        title: 'Events',
+        id: 'events',
+        translate: 'events',
+        icon: 'fa fa-calendar-check-o',
+        children: [
+            {
+                translate: 'all-events',
+                link: '/events'
+            },
+            {
+                translate: 'new-event',
+                link: '/events/add'
+            }
+        ]
     }
 ];

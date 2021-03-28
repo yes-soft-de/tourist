@@ -10,12 +10,14 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HeaderComponent } from './components/header/header.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 
 const COMPONENTS = [
   SidebarComponent,
   FooterComponent,
-  HeaderComponent
+  HeaderComponent,
+  LoadingSpinnerComponent
 ];
 
 

@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import {forkJoin, Observable, Subscription} from 'rxjs';
 import { FooterComponent } from 'src/app/@theme/components';
+import { AppState } from 'src/app/@theme/store/app-state';
+import { setLoadSpinner } from 'src/app/@theme/store/shared/shared.actions';
 import {DashboardService} from './services/dashboard.service';
 
 @Component({
@@ -20,11 +23,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   combinedObservable: Subscription;
 
-  constructor(private dashboardService: DashboardService) {
+  constructor(private store: Store<AppState>,
+              private dashboardService: DashboardService) {
   }
 
   ngOnInit() {
     this.allStatistics = true;
+    // this.store.dispatch(setLoadSpinner({status: false}));
   }
 
   ngOnDestroy() {

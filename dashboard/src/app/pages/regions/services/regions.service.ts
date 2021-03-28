@@ -5,6 +5,7 @@ import { TokenService } from 'src/app/@theme/admin-service/token/token.service';
 import { AdminConfig } from '../../AdminConfig';
 import { RegionDetailsResponse } from '../model/region-details.response';
 import { RegionsResponse } from '../model/region-response.model';
+import { Region } from '../model/region.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,8 @@ export class RegionsService {
   }
 
   // Create New Regions
-  createRegion(data): Observable<any> {
-    return this.httpClient.post<any>(
+  createRegion(data): Observable<Region> {
+    return this.httpClient.post<Region>(
       AdminConfig.regionAPI,
       JSON.stringify(data),
       this.tokenService.httpOptions()
@@ -40,8 +41,8 @@ export class RegionsService {
   }
 
   // Update Exists Region
-  updateRegion(regionId: number, data): Observable<any> {
-    return this.httpClient.put<any>(
+  updateRegion(regionId: number, data): Observable<Region> {
+    return this.httpClient.put<Region>(
       `${AdminConfig.regionAPI}/${regionId}`,
       JSON.stringify(data),
       this.tokenService.httpOptions()

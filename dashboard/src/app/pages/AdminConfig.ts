@@ -13,6 +13,11 @@ export class AdminConfig {
   public static regionsAPI                  = AdminConfig.sourceAPI + 'regions';
   public static regionAPI                   = AdminConfig.sourceAPI + 'region';
 
+  // Events
+  public static eventsAPI                  = AdminConfig.sourceAPI + 'events';
+  public static eventAPI                   = AdminConfig.sourceAPI + 'event';
+
+
   // Upload
   public static generalUploadAPI            = AdminConfig.sourceAPI + 'uploadfile';
 }

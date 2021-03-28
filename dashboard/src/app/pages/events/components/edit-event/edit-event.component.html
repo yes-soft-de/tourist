@@ -1,0 +1,96 @@
+<!-- general form elements -->
+<div class="container-fluid" *ngIf="eventDetails != null">
+    <div class="content-header">
+        <h1 class="text-center my-5">{{'update-event-page' | translate}}</h1>
+    </div>
+    <div class="card card-info">
+        <div class="card-header bg-sidebar-item-button text-white">
+            <h3 class="card-title mb-0">{{'update-event' | translate}}</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form [formGroup]="editEventForm" (ngSubmit)="onSubmit()">
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="col-form-label" for="inputNameSuccess">{{'name' | translate}}</label>
+                    <input class="form-control"
+                           [ngClass]="{'is-invalid': editEventForm.get('name').errors &&
+                           (editEventForm.get('name').touched || editEventForm.get('name').dirty)}"
+                           type="text"
+                           name="name"
+                           id="inputNameSuccess"
+                           formControlName="name"
+                           placeholder="{{'name-type-placeholder' | translate}}">
+                    <span class="invalid-feedback" *ngIf="editEventForm.get('name').errors?.required">{{'name-field-required' | translate}}</span>                      
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label" for="inputTypeSuccess">{{'type' | translate}}</label>                    
+                    <select class="form-control"
+                            name="type"
+                            formControlName="type">
+                        <option value="">{{'select-type-placeholder' | translate}}</option>
+                        <option value="event">Event</option>
+                        <option value="festival">Festival</option>
+                    </select>
+                    <span class="invalid-feedback" *ngIf="editEventForm.get('type').errors?.required">{{'type-field-required' | translate}}</span>                      
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label" for="inputSubTypeSuccess">{{'sub-type' | translate}}</label>                    
+                    <input class="form-control"
+                           [ngClass]="{'is-invalid': editEventForm.get('subType').errors &&
+                           (editEventForm.get('subType').touched || editEventForm.get('subType').dirty)}"
+                           type="text"
+                           id="inputSubTypeSuccess"
+                           name="subType"
+                           formControlName="subType"
+                           placeholder="{{'name-sub-type-placeholder' | translate}}">
+                    <span class="invalid-feedback" *ngIf="editEventForm.get('subType').errors?.required">{{'sub-type-field-required' | translate}}</span>                      
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label" for="inputTypeSuccess">{{'status' | translate}}</label>                    
+                    <select class="form-control"
+                            name="status"
+                            formControlName="status">
+                        <option value="">{{'select-status-placeholder' | translate}}</option>
+                        <option value="soon">Soon</option>
+                        <option value="tomorrow">Tomorrow</option>
+                    </select>
+                    <span class="invalid-feedback" *ngIf="editEventForm.get('status').errors?.required">{{'status-field-required' | translate}}</span>                      
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">{{'location' | translate}}</label>
+                    <input type="text"
+                           [ngClass]="{'is-invalid': editEventForm.get('location').errors &&
+                           (editEventForm.get('location').touched || editEventForm.get('location').dirty)}"
+                           name="location"
+                           formControlName="location"
+                           id="exampleInputlocation1"
+                           class="form-control"
+                           placeholder="{{'location-type-placeholder' | translate}}">
+                    <span class="invalid-feedback" *ngIf="editEventForm.get('location').errors?.required">{{'location-field-required' | translate}}</span>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputdescription1">{{'description' | translate}}</label>
+                    <textarea class="form-control" 
+                           [ngClass]="{'is-invalid': editEventForm.get('description').errors &&
+                           (editEventForm.get('description').touched || editEventForm.get('description').dirty)}"
+                           name="description"
+                           formControlName="description"
+                           id="exampleInputdescription1" 
+                           placeholder="{{'description-type-placeholder' | translate}}">
+                    </textarea>
+                    <span class="invalid-feedback" *ngIf="editEventForm.get('description').errors?.required">{{'descriptioon-field-required' | translate}}</span>
+                </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn bg-sidebar-item-button text-white" [disabled]="editEventForm.invalid || isSubmited">{{'update' | translate}}</button>
+            </div>
+        </form>
+    </div>
+    <!-- /.card -->
+</div>
+<div *ngIf="eventDetails == null">
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</div>

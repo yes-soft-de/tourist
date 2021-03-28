@@ -20,6 +20,11 @@ const routes: Routes = [
         loadChildren: () => import('./regions/regions.module').then(m => m.RegionsModule),
         canActivate: [AfterLoginService]
       },
+      {
+        path: 'events',
+        loadChildren: () => import('./events/events.module').then(m => m.EventsModule),
+        canActivate: [AfterLoginService]
+      },
       { path: '**', component: NotFoundComponent }
     ]
   }

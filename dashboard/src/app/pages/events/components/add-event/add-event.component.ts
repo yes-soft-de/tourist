@@ -1,22 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { ImageSnippet } from 'src/app/@theme/model/image-snippet';
-import { RegionsService } from '../../services/regions.service';
-import { addRegion, deleteRegion } from '../../store/region.actions';
-import { RegionState } from '../../store/region.reducer';
+import { EventState } from '../../store/event.reducer';
 
 @Component({
-  selector: 'app-add-region',
-  templateUrl: './add-region.component.html',
-  styleUrls: ['./add-region.component.scss']
+  selector: 'app-add-event',
+  templateUrl: './add-event.component.html',
+  styleUrls: ['./add-event.component.scss']
 })
-export class AddRegionComponent implements OnInit {
+export class AddEventComponent implements OnInit {
 
   isSubmited = false;
-  addRegionForm: FormGroup;
+  addEventForm: FormGroup;
   uploadButtonValue = 'Upload';
   coverUploadButtonValue = 'Upload';
   imageName = 'Select Image';
@@ -27,20 +24,18 @@ export class AddRegionComponent implements OnInit {
   submitButtonValue = 'Waiting Uploading Image';
   selectedFile: ImageSnippet;
 
-  constructor(private store: Store<RegionState>,
-              private toaster: ToastrService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute) {
+  constructor(private store: Store<EventState>,
+              private toaster: ToastrService) {
   }
 
   ngOnInit() {
     // Fetch Form Data
-    this.addRegionForm = new FormGroup({
+    this.addEventForm = new FormGroup({
       name: new FormControl(''),
       description: new FormControl(''),
       location: new FormControl(''),
-      path: new FormControl(''),
-      placeId: new FormControl(''),
+      status: new FormControl(''),
+      type: new FormControl(''),
     });
 
   }
@@ -80,14 +75,15 @@ export class AddRegionComponent implements OnInit {
 
   onSubmit() {
     this.isSubmited = true;
-    if (!this.addRegionForm.valid) {
+    if (!this.addEventForm.valid) {
       this.toaster.error('Error : Form Not Valid');
       this.isSubmited = false;
       return false;
     }
     // Fetch All Form Data On Json Type
-    const formObject = this.addRegionForm.getRawValue();
-    this.store.dispatch(addRegion({region: formObject}));    
+    const formObject = this.addEventForm.getRawValue();
+    console.log(formObject);
+    // this.store.dispatch(addRegion({region: formObject}));    
   }
 
 

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, Subscription } from 'rxjs';
+import { setLoadSpinner } from 'src/app/@theme/store/shared/shared.actions';
 import { Region } from '../../model/region.model';
 import * as regionsAction from '../../store/region.actions';
 import { RegionState } from '../../store/region.reducer';
@@ -12,7 +13,7 @@ import { getAllRegionsSelector } from '../../store/region.selector';
   templateUrl: './all-regions.component.html',
   styleUrls: ['./all-regions.component.scss']
 })
-export class AllRegionsComponent implements OnInit {
+export class AllRegionsComponent implements OnInit, OnDestroy {
   regions: Region[];
   regionsList: Region[] = [];
   name: any;
@@ -20,11 +21,10 @@ export class AllRegionsComponent implements OnInit {
   isDeleted: boolean;
   regionsSubscription: Subscription;
 
-  constructor(private store: Store<RegionState>,
-              private toaster: ToastrService) { }
+  constructor(private store: Store<RegionState>) { }
 
   ngOnInit(): void {
-    this.store.dispatch(regionsAction.loadRegions());
+    this.store.dispatch(regionsAction.loadRegions());    
     this.getAllRegions();
   }
 
@@ -43,17 +43,6 @@ export class AllRegionsComponent implements OnInit {
     };
   }
 
-  
-  // Handle Response Error
-  handleError(error) {
-    console.log(error);
-    if (error.error.error) {
-      this.toaster.error(error.error.error);
-    } else if (error.error.msg) {
-      this.toaster.error(error.error.msg);
-    }
-  }
-
   // Fetch The Page Number On Page Change
   pageChanged(event) {
     this.config.currentPage = event;
@@ -63,7 +52,7 @@ export class AllRegionsComponent implements OnInit {
     if (confirm('Are You Sure You Want To Delete This Region')) {
       this.isDeleted = true;
       this.store.dispatch(regionsAction.deleteRegion({id: regionId}));
-      this.toaster.success('Region Successfully Deleted');
+      // this.toaster.success('Region Successfully Deleted');
       setTimeout(() => { this.isDeleted = false; }, 1000);      
     } else {
       return false;
@@ -87,5 +76,11 @@ export class AllRegionsComponent implements OnInit {
       });
     }
   }
+
+  
+  ngOnDestroy() {
+    this.regionsSubscription.unsubscribe();
+  }
+
 
 }

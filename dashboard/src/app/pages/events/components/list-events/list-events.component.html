@@ -1,7 +1,7 @@
-<div *ngIf="regions.length != 0">
-    <!-- <div *ngIf="regionsList.length !== 0"> -->
+<div *ngIf="events.length != 0">
+    <!-- <div *ngIf="eventsList.length !== 0"> -->
       <!-- <div class="container-fluid"> -->
-        <h1 class="text-center details-title my-4">{{'manage-regions-page' | translate}}</h1>
+        <h1 class="text-center details-title my-4">{{'manage-events-page' | translate}}</h1>
           <div class="row">
               <div class="col-10 col-sm-8 col-md-6 col-xl-4">
                   <div class="form-group mb-4">
@@ -10,36 +10,40 @@
                         [(ngModel)]="name"
                         (keyup)="applyFilter()"
                         type="text"
-                        placeholder="{{'region-search-input' | translate}}"
-                        title="{{'region-search-input' | translate}}"
+                        placeholder="{{'event-search-input' | translate}}"
+                        title="{{'event-search-input' | translate}}"
                         class="form-control form-control-underlined border-primary search-input">
                   </div>
               </div>
               <!-- <div class="col-5 col-md-6 col-xl-8 align-self-center">
-                <a class="btn btn-primary btn-sm mb-2 float-right" routerLink="/regions/add">
+                <a class="btn btn-primary btn-sm mb-2 float-right" routerLink="/events/add">
                   <i class="fa fa-plus"></i>
-                  {{'new-region' | translate}}
+                  {{'new-event' | translate}}
                 </a>
               </div> -->
           </div>
         <div class="table-responsive text-center">
             <table class="table table-bordered main-table">
-                <tr class="bg-dark text-white">                    
-                    <td>{{'image' | translate}}</td>
-                    <td>{{'name' | translate}}</td>
-                    <td>{{'description' | translate}}</td>
-                    <td>{{'location' | translate}}</td>
-                    <td>{{'comment-number' | translate}}</td>
-                    <td>{{'rating-average' | translate}}</td>
+                <tr class="bg-dark text-white">
+                    <td>{{'name' | translate }}</td>
+                    <td>{{'comment-number' | translate }}</td>
+                    <td>{{'date' | translate }}</td>
+                    <td>{{'description' | translate }}</td>
+                    <td>{{'location' | translate }}</td>
+                    <td>{{'status' | translate }}</td>
+                    <td>{{'sub-type' | translate }}</td>
+                    <td>{{'type' | translate }}</td>
                     <td>{{'control' | translate}}</td>
                 </tr>
-                <tr *ngFor="let region of regionsList | paginate: config">
-                  <td><img src="{{region?.path[0].path}}" alt="{{region.name}} Image" class="img-thumbnail img-custom"></td>
-                  <td>{{region.name ? region.name : '-'}}</td>
-                  <td class="td-custom">{{region.description ? region.description : '-'}}</td>
-                  <td>{{region.location ? region.location : '-'}}</td>
-                  <td>{{region.commentNumber ? region.commentNumber : '-'}}</td>
-                  <td>{{region.ratingAverage ? region.ratingAverage : '-'}}</td>
+                <tr *ngFor="let event of eventsList | paginate: config">
+                    <td>{{event?.name ? event?.name : '-'}}</td>
+                    <td>{{event?.commentNumber ? event?.commentNumber : '-'}}</td>
+                    <td style="white-space: nowrap;">{{event?.date ? (event?.date.timestamp * 1000 | date: 'yyyy-MM-dd') : '-'}}</td>
+                    <td class="td-custom">{{event?.description ? event?.description : '-'}}</td>
+                    <td>{{event?.location ? event?.location : '-'}}</td>
+                    <td>{{event?.status ? event?.status : '-'}}</td>
+                    <td>{{event?.subType ? event?.subType : '-'}}</td>
+                    <td>{{event?.type ? event?.type : '-'}}</td>
                   <!-- <td>
                     <a (click)="suggest(car.id, (car.suggest ? false : true))"
                        class="text-primary mr-1 mb-1"
@@ -50,12 +54,12 @@
                     </a>
                   </td> -->
                   <td>
-                      <a routerLink="/regions/{{region.id}}" class="btn btn-success btn-sm mr-1 mb-1">
+                      <a routerLink="edit/{{event.id}}" class="btn btn-success btn-sm mr-1 mb-1">
                         {{'update' | translate}}
                     </a>
-                    <a (click)="delete(region.id)" class="btn btn-danger confirm btn-sm mr-1 mb-1 {{isDeleted ? 'disabled' : ''}}">
+                    <!-- <a (click)="delete(event.id)" class="btn btn-danger confirm btn-sm mr-1 mb-1 {{isDeleted ? 'disabled' : ''}}">
                         {{'delete' | translate}}
-                      </a>
+                      </a> -->
                   </td>
                 </tr>
             </table>
@@ -73,9 +77,9 @@
         </div>
       <!-- </div> -->
     <!-- </div> -->
-    <!-- <div *ngIf="regionsList.length === 0">
+    <!-- <div *ngIf="eventsList.length === 0">
         <div class="container">
-            <div class="alert alert-primary text-center mt-5">{{'region-not-found' | translate}}</div>
+            <div class="alert alert-primary text-center mt-5">{{'event-not-found' | translate}}</div>
             <a routerLink="/cars/add" class="btn btn-primary btn-sm mb-2 float-right">
                 <i class="fa fa-plus"></i>
                 {{'add-new-car' | translate}}
@@ -83,6 +87,6 @@
         </div>
     </div> -->
 </div>
-<div *ngIf="regions.length == 0">
+<div *ngIf="events.length == 0">
     <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
 </div>

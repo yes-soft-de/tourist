@@ -6,11 +6,11 @@
       <div class="alert alert-danger mb-0 my-2" [hidden]="!error">
         {{ error }}
       </div>
-      <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group row">
           <label for="inputEmail3" class="col-12 col-sm-2 col-md-3 col-lg-2 col-xl-2 col-form-label">Username</label>
           <div class="col-12 col-sm-10 col-md-9 col-lg-10 col-xl-10">
-            <input type="text" name="username" class="form-control" id="inputEmail3" placeholder="Username" [(ngModel)]="form.username" required>
+            <input type="text" name="username" formControlName="username" class="form-control" id="inputEmail3" placeholder="Username" required>
             <div class="alert alert-danger mb-0 mt-2" [hidden]="!errors['username']">
               {{ errors['username'] }}
             </div>
@@ -19,7 +19,7 @@
         <div class="form-group row">
           <label for="inputPassword3" class="col-12 col-sm-2 col-md-3 col-lg-2 col-xl-2 col-form-label">Password</label>
           <div class="col-12 col-sm-10 col-md-9 col-lg-10 col-xl-10">
-            <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password" [(ngModel)]="form.password" required>
+            <input type="password" name="password" formControlName="password" class="form-control" id="inputPassword3" placeholder="Password" required>
             <div class="alert alert-danger mb-0 mt-2" [hidden]="!errors['password']">
               {{ errors['password'] }}
             </div>

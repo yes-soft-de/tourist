@@ -24,7 +24,7 @@
                     <span class="invalid-feedback" *ngIf="addRegionForm.get('name').errors?.required">{{'name-field-required' | translate}}</span>                      
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Location</label>
+                    <label for="exampleInputEmail1">{{'location' | translate}}</label>
                     <input type="text"
                            [ngClass]="{'is-invalid': addRegionForm.get('location').errors &&
                            (addRegionForm.get('location').touched || addRegionForm.get('location').dirty)}"
@@ -32,9 +32,22 @@
                            formControlName="location"
                            id="exampleInputlocation1"
                            class="form-control"
-                           placeholder="Type The location">
+                           placeholder="{{'location-type-placeholder' | translate}}">
                     <span class="invalid-feedback" *ngIf="addRegionForm.get('location').errors?.required">location Field Is Required</span>
                     <span class="invalid-feedback" *ngIf="addRegionForm.get('location').errors?.location">Please enter a vaild location address</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="exampleInputplaceId1">PlaceId</label>
+                    <input type="text"
+                           [ngClass]="{'is-invalid': addRegionForm.get('placeId').errors &&
+                           (addRegionForm.get('placeId').touched || addRegionForm.get('placeId').dirty)}"
+                           name="placeId"
+                           formControlName="placeId"
+                           id="exampleInputplaceId1"
+                           class="form-control"
+                           placeholder="Type The Location Id">
+                    <span class="invalid-feedback" *ngIf="addRegionForm.get('placeId').errors?.required">Location Id Field Is Required</span>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputdescription1">{{'description' | translate}}</label>
@@ -53,7 +66,7 @@
             <!-- /.card-body -->
 
             <div class="card-footer">
-                <button type="submit" class="btn bg-sidebar-item-button text-white" [disabled]="addRegionForm.invalid || isSubmited">Submit</button>
+                <button type="submit" class="btn bg-sidebar-item-button text-white" [disabled]="addRegionForm.invalid || isSubmited">{{'create' | translate}}</button>
             </div>
         </form>
     </div>

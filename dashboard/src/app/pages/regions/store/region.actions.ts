@@ -22,7 +22,7 @@ export const loadRegion = createAction(
 
 export const loadRegionSuccess = createAction(
   '[Region/API] Load Region Success', 
-  props<{ id: number }>()
+  props<{ region: Region }>()
 );
 
 export const loadRegionFailure = createAction(
@@ -30,9 +30,33 @@ export const loadRegionFailure = createAction(
   props<{ error: string }>()
 );
 
+export const deleteRegion = createAction(
+  '[Region/API] Delete Region',
+  props<{ id: number }>()
+);
+
+export const deleteRegionSuccess = createAction(
+  '[Region/API] Delete Region Success'
+);
+
+
+export const deleteRegionFailure = createAction(
+  '[Region/API] Delete Region Failure',
+  props<{ error: string }>()
+);
+
 export const addRegion = createAction(
   '[Region/API] Add Region',
   props<{ region: Region }>()
+);
+
+export const addRegionSuccess = createAction(
+  '[Region/API] Add Region Success'
+);
+
+export const addRegionFailure = createAction(
+  '[Region/API] Add Region Failure',
+  props<{ error: string }>()
 );
 
 export const upsertRegion = createAction(
@@ -58,11 +82,6 @@ export const updateRegion = createAction(
 export const updateRegions = createAction(
   '[Region/API] Update Regions',
   props<{ regions: Update<Region>[] }>()
-);
-
-export const deleteRegion = createAction(
-  '[Region/API] Delete Region',
-  props<{ id: number }>()
 );
 
 export const deleteRegions = createAction(

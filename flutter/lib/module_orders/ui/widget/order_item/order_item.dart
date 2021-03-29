@@ -30,6 +30,9 @@ class OrderItemWidget extends StatelessWidget {
       } else if (orderModel.status == 'onGoing') {
         // There is a chat here
         widgetLayout.add(_getOnGoingOrder(orderModel, context));
+      } else if (orderModel.status == 'pendingPayment') {
+        // There is a chat here
+        widgetLayout.add(_getPendingPaymentOrder(orderModel, context));
       } else if (orderModel.status == 'finished') {
         widgetLayout.add(_getFinishedOrder(orderModel, context));
       }
@@ -163,7 +166,8 @@ class OrderItemWidget extends StatelessWidget {
                     Container(
                       height: 8,
                     ),
-                    Text(orderModel.city + ' | ' + orderModel.language),
+                    Text(
+                        '${orderModel.city ?? ''} | ${orderModel.language ?? ''}'),
                     Container(
                       height: 8,
                     ),
@@ -181,6 +185,80 @@ class OrderItemWidget extends StatelessWidget {
                   this.onAcceptOrder(orderModel);
                 },
                 child: Text(S.of(context).accept_order),
+              )
+            : Container()
+      ],
+    );
+  }
+
+  Widget _getPendingPaymentOrder(OrderModel orderModel, BuildContext context) {
+    return Flex(
+      direction: Axis.vertical,
+      children: [
+        Flex(
+          direction: Axis.horizontal,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Flexible(
+              flex: 1,
+              child: Container(
+                  height: 72,
+                  width: 72,
+                  alignment: Alignment.center,
+//                  decoration: BoxDecoration(color: Colors.greenAccent),
+                  child: Image.asset(
+                    'resources/images/logo.jpg',
+                    fit: BoxFit.contain,
+                  )),
+            ),
+            Flexible(
+              flex: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Flex(
+                  direction: Axis.vertical,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Order #${orderModel.id} Pending',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Container(
+                      height: 8,
+                    ),
+                    Text(
+                        '${orderModel.city ?? ''} | ${orderModel.language ?? ''}'),
+                    Container(
+                      height: 8,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            // Order date
+            Flexible(child: Text(orderModel.date.toString().substring(5, 10)))
+          ],
+        ),
+        canPay != null && canPay
+            ? Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  RaisedButton(
+                    onPressed: () {
+                      orderModel.status = 'onGoing';
+                      this.onAcceptOrder(orderModel);
+                    },
+                    child: Text(S.of(context).accept_order),
+                  ),
+                  RaisedButton(
+                    onPressed: () {
+                      orderModel.status = 'refused';
+                      this.onAcceptOrder(orderModel);
+                    },
+                    child: Text('Refuse Order'),
+                  ),
+                ],
               )
             : Container()
       ],
@@ -220,10 +298,6 @@ class OrderItemWidget extends StatelessWidget {
                       'On Going',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    Container(
-                      height: 8,
-                    ),
-                    Text(orderModel.city + ' | ' + orderModel.language),
                     Container(
                       height: 8,
                     ),

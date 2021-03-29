@@ -14,7 +14,8 @@ class OrderModule extends YesModule {
   @override
   Map<String, WidgetBuilder> getRoutes() {
     return {
-      OrdersRoutes.ordersList: (context) => _ordersListScreen
+      OrdersRoutes.ordersList: (context) => _ordersListScreen,
+      OrdersRoutes.guideOrders: (context) => _ordersListScreen,
     };
   }
 }

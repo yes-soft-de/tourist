@@ -18,9 +18,10 @@ class Urls {
   static final guideList = 'guides';
   static final guidesByRegion = 'guide';
   static final orderGuide = 'order';
+  static final touristAcceptedOrders = 'acceptedorders';
   static final orderLookup = 'orderlookup';
   static final acceptOrder = 'acceptorder';
-  static final updateOrder = 'order';
+  static final updateOrder = 'acceptorder';
   static final touristOrders = 'orders';
   static final guideOrders = 'guideorder';
   static final comment = 'comment';

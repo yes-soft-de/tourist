@@ -11,7 +11,7 @@ class OrdersManager {
   OrdersManager(this._ordersRepository);
 
   Future<OrderListResponse> getGuideOrders(String userId) {
-    return _ordersRepository.getOrders(userId);
+    return _ordersRepository.getGuideOrders(userId);
   }
 
   Future<OrderListResponse> getTouristOrders(String userId) {

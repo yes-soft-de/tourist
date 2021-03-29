@@ -10,8 +10,9 @@ class OrderListStateOrdersLoaded extends OrdersListState {
   final PageController _pageController = PageController();
   final List<OrderModel> ordersList;
   int activePosition = 0;
-  
-  OrderListStateOrdersLoaded(OrdersListScreen screen, this.ordersList) : super(screen) {
+
+  OrderListStateOrdersLoaded(OrdersListScreen screen, this.ordersList)
+      : super(screen) {
     print('User Orders: ${ordersList?.length}');
   }
 
@@ -47,7 +48,6 @@ class OrderListStateOrdersLoaded extends OrdersListState {
     );
   }
 
-
   Widget _getFilterBar(BuildContext context) {
     return Flex(
       direction: Axis.horizontal,
@@ -75,7 +75,7 @@ class OrderListStateOrdersLoaded extends OrdersListState {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color:
-                        activePosition == 0 ? Colors.white : Colors.black),
+                            activePosition == 0 ? Colors.white : Colors.black),
                   )),
             )),
         Flexible(
@@ -100,7 +100,7 @@ class OrderListStateOrdersLoaded extends OrdersListState {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color:
-                        activePosition == 1 ? Colors.white : Colors.black),
+                            activePosition == 1 ? Colors.white : Colors.black),
                   )),
             )),
         Flexible(
@@ -125,7 +125,7 @@ class OrderListStateOrdersLoaded extends OrdersListState {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color:
-                        activePosition == 2 ? Colors.white : Colors.black),
+                            activePosition == 2 ? Colors.white : Colors.black),
                   )),
             )),
         Flexible(
@@ -150,7 +150,7 @@ class OrderListStateOrdersLoaded extends OrdersListState {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color:
-                        activePosition == 3 ? Colors.white : Colors.black),
+                            activePosition == 3 ? Colors.white : Colors.black),
                   )),
             )),
       ],
@@ -180,8 +180,13 @@ class OrderListStateOrdersLoaded extends OrdersListState {
       children: ordersWidgetList.isNotEmpty
           ? ordersWidgetList
           : <Widget>[
-        Container(height: 300, child: Center(child: Text('Empty List')))
-      ],
+              Container(
+                height: 300,
+                child: Center(
+                  child: Text('Empty List'),
+                ),
+              )
+            ],
     );
   }
 
@@ -198,8 +203,7 @@ class OrderListStateOrdersLoaded extends OrdersListState {
     }
     List<Widget> ordersWidgetList = [];
     ordersList.forEach((element) {
-      print(element.status);
-      if (element.status == 'waitingPayment') {
+      if (element.status == 'pendingPayment') {
         ordersWidgetList.add(OrderItemWidget(
           element,
           canPay: true,
@@ -216,8 +220,8 @@ class OrderListStateOrdersLoaded extends OrdersListState {
       children: ordersWidgetList.isNotEmpty
           ? ordersWidgetList
           : <Widget>[
-        Container(height: 300, child: Center(child: Text('Empty List')))
-      ],
+              Container(height: 300, child: Center(child: Text('Empty List')))
+            ],
     );
   }
 
@@ -244,8 +248,8 @@ class OrderListStateOrdersLoaded extends OrdersListState {
       children: ordersWidgetList.isNotEmpty
           ? ordersWidgetList
           : <Widget>[
-        Container(height: 300, child: Center(child: Text('Empty List')))
-      ],
+              Container(height: 300, child: Center(child: Text('Empty List')))
+            ],
     );
   }
 
@@ -272,8 +276,8 @@ class OrderListStateOrdersLoaded extends OrdersListState {
       children: ordersWidgetList.isNotEmpty
           ? ordersWidgetList
           : <Widget>[
-        Container(height: 300, child: Center(child: Text('Empty List')))
-      ],
+              Container(height: 300, child: Center(child: Text('Empty List')))
+            ],
     );
   }
 }

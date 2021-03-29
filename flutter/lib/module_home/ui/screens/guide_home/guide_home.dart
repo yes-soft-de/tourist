@@ -6,9 +6,7 @@ import 'package:tourists/module_orders/ui/screen/guide_orders/guide_orders.dart'
 class GuideHomeScreen extends StatefulWidget {
   final GuideOrdersScreen _ordersListScreen;
 
-  GuideHomeScreen(
-    this._ordersListScreen,
-    );
+  GuideHomeScreen(this._ordersListScreen);
 
   @override
   State<StatefulWidget> createState() => GuideHomeScreenState(0);

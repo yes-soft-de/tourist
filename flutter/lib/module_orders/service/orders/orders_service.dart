@@ -23,47 +23,32 @@ class TouristOrdersService {
     if (uid == null) {
       return null;
     }
-
-    UserRole role = await _authService.userRole;
-
-    try {
-      if (role == UserRole.ROLE_GUIDE) {
-        var orders = await _ordersManager.getGuideOrders(uid);
-        return orders.data.map((e) => OrderModel(
-          id: e.id,
-          touristId: e.touristUserID,
-          guideUserID: e.guidUserID,
-          language: e.language,
-          services: e.services,
-          arriveDate: DateTime.fromMillisecondsSinceEpoch(1000 * e.arriveDate.timestamp),
-          leaveDate: DateTime.fromMillisecondsSinceEpoch(1000 * e.leaveDate.timestamp),
-          date: DateTime.fromMillisecondsSinceEpoch(1000 * e.date.timestamp),
-          city: e.city,
-          cost: e.cost,
-          roomId: e.roomID,
-          status: e.status,
-        )).toList();
-      } else {
-        var orders = await _ordersManager.getTouristOrders(uid);
-        return orders.data.map((e) => OrderModel(
-          id: e.id,
-          touristId: e.touristUserID,
-          guideUserID: e.guidUserID,
-          language: e.language,
-          services: e.services,
-          arriveDate: DateTime.fromMillisecondsSinceEpoch(1000 * e.arriveDate.timestamp),
-          leaveDate: DateTime.fromMillisecondsSinceEpoch(1000 * e.leaveDate.timestamp),
-          date: DateTime.fromMillisecondsSinceEpoch(1000 * e.date.timestamp),
-          city: e.city,
-          cost: e.cost,
-          roomId: e.roomID,
-          status: e.status,
-        )).toList();
-      }
-    } catch (e) {
-      print(e.toString());
-      return null;
-    }
+    var orders = await _ordersManager.getTouristOrders(uid);
+    return orders.data
+        .map((e) => OrderModel(
+      id: e.id,
+      touristId: e.touristUserID,
+      guideUserID: e.guidUserID,
+      language: e.language,
+      services: e.services,
+      city: e.city,
+      cost: e.cost,
+      roomId: e.roomID,
+      status: e.status,
+      arriveDate: e.arriveDate?.timestamp == null
+          ? DateTime.now()
+          : DateTime.fromMillisecondsSinceEpoch(
+          1000 * e.arriveDate?.timestamp),
+      leaveDate: e.leaveDate?.timestamp == null
+          ? DateTime.now()
+          : DateTime.fromMillisecondsSinceEpoch(
+          1000 * e.leaveDate?.timestamp),
+      date: e.arriveDate?.timestamp == null
+          ? DateTime.now()
+          : DateTime.fromMillisecondsSinceEpoch(
+          1000 * e.date?.timestamp),
+    ))
+        .toList();
   }
 
   Future<List<OrderModel>> getGeneralOrders() async {
@@ -72,28 +57,39 @@ class TouristOrdersService {
     OrderListResponse response = await _ordersManager.getGeneralOrderList(uid);
 
     if (response != null) {
-      return response.data.map((e) => OrderModel(
-        id: e.id,
-        touristId: e.touristUserID,
-        guideUserID: e.guidUserID,
-        language: e.language,
-        services: e.services,
-        arriveDate: DateTime.fromMillisecondsSinceEpoch(1000 * e.arriveDate.timestamp),
-        leaveDate: DateTime.fromMillisecondsSinceEpoch(1000 * e.leaveDate.timestamp),
-        date: DateTime.fromMillisecondsSinceEpoch(1000 * e.date.timestamp),
-        city: e.city,
-        cost: e.cost,
-        roomId: e.roomID,
-        status: e.status,
-      )).toList();
+      return response.data
+          .map((e) => OrderModel(
+                id: e.id,
+                touristId: e.touristUserID,
+                guideUserID: e.guidUserID,
+                language: e.language,
+                services: e.services,
+                arriveDate: e.arriveDate == null
+                    ? DateTime.now()
+                    : DateTime.fromMillisecondsSinceEpoch(
+                        1000 * e.arriveDate?.timestamp),
+                leaveDate: e.leaveDate == null
+                    ? DateTime.now()
+                    : DateTime.fromMillisecondsSinceEpoch(
+                        1000 * e.leaveDate?.timestamp),
+                date: e.date == null
+                    ? DateTime.now()
+                    : DateTime.fromMillisecondsSinceEpoch(
+                        1000 * e.date?.timestamp),
+                city: e.city,
+                cost: e.cost,
+                roomId: e.roomID,
+                status: e.status,
+              ))
+          .toList();
     }
     return null;
   }
 
-  Future<UpdateOrderResponse> payOrder(OrderModel orderModel) async {
-    orderModel.status = 'onGoing';
-
-    UpdateOrderResponse response = await _ordersManager.updateOrder(_toUpdateOrderRequest(orderModel));
+  Future<UpdateOrderResponse> updateOrder(OrderModel orderModel) async {
+    UpdateOrderResponse response = await _ordersManager.updateOrder(
+      _toUpdateOrderRequest(orderModel),
+    );
 
     if (response == null) {
       return null;
@@ -114,7 +110,6 @@ class TouristOrdersService {
         date: DateTime.now().toIso8601String(),
         arriveDate: orderModel.arriveDate.toIso8601String(),
         leaveDate: orderModel.leaveDate.toIso8601String(),
-        id: orderModel.id.toString()
-    );
+        id: orderModel.id.toString());
   }
 }

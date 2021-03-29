@@ -28,10 +28,8 @@ class OrdersListBloc {
     _orderSubject.add(OrderListStateLoading(screen));
     _ordersService.getOrders().then((value) {
       if (value == null) {
-        print('Error Loading Orders');
         _orderSubject.add(OrderListStateError(screen, 'Error Loading Data'));
       } else {
-        print('Got Orders: ${value.length}');
         _orderSubject.add(OrderListStateOrdersLoaded(screen, value));
       }
     });
@@ -40,7 +38,7 @@ class OrdersListBloc {
   void payOrder(OrdersListScreen screen, OrderModel orderModel) {
     _orderSubject.add(OrderListStateLoading(screen));
     orderModel.roomId = Uuid().v1();
-    _ordersService.payOrder(orderModel).then((value) {
+    _ordersService.updateOrder(orderModel).then((value) {
       if (value == null) {
         _orderSubject.add(OrderListStateError(screen, 'Error Loading Data'));
       } else {

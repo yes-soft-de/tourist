@@ -69,7 +69,7 @@ class Data {
         : null;
     leaveDate =
     json['leaveDate'] != null ? new Date.fromJson(json['leaveDate']) : null;
-    services = json['services'].cast<String>();
+    services = json['services']?.cast<String>();
     roomID = json['roomID'];
     status = json['status'];
     cost = json['cost'];

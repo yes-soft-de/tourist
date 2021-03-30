@@ -198,12 +198,15 @@ class GuidService
     public function guideById($id)
     {
         $item = $this->guidManager->guideById($id);
-        if($item) {
+        
+        if($item) 
+        {
             $item['imageURL'] = $item['image'];
             $item['image'] = $this->params.$item['image'];
             $item['baseURL'] = $this->params;
-            $item['myOrders'] = $this->orderService->getOrderByGuid($item['user']);
+            $item['myOrders'] = $this->orderService->getOrderByGuid($item['userID']);
         }
+        
         return $this->autoMapping->map('array', GuidByRegionResponse::class, $item);
     }
 }

@@ -169,7 +169,12 @@ class GuidEntityRepository extends ServiceEntityRepository
     public function guideById($id)
     {
         return $this->createQueryBuilder('guid')
-        ->select('guid.id', 'IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image', 'guid.places', 'guid.about', 'guid.phoneNumber', 'guid.service')
+            ->select('guid.id', 'IDENTITY(guid.user) as user', 'guid.name', 'guid.status', 'guid.language', 'guid.city', 'guid.path as image', 
+            'guid.places', 'guid.about', 'guid.phoneNumber', 'guid.service', 'userEntity.userID as userID')
+            
+            ->from('App:User', 'userEntity')
+            ->andWhere('userEntity.id = IDENTITY(guid.user)')
+        
             ->andWhere('guid.id =:id')
             ->setParameter('id', $id)
             ->getQuery()

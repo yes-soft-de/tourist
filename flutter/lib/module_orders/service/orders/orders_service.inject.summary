@@ -5,13 +5,13 @@
     "module": [],
     "injectable": [
       {
-        "name": "OrdersService",
+        "name": "TouristOrdersService",
         "constructor": {
           "name": "",
           "kind": "constructor",
           "injectedType": {
             "lookupKey": {
-              "root": "asset:tourists/lib/module_orders/service/orders/orders_service.dart#OrdersService",
+              "root": "asset:tourists/lib/module_orders/service/orders/orders_service.dart#TouristOrdersService",
               "qualifier": null
             },
             "isProvider": false
@@ -22,13 +22,6 @@
             {
               "lookupKey": {
                 "root": "asset:tourists/lib/module_orders/manager/orders/orders_manager.dart#OrdersManager",
-                "qualifier": null
-              },
-              "isProvider": false
-            },
-            {
-              "lookupKey": {
-                "root": "asset:tourists/lib/module_guide/service/guide_list/guide_list.dart#GuideListService",
                 "qualifier": null
               },
               "isProvider": false

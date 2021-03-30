@@ -177,10 +177,10 @@ class AppComponent$Injector implements _i1.AppComponent {
       _i17.SettingsScreen(_createSettingsStateManager());
   _i18.SettingsStateManager _createSettingsStateManager() =>
       _i18.SettingsStateManager(_createAuthService(), _createLanguageHelper());
-  _i19.HomeModule _createHomeModule() => _i19.HomeModule(
-      _createGuideHomeScreen(), _createHomeScreen(), _createAuthGuard());
-  _i20.GuideHomeScreen _createGuideHomeScreen() => _i20.GuideHomeScreen(
-      _createGuideOrdersScreen(), _createSharedPreferencesHelper());
+  _i19.HomeModule _createHomeModule() =>
+      _i19.HomeModule(_createGuideHomeScreen(), _createHomeScreen());
+  _i20.GuideHomeScreen _createGuideHomeScreen() =>
+      _i20.GuideHomeScreen(_createGuideOrdersScreen());
   _i21.GuideOrdersScreen _createGuideOrdersScreen() =>
       _i21.GuideOrdersScreen(_createGuideOrdersListBloc());
   _i22.GuideOrdersListBloc _createGuideOrdersListBloc() =>
@@ -232,8 +232,6 @@ class AppComponent$Injector implements _i1.AppComponent {
       _i41.EventRepository(_createHttpClient());
   _i42.LocationCarouselScreen _createLocationCarouselScreen() =>
       _i42.LocationCarouselScreen(_createLocationListBloc());
-  _i4.AuthGuard _createAuthGuard() =>
-      _singletonAuthGuard ??= _i4.AuthGuard(_createSharedPreferencesHelper());
   _i43.SplashModule _createSplashModule() =>
       _i43.SplashModule(_createSplashScreen());
   _i44.SplashScreen _createSplashScreen() =>
@@ -263,7 +261,6 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i54.LocationDetailsService _createLocationDetailsService() =>
       _i54.LocationDetailsService(
           _createLocationDetailsManager(),
-          _createGuidesManager(),
           _createRatingManager(),
           _createSharedPreferencesHelper(),
           _createGoogleLocationsService());
@@ -286,8 +283,9 @@ class AppComponent$Injector implements _i1.AppComponent {
       _i62.LocationPreferencesHelper();
   _i63.CommentManager _createCommentManager() =>
       _i63.CommentManager(_createCommentRepository());
-  _i64.CommentRepository _createCommentRepository() =>
-      _i64.CommentRepository(_createAuthService());
+  _i64.CommentRepository _createCommentRepository() => _i64.CommentRepository();
+  _i4.AuthGuard _createAuthGuard() =>
+      _singletonAuthGuard ??= _i4.AuthGuard(_createSharedPreferencesHelper());
   _i65.EventDetailsScreen _createEventDetailsScreen() =>
       _i65.EventDetailsScreen(_createEventDetailsBloc());
   _i66.EventDetailsBloc _createEventDetailsBloc() => _i66.EventDetailsBloc(
@@ -307,9 +305,9 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i74.OrdersListScreen _createOrdersListScreen() =>
       _i74.OrdersListScreen(_createOrdersListBloc());
   _i75.OrdersListBloc _createOrdersListBloc() =>
-      _i75.OrdersListBloc(_createOrdersService());
-  _i76.OrdersService _createOrdersService() => _i76.OrdersService(
-      _createOrdersManager(), _createGuideListService(), _createAuthService());
+      _i75.OrdersListBloc(_createTouristOrdersService());
+  _i76.TouristOrdersService _createTouristOrdersService() =>
+      _i76.TouristOrdersService(_createOrdersManager(), _createAuthService());
   _i77.OrdersManager _createOrdersManager() =>
       _i77.OrdersManager(_createOrdersRepository());
   _i78.OrdersRepository _createOrdersRepository() =>
@@ -317,7 +315,7 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i79.FormsModule _createFormsModule() =>
       _i79.FormsModule(_createRequestGuideScreen());
   _i80.RequestGuideScreen _createRequestGuideScreen() =>
-      _i80.RequestGuideScreen(_createRequestGuideBloc(), _createLogger());
+      _i80.RequestGuideScreen(_createRequestGuideBloc());
   _i81.RequestGuideBloc _createRequestGuideBloc() => _i81.RequestGuideBloc(
       _createRequestGuideService(), _createLocationDetailsService());
   _i82.RequestGuideService _createRequestGuideService() =>

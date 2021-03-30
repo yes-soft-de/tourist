@@ -28,13 +28,6 @@
             },
             {
               "lookupKey": {
-                "root": "asset:tourists/lib/module_guide/manager/guides_manager/guides_manager.dart#GuidesManager",
-                "qualifier": null
-              },
-              "isProvider": false
-            },
-            {
-              "lookupKey": {
                 "root": "asset:tourists/lib/module_comment/manager/rate/rate_manager.dart#RatingManager",
                 "qualifier": null
               },

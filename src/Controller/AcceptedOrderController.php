@@ -104,14 +104,14 @@ class AcceptedOrderController extends BaseController
     }
 
     /**
-     * @Route("/acceptedordersbystatus/{status}", name="getAllFinishedOrders", methods={"GET"})
+     * @Route("/acceptedordersbystatus/{status}", name="getAllAcceptedOrdersByStatus", methods={"GET"})
      * @return JsonResponse
      */
     public function getAcceptedOrdersByStatus($status)
     {
         $response = $this->orderService->getAcceptedOrdersByStatus($status);
 
-        return $this->response($response, self::UPDATE);
+        return $this->response($response, self::FETCH);
     }
 
 }

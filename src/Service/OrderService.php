@@ -16,6 +16,8 @@ use App\Request\TouristOrderCreateRequest;
 use App\Request\TouristOrderUpdateRequest;
 use App\Response\AcceptedOrderResponse;
 use App\Response\AcceptedOrderUpdateResponse;
+use App\Response\AllAcceptedOrdersGetResponse;
+use App\Response\AllUnacceptedOrdersGetResponse;
 use App\Response\OrderByGuidCityAndLanguageResponse;
 use App\Response\TouristOrderCreateResponse;
 
@@ -190,4 +192,18 @@ class OrderService
         $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
         return  vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
+
+    public function getAcceptedOrdersByStatus($status)
+    {
+        $ordersResponse = [];
+        $orders = $this->acceptedOrderManager->getAcceptedOrdersByStatus($status);
+
+        foreach ($orders as $order)
+        {
+            $ordersResponse[] = $this->autoMapping->map('array', AllAcceptedOrdersGetResponse::class, $order);
+        }
+
+        return $ordersResponse;
+    }
+
 }

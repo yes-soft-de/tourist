@@ -76,4 +76,28 @@ class AcceptedOrderEntityRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getAcceptedOrdersByStatus($status)
+    {
+        return $this->createQueryBuilder('acceptedOrder')
+            ->select('acceptedOrder.id', 'acceptedOrder.orderID', 'acceptedOrder.cost', 'acceptedOrder.date', 'acceptedOrder.status', 'acceptedOrder.guidUserID',
+                'acceptedOrder.touristUserID', 'touristOrder as order', 'userEntity1.name as guideName', 'userEntity2.name as touristName')
+
+            ->join('App:TouristOrderEntity', 'touristOrder')
+            ->andWhere('touristOrder.id = acceptedOrder.orderID')
+
+            ->join('App:User', 'userEntity1')
+            ->andWhere('userEntity1.userID = acceptedOrder.guidUserID')
+
+            ->join('App:User', 'userEntity2')
+            ->andWhere('userEntity2.userID = acceptedOrder.touristUserID')
+
+            ->andWhere('acceptedOrder.status = :status')
+            ->setParameter('status', $status)
+
+            ->orderBy('acceptedOrder.id')
+
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -84,4 +84,9 @@ class AcceptedOrderManager
             return $order;
         }
     }
+
+    public function getAcceptedOrdersByStatus($status)
+    {
+        return $this->acceptedOrderEntityRepository->getAcceptedOrdersByStatus($status);
+    }
 }

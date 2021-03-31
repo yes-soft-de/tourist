@@ -205,6 +205,12 @@ class GuidService
             $item['image'] = $this->params.$item['image'];
             $item['baseURL'] = $this->params;
             $item['myOrders'] = $this->orderService->getOrderByGuid($item['userID']);
+
+            //rating
+            $ratingGuidCalculate = $this->ratingManager->getGuidRatingByID($item['user']);
+          
+            $guidRate = $ratingGuidCalculate[1];
+            $item['rating'] = $guidRate;
         }
         
         return $this->autoMapping->map('array', GuidByRegionResponse::class, $item);

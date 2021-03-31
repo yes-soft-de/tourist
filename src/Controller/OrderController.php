@@ -128,4 +128,15 @@ class OrderController extends BaseController
 
         return $this->response($response,self::FETCH);
     }
+    
+    /**
+     * @Route("/allunacceptedorders", name="getAllUnacceptedOrders", methods="GET")
+     * @return JsonResponse
+     */
+    public function getAllUnacceptedOrders()
+    {
+        $response = $this->orderService->getUnacceptedOrders();
+
+        return $this->response($response, self::FETCH);
+    }
 }

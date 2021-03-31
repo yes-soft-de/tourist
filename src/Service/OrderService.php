@@ -205,5 +205,38 @@ class OrderService
 
         return $ordersResponse;
     }
+    
+    // Get all orders which hasn't been accepted by any guide
+    public function getUnacceptedOrders()
+    {
+        $ordersResponse = [];
+        $acceptedOrdersIDs = $this->acceptedOrderManager->getOrdersIDs();
+        $unacceptedOrders = $this->touristOrderManager->getUnacceptedOrders();
 
+        foreach ($unacceptedOrders as $order)
+        {
+            // We first have to check if the order is being accepted or not
+            // That's done via check if the order id is in the accepted orders IDs
+            if(!$this->searchMyArray($acceptedOrdersIDs, $order['id']))
+            {
+                $ordersResponse[] = $this->autoMapping->map('array', AllUnacceptedOrdersGetResponse::class, $order);
+            }
+        }
+
+        return $ordersResponse;
+    }
+
+    public function searchMyArray($target_array, $search)
+    {   
+        foreach ($target_array as $array_item) 
+        {
+            foreach($array_item as $item)
+            {
+                if ($item == $search) 
+                {
+                    return true;
+                }
+            }
+        }
+    }
 }

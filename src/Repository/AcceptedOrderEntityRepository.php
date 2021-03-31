@@ -100,4 +100,18 @@ class AcceptedOrderEntityRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getOrdersIDs()
+    {
+        return $this->createQueryBuilder('acceptedOrder')
+            ->select('acceptedOrder.orderID')
+
+            ->join('App:TouristOrderEntity', 'touristOrder')
+            ->andWhere('touristOrder.id = acceptedOrder.orderID')
+
+            ->orderBy('acceptedOrder.id')
+
+            ->getQuery()
+            ->getResult();
+    }
 }

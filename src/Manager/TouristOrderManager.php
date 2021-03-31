@@ -112,4 +112,10 @@ class TouristOrderManager
     {
         return $this->orderEntityRepository->getOrderByID($id);
     }
+
+    public function getUnacceptedOrders()
+    {
+        return $this->orderEntityRepository->getUnacceptedOrders();
+
+    }
 }

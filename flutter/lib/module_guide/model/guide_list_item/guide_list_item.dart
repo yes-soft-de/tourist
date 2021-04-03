@@ -28,9 +28,9 @@ class GuideListItemModel {
     userID = json['userID'];
     name = json['name'];
     status = json['status'];
-    city = json['city'].cast<String>();
-    language = json['language'].cast<String>();
-    rating = json['rating'];
+    city = json['city']?.cast<String>();
+    language = json['language']?.cast<String>();
+    rating = double.parse(json['rating'] ?? '5');
     image = json['image'];
     if (json['regions'] != null) {
       regions = <Regions>[];

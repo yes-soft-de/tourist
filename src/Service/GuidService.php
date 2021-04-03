@@ -118,6 +118,8 @@ class GuidService
 
         foreach ($guides as $guid)
         {
+            $guid['image'] = $this->params.$guid['image'];
+            
             //rating
             $ratingGuidCalculate = $this->ratingManager->getGuidRatingByID($guid['user']);
           

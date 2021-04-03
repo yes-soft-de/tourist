@@ -29,4 +29,18 @@ class RatingService
 
         return $response;
     }
+
+    public function deleteRegionRatings($id)
+    {
+        $response = [];
+
+        $ratings = $this->ratingManager->getRatingsByRegion($id);
+
+        foreach($ratings as $rating)
+        {
+            $response[] = $this->autoMapping->map(RatingsEntity::class, RatingCreateResponse::class, $rating);
+        }
+
+        return $response;
+    }
 }

@@ -51,4 +51,15 @@ class RatingController extends BaseController
 
         return $this->response($response, self::CREATE);
     }
+
+    /**
+     * @Route("/deleteratingsbyregion/{id}", name="deleteRegionRatings", methods={"DELETE"})
+     * @return JsonResponse
+     */
+    public function deleteRegionRatings($id)
+    {
+        $response = $this->ratingService->deleteRegionRatings($id);
+
+        return $this->response($response, self::DELETE);
+    }
 }

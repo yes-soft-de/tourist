@@ -66,4 +66,17 @@ class RatingManager
     {
         return $this->ratingsEntityRepository->ratingGuidCalculate($id);
     }
+
+    public function getRatingsByRegion($id)
+    {
+        $ratings = $this->ratingsEntityRepository->getRatingsByRegion($id);
+
+        foreach($ratings as $rating)
+        {
+            $this->entityManager->remove($rating);
+            $this->entityManager->flush();
+        }
+
+        return $ratings;
+    }
 }

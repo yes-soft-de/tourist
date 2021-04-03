@@ -43,4 +43,15 @@ class RatingsEntityRepository extends ServiceEntityRepository
       // dd($r);
         return $r;
     }
+
+    public function getRatingsByRegion($id)
+    {
+        return $this->createQueryBuilder('rate')
+            
+            ->andWhere('rate.region = :id')
+            ->setParameter('id', $id)
+
+            ->getQuery()
+            ->getResult();
+    }
 }

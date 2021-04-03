@@ -24,6 +24,10 @@ class TouristOrdersService {
       return null;
     }
     var orders = await _ordersManager.getTouristOrders(uid);
+    if (orders?.data == null) {
+      return [];
+    }
+
     return orders.data
         .map((e) => OrderModel(
       id: e.id,

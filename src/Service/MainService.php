@@ -25,9 +25,9 @@ class MainService
 
         $results = $this->mainManager->getStatistics();
 
-        $response[] = $this->autoMapping->map('array', GetStatisticsResponse::class, $results);
+        return $this->autoMapping->map('array', GetStatisticsResponse::class, $results);
 
-        return $response;
+        // return $response;
     }
 
 }

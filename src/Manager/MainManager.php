@@ -5,8 +5,6 @@ namespace App\Manager;
 
 
 use App\AutoMapping;
-use App\Request\GuidesFilterRequest;
-use Doctrine\ORM\EntityManagerInterface;
 
 class MainManager
 {

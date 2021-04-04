@@ -34,6 +34,8 @@ class MainManager
     public function getStatistics()
     {
         $response = [];
+
+        $response['id'] = 1;
         
         $response['regions'] = count($this->regionManager->getRegions());
 

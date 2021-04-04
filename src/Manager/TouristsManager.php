@@ -77,4 +77,9 @@ class TouristsManager
     {
         return $this->userRepository->getUser($userID);
     }
+
+    public function getTourists()
+    {
+        return $this->userRepository->getTourists();
+    }
 }

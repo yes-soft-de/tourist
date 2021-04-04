@@ -79,4 +79,9 @@ class RatingManager
 
         return $ratings;
     }
+
+    public function getRatingsCount()
+    {
+        return count($this->ratingsEntityRepository->findAll());
+    }
 }

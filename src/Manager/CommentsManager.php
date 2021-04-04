@@ -76,4 +76,9 @@ class CommentsManager
     {
         return $this->commentsEntityRepository->getEventCommentsByID($id);
     }
+
+    public function getAllCommentsNumber()
+    {
+        return count($this->commentsEntityRepository->findAll());
+    }
 }

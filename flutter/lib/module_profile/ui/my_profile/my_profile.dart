@@ -47,9 +47,17 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   @override
   Widget build(BuildContext context) {
     currentState ??= EditProfileStateLoading(widget);
-    return Scaffold(
-      appBar: AppBar(),
-      body: currentState.getUI(context),
+    return GestureDetector(
+      onTap: () {
+        var focus = FocusScope.of(context);
+        if (focus.canRequestFocus) {
+          focus.unfocus();
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(),
+        body: currentState.getUI(context),
+      ),
     );
   }
 

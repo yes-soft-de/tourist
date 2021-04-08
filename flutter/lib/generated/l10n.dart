@@ -1364,6 +1364,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Login as guide`
+  String get loginAsGuide {
+    return Intl.message(
+      'Login as guide',
+      name: 'loginAsGuide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login as tourist`
+  String get loginAsTourist {
+    return Intl.message(
+      'Login as tourist',
+      name: 'loginAsTourist',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

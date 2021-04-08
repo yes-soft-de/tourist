@@ -41,6 +41,7 @@ class HomeScreenState extends State<HomeScreen> {
   int position;
   bool moreActive = false;
   bool loggedIn;
+  int prePostion;
   final PageController _pageController = PageController();
 
   @override
@@ -106,6 +107,9 @@ class HomeScreenState extends State<HomeScreen> {
                 widget._eventListScreen
               ],
               onPageChanged: (pos) {
+                if (position != 3) {
+                  prePostion = position;
+                }
                 _changePosition(pos);
               },
             ),
@@ -116,6 +120,9 @@ class HomeScreenState extends State<HomeScreen> {
                     children: [
                       Expanded(
                         child: GestureDetector(
+                          onTap: () {
+                            _changePosition(prePostion);
+                          },
                           child: Container(
                             color: Colors.black54,
                           ),
@@ -138,6 +145,9 @@ class HomeScreenState extends State<HomeScreen> {
           selectedItemColor: Theme.of(context).primaryColor,
           selectedLabelStyle: TextStyle(color: Theme.of(context).primaryColor),
           onTap: (pos) {
+            if (position != 3) {
+              prePostion = position;
+            }
             _changePosition(pos);
             return true;
           },

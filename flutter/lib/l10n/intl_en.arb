@@ -132,5 +132,7 @@
   "pending": "Pending",
   "onGoing": "On Going",
   "finished": "Finished",
-  "proposal": "Proposal"
+  "proposal": "Proposal",
+  "loginAsGuide":"Login as guide",
+  "loginAsTourist":"Login as tourist"
 }

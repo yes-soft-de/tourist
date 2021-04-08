@@ -162,7 +162,7 @@ class _GuideProfileFormWidgetState extends State<GuideProfileFormWidget> {
             ),
             CheckboxListTile(
               title: Text(S.of(context).language_english),
-              value: profile.languages.contains('en'),
+              value: languages.contains('en'),
               onChanged: (bool value) {
                 if (value) {
                   languages.add('en');

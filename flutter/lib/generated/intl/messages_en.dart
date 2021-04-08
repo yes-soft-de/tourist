@@ -70,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "locationsYouWorkIn" : MessageLookupByLibrary.simpleMessage("Locations you work in"),
     "loggedIn" : MessageLookupByLibrary.simpleMessage("Logged in:"),
     "login" : MessageLookupByLibrary.simpleMessage("Login"),
+    "loginAsGuide" : MessageLookupByLibrary.simpleMessage("Login as guide"),
+    "loginAsTourist" : MessageLookupByLibrary.simpleMessage("Login as tourist"),
     "logout" : MessageLookupByLibrary.simpleMessage("Logout"),
     "makeAGeneralRequest" : MessageLookupByLibrary.simpleMessage("Make a General Request"),
     "male" : MessageLookupByLibrary.simpleMessage("Male"),

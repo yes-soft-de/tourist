@@ -24,7 +24,9 @@ class SettingsStateManager {
     } catch (e) {
       userRole = null;
     }
-
+    if (!await _authService.isLoggedIn) {
+      userRole = null;
+    }
     return SettingsModel(lang, userRole);
   }
 

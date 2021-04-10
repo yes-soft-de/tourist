@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_orders/bloc/orders_list_bloc/orders_list_bloc.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
 import 'package:tourists/module_orders/ui/state/order_list/order_list_state.dart';
@@ -41,7 +42,9 @@ class _OrderListScreenState extends State<OrdersListScreen> {
   Widget build(BuildContext context) {
     currentStatus ??= OrderListStateLoading(widget);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('${S.of(context).orders}'),
+      ),
       body: currentStatus.getUI(context) ?? Container(),
     );
   }

@@ -38,10 +38,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  int position;
+  int position = 0;
   bool moreActive = false;
   bool loggedIn;
-  int prePostion;
+  int prePostion = 0;
   final PageController _pageController = PageController();
 
   @override
@@ -170,7 +170,7 @@ class HomeScreenState extends State<HomeScreen> {
     return FutureBuilder(
       future: widget._authService.userRole,
       builder: (BuildContext context, AsyncSnapshot<UserRole> snapshot) {
-        if (snapshot.hasData) {
+        if (snapshot.hasData && loggedIn) {
           return Flex(
             direction: Axis.vertical,
             children: <Widget>[
@@ -281,6 +281,9 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   void _changePosition(position) {
+    if (position == null) {
+      position = 0;
+    }
     if (position < 3) _pageController.jumpToPage(position);
     setState(() {
       this.position = position;

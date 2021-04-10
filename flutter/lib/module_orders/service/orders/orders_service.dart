@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/module_auth/enums/user_type.dart';
 import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
@@ -23,6 +24,10 @@ class TouristOrdersService {
     if (uid == null) {
       return null;
     }
+    if (await _authService.getToken() == null ||
+        !await _authService.isLoggedIn) {
+      return null;
+    }
     var orders = await _ordersManager.getTouristOrders(uid);
     if (orders?.data == null) {
       return [];
@@ -30,28 +35,28 @@ class TouristOrdersService {
 
     return orders.data
         .map((e) => OrderModel(
-      id: e.id,
-      touristId: e.touristUserID,
-      guideUserID: e.guidUserID,
-      language: e.language,
-      services: e.services,
-      city: e.city,
-      cost: e.cost,
-      roomId: e.roomID,
-      status: e.status,
-      arriveDate: e.arriveDate?.timestamp == null
-          ? DateTime.now()
-          : DateTime.fromMillisecondsSinceEpoch(
-          1000 * e.arriveDate?.timestamp),
-      leaveDate: e.leaveDate?.timestamp == null
-          ? DateTime.now()
-          : DateTime.fromMillisecondsSinceEpoch(
-          1000 * e.leaveDate?.timestamp),
-      date: e.arriveDate?.timestamp == null
-          ? DateTime.now()
-          : DateTime.fromMillisecondsSinceEpoch(
-          1000 * e.date?.timestamp),
-    ))
+              id: e.id,
+              touristId: e.touristUserID,
+              guideUserID: e.guidUserID,
+              language: e.language,
+              services: e.services,
+              city: e.city,
+              cost: e.cost,
+              roomId: e.roomID,
+              status: e.status,
+              arriveDate: e.arriveDate?.timestamp == null
+                  ? DateTime.now()
+                  : DateTime.fromMillisecondsSinceEpoch(
+                      1000 * e.arriveDate?.timestamp),
+              leaveDate: e.leaveDate?.timestamp == null
+                  ? DateTime.now()
+                  : DateTime.fromMillisecondsSinceEpoch(
+                      1000 * e.leaveDate?.timestamp),
+              date: e.arriveDate?.timestamp == null
+                  ? DateTime.now()
+                  : DateTime.fromMillisecondsSinceEpoch(
+                      1000 * e.date?.timestamp),
+            ))
         .toList();
   }
 

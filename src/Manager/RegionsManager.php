@@ -101,9 +101,9 @@ class RegionsManager
     {
         // return $this->guideManager->getGuidByRegion($id);
     }
-    
-    // public function guidByPlaceId($placeID)
-    // {
-    //     return $this->guideManager->guidByPlaceId($placeID);
-    // }
+
+    public function getRegionsByName($name)
+    {
+        return $this->regionsEntityRepository->getRegionsByName($name);
+    }
 }

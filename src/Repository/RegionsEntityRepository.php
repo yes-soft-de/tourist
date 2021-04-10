@@ -70,4 +70,17 @@ class RegionsEntityRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function getRegionsByName($name)
+    {
+        return $this->createQueryBuilder('regions')
+
+            ->select('regions.id', 'regions.name', 'regions.description', 'regions.location', 'regions.placeId')
+
+            ->andWhere('regions.name LIKE :name')
+            ->setParameter('name', '%'.$name.'%')
+
+            ->getQuery()
+            ->getResult();
+    }
 }

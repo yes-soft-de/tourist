@@ -274,4 +274,38 @@ class RegionsService
         return $this->autoMapping->map(RegionsEntity::class,RegionCreateResponse::class, $item);
     }
 
+    public function getRegionsByName($name)
+    {
+        $response = [];
+
+        $results = $this->regionsManager->getRegionsByName($name);
+
+        foreach ($results as $result)
+        {
+            //count comment for each region
+            $commentsCount = $this->commentsCount($result['id']);
+            $result['commentNumber'] = $commentsCount[1];
+
+            //calculate rating
+            $ratingRegionCalculate = $this->ratingRegionCalculate($result['id']);
+            $result['ratingAverage'] = $ratingRegionCalculate[1];
+
+            //get images
+            $imagesResponse = [];
+            $images = $this->getRegionImages($result['id']);
+            foreach ($images as $image)
+            {
+                $image['pathURL'] = $image['path'];
+                $image['path'] = $this->params.$image['path'];
+                $image['baseURL'] = $this->params;
+                $imagesResponse[] = $this->autoMapping->map('array', ImagesPathsResponse::class, $image);
+            }
+            $result['path'] = $imagesResponse;
+
+            $response[] = $this->autoMapping->map('array', RegionsResponse::class, $result);
+        }
+
+        return $response;
+    }
+
 }

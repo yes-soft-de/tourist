@@ -104,4 +104,14 @@ class RegionsController extends BaseController
         return $this->response($response, self::UPDATE);
     }
 
+    /**
+     * @Route("/searchregion/{name}", name="getRegionsByName", methods="GET")
+     */
+    public function getRegionsByName($name)
+    {
+        $response = $this->regionsService->getRegionsByName($name);
+
+        return $this->response($response,self::FETCH);
+    }
+
 }

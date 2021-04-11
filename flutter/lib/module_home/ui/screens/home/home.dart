@@ -40,7 +40,7 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> {
   int position = 0;
   bool moreActive = false;
-  bool loggedIn = false;
+  bool loggedIn;
   int prePostion = 0;
   final PageController _pageController = PageController();
 
@@ -70,15 +70,22 @@ class HomeScreenState extends State<HomeScreen> {
                           leading: FutureBuilder(
                             future: widget._authService.userRole,
                             builder: (_, snapshot) {
-                              if (loggedIn && snapshot.hasData) {
-                                if (snapshot.data == UserRole.ROLE_GUIDE) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Image.asset(
-                                        'resources/images/logo.jpg'),
-                                  );
+                              if (loggedIn != null) {
+                                if (loggedIn && snapshot.hasData) {
+                                  if (snapshot.data == UserRole.ROLE_GUIDE) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Image.asset(
+                                          'resources/images/logo.jpg'),
+                                    );
+                                  } else {
+                                    return Icon(
+                                      Icons.account_circle,
+                                      color: Colors.green,
+                                    );
+                                  }
                                 } else {
-                                  return Icon(Icons.account_circle,color: Colors.green,);
+                                  return Container();
                                 }
                               } else {
                                 return Container();

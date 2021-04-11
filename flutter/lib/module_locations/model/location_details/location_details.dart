@@ -7,7 +7,7 @@ class LocationDetailsModel {
   String description;
   dynamic location;
   List<CommentModel> comments;
-  double ratingAverage;
+  String ratingAverage;
   List<RegionImage> regionImage;
   List<GuideListItemModel> guides;
   String placeId;

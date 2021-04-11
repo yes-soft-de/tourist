@@ -18,7 +18,6 @@ class CarouselCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('stars : $stars');
     return Container(
       height: 240,
       child: Stack(
@@ -99,12 +98,12 @@ class CarouselCard extends StatelessWidget {
         i + 1 <= stars
             ? Icon(
                 Icons.star,
-                color: Color(0x88ffffff),
+                color:Colors.white,
                 size: starSize,
               )
             : Icon(
                 Icons.star,
-                color: Colors.white,
+                color: Color(0x88ffffff),
                 size: starSize,
               ),
       );

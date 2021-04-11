@@ -70,7 +70,6 @@ class HomeScreenState extends State<HomeScreen> {
                           leading: FutureBuilder(
                             future: widget._authService.userRole,
                             builder: (_, snapshot) {
-
                               if (loggedIn && snapshot.hasData) {
                                 if (snapshot.data == UserRole.ROLE_GUIDE) {
                                   return Padding(
@@ -79,7 +78,7 @@ class HomeScreenState extends State<HomeScreen> {
                                         'resources/images/logo.jpg'),
                                   );
                                 } else {
-                                  return Icon(Icons.account_circle);
+                                  return Icon(Icons.account_circle,color: Colors.green,);
                                 }
                               } else {
                                 return Container();
@@ -189,6 +188,7 @@ class HomeScreenState extends State<HomeScreen> {
     return FutureBuilder(
       future: widget._authService.userRole,
       builder: (BuildContext context, AsyncSnapshot<UserRole> snapshot) {
+        print(loggedIn);
         if (snapshot.hasData && loggedIn) {
           return Flex(
             direction: Axis.vertical,

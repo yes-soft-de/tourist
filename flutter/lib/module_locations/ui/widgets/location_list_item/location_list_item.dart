@@ -100,7 +100,7 @@ class LocationListItemWidget extends StatelessWidget {
   List<Widget> getStarsBar(int rate) {
     List<Widget> starsBar = [];
     for (int i = 0; i < 5; i++) {
-      i <= rate
+      i+1 <= rate
           ? starsBar.add(Icon(
               Icons.star,
               size: 16,

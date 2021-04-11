@@ -18,6 +18,7 @@ class CarouselCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('stars : $stars');
     return Container(
       height: 240,
       child: Stack(
@@ -25,9 +26,9 @@ class CarouselCard extends StatelessWidget {
           Container(
               width: double.infinity,
               child: Image.network(
-                  '$image'.contains('http')
-                      ? image.substring(image.lastIndexOf('http'))
-                      : image,
+                '$image'.contains('http')
+                    ? image.substring(image.lastIndexOf('http'))
+                    : image,
                 fit: BoxFit.fill,
                 errorBuilder: (context, object, stack) {
                   return Image.asset('resources/images/logo.jpg');
@@ -95,7 +96,7 @@ class CarouselCard extends StatelessWidget {
     List<Widget> starsRow = [];
     for (int i = 0; i < 5; i++) {
       starsRow.add(
-        i >= stars
+        i + 1 <= stars
             ? Icon(
                 Icons.star,
                 color: Color(0x88ffffff),

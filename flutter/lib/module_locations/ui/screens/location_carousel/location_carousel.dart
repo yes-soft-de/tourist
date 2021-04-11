@@ -55,22 +55,22 @@ class _LocationCarouselScreenState extends State<LocationCarouselScreen> {
     List<Widget> locationWidgetList = [];
 
     locationList.forEach((location) {
-      locationWidgetList.add(
-        GestureDetector(
-          onTap: () {
-            Navigator.of(context).pushNamed(
-              LocationRoutes.locationDetails,
-              arguments: location.id.toString(),
-            );
-          },
+      print(location.ratingAverage);
+      locationWidgetList.add(GestureDetector(
+        onTap: () {
+          Navigator.of(context).pushNamed(
+            LocationRoutes.locationDetails,
+            arguments: location.id.toString(),
+          );
+        },
         child: CarouselCard(
           title: location.name,
           description: location.description,
           image: location.path[0].path,
-          commentsNumber:  location.commentNumber != null
+          commentsNumber: location.commentNumber != null
               ? int.parse(location.commentNumber)
               : 0,
-          stars: location.ratingAverage ?? 5,
+          stars: double.parse(location.ratingAverage).floor() ?? 0,
         ),
       ));
     });
@@ -106,7 +106,7 @@ class _LocationCarouselScreenState extends State<LocationCarouselScreen> {
 
   @override
   void dispose() {
-    if (_stateSubscription != null){
+    if (_stateSubscription != null) {
       _stateSubscription.cancel();
     }
     super.dispose();

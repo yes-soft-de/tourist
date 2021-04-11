@@ -40,7 +40,7 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> {
   int position = 0;
   bool moreActive = false;
-  bool loggedIn;
+  bool loggedIn = false;
   int prePostion = 0;
   final PageController _pageController = PageController();
 
@@ -70,6 +70,7 @@ class HomeScreenState extends State<HomeScreen> {
                           leading: FutureBuilder(
                             future: widget._authService.userRole,
                             builder: (_, snapshot) {
+
                               if (loggedIn && snapshot.hasData) {
                                 if (snapshot.data == UserRole.ROLE_GUIDE) {
                                   return Padding(

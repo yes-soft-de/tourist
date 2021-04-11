@@ -4,7 +4,7 @@ class LocationListItem {
   String description;
   dynamic location;
   String commentNumber;
-  int ratingAverage;
+  String ratingAverage;
   List<Path> path;
 
   LocationListItem(
@@ -22,7 +22,7 @@ class LocationListItem {
     description = json['description'];
    location = json['location'];
     commentNumber = json['commentNumber'];
-    ratingAverage = int.tryParse(json['ratingAverage'] ?? '0');
+    ratingAverage = json['ratingAverage']??'0';
     if (json['path'] != null) {
       path = <Path>[];
       json['path'].forEach((v) {

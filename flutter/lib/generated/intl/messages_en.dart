@@ -142,6 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "showLess" : MessageLookupByLibrary.simpleMessage("Show Less"),
     "show_more" : MessageLookupByLibrary.simpleMessage("SHOW MORE"),
     "signing_out" : MessageLookupByLibrary.simpleMessage("Signing out"),
+    "soyah" : MessageLookupByLibrary.simpleMessage("Soyah"),
     "stayingFor" : MessageLookupByLibrary.simpleMessage("Staying for"),
     "stying_for" : MessageLookupByLibrary.simpleMessage("Stying For"),
     "success" : MessageLookupByLibrary.simpleMessage("Success"),

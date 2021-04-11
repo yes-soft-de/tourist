@@ -67,7 +67,25 @@ class HomeScreenState extends State<HomeScreen> {
                         AppBar(
                           backgroundColor: Colors.white,
                           centerTitle: true,
-                          title: Text('سياح'),
+                          leading: FutureBuilder(
+                            future: widget._authService.userRole,
+                            builder: (_, snapshot) {
+                              if (loggedIn && snapshot.hasData) {
+                                if (snapshot.data == UserRole.ROLE_GUIDE) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Image.asset(
+                                        'resources/images/logo.jpg'),
+                                  );
+                                } else {
+                                  return Icon(Icons.account_circle);
+                                }
+                              } else {
+                                return Container();
+                              }
+                            },
+                          ),
+                          title: Text('${S.of(context).soyah}'),
                           actions: [
                             IconButton(
                               icon: Icon(Icons.search),

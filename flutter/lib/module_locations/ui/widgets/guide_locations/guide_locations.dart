@@ -5,7 +5,7 @@ import 'package:tourists/module_locations/ui/widgets/guide_location_card/guide_l
 class GuideLocations extends StatelessWidget {
   final List<LocationListItem> locations;
   final List<String> selectedLocations;
-  final Function(int) onLocationSelected;
+  final Function(String) onLocationSelected;
 
   GuideLocations({
     this.locations,

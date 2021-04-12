@@ -68,7 +68,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
           child: Padding(
             padding: EdgeInsets.all(8),
             child: LocationListItemWidget(
-              imageLink:location.path.length!=0?location.path[0].path:'',
+              imageLink:location.path.length!=0?location.path[0].path:'https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg',
               title: location.name,
               description: location.description,
               rate: double.parse(location.ratingAverage).floor() ?? 0,

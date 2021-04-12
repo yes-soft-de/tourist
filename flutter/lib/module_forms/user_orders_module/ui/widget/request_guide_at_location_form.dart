@@ -54,15 +54,17 @@ class _RequestGuideAtLocationFormState
                 child: Column(
                   children: [
                     Expanded(
-                      child: Image.network(
-                        '${location.regionImage[0].path}'.contains('http')
-                            ? '${location.regionImage[0].path.substring(location.regionImage[0].path.lastIndexOf('http'))}'
-                            : '${location.regionImage[0].path}',
-                        errorBuilder: (c, o, s) {
-                          print(guide.image);
-                          return Image.asset('resources/images/logo.jpg');
-                        },
-                      ),
+                      child: location != null
+                          ? Image.network(
+                              '${location.regionImage[0].path}'.contains('http')
+                                  ? '${location.regionImage[0].path.substring(location.regionImage[0].path.lastIndexOf('http'))}'
+                                  : '${location.regionImage[0].path}',
+                              errorBuilder: (c, o, s) {
+                                print(guide.image);
+                                return Image.asset('resources/images/logo.jpg');
+                              },
+                            )
+                          : Image.asset('resources/images/logo.jpg'),
                     ),
                     Text(location.name),
                   ],

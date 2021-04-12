@@ -1,5 +1,5 @@
 class LocationListItem {
-  int id;
+  String id;
   String name;
   String description;
   dynamic location;
@@ -17,7 +17,7 @@ class LocationListItem {
       this.path});
 
   LocationListItem.fromJson(Map<String, dynamic> json) {
-    id = json['id']??2;
+    id =json['placeId'] ?? '2';
     name = json['name'];
     description = json['description'];
    location = json['location'];
@@ -48,7 +48,7 @@ class LocationListItem {
 
 class Path {
   String path;
-  
+
   Path({this.path});
 
   Path.fromJson(Map<String, dynamic> json) {

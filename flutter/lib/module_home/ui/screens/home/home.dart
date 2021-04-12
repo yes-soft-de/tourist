@@ -81,7 +81,7 @@ class HomeScreenState extends State<HomeScreen> {
                                   } else {
                                     return Icon(
                                       Icons.account_circle,
-                                      color: Colors.green,
+                                      color: Color(0xff05F29B),
                                     );
                                   }
                                 } else {

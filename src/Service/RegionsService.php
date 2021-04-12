@@ -190,6 +190,18 @@ class RegionsService
 
             foreach ($comments as $comment)
             {
+                // Check if the user who post the comment is Guide,
+                // then we have to get his name from the Guide table
+                if($comment['roles'][0] == "guid")
+                {
+                    $guideResult = $this->guidService->getguideByUserID($comment['userID']);
+                    
+                    if($guideResult)
+                    {
+                        $comment['userName'] = $guideResult->name;
+                    }
+                }
+
                 $commentsResponse[] = $this->autoMapping->map('array', GetCommentsByIdResponse::class, $comment);
             }
         }

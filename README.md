@@ -58,7 +58,7 @@ methods={"GET"}
 ```
 #### get Region By PlaceId
 ```
-//regionbyplaceid/{placeId}
+/regionbyplaceid/{placeId}
 methods={"GET"}
 ```
 #### Create image (region or event)

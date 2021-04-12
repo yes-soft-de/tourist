@@ -1,3 +1,5 @@
+import 'package:tourists/module_orders/response/accepted_order_response.dart';
+
 class OrderListResponse {
   String statusCode;
   String msg;
@@ -37,25 +39,27 @@ class Data {
   Date arriveDate;
   Date leaveDate;
   List<String> services;
-  Null roomID;
+  String roomID;
   String status;
   String cost;
   String uuid;
-
+  Order order;
   Data(
       {this.id,
-        this.date,
-        this.touristUserID,
-        this.guidUserID,
-        this.city,
-        this.language,
-        this.arriveDate,
-        this.leaveDate,
-        this.services,
-        this.roomID,
-        this.status,
-        this.cost,
-        this.uuid});
+      this.date,
+      this.touristUserID,
+      this.guidUserID,
+      this.city,
+      this.language,
+      this.arriveDate,
+      this.leaveDate,
+      this.services,
+      this.roomID,
+      this.status,
+      this.cost,
+      this.uuid,
+      this.order
+      });
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -68,12 +72,14 @@ class Data {
         ? new Date.fromJson(json['arriveDate'])
         : null;
     leaveDate =
-    json['leaveDate'] != null ? new Date.fromJson(json['leaveDate']) : null;
+        json['leaveDate'] != null ? new Date.fromJson(json['leaveDate']) : null;
     services = json['services']?.cast<String>();
     roomID = json['roomID'];
     status = json['status'];
     cost = json['cost'];
     uuid = json['uuid'];
+    order = Order.fromJson(json['order']);
+
   }
 
   Map<String, dynamic> toJson() {

@@ -199,7 +199,7 @@ class Order {
   Date leaveDate;
   List<String> services;
   String cost;
-  Null roomID;
+  String roomID;
   String status;
 
   Order(

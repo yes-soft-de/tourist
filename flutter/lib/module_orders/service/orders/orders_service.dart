@@ -38,11 +38,11 @@ class TouristOrdersService {
               id: e.id,
               touristId: e.touristUserID,
               guideUserID: e.guidUserID,
-              language: e.language,
+              language: e.language??e.order.language,
               services: e.services,
-              city: e.city,
+              city: e.city??e.order.city,
               cost: e.cost,
-              roomId: e.roomID,
+              roomId: e.roomID??e.uuid,
               status: e.status,
               arriveDate: e.arriveDate?.timestamp == null
                   ? DateTime.now()
@@ -71,7 +71,7 @@ class TouristOrdersService {
                 id: e.id,
                 touristId: e.touristUserID,
                 guideUserID: e.guidUserID,
-                language: e.language,
+                language: e.language??e.order.language,
                 services: e.services,
                 arriveDate: e.arriveDate == null
                     ? DateTime.now()
@@ -85,9 +85,9 @@ class TouristOrdersService {
                     ? DateTime.now()
                     : DateTime.fromMillisecondsSinceEpoch(
                         1000 * e.date?.timestamp),
-                city: e.city,
+                city: e.city??e.order.city,
                 cost: e.cost,
-                roomId: e.roomID,
+                roomId: e.roomID??e.uuid,
                 status: e.status,
               ))
           .toList();

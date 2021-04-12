@@ -39,6 +39,9 @@ class OrderItemWidget extends StatelessWidget {
     } else {
       widgetLayout.add(_getAvailableOrder(orderModel, context));
     }
+    print('+++++++++++++++++++++++++++++++++++++++++++++++++++++');
+    print(widgetLayout);
+    print('+++++++++++++++++++++++++++++++++++++++++++++++++++++');
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -228,7 +231,7 @@ class OrderItemWidget extends StatelessWidget {
                       height: 8,
                     ),
                     Text(
-                        '${orderModel.city ?? ''} | ${orderModel.language ?? ''}'),
+                        'city ${orderModel.city ?? ''} | lang ${orderModel.language ?? ''} | cost ${orderModel.cost??''}'),
                     Container(
                       height: 8,
                     ),
@@ -242,7 +245,7 @@ class OrderItemWidget extends StatelessWidget {
         ),
         canPay != null && canPay
             ? Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   RaisedButton(
                     onPressed: () {

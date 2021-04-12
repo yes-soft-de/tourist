@@ -55,7 +55,6 @@ class _LocationCarouselScreenState extends State<LocationCarouselScreen> {
     List<Widget> locationWidgetList = [];
 
     locationList.forEach((location) {
-      print(location.ratingAverage);
       locationWidgetList.add(GestureDetector(
         onTap: () {
           Navigator.of(context).pushNamed(
@@ -66,7 +65,7 @@ class _LocationCarouselScreenState extends State<LocationCarouselScreen> {
         child: CarouselCard(
           title: location.name,
           description: location.description,
-          image: location.path[0].path,
+          image: location.path.length!=0?location.path[0].path:'',
           commentsNumber: location.commentNumber != null
               ? int.parse(location.commentNumber)
               : 0,

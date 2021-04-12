@@ -180,4 +180,5 @@ class GuidManager
     {
         return $this->guidEntityRepository->getGuidCityAndLanguage($guideID);
     }
+    
 }

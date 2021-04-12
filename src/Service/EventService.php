@@ -18,19 +18,21 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class EventService
 {
-
     private $autoMapping;
     private $eventManager;
     private $imageManager;
     private $commentsManager;
     private $params;
+    private $guideService;
 
-    public function __construct(AutoMapping $autoMapping, EventManager $eventManager, ImageManager $imageManager, CommentsManager $commentsManager, ParameterBagInterface $params)
+    public function __construct(AutoMapping $autoMapping, EventManager $eventManager, ImageManager $imageManager, CommentsManager $commentsManager, 
+    ParameterBagInterface $params, GuidService $guideService)
     {
         $this->autoMapping = $autoMapping;
         $this->eventManager = $eventManager;
         $this->imageManager = $imageManager;
         $this->commentsManager = $commentsManager;
+        $this->guideService = $guideService;
         $this->params = $params->get('upload_base_url') . '/';
     }
 
@@ -92,6 +94,18 @@ class EventService
         $response->setCommentsNumber(count($comments));
         foreach ($comments as $comment)
         {
+            // Check if the user who post the comment is Guide,
+            // then we have to get his name from the Guide table
+            if($comment['roles'][0] == "guid")
+            {
+                $guideResult = $this->guideService->getguideByUserID($comment['userID']);
+                
+                if($guideResult)
+                {
+                    $comment['userName'] = $guideResult->name;
+                }
+            }
+
             $commentsResponse[] = $this->autoMapping->map('array', GetCommentsByIdResponse::class, $comment);
         }
         if ($commentsResponse) 

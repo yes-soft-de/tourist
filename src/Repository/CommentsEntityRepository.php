@@ -22,7 +22,7 @@ class CommentsEntityRepository extends ServiceEntityRepository
     public function getCommentsByID($id)
     {
         $r = $this->createQueryBuilder('comments')
-            ->select('comments.id', 'comments.comment', 'comments.date', 'user.name as userName', 'user.roles')
+            ->select('comments.id', 'comments.comment', 'comments.date', 'user.name as userName', 'user.roles', 'user.userID')
             //->from('App:User', 'user')
             ->join('App:User', 'user')
             //'IDENTITY(comments.region)'
@@ -66,7 +66,7 @@ class CommentsEntityRepository extends ServiceEntityRepository
     public function getEventCommentsByID($id)
     {
         $r = $this->createQueryBuilder('comments')
-            ->select('comments.id', 'comments.comment', 'comments.date', 'user_entity.name as userName', 'user_entity.roles')
+            ->select('comments.id', 'comments.comment', 'comments.date', 'user_entity.name as userName', 'user_entity.roles', 'user_entity.userID')
             //->from('App:User', 'user')
             ->join('App:User', 'user_entity')
             ->andWhere('user_entity.id = comments.user')

@@ -72,6 +72,11 @@ methods={"DELETE"}
 /image
 methods={"POST"}
 ```
+#### Delete all images of a region
+```
+/images/{regionID}
+methods={"DELETE"}
+```
 #### Create comment
 ```
 /comment

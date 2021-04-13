@@ -129,4 +129,11 @@ class EventService
         return $this->autoMapping->map(EventEntity::class, EventCreateResponse::class, $item);
     }
 
+    public function delete($id)
+    {
+        $eventResult = $this->eventManager->delete($id);
+
+        return $this->autoMapping->map(EventEntity::class, EventsResponse::class, $eventResult);
+    }
+
 }

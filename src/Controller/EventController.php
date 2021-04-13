@@ -77,7 +77,6 @@ class EventController extends BaseController
 
         return $this->response($response,self::FETCH);
     }
-
     
     /**
      * @IsGranted("ROLE_ADMIN", message="Access denied")
@@ -101,5 +100,15 @@ class EventController extends BaseController
         $response = $this->eventService->eventUpdate($request);
 
         return $this->response($response, self::UPDATE);
+    }
+
+    /**
+     * @Route("/event/{id}", name="deleteEventById", methods="DELETE")
+     */
+    public function deleteEvent($id)
+    {
+        $response = $this->eventService->delete($id);
+
+        return $this->response($response, self::DELETE);
     }
 }

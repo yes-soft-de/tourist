@@ -61,4 +61,17 @@ class EventManager
             return $item;
         }
     }
+
+    public function delete($id)
+    {
+        $event = $this->eventEntityRepository->find($id);
+
+        if($event)
+        {
+            $this->entityManager->remove($event);
+            $this->entityManager->flush();
+        }
+
+        return $event;
+    }
 }

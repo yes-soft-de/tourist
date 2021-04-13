@@ -21,17 +21,19 @@ class RegionsManager
     private $regionsEntityRepository;
     private $imagesEntityRepository;
     private $imageManager;
-    // private $guideManager;
+    private $commentManager;
+    private $ratingManager;
 
     public function __construct(AutoMapping $autoMapping, EntityManagerInterface $entityManager, RegionsEntityRepository $regionsEntityRepository,  
-    ImagesEntityRepository $imagesEntityRepository, ImageManager $imageManager)
+    ImagesEntityRepository $imagesEntityRepository, ImageManager $imageManager, CommentsManager $commentManager, RatingManager $ratingManager)
     {
         $this->autoMapping = $autoMapping;
         $this->entityManager = $entityManager;
         $this->regionsEntityRepository = $regionsEntityRepository;
         $this->imagesEntityRepository = $imagesEntityRepository;
         $this->imageManager = $imageManager;
-        // $this->guideManager = $guideManager;
+        $this->commentManager = $commentManager;
+        $this->ratingManager = $ratingManager;
     }
 
     public function regionCreate(RegionCreateRequest $request)
@@ -113,7 +115,7 @@ class RegionsManager
 
         if($region)
         {
-            //now, we have to delete the related image
+            //first, we have to delete the related image
 
             $image = $this->imageManager->getRegionImage($region->getId());
 
@@ -122,6 +124,25 @@ class RegionsManager
                 $this->entityManager->remove($image);
                 $this->entityManager->flush();
             }
+
+            //also, we have to delete the related comments
+
+            $comments = $this->commentManager->getCommentsByRegion($region->getId());
+
+            if(isset($comments))
+            {
+                foreach($comments as $comment)
+                {
+                    $this->entityManager->remove($comment);
+                    $this->entityManager->flush();
+                }
+            }
+
+            //third, we have to delete the related ratings
+
+            $this->ratingManager->getRatingsByRegion($region->getId());
+
+            //now, we delete the region
 
             $this->entityManager->remove($region);
             $this->entityManager->flush();

@@ -81,4 +81,9 @@ class CommentsManager
     {
         return count($this->commentsEntityRepository->findAll());
     }
+
+    public function getCommentsByRegion($regionID)
+    {
+        return $this->commentsEntityRepository->getCommentsByRegion($regionID);
+    }
 }

@@ -80,4 +80,15 @@ class CommentsEntityRepository extends ServiceEntityRepository
 
         return $r;
     }
+
+    public function getCommentsByRegion($regionID)
+    {
+        return $this->createQueryBuilder('comments')
+
+            ->andWhere('comments.region = :id')
+            ->setParameter('id', $regionID)
+
+            ->getQuery()
+            ->getResult();
+    }
 }

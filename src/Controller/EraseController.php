@@ -91,4 +91,52 @@ class EraseController extends BaseController
 
         return $this->response("", self::DELETE);
     }
+
+    // Delete all users and related data
+    /**
+     * @Route("eraseallusers", name="deleteAllUsers", methods={"DELETE"})
+     */
+    public function eraseAllData2()
+    {
+        try
+        {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->getRepository(AcceptedOrderEntity::class)->createQueryBuilder('acceptedOrderEntity')
+                ->delete()
+                ->getQuery()
+                ->execute();
+
+            $em->getRepository(RatingsEntity::class)->createQueryBuilder('RatingsEntity')
+                ->delete()
+                ->getQuery()
+                ->execute();
+
+            $em->getRepository(CommentsEntity::class)->createQueryBuilder('CommentsEntity')
+                ->delete()
+                ->getQuery()
+                ->execute();
+
+            $em->getRepository(GuidEntity::class)->createQueryBuilder('GuidEntity')
+                ->delete()
+                ->getQuery()
+                ->execute();
+
+            $em->getRepository(TouristOrderEntity::class)->createQueryBuilder('TouristOrderEntity')
+                ->delete()
+                ->getQuery()
+                ->execute();
+
+            $em->getRepository(User::class)->createQueryBuilder('User')
+                ->delete()
+                ->getQuery()
+                ->execute();
+        }
+        catch (\Exception $ex)
+        {
+            return $this->json($ex);
+        }
+
+        return $this->response("All users and related data were being deleted", self::DELETE);
+    }
 }

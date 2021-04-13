@@ -29,4 +29,20 @@ class ImageService
 
         return $response;
     }
+
+    public function deleteImages($regionID)
+    {
+        $response = [];
+        $images = $this->imageManager->deleteRegionImages($regionID);
+
+        if(isset($images))
+        {
+            foreach($images as $image)
+            {
+                $response[] = $this->autoMapping->map(ImagesEntity::class, ImageCreateResponse::class, $image);
+            }
+        }
+
+        return $response;
+    }
 }

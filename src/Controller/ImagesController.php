@@ -106,4 +106,14 @@ class ImagesController extends BaseController
 
 
     }
+
+    /**
+     * @Route("/images/{regionID}", name="deleteRegionImages", methods="DELETE")
+     */
+    public function deleteRegion($regionID)
+    {
+        $response = $this->imageService->deleteImages($regionID);
+
+        return $this->response($response, self::DELETE);
+    }
 }

@@ -68,4 +68,22 @@ class ImageManager
     {
         return $this->imagesEntityRepository->getEventImage($id);
     }
+
+    public function deleteRegionImages($regionID)
+    {
+        $images = $this->imagesEntityRepository->findBy(["region" => $regionID]);
+
+        //dd($images);
+
+        if(isset($images))
+        {
+            foreach ($images as $image)
+            {
+                $this->entityManager->remove($image);
+                $this->entityManager->flush();
+            }
+        }
+
+        return $images;
+    }
 }

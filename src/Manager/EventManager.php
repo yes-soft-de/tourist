@@ -17,14 +17,18 @@ class EventManager
     private $entityManager;
     private $eventEntityRepository;
     private $imageManager;
+    private $commentManager;
+    private $ratingManager;
 
     public function __construct(AutoMapping $autoMapping, EntityManagerInterface $entityManager, EventEntityRepository $eventEntityRepository,
-     ImageManager $imageManager)
+     ImageManager $imageManager, CommentsManager $commentManager, RatingManager $ratingManager)
     {
         $this->autoMapping = $autoMapping;
         $this->entityManager = $entityManager;
         $this->eventEntityRepository = $eventEntityRepository;
         $this->imageManager = $imageManager;
+        $this->commentManager = $commentManager;
+        $this->ratingManager = $ratingManager;
     }
 
     public function eventCreate(EventCreateRequest $request)
@@ -71,7 +75,7 @@ class EventManager
 
         if($event)
         {
-            //now, we have to delete the related image
+            //first, we have to delete the related image
 
             $image = $this->imageManager->getImageOfEvent($event->getId());
 
@@ -80,6 +84,21 @@ class EventManager
                 $this->entityManager->remove($image);
                 $this->entityManager->flush();
             }
+
+            //also, we have to delete the related comments
+
+            $comments = $this->commentManager->getCommentsByEvent($event->getId());
+
+            if(isset($comments))
+            {
+                foreach($comments as $comment)
+                {
+                    $this->entityManager->remove($comment);
+                    $this->entityManager->flush();
+                }
+            }
+
+            //now, we delete the region
 
             $this->entityManager->remove($event);
             $this->entityManager->flush();

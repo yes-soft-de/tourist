@@ -91,4 +91,15 @@ class CommentsEntityRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getCommentsByEvent($eventID)
+    {
+        return $this->createQueryBuilder('comments')
+
+            ->andWhere('comments.event = :id')
+            ->setParameter('id', $eventID)
+
+            ->getQuery()
+            ->getResult();
+    }
 }

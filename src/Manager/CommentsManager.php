@@ -86,4 +86,9 @@ class CommentsManager
     {
         return $this->commentsEntityRepository->getCommentsByRegion($regionID);
     }
+
+    public function getCommentsByEvent($eventID)
+    {
+        return $this->commentsEntityRepository->getCommentsByEvent($eventID);
+    }
 }

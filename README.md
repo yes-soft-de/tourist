@@ -61,6 +61,12 @@ methods={"GET"}
 /regionbyplaceid/{placeId}
 methods={"GET"}
 ```
+#### Delete Region By Id
+```
+/region/{id}
+methods={"DELETE"}
+```
+
 #### Create image (region or event)
 ```
 /image
@@ -212,9 +218,13 @@ methods={"GET"}
 /event
 methods={"PUT"}
 ```
+#### Delete event By Id
+```
+/event/{id}
+methods={"DELETE"}
+```
 
 ### Payment
-
 ------------
 #### Create payment
 ```

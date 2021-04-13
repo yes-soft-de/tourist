@@ -16,12 +16,15 @@ class EventManager
     private $autoMapping;
     private $entityManager;
     private $eventEntityRepository;
+    private $imageManager;
 
-    public function __construct(AutoMapping $autoMapping, EntityManagerInterface $entityManager, EventEntityRepository $eventEntityRepository)
+    public function __construct(AutoMapping $autoMapping, EntityManagerInterface $entityManager, EventEntityRepository $eventEntityRepository,
+     ImageManager $imageManager)
     {
         $this->autoMapping = $autoMapping;
         $this->entityManager = $entityManager;
         $this->eventEntityRepository = $eventEntityRepository;
+        $this->imageManager = $imageManager;
     }
 
     public function eventCreate(EventCreateRequest $request)
@@ -68,6 +71,16 @@ class EventManager
 
         if($event)
         {
+            //now, we have to delete the related image
+
+            $image = $this->imageManager->getImageOfEvent($event->getId());
+
+            if($image)
+            {
+                $this->entityManager->remove($image);
+                $this->entityManager->flush();
+            }
+
             $this->entityManager->remove($event);
             $this->entityManager->flush();
         }

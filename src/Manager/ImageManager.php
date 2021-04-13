@@ -54,8 +54,18 @@ class ImageManager
         return $this->imagesEntityRepository->getRegionImages($id);
     }
 
+    public function getRegionImage($id)
+    {
+        return $this->imagesEntityRepository->getRegionImage($id);
+    }
+
     public function getEventImage($id)
     {
         return $this->imagesEntityRepository->getEventImages($id);
+    }
+
+    public function getImageOfEvent($id)
+    {
+        return $this->imagesEntityRepository->getEventImage($id);
     }
 }

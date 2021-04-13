@@ -52,4 +52,15 @@ class ImagesEntityRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getEventImage($id)
+    {
+        return $this->createQueryBuilder('images')
+        
+            ->andWhere('images.event = :id')
+            ->setParameter('id', $id)
+
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

@@ -113,6 +113,16 @@ class RegionsManager
 
         if($region)
         {
+            //now, we have to delete the related image
+
+            $image = $this->imageManager->getRegionImage($region->getId());
+
+            if($image)
+            {
+                $this->entityManager->remove($image);
+                $this->entityManager->flush();
+            }
+
             $this->entityManager->remove($region);
             $this->entityManager->flush();
         }

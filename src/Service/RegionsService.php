@@ -332,4 +332,11 @@ class RegionsService
         return $response;
     }
 
+    public function delete($id)
+    {
+        $regionResult = $this->regionsManager->delete($id);
+
+        return $this->autoMapping->map(RegionsEntity::class, RegionsResponse::class, $regionResult);
+    }
+
 }

@@ -114,4 +114,14 @@ class RegionsController extends BaseController
         return $this->response($response,self::FETCH);
     }
 
+    /**
+     * @Route("/region/{id}", name="deleteRegionById", methods="DELETE")
+     */
+    public function deleteRegion($id)
+    {
+        $response = $this->regionsService->delete($id);
+
+        return $this->response($response,self::DELETE);
+    }
+
 }

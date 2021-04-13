@@ -106,4 +106,17 @@ class RegionsManager
     {
         return $this->regionsEntityRepository->getRegionsByName($name);
     }
+
+    public function delete($id)
+    {
+        $region = $this->regionsEntityRepository->find($id);
+
+        if($region)
+        {
+            $this->entityManager->remove($region);
+            $this->entityManager->flush();
+        }
+
+        return $region;
+    }
 }

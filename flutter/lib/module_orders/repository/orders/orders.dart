@@ -22,7 +22,16 @@ class OrdersRepository {
   }
 
   Future<OrderListResponse> getTouristOrders(String uid) async {
-    Map response = await _httpClient.get(Urls.touristAcceptedOrders + '/' + uid);
+    Map response =
+        await _httpClient.get(Urls.touristAcceptedOrders + '/' + uid);
+    if (response != null) {
+      return OrderListResponse.fromJson(response);
+    }
+    return null;
+  }
+  Future<OrderListResponse> getTouristOrdersPending(String uid) async {
+    Map response =
+        await _httpClient.get(Urls.touristOrders + '/' + uid);
     if (response != null) {
       return OrderListResponse.fromJson(response);
     }
@@ -52,7 +61,12 @@ class OrdersRepository {
   }
 
   Future<UpdateOrderResponse> updateOrder(UpdateOrderRequest model) async {
-    Map response = await _httpClient.post(Urls.updateOrder, model.toJson());
+    Map response;
+    if (model.id != null) {
+      response = await _httpClient.put(Urls.updateOrder, model.toJson());
+    } else {
+      response = await _httpClient.post(Urls.updateOrder, model.toJson());
+    }
 
     if (response == null) {
       return null;
@@ -61,7 +75,8 @@ class OrdersRepository {
     return UpdateOrderResponse.fromJson(response);
   }
 
-  Future<UpdateOrderResponse> updateAvailableOrder(UpdateOrderRequest model) async {
+  Future<UpdateOrderResponse> updateAvailableOrder(
+      UpdateOrderRequest model) async {
     Map response = await _httpClient.post(Urls.acceptOrder, model.toJson());
     if (response == null) return null;
     return UpdateOrderResponse.fromJson(response);

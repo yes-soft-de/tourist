@@ -8,23 +8,25 @@ class UpdateOrderRequest {
   String leaveDate;
   String status;
   List<String> services;
-  String id;
+  String orderID;
+  int id;
   int cost;
   String roomID;
 
   UpdateOrderRequest(
       {this.date,
-        this.touristUserID,
-        this.guidUserID,
-        this.city,
-        this.language,
-        this.arriveDate,
-        this.leaveDate,
-        this.status,
-        this.services,
-        this.id,
-        this.cost,
-        this.roomID});
+      this.touristUserID,
+      this.guidUserID,
+      this.city,
+      this.language,
+      this.arriveDate,
+      this.leaveDate,
+      this.status,
+      this.services,
+      this.id,
+      this.cost,
+      this.roomID,
+      this.orderID});
 
   UpdateOrderRequest.fromJson(Map<String, dynamic> json) {
     date = json['date'];
@@ -43,18 +45,45 @@ class UpdateOrderRequest {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['date'] = this.date;
-    data['touristUserID'] = this.touristUserID;
-    data['guidUserID'] = this.guidUserID;
-    data['city'] = this.city;
-    data['language'] = this.language;
-    data['arriveDate'] = this.arriveDate;
-    data['leaveDate'] = this.leaveDate;
-    data['status'] = this.status;
-    data['services'] = this.services;
-    data['orderID'] = this.id;
-    data['cost'] = this.cost;
-    data['roomID'] = this.roomID;
+    if (this.date != null) {
+      data['date'] = this.date;
+    }
+    if (this.touristUserID != null) {
+      data['touristUserID'] = this.touristUserID;
+    }
+    if (this.guidUserID != null) {
+      data['guidUserID'] = this.guidUserID;
+    }
+    if (this.city != null) {
+      data['city'] = this.city;
+    }
+    if (this.language != null) {
+      data['language'] = this.language;
+    }
+    if (this.arriveDate != null) {
+      data['arriveDate'] = this.arriveDate;
+    }
+    if (this.leaveDate != null) {
+      data['leaveDate'] = this.leaveDate;
+    }
+    if (this.status != null) {
+      data['status'] = this.status;
+    }
+    if (this.services != null) {
+      data['services'] = this.services;
+    }
+    if (this.orderID != null) {
+      data['orderID'] = this.orderID;
+    }
+    if (this.cost != null) {
+      data['cost'] = this.cost;
+    }
+    if (this.roomID != null) {
+      data['roomID'] = this.roomID;
+    }
+    if (this.id != null) {
+      data['id'] = this.id;
+    }
     return data;
   }
 }

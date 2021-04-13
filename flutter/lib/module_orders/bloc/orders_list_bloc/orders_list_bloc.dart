@@ -1,10 +1,12 @@
 import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
+import 'package:tourists/module_orders/service/guide_orders/guide_orders.dart';
 import 'package:tourists/module_orders/service/orders/orders_service.dart';
 import 'package:tourists/module_orders/ui/screen/orders_list/order_list_screen.dart';
 import 'package:tourists/module_orders/ui/state/order_list/order_list_state.dart';
 import 'package:tourists/module_orders/ui/state/order_list/order_list_state_error.dart';
+import 'package:tourists/module_orders/ui/state/order_list/order_list_state_guide_order_loaded.dart';
 import 'package:tourists/module_orders/ui/state/order_list/order_list_state_loading.dart';
 import 'package:tourists/module_orders/ui/state/order_list/order_list_state_orders_loaded.dart';
 import 'package:uuid/uuid.dart';
@@ -17,8 +19,8 @@ class OrdersListBloc {
   static const STATUS_CODE_LOAD_ERROR = 165;
 
   final TouristOrdersService _ordersService;
-
-  OrdersListBloc(this._ordersService);
+  final GuideOrdersService _guideOrdersService;
+  OrdersListBloc(this._ordersService,this._guideOrdersService);
 
   final _orderSubject = new PublishSubject<OrdersListState>();
 
@@ -31,6 +33,17 @@ class OrdersListBloc {
         _orderSubject.add(OrderListStateError(screen, 'Error Loading Data'));
       } else {
         _orderSubject.add(OrderListStateOrdersLoaded(screen, value));
+      }
+    });
+  }
+
+  void getGuidOrdersList(OrdersListScreen screen) {
+    _orderSubject.add(OrderListStateLoading(screen));
+    _guideOrdersService.getGuideOrders().then((value) {
+      if (value == null) {
+        _orderSubject.add(OrderListStateError(screen, 'Error Loading Data'));
+      } else {
+        _orderSubject.add(OrderListStateGuideOrdersLoaded(screen, value));
       }
     });
   }

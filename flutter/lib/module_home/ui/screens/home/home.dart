@@ -202,7 +202,7 @@ class HomeScreenState extends State<HomeScreen> {
             children: <Widget>[
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushNamed(OrdersRoutes.ordersList);
+                    Navigator.of(context).pushNamed(OrdersRoutes.ordersList);
                 },
                 child: Container(
                   color: Colors.white,

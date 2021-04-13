@@ -33,16 +33,12 @@ class OrderItemWidget extends StatelessWidget {
       } else if (orderModel.status == 'pendingPayment') {
         // There is a chat here
         widgetLayout.add(_getPendingPaymentOrder(orderModel, context));
-      } else if (orderModel.status == 'finished') {
+      } else if (orderModel.status == 'finished' || orderModel.status == 'done') {
         widgetLayout.add(_getFinishedOrder(orderModel, context));
       }
     } else {
       widgetLayout.add(_getAvailableOrder(orderModel, context));
     }
-    print('+++++++++++++++++++++++++++++++++++++++++++++++++++++');
-    print(widgetLayout);
-    print('+++++++++++++++++++++++++++++++++++++++++++++++++++++');
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -231,7 +227,7 @@ class OrderItemWidget extends StatelessWidget {
                       height: 8,
                     ),
                     Text(
-                        'city ${orderModel.city ?? ''} | lang ${orderModel.language ?? ''} | cost ${orderModel.cost??''}'),
+                        'city ${orderModel.city ?? ''} | lang ${orderModel.language ?? ''} | cost ${orderModel.cost ?? ''}'),
                     Container(
                       height: 8,
                     ),
@@ -249,8 +245,9 @@ class OrderItemWidget extends StatelessWidget {
                 children: [
                   RaisedButton(
                     onPressed: () {
+                      OrderModel order = OrderModel(id:orderModel.id,status: 'onGoing');
                       orderModel.status = 'onGoing';
-                      this.onAcceptOrder(orderModel);
+                      this.onAcceptOrder(order);
                     },
                     child: Text(S.of(context).accept_order),
                   ),

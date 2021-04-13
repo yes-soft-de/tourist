@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
+import 'package:tourists/module_auth/enums/user_type.dart';
+import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
 import 'package:tourists/module_orders/bloc/orders_list_bloc/orders_list_bloc.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
 import 'package:tourists/module_orders/ui/state/order_list/order_list_state.dart';
@@ -9,8 +11,8 @@ import 'package:tourists/module_orders/ui/state/order_list/order_list_state_load
 @provide
 class OrdersListScreen extends StatefulWidget {
   final OrdersListBloc _bloc;
-
-  OrdersListScreen(this._bloc);
+  final AuthService _authService;
+  OrdersListScreen(this._bloc, this._authService);
 
   @override
   State<StatefulWidget> createState() => _OrderListScreenState();
@@ -27,10 +29,18 @@ class OrdersListScreen extends StatefulWidget {
 class _OrderListScreenState extends State<OrdersListScreen> {
   List<OrderModel> ordersList;
   OrdersListState currentStatus;
+  Future<void> getCurrentStatus(OrdersListScreen screen) async {
+    UserRole userRole = await widget._authService.userRole;
+    if (userRole == UserRole.ROLE_TOURIST) {
+      widget._bloc.getOrdersList(screen);
+    } else {
+      widget._bloc.getGuidOrdersList(screen);
+    }
+  }
 
   @override
   void initState() {
-    widget._bloc.getOrdersList(widget);
+    getCurrentStatus(widget);
     widget._bloc.ordersStream.listen((event) {
       currentStatus = event;
       if (mounted) setState(() {});

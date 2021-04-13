@@ -6,12 +6,12 @@ import 'package:tourists/module_orders/ui/screen/orders_list/order_list_screen.d
 import 'package:tourists/module_orders/ui/state/order_list/order_list_state.dart';
 import 'package:tourists/module_orders/ui/widget/order_item/order_item.dart';
 
-class OrderListStateOrdersLoaded extends OrdersListState {
+class OrderListStateGuideOrdersLoaded extends OrdersListState {
   final PageController _pageController = PageController();
   final List<OrderModel> ordersList;
   int activePosition = 0;
 
-  OrderListStateOrdersLoaded(OrdersListScreen screen, this.ordersList)
+  OrderListStateGuideOrdersLoaded(OrdersListScreen screen, this.ordersList)
       : super(screen) {
     print('User Orders: ${ordersList?.length}');
   }
@@ -205,7 +205,7 @@ class OrderListStateOrdersLoaded extends OrdersListState {
       if (element.status == 'pendingPayment') {
         ordersWidgetList.add(OrderItemWidget(
           element,
-          canPay: true,
+          canPay: false,
           onPayOrder: (order) {
             screen.payOrder(order);
           },

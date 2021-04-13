@@ -29,20 +29,32 @@ class TouristOrdersService {
       return null;
     }
     var orders = await _ordersManager.getTouristOrders(uid);
+    var orders2 = await _ordersManager.getTouristOrdersPending(uid);
+     if (orders?.data == null) {
+      return [];
+    }
+     if (orders2?.data == null) {
+      return [];
+    }
+    List allOrder = [];
+    allOrder.addAll(orders.data);
+    allOrder.addAll(orders2.data);
     if (orders?.data == null) {
       return [];
     }
-
-    return orders.data
+    if (allOrder.isEmpty) {
+      return [];
+    }
+    return allOrder
         .map((e) => OrderModel(
               id: e.id,
               touristId: e.touristUserID,
               guideUserID: e.guidUserID,
-              language: e.language??e.order.language,
+              language: e.language ?? e.order.language,
               services: e.services,
-              city: e.city??e.order.city,
+              city: e.city ?? e.order.city,
               cost: e.cost,
-              roomId: e.roomID??e.uuid,
+              roomId: e.roomID ?? e.uuid,
               status: e.status,
               arriveDate: e.arriveDate?.timestamp == null
                   ? DateTime.now()
@@ -71,7 +83,7 @@ class TouristOrdersService {
                 id: e.id,
                 touristId: e.touristUserID,
                 guideUserID: e.guidUserID,
-                language: e.language??e.order.language,
+                language: e.language ?? e.order.language,
                 services: e.services,
                 arriveDate: e.arriveDate == null
                     ? DateTime.now()
@@ -85,9 +97,9 @@ class TouristOrdersService {
                     ? DateTime.now()
                     : DateTime.fromMillisecondsSinceEpoch(
                         1000 * e.date?.timestamp),
-                city: e.city??e.order.city,
+                city: e.city ?? e.order.city,
                 cost: e.cost,
-                roomId: e.roomID??e.uuid,
+                roomId: e.roomID ?? e.uuid,
                 status: e.status,
               ))
           .toList();
@@ -108,17 +120,21 @@ class TouristOrdersService {
   }
 
   UpdateOrderRequest _toUpdateOrderRequest(OrderModel orderModel) {
-    return UpdateOrderRequest(
-        status: 'onGoing',
-        services: orderModel.services,
-        touristUserID: orderModel.touristId,
-        guidUserID: FirebaseAuth.instance.currentUser.uid,
-        cost: int.tryParse(orderModel.cost),
-        city: orderModel.city,
-        language: orderModel.language,
-        date: DateTime.now().toIso8601String(),
-        arriveDate: orderModel.arriveDate.toIso8601String(),
-        leaveDate: orderModel.leaveDate.toIso8601String(),
-        id: orderModel.id.toString());
+    if (orderModel.touristId == null) {
+      return UpdateOrderRequest(status: orderModel.status, id: orderModel.id);
+    } else {
+      return UpdateOrderRequest(
+          status: 'onGoing',
+          services: orderModel.services,
+          touristUserID: orderModel.touristId,
+          guidUserID: FirebaseAuth.instance.currentUser.uid,
+          cost: int.tryParse(orderModel.cost) ?? 0,
+          city: orderModel.city,
+          language: orderModel.language,
+          date: DateTime.now().toIso8601String(),
+          arriveDate: orderModel.arriveDate.toIso8601String(),
+          leaveDate: orderModel.leaveDate.toIso8601String(),
+          orderID: orderModel.id.toString());
+    }
   }
 }

@@ -301,11 +301,11 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i71.UploadRepository _createUploadRepository() => _i71.UploadRepository();
   _i72.GuideListModule _createGuideListModule() => _i72.GuideListModule();
   _i73.OrderModule _createOrderModule() =>
-      _i73.OrderModule(_createOrdersListScreen());
+      _i73.OrderModule(_createOrdersListScreen(), _createGuideOrdersScreen());
   _i74.OrdersListScreen _createOrdersListScreen() =>
-      _i74.OrdersListScreen(_createOrdersListBloc());
-  _i75.OrdersListBloc _createOrdersListBloc() =>
-      _i75.OrdersListBloc(_createTouristOrdersService());
+      _i74.OrdersListScreen(_createOrdersListBloc(), _createAuthService());
+  _i75.OrdersListBloc _createOrdersListBloc() => _i75.OrdersListBloc(
+      _createTouristOrdersService(), _createGuideOrdersService());
   _i76.TouristOrdersService _createTouristOrdersService() =>
       _i76.TouristOrdersService(_createOrdersManager(), _createAuthService());
   _i77.OrdersManager _createOrdersManager() =>

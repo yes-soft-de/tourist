@@ -80,7 +80,10 @@ class _GuideOrdersScreenState extends State<GuideOrdersScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Center(child: CircularProgressIndicator()),
-          Text(S.of(context).loading, textAlign: TextAlign.center,),
+          Text(
+            S.of(context).loading,
+            textAlign: TextAlign.center,
+          ),
         ],
       ),
     );

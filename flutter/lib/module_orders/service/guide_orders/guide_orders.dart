@@ -167,6 +167,7 @@ class GuideOrdersService {
         date: DateTime.now().toIso8601String(),
         arriveDate: orderModel.arriveDate.toIso8601String(),
         leaveDate: orderModel.leaveDate.toIso8601String(),
-        id: orderModel.id.toString());
+        orderID: orderModel.id.toString(),
+        );
   }
 }

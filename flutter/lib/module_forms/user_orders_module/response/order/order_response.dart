@@ -58,8 +58,7 @@ class Data {
       this.status,
       this.cost,
       this.uuid,
-      this.order
-      });
+      this.order});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -78,8 +77,7 @@ class Data {
     status = json['status'];
     cost = json['cost'];
     uuid = json['uuid'];
-    order = Order.fromJson(json['order']);
-
+    order = json['order'] != null ? new Order.fromJson(json['order']) : null;
   }
 
   Map<String, dynamic> toJson() {

@@ -5,6 +5,7 @@ on:
     branches: 
       - 'release-v*'
       - 'dev*'
+      - 'flutter-deploy'
   
 
 jobs:

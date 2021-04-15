@@ -23,6 +23,10 @@ jobs:
         with:
           java-version: "12.x"
 
+      - name: Current Folder
+        run: |
+          pwd
+
       - name: Setup flutter
         uses: subosito/flutter-action@v1
         with:

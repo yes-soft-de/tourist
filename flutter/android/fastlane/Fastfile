@@ -5,15 +5,15 @@ platform :android do
     gradle(
       task: "assemble",
       build_type: 'Debug',
-      project_dir: '../'
+      project_dir: '../android/'
     )
     gradle(
-      project_dir: '../',
+      project_dir: '../android/',
       task: "assemble",
       build_type: 'Profile'
     )
     gradle(
-      project_dir: '../',
+      project_dir: '../android/',
       task: "assemble",
       build_type: 'Release'
     )

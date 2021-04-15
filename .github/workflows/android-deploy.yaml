@@ -79,6 +79,11 @@ jobs:
           name: release-apk
           path: flutter/build/app/outputs/flutter-apk/app-release.apk
 
+      - name: Downgrade Gradle
+        uses: eskatos/gradle-command-action@v1
+        with:
+          gradle-version: 6.5
+
       - name: Create release and upload apk
         uses: underwindfall/create-release-with-debugapk@v2.0.0
         env:

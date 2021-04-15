@@ -10,13 +10,15 @@ class OrderItemWidget extends StatelessWidget {
   final Function(OrderModel) onPayOrder;
   final Function(OrderModel) onPayAvailableOrder;
   final bool canPay;
+  final String status;
 
   OrderItemWidget(this.orderModel,
       {this.onAcceptOrder,
       this.onPayAvailableOrder,
       this.onAcceptAvailableOrder,
       this.onPayOrder,
-      this.canPay = false});
+      this.canPay = false,
+      this.status});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,8 @@ class OrderItemWidget extends StatelessWidget {
       } else if (orderModel.status == 'pendingPayment') {
         // There is a chat here
         widgetLayout.add(_getPendingPaymentOrder(orderModel, context));
-      } else if (orderModel.status == 'finished' || orderModel.status == 'done') {
+      } else if (orderModel.status == 'finished' ||
+          orderModel.status == 'done') {
         widgetLayout.add(_getFinishedOrder(orderModel, context));
       }
     } else {
@@ -245,7 +248,8 @@ class OrderItemWidget extends StatelessWidget {
                 children: [
                   RaisedButton(
                     onPressed: () {
-                      OrderModel order = OrderModel(id:orderModel.id,status: 'onGoing');
+                      OrderModel order =
+                          OrderModel(id: orderModel.id, status: 'onGoing');
                       orderModel.status = 'onGoing';
                       this.onAcceptOrder(order);
                     },
@@ -295,6 +299,13 @@ class OrderItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
+                      'Order #${orderModel.id} Pending',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Container(
+                      height: 8,
+                    ),
+                    Text(
                       'On Going',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
@@ -315,7 +326,17 @@ class OrderItemWidget extends StatelessWidget {
             Navigator.of(context)
                 .pushNamed(ChatRoutes.chatRoute, arguments: orderModel.roomId);
           },
-        )
+        ),
+        canPay != null && canPay && status != null
+            ? RaisedButton(
+                child: Text('finish order'),
+                onPressed: () {
+                  OrderModel order =
+                      OrderModel(id: orderModel.id, status: status ?? 'done');
+                  this.onAcceptOrder(order);
+                },
+              )
+            : Container()
       ],
     );
   }

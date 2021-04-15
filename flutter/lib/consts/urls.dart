@@ -20,6 +20,7 @@ class Urls {
   static final orderGuide = 'order';
   static final touristAcceptedOrders = 'acceptedorders';
   static final orderLookup = 'orderlookup';
+  static final acceptGuideOrder = 'acceptordersbyguide';
   static final acceptOrder = 'acceptorder';
   static final updateOrder = 'acceptorder';
   static final touristOrders = 'orders';

@@ -4,6 +4,7 @@ import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_orders/model/order/order_model.dart';
 import 'package:tourists/module_orders/ui/screen/orders_list/order_list_screen.dart';
 import 'package:tourists/module_orders/ui/state/order_list/order_list_state.dart';
+import 'package:tourists/module_orders/ui/widget/guide_order_item/guide_order_item.dart';
 import 'package:tourists/module_orders/ui/widget/order_item/order_item.dart';
 
 class OrderListStateGuideOrdersLoaded extends OrdersListState {
@@ -169,9 +170,28 @@ class OrderListStateGuideOrdersLoaded extends OrdersListState {
     List<Widget> ordersWidgetList = [];
     ordersList.forEach((element) {
       if (element.status == 'pending' && element.roomId == null) {
-        ordersWidgetList.add(OrderItemWidget(
+        ordersWidgetList.add(GuideOrderItemWidget(
           element,
-          canPay: false,
+          onAcceptOrder: (order) {
+            print('Accept Order');
+            screen.guideBloc.acceptOrder(order);
+            screen.refreshState();
+          },
+          onAcceptAvailableOrder: (order) {
+            print('Accept Available Order');
+            screen.guideBloc.acceptAvailableOrder(order);
+            screen.refreshState();
+          },
+          onPayOrder: (order) {
+            print('Pay Order');
+            screen.guideBloc.payOrder(order);
+            screen.refreshState();
+          },
+          onPayAvailableOrder: (orderModel) {
+            print('Pay available Order');
+            screen.guideBloc.payAvailableOrder(orderModel);
+            screen.refreshState();
+          },
         ));
       }
     });
@@ -206,12 +226,12 @@ class OrderListStateGuideOrdersLoaded extends OrdersListState {
         ordersWidgetList.add(OrderItemWidget(
           element,
           canPay: false,
-          onPayOrder: (order) {
-            screen.payOrder(order);
-          },
-          onAcceptOrder: (order) {
-            screen.payOrder(order);
-          },
+          // onPayOrder: (order) {
+          //   screen.payOrder(order);
+          // },
+          // onAcceptOrder: (order) {
+          //   screen.payOrder(order);
+          // },
         ));
       }
     });
@@ -240,6 +260,11 @@ class OrderListStateGuideOrdersLoaded extends OrdersListState {
         ordersWidgetList.add(OrderItemWidget(
           element,
           canPay: true,
+          status: 'done',
+          onAcceptOrder: (order) {
+            screen.payOrder(order);
+            screen.refreshState();
+          },
         ));
       }
     });

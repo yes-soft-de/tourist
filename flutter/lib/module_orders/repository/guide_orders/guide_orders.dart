@@ -37,14 +37,26 @@ class GuideOrdersRepository {
     return UpdateOrderResponse.fromJson(response);
   }
 
-  Future<UpdateOrderResponse> updateAvailableOrder(UpdateOrderRequest model) async {
+  Future<UpdateOrderResponse> updateAvailableOrder(
+      UpdateOrderRequest model) async {
     Map response = await _httpClient.post(Urls.acceptOrder, model.toJson());
     if (response == null) return null;
     return UpdateOrderResponse.fromJson(response);
   }
 
   Future<OrderListResponse> getGuideOrders(String guideUserId) async {
-    Map response = await _httpClient.get(Urls.guideOrders + '/$guideUserId');
+    Map response =
+        await _httpClient.get(Urls.acceptGuideOrder + '/$guideUserId');
+
+    if (response == null) {
+      return null;
+    }
+
+    return OrderListResponse.fromJson(response);
+  }
+
+  Future<OrderListResponse> getLookupOrder(String guideUserId) async {
+    Map response = await _httpClient.get(Urls.orderLookup + '/$guideUserId');
 
     if (response == null) {
       return null;

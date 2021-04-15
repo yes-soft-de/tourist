@@ -44,30 +44,58 @@ class GuideOrdersService {
     String userId = user.uid;
 
     OrderListResponse response = await _ordersManager.getGuideOrders(userId);
+    OrderListResponse response2 = await _ordersManager.getLookupOrder(userId);
 
-    if (response == null) {
+    if (response == null && response2 == null) {
       return <OrderModel>[];
     }
+    List lookupOrder = response2 != null ? response2.data : null;
+    List guideOrder = response != null ? response.data : null;
+    List allOrder = [];
+    if (lookupOrder != null) {
+      allOrder.addAll(lookupOrder);
+    }
 
-    return response.data
-        .map((e) => OrderModel(
-              id: e.id,
-              touristId: e.touristUserID,
-              guideUserID: e.guidUserID,
-              language: e.language,
-              services: e.services,
-              arriveDate: DateTime.fromMillisecondsSinceEpoch(
-                  1000 * e.arriveDate.timestamp),
-              leaveDate: DateTime.fromMillisecondsSinceEpoch(
-                  1000 * e.leaveDate.timestamp),
-              date:
-                  DateTime.fromMillisecondsSinceEpoch(1000 * e.date.timestamp),
-              city: e.city,
-              cost: e.cost,
-              roomId: e.roomID,
-              status: e.status,
-            ))
-        .toList();
+    if (guideOrder != null) {
+      allOrder.addAll(guideOrder);
+    }
+    return allOrder.map((e) {
+      if (e.order != null) {
+        return OrderModel(
+          id: e.id,
+          touristId: e.order.touristUserID,
+          guideUserID: e.order.guidUserID,
+          language: e.order.language,
+          services: e.order.services,
+          arriveDate: DateTime.fromMillisecondsSinceEpoch(
+              1000 * e.order.arriveDate.timestamp),
+          leaveDate: DateTime.fromMillisecondsSinceEpoch(
+              1000 * e.order.leaveDate.timestamp),
+          date: DateTime.fromMillisecondsSinceEpoch(
+              1000 * e.order.date.timestamp),
+          city: e.order.city,
+          cost: e.cost,
+          roomId: e.order.roomID,
+          status: e.status,
+        );
+      }
+      return OrderModel(
+        id: e.id,
+        touristId: e.touristUserID,
+        guideUserID: e.guidUserID,
+        language: e.language,
+        services: e.services,
+        arriveDate:
+            DateTime.fromMillisecondsSinceEpoch(1000 * e.arriveDate.timestamp),
+        leaveDate:
+            DateTime.fromMillisecondsSinceEpoch(1000 * e.leaveDate.timestamp),
+        date: DateTime.fromMillisecondsSinceEpoch(1000 * e.date.timestamp),
+        city: e.city,
+        cost: e.cost,
+        roomId: e.roomID,
+        status: e.status,
+      );
+    }).toList();
   }
 
   Future<List<OrderModel>> getAllPossibleOrders() async {
@@ -80,7 +108,8 @@ class GuideOrdersService {
     allOrders.forEach((element) {
       existingOrders.add(element.id);
     });
-    allOrders.addAll(locationOrders.where((element) => !allOrders.contains(element.id)));
+    allOrders.addAll(
+        locationOrders.where((element) => !allOrders.contains(element.id)));
     print('Location Order: ${locationOrders.length}');
 
     return allOrders;
@@ -156,18 +185,18 @@ class GuideOrdersService {
 
   UpdateOrderRequest _toUpdateOrderRequest(OrderModel orderModel) {
     return UpdateOrderRequest(
-        status: orderModel.status,
-        roomID: new Uuid().v1(),
-        services: orderModel.services,
-        touristUserID: orderModel.touristId,
-        guidUserID: FirebaseAuth.instance.currentUser.uid,
-        cost: int.tryParse(orderModel.cost),
-        city: orderModel.city,
-        language: orderModel.language,
-        date: DateTime.now().toIso8601String(),
-        arriveDate: orderModel.arriveDate.toIso8601String(),
-        leaveDate: orderModel.leaveDate.toIso8601String(),
-        orderID: orderModel.id.toString(),
-        );
+      status: orderModel.status,
+      roomID: new Uuid().v1(),
+      services: orderModel.services,
+      touristUserID: orderModel.touristId,
+      guidUserID: FirebaseAuth.instance.currentUser.uid,
+      cost: int.tryParse(orderModel.cost),
+      city: orderModel.city,
+      language: orderModel.language,
+      date: DateTime.now().toIso8601String(),
+      arriveDate: orderModel.arriveDate.toIso8601String(),
+      leaveDate: orderModel.leaveDate.toIso8601String(),
+      orderID: orderModel.id.toString(),
+    );
   }
 }

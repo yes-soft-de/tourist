@@ -25,4 +25,8 @@ class GuideOrdersManager {
   Future<UpdateOrderResponse> updateAvailableOrder(UpdateOrderRequest orderModel) {
     return _repository.updateAvailableOrder(orderModel);
   }
+
+  Future<OrderListResponse> getLookupOrder(String guideUserId) {
+    return _repository.getLookupOrder(guideUserId);
+  }
 }

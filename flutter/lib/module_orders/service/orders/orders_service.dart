@@ -30,17 +30,17 @@ class TouristOrdersService {
     }
     var orders = await _ordersManager.getTouristOrders(uid);
     var orders2 = await _ordersManager.getTouristOrdersPending(uid);
-     if (orders?.data == null) {
+
+    if (orders?.data == null && orders2?.data == null) {
       return [];
     }
-     if (orders2?.data == null) {
-      return [];
-    }
+
     List allOrder = [];
-    allOrder.addAll(orders.data);
-    allOrder.addAll(orders2.data);
-    if (orders?.data == null) {
-      return [];
+    if (orders != null) {
+      allOrder.addAll(orders.data);
+    }
+    if (orders2 != null) {
+      allOrder.addAll(orders2.data);
     }
     if (allOrder.isEmpty) {
       return [];

@@ -4,7 +4,8 @@ platform :android do
   lane :alpha do
     gradle(
       task: "assemble",
-      build_type: 'Debug'
+      build_type: 'Debug',
+      project_dir: '../'
     )
     gradle(
       gradle_path: "/usr/bin/gradle",

@@ -71,6 +71,12 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
 
+      - name: Generate Gradle Wrapper
+        run: |
+          cd flutter/android
+          gradle wrapper
+          chmod +x gradlew
+
       - name: Distribute app to Alpha track 🚀
         run: |
           cd flutter/android

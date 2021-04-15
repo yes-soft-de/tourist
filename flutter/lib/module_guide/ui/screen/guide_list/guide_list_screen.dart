@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_guide/bloc/guide_list/guide_list_bloc.dart';
 import 'package:tourists/module_guide/ui/states/guide_list_state.dart';
 
@@ -41,7 +42,7 @@ class _GuideListScreenState extends State<GuideListScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('سياح'),
+        title: Text('${S.of(context).soyah}'),
         backgroundColor: Colors.white,
       ),
       body: currentStatus != null ? currentStatus.getUI(context) : Container(),

@@ -7,7 +7,7 @@ import 'package:tourists/utils/logger/logger.dart';
 @provide
 class UploadRepository {
   Future<ImgBBResponse> upload(String filePath) async {
-    var client = Dio();
+    var client = Dio(BaseOptions(baseUrl: Urls.baseAPI));
     FormData data = FormData.fromMap({
       'image': await MultipartFile.fromFile(filePath),
     });

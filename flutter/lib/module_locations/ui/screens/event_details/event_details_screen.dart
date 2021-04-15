@@ -196,9 +196,7 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
   }
 
   DateTime getTimeFromTimeStamp(int timestamp) {
-    print(timestamp);
     var date = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
-    print(date.toString());
     return date;
   }
 }

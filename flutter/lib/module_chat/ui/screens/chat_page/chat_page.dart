@@ -31,13 +31,11 @@ class ChatPageState extends State<ChatPage> {
     chatRoomId = ModalRoute.of(context).settings.arguments.toString();
 
     if (currentState == ChatPageBloc.STATUS_CODE_INIT) {
-      print('Chat Room: ' + chatRoomId);
       widget._chatPageBloc.getMessages(chatRoomId);
     }
 
     widget._chatPageBloc.chatBlocStream.listen((event) {
       currentState = event.first;
-      print('Got Event');
       if (event.first == ChatPageBloc.STATUS_CODE_GOT_DATA) {
         _chatMessagesList = event.last;
         if (chatsMessagesWidgets.length == _chatMessagesList.length) {

@@ -1244,6 +1244,156 @@ class S {
       args: [],
     );
   }
+
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Locations you work in`
+  String get locationsYouWorkIn {
+    return Intl.message(
+      'Locations you work in',
+      name: 'locationsYouWorkIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location Name`
+  String get locationName {
+    return Intl.message(
+      'Location Name',
+      name: 'locationName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location Description`
+  String get locationDescription {
+    return Intl.message(
+      'Location Description',
+      name: 'locationDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Phone number`
+  String get myPhoneNumber {
+    return Intl.message(
+      'My Phone number',
+      name: 'myPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Guides Area`
+  String get guidesArea {
+    return Intl.message(
+      'Guides Area',
+      name: 'guidesArea',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search Query`
+  String get searchQuery {
+    return Intl.message(
+      'Search Query',
+      name: 'searchQuery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price proposal`
+  String get priceProposal {
+    return Intl.message(
+      'Price proposal',
+      name: 'priceProposal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pending`
+  String get pending {
+    return Intl.message(
+      'Pending',
+      name: 'pending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `On Going`
+  String get onGoing {
+    return Intl.message(
+      'On Going',
+      name: 'onGoing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Finished`
+  String get finished {
+    return Intl.message(
+      'Finished',
+      name: 'finished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Proposal`
+  String get proposal {
+    return Intl.message(
+      'Proposal',
+      name: 'proposal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login as guide`
+  String get loginAsGuide {
+    return Intl.message(
+      'Login as guide',
+      name: 'loginAsGuide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login as tourist`
+  String get loginAsTourist {
+    return Intl.message(
+      'Login as tourist',
+      name: 'loginAsTourist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Soyah`
+  String get soyah {
+    return Intl.message(
+      'Soyah',
+      name: 'soyah',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

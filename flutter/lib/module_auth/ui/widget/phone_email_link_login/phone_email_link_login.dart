@@ -70,7 +70,9 @@ class _PhoneEmailLinkLoginWidgetState
             child: Image.asset('resources/images/logo.jpg'),
           ),
         ),
-        Text(isGuide ? 'Login as guide' : 'Login as tourist'),
+        Text(isGuide
+            ? S.of(context).loginAsGuide
+            : S.of(context).loginAsTourist),
         Form(
           autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Flex(
@@ -82,6 +84,9 @@ class _PhoneEmailLinkLoginWidgetState
                   controller: _emailController,
                   decoration:
                       InputDecoration(hintText: S.of(context).emailphone),
+                  onFieldSubmitted: (s) {
+                    FocusScope.of(context).unfocus();
+                  },
                 ),
               ),
               Container(
@@ -192,7 +197,7 @@ class _PhoneEmailLinkLoginWidgetState
           ),
         ),
         Text(
-          isGuide ? 'Login as guide' : 'Login as tourist',
+          isGuide ? S.of(context).loginAsGuide : S.of(context).loginAsTourist,
           textAlign: TextAlign.center,
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -233,6 +238,9 @@ class _PhoneEmailLinkLoginWidgetState
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
+                        onFieldSubmitted: (s) {
+                          FocusScope.of(context).unfocus();
+                        },
                         controller: _phoneController,
                         keyboardType: TextInputType.phone,
                         decoration: InputDecoration(

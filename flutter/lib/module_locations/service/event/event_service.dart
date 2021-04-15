@@ -26,7 +26,11 @@ class EventService {
           subType: element.subType,
           description: element.description,
           date: element.date,
-          images: element.images,
+          images: element.images.isNotEmpty
+              ? element.images
+              : [
+                  'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg'
+                ],
           status: element.status));
     });
 

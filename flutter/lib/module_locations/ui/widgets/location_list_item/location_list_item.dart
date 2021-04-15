@@ -19,7 +19,7 @@ class LocationListItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 128,
+      height: 135,
       child: Flex(
           direction: Axis.horizontal,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -30,8 +30,13 @@ class LocationListItemWidget extends StatelessWidget {
                 height: 128,
                 width: 128,
                 child: Image.network(
-                  imageLink,
+                  '$imageLink'.contains('http')
+                      ? imageLink.substring(imageLink.lastIndexOf('http'))
+                      : imageLink,
                   fit: BoxFit.fitHeight,
+                  errorBuilder: (c, e, s) {
+                    return Image.asset('resources/images/logo.jpg');
+                  },
                 ),
               ),
             ),
@@ -95,7 +100,7 @@ class LocationListItemWidget extends StatelessWidget {
   List<Widget> getStarsBar(int rate) {
     List<Widget> starsBar = [];
     for (int i = 0; i < 5; i++) {
-      i <= rate
+      i+1 <= rate
           ? starsBar.add(Icon(
               Icons.star,
               size: 16,

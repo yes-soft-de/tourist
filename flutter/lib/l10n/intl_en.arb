@@ -120,5 +120,20 @@
   "uploading": "Uploading",
   "pleaseUploadYourImage": "Please Upload Your Image",
   "pleaseEnterYourName": "Please Enter Your Name",
-  "profile": "Profile"
+  "profile": "Profile",
+  "search": "Search",
+  "locationsYouWorkIn": "Locations you work in",
+  "locationName": "Location Name",
+  "locationDescription": "Location Description",
+  "myPhoneNumber": "My Phone number",
+  "guidesArea": "Guides Area",
+  "searchQuery": "Search Query",
+  "priceProposal": "Price proposal",
+  "pending": "Pending",
+  "onGoing": "On Going",
+  "finished": "Finished",
+  "proposal": "Proposal",
+  "loginAsGuide":"Login as guide",
+  "loginAsTourist":"Login as tourist",
+  "soyah":"Soyah"
 }

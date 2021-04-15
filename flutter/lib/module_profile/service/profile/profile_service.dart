@@ -1,7 +1,8 @@
 import 'package:inject/inject.dart';
-import 'package:tourists/consts/urls.dart';
 import 'package:tourists/module_auth/enums/user_type.dart';
 import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
+import 'package:tourists/module_locations/model/location_list_item/location_list_item.dart';
+import 'package:tourists/module_locations/service/location_list/location_list_service.dart';
 import 'package:tourists/module_profile/manager/my_profile_manager/my_profile_manager.dart';
 import 'package:tourists/module_profile/model/profile_model/profile_model.dart';
 import 'package:tourists/module_profile/presistance/profile_shared_preferences.dart';
@@ -13,11 +14,13 @@ class ProfileService {
   final MyProfileManager _manager;
   final ProfileSharedPreferencesHelper _preferencesHelper;
   final AuthService _authService;
+  final LocationListService _locationListService;
 
   ProfileService(
     this._manager,
     this._preferencesHelper,
     this._authService,
+    this._locationListService,
   );
 
   Future<bool> hasProfile() async {
@@ -38,55 +41,55 @@ class ProfileService {
     CreateProfileRequest request = CreateProfileRequest(
       userName: profileModel.name,
       image: profileModel.image,
-      location: 'Saudi Arabia',
+      role: role,
+      phoneNumber: profileModel.phone,
+      location: profileModel.locations,
       userID: userId,
+      languages: profileModel.languages,
+      services: profileModel.services,
     );
 
-    ProfileResponse response = await _manager.createMyProfile(request, role);
-    if (response == null) return null;
-    var result = ProfileModel(
-      languages: response.language,
-      locations: response.city,
-      name: response.name,
-      image: response.image.path,
-    );
-    await cacheProfile(result);
-    return result;
-  }
-
-  Future<void> cacheProfile(ProfileModel response) async {
-    await _preferencesHelper.setUserName(response.name);
-    if (response.image.contains('http')) {
-      await _preferencesHelper.setUserImage(response.image);
+    ProfileResponse response;
+    if (role == UserRole.ROLE_GUIDE) {
+      response = await _manager.createGuideProfile(request);
     } else {
-      await _preferencesHelper.setUserImage(Urls.imagesRoot + response.image);
+      response = await _manager.createTouristProfile(request);
     }
+
+    if (response == null) return null;
+
+    return getUserProfile(userId);
   }
 
-  Future<ProfileResponse> getUserProfile(String userId) async {
-    var me = await _authService.userID;
-    if (userId == me) {
-      var myProfile = await profile;
-      if (myProfile.name != null) {
-        return ProfileResponse(
-            name: myProfile.name,
-            image: ApiImage(path: myProfile.image),
-            language: myProfile.languages,
-            city: myProfile.locations);
-      }
+  Future<ProfileModel> getUserProfile(String userId) async {
+    var role = await _authService.userRole;
+    ProfileResponse myProfile;
+
+    if (role == UserRole.ROLE_GUIDE) {
+      myProfile = await _manager.getGuideProfile(userId);
+    } else {
+      myProfile = await _manager.getTouristProfile(userId);
     }
-    return _manager.getUserProfile(userId);
+    var places = <LocationListItem>[];
+
+    if (role == UserRole.ROLE_GUIDE) {
+      places = await _locationListService.getLocationList();
+    }
+
+
+    return ProfileModel(
+      name: '${myProfile?.data?.name ?? ''}',
+      image: '${myProfile?.data?.image}',
+      phone: '${myProfile?.data?.phoneNumber ?? ''}',
+      locations: myProfile?.data?.city,
+      services: myProfile?.data?.service,
+      languages: myProfile?.data?.guideLanguage,
+      availableLocations: places,
+    );
   }
 
   Future<ProfileModel> getMyProfile() async {
-    String uid = await _authService.userID;
-    var response = await getUserProfile(uid);
-
-    return ProfileModel(
-      languages: response != null ? response.language : [],
-      locations: response != null ? response.city : [],
-      name: response != null ? response.name : 'user',
-      image: response != null ? response.image.path : '',
-    );
+    var me = await _authService.userID;
+    return getUserProfile(me);
   }
 }

@@ -6,7 +6,10 @@ class NewCommentWidget extends StatelessWidget {
 
   final TextEditingController commentController = TextEditingController();
 
-  NewCommentWidget({@required this.onCommentAdded, @required this.active});
+  NewCommentWidget({
+    @required this.onCommentAdded,
+    this.active = true,
+  });
 
   @override
   Widget build(BuildContext context) {

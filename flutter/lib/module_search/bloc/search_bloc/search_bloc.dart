@@ -25,7 +25,6 @@ class SearchBloc {
     _debounce = Timer(const Duration(milliseconds: 500), () {
       _locationsService.getPredictions(query).then(
         (value) {
-          print('New Suggestion Batch');
           _searchSuggestionSubject.add(value);
         },
       );

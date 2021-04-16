@@ -33,6 +33,6 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-task wrapper(type: Wrapper) {
+task flutterWrapper(type: Wrapper) {
     gradleVersion = '6.7.1' // set to applicable version
 }

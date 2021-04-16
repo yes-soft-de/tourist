@@ -71,6 +71,10 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
 
+      - uses: eskatos/gradle-command-action@v1
+        with:
+          gradle-version: 6.7.1
+
       - name: Generate Gradle Wrapper
         run: |
           cd flutter/android
@@ -78,12 +82,9 @@ jobs:
           chmod +x gradlew
 
       - name: Distribute app to Alpha track 🚀
-        uses: eskatos/gradle-command-action@v1
         run: |
           cd flutter/android
           bundle exec fastlane alpha
-        with:
-          gradle-version: 6.7.1
 
       - name: Upload artifact to Github
         uses: actions/upload-artifact@v1

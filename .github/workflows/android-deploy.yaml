@@ -74,6 +74,7 @@ jobs:
       - name: Generate Gradle Wrapper
         run: |
           cd flutter/android
+          gradle wrapper
           chmod +x gradlew
 
       - name: Distribute app to Alpha track 🚀

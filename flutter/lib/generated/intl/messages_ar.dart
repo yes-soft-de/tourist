@@ -108,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "priceProposal" : MessageLookupByLibrary.simpleMessage("سعر الطلب"),
     "profile" : MessageLookupByLibrary.simpleMessage("ملف شخصي"),
     "proposal" : MessageLookupByLibrary.simpleMessage("طلب"),
+    "rating" : MessageLookupByLibrary.simpleMessage("تقييم"),
     "register" : MessageLookupByLibrary.simpleMessage("تسجيل اشتراك"),
     "registerSuccessSetupMyProfile" : MessageLookupByLibrary.simpleMessage("تم التسجيل بنجاح , هيء ملفك"),
     "register_submit" : MessageLookupByLibrary.simpleMessage("تسجيل حساب جديد"),

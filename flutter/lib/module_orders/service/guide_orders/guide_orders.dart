@@ -75,7 +75,7 @@ class GuideOrdersService {
               1000 * e.order.date.timestamp),
           city: e.order.city,
           cost: e.cost,
-          roomId: e.order.roomID,
+          roomId: e.order.roomID??e.order.uuid??e.uuid,
           status: e.status,
         );
       }
@@ -92,7 +92,7 @@ class GuideOrdersService {
         date: DateTime.fromMillisecondsSinceEpoch(1000 * e.date.timestamp),
         city: e.city,
         cost: e.cost,
-        roomId: e.roomID,
+        roomId: e.roomID??e.uuid,
         status: e.status,
       );
     }).toList();

@@ -135,5 +135,6 @@
   "proposal": "طلب",
   "loginAsGuide":"تسجيل كمرشد",
   "loginAsTourist":"تسجيل كسائح",
-  "soyah":"سياح"
+  "soyah":"سياح",
+  "rating":"تقييم"
 }

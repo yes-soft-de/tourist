@@ -47,7 +47,11 @@ class LocationDetailsBloc {
         guides: locationInfo.guides ?? [],
         isLoggedIn: loggedIn,
         onPostComment: (commentMsg) {
-          postComment(commentMsg, locationInfo.id.toString(), locationInfo.placeId);
+          postComment(
+              commentMsg, locationInfo.id.toString(), locationInfo.placeId);
+        },
+        onCreateRate: (rate) {
+          createRate(rate, locationId);
         }));
   }
 
@@ -68,7 +72,7 @@ class LocationDetailsBloc {
     return getLocation(detailsId);
   }
 
-  void createRate(int rate, String locationId) {
+  void createRate(double rate, String locationId) {
     _locationDetailsService.createRate(rate, locationId).then((value) {
       if (value != null) {
         getLocation(locationId);

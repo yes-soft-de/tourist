@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:tourists/module_comment/response/comment/comment_response.dart';
 import 'package:tourists/module_comment/ui/widget/comment_list/comment_list.dart';
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
@@ -11,14 +12,16 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
   LocationDetailsModel location;
   List<GuideListItemModel> guides;
   void Function(String) onPostComment;
-  bool isLoggedIn;
+  void Function(double) onCreateRate;
 
-  LocationDetailsStateLoaded({
-    this.location,
-    this.guides,
-    this.onPostComment,
-    this.isLoggedIn,
-  }) {
+  bool isLoggedIn;
+  double rate = 0.0;
+  LocationDetailsStateLoaded(
+      {this.location,
+      this.guides,
+      this.onPostComment,
+      this.isLoggedIn,
+      this.onCreateRate}) {
     if (this.location == null) {
       this.location = LocationDetailsModel();
     }
@@ -41,6 +44,20 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
                 location.description,
                 maxLines: 4,
               ),
+            ),
+            Center(
+              child: SmoothStarRating(
+                  allowHalfRating: true, 
+                  onRated: (v) {
+                    onCreateRate(v);
+                  },
+                  starCount: 5,
+                  rating: double.parse(location.ratingAverage),
+                  size: 35.0,
+                  isReadOnly: !isLoggedIn,
+                  color:  Color(0xff05F29B),
+                  borderColor:  Color(0xff05F29B),
+                  spacing: 0.0),
             ),
             guides.isNotEmpty
                 ? GuidesListWidget(guides, location.placeId)

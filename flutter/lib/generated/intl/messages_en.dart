@@ -108,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "priceProposal" : MessageLookupByLibrary.simpleMessage("Price proposal"),
     "profile" : MessageLookupByLibrary.simpleMessage("Profile"),
     "proposal" : MessageLookupByLibrary.simpleMessage("Proposal"),
+    "rating" : MessageLookupByLibrary.simpleMessage("rating"),
     "register" : MessageLookupByLibrary.simpleMessage("Register"),
     "registerSuccessSetupMyProfile" : MessageLookupByLibrary.simpleMessage("Register Success, Setup My Profile"),
     "register_submit" : MessageLookupByLibrary.simpleMessage("Register"),

@@ -86,7 +86,7 @@ class LocationDetailsService {
     return response.locationDetails;
   }
 
-  Future<dynamic> createRate(int rate, String locationId) async {
+  Future<dynamic> createRate(double rate, String locationId) async {
     String uid = await _preferencesHelper.getUserUID();
     dynamic response = await _ratingManager.createRating(
         CreateRatingRequest(user: uid, rate: rate, region: locationId));

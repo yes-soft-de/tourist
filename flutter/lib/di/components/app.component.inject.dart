@@ -208,7 +208,8 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i30.LocationListManager _createLocationListManager() =>
       _i30.LocationListManager(_createLocationListRepository());
   _i31.LocationListRepository _createLocationListRepository() =>
-      _i31.LocationListRepository(_createHttpClient());
+      _i31.LocationListRepository(
+          _createHttpClient(), _createAuthService(), _createAuthPrefsHelper());
   _i2.Logger _createLogger() => _singletonLogger ??= _i2.Logger();
   _i32.GuideListScreen _createGuideListScreen() =>
       _i32.GuideListScreen(_createGuideListBloc());
@@ -273,7 +274,8 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i57.LocationDetailsManager _createLocationDetailsManager() =>
       _i57.LocationDetailsManager(_createLocationDetailsRepository());
   _i58.LocationDetailsRepository _createLocationDetailsRepository() =>
-      _i58.LocationDetailsRepository(_createHttpClient(), _createAuthService());
+      _i58.LocationDetailsRepository(
+          _createHttpClient(), _createAuthService(), _createAuthPrefsHelper());
   _i59.GoogleLocationsService _createGoogleLocationsService() =>
       _i59.GoogleLocationsService(
           _createGoogleLocationsManager(), _createLocationPreferencesHelper());

@@ -136,5 +136,7 @@
   "loginAsGuide":"Login as guide",
   "loginAsTourist":"Login as tourist",
   "soyah":"Soyah",
-  "rating":"rating"
+  "rating":"rating",
+  "loginStatus":"Login Status",
+  "empty": "Empty List"
 }

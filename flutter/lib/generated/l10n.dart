@@ -1404,6 +1404,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Login Status`
+  String get loginStatus {
+    return Intl.message(
+      'Login Status',
+      name: 'loginStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Empty List`
+  String get empty {
+    return Intl.message(
+      'Empty List',
+      name: 'empty',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

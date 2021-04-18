@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class CreateRatingRequest {
   String user;
-  double rate;
-  String region;
+  String rate;
+  int region;
   String guide;
 
   CreateRatingRequest(

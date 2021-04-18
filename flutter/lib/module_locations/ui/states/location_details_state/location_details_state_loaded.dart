@@ -45,20 +45,22 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
                 maxLines: 4,
               ),
             ),
-            Center(
+            isLoggedIn?Center(
               child: SmoothStarRating(
-                  allowHalfRating: true, 
+                  allowHalfRating: false,
                   onRated: (v) {
                     onCreateRate(v);
                   },
                   starCount: 5,
-                  rating:location.ratingAverage !=null ? double.parse(location.ratingAverage):0.0,
+                  rating: location.userRating != null
+                      ? double.parse(location.userRating)
+                      : 0.0,
                   size: 35.0,
                   isReadOnly: !isLoggedIn,
-                  color:  Color(0xff05F29B),
-                  borderColor:  Color(0xff05F29B),
+                  color: Color(0xff05F29B),
+                  borderColor: Color(0xff05F29B),
                   spacing: 0.0),
-            ),
+            ):Container(),
             guides.isNotEmpty
                 ? GuidesListWidget(guides, location.placeId)
                 : Container(

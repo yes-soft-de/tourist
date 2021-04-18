@@ -51,7 +51,33 @@ class LocationDetailsBloc {
               commentMsg, locationInfo.id.toString(), locationInfo.placeId);
         },
         onCreateRate: (rate) {
-          createRate(rate, locationId);
+          createRate(rate, locationInfo.id.toString(),locationId);
+        }));
+  }
+
+  Future<void> getLocationWithoutLoading(String locationId) async {
+    var locationInfo =
+        await _locationDetailsService.getLocationDetails(locationId);
+
+    if (locationInfo == null) {
+      stateStream.add(LocationDetailsStateError(
+          'Error loading location or location does not exist!'));
+      return;
+    }
+
+    var loggedIn = await _authService.isLoggedIn;
+    loggedIn ??= false;
+
+    stateStream.add(LocationDetailsStateLoaded(
+        location: locationInfo,
+        guides: locationInfo.guides ?? [],
+        isLoggedIn: loggedIn,
+        onPostComment: (commentMsg) {
+          postComment(
+              commentMsg, locationInfo.id.toString(), locationInfo.placeId);
+        },
+        onCreateRate: (rate) {
+          createRate(rate, locationInfo.id.toString(),locationId);
         }));
   }
 
@@ -72,10 +98,10 @@ class LocationDetailsBloc {
     return getLocation(detailsId);
   }
 
-  void createRate(double rate, String locationId) {
+  void createRate(double rate, String locationId,String placeID) {
     _locationDetailsService.createRate(rate, locationId).then((value) {
       if (value != null) {
-        getLocation(locationId);
+        getLocationWithoutLoading(placeID);
       } else {
         Fluttertoast.showToast(msg: 'Error Creating Rate');
       }

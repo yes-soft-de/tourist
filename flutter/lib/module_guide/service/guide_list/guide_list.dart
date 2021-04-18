@@ -25,7 +25,7 @@ class GuideListService {
   Future<dynamic> createRate(double rate,String guideId) async {
     String uid = await _preferencesHelper.getUserUID();
     dynamic response = await _ratingManager.createRating(
-        CreateRatingRequest(user: uid, rate: rate,guide: guideId));
+        CreateRatingRequest(user: uid, rate: rate.toInt().toString(),guide: guideId));
 
     return response;
   }

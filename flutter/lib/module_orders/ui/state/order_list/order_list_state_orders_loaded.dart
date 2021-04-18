@@ -26,7 +26,7 @@ class OrderListStateOrdersLoaded extends OrdersListState {
     ListView sentOrders = _getSentOrdersList(context);
     ListView pendingPaymentOrders = _getPendingPaymentList(context);
     ListView onGoing = _getOnGoingOrdersList(context);
-    ListView done = _getFinishedOrdersList();
+    ListView done = _getFinishedOrdersList(context);
 
     PageView orderPages = PageView(
       controller: _pageController,
@@ -161,7 +161,7 @@ class OrderListStateOrdersLoaded extends OrdersListState {
       return ListView(
         children: <Widget>[
           Center(
-            child: Text('Empty List'),
+            child: Text('${S.of(context).empty}'),
           ),
         ],
       );
@@ -182,7 +182,7 @@ class OrderListStateOrdersLoaded extends OrdersListState {
               Container(
                 height: 300,
                 child: Center(
-                  child: Text('Empty List'),
+                  child: Text('${S.of(context).empty}'),
                 ),
               )
             ],
@@ -195,7 +195,7 @@ class OrderListStateOrdersLoaded extends OrdersListState {
       return ListView(
         children: <Widget>[
           Center(
-            child: Text('Empty List'),
+            child: Text('${S.of(context).empty}'),
           ),
         ],
       );
@@ -219,7 +219,7 @@ class OrderListStateOrdersLoaded extends OrdersListState {
       children: ordersWidgetList.isNotEmpty
           ? ordersWidgetList
           : <Widget>[
-              Container(height: 300, child: Center(child: Text('Empty List')))
+              Container(height: 300, child: Center(child: Text('${S.of(context).empty}')))
             ],
     );
   }
@@ -229,7 +229,7 @@ class OrderListStateOrdersLoaded extends OrdersListState {
       return ListView(
         children: <Widget>[
           Center(
-            child: Text('Empty List'),
+            child: Text('${S.of(context).empty}'),
           ),
         ],
       );
@@ -247,17 +247,17 @@ class OrderListStateOrdersLoaded extends OrdersListState {
       children: ordersWidgetList.isNotEmpty
           ? ordersWidgetList
           : <Widget>[
-              Container(height: 300, child: Center(child: Text('Empty List')))
+              Container(height: 300, child: Center(child: Text('${S.of(context).empty}')))
             ],
     );
   }
 
-  Widget _getFinishedOrdersList() {
+  Widget _getFinishedOrdersList(BuildContext context) {
     if (ordersList == null) {
       return ListView(
         children: <Widget>[
           Center(
-            child: Text('Empty List'),
+            child: Text('${S.of(context).empty}'),
           ),
         ],
       );
@@ -275,7 +275,7 @@ class OrderListStateOrdersLoaded extends OrdersListState {
       children: ordersWidgetList.isNotEmpty
           ? ordersWidgetList
           : <Widget>[
-              Container(height: 300, child: Center(child: Text('Empty List')))
+              Container(height: 300, child: Center(child: Text('${S.of(context).empty}')))
             ],
     );
   }

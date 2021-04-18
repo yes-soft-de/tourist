@@ -29,7 +29,7 @@ class EventService {
           images: element.images.isNotEmpty
               ? element.images
               : [
-                  'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg'
+                  'https://www.abouther.com/sites/default/files/2018/11/06/main_-_janadriyah_festival.jpg'
                 ],
           status: element.status));
     });

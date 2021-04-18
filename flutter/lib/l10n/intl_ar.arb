@@ -136,5 +136,7 @@
   "loginAsGuide":"تسجيل كمرشد",
   "loginAsTourist":"تسجيل كسائح",
   "soyah":"سياح",
-  "rating":"تقييم"
+  "rating":"تقييم",
+  "loginStatus":"حالة تسجيل الدخول",
+  "empty": "القائمة فارغة"
 }

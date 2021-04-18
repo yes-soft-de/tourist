@@ -144,7 +144,7 @@ class _EventListScreenState extends State<EventListScreen> {
           },
           child: EventListItemWidget(
             image:
-                'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
+                'https://www.abouther.com/sites/default/files/2018/11/06/main_-_janadriyah_festival.jpg',
             location: event.location,
             status: event.status,
             commentNumber: 0,

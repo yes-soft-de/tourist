@@ -195,7 +195,7 @@ class RegionsService
             
             $rateValue = $this->regionsManager->getRatingByUserAndRegion($response->id, $user->getId());
             
-            if(isset($rateValue))
+            if($rateValue)
             {
                 $response->setUserRating(number_format($rateValue[0]['rateValue'], 4, '.', ','));
             }

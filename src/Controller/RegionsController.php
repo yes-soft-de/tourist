@@ -83,7 +83,7 @@ class RegionsController extends BaseController
      */
     public function getRegionByPlaceID($placeId)
     {
-        $response = $this->regionsService->getRegionByPlaceID($placeId);
+        $response = $this->regionsService->getRegionByPlaceID($placeId, $this->getUserId());
 
         return $this->response($response,self::FETCH);
     }

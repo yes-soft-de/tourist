@@ -18,6 +18,8 @@ class RegionResponse
 
     public $ratingAverage;
 
+    public $userRating;
+
     public $regionImage = [];
 
     public $guides = [];
@@ -54,6 +56,11 @@ class RegionResponse
     public function setGuides(array $guides): void
     {
         $this->guides = $guides;
+    }
+
+    public function setUserRating($userRating)
+    {
+        $this->userRating = $userRating;
     }
 
 

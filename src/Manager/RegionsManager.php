@@ -23,9 +23,11 @@ class RegionsManager
     private $imageManager;
     private $commentManager;
     private $ratingManager;
+    private $touristManager;
 
     public function __construct(AutoMapping $autoMapping, EntityManagerInterface $entityManager, RegionsEntityRepository $regionsEntityRepository,  
-    ImagesEntityRepository $imagesEntityRepository, ImageManager $imageManager, CommentsManager $commentManager, RatingManager $ratingManager)
+    ImagesEntityRepository $imagesEntityRepository, ImageManager $imageManager, CommentsManager $commentManager, 
+    RatingManager $ratingManager, TouristsManager $touristManager)
     {
         $this->autoMapping = $autoMapping;
         $this->entityManager = $entityManager;
@@ -34,6 +36,7 @@ class RegionsManager
         $this->imageManager = $imageManager;
         $this->commentManager = $commentManager;
         $this->ratingManager = $ratingManager;
+        $this->touristManager = $touristManager;
     }
 
     public function regionCreate(RegionCreateRequest $request)
@@ -50,6 +53,11 @@ class RegionsManager
     public function getRegions()
     {
         return $this->regionsEntityRepository->getRegions();
+    }
+
+    public function getRatingByUserAndRegion($id, $userID)
+    {
+        return $this->ratingManager->getRatingByUserAndRegion($id, $userID);
     }
 
     public function getRegion($id)
@@ -149,5 +157,10 @@ class RegionsManager
         }
 
         return $region;
+    }
+
+    public function getTouristByUserID($userID)
+    {
+        return $this->touristManager->getTouristByUserID($userID);
     }
 }

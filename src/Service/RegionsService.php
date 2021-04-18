@@ -29,12 +29,14 @@ class RegionsService
     private $autoMapping;
     private $imageManager;
     private $ratingManager;
+    private $ratingService;
     private $commentsManager;
     private $guidService;
     private $params;
 
     public function __construct(AutoMapping $autoMapping, RegionsManager $regionsManager, ImageManager $imageManager, RatingManager $ratingManager,
-                                CommentsManager $commentsManager, ParameterBagInterface $params, GuidService $guideService)
+                                CommentsManager $commentsManager, ParameterBagInterface $params, 
+                                GuidService $guideService, RatingService $ratingService)
     {
         $this->regionsManager = $regionsManager;
         $this->autoMapping = $autoMapping;
@@ -42,6 +44,7 @@ class RegionsService
         $this->ratingManager = $ratingManager;
         $this->commentsManager = $commentsManager;
         $this->guidService = $guideService;
+        $this->ratingService = $ratingService;
         $this->params = $params->get('upload_base_url') . '/';
     }
 
@@ -176,11 +179,23 @@ class RegionsService
         }
         return $response;
     }
-    public function getRegionByPlaceID($placeId)
+
+    public function getRegionByPlaceID($placeId, $userID)
     {
         //get region
         $result = $this->regionsManager->getRegionByPlaceID($placeId);
         $response = $this->autoMapping->map('array', RegionResponse::class, $result);
+
+        //get signed-in user's rating
+        if($response)
+        {
+            //first get id of the user
+            $user = $this->regionsManager->getTouristByUserID($userID);
+            
+            $rateValue = $this->regionsManager->getRatingByUserAndRegion($response->id, $user->getId());
+            
+            $response->setUserRating($rateValue[0]['rateValue']);
+        }
 
         //get comments
         $commentsResponse= [];

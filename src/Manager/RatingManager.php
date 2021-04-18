@@ -84,4 +84,9 @@ class RatingManager
     {
         return count($this->ratingsEntityRepository->findAll());
     }
+
+    public function getRatingByUserAndRegion($id, $userID)
+    {
+        return $this->ratingsEntityRepository->getRatingByUserAndRegion($id, $userID);
+    }
 }

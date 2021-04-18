@@ -52,7 +52,7 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
                     onCreateRate(v);
                   },
                   starCount: 5,
-                  rating: double.parse(location.ratingAverage),
+                  rating:location.ratingAverage !=null ? double.parse(location.ratingAverage):0.0,
                   size: 35.0,
                   isReadOnly: !isLoggedIn,
                   color:  Color(0xff05F29B),

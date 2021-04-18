@@ -22,6 +22,7 @@ use App\Response\RegionCreateResponse;
 use App\Response\ImageCreateResponse;
 use App\Response\RegionResponse;
 use App\Response\RegionsResponse;
+use PhpParser\Node\Expr\Cast\Double;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 class RegionsService
 {
@@ -194,7 +195,10 @@ class RegionsService
             
             $rateValue = $this->regionsManager->getRatingByUserAndRegion($response->id, $user->getId());
             
-            $response->setUserRating($rateValue[0]['rateValue']);
+            if(isset($rateValue))
+            {
+                $response->setUserRating(number_format($rateValue[0]['rateValue'], 4, '.', ','));
+            }
         }
 
         //get comments

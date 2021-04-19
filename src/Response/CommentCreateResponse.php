@@ -12,7 +12,7 @@ class CommentCreateResponse
 
     public $region;
 
-    public $user;
+    // public $user;
 
     /**
      * @param mixed $region
@@ -22,13 +22,13 @@ class CommentCreateResponse
         $this->region = $region;
     }
 
-    /**
-     * @param mixed $user
-     */
-    public function setUser($user): void
-    {
-        $this->user = $user;
-    }
+    // /**
+    //  * @param mixed $user
+    //  */
+    // public function setUser($user): void
+    // {
+    //     $this->user = $user;
+    // }
 
 
 }

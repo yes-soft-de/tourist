@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:tourists/generated/l10n.dart';
+import 'package:tourists/module_comment/response/comment/comment_response.dart';
+import 'package:tourists/module_comment/ui/widget/comment_list/comment_list.dart';
 import 'package:tourists/module_locations/bloc/event_details/event_details.dart';
+import 'package:tourists/module_locations/location_routes.dart';
 import 'package:tourists/module_locations/model/event/event_model.dart';
 import 'package:tourists/module_shared/ui/widgets/carousel/carousel.dart';
 import 'package:tourists/module_shared/ui/widgets/request_guide_button/request_guide_button.dart';
@@ -21,6 +24,22 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
   int eventId;
   EventModel eventDetails;
   String locationId;
+  @override
+  void initState() {
+    super.initState();
+    widget._bloc.eventStream.listen((event) {
+      currentState = event[EventDetailsBloc.KEY_STATUS];
+      if (currentState == EventDetailsBloc.STATUS_CODE_LOAD_SUCCESS) {
+        eventDetails = event[EventDetailsBloc.KEY_EVENT];
+        if (event[EventDetailsBloc.KEY_LOCATION] != null) {
+          locationId = event[EventDetailsBloc.KEY_LOCATION].id;
+        }
+      }
+      if (mounted) {
+        setState(() {});
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +52,9 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
           locationId = event[EventDetailsBloc.KEY_LOCATION].id;
         }
       }
-      setState(() {});
+      if (mounted) {
+        setState(() {});
+      }
     });
 
     if (currentState == EventDetailsBloc.STATUS_CODE_INIT) {
@@ -142,7 +163,6 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
     pageUI.add(Container(
       height: 16,
     ));
-
     pageUI.add(Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -153,6 +173,10 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
         )
       ],
     ));
+    pageUI.add(Container(
+      height: 16,
+    ));
+    pageUI.add(_getCommentsList());
 
     return Scaffold(
       appBar: AppBar(
@@ -192,6 +216,24 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
       body: Center(
         child: Text(S.of(context).error_fetching_data),
       ),
+    );
+  }
+
+  Widget _getCommentsList() {
+    eventDetails.comments ??= <CommentModel>[];
+    return CommentListWidget(
+      comments: eventDetails.comments,
+      pageSize: 3,
+      onCommentPosted: (comment) {
+        widget._bloc
+            .postComment(comment, locationId ?? eventDetails.id)
+            .whenComplete(() {
+          Navigator.of(context).pop();
+          Navigator.pushNamed(context, LocationRoutes.eventDetails,
+              arguments: eventDetails.id);
+        });
+      },
+      isLoggedIn: eventDetails.isLogged ?? false,
     );
   }
 

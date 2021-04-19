@@ -232,7 +232,7 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i40.EventListBloc _createEventListBloc() =>
       _i40.EventListBloc(_createEventService());
   _i41.EventService _createEventService() =>
-      _i41.EventService(_createEventManager());
+      _i41.EventService(_createEventManager(), _createAuthService());
   _i42.EventManager _createEventManager() =>
       _i42.EventManager(_createEventRepository());
   _i43.EventRepository _createEventRepository() =>
@@ -293,7 +293,10 @@ class AppComponent$Injector implements _i1.AppComponent {
   _i65.EventDetailsScreen _createEventDetailsScreen() =>
       _i65.EventDetailsScreen(_createEventDetailsBloc());
   _i66.EventDetailsBloc _createEventDetailsBloc() => _i66.EventDetailsBloc(
-      _createEventService(), _createLocationListService());
+      _createEventService(),
+      _createLocationListService(),
+      _createCommentManager(),
+      _createSharedPreferencesHelper());
   _i67.AddLocationScreen _createAddLocationScreen() =>
       _i67.AddLocationScreen(_createAddLocationBloc());
   _i68.AddLocationBloc _createAddLocationBloc() => _i68.AddLocationBloc(

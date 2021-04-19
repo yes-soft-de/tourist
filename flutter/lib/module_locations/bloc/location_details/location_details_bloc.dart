@@ -94,7 +94,7 @@ class LocationDetailsBloc {
               region: regionId,
             ));
     if (response == null) return;
-
+    //stateStream.add(LocationDetailsStateLoading());
     return getLocation(detailsId);
   }
 

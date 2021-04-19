@@ -147,7 +147,7 @@ class _EventListScreenState extends State<EventListScreen> {
                 'https://www.abouther.com/sites/default/files/2018/11/06/main_-_janadriyah_festival.jpg',
             location: event.location,
             status: event.status,
-            commentNumber: 0,
+            commentNumber: int.parse(event.commentNumber??'0'),
             time: getDate(event.date.timestamp),
             name: event.name,
           ),

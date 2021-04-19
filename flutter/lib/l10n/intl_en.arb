@@ -138,5 +138,9 @@
   "soyah":"Soyah",
   "rating":"rating",
   "loginStatus":"Login Status",
-  "empty": "Empty List"
+  "empty": "Empty List",
+  "filter":"Filter",
+  "continues": "Continue",
+  "cancel": "Cancel"
+
 }

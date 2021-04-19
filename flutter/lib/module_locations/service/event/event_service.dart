@@ -1,14 +1,16 @@
 import 'package:inject/inject.dart';
+import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
 import 'package:tourists/module_locations/manager/event/event_manager.dart';
 import 'package:tourists/module_locations/model/event/event_model.dart';
 import 'package:tourists/module_locations/response/event_details/event_details.dart';
 import 'package:tourists/module_locations/response/event_list/event_list.dart';
+import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 
 @provide
 class EventService {
   final EventManager _manager;
-
-  EventService(this._manager);
+  final AuthService _authService;
+  EventService(this._manager, this._authService);
 
   Future<List<EventModel>> getAllEvents() async {
     EventListResponse response = await _manager.getAllEvents();
@@ -31,7 +33,9 @@ class EventService {
               : [
                   'https://www.abouther.com/sites/default/files/2018/11/06/main_-_janadriyah_festival.jpg'
                 ],
-          status: element.status));
+          status: element.status,
+          commentNumber: element.commentNumber
+          ));
     });
 
     return eventList;
@@ -39,6 +43,7 @@ class EventService {
 
   Future<EventModel> getEvent(String id) async {
     EventResponse response = await _manager.getEvent(id);
+    bool isLogged = await _authService.isLoggedIn;
 
     if (response != null) {
       return EventModel(
@@ -49,7 +54,11 @@ class EventService {
           description: response.data.description,
           images: response.data.images,
           date: response.data.date,
-          status: response.data.status);
+          status: response.data.status,
+          comments: response.data.comments,
+          isLogged: isLogged,
+          commentNumber: response.data.commentNumber??0
+          );
     }
     return null;
   }

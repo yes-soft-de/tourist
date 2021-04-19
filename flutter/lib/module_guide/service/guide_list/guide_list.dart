@@ -3,6 +3,7 @@ import 'package:tourists/module_comment/manager/rate/rate_manager.dart';
 import 'package:tourists/module_comment/request/create_rating/create_rating.dart';
 import 'package:tourists/module_guide/manager/guides_manager/guides_manager.dart';
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
+import 'package:tourists/module_guide/request/filter_guide_list.dart';
 import 'package:tourists/module_guide/response/guide_response/guides_response.dart';
 import 'package:tourists/module_persistence/sharedpref/shared_preferences_helper.dart';
 
@@ -15,6 +16,14 @@ class GuideListService {
 
   Future<List<GuideListItemModel>> getAllGuides() async {
     GuidesResponse response = await _guidesManager.getGuidesList();
+    if (response == null) return null;
+
+    var guideList =
+        response.data.where((element) => element.regions?.isNotEmpty).toList();
+    return guideList;
+  }
+  Future<List<GuideListItemModel>> getAllGuidesFiltred(FilterGuideListRequest request) async {
+    GuidesResponse response = await _guidesManager.getAllGuidesFiltredList(request);
     if (response == null) return null;
 
     var guideList =

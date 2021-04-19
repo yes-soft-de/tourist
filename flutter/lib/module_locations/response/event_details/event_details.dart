@@ -1,3 +1,4 @@
+import 'package:tourists/module_comment/response/comment/comment_response.dart';
 import 'package:tourists/module_shared/model/date/date.dart';
 
 class EventResponse {
@@ -34,7 +35,8 @@ class Data {
   String location;
   String description;
   List<String> images;
-
+  List<CommentModel> comments;
+  int commentNumber;
   Data(
       {this.id,
       this.name,
@@ -44,7 +46,10 @@ class Data {
       this.status,
       this.location,
       this.description,
-      this.images});
+      this.images,
+      this.comments,
+      this.commentNumber
+      });
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -56,6 +61,13 @@ class Data {
     location = json['location'];
     description = json['description'];
     images = json['images'].cast<String>();
+     commentNumber = json['commentNumber'];
+    if (json['comments'] != null) {
+      comments = <CommentModel>[];
+      json['comments'].forEach((v) {
+        comments.add(new CommentModel.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {

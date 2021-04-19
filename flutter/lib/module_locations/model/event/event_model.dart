@@ -1,3 +1,4 @@
+import 'package:tourists/module_comment/response/comment/comment_response.dart';
 import 'package:tourists/module_shared/model/date/date.dart';
 
 class EventModel {
@@ -10,14 +11,21 @@ class EventModel {
   String location;
   String description;
   List<String> images;
-
-  EventModel({this.id,
-    this.name,
-    this.type,
-    this.subType,
-    this.date,
-    this.status,
-    this.location,
-    this.description,
-    this.images});
+  List<CommentModel> comments;
+  bool isLogged;
+  var commentNumber;
+  EventModel(
+      {this.id,
+      this.name,
+      this.type,
+      this.subType,
+      this.date,
+      this.status,
+      this.location,
+      this.description,
+      this.images,
+      this.comments,
+      this.isLogged,
+      this.commentNumber
+      });
 }

@@ -2,6 +2,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inject/inject.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tourists/module_auth/service/auth_service/auth_service.dart';
+import 'package:tourists/module_guide/request/filter_guide_list.dart';
 import 'package:tourists/module_guide/service/guide_list/guide_list.dart';
 import 'package:tourists/module_guide/ui/screen/guide_list/guide_list_screen.dart';
 import 'package:tourists/module_guide/ui/states/guide_list_state.dart';
@@ -25,6 +26,24 @@ class GuideListBloc {
   void getAllGuides(GuideListScreen screen) {
     _authService.isLoggedIn.then((loggedId) {
       _guideListService.getAllGuides().then((value) {
+        if (value != null) {
+          _guidesListSubject.add(GuideListStateLoadSuccess(
+              screen: screen,
+              guidesListModel: value,
+              isLoggedId: loggedId,
+              onCreateRate: (rate,guidId) {
+                createRate(rate,guidId,screen);
+              }));
+        } else {
+          _guidesListSubject
+              .add(GuideListStateLoadError(screen, 'Null Data Error'));
+        }
+      });
+    });
+  }
+   void getAllGuidesFiltred(GuideListScreen screen,String language , String city) {
+    _authService.isLoggedIn.then((loggedId) {
+      _guideListService.getAllGuidesFiltred(FilterGuideListRequest(language:language,city: city)).then((value) {
         if (value != null) {
           _guidesListSubject.add(GuideListStateLoadSuccess(
               screen: screen,

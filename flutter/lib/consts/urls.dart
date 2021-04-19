@@ -30,6 +30,7 @@ class Urls {
   static final eventList = 'events';
   static final rate = 'rating';
   static final mapHelper = 'maphelper';
+  static final filterguide = 'guidesfilter';
   static final googleAutoComplete =
       'https://maps.googleapis.com/maps/api/place/autocomplete/json';
   static final googlePlaceDetails =

@@ -152,6 +152,8 @@ class GuidService
     public function filterGuides(GuidesFilterRequest $request)
     {
         $response = [];
+        $guidArray = [];
+
         $language = $request->getLanguage();
         $city = $request->getCity();
         
@@ -168,17 +170,43 @@ class GuidService
             $guides = $this->guidManager->guidesByLanguageAndCity($language, $city);
         }
         
-        foreach ($guides as $guide) 
+        if($guides)
         {
-            foreach($guide['places'] as $place)
+            foreach ($guides as $guid)
             {
-                $guide['regions'][] = $this->guidManager->getRegionByPlaceID($place); 
+                $guid['image'] = $this->params.$guid['image'];
+                
+                //rating
+                $ratingGuidCalculate = $this->ratingManager->getGuidRatingByID($guid['user']);
+                
+                $guidRate = $ratingGuidCalculate[1];
+                $guid['rating'] = $guidRate;
+                
+                //-------> Start of editing
+                $guidArray[] = $guid;
+                //Sort the matrix in descending order by rating
+                array_multisort(array_column($guidArray, 'rating'), SORT_DESC, $guidArray);
+                //end of editing <-------
+
             }
 
-            $response[] = $this->autoMapping->map('array', GuidesResponse::class, $guide);
-        }
+            foreach ($guidArray as $guide) 
+            {
+                foreach($guide['places'] as $place)
+                {
+                    $guide['regions'][] = $this->guidManager->getRegionByPlaceID($place); 
+                }
 
-        return $response;
+                $response[] = $this->autoMapping->map('array', GuidesResponse::class, $guide);
+            }
+
+            return $response;
+        }
+        else
+        {
+            return "not found!";
+        }        
+
     }
 
     public function getguideByUserID($userId)

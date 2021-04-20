@@ -41,11 +41,25 @@ class _CommentListWidgetState extends State<CommentListWidget> {
       }
     });
   }
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     if (allComments == null) return Container();
-
+    if (widget.comments.length > allComments.length) {
+      allComments = [];
+      allComments.addAll(widget.comments.reversed);
+      try {
+        displayedComments =
+            allComments.sublist(0, widget.pageSize * (1 + currentPage));
+      } catch (e) {
+        displayedComments = allComments;
+        canShowMore = false;
+      }
+    }
     if (allComments.length > widget.pageSize) {
       canShowMore = true;
     }
@@ -57,7 +71,6 @@ class _CommentListWidgetState extends State<CommentListWidget> {
       displayedComments = allComments;
       canShowMore = false;
     }
-
     List<Widget> comments = [];
 
     if (widget.isLoggedIn) {
@@ -65,6 +78,7 @@ class _CommentListWidgetState extends State<CommentListWidget> {
         NewCommentWidget(
           onCommentAdded: (comment) {
             widget.onCommentPosted(comment);
+            setState(() {});
           },
         ),
       );

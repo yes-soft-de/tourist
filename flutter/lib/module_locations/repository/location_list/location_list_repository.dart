@@ -14,11 +14,13 @@ class LocationListRepository {
       this._httpClient, this._authService, this._prefsHelper);
 
   Future<LocationListResponse> getLocationList() async {
-    var token = await _prefsHelper.getToken();
     Map response;
-    if (token != null) {
-      response = await _httpClient.get(Urls.locationList, headers:{'Authorization':'Bearer $token'});
-    } else {
+
+    try {
+      var token = await _prefsHelper.getToken();
+      response = await _httpClient
+          .get(Urls.locationList, headers: {'Authorization': 'Bearer $token'});
+    } catch (e) {
       response = await _httpClient.get(Urls.locationList);
     }
 

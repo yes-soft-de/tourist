@@ -5,30 +5,26 @@ import 'package:tourists/module_comment/response/comment/comment_response.dart';
 import 'package:tourists/module_comment/ui/widget/comment_list/comment_list.dart';
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
 import 'package:tourists/module_locations/model/location_details/location_details.dart';
+import 'package:tourists/module_locations/ui/screens/location_details/location_details.dart';
 import 'package:tourists/module_locations/ui/states/location_details_state/location_details_state.dart';
 import 'package:tourists/module_locations/ui/widgets/guides_list/guides_list.dart';
 
 class LocationDetailsStateLoaded extends LocationDetailsState {
   LocationDetailsModel location;
   List<GuideListItemModel> guides;
-  void Function(String) onPostComment;
-  void Function(double) onCreateRate;
-
   bool isLoggedIn;
   double rate = 0.0;
+  LocationDetailsScreenState screenState;
   LocationDetailsStateLoaded(
-      {this.location,
-      this.guides,
-      this.onPostComment,
-      this.isLoggedIn,
-      this.onCreateRate}) {
-    if (this.location == null) {
-      this.location = LocationDetailsModel();
-    }
-  }
+    this.screenState, {
+    this.location,
+    this.guides,
+    this.isLoggedIn,
+  }) : super(screenState);
 
   @override
   Widget getUI(BuildContext context) {
+    location.comments ??= <CommentModel>[];
     return Scaffold(
       appBar: AppBar(
         title: Text('${location?.name}'),
@@ -45,22 +41,25 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
                 maxLines: 4,
               ),
             ),
-            isLoggedIn?Center(
-              child: SmoothStarRating(
-                  allowHalfRating: false,
-                  onRated: (v) {
-                    onCreateRate(v);
-                  },
-                  starCount: 5,
-                  rating: location.userRating != null
-                      ? double.parse(location.userRating)
-                      : 0.0,
-                  size: 35.0,
-                  isReadOnly: !isLoggedIn,
-                  color: Color(0xff05F29B),
-                  borderColor: Color(0xff05F29B),
-                  spacing: 0.0),
-            ):Container(),
+            isLoggedIn
+                ? Center(
+                    child: SmoothStarRating(
+                        allowHalfRating: false,
+                        onRated: (v) {
+                          screenState.createRate(
+                              rate, location.id.toString(), location.placeId);
+                        },
+                        starCount: 5,
+                        rating: location.userRating != null
+                            ? double.parse(location.userRating)
+                            : 0.0,
+                        size: 35.0,
+                        isReadOnly: !isLoggedIn,
+                        color: Color(0xff05F29B),
+                        borderColor: Color(0xff05F29B),
+                        spacing: 0.0),
+                  )
+                : Container(),
             guides.isNotEmpty
                 ? GuidesListWidget(guides, location.placeId)
                 : Container(
@@ -70,7 +69,16 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
                       child: Text('No guides for this place was found!'),
                     ),
                   ),
-            _getCommentsList(),
+            //_getCommentsList(context),
+            CommentListWidget(
+              comments: location.comments,
+              pageSize: 3,
+              onCommentPosted: (comment) {
+                screenState.createComment(
+                    comment, location.id.toString(), location.placeId);
+              },
+              isLoggedIn: isLoggedIn,
+            ),
           ],
         ),
       ),
@@ -99,13 +107,14 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
     );
   }
 
-  Widget _getCommentsList() {
+  Widget _getCommentsList(BuildContext context) {
     location.comments ??= <CommentModel>[];
     return CommentListWidget(
       comments: location.comments,
       pageSize: 3,
       onCommentPosted: (comment) {
-        onPostComment(comment);
+        screenState.createComment(
+            comment, location.id.toString(), location.placeId);
       },
       isLoggedIn: isLoggedIn,
     );

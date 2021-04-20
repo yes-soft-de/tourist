@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "comments" : MessageLookupByLibrary.simpleMessage("التعليقات"),
     "confirm" : MessageLookupByLibrary.simpleMessage("تأكيد"),
     "confirmCode" : MessageLookupByLibrary.simpleMessage("رمز التأكيد"),
+    "continues" : MessageLookupByLibrary.simpleMessage("متابعة"),
     "days" : MessageLookupByLibrary.simpleMessage("يوماً"),
     "dessert" : MessageLookupByLibrary.simpleMessage("الصحراء"),
     "email" : MessageLookupByLibrary.simpleMessage("الايميل"),

@@ -27,31 +27,18 @@ class GuideListBloc {
     _authService.isLoggedIn.then((loggedId) {
       _guideListService.getAllGuides().then((value) {
         if (value != null) {
-          _guidesListSubject.add(GuideListStateLoadSuccess(
-              screen: screen,
-              guidesListModel: value,
-              isLoggedId: loggedId,
-              onCreateRate: (rate,guidId) {
-                createRate(rate,guidId,screen);
-              }));
-        } else {
-          _guidesListSubject
-              .add(GuideListStateLoadError(screen, 'Null Data Error'));
-        }
-      });
-    });
-  }
-   void getAllGuidesFiltred(GuideListScreen screen,String language , String city) {
-    _authService.isLoggedIn.then((loggedId) {
-      _guideListService.getAllGuidesFiltred(FilterGuideListRequest(language:language,city: city)).then((value) {
-        if (value != null) {
-          _guidesListSubject.add(GuideListStateLoadSuccess(
-              screen: screen,
-              guidesListModel: value,
-              isLoggedId: loggedId,
-              onCreateRate: (rate,guidId) {
-                createRate(rate,guidId,screen);
-              }));
+          if (value.isNotEmpty) {
+            _guidesListSubject.add(GuideListStateLoadSuccess(
+                screen: screen,
+                guidesListModel: value,
+                isLoggedId: loggedId,
+                onCreateRate: (rate, guidId) {
+                  createRate(rate, guidId, screen);
+                }));
+          } else {
+            _guidesListSubject
+                .add(GuideListStateLoadError(screen, 'Empty List'));
+          }
         } else {
           _guidesListSubject
               .add(GuideListStateLoadError(screen, 'Null Data Error'));
@@ -60,8 +47,36 @@ class GuideListBloc {
     });
   }
 
-  void createRate(double rate,String guidId,GuideListScreen screen) {
-    _guideListService.createRate(rate,guidId).then((value) {
+  void getAllGuidesFiltred(
+      GuideListScreen screen, String language, String city) {
+    _authService.isLoggedIn.then((loggedId) {
+      _guideListService
+          .getAllGuidesFiltred(
+              FilterGuideListRequest(language: language, city: city))
+          .then((value) {
+        if (value != null) {
+          if (value.isNotEmpty) {
+            _guidesListSubject.add(GuideListStateLoadSuccess(
+                screen: screen,
+                guidesListModel: value,
+                isLoggedId: loggedId,
+                onCreateRate: (rate, guidId) {
+                  createRate(rate, guidId, screen);
+                }));
+          } else {
+            _guidesListSubject
+                .add(GuideListStateLoadError(screen, 'Empty List'));
+          }
+        } else {
+          _guidesListSubject
+              .add(GuideListStateLoadError(screen, 'Null Data Error'));
+        }
+      });
+    });
+  }
+
+  void createRate(double rate, String guidId, GuideListScreen screen) {
+    _guideListService.createRate(rate, guidId).then((value) {
       if (value != null) {
         getAllGuides(screen);
       } else {

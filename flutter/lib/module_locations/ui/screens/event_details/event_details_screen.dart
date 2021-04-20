@@ -225,13 +225,7 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
       comments: eventDetails.comments,
       pageSize: 3,
       onCommentPosted: (comment) {
-        widget._bloc
-            .postComment(comment, locationId ?? eventDetails.id)
-            .whenComplete(() {
-          Navigator.of(context).pop();
-          Navigator.pushNamed(context, LocationRoutes.eventDetails,
-              arguments: eventDetails.id);
-        });
+        widget._bloc.postComment(comment, locationId ?? eventDetails.id);
       },
       isLoggedIn: eventDetails.isLogged ?? false,
     );

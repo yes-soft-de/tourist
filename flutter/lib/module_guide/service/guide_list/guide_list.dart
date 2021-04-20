@@ -12,7 +12,8 @@ class GuideListService {
   final GuidesManager _guidesManager;
   final RatingManager _ratingManager;
   final SharedPreferencesHelper _preferencesHelper;
-  GuideListService(this._guidesManager,this._preferencesHelper,this._ratingManager);
+  GuideListService(
+      this._guidesManager, this._preferencesHelper, this._ratingManager);
 
   Future<List<GuideListItemModel>> getAllGuides() async {
     GuidesResponse response = await _guidesManager.getGuidesList();
@@ -22,19 +23,24 @@ class GuideListService {
         response.data.where((element) => element.regions?.isNotEmpty).toList();
     return guideList;
   }
-  Future<List<GuideListItemModel>> getAllGuidesFiltred(FilterGuideListRequest request) async {
-    GuidesResponse response = await _guidesManager.getAllGuidesFiltredList(request);
-    if (response == null) return null;
 
+  Future<List<GuideListItemModel>> getAllGuidesFiltred(
+      FilterGuideListRequest request) async {
+    GuidesResponse response =
+        await _guidesManager.getAllGuidesFiltredList(request);
+    if (response == null) return null;
+    if (response.noData != null) {
+      return [];
+    }
     var guideList =
         response.data.where((element) => element.regions?.isNotEmpty).toList();
     return guideList;
   }
 
-  Future<dynamic> createRate(double rate,String guideId) async {
+  Future<dynamic> createRate(double rate, String guideId) async {
     String uid = await _preferencesHelper.getUserUID();
-    dynamic response = await _ratingManager.createRating(
-        CreateRatingRequest(user: uid, rate: rate.toInt().toString(),guide: guideId));
+    dynamic response = await _ratingManager.createRating(CreateRatingRequest(
+        user: uid, rate: rate.toInt().toString(), guide: guideId));
 
     return response;
   }

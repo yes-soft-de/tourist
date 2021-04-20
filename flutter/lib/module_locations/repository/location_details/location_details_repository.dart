@@ -15,11 +15,11 @@ class LocationDetailsRepository {
 
   Future<LocationDetailsResponse> getLocationDetails(String locationId) async {
     Map response;
-    var token = await _prefsHelper.getToken();
-    if (token != null) {
-      response =
-          await _client.get(Urls.locationDetails + locationId, headers: {'Authorization':'Bearer $token'});
-    } else {
+    try {
+      var token = await _prefsHelper.getToken();
+      response = await _client.get(Urls.locationDetails + locationId,
+          headers: {'Authorization': 'Bearer $token'});
+    } catch (e) {
       response = await _client.get(Urls.locationDetails + locationId);
     }
     if (response != null) {
@@ -31,14 +31,14 @@ class LocationDetailsRepository {
 
   Future<LocationDetailsResponse> createLocationDetails(
       CreateLocationRequest createLocationRequest) async {
-    await _authService.refreshToken();
-    var token = await _authService.getToken();
     try {
+      await _authService.refreshToken();
+      var token = await _authService.getToken();
       var response = await _client.post(
         Urls.createLocationDetails,
         createLocationRequest.toJson(),
         headers: {
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Beare $token',
         },
       );
 

@@ -97,7 +97,7 @@ class GuideOrderItemWidget extends StatelessWidget {
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.all(8),
-                          child: Text(orderModel.city ?? ''),
+                          child: Container(width: 100,child: Text(orderModel.city ?? '',overflow: TextOverflow.ellipsis,)),
                         ),
                         Padding(
                           padding: EdgeInsets.all(8),

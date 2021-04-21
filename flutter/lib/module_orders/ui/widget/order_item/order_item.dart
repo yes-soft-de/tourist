@@ -258,7 +258,9 @@ class OrderItemWidget extends StatelessWidget {
                   RaisedButton(
                     onPressed: () {
                       orderModel.status = 'refused';
-                      this.onAcceptOrder(orderModel);
+                      OrderModel order =
+                          OrderModel(id: orderModel.id, status: 'refused');
+                      this.onAcceptOrder(order);
                     },
                     child: Text('Refuse Order'),
                   ),

@@ -8,6 +8,7 @@ import 'package:tourists/module_guide/ui/screen/guide_list/guide_list_screen.dar
 import 'package:tourists/module_guide/ui/states/guide_list_state.dart';
 import 'package:tourists/module_guide/ui/states/guide_list_state_load_error.dart';
 import 'package:tourists/module_guide/ui/states/guide_list_state_load_success.dart';
+import 'package:tourists/module_guide/ui/states/guide_list_state_loading.dart';
 
 @provide
 class GuideListBloc {
@@ -24,6 +25,7 @@ class GuideListBloc {
   Stream<GuideListState> get guidesStream => _guidesListSubject.stream;
 
   void getAllGuides(GuideListScreen screen) {
+    _guidesListSubject.add(GuideListStateLoading(screen));
     _authService.isLoggedIn.then((loggedId) {
       _guideListService.getAllGuides().then((value) {
         if (value != null) {

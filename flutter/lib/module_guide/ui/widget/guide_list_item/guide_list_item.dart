@@ -127,7 +127,6 @@ class GuideListItemWidget extends StatelessWidget {
                                 actions: [
                                   FlatButton(
                                     onPressed: () {
-                                      print(rating);
                                       createRate(rating);
                                       Navigator.of(context).pop();
                                     },

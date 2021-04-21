@@ -85,7 +85,7 @@ class _RequestGuideFormState extends State<RequestGuideForm> {
                 child: Text('${location.name}'),
               );
             }).toList(),
-            hint: Text(S.of(context).expectedCommunicationLanguage),
+            hint: Text(S.of(context).locationName),
             onChanged: (String value) {
               this._placeId = value;
             },

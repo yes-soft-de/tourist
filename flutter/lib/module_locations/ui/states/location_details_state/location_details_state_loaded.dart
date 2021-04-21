@@ -46,8 +46,10 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
                     child: SmoothStarRating(
                         allowHalfRating: false,
                         onRated: (v) {
-                          screenState.createRate(
-                              rate, location.id.toString(), location.placeId);
+                          if (v > 0.0) {
+                            screenState.createRate(
+                                v, location.id.toString(), location.placeId);
+                          }
                         },
                         starCount: 5,
                         rating: location.userRating != null

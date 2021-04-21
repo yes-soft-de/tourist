@@ -29,7 +29,7 @@ class LocationDetailsService {
 
     var locationModel = apiResponse?.locationDetails;
 
-    locationModel ??= await createLocationByGoogleId(locationId);
+    //locationModel ??= await createLocationByGoogleId(locationId);
 
     if (locationModel == null) {
       // There is a problem in the request. it should be validated and reported

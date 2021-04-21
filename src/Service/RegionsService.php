@@ -187,17 +187,20 @@ class RegionsService
         $result = $this->regionsManager->getRegionByPlaceID($placeId);
         $response = $this->autoMapping->map('array', RegionResponse::class, $result);
 
-        //get signed-in user's rating
-        if($response)
+        if((is_string($userID) && $userID != null))
         {
-            //first get id of the user
-            $user = $this->regionsManager->getTouristByUserID($userID);
-            
-            $rateValue = $this->regionsManager->getRatingByUserAndRegion($response->id, $user->getId());
-            
-            if($rateValue)
+            //get signed-in user's rating
+            if($response)
             {
-                $response->setUserRating(number_format($rateValue[0]['rateValue'], 4, '.', ','));
+                //first get id of the user
+                $user = $this->regionsManager->getTouristByUserID($userID);
+                
+                $rateValue = $this->regionsManager->getRatingByUserAndRegion($response->id, $user->getId());
+                
+                if($rateValue)
+                {
+                    $response->setUserRating(number_format($rateValue[0]['rateValue'], 4, '.', ','));
+                }
             }
         }
 

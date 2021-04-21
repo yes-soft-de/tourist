@@ -6,7 +6,7 @@ namespace App\Response;
 
 class RatingCreateResponse
 {
-    public $user;
+    // public $user;
 
     public $rate;
 

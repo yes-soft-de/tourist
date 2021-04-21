@@ -37,4 +37,5 @@ class Urls {
       'https://maps.googleapis.com/maps/api/place/details/json';
 
   static final CREATE_TOKEN_API = 'login_check';
+  static final searchRegion = 'searchregion';
 }

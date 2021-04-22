@@ -221,7 +221,13 @@ class RegionsService
                     if($guideResult)
                     {
                         $comment['userName'] = $guideResult->name;
+
+                        $comment['userImage'] = $guideResult->image;
                     }
+                }
+                else
+                {
+                    $comment['userImage'] = $this->params . $comment['image'];
                 }
 
                 $commentsResponse[] = $this->autoMapping->map('array', GetCommentsByIdResponse::class, $comment);

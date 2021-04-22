@@ -15,4 +15,6 @@ class GetCommentsByIdResponse
     public $userName;
 
     public $roles;
+
+    public $userImage;
 }

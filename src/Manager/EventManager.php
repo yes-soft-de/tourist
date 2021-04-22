@@ -9,6 +9,7 @@ use App\Entity\EventEntity;
 use App\Repository\EventEntityRepository;
 use App\Request\EventCreateRequest;
 use App\Request\EventUpdateRequest;
+use App\Request\ImageCreateRequest;
 use Doctrine\ORM\EntityManagerInterface;
 
 class EventManager
@@ -41,6 +42,17 @@ class EventManager
         $this->entityManager->flush();
         $this->entityManager->clear();
 
+        // Now insert the image of the event if the request include one
+        if($request->getImage())
+        {
+            $imageCreateRequest = new ImageCreateRequest();
+
+            $imageCreateRequest->setPath($request->getImage());
+            $imageCreateRequest->setEvent($eventCreate->getId());
+
+            $this->imageManager->imageCreate($imageCreateRequest);
+        }
+
         return $eventCreate;
     }
 
@@ -58,13 +70,38 @@ class EventManager
     {
         $entity = $this->eventEntityRepository->find($request->getId());
 
-         if ($entity)
+        if ($entity)
         {
             $item = $this->autoMapping->mapToObject(EventUpdateRequest::class,
             EventEntity::class, $request, $entity);
 
             $this->entityManager->flush();
             $this->entityManager->clear();
+
+            // Now update the image of the event if the request include one
+            if($request->getImage())
+            {
+                //check if there is a previous image for the event
+                $imageResult = $this->imageManager->getImageOfEvent($request->getId());
+
+                if($imageResult)
+                {
+                    $imageResult->setPath($request->getImage());
+
+                    $this->entityManager->flush();
+                    $this->entityManager->clear();
+                }
+                else
+                {
+                    $imageCreateRequest = new ImageCreateRequest();
+
+                    $imageCreateRequest->setPath($request->getImage());
+                    $imageCreateRequest->setEvent($request->getId());
+
+                    $this->imageManager->imageCreate($imageCreateRequest);
+                }
+            }
+
             return $item;
         }
     }

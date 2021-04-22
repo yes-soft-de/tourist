@@ -22,6 +22,8 @@ class EventCreateRequest
 
     private $description;
 
+    private $image;
+
     /**
      * @return mixed
      */
@@ -138,6 +140,16 @@ class EventCreateRequest
     public function setDescription($description): void
     {
         $this->description = $description;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
     }
 
 

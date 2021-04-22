@@ -22,6 +22,8 @@ class EventUpdateRequest
 
     private $description;
 
+    private $image;
+
     /**
      * @return mixed
      */
@@ -136,5 +138,15 @@ class EventUpdateRequest
         $this->id = $id;
 
         return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
     }
 }

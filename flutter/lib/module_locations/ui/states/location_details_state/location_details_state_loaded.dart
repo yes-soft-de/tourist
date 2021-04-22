@@ -34,7 +34,7 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _getCarousel(),
+            _getCarousel(context),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
@@ -88,18 +88,57 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
     );
   }
 
-  Widget _getCarousel() {
+  Widget _getCarousel(BuildContext context) {
     List<Widget> carouselList = [];
     location.regionImage ??= [];
     if (location.regionImage != null) {
       location.regionImage.forEach((path) {
-        carouselList.add(Image.network(
-          '${path.path}'.contains('http')
-              ? '${path.path}'.substring(path.path.lastIndexOf('http'))
-              : path.path,
-          errorBuilder: (c, e, s) {
-            return Image.asset('resources/images/logo.png');
-          },
+        carouselList.add(Flex(
+          direction: Axis.vertical,
+          children: [
+            Image.network(
+              '${path.path}'.contains('http')
+                  ? '${path.path}'.substring(path.path.lastIndexOf('http'))
+                  : path.path,
+              errorBuilder: (c, e, s) {
+                return Image.asset('resources/images/logo.png');
+              },
+            ),
+            Positioned(
+              bottom: 0,
+              child: Container(
+                height: 45,
+                width: MediaQuery.of(context).size.width,
+                color: Color(0xff05F29B),
+                child: Align(
+                    alignment: AlignmentDirectional.center,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          '${S.of(context).ratingAverage}',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.5
+                          ),
+                        ),
+                        SmoothStarRating(
+                            allowHalfRating: true,
+                            starCount: 5,
+                            rating: location.ratingAverage != null
+                                ? double.parse(location.ratingAverage)
+                                : 0.0,
+                            size: 25.0,
+                            isReadOnly: true,
+                            color: Colors.white,
+                            borderColor: Colors.white,
+                            spacing: 0.0),
+                      ],
+                    )),
+              ),
+            ),
+          ],
         ));
       });
     }

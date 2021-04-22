@@ -157,7 +157,12 @@
   "finished":"Finished",
   "refused":"Refuse Order",
   "finishOrder":"Finish Order",
-  "valueRequred":"This value is required"
+  "valueRequred":"This value is required",
+  "notFound":"There is no result found",
+  "createNewOrder": "Create a Request",
+  "ratingAverage": "Rating average"
+
+
 
 
 

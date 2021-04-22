@@ -108,47 +108,48 @@ class _TouristProfileFormState extends State<TouristProfileForm> {
             direction: Axis.vertical,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ListTile(
-                title: Text(
-                  S.of(context).language,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-              Flex(
-                direction: Axis.vertical,
-                children: [
-                  CheckboxListTile(
-                    title: Text(S.of(context).language_arabic),
-                    onChanged: (bool value) {
-                      if (value) {
-                        languages.add('ar');
-                      } else {
-                        languages.remove('ar');
-                      }
-                      profile.languages = languages.toList();
-                      if (mounted) setState(() {});
-                    },
-                    value: profile.languages != null
-                        ? profile.languages.contains('ar')
-                        : false,
-                  ),
-                  CheckboxListTile(
-                    title: Text(S.of(context).language_english),
-                    onChanged: (bool value) {
-                      if (value) {
-                        languages.add('en');
-                      } else {
-                        languages.remove('en');
-                      }
-                      profile.languages = languages.toList();
-                      if (mounted) setState(() {});
-                    },
-                    value: profile.languages != null
-                        ? profile.languages.contains('en')
-                        : false,
-                  ),
-                ],
-              ),
+              // ListTile(
+              //   title: Text(
+              //     S.of(context).language,
+              //     style: TextStyle(fontWeight: FontWeight.bold),
+              //   ),
+              // ),
+              // Flex(
+              //   direction: Axis.vertical,
+              //   children: [
+              //     CheckboxListTile(
+              //       title: Text(S.of(context).language_arabic),
+              //       onChanged: (bool value) {
+              //         if (value) {
+              //           languages.add('ar');
+              //         } else {
+              //           languages.remove('ar');
+              //         }
+              //         profile.languages = languages.toList();
+              //         if (mounted) setState(() {});
+              //       },
+              //       value: profile.languages != null
+              //           ? profile.languages.contains('ar')
+              //           : false,
+              //     ),
+              //     CheckboxListTile(
+              //       title: Text(S.of(context).language_english),
+              //       onChanged: (bool value) {
+              //         if (value) {
+              //           languages.add('en');
+              //         } else {
+              //           languages.remove('en');
+              //         }
+              //         profile.languages = languages.toList();
+              //         if (mounted) setState(() {});
+              //       },
+              //       value: profile.languages != null
+              //           ? profile.languages.contains('en')
+              //           : false,
+              //     ),
+              //   ],
+              // ),
+            
             ],
           ),
           GestureDetector(

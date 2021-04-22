@@ -238,7 +238,7 @@ class _RequestGuideAtLocationFormState
             ));
           },
           color: Colors.greenAccent,
-          child: Text(S.of(context).requestAChat),
+          child: Text(S.of(context).createNewOrder),
         ),
       ],
     );

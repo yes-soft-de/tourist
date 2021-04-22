@@ -211,7 +211,7 @@ class _RequestGuideFormState extends State<RequestGuideForm> {
             ));
           },
           color: Colors.greenAccent,
-          child: Text(S.of(context).requestAChat),
+          child: Text(S.of(context).createNewOrder),
         ),
       ],
     );

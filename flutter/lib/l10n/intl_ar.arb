@@ -157,6 +157,9 @@
   "finished":"منتهية",
   "refused":"رفض الطلب",
   "finishOrder":"انهاء الطلب",
-  "valueRequred":"هذه القيمة مطلوبة"
+  "valueRequred":"هذه القيمة مطلوبة",
+  "notFound":"لا يوجد نتائج",
+  "createNewOrder": "إنشاء طلب جديد",
+  "ratingAverage": "معدل التقييم"
   
 }

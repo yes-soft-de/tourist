@@ -1584,6 +1584,36 @@ class S {
       args: [],
     );
   }
+
+  /// `There is no result found`
+  String get notFound {
+    return Intl.message(
+      'There is no result found',
+      name: 'notFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create a Request`
+  String get createNewOrder {
+    return Intl.message(
+      'Create a Request',
+      name: 'createNewOrder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rating average`
+  String get ratingAverage {
+    return Intl.message(
+      'Rating average',
+      name: 'ratingAverage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

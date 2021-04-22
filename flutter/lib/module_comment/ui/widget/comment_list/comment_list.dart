@@ -90,7 +90,7 @@ class _CommentListWidgetState extends State<CommentListWidget> {
             AuthorizationRoutes.LOGIN_SCREEN,
           );
         },
-        child: Text('Please Login!'),
+        child: Text('${S.of(context).loginPlease}!'),
       ));
     }
 
@@ -110,7 +110,7 @@ class _CommentListWidgetState extends State<CommentListWidget> {
     if (comments.length == 1) {
       comments.add(Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text('Be the First to comment'),
+        child: Text('${S.of(context).firstComment}'),
       ));
     }
 

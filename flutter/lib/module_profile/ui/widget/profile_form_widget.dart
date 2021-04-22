@@ -119,7 +119,7 @@ class _GuideProfileFormWidgetState extends State<GuideProfileFormWidget> {
                 ),
                 validator: (val) {
                   if (val.isEmpty) {
-                    return 'This value is required';
+                    return '${S.of(context).valueRequred}';
                   }
                   return null;
                 },
@@ -135,7 +135,7 @@ class _GuideProfileFormWidgetState extends State<GuideProfileFormWidget> {
                 keyboardType: TextInputType.phone,
                 validator: (val) {
                   if (val.isEmpty) {
-                    return 'This value is required';
+                    return '${S.of(context).valueRequred}';
                   }
                   return null;
                 },

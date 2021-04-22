@@ -140,7 +140,7 @@ class GuideListItemWidget extends StatelessWidget {
                                     },
                                     textColor: Colors.white,
                                     color: Color(0xff05F29B),
-                                    child: Text('cancel'),
+                                    child: Text('${S.of(context).cancel}'),
                                   )
                                 ],
                               );

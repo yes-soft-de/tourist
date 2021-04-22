@@ -262,7 +262,7 @@ class OrderItemWidget extends StatelessWidget {
                           OrderModel(id: orderModel.id, status: 'refused');
                       this.onAcceptOrder(order);
                     },
-                    child: Text('Refuse Order'),
+                    child: Text('${S.of(context).refused}'),
                   ),
                 ],
               )
@@ -308,7 +308,7 @@ class OrderItemWidget extends StatelessWidget {
                       height: 8,
                     ),
                     Text(
-                      'On Going',
+                      '${S.of(context).onGoing}',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Container(
@@ -331,7 +331,7 @@ class OrderItemWidget extends StatelessWidget {
         ),
         canPay != null && canPay && status != null
             ? RaisedButton(
-                child: Text('finish order'),
+                child: Text('${S.of(context).finishOrder}'),
                 onPressed: () {
                   OrderModel order =
                       OrderModel(id: orderModel.id, status: status ?? 'done');
@@ -370,7 +370,7 @@ class OrderItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'Finished',
+                  '${S.of(context).finished}',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Container(

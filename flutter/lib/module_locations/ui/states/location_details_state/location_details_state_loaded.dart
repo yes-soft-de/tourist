@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_comment/response/comment/comment_response.dart';
 import 'package:tourists/module_comment/ui/widget/comment_list/comment_list.dart';
 import 'package:tourists/module_guide/model/guide_list_item/guide_list_item.dart';
@@ -68,7 +69,7 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
                     color: Colors.grey,
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: Text('No guides for this place was found!'),
+                      child: Text('${S.of(context).noGuides}!'),
                     ),
                   ),
             //_getCommentsList(context),

@@ -1,7 +1,7 @@
 {
   "@@locale": "ar",
   "title": "سياح",
-  "welcome": "اهلا بك في",
+  "welcome": "أهلا بك في سياح",
   "card_01": "اريد الاستمتاع بخدماتكم في السعودية",
   "go_to_tourist_login": "التالي",
   "login": "تسجيل الدخول",
@@ -141,5 +141,22 @@
   "empty": "القائمة فارغة",
   "filter":"تصفية",
   "continues": "متابعة",
-  "cancel": "إغلاق"
+  "cancel": "إغلاق",
+  "chatRoom": "غرفة المحادثة",
+  "startWriting": "ابدأ الكتابة",
+  "emptyText":"نص فارغ",
+  "loginPlease":"سجل دخول رجاءا",
+  "firstComment":"كن أول من يعلق",
+  "commentHere":"علق هنا",
+  "ccPay":"CC مدفوعات تعمل",
+  "requestSuccess":"تم الطلب بنجاح",
+  "soon":"قريبا",
+  "noGuides":"لايوجد مرشدين متوفرين لهذه المنطقة",
+  "pending":"معلقة",
+  "onGoing":"جارية",
+  "finished":"منتهية",
+  "refused":"رفض الطلب",
+  "finishOrder":"انهاء الطلب",
+  "valueRequred":"هذه القيمة مطلوبة"
+  
 }

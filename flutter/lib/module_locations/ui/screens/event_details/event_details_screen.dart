@@ -168,7 +168,7 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
       children: <Widget>[
         Icon(Icons.location_on),
         Text(
-          eventDetails.location ?? 'Soon',
+          eventDetails.location ?? '${S.of(context).soon}',
           style: TextStyle(fontSize: 24),
         )
       ],

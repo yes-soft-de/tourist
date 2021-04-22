@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tourists/generated/l10n.dart';
 
 class NewCommentWidget extends StatelessWidget {
   final Function(String) onCommentAdded;
@@ -23,7 +24,7 @@ class NewCommentWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               controller: commentController,
-              decoration: InputDecoration(hintText: 'Comment Here'),
+              decoration: InputDecoration(hintText: '${S.of(context).commentHere}'),
             ),
           ),
         ),

@@ -45,10 +45,10 @@ class S {
     );
   }
 
-  /// `Welcome to `
+  /// `Welcome to Soyah`
   String get welcome {
     return Intl.message(
-      'Welcome to ',
+      'Welcome to Soyah',
       name: 'welcome',
       desc: '',
       args: [],
@@ -1450,6 +1450,136 @@ class S {
     return Intl.message(
       'Cancel',
       name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chat Room`
+  String get chatRoom {
+    return Intl.message(
+      'Chat Room',
+      name: 'chatRoom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Writing`
+  String get startWriting {
+    return Intl.message(
+      'Start Writing',
+      name: 'startWriting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Empty Text`
+  String get emptyText {
+    return Intl.message(
+      'Empty Text',
+      name: 'emptyText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loging Please`
+  String get loginPlease {
+    return Intl.message(
+      'Loging Please',
+      name: 'loginPlease',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Be the First to comment`
+  String get firstComment {
+    return Intl.message(
+      'Be the First to comment',
+      name: 'firstComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comment Here`
+  String get commentHere {
+    return Intl.message(
+      'Comment Here',
+      name: 'commentHere',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CC Payment works`
+  String get ccPay {
+    return Intl.message(
+      'CC Payment works',
+      name: 'ccPay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request Success`
+  String get requestSuccess {
+    return Intl.message(
+      'Request Success',
+      name: 'requestSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Soon`
+  String get soon {
+    return Intl.message(
+      'Soon',
+      name: 'soon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No guides for this place was found`
+  String get noGuides {
+    return Intl.message(
+      'No guides for this place was found',
+      name: 'noGuides',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refuse Order`
+  String get refused {
+    return Intl.message(
+      'Refuse Order',
+      name: 'refused',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Finish Order`
+  String get finishOrder {
+    return Intl.message(
+      'Finish Order',
+      name: 'finishOrder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This value is required`
+  String get valueRequred {
+    return Intl.message(
+      'This value is required',
+      name: 'valueRequred',
       desc: '',
       args: [],
     );

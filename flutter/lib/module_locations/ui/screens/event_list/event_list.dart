@@ -51,13 +51,13 @@ class _EventListScreenState extends State<EventListScreen> {
         direction: Axis.vertical,
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[CircularProgressIndicator(), Text('Loading...')],
+        children: <Widget>[CircularProgressIndicator(), Text('${S.of(context).loading}...')],
       ),
     );
   }
 
   Widget _getErrorUI() {
-    return Center(child: Text('Error fetching Data'));
+    return Center(child: Text('${S.of(context).error_fetching_data}'));
   }
 
   Widget _getSuccessUI() {

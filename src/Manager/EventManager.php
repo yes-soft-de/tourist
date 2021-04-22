@@ -135,7 +135,7 @@ class EventManager
                 }
             }
 
-            //now, we delete the region
+            //now, we delete the event
 
             $this->entityManager->remove($event);
             $this->entityManager->flush();

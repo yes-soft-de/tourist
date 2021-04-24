@@ -39,7 +39,7 @@ class _GuideProfileFormWidgetState extends State<GuideProfileFormWidget> {
   ProfileModel userProfile;
 
   _GuideProfileFormWidgetState(this.userProfile) {
-    _nameController.text = userProfile?.name;
+    _nameController.text = userProfile?.name?.trim();
     _phoneController.text = userProfile?.phone;
     languages.addAll(userProfile?.languages ?? []);
     locations.addAll(userProfile?.locations ?? []);

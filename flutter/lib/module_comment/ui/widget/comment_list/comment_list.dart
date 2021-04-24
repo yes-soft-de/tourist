@@ -99,6 +99,7 @@ class _CommentListWidgetState extends State<CommentListWidget> {
         return;
       }
       comments.add(CommentItemWidget(
+        userImage: element.userImage ?? '',
         comment: element.comment,
         userName: element.userName,
         role: element.roles[0],
@@ -128,5 +129,14 @@ class _CommentListWidgetState extends State<CommentListWidget> {
       direction: Axis.vertical,
       children: comments,
     );
+  }
+
+  String imageLink(String url) {
+    print(url.allMatches('/'));
+    if (url.allMatches('http').length > 1) {
+      return url.substring(35);
+    } else {
+      return url;
+    }
   }
 }

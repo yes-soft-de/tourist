@@ -96,11 +96,11 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
     List<String> eventImages = [];
     if (eventDetails.images == null) {
       eventImages = [
-        'https://cdn.pixabay.com/photo/2017/07/21/23/57/concert-2527495__340.jpg'
+        'https://www.abouther.com/sites/default/files/2018/11/06/main_-_janadriyah_festival.jpg'
       ];
     } else if (eventDetails.images.isEmpty) {
       eventImages = [
-        'https://cdn.pixabay.com/photo/2017/07/21/23/57/concert-2527495__340.jpg'
+        'https://www.abouther.com/sites/default/files/2018/11/06/main_-_janadriyah_festival.jpg'
       ];
     } else {
       eventImages = eventDetails.images;

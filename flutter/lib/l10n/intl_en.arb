@@ -160,15 +160,15 @@
   "valueRequred":"This value is required",
   "notFound":"There is no result found",
   "createNewOrder": "Create a Request",
-  "ratingAverage": "Rating average"
-
-
-
-
-
-
-
-
-
+  "ratingAverage": "Rating average",
+  "errorFindingProfile":"Error finding the profile, please register first",
+  "codeTimeout":"Code Timeout",
+  "successfully_saved":"Successfully Saved",
+  "order":"Order",
+  "city":"City",
+  "cost":"Cost",
+  "chatWithTourest":"You can chat with the tourist after payment phase",
+  "chatWithGuid":"You can chat with the guide after payment phase",
+  "rateThisLocation":"Rate this area"
 
 }

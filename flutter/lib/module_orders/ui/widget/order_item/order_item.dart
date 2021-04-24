@@ -223,14 +223,14 @@ class OrderItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Order #${orderModel.id} Pending',
+                      '${S.of(context).order} #${orderModel.id} ${S.of(context).pending}',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Container(
                       height: 8,
                     ),
                     Text(
-                        'city ${orderModel.city ?? ''} | lang ${orderModel.language ?? ''} | cost ${orderModel.cost ?? ''}'),
+                        '${S.of(context).city} ${orderModel.city ?? ''} | ${S.of(context).language} ${orderModel.language ?? ''} | ${S.of(context).cost} ${orderModel.cost ?? ''}'),
                     Container(
                       height: 8,
                     ),
@@ -301,7 +301,7 @@ class OrderItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Order #${orderModel.id} Pending',
+                      '${S.of(context).order} #${orderModel.id} ${S.of(context).pending}',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Container(

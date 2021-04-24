@@ -51,7 +51,10 @@ class _EventListScreenState extends State<EventListScreen> {
         direction: Axis.vertical,
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[CircularProgressIndicator(), Text('${S.of(context).loading}...')],
+        children: <Widget>[
+          CircularProgressIndicator(),
+          Text('${S.of(context).loading}...')
+        ],
       ),
     );
   }
@@ -143,11 +146,11 @@ class _EventListScreenState extends State<EventListScreen> {
                 arguments: event.id);
           },
           child: EventListItemWidget(
-            image:
+            image: event.images[0] ??
                 'https://www.abouther.com/sites/default/files/2018/11/06/main_-_janadriyah_festival.jpg',
             location: event.location,
-            status: event.status,
-            commentNumber: int.parse(event.commentNumber??'0'),
+            status: getStatus(getDate(event.date.timestamp)),
+            commentNumber: int.parse(event.commentNumber ?? '0'),
             time: getDate(event.date.timestamp),
             name: event.name,
           ),
@@ -174,5 +177,13 @@ class _EventListScreenState extends State<EventListScreen> {
 
   DateTime getDate(int timeStamp) {
     return new DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
+  }
+
+  String getStatus(DateTime date) {
+    if (date.isAfter(DateTime.now())) {
+      return '${S.of(context).soon}';
+    } else {
+    return '${S.of(context).finished}';
+    }
   }
 }

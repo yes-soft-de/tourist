@@ -52,8 +52,7 @@ class Data {
       this.location,
       this.description,
       this.images,
-      this.commentNumber
-      });
+      this.commentNumber});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -65,7 +64,14 @@ class Data {
     location = json['location'];
     description = json['description'];
     commentNumber = json['commentNumber'];
-    images = json['images'].cast<String>();
+    if (json['images'] != null) {
+      images = <String>[];
+      if (images.isNotEmpty) {
+        json['images'].forEach((v) {
+          images.add(v);
+        });
+      }
+    }
     if (json['comments'] != null) {
       comments = <CommentModel>[];
       json['comments'].forEach((v) {

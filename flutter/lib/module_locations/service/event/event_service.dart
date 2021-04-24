@@ -57,6 +57,7 @@ class EventService {
           status: response.data.status,
           comments: response.data.comments,
           isLogged: isLogged,
+          location: response.data.location,
           commentNumber: response.data.commentNumber??0
           );
     }

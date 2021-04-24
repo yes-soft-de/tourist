@@ -26,7 +26,7 @@ class _TouristProfileFormState extends State<TouristProfileForm> {
   _TouristProfileFormState(ProfileModel profileModel) {
     if (profileModel != null) {
       languages.addAll(profileModel.languages ?? []);
-      _nameController.text = profileModel.name;
+      _nameController.text = profileModel.name?.trim();
     }
   }
 

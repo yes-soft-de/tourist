@@ -1614,6 +1614,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Error finding the profile, please register first`
+  String get errorFindingProfile {
+    return Intl.message(
+      'Error finding the profile, please register first',
+      name: 'errorFindingProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Code Timeout`
+  String get codeTimeout {
+    return Intl.message(
+      'Code Timeout',
+      name: 'codeTimeout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Successfully Saved`
+  String get successfully_saved {
+    return Intl.message(
+      'Successfully Saved',
+      name: 'successfully_saved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order`
+  String get order {
+    return Intl.message(
+      'Order',
+      name: 'order',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `City`
+  String get city {
+    return Intl.message(
+      'City',
+      name: 'city',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cost`
+  String get cost {
+    return Intl.message(
+      'Cost',
+      name: 'cost',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can chat with the tourist after payment phase`
+  String get chatWithTourest {
+    return Intl.message(
+      'You can chat with the tourist after payment phase',
+      name: 'chatWithTourest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can chat with the guide after payment phase`
+  String get chatWithGuid {
+    return Intl.message(
+      'You can chat with the guide after payment phase',
+      name: 'chatWithGuid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rate this area`
+  String get rateThisLocation {
+    return Intl.message(
+      'Rate this area',
+      name: 'rateThisLocation',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

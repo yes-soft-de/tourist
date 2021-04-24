@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:intl/intl.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:tourists/generated/l10n.dart';
 import 'package:tourists/module_comment/response/comment/comment_response.dart';
@@ -9,6 +10,7 @@ import 'package:tourists/module_locations/model/location_details/location_detail
 import 'package:tourists/module_locations/ui/screens/location_details/location_details.dart';
 import 'package:tourists/module_locations/ui/states/location_details_state/location_details_state.dart';
 import 'package:tourists/module_locations/ui/widgets/guides_list/guides_list.dart';
+import 'package:flutter/material.dart' as mat;
 
 class LocationDetailsStateLoaded extends LocationDetailsState {
   LocationDetailsModel location;
@@ -43,24 +45,62 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
               ),
             ),
             isLoggedIn
+                ? Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Center(
+                        child: Text(
+                      '${S.of(context).rateThisLocation}',
+                      style: TextStyle(
+                          fontSize: 16.5,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColor),
+                    )),
+                  )
+                : Container(),
+            isLoggedIn
                 ? Center(
-                    child: SmoothStarRating(
-                        allowHalfRating: false,
-                        onRated: (v) {
-                          if (v > 0.0) {
-                            screenState.createRate(
-                                v, location.id.toString(), location.placeId);
-                          }
-                        },
-                        starCount: 5,
-                        rating: location.userRating != null
-                            ? double.parse(location.userRating)
-                            : 0.0,
-                        size: 35.0,
-                        isReadOnly: !isLoggedIn,
-                        color: Color(0xff05F29B),
-                        borderColor: Color(0xff05F29B),
-                        spacing: 0.0),
+                    child: Directionality(
+                      textDirection: mat.TextDirection.ltr,
+                      child: SmoothStarRating(
+                          allowHalfRating: false,
+                          onRated: (v) {
+                            if (v > 0.0) {
+                              screenState.createRate(
+                                  v, location.id.toString(), location.placeId);
+                            }
+                          },
+                          starCount: 5,
+                          rating: location.userRating != null
+                              ? double.parse(location.userRating)
+                              : 0.0,
+                          size: 35.0,
+                          isReadOnly:
+                              double.parse(location.userRating ?? '0.0') > 0.0,
+                          color: Color(0xff05F29B),
+                          borderColor: Color(0xff05F29B),
+                          spacing: 0.0),
+                    ),
+                  )
+                : Container(),
+            guides.isNotEmpty
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
+                    child: Container(
+                      width: double.maxFinite,
+                      color: Theme.of(context).primaryColor,
+                      child: Center(
+                          child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          '${S.of(context).guides}',
+                          style: TextStyle(
+                            fontSize: 16.5,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white
+                          ),
+                        ),
+                      )),
+                    ),
                   )
                 : Container(),
             guides.isNotEmpty
@@ -73,6 +113,27 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
                     ),
                   ),
             //_getCommentsList(context),
+               guides.isNotEmpty
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
+                    child: Container(
+                      width: double.maxFinite,
+                      color: Theme.of(context).primaryColor,
+                      child: Center(
+                          child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          '${S.of(context).comments}',
+                          style: TextStyle(
+                            fontSize: 16.5,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white
+                          ),
+                        ),
+                      )),
+                    ),
+                  )
+                : Container(),
             CommentListWidget(
               comments: location.comments,
               pageSize: 3,
@@ -104,26 +165,25 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
                 return Image.asset('resources/images/logo.png');
               },
             ),
-            Positioned(
-              bottom: 0,
-              child: Container(
-                height: 45,
-                width: MediaQuery.of(context).size.width,
-                color: Color(0xff05F29B),
-                child: Align(
-                    alignment: AlignmentDirectional.center,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          '${S.of(context).ratingAverage}',
-                          style: TextStyle(
+            Container(
+              height: 45,
+              width: MediaQuery.of(context).size.width,
+              color: Color(0xff05F29B),
+              child: Align(
+                  alignment: AlignmentDirectional.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        '${S.of(context).ratingAverage}',
+                        style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 16.5
-                          ),
-                        ),
-                        SmoothStarRating(
+                            fontSize: 16.5),
+                      ),
+                      Directionality(
+                        textDirection: mat.TextDirection.ltr,
+                        child: SmoothStarRating(
                             allowHalfRating: true,
                             starCount: 5,
                             rating: location.ratingAverage != null
@@ -134,9 +194,9 @@ class LocationDetailsStateLoaded extends LocationDetailsState {
                             color: Colors.white,
                             borderColor: Colors.white,
                             spacing: 0.0),
-                      ],
-                    )),
-              ),
+                      ),
+                    ],
+                  )),
             ),
           ],
         ));

@@ -152,14 +152,25 @@
   "requestSuccess":"تم الطلب بنجاح",
   "soon":"قريبا",
   "noGuides":"لايوجد مرشدين متوفرين لهذه المنطقة",
-  "pending":"معلقة",
-  "onGoing":"جارية",
-  "finished":"منتهية",
+  "pending":"معلق",
+  "onGoing":"جاري",
+  "finished":"منتهي",
   "refused":"رفض الطلب",
   "finishOrder":"انهاء الطلب",
   "valueRequred":"هذه القيمة مطلوبة",
   "notFound":"لا يوجد نتائج",
   "createNewOrder": "إنشاء طلب جديد",
-  "ratingAverage": "معدل التقييم"
-  
+  "ratingAverage": "معدل التقييم",
+  "errorFindingProfile":"تعذر العثور على حسابك الرجاء التسجيل أولا",
+  "codeTimeout":"انتهت مهلة الرمز",
+  "successfully_saved":"تم الحفظ بنجاح",
+  "order":"الطلب",
+  "city":"مدينة",
+  "cost":"السعر",
+  "chatWithTourest":"يمكنك التحدث مع السائح بعد عملية الدفع",
+  "chatWithGuid":"يمكنك التحدث مع المرشد بعد عملية الدفع",
+  "rateThisLocation":"قييم هذه المنطقة"
+
+
+
 }

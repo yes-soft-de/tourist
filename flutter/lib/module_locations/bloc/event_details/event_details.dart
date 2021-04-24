@@ -37,7 +37,7 @@ class EventDetailsBloc {
     }
 
     LocationListItem locationListItem =
-        await getLocationByName(eventDetailsModel.location);
+        await getLocationByName(eventDetailsModel?.location);
 
     _eventSubject.add({
       KEY_STATUS: STATUS_CODE_LOAD_SUCCESS,

@@ -167,6 +167,7 @@ class OrderListStateOrdersLoaded extends OrdersListState {
       );
     }
     List<Widget> ordersWidgetList = [];
+
     ordersList.forEach((element) {
       if (element.status == 'pending' && element.roomId == null) {
         ordersWidgetList.add(OrderItemWidget(
@@ -175,14 +176,34 @@ class OrderListStateOrdersLoaded extends OrdersListState {
         ));
       }
     });
+    ordersWidgetList.insert(
+        0,
+        Container(
+          width: double.maxFinite,
+          color: Theme.of(context).primaryColor,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                '${S.of(context).chatWithGuid}',
+                textAlign: TextAlign.start,
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+        ));
     return ListView(
-      children: ordersWidgetList.isNotEmpty
+      children:  ordersWidgetList.isNotEmpty && ordersWidgetList.length > 1 
           ? ordersWidgetList
           : <Widget>[
-              Container(
-                height: 300,
-                child: Center(
-                  child: Text('${S.of(context).empty}'),
+            ordersWidgetList[0],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 300,
+                  child: Center(
+                    child: Text('${S.of(context).empty}'),
+                  ),
                 ),
               )
             ],
@@ -219,7 +240,9 @@ class OrderListStateOrdersLoaded extends OrdersListState {
       children: ordersWidgetList.isNotEmpty
           ? ordersWidgetList
           : <Widget>[
-              Container(height: 300, child: Center(child: Text('${S.of(context).empty}')))
+              Container(
+                  height: 300,
+                  child: Center(child: Text('${S.of(context).empty}')))
             ],
     );
   }
@@ -247,7 +270,9 @@ class OrderListStateOrdersLoaded extends OrdersListState {
       children: ordersWidgetList.isNotEmpty
           ? ordersWidgetList
           : <Widget>[
-              Container(height: 300, child: Center(child: Text('${S.of(context).empty}')))
+              Container(
+                  height: 300,
+                  child: Center(child: Text('${S.of(context).empty}')))
             ],
     );
   }
@@ -275,7 +300,9 @@ class OrderListStateOrdersLoaded extends OrdersListState {
       children: ordersWidgetList.isNotEmpty
           ? ordersWidgetList
           : <Widget>[
-              Container(height: 300, child: Center(child: Text('${S.of(context).empty}')))
+              Container(
+                  height: 300,
+                  child: Center(child: Text('${S.of(context).empty}')))
             ],
     );
   }

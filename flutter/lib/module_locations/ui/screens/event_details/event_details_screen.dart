@@ -93,7 +93,8 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
     List<Widget> pageUI = [];
     List<Widget> carouselCards = [];
 
-    List<String> eventImages = [];
+    var eventImages = [];
+    print(eventDetails.images);
     if (eventDetails.images == null) {
       eventImages = [
         'https://www.abouther.com/sites/default/files/2018/11/06/main_-_janadriyah_festival.jpg'
@@ -103,7 +104,7 @@ class EventDetailsScreenState extends State<EventDetailsScreen> {
         'https://www.abouther.com/sites/default/files/2018/11/06/main_-_janadriyah_festival.jpg'
       ];
     } else {
-      eventImages = eventDetails.images;
+      eventImages.add(eventDetails.images);
     }
 
     eventImages.forEach((element) {

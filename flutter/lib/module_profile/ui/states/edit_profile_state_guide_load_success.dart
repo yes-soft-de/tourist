@@ -45,9 +45,11 @@ class EditProfileStateGuideLoadSuccess extends EditProfileState {
       searchBloc: _searchBloc,
       userProfile: userProfile,
       onImageSelected: (imagePath, profileModel) {
+        profileModel.imageUpdated = true;
         screen.onImageSelected(imagePath, profileModel);
       },
       onProfileSaved: (profile) {
+        profile.imageUpdated = profile.imageUpdated ?? false;
         screen.saveProfile(profile);
       },
     );

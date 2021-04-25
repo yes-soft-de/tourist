@@ -10,7 +10,7 @@ class EventModel {
   String status;
   String location;
   String description;
-  List<String> images;
+  var images;
   List<CommentModel> comments;
   bool isLogged;
   var commentNumber;

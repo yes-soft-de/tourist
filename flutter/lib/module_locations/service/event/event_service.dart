@@ -30,12 +30,9 @@ class EventService {
           date: element.date,
           images: element.images.isNotEmpty
               ? element.images
-              : [
-                  'https://www.abouther.com/sites/default/files/2018/11/06/main_-_janadriyah_festival.jpg'
-                ],
+              : 'https://www.abouther.com/sites/default/files/2018/11/06/main_-_janadriyah_festival.jpg',
           status: element.status,
-          commentNumber: element.commentNumber
-          ));
+          commentNumber: element.commentNumber));
     });
 
     return eventList;
@@ -52,14 +49,15 @@ class EventService {
           type: response.data.type,
           subType: response.data.subType,
           description: response.data.description,
-          images: response.data.images,
+          images: response.data.images.isNotEmpty
+              ? response.data.images
+              : 'https://www.abouther.com/sites/default/files/2018/11/06/main_-_janadriyah_festival.jpg',
           date: response.data.date,
           status: response.data.status,
           comments: response.data.comments,
           isLogged: isLogged,
           location: response.data.location,
-          commentNumber: response.data.commentNumber??0
-          );
+          commentNumber: response.data.commentNumber ?? 0);
     }
     return null;
   }

@@ -34,7 +34,7 @@ class Data {
   String status;
   String location;
   String description;
-  List<String> images;
+  var images;
   List<CommentModel> comments;
   int commentNumber;
   Data(
@@ -48,8 +48,7 @@ class Data {
       this.description,
       this.images,
       this.comments,
-      this.commentNumber
-      });
+      this.commentNumber});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -60,8 +59,16 @@ class Data {
     status = json['status'];
     location = json['location'];
     description = json['description'];
-    images = json['images'].cast<String>();
-     commentNumber = json['commentNumber'];
+    if (json['images'] != null) {
+      images = json['images'];
+      bool flag = images?.isEmpty;
+      if (flag) {
+        images = <String>[];
+      } else {
+        images = json['images']['image'];
+      }
+    }
+    commentNumber = json['commentNumber'];
     if (json['comments'] != null) {
       comments = <CommentModel>[];
       json['comments'].forEach((v) {

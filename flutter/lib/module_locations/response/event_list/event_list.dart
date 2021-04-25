@@ -39,7 +39,7 @@ class Data {
   String status;
   String location;
   String description;
-  List<String> images;
+  var images;
   List<CommentModel> comments;
   var commentNumber;
   Data(
@@ -65,11 +65,10 @@ class Data {
     description = json['description'];
     commentNumber = json['commentNumber'];
     if (json['images'] != null) {
-      images = <String>[];
-      if (images.isNotEmpty) {
-        json['images'].forEach((v) {
-          images.add(v);
-        });
+      images = json['images'];
+      bool flag = images?.isEmpty;
+      if (flag) {
+        images = <String>[];
       }
     }
     if (json['comments'] != null) {

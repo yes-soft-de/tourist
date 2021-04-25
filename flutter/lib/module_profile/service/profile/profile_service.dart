@@ -40,7 +40,7 @@ class ProfileService {
 
     CreateProfileRequest request = CreateProfileRequest(
       userName: profileModel.name,
-      image: profileModel.image,
+      image:profileModel.imageUpdated?profileModel.image:profileModel.imageUrl,
       role: role,
       phoneNumber: profileModel.phone,
       location: profileModel.locations,
@@ -85,6 +85,7 @@ class ProfileService {
       services: myProfile?.data?.service,
       languages: myProfile?.data?.guideLanguage,
       availableLocations: places,
+      imageUrl: myProfile?.data?.imageUrl
     );
   }
 

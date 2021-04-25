@@ -41,7 +41,7 @@ class Data {
   List<String> service;
   String image;
   CreateDate createDate;
-
+  String imageUrl;
   Data(
       {this.userID,
       this.roles,
@@ -58,7 +58,9 @@ class Data {
       this.email,
       this.phoneNumber,
       this.image,
-      this.createDate});
+      this.createDate,
+      this.imageUrl
+      });
 
   Data.fromJson(Map<String, dynamic> json) {
     userID = json['userID'];
@@ -82,6 +84,7 @@ class Data {
     createDate = json['createDate'] != null
         ? new CreateDate.fromJson(json['createDate'])
         : null;
+        imageUrl = json['imageURL'];
   }
 
   Map<String, dynamic> toJson() {

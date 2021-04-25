@@ -146,7 +146,7 @@ class _EventListScreenState extends State<EventListScreen> {
                 arguments: event.id);
           },
           child: EventListItemWidget(
-            image: event.images[0] ??
+            image: event.images ??
                 'https://www.abouther.com/sites/default/files/2018/11/06/main_-_janadriyah_festival.jpg',
             location: event.location,
             status: getStatus(getDate(event.date.timestamp)),

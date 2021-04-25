@@ -56,34 +56,30 @@ class _GuideListScreenState extends State<GuideListScreen> {
                   builder: (_) {
                     return AlertDialog(
                       title: Text('${S.of(context).filter}'),
-                      content: Container(
-                        height: 175,
-                        child: Column(
+                      content: SingleChildScrollView(
+                        child: Flex(
+                          direction: Axis.vertical,
+                          mainAxisAlignment:MainAxisAlignment.spaceBetween,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: DropdownButtonFormField(
-                                value: guideLanguage ?? null,
-                                items: ['ar', 'en'].map((guideLanguage) {
-                                  return DropdownMenuItem(
-                                    value: guideLanguage,
-                                    child: Text(guideLanguage),
-                                  );
-                                }).toList(),
-                                hint: Text(S.of(context).language),
-                                onChanged: (String value) {
-                                  guideLanguage = value;
-                                },
-                              ),
+                            DropdownButtonFormField(
+                              value: guideLanguage ?? null,
+                              items: ['ar', 'en'].map((guideLanguage) {
+                                return DropdownMenuItem(
+                                  value: guideLanguage,
+                                  child: Text(guideLanguage),
+                                );
+                              }).toList(),
+                              hint: Text(S.of(context).language),
+                              onChanged: (String value) {
+                                guideLanguage = value;
+                              },
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: TextField(
-                                controller: cityController,
-                                decoration: InputDecoration(
-                                    labelText: '${S.of(context).targetCity}'),
-                              ),
-                            )
+                            Container(height: 8,),
+                            TextField(
+                              controller: cityController,
+                              decoration: InputDecoration(
+                                  labelText: '${S.of(context).targetCity}'),
+                            ),
                           ],
                         ),
                       ),
@@ -112,15 +108,17 @@ class _GuideListScreenState extends State<GuideListScreen> {
             },
             icon: Icon(Icons.filter_list),
           ),
-          cityController.text.isNotEmpty || guideLanguage !=null ? IconButton(
-            splashRadius: 25,
-            onPressed: () {
-              guideLanguage = null;
-              cityController.clear();
-               widget._guideListBloc.getAllGuides(widget);
-            },
-            icon: Icon(Icons.clear),
-          ):Container(),
+          cityController.text.isNotEmpty || guideLanguage != null
+              ? IconButton(
+                  splashRadius: 25,
+                  onPressed: () {
+                    guideLanguage = null;
+                    cityController.clear();
+                    widget._guideListBloc.getAllGuides(widget);
+                  },
+                  icon: Icon(Icons.clear),
+                )
+              : Container(),
         ],
       ),
       body: currentStatus != null ? currentStatus.getUI(context) : Container(),

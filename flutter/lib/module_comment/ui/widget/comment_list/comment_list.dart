@@ -28,7 +28,7 @@ class _CommentListWidgetState extends State<CommentListWidget> {
   List<CommentModel> displayedComments;
   int currentPage = 0;
   bool canShowMore = false;
-
+  TextEditingController controller;
   _CommentListWidgetState(List<CommentModel> comments) {
     if (comments == null) {
       allComments = [];
@@ -44,6 +44,7 @@ class _CommentListWidgetState extends State<CommentListWidget> {
   @override
   void initState() {
     super.initState();
+    controller = TextEditingController();
   }
 
   @override
@@ -76,9 +77,9 @@ class _CommentListWidgetState extends State<CommentListWidget> {
     if (widget.isLoggedIn) {
       comments.add(
         NewCommentWidget(
+          commentController: controller,
           onCommentAdded: (comment) {
             widget.onCommentPosted(comment);
-            setState(() {});
           },
         ),
       );

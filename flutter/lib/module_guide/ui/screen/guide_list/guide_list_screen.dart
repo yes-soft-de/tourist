@@ -42,86 +42,104 @@ class _GuideListScreenState extends State<GuideListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('${S.of(context).soyah}'),
-        backgroundColor: Colors.white,
-        actions: [
-          IconButton(
-            splashRadius: 25,
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (_) {
-                    return AlertDialog(
-                      title: Text('${S.of(context).filter}'),
-                      content: SingleChildScrollView(
-                        child: Flex(
-                          direction: Axis.vertical,
-                          mainAxisAlignment:MainAxisAlignment.spaceBetween,
-                          children: [
-                            DropdownButtonFormField(
-                              value: guideLanguage ?? null,
-                              items: ['ar', 'en'].map((guideLanguage) {
-                                return DropdownMenuItem(
-                                  value: guideLanguage,
-                                  child: Text(guideLanguage),
-                                );
-                              }).toList(),
-                              hint: Text(S.of(context).language),
-                              onChanged: (String value) {
-                                guideLanguage = value;
-                              },
-                            ),
-                            Container(height: 8,),
-                            TextField(
-                              controller: cityController,
-                              decoration: InputDecoration(
-                                  labelText: '${S.of(context).targetCity}'),
-                            ),
-                          ],
+    return WillPopScope(
+      onWillPop: () async {
+        bool pop = false;
+        if (guideLanguage == null && cityController.text.isEmpty) {
+          pop = true;
+        } else {
+          pop = false;
+          guideLanguage = null;
+          cityController.clear();
+          widget._guideListBloc.getAllGuides(widget);
+        }
+
+        return pop;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('${S.of(context).soyah}'),
+          backgroundColor: Colors.white,
+          actions: [
+            IconButton(
+              splashRadius: 25,
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (_) {
+                      return AlertDialog(
+                        title: Text('${S.of(context).filter}'),
+                        content: SingleChildScrollView(
+                          child: Flex(
+                            direction: Axis.vertical,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              DropdownButtonFormField(
+                                value: guideLanguage ?? null,
+                                items: ['ar', 'en'].map((guideLanguage) {
+                                  return DropdownMenuItem(
+                                    value: guideLanguage,
+                                    child: Text(guideLanguage),
+                                  );
+                                }).toList(),
+                                hint: Text(S.of(context).language),
+                                onChanged: (String value) {
+                                  guideLanguage = value;
+                                },
+                              ),
+                              Container(
+                                height: 8,
+                              ),
+                              TextField(
+                                controller: cityController,
+                                decoration: InputDecoration(
+                                    labelText: '${S.of(context).targetCity}'),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      actions: [
-                        FlatButton(
-                          onPressed: () {
-                            widget._guideListBloc.getAllGuidesFiltred(
-                                widget,
-                                guideLanguage ?? null,
-                                cityController.text == ''
-                                    ? null
-                                    : cityController.text);
-                            Navigator.of(context).pop();
-                          },
-                          child: Text('${S.of(context).continues}'),
-                        ),
-                        FlatButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text('${S.of(context).cancel}'),
-                        ),
-                      ],
-                    );
-                  });
-            },
-            icon: Icon(Icons.filter_list),
-          ),
-          cityController.text.isNotEmpty || guideLanguage != null
-              ? IconButton(
-                  splashRadius: 25,
-                  onPressed: () {
-                    guideLanguage = null;
-                    cityController.clear();
-                    widget._guideListBloc.getAllGuides(widget);
-                  },
-                  icon: Icon(Icons.clear),
-                )
-              : Container(),
-        ],
+                        actions: [
+                          FlatButton(
+                            onPressed: () {
+                              widget._guideListBloc.getAllGuidesFiltred(
+                                  widget,
+                                  guideLanguage ?? null,
+                                  cityController.text == ''
+                                      ? null
+                                      : cityController.text);
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('${S.of(context).continues}'),
+                          ),
+                          FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('${S.of(context).cancel}'),
+                          ),
+                        ],
+                      );
+                    });
+              },
+              icon: Icon(Icons.filter_list),
+            ),
+            cityController.text.isNotEmpty || guideLanguage != null
+                ? IconButton(
+                    splashRadius: 25,
+                    onPressed: () {
+                      guideLanguage = null;
+                      cityController.clear();
+                      widget._guideListBloc.getAllGuides(widget);
+                    },
+                    icon: Icon(Icons.clear),
+                  )
+                : Container(),
+          ],
+        ),
+        body:
+            currentStatus != null ? currentStatus.getUI(context) : Container(),
       ),
-      body: currentStatus != null ? currentStatus.getUI(context) : Container(),
     );
   }
 

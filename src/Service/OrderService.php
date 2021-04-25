@@ -179,6 +179,19 @@ class OrderService
 
         return $ordersResponse;
     }
+
+    public function getOrdersByGuideIDForDashboard($guidUserID)
+    {
+        $ordersResponse = [];
+        $orders = $this->touristOrderManager->getOrdersByGuideIdForDashboard($guidUserID);
+       
+        foreach ($orders as $order)
+        {
+            $ordersResponse[] = $this->autoMapping->map('array', TouristOrderCreateResponse::class, $order);
+        }
+
+        return $ordersResponse;
+    }
     
     // for generate uuid
     public function uuid()

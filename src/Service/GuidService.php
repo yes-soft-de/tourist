@@ -231,10 +231,19 @@ class GuidService
         
         if($item) 
         {
+            // Get regions names from placeIds
+            if(isset($item['places']))
+            {
+                foreach($item['places'] as $place)
+                {
+                    $item['cities'][] = $this->guidManager->getRegionByPlaceID($place)['name'];
+                }
+            }
+
             $item['imageURL'] = $item['image'];
             $item['image'] = $this->params.$item['image'];
             $item['baseURL'] = $this->params;
-            $item['myOrders'] = $this->orderService->getOrderByGuid($item['userID']);
+            $item['myOrders'] = $this->orderService->getOrdersByGuideIDForDashboard($item['userID']);
 
             //rating
             $ratingGuidCalculate = $this->ratingManager->getGuidRatingByID($item['user']);

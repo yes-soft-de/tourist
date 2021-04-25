@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\RegionsEntity;
 use App\Entity\TouristOrderEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * @method TouristOrderEntity|null find($id, $lockMode = null, $lockVersion = null)
@@ -164,6 +166,34 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
             ->getResult();
 
              return $e;
+    }
+
+    public function getOrdersByGuideIdForDashboard($guideID)
+    {
+        return $this->createQueryBuilder('orders')
+            ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.guidUserID', 'orders.city as area', 'orders.language', 'orders.services',
+            'orders.arriveDate', 'orders.leaveDate', 'orders.roomID', 'acceptedOrderEntity.cost', 'acceptedOrderEntity.status', 'acceptedOrderEntity.uuid',
+            'region_entity.name as city')
+
+            ->join('App:AcceptedOrderEntity', 'acceptedOrderEntity')
+            ->andWhere('orders.id = acceptedOrderEntity.orderID')
+
+            ->leftJoin(
+                RegionsEntity::class,
+                'region_entity',
+                Join::WITH,
+                'region_entity.placeId = orders.city'
+            )
+
+            ->andWhere('orders.guidUserID=:guidID')
+            ->setParameter('guidID', $guideID)
+
+            ->groupBy('orders.id')
+            ->orderBy('orders.id', 'ASC')
+
+            ->getQuery()
+            ->getResult();
+
     }
 
     public function getOrderByID($id)

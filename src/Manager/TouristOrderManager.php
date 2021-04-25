@@ -108,6 +108,11 @@ class TouristOrderManager
         return $this->orderEntityRepository->getOrdersByGuidUserID($guidUserID);
     }
 
+    public function getOrdersByGuideIdForDashboard($guidUserID)
+    {
+        return $this->orderEntityRepository->getOrdersByGuideIdForDashboard($guidUserID);
+    }
+
     public function getOrderByID($id)
     {
         return $this->orderEntityRepository->getOrderByID($id);

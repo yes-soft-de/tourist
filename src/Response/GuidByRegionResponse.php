@@ -36,6 +36,8 @@ class GuidByRegionResponse
 
     public $myOrders;
 
+    public $cities; // cities of guide which are used in dashboard
+
     /**
      * @param array $image
      */

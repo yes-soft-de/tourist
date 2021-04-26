@@ -11,7 +11,7 @@ import 'package:tourists/utils/keyboard_detector/keyboard_detector.dart';
 class GuideProfileFormWidget extends StatefulWidget {
   final ProfileModel userProfile;
   final SearchBloc searchBloc;
-  final Function(String path, ProfileModel profileModel) onImageSelected;
+  final Function(String path, ProfileModel profile) onImageSelected;
   final Function(ProfileModel profileModel) onProfileSaved;
 
   GuideProfileFormWidget({
@@ -87,6 +87,7 @@ class _GuideProfileFormWidgetState extends State<GuideProfileFormWidget> {
                                   source: ImageSource.gallery, imageQuality: 70)
                               .then((image) {
                             if (image != null) {
+                              print('555555555555555555555555555555555555');
                               widget.onImageSelected(image.path, profile);
                             }
                           });
@@ -247,7 +248,13 @@ class _GuideProfileFormWidgetState extends State<GuideProfileFormWidget> {
                     locations: locations.toList(),
                     services: services.toList(),
                   );
-                  widget.onProfileSaved(createProfileRequest);
+                  profile.name = _nameController.text;
+                  profile.phone = _phoneController.text;
+                  profile.image = profile.image;
+                  profile.languages = languages.toList();
+                  profile.locations = locations.toList();
+                  profile.services = services.toList();
+                  widget.onProfileSaved(profile);
                 }
               },
               child: Container(

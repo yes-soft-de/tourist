@@ -112,15 +112,18 @@ class GuideListItemWidget extends StatelessWidget {
                                 content: Container(
                                   height: 100,
                                   child: Center(
-                                    child: SmoothStarRating(
-                                      onRated: (r) {
-                                        rating = r;
-                                      },
-                                      allowHalfRating: true,
-                                      isReadOnly: !isLogged,
-                                      color: Color(0xff05F29B),
-                                      borderColor: Color(0xff05F29B),
-                                      size: 35,
+                                    child: Directionality(
+                                      textDirection: TextDirection.ltr,
+                                      child: SmoothStarRating(
+                                        onRated: (r) {
+                                          rating = r;
+                                        },
+                                        allowHalfRating: true,
+                                        isReadOnly: !isLogged,
+                                        color: Color(0xff05F29B),
+                                        borderColor: Color(0xff05F29B),
+                                        size: 35,
+                                      ),
                                     ),
                                   ),
                                 ),

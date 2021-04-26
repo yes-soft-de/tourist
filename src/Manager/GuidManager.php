@@ -180,5 +180,10 @@ class GuidManager
     {
         return $this->guidEntityRepository->getGuidCityAndLanguage($guideID);
     }
+
+    public function getRegionsByName($name)
+    {
+        return $this->regionsManager->getRegionsByName($name);
+    }
     
 }

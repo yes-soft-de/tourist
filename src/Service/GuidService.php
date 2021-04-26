@@ -153,6 +153,7 @@ class GuidService
     {
         $response = [];
         $guidArray = [];
+        $guides = [];
 
         $language = $request->getLanguage();
         $city = $request->getCity();
@@ -163,11 +164,26 @@ class GuidService
         }
         elseif($language == NULL && $city != NULL)
         {
-            $guides = $this->guidManager->guidesByCity($city);
+            $region = $this->guidManager->getRegionsByName($city);
+
+            if($region)
+            {
+                $placeId = $region[0]['placeId'];
+
+                $guides = $this->guidManager->guidesByCity($placeId);
+            }
+            
         }
         elseif($language != NULL && $city != NULL)
         {
-            $guides = $this->guidManager->guidesByLanguageAndCity($language, $city);
+            $region = $this->guidManager->getRegionsByName($city);
+
+            if($region)
+            {
+                $placeId = $region[0]['placeId'];
+
+                $guides = $this->guidManager->guidesByLanguageAndCity($language, $placeId);
+            }
         }
         
         if($guides)

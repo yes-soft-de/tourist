@@ -91,7 +91,6 @@ class AuthService {
 
     // This means that this guy is not registered
     if (existingProfile.data() == null) {
-
       // Create the profile password
       password = Uuid().v1();
 
@@ -100,7 +99,6 @@ class AuthService {
           .collection('users')
           .doc(user.credential.uid)
           .set({'password': password});
-
     } else {
       password = await existingProfile.data()['password'];
     }
@@ -202,7 +200,7 @@ class AuthService {
       actionCodeSettings: ActionCodeSettings(
           url: 'https://soyah.page.link/' + Uuid().v1(),
           androidPackageName: 'com.fast_prog.soyah',
-          iOSBundleId: 'de.yes-soft.soyah',
+          iOSBundleId: 'de.yes-soft.tourists',
           handleCodeInApp: true,
           androidMinimumVersion: '21',
           androidInstallApp: true),
@@ -214,8 +212,9 @@ class AuthService {
     var role = await _prefsHelper.getCurrentRole();
     try {
       var userCredential =
-      await _auth.signInWithEmailLink(email: email, emailLink: link);
-      await _registerApiNewUser(AppUser(userCredential.user, AuthSource.EMAIL, role));
+          await _auth.signInWithEmailLink(email: email, emailLink: link);
+      await _registerApiNewUser(
+          AppUser(userCredential.user, AuthSource.EMAIL, role));
     } catch (e) {
       if (e is FirebaseAuthException) {
         FirebaseAuthException x = e;

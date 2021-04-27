@@ -198,7 +198,7 @@ class AuthService {
     await _auth.sendSignInLinkToEmail(
       email: email,
       actionCodeSettings: ActionCodeSettings(
-          url: 'https://soyah.page.link/' + Uuid().v1(),
+          url: 'https://yestourists.page.link/',
           androidPackageName: 'com.fast_prog.soyah',
           iOSBundleId: 'de.yes-soft.tourists',
           handleCodeInApp: true,

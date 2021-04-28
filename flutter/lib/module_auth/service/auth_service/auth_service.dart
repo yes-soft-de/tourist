@@ -119,6 +119,7 @@ class AuthService {
     if (user == null) {
       _auth.verifyPhoneNumber(
           phoneNumber: phone,
+          timeout: Duration(seconds:120),
           verificationCompleted: (authCredentials) {
             _auth.signInWithCredential(authCredentials).then((credential) {
               if (isRegister) {

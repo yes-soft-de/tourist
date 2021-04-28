@@ -25,5 +25,7 @@ class AllUnacceptedOrdersGetResponse
     public $guideName;
 
     public $cost;
+
+    public $regionName;
     
 }

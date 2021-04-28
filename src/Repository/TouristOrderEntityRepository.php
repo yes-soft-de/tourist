@@ -225,13 +225,20 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('orders')
             ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.guidUserID', 'orders.city', 'orders.language', 'orders.services',
-            'orders.arriveDate', 'orders.leaveDate', 'orders.cost', 'userEntity1.name as guideName', 'userEntity2.name as touristName')
+            'orders.arriveDate', 'orders.leaveDate', 'orders.cost', 'userEntity1.name as guideName', 'userEntity2.name as touristName', 'region_entity.name as regionName')
 
             ->join('App:User', 'userEntity1')
             ->andWhere('userEntity1.userID = orders.guidUserID')
 
             ->join('App:User', 'userEntity2')
             ->andWhere('userEntity2.userID = orders.touristUserID')
+
+            ->leftJoin(
+                RegionsEntity::class,
+                'region_entity',
+                Join::WITH,
+                'region_entity.placeId = orders.city'
+            )
             
             ->groupBy('orders.id')
             ->orderBy('orders.id', 'ASC')

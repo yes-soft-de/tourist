@@ -159,6 +159,16 @@ class RegionsService
                 $guidRate = $ratingGuidCalculate[1];
                 $guid['rating'] = $guidRate;
                 //
+
+                if($guid['image'])
+                {
+                    $guid['imageURL'] = $guid['image'];
+
+                    $guid['baseURL'] = $this->params;
+
+                    $guid['image'] = $this->params . $guid['image'];
+                }
+
                 $guidesResponse[] = $this->autoMapping->map('array', GuidByRegionResponse::class, $guid);
             }
         }

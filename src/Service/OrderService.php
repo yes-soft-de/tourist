@@ -238,6 +238,13 @@ class OrderService
 
         foreach ($orders as $order)
         {
+            $region = $this->acceptedOrderManager->getRegionNameByPlaceId($order['order']->getCity());
+
+            if($region)
+            {
+                $order['regionName'] = $region['name'];
+            }
+
             $ordersResponse[] = $this->autoMapping->map('array', AllAcceptedOrdersGetResponse::class, $order);
         }
 

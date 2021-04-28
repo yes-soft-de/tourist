@@ -87,7 +87,12 @@ class _GuideProfileFormWidgetState extends State<GuideProfileFormWidget> {
                                   source: ImageSource.gallery, imageQuality: 70)
                               .then((image) {
                             if (image != null) {
-                              print('555555555555555555555555555555555555');
+                              profile.name = _nameController.text;
+                              profile.phone = _phoneController.text;
+                              profile.image = profile.image;
+                              profile.languages = languages.toList();
+                              profile.locations = locations.toList();
+                              profile.services = services.toList();
                               widget.onImageSelected(image.path, profile);
                             }
                           });
@@ -240,14 +245,14 @@ class _GuideProfileFormWidgetState extends State<GuideProfileFormWidget> {
             GestureDetector(
               onTap: () {
                 if (_registerGuideFormKey.currentState.validate()) {
-                  var createProfileRequest = ProfileModel(
-                    name: _nameController.text,
-                    phone: _phoneController.text,
-                    image: profile.image,
-                    languages: languages.toList(),
-                    locations: locations.toList(),
-                    services: services.toList(),
-                  );
+                  // var createProfileRequest = ProfileModel(
+                  //   name: _nameController.text,
+                  //   phone: _phoneController.text,
+                  //   image: profile.image,
+                  //   languages: languages.toList(),
+                  //   locations: locations.toList(),
+                  //   services: services.toList(),
+                  // );
                   profile.name = _nameController.text;
                   profile.phone = _phoneController.text;
                   profile.image = profile.image;

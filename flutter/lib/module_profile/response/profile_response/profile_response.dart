@@ -59,8 +59,7 @@ class Data {
       this.phoneNumber,
       this.image,
       this.createDate,
-      this.imageUrl
-      });
+      this.imageUrl});
 
   Data.fromJson(Map<String, dynamic> json) {
     userID = json['userID'];
@@ -80,11 +79,15 @@ class Data {
     city = json['city']?.cast<String>();
     email = json['email'];
     phoneNumber = json['phoneNumber'];
+    if (json['image'] is List<dynamic>) {
+      image = null;
+    } else {
     image = json['image'];
+    }
     createDate = json['createDate'] != null
         ? new CreateDate.fromJson(json['createDate'])
         : null;
-        imageUrl = json['imageURL'];
+    imageUrl = json['imageURL'];
   }
 
   Map<String, dynamic> toJson() {

@@ -53,12 +53,12 @@ class _TouristProfileFormState extends State<TouristProfileForm> {
               children: [
                 Positioned.fill(
                     child: FadeInImage.assetNetwork(
-                      placeholder: 'resources/images/logo.jpg',
-                      image: '${profile.image}'.contains('http')
-                          ? '${profile.image.substring(profile.image.lastIndexOf('http'))}'
-                          : Urls.imagesRoot + profile.image,
-                      fit: BoxFit.contain,
-                    )),
+                  placeholder: 'resources/images/logo.jpg',
+                  image: '${profile.image}'.contains('http')
+                      ? '${profile.image.substring(profile.image.lastIndexOf('http'))}'
+                      : Urls.imagesRoot + profile.image,
+                  fit: BoxFit.contain,
+                )),
                 Positioned(
                   right: 16,
                   top: 16,
@@ -66,9 +66,10 @@ class _TouristProfileFormState extends State<TouristProfileForm> {
                     onTap: () {
                       picker
                           .getImage(
-                          source: ImageSource.gallery, imageQuality: 70)
+                              source: ImageSource.gallery, imageQuality: 70)
                           .then((image) {
                         if (image != null) {
+                          profile.name = _nameController.text;
                           widget.onImageSelected(image.path, profile);
                         }
                       });
@@ -149,7 +150,6 @@ class _TouristProfileFormState extends State<TouristProfileForm> {
               //     ),
               //   ],
               // ),
-            
             ],
           ),
           GestureDetector(

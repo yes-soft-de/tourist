@@ -139,6 +139,18 @@ class OrderService
 
         foreach ($orders as $order)
         {
+            if($order)
+            {
+                $placeId = $order['order']['city'];
+
+                $region = $this->acceptedOrderManager->getRegionNameByPlaceId($placeId);
+
+                if($region)
+                {
+                    $order['order']['city'] = $region['name'];
+                }
+            }
+            
             $ordersResponse[] = $this->autoMapping->map('array', AcceptedOrderResponse::class, $order);
         }
 
@@ -152,6 +164,19 @@ class OrderService
 
         foreach ($orders as $order)
         {
+            if($order)
+            {
+                //dd($order['order']->getCity());
+                $placeId = $order['order']->getCity();
+
+                $region = $this->acceptedOrderManager->getRegionNameByPlaceId($placeId);
+
+                if($region)
+                {
+                    $order['order']->setCity($region['name']);
+                }
+            }
+
             $ordersResponse[] = $this->autoMapping->map('array', AcceptedOrderResponse::class, $order);
         }
 

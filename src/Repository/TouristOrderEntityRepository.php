@@ -47,14 +47,21 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
     {
         // Get all orders of a tourist either they are accepted or not
         return $this->createQueryBuilder('orders')
-            ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.guidUserID', 'orders.city', 'orders.language', 'orders.services',
-                'orders.arriveDate', 'orders.leaveDate', 'orders.roomID', 'orders.cost', 'orders.status')
+            ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.guidUserID', 'orders.city as area', 'orders.language', 'orders.services',
+                'orders.arriveDate', 'orders.leaveDate', 'orders.roomID', 'orders.cost', 'orders.status', 'region_entity.name as city')
 
             ->andWhere('orders.touristUserID = :touristID')
             ->setParameter('touristID', $touristID)
             
             ->andWhere('orders.status = :pending')
             ->setParameter('pending', 'pending')
+
+            ->leftJoin(
+                RegionsEntity::class,
+                'region_entity',
+                Join::WITH,
+                'region_entity.placeId = orders.city'
+            )
 
             ->groupBy('orders.id')
             ->orderBy('orders.id', 'ASC')
@@ -72,8 +79,8 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
             foreach ($language as $l)
             {
                 $order = $this->createQueryBuilder('orders')
-                    ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.city', 'orders.language', 'orders.services',
-                        'orders.arriveDate', 'orders.leaveDate', 'orders.cost', 'orders.status')
+                    ->select('orders.id', 'orders.date', 'orders.touristUserID', 'orders.city as area', 'orders.language', 'orders.services',
+                        'orders.arriveDate', 'orders.leaveDate', 'orders.cost', 'orders.status', 'region_entity.name as city')
 
                     ->andWhere('orders.city = :city')
                     ->setParameter('city', $c)
@@ -83,6 +90,13 @@ class TouristOrderEntityRepository extends ServiceEntityRepository
 
                     ->andWhere('orders.status = :pending')
                     ->setParameter('pending', 'pending')
+
+                    ->leftJoin(
+                        RegionsEntity::class,
+                        'region_entity',
+                        Join::WITH,
+                        'region_entity.placeId = orders.city'
+                    )
 
                     ->getQuery()
                     ->getResult();

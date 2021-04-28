@@ -18,14 +18,16 @@ class AcceptedOrderManager
     private $entityManager;
     private $acceptedOrderEntityRepository;
     private $touristOrderManager;
+    private $regionManager;
 
     public function __construct(AutoMapping $autoMapping, EntityManagerInterface $entityManager, TouristOrderManager $touristOrderManager,
-                                AcceptedOrderEntityRepository $acceptedOrderEntityRepository)
+                                AcceptedOrderEntityRepository $acceptedOrderEntityRepository, RegionsManager $regionsManager)
     {
         $this->autoMapping = $autoMapping;
         $this->entityManager = $entityManager;
         $this->acceptedOrderEntityRepository = $acceptedOrderEntityRepository;
         $this->touristOrderManager = $touristOrderManager;
+        $this->regionManager = $regionsManager;
     }
 
     public function acceptOrderCreate(AcceptedOrderCreateRequest $request)
@@ -93,5 +95,10 @@ class AcceptedOrderManager
     public function getOrdersIDs()
     {
         return $this->acceptedOrderEntityRepository->getOrdersIDs();
+    }
+
+    public function getRegionNameByPlaceId($placeId)
+    {
+        return $this->regionManager->getRegionByPlaceID($placeId);
     }
 }

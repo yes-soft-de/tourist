@@ -36,7 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "chatRoom" : MessageLookupByLibrary.simpleMessage("غرفة المحادثة"),
     "chatWithGuid" : MessageLookupByLibrary.simpleMessage("يمكنك التحدث مع المرشد بعد عملية الدفع"),
     "chatWithTourest" : MessageLookupByLibrary.simpleMessage("يمكنك التحدث مع السائح بعد عملية الدفع"),
-    "city" : MessageLookupByLibrary.simpleMessage("مدينة"),
+    "city" : MessageLookupByLibrary.simpleMessage("منطقة"),
     "codeTimeout" : MessageLookupByLibrary.simpleMessage("انتهت مهلة الرمز"),
     "commentHere" : MessageLookupByLibrary.simpleMessage("علق هنا"),
     "comments" : MessageLookupByLibrary.simpleMessage("التعليقات"),

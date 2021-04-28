@@ -36,7 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "chatRoom" : MessageLookupByLibrary.simpleMessage("Chat Room"),
     "chatWithGuid" : MessageLookupByLibrary.simpleMessage("You can chat with the guide after payment phase"),
     "chatWithTourest" : MessageLookupByLibrary.simpleMessage("You can chat with the tourist after payment phase"),
-    "city" : MessageLookupByLibrary.simpleMessage("City"),
+    "city" : MessageLookupByLibrary.simpleMessage("Region"),
     "codeTimeout" : MessageLookupByLibrary.simpleMessage("Code Timeout"),
     "commentHere" : MessageLookupByLibrary.simpleMessage("Comment Here"),
     "comments" : MessageLookupByLibrary.simpleMessage("Comments"),

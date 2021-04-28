@@ -1655,10 +1655,10 @@ class S {
     );
   }
 
-  /// `City`
+  /// `Region`
   String get city {
     return Intl.message(
-      'City',
+      'Region',
       name: 'city',
       desc: '',
       args: [],
